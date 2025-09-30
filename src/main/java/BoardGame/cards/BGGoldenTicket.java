@@ -1,7 +1,6 @@
 package BoardGame.cards;
 
 import BoardGame.BoardGame;
-
 import BoardGame.characters.BGColorless;
 import basemod.AutoAdd;
 import com.badlogic.gdx.graphics.Texture;

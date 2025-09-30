@@ -1,6 +1,7 @@
 package BoardGame.monsters.bgexordium;
-import BoardGame.monsters.BGDamageIcons;
 
+import BoardGame.monsters.AbstractBGMonster;
+import BoardGame.monsters.BGDamageIcons;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -17,7 +18,6 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import BoardGame.monsters.AbstractBGMonster;
 import com.megacrit.cardcrawl.vfx.SpeechBubble;
 
 public class BGGremlinFat extends AbstractBGMonster implements BGDamageIcons {

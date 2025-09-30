@@ -1,5 +1,7 @@
 package BoardGame.powers;
 
+import BoardGame.BoardGame;
+import BoardGame.util.TextureLoader;
 import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -13,8 +15,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.DexterityPower;
-import BoardGame.BoardGame;
-import BoardGame.util.TextureLoader;
 
 import static BoardGame.BoardGame.makePowerPath;
 

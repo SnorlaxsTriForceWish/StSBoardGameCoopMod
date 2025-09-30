@@ -1,27 +1,28 @@
 
 package BoardGame.monsters.bgbeyond;
- import BoardGame.monsters.BGDamageIcons;
+
 import BoardGame.dungeons.BGTheBeyond;
+import BoardGame.monsters.AbstractBGMonster;
+import BoardGame.monsters.BGDamageIcons;
 import BoardGame.monsters.DieControlledMoves;
 import BoardGame.powers.BGSpikerPower;
 import BoardGame.thedie.TheDie;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
-import BoardGame.monsters.AbstractBGMonster;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.AnimateSlowAttackAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
- import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
- import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BGSpiker extends AbstractBGMonster implements DieControlledMoves, BGDamageIcons {

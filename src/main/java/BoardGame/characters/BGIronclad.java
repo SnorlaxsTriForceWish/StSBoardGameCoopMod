@@ -1,9 +1,12 @@
 package BoardGame.characters;
 
-import BoardGame.cards.BGRed.*;
+import BoardGame.BoardGame;
+import BoardGame.cards.BGRed.BGBash;
+import BoardGame.cards.BGRed.BGDefend_Red;
+import BoardGame.cards.BGRed.BGStrike_Red;
 import BoardGame.multicharacter.UnselectablePlayer;
-import BoardGame.relics.BGTheDieRelic;
 import BoardGame.relics.BGBurningBlood;
+import BoardGame.relics.BGTheDieRelic;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -31,7 +34,6 @@ import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbRed;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import BoardGame.BoardGame;
 
 import java.util.ArrayList;
 

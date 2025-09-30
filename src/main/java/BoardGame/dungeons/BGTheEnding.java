@@ -2,36 +2,34 @@
 package BoardGame.dungeons;
 
 import BoardGame.cards.BGStatus.BGBurn;
+import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.map.DungeonMap;
+import com.megacrit.cardcrawl.map.MapEdge;
+import com.megacrit.cardcrawl.map.MapGenerator;
+import com.megacrit.cardcrawl.map.MapRoomNode;
+import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.*;
+import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
+import com.megacrit.cardcrawl.scenes.AbstractScene;
+import com.megacrit.cardcrawl.scenes.TheEndingScene;
 import com.megacrit.cardcrawl.screens.DungeonMapScreen;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.badlogic.gdx.graphics.Color;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.helpers.ImageMaster;
-import com.megacrit.cardcrawl.localization.UIStrings;
-import com.megacrit.cardcrawl.map.MapEdge;
-import com.megacrit.cardcrawl.map.MapGenerator;
-import com.megacrit.cardcrawl.map.MapRoomNode;
-import com.megacrit.cardcrawl.random.Random;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
-import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
-import com.megacrit.cardcrawl.scenes.AbstractScene;
-import com.megacrit.cardcrawl.scenes.TheEndingScene;
 import java.util.ArrayList;
 
 public class BGTheEnding extends AbstractBGDungeon {

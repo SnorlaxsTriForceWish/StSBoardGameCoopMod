@@ -1,7 +1,7 @@
 package BoardGame.monsters.bgcity;
- import BoardGame.monsters.BGDamageIcons;
-import BoardGame.monsters.AbstractBGMonster;
 
+import BoardGame.monsters.AbstractBGMonster;
+import BoardGame.monsters.BGDamageIcons;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;

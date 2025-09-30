@@ -1,11 +1,9 @@
 package BoardGame.monsters.bgbeyond;
- import BoardGame.cards.BGStatus.BGVoidCard;
- import BoardGame.powers.BGCuriosityPower;
- import BoardGame.relics.BGTheDieRelic;
- import com.megacrit.cardcrawl.actions.common.*;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
-import BoardGame.monsters.AbstractBGMonster;
 
+import BoardGame.cards.BGStatus.BGVoidCard;
+import BoardGame.monsters.AbstractBGMonster;
+import BoardGame.powers.BGCuriosityPower;
+import BoardGame.relics.BGTheDieRelic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,19 +16,21 @@ import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.animations.AnimateFastAttackAction;
 import com.megacrit.cardcrawl.actions.animations.ShoutAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.actions.unique.CanLoseAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
- import com.megacrit.cardcrawl.core.AbstractCreature;
- import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ModHelper;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
- import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.powers.UnawakenedPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
@@ -40,10 +40,11 @@ import com.megacrit.cardcrawl.vfx.AwakenedWingParticle;
 import com.megacrit.cardcrawl.vfx.SpeechBubble;
 import com.megacrit.cardcrawl.vfx.combat.IntenseZoomEffect;
 import com.megacrit.cardcrawl.vfx.combat.ShockWaveEffect;
-import java.util.ArrayList;
-import java.util.Iterator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 
 

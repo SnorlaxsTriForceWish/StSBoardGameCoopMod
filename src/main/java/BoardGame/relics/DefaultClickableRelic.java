@@ -1,5 +1,7 @@
 package BoardGame.relics;
 
+import BoardGame.BoardGame;
+import BoardGame.util.TextureLoader;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
@@ -11,8 +13,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
-import BoardGame.BoardGame;
-import BoardGame.util.TextureLoader;
 
 import static BoardGame.BoardGame.makeRelicOutlinePath;
 import static BoardGame.BoardGame.makeRelicPath;

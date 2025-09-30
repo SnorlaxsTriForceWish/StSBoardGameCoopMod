@@ -1,7 +1,8 @@
 package BoardGame.monsters.bgcity;
- import BoardGame.monsters.BGDamageIcons;
+
 import BoardGame.actions.BGFakeStealGoldDamageAction;
 import BoardGame.monsters.AbstractBGMonster;
+import BoardGame.monsters.BGDamageIcons;
 import BoardGame.powers.BGThieveryPower;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
@@ -10,7 +11,7 @@ import com.megacrit.cardcrawl.actions.animations.AnimateSlowAttackAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
- import com.megacrit.cardcrawl.actions.common.EscapeAction;
+import com.megacrit.cardcrawl.actions.common.EscapeAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.SetMoveAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
@@ -22,7 +23,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
- import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
+import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.SmokeBombEffect;
 
 public class BGMugger extends AbstractBGMonster implements BGDamageIcons {

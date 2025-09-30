@@ -1,8 +1,9 @@
 package BoardGame.monsters.bgexordium;
-import BoardGame.cards.BGStatus.BGDazed;
-import BoardGame.monsters.BGDamageIcons;
 
 import BoardGame.BoardGame;
+import BoardGame.cards.BGStatus.BGDazed;
+import BoardGame.monsters.AbstractBGMonster;
+import BoardGame.monsters.BGDamageIcons;
 import BoardGame.monsters.DieControlledMoves;
 import BoardGame.thedie.TheDie;
 import com.badlogic.gdx.graphics.Color;
@@ -21,7 +22,6 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import BoardGame.monsters.AbstractBGMonster;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.combat.ShockWaveEffect;

@@ -1,7 +1,8 @@
 package BoardGame.monsters.bgending;
-import BoardGame.monsters.AbstractBGMonster;
+
 import BoardGame.cards.BGStatus.BGBurn;
 import BoardGame.cards.BGStatus.BGSlimed;
+import BoardGame.monsters.AbstractBGMonster;
 import BoardGame.monsters.BGDamageIcons;
 import BoardGame.powers.BGBeatOfDeathPower;
 import BoardGame.powers.BGInvinciblePower;

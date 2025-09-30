@@ -2,7 +2,9 @@ package BoardGame.multicharacter.patches;
 
 import BoardGame.multicharacter.MultiCharacter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.evacipated.cardcrawl.modthespire.lib.SpireInstrumentPatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.OverlayMenu;
 import com.megacrit.cardcrawl.core.Settings;

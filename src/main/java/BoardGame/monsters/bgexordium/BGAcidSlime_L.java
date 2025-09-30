@@ -1,13 +1,12 @@
 package BoardGame.monsters.bgexordium;
-import BoardGame.cards.BGStatus.BGDazed;
-import BoardGame.cards.BGStatus.BGSlimed;
-import BoardGame.monsters.BGDamageIcons;
 
 import BoardGame.BoardGame;
+import BoardGame.cards.BGStatus.BGDazed;
+import BoardGame.cards.BGStatus.BGSlimed;
 import BoardGame.dungeons.BGExordium;
-import BoardGame.monsters.DieControlledMoves;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import BoardGame.monsters.AbstractBGMonster;
+import BoardGame.monsters.BGDamageIcons;
+import BoardGame.monsters.DieControlledMoves;
 import BoardGame.powers.BGWeakPower;
 import BoardGame.thedie.TheDie;
 import com.badlogic.gdx.math.MathUtils;
@@ -25,6 +24,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.SlimeAnimListener;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;

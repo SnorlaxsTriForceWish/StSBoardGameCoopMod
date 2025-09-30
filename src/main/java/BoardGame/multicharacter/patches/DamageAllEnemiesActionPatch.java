@@ -3,7 +3,9 @@ package BoardGame.multicharacter.patches;
 import BoardGame.multicharacter.NullMonster;
 import BoardGame.screen.TargetSelectScreen;
 import basemod.BaseMod;
-import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 
 public class DamageAllEnemiesActionPatch {

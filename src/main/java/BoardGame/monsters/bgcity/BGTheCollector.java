@@ -1,9 +1,9 @@
 package BoardGame.monsters.bgcity;
- import BoardGame.monsters.BGDamageIcons;
+
 import BoardGame.cards.BGStatus.BGBurn;
 import BoardGame.cards.BGStatus.BGDazed;
 import BoardGame.monsters.AbstractBGMonster;
-
+import BoardGame.monsters.BGDamageIcons;
 import BoardGame.powers.BGWeakPower;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.*;
- import com.megacrit.cardcrawl.actions.utility.SFXAction;
+import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -25,19 +25,19 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
- import com.megacrit.cardcrawl.powers.StrengthPower;
- import com.megacrit.cardcrawl.scenes.TheCityScene;
+import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.scenes.TheCityScene;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
 import com.megacrit.cardcrawl.vfx.GlowyFireEyesEffect;
 import com.megacrit.cardcrawl.vfx.StaffFireEffect;
-
- import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BGTheCollector extends AbstractBGMonster implements BGDamageIcons {
     private static final Logger logger = LogManager.getLogger(BGTheCollector.class.getName());

@@ -1,16 +1,15 @@
 package BoardGame.shop;
 
 import BoardGame.dungeons.AbstractBGDungeon;
-import com.evacipated.cardcrawl.modthespire.lib.ByRef;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import basemod.ReflectionHacks;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AnimatedNpc;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
+import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.shop.Merchant;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +18,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class BGMerchant {
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGMerchant");
+    public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
+
     public static final Logger logger = LogManager.getLogger(BGMerchant.class.getName());
     @SpirePatch(clz = Merchant.class, method = SpirePatch.CONSTRUCTOR,
             paramtypez = {float.class,float.class,int.class})
@@ -88,13 +90,15 @@ public class BGMerchant {
             }
             return SpireReturn.Continue();
         }
-//        @SpirePostfixPatch
-//        public static SpireReturn<Void> Postfix(Merchant merchant, float x, float y, int newShopScreen,
-//                                               @ByRef ArrayList<String>[] ___idleMessages,
-//                                               @ByRef float[] ___speechTimer, @ByRef float[]___modX, @ByRef float[]___modY, @ByRef int[]___shopScreen) {
-//
-//            return SpireReturn.Continue();
-//        }
+        @SpirePostfixPatch
+        public static void Postfix(Merchant merchant, float x, float y, int newShopScreen,
+                                               @ByRef ArrayList<AbstractCard> ___cards1[], @ByRef ArrayList<AbstractCard> ___cards2[], @ByRef ArrayList<String> ___idleMessages[],
+                                               @ByRef float[] ___speechTimer, @ByRef float[]___modX, @ByRef float[]___modY, @ByRef int[]___shopScreen) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+                ArrayList<String> idleMessages= ReflectionHacks.getPrivate(merchant,Merchant.class,"idleMessages");
+                idleMessages.add(DESCRIPTIONS[0]);
+            }
+        }
     }
 
 

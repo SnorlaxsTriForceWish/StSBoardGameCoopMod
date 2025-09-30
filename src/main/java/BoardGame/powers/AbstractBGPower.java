@@ -1,6 +1,5 @@
 package BoardGame.powers;
 
-import BoardGame.BoardGame;
 import BoardGame.relics.BGTheDieRelic;
 import BoardGame.thedie.TheDie;
 import com.badlogic.gdx.graphics.Color;

@@ -1,7 +1,7 @@
 package BoardGame.multicharacter.patches;
 
-import BoardGame.multicharacter.MultiCharacter;
 import BoardGame.multicharacter.GainEnergyAndEnableControlsMultiAction;
+import BoardGame.multicharacter.MultiCharacter;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;

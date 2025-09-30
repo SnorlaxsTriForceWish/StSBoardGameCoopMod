@@ -1,10 +1,10 @@
 package BoardGame.cards.BGRed;
 
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import BoardGame.cards.AbstractBGCard;
 import BoardGame.characters.BGIronclad;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;

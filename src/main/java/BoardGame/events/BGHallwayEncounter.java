@@ -7,19 +7,11 @@ import basemod.ReflectionHacks;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractEvent;
-import com.megacrit.cardcrawl.events.AbstractImageEvent;
-import com.megacrit.cardcrawl.helpers.MonsterHelper;
 import com.megacrit.cardcrawl.localization.EventStrings;
-import com.megacrit.cardcrawl.map.MapEdge;
-import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import com.megacrit.cardcrawl.rooms.MonsterRoom;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class BGHallwayEncounter extends AbstractEvent {
     public static final String ID = "BGHallwayEncounter";

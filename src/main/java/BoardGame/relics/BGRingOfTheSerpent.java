@@ -1,9 +1,7 @@
 package BoardGame.relics;
 
-import com.megacrit.cardcrawl.relics.AbstractRelic;
-
-
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class BGRingOfTheSerpent
         extends AbstractBGRelic  {

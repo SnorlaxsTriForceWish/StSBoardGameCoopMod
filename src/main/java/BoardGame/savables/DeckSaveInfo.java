@@ -2,7 +2,10 @@ package BoardGame.savables;
 
 
 import BoardGame.BoardGame;
-import BoardGame.characters.*;
+import BoardGame.characters.BGDefect;
+import BoardGame.characters.BGIronclad;
+import BoardGame.characters.BGSilent;
+import BoardGame.characters.BGWatcher;
 import BoardGame.dungeons.AbstractBGDungeon;
 import BoardGame.potions.PotionHelperPatch;
 import BoardGame.relics.AbstractBGRelic;

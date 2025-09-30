@@ -2,6 +2,7 @@ package BoardGame.shop;
 
 import BoardGame.cards.BGGoldenTicket;
 import BoardGame.dungeons.AbstractBGDungeon;
+import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.audio.SoundMaster;
@@ -11,6 +12,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.shop.OnSaleTag;
 import com.megacrit.cardcrawl.shop.ShopScreen;
@@ -21,6 +23,9 @@ import javassist.CtBehavior;
 import java.util.ArrayList;
 
 public class BGShopScreen {
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGMerchant");
+    public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
+
     final static float fake_draw_start_x = Settings.WIDTH * 0.16F;
     @SpirePatch(clz = ShopScreen.class, method = "initCards",
             paramtypez = {} )
@@ -123,6 +128,8 @@ public class BGShopScreen {
         @SpirePostfixPatch
         private static void init(ShopScreen __instance, ArrayList<AbstractCard> coloredCards, ArrayList<AbstractCard> colorlessCards){
             if(CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+                ArrayList<String> idleMessages = ReflectionHacks.getPrivate(__instance, ShopScreen.class,"idleMessages");
+                idleMessages.add(DESCRIPTIONS[0]);
                 if(AbstractBGDungeon.ascensionLevel<8)
                     __instance.actualPurgeCost = 3;
                 else

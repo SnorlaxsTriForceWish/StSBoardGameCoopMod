@@ -1,5 +1,6 @@
 package BoardGame.multicharacter.patches;
 
+import BoardGame.dungeons.AbstractBGDungeon;
 import BoardGame.multicharacter.MultiCharacter;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInstrumentPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
@@ -13,15 +14,17 @@ import javassist.expr.MethodCall;
 
 public class UpdateActionPatch {
     public static void before(AbstractGameAction a){
+        if(!(CardCrawlGame.dungeon instanceof AbstractBGDungeon))return;
         ContextPatches.pushTargetContext(ActionPatches.Field.rowTarget.get(a));
-        if(CardCrawlGame.chosenCharacter!= MultiCharacter.Enums.BG_MULTICHARACTER)return;
+        if(CardCrawlGame.chosenCharacter != MultiCharacter.Enums.BG_MULTICHARACTER)return;
         if(ContextPatches.originalBGMultiCharacter==null)ContextPatches.originalBGMultiCharacter=AbstractDungeon.player;
         ContextPatches.pushPlayerContext(ActionPatches.Field.owner.get(a));
 
     }
     public static void after(AbstractGameAction a){
+        if(!(CardCrawlGame.dungeon instanceof AbstractBGDungeon))return;
         ContextPatches.popTargetContext();
-        if(CardCrawlGame.chosenCharacter!= MultiCharacter.Enums.BG_MULTICHARACTER)return;
+        if(CardCrawlGame.chosenCharacter != MultiCharacter.Enums.BG_MULTICHARACTER)return;
         ContextPatches.popPlayerContext();
     }
     @SpirePatch2(clz = GameActionManager.class, method = "update")

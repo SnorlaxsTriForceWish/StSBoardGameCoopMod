@@ -1,10 +1,9 @@
 package BoardGame.monsters.bgexordium;
-import BoardGame.monsters.BGDamageIcons;
-
 
 import BoardGame.BoardGame;
+import BoardGame.monsters.AbstractBGMonster;
+import BoardGame.monsters.BGDamageIcons;
 import BoardGame.monsters.DieControlledMoves;
- 
 import BoardGame.powers.BGSporeCloudPower;
 import BoardGame.thedie.TheDie;
 import com.badlogic.gdx.math.MathUtils;
@@ -21,7 +20,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import BoardGame.monsters.AbstractBGMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import org.apache.logging.log4j.LogManager;

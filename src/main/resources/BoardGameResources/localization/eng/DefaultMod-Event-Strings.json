@@ -403,6 +403,11 @@
       "[Gambler's Brew] One player gains a second Potion."
     ]
   },
+  "BoardGame:BGMerchant": {
+    "DESCRIPTIONS": [
+      "I love this game. Will probably play it forever."
+    ]
+  },
   "BoardGame:BGMindBloom": {
     "NAME": "Mind Bloom",
     "DESCRIPTIONS": [

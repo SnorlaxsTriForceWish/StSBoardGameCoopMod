@@ -1,7 +1,8 @@
 package BoardGame.monsters.bgbeyond;
- import BoardGame.cards.BGStatus.BGDazed;
- import BoardGame.monsters.BGDamageIcons;
+
+import BoardGame.cards.BGStatus.BGDazed;
 import BoardGame.monsters.AbstractBGMonster;
+import BoardGame.monsters.BGDamageIcons;
 import BoardGame.monsters.DieControlledMoves;
 import BoardGame.powers.BGReactivePower;
 import BoardGame.powers.BGVulnerablePower;
@@ -15,16 +16,16 @@ import com.megacrit.cardcrawl.actions.animations.AnimateSlowAttackAction;
 import com.megacrit.cardcrawl.actions.animations.FastShakeAction;
 import com.megacrit.cardcrawl.actions.animations.ShoutAction;
 import com.megacrit.cardcrawl.actions.common.*;
- import com.megacrit.cardcrawl.actions.utility.WaitAction;
+import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
- import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
- import com.megacrit.cardcrawl.localization.MonsterStrings;
+import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
- import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 //TODO: when hit with Skewer, Writhing Mass *repeatedly* switched to vulnerable and made several overlapping Ominous Noises

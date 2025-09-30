@@ -863,7 +863,7 @@
   "BoardGame:BGOutmaneuver": {
     "NAME": "Outmaneuver",
     "DESCRIPTION": "Retain. NL When played, if you Retained this last turn, gain [G] [G] .",
-    "UPGRADE_DESCRIPTION": "Retain. NL When played, if you Retained card last turn, gain [G] [G] [G] ."
+    "UPGRADE_DESCRIPTION": "Retain. NL When played, if you Retained this last turn, gain [G] [G] [G] ."
   },
   "BoardGame:BGOverclock": {
     "NAME": "Overclock",

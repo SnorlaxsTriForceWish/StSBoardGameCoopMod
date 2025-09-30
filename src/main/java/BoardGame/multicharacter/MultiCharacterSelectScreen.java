@@ -5,6 +5,7 @@ import BoardGame.characters.BGDefect;
 import BoardGame.characters.BGIronclad;
 import BoardGame.characters.BGSilent;
 import BoardGame.characters.BGWatcher;
+import BoardGame.ui.OverlayMenuPatches;
 import basemod.BaseMod;
 import basemod.ReflectionHacks;
 import basemod.abstracts.CustomScreen;
@@ -19,14 +20,13 @@ import com.megacrit.cardcrawl.helpers.MathHelper;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.screens.charSelect.CharacterOption;
-import java.util.ArrayList;
-
 import javassist.CannotCompileException;
 import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import BoardGame.ui.OverlayMenuPatches;
+
+import java.util.ArrayList;
 
 public class MultiCharacterSelectScreen extends CustomScreen {
   public boolean isDone = false;

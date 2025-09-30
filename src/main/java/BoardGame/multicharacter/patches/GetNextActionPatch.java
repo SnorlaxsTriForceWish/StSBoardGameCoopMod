@@ -1,5 +1,6 @@
 package BoardGame.multicharacter.patches;
 
+import BoardGame.dungeons.AbstractBGDungeon;
 import BoardGame.multicharacter.MultiCharacter;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
@@ -15,13 +16,14 @@ import java.util.ArrayList;
 
 public class GetNextActionPatch {
     public static void before(AbstractCard c){
+        if(!(CardCrawlGame.dungeon instanceof AbstractBGDungeon))return;
         if(c!=null) {
             ContextPatches.pushTargetContext(CardTargetingPatches.CardField.lastHoveredTarget.get(c));
         }else{
             ContextPatches.pushTargetContext(null);
         }
-        //REMINDER: copied cards (from Foreign Influence and Doppelganger) must manually set owner before playing
         if(CardCrawlGame.chosenCharacter!= MultiCharacter.Enums.BG_MULTICHARACTER)return;
+        //REMINDER: copied cards (from Foreign Influence and Doppelganger) must manually set owner before playing
         if(ContextPatches.originalBGMultiCharacter==null)ContextPatches.originalBGMultiCharacter=AbstractDungeon.player;
 
         if(c!=null) {
@@ -31,6 +33,7 @@ public class GetNextActionPatch {
         }
     }
     public static void after(){
+        if(!(CardCrawlGame.dungeon instanceof AbstractBGDungeon))return;
         ContextPatches.popTargetContext();
         if(CardCrawlGame.chosenCharacter!= MultiCharacter.Enums.BG_MULTICHARACTER)return;
         ContextPatches.popPlayerContext();

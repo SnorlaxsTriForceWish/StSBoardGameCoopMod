@@ -2,7 +2,6 @@ package BoardGame.orbs;
 
 import BoardGame.actions.BGLightningOrbEvokeAction;
 import BoardGame.actions.BGLightningOrbPassiveAction;
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import basemod.abstracts.CustomOrb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,6 +9,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;

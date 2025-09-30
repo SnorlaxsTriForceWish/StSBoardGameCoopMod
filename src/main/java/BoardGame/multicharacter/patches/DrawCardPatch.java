@@ -1,8 +1,10 @@
 package BoardGame.multicharacter.patches;
 
-import BoardGame.multicharacter.MultiCharacter;
 import BoardGame.multicharacter.DrawCardMultiAction;
-import com.evacipated.cardcrawl.modthespire.lib.*;
+import BoardGame.multicharacter.MultiCharacter;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 

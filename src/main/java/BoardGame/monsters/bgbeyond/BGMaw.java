@@ -1,10 +1,8 @@
 package BoardGame.monsters.bgbeyond;
- import BoardGame.monsters.BGDamageIcons;
- import BoardGame.powers.BGVulnerablePower;
-import com.megacrit.cardcrawl.actions.common.SetMoveAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
- import com.megacrit.cardcrawl.core.CardCrawlGame;
+
 import BoardGame.monsters.AbstractBGMonster;
+import BoardGame.monsters.BGDamageIcons;
+import BoardGame.powers.BGVulnerablePower;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
@@ -14,15 +12,18 @@ import com.megacrit.cardcrawl.actions.animations.ShoutAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
- import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.actions.common.SetMoveAction;
+import com.megacrit.cardcrawl.actions.utility.SFXAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
- import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
- import com.megacrit.cardcrawl.powers.StrengthPower;
- import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
+import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.BiteEffect;
 
 public class BGMaw extends AbstractBGMonster implements BGDamageIcons {

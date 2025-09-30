@@ -10,10 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractEvent;
-import com.megacrit.cardcrawl.events.AbstractImageEvent;
 import com.megacrit.cardcrawl.localization.EventStrings;
-import com.megacrit.cardcrawl.map.MapEdge;
-import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.ShopRoom;
@@ -23,14 +20,11 @@ import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 public class BGMerchantEncounter extends AbstractEvent {
     public static final String ID = "BGMerchantEncounter";
 
     private static final Logger logger = LogManager.getLogger(BGHallwayEncounter.class.getName());
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGPlaceholderEvent");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGMerchant");
     public static final String NAME = eventStrings.NAME;
 
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

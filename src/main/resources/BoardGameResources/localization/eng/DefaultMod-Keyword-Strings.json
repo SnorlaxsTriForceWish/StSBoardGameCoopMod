@@ -7,13 +7,6 @@
     "DESCRIPTION": "Deal 2x damage on each [BoardGame:HitIcon] in the next Attack, then remove a [BoardGame:VulnIcon] token."
   },
   {
-    "PROPER_NAME": "Dexterity",
-    "NAMES": [
-      "dexterity"
-    ],
-    "DESCRIPTION": "Dexterity improves Block applied by your cards."
-  },
-  {
     "PROPER_NAME": "[BoardGame:WeakIcon] Weak",
     "NAMES": [
       "weak"
@@ -109,25 +102,5 @@
       "scrying"
     ],
     "DESCRIPTION": "Look at the top X cards of your draw pile. You may discard any of them."
-  },
-  {
-    "NAMES": [
-      "keyword",
-      "keywords"
-    ],
-    "DESCRIPTION": "Whenever you play a card, gain 1 dexterity this turn only."
-  },
-  {
-    "PROPER_NAME": "Multiword Keyword",
-    "NAMES": [
-      "Multiword Keyword",
-      "multiword_keyword",
-      "multiword_keywords",
-      "multikey",
-      "multikeyword"
-    ],
-    "DESCRIPTION": "Make sure the first element in the NAMES is the same as your PROPER_NAME. The rest is to match keywords like the single word keyword."
   }
-
-
 ]

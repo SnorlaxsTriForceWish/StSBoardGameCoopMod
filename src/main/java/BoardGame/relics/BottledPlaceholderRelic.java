@@ -1,5 +1,8 @@
 package BoardGame.relics;
 
+import BoardGame.BoardGame;
+import BoardGame.patches.relics.BottledPlaceholderField;
+import BoardGame.util.TextureLoader;
 import basemod.BaseMod;
 import basemod.abstracts.CustomBottleRelic;
 import basemod.abstracts.CustomRelic;
@@ -15,9 +18,6 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import BoardGame.BoardGame;
-import BoardGame.patches.relics.BottledPlaceholderField;
-import BoardGame.util.TextureLoader;
 
 import java.util.Iterator;
 import java.util.function.Predicate;

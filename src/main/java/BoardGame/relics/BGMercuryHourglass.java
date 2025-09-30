@@ -3,15 +3,13 @@ package BoardGame.relics;
 import BoardGame.actions.BGActivateDieAbilityAction;
 import BoardGame.powers.NilrysCodexCompatible;
 import BoardGame.thedie.TheDie;
-import com.megacrit.cardcrawl.relics.AbstractRelic;
-
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class BGMercuryHourglass
         extends AbstractBGRelic implements DieControlledRelic, NilrysCodexCompatible {

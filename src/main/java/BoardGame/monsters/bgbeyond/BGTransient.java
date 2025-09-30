@@ -1,9 +1,8 @@
 package BoardGame.monsters.bgbeyond;
- import BoardGame.monsters.BGDamageIcons;
- import BoardGame.powers.BGShiftingPower;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
-import BoardGame.monsters.AbstractBGMonster;
 
+import BoardGame.monsters.AbstractBGMonster;
+import BoardGame.monsters.BGDamageIcons;
+import BoardGame.powers.BGShiftingPower;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -13,13 +12,14 @@ import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
- import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.FadingPower;
- import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 public class BGTransient extends AbstractBGMonster implements BGDamageIcons {
     private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("Transient");

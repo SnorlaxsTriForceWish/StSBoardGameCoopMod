@@ -15,8 +15,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-import java.util.logging.Logger;
-
 //BGSpikerProccedPower has been rewritten to apply to the PLAYER instead of the MONSTER
 //  in order to fix an inconsistency with the end-of-combat referee whistle.
 public class BGSpikerProccedPower extends AbstractBGPower implements InvisiblePower {

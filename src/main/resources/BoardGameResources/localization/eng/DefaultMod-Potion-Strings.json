@@ -1,8 +1,4 @@
 {
-"BoardGame:PlaceholderPotion": {
-        "NAME": "Placeholder Potion",
-        "DESCRIPTIONS": ["Gain ", " At the end of your turn, lose ", " Strength."]
-},
         "BoardGame:BGAttackPotion": {
                 "NAME": "Attack Potion",
                 "DESCRIPTIONS": [
@@ -18,10 +14,10 @@
         "BoardGame:BGBlock Potion": {
         "NAME": "Block Potion",
         "DESCRIPTIONS": [
-                "#b",
-                " [BoardGame:BlockIcon] to any player."
-        ]
-},
+                        "#b",
+                        " [BoardGame:BlockIcon] to any player."
+                ]
+        },
         "BoardGame:BGBloodPotion": {
                 "NAME": "Blood Potion",
                 "DESCRIPTIONS": [

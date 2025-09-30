@@ -1,6 +1,7 @@
 package BoardGame.monsters.bgexordium;
-import BoardGame.monsters.BGDamageIcons;
 
+import BoardGame.monsters.AbstractBGMonster;
+import BoardGame.monsters.BGDamageIcons;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -14,7 +15,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.SlimeAnimListener;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import BoardGame.monsters.AbstractBGMonster;
 
 public class BGSpikeSlime_S extends AbstractBGMonster implements BGDamageIcons {
     private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("SpikeSlime_S"); public static final String ID = "SpikeSlime_S";

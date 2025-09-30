@@ -1,17 +1,21 @@
 package BoardGame.characters;
 
-import BoardGame.cards.BGGreen.*;
+import BoardGame.BoardGame;
+import BoardGame.cards.BGGreen.BGDefend_Green;
+import BoardGame.cards.BGGreen.BGNeutralize;
+import BoardGame.cards.BGGreen.BGStrike_Green;
+import BoardGame.cards.BGGreen.BGSurvivor;
 import BoardGame.multicharacter.UnselectablePlayer;
+import BoardGame.relics.BGBurningBlood;
 import BoardGame.relics.BGShivs;
 import BoardGame.relics.BGSnakeRing;
 import BoardGame.relics.BGTheDieRelic;
-import BoardGame.relics.BGBurningBlood;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
-import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -34,7 +38,6 @@ import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbInterface;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import BoardGame.BoardGame;
 
 import java.util.ArrayList;
 import java.util.List;

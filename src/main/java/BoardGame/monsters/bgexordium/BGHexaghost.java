@@ -1,18 +1,14 @@
 package BoardGame.monsters.bgexordium;
 
 import BoardGame.cards.BGStatus.BGBurn;
+import BoardGame.monsters.AbstractBGMonster;
 import BoardGame.monsters.BGDamageIcons;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.AnimateSlowAttackAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.ChangeStateAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
-import com.megacrit.cardcrawl.actions.common.RollMoveAction;
+import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -20,7 +16,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import BoardGame.monsters.AbstractBGMonster;
 import com.megacrit.cardcrawl.monsters.exordium.HexaghostBody;
 import com.megacrit.cardcrawl.monsters.exordium.HexaghostOrb;
 import com.megacrit.cardcrawl.powers.AbstractPower;
@@ -31,9 +26,10 @@ import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.combat.FireballEffect;
 import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
 import com.megacrit.cardcrawl.vfx.combat.ScreenOnFireEffect;
-import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
 
 //TODO: multiflame attack cards should be autopositioned
 public class BGHexaghost extends AbstractBGMonster implements BGDamageIcons {

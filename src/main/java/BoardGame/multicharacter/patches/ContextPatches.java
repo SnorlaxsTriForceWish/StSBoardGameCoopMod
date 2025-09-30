@@ -6,6 +6,7 @@ import BoardGame.multicharacter.NullMonster;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 import java.util.ArrayDeque;
@@ -51,7 +52,7 @@ public class ContextPatches {
         AbstractCreature oldContext = targetContextHistory.pop();
         AbstractDungeon.getCurrRoom().monsters = AbstractDungeonMonsterPatches.getMonstersInSameRow(oldContext);
         currentTargetContext=oldContext;
-
+        MonsterGroup debug=AbstractDungeon.getCurrRoom().monsters;
     }
 
 }

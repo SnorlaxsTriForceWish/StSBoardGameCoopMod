@@ -1,6 +1,5 @@
 package BoardGame.cards.BGGreen;
 
-import BoardGame.BoardGame;
 import BoardGame.actions.BGDoppelgangerAction;
 import BoardGame.actions.BGXCostCardAction;
 import BoardGame.cards.AbstractBGCard;
