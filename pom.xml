@@ -7,7 +7,7 @@
 
         <!-- Change the path for your system to match your Steam installation. -->
         <!-- If you're not sure, go to Slay the Spire in the Steam library, and choose Manage -> Browse local files -->
-        <steam.windows>C:/Program Files (x86)/steam/steamapps</steam.windows>
+        <steam.windows>D:\SteamLibrary\steamapps</steam.windows>
         <steam.mac>${user.home}/Library/Application Support/Steam/steamapps</steam.mac>
         <steam.linux>${user.home}/.local/share/Steam/steamapps</steam.linux>
         <!-- In the Maven tab, under Profiles, make sure only the profile for your system is enabled. Windows is the default. -->
