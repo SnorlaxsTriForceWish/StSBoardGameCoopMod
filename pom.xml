@@ -3,7 +3,7 @@
 
     <properties>
         <modID>BoardGame</modID>
-        <author>Lua Viper</author>
+        <author>degraffa</author>
 
         <!-- Change the path for your system to match your Steam installation. -->
         <!-- If you're not sure, go to Slay the Spire in the Steam library, and choose Manage -> Browse local files -->
