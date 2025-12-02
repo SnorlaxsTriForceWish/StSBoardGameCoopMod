@@ -11,19 +11,37 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Build & Development Commands
 
 ### Building and Running
-```bash
+
+**Windows Command Line** (from `D:\STS_BG_Mod\StSBoardGameCoopMod`):
+```cmd
 # Package the mod (creates JAR in target/ and copies to SteamLibrary/mods/)
-mvn package
+mvnw.cmd package
+
+# Run tests (part of development iteration process)
+mvnw.cmd test
 
 # Clean build artifacts
-mvn clean
+mvnw.cmd clean
 
-# Run tests
+# Clean and rebuild (recommended after major changes)
+mvnw.cmd clean package
+```
+
+**Unix/Mac/Linux** (or if you have Maven installed globally):
+```bash
+# Use ./mvnw (Unix) or mvn (if installed) instead of mvnw.cmd
+mvn package
 mvn test
-
-# Clean and rebuild
+mvn clean
 mvn clean package
 ```
+
+**Typical Development Iteration:**
+1. Make code changes in IntelliJ
+2. Run `mvnw.cmd test` to verify tests pass
+3. Run `mvnw.cmd package` to compile and deploy to Steam mods folder
+4. Launch Slay the Spire to test changes in-game
+5. Repeat as needed
 
 ### Development in IntelliJ
 - **Steam Installation Path:** Configure in `pom.xml` under `<steam.windows>` property (default: `D:\SteamLibrary\steamapps`)
