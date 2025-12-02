@@ -1,0 +1,9 @@
+{
+  "expansioncontent:StudyCardRelic": {
+    "NAME": "タイニーボウラーハット",
+    "FLAVOR": "帽子を制する者はスパイアを制す。",
+    "DESCRIPTIONS": [
+      "戦闘開始時、手札に コスト #b0 の #yスパイアの研究 カードを手札に加える。"
+    ]
+  }
+}

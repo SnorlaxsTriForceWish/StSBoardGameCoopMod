@@ -1,0 +1,19 @@
+{
+  "hexamod:SealCommonReward": {
+    "TEXT": [
+      "デッキに1枚のコモンカードを加える。"
+    ]
+  },
+  "hexamod:SealSealReward": {
+    "TEXT": [
+      "デッキに封印を加える。",
+      "カードを選ぶ。"
+    ]
+  },
+  "hexamod:SealDescriptor": {
+    "TEXT": [
+      "封印",
+      "hexamod:封印 NL "
+    ]
+  }
+}

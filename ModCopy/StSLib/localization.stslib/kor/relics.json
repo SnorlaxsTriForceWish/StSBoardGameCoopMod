@@ -1,0 +1,10 @@
+{
+  "stslib:Clickable": {
+    "NAME": "Clickable",
+    "FLAVOR": "THIS SHOULD NEVER BE SEEN",
+    "DESCRIPTIONS": [
+      "[#2aecd7]전투 [#2aecd7]중 [#2aecd7]우클릭으로 [#2aecd7]사용합니다.[]",
+      "[#2aecd7]우클릭으로 [#2aecd7]사용합니다.[]"
+    ]
+  }
+}

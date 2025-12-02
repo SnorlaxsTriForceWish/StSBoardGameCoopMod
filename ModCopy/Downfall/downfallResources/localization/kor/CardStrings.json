@@ -1,0 +1,34 @@
+{
+  "downfall:Aged": {
+    "NAME": "노쇠",
+    "DESCRIPTION": "사용불가. NL 휘발성. NL 내 턴 종료 시 뽑을 더미 맨 위에 *공허를 놓습니다."
+  },
+  "downfall:Bewildered": {
+    "NAME": "당혹",
+    "DESCRIPTION": "사용불가. NL 휘발성. NL 이 카드를 뽑을 때 손에 있는 모든 카드가 sneckomod:뒤엉킵니다."
+  },
+  "downfall:Icky": {
+    "NAME": "질척임",
+    "DESCRIPTION": "*점액투성이를 1장 얻습니다. NL 소멸."
+  },
+  "downfall:Haunted": {
+    "NAME": "귀신들림",
+    "DESCRIPTION": "사용불가. NL 휘발성. NL 이 카드가 손에 있다면 이 카드 이외의 카드가 소멸할 때마다 피해를 2 받습니다."
+  },
+  "downfall:Malfunctioning": {
+    "NAME": "결함",
+    "DESCRIPTION": "내 턴 종료 시 손에 있는 모든 카드를 무작위 상태이상 카드로 변환합니다. NL 소멸."
+  },
+  "downfall:Scatterbrained": {
+    "NAME": "주의산만",
+    "DESCRIPTION": "내 턴 종료 시 이 카드가 손에 있다면 이 카드를 1장 복사해 버린 카드 더미에 넣고 섞습니다. NL 소멸."
+  },
+  "downfall:SummonMushrooms": {
+    "NAME": "균류 무리",
+    "DESCRIPTION": "모든 버섯을 죽입니다. 버섯의 남아있던 체력만큼 체력을 회복합니다. NL 버섯을 2개 소환합니다."
+  },
+  "downfall:BossMaintenance": {
+    "NAME": "유지보수",
+    "DESCRIPTION": "이번 전투 동안 *타격의 피해량을 !M! 증가시키고 이 카드의 비용을 [E] 증가시킵니다. NL 민첩을 !B! 얻습니다."
+  }
+}
