@@ -63,7 +63,7 @@ public class BGSpawnTwoGremlinsForGremlinLeaderAction extends AbstractGameAction
             );
         }
         AbstractDungeon.actionManager.addToBottom(
-            (AbstractGameAction) new ApplyAngerToGremlinsAction()
+            (AbstractGameAction) new BGApplyAngerToGremlinsAction()
         );
         this.isDone = true;
     }
