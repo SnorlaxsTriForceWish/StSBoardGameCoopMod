@@ -18,7 +18,7 @@ public class BGApplyAngerToGremlinsAction extends AbstractGameAction {
 
         for (AbstractMonster monster : dungeonMonsterGroup.monsters) {
             if (monster instanceof BGGremlinAngry) {
-                if (!monster.hasPower("Angry")) {
+                if (!monster.hasPower(AngryPower.POWER_ID)) {
                     addToBot(
                         (AbstractGameAction) new ApplyPowerAction(
                             monster,
