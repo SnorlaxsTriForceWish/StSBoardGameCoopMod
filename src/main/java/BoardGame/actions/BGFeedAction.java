@@ -1,6 +1,5 @@
 package BoardGame.actions;
 
-
 import BoardGame.monsters.bgbeyond.BGAwakenedOne;
 import BoardGame.monsters.bgbeyond.BGDarkling;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -13,16 +12,9 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 
-
-
-
-
-public class BGFeedAction
-        extends AbstractGameAction
-{
+public class BGFeedAction extends AbstractGameAction{
     private int magicNumber;
     private DamageInfo info;
-    private static final float DURATION = 0.1F;
 
     public BGFeedAction(AbstractCreature target, DamageInfo info, int strAmount) {
         this.info = info;
@@ -32,10 +24,8 @@ public class BGFeedAction
         this.duration = 0.1F;
     }
 
-
     public void update() {
-        if (this.duration == 0.1F &&
-                this.target != null) {
+        if (this.duration == 0.1F && this.target != null) {
             AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, AbstractGameAction.AttackEffect.NONE));
             this.target.damage(this.info);
 
@@ -43,13 +33,9 @@ public class BGFeedAction
             boolean halfDeadCheckPassed=(!this.target.halfDead || this.target instanceof BGDarkling || this.target instanceof BGAwakenedOne);
             if ((((AbstractMonster)this.target).isDying || this.target.currentHealth <= 0) && halfDeadCheckPassed &&
                     !this.target.hasPower("Minion")) {
-                //AbstractDungeon.player.increaseMaxHp(this.increaseHpAmount, false);
+
+                // TODO degraffa: Use BG StrengthPower
                 addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, (AbstractPower)new StrengthPower((AbstractCreature)AbstractDungeon.player, this.magicNumber), this.magicNumber));
-
-
-//                if (this.target instanceof com.megacrit.cardcrawl.monsters.beyond.Donu) {
-//                    UnlockTracker.unlockAchievement("DONUT");
-//                }
             }
 
             if ((AbstractDungeon.getCurrRoom()).monsters.areMonstersBasicallyDead()) {
