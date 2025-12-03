@@ -1,0 +1,34 @@
+{
+  "downfall:Aged": {
+    "NAME": "Aged",
+    "DESCRIPTION": "Unplayable. Ethereal. NL At the end of your turn, add a *Void to the top of your draw pile."
+  },
+  "downfall:Bewildered": {
+    "NAME": "Bewildered",
+    "DESCRIPTION": "Unplayable. Ethereal. NL When drawn, sneckomod:Muddle your hand."
+  },
+  "downfall:Icky": {
+    "NAME": "Icky",
+    "DESCRIPTION": "Gain a *Slimed. NL Exhaust."
+  },
+  "downfall:Haunted": {
+    "NAME": "Haunted",
+    "DESCRIPTION": "Ethereal. Unplayable. NL Whenever another card is *Exhausted when this is in hand, take 2 damage."
+  },
+  "downfall:Malfunctioning": {
+    "NAME": "Flawed",
+    "DESCRIPTION": "At the end of your turn, transform all cards in hand into random Status cards. NL Exhaust."
+  },
+  "downfall:Scatterbrained": {
+    "NAME": "Scatterbrained",
+    "DESCRIPTION": "At the end of your turn, if this is in your hand, add a copy of it to your discard pile. NL Exhaust."
+  },
+  "downfall:SummonMushrooms": {
+    "NAME": "Fungus Among Us",
+    "DESCRIPTION": "Kill all Mushrooms. Heal HP equal to their remaining HP. NL Summon two Mushrooms."
+  },
+  "downfall:BossMaintenance": {
+    "NAME": "Maintenance",
+    "DESCRIPTION": "*Strikes deal !M! more damage this combat. NL Gain !B! Dexterity. NL This costs 1 more this combat."
+  }
+}

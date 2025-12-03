@@ -67,12 +67,6 @@ import static basemod.BaseMod.addMonster;
 //TODO: Game softlocks if BoardGame character is started on a completely new profile (tries to skip Neow screen)
 //TODO: implement PostCreditsNeow easter egg -- need to put these back in the box -- does anyone have opposable thumbs
 
-/*
-
- * https://github.com/daviscook477/BaseMod/wiki
-
- */
-
 @SpireInitializer
 public class BoardGame implements
         EditCardsSubscriber,
@@ -1105,9 +1099,6 @@ public class BoardGame implements
             clawLabel.text+=" - Overpowered, but fun.";
         }
     }
-
-
-
 
     // this adds "ModName:" before the ID of any card/relic/power etc.
     // in order to avoid conflicts if any other mod uses the same ID.

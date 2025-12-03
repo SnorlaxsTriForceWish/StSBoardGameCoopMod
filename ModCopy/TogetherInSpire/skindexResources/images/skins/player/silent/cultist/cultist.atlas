@@ -1,0 +1,83 @@
+
+cultist.png
+size: 346,263
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+back_branch
+  rotate: true
+  xy: 189, 10
+  size: 112, 46
+  orig: 112, 46
+  offset: 0, 0
+  index: -1
+cape_left
+  rotate: false
+  xy: 62, 96
+  size: 125, 165
+  orig: 157, 165
+  offset: 27, 0
+  index: -1
+cape_right
+  rotate: true
+  xy: 189, 124
+  size: 137, 155
+  orig: 137, 155
+  offset: 0, 0
+  index: -1
+eye
+  rotate: true
+  xy: 2, 3
+  size: 6, 5
+  orig: 10, 10
+  offset: 2, 3
+  index: -1
+face
+  rotate: false
+  xy: 143, 22
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
+hair
+  rotate: true
+  xy: 237, 23
+  size: 25, 83
+  orig: 25, 83
+  offset: 0, 0
+  index: -1
+hair2
+  rotate: true
+  xy: 143, 52
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+kris
+  rotate: false
+  xy: 237, 50
+  size: 106, 72
+  orig: 106, 72
+  offset: 0, 0
+  index: -1
+neck_spine
+  rotate: true
+  xy: 143, 70
+  size: 24, 32
+  orig: 28, 36
+  offset: 2, 2
+  index: -1
+shadow
+  rotate: true
+  xy: 2, 11
+  size: 250, 58
+  orig: 250, 58
+  offset: 0, 0
+  index: -1
+skull
+  rotate: true
+  xy: 62, 2
+  size: 92, 79
+  orig: 115, 80
+  offset: 12, 0
+  index: -1

@@ -1,0 +1,17 @@
+{
+  "stslib:Stunned": {
+    "NAME": "Stunned",
+    "DESCRIPTIONS": [
+      "Does nothing for #b",
+      " turn.",
+      " turns."
+    ]
+  },
+  "stslib:ExhaustiveNegationPower": {
+    "NAME": "Negate Exhaustive",
+    "DESCRIPTIONS": [
+      "The next #b",
+      " times you play an Exhaustive card, the Exhaustive counter will not go down."
+    ]
+  }
+}

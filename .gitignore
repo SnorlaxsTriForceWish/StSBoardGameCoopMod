@@ -1,2 +1,8 @@
 /target/
 pom.xml
+nul
+/preferences
+/runs
+twitchconfig.txt
+info.displayconfig
+/sendToDevs

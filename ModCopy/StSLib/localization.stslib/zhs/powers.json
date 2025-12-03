@@ -1,0 +1,17 @@
+﻿{
+  "stslib:Stunned": {
+    "NAME": "击晕",
+    "DESCRIPTIONS": [
+      "在 #b",
+      " 个回合内不作任何行动。",
+      " 个回合内不作任何行动。"
+    ]
+  },
+  "stslib:ExhaustiveNegationPower": {
+    "NAME": "零消耗性",
+    "DESCRIPTIONS": [
+      "下 #b",
+      " 次打出 #y消耗性 的牌时，其次数不会减少。"
+    ]
+  }
+}

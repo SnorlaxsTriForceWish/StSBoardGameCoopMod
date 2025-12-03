@@ -1,0 +1,20 @@
+End User License Agreement (EULA)
+This End User License Agreement (“Agreement”) is a legal agreement between you (“User”) and the owner of the tool (“Owner”). By using this tool, you agree to be bound by the terms of this Agreement.
+
+1. Content Submission
+Users agree to submit only valid files that are free from corruption and infection. Any submission of invalid, corrupted, or infected files is strictly prohibited.
+
+2. Adult Content
+Users agree not to submit any content that is adult, explicit, or inappropriate in nature. The Owner reserves the right to remove such content without prior notice.
+
+3. Sabotage
+Users agree not to sabotage, disrupt, or in any way interfere with the operation of the tool or the service it provides. Any attempt to do so is strictly prohibited.
+
+4. Original Content & Non-Copyrighted Material
+Users agree to submit only original content that they have created themselves. Any submission of copyrighted material without the necessary permissions is strictly prohibited.
+
+5. Additional Provisions
+Users agree not to engage in any activity that violates any applicable law or regulation, infringes upon the rights of any third party, or is otherwise deemed harmful by the Owner.
+
+6. Penalties
+Violation of any of these terms may result in penalties, including but not limited to temporary or permanent bans from using the tool. The determination and enforcement of such penalties are at the sole discretion of the Owner.
