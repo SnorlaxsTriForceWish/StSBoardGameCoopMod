@@ -1100,9 +1100,6 @@ public class BoardGame implements
         }
     }
 
-
-
-
     // this adds "ModName:" before the ID of any card/relic/power etc.
     // in order to avoid conflicts if any other mod uses the same ID.
     public static String makeID(String idText) {
