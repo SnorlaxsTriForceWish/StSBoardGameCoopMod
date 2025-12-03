@@ -6,6 +6,5 @@ nul
 twitchconfig.txt
 info.displayconfig
 /sendToDevs
-/.vscode
 node_modules/
 package-lock.json
