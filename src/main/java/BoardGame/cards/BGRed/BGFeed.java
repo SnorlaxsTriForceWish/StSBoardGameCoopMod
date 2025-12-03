@@ -4,61 +4,73 @@ import BoardGame.actions.BGFeedAction;
 import BoardGame.cards.AbstractBGCard;
 import BoardGame.characters.BGIronclad;
 import com.badlogic.gdx.graphics.Color;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.BiteEffect;
 
 public class BGFeed extends AbstractBGCard {
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+    private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(
         "BoardGame:BGFeed"
     );
     public static final String ID = "BGFeed";
 
+    private static final int DAMAGE = 3;
+    private static final int STRENGTH_GAIN = 1;
+    private static final int UPGRADE_STRENGTH_BONUS = 1;
+
+    private static final float BITE_EFFECT_DURATION = 0.3F;
+    private static final float BITE_EFFECT_Y_OFFSET = 40.0F;
+
     public BGFeed() {
         super(
-            "BGFeed",
-            cardStrings.NAME,
+            ID,
+            CARD_STRINGS.NAME,
             "red/attack/feed",
             1,
-            cardStrings.DESCRIPTION,
-            AbstractCard.CardType.ATTACK,
+            CARD_STRINGS.DESCRIPTION,
+            CardType.ATTACK,
             BGIronclad.Enums.BG_RED,
-            AbstractCard.CardRarity.RARE,
-            AbstractCard.CardTarget.ENEMY
+            CardRarity.RARE,
+            CardTarget.ENEMY
         );
-        this.baseDamage = 3;
+        this.baseDamage = DAMAGE;
         this.exhaust = true;
-        this.baseMagicNumber = 1;
+        this.baseMagicNumber = STRENGTH_GAIN;
         this.magicNumber = this.baseMagicNumber;
     }
 
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        if (m != null) {
+    public void use(AbstractPlayer player, AbstractMonster target) {
+        playBiteEffect(target);
+        dealFeedDamage(player, target);
+    }
+
+    private void playBiteEffect(AbstractMonster target) {
+        if (target != null) {
             addToBot(
-                (AbstractGameAction) new VFXAction(
-                    (AbstractGameEffect) new BiteEffect(
-                        m.hb.cX,
-                        m.hb.cY - 40.0F * Settings.scale,
+                new VFXAction(
+                    new BiteEffect(
+                        target.hb.cX,
+                        target.hb.cY - BITE_EFFECT_Y_OFFSET * Settings.scale,
                         Color.SCARLET.cpy()
                     ),
-                    0.3F
+                    BITE_EFFECT_DURATION
                 )
             );
         }
+    }
+
+    private void dealFeedDamage(AbstractPlayer player, AbstractMonster target) {
         addToBot(
-            (AbstractGameAction) new BGFeedAction(
-                (AbstractCreature) m,
-                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+            new BGFeedAction(
+                target,
+                new DamageInfo(player, this.damage, this.damageTypeForTurn),
                 this.magicNumber
             )
         );
@@ -67,8 +79,8 @@ public class BGFeed extends AbstractBGCard {
     public void upgrade() {
         if (!this.upgraded) {
             upgradeName();
-            upgradeMagicNumber(1);
-            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+            upgradeMagicNumber(UPGRADE_STRENGTH_BONUS);
+            this.rawDescription = CARD_STRINGS.UPGRADE_DESCRIPTION;
             initializeDescription();
         }
     }
