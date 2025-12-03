@@ -2,7 +2,7 @@
 
 package BoardGame.cards.BGStatus;
 
-import BoardGame.actions.AttemptAutoplayCardAction;
+import BoardGame.actions.BGAttemptAutoplayCardAction;
 import BoardGame.cards.AbstractBGCard;
 import BoardGame.cards.CardDisappearsOnExhaust;
 import BoardGame.characters.BGColorless;
@@ -38,7 +38,7 @@ public class BGVoidCard extends AbstractBGCard implements CardDisappearsOnExhaus
     }
 
     public void triggerWhenDrawn() {
-        addToBot((AbstractGameAction) new AttemptAutoplayCardAction(this));
+        addToBot((AbstractGameAction) new BGAttemptAutoplayCardAction(this));
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {}

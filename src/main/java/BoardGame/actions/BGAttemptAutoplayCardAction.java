@@ -11,11 +11,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import java.util.ArrayList;
 
-public class AttemptAutoplayCardAction extends AbstractGameAction {
+public class BGAttemptAutoplayCardAction extends AbstractGameAction {
 
     public AbstractCard card;
 
-    public AttemptAutoplayCardAction(AbstractCard card) {
+    public BGAttemptAutoplayCardAction(AbstractCard card) {
         this.card = card;
     }
 
