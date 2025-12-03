@@ -14,17 +14,37 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.HeatsinkPower;
 
 public class BGHeatsinks extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGHeatsinks");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGHeatsinks"
+    );
     public static final String ID = "BGHeatsinks";
 
     public BGHeatsinks() {
-        super("BGHeatsinks", cardStrings.NAME, "blue/power/heatsinks", 1, cardStrings.DESCRIPTION, CardType.POWER, BGDefect.Enums.BG_BLUE, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(
+            "BGHeatsinks",
+            cardStrings.NAME,
+            "blue/power/heatsinks",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
         this.baseMagicNumber = 2;
         this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new HeatsinkPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new HeatsinkPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {
@@ -40,4 +60,3 @@ public class BGHeatsinks extends AbstractBGCard {
         return new BGHeatsinks();
     }
 }
-

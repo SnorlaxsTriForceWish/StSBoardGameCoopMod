@@ -14,17 +14,37 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGFusion extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGFusion");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGFusion"
+    );
     public static final String ID = "BGFusion";
 
     public BGFusion() {
-        super("BGFusion", cardStrings.NAME, "blue/skill/fusion", 2, cardStrings.DESCRIPTION, CardType.POWER, BGDefect.Enums.BG_BLUE, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(
+            "BGFusion",
+            cardStrings.NAME,
+            "blue/skill/fusion",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = 1;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGEnergyUpPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGEnergyUpPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {

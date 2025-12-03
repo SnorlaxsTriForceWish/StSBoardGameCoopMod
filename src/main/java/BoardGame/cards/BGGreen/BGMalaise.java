@@ -12,21 +12,37 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGMalaise extends AbstractBGCard {
+
     public static final String ID = "BGMalaise";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGMalaise");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGMalaise"
+    );
 
     public BGMalaise() {
-        super("BGMalaise", cardStrings.NAME, "green/skill/malaise", -1, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGSilent.Enums.BG_GREEN, AbstractCard.CardRarity.RARE, AbstractCard.CardTarget.ENEMY);
-        this.baseMagicNumber=0;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGMalaise",
+            cardStrings.NAME,
+            "green/skill/malaise",
+            -1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            AbstractCard.CardRarity.RARE,
+            AbstractCard.CardTarget.ENEMY
+        );
+        this.baseMagicNumber = 0;
+        this.magicNumber = this.baseMagicNumber;
         this.exhaust = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         BGXCostCardAction.XCostInfo info = BGXCostCardAction.preProcessCard(this);
-        addToBot((AbstractGameAction)new BGXCostCardAction(this, info,
-                (e,d)->addToTop((AbstractGameAction)new BGMalaiseAction(p, m, d, e, this.magicNumber))));
+        addToBot(
+            (AbstractGameAction) new BGXCostCardAction(this, info, (e, d) ->
+                addToTop((AbstractGameAction) new BGMalaiseAction(p, m, d, e, this.magicNumber))
+            )
+        );
     }
 
     public void upgrade() {

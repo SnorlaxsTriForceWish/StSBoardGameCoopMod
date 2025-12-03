@@ -14,29 +14,45 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 //TODO: activated status (wasRetainedLastTurn) does not work with Play Twice effects. should it?
 public class BGWindmillStrike extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGWindmillStrike");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGWindmillStrike"
+    );
     public static final String ID = "BGWindmillStrike";
 
     public BGWindmillStrike() {
-        super("BGWindmillStrike", cardStrings.NAME, "purple/attack/windmill_strike", 2, cardStrings.DESCRIPTION, CardType.ATTACK, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.ENEMY);
-
-        this.selfRetain=true;
-        this.baseDamage=2;
-        this.baseMagicNumber=3;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGWindmillStrike",
+            cardStrings.NAME,
+            "purple/attack/windmill_strike",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.ENEMY
+        );
+        this.selfRetain = true;
+        this.baseDamage = 2;
+        this.baseMagicNumber = 3;
+        this.magicNumber = this.baseMagicNumber;
 
         this.tags.add(AbstractCard.CardTags.STRIKE);
     }
 
-
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.BLUNT_HEAVY
+            )
+        );
     }
 
     public void applyPowers() {
         int realBaseDamage = this.baseDamage;
-        if(wasRetainedLastTurn) this.baseDamage += this.magicNumber;
+        if (wasRetainedLastTurn) this.baseDamage += this.magicNumber;
         super.applyPowers();
         this.baseDamage = realBaseDamage;
         this.isDamageModified = (this.damage != this.baseDamage);
@@ -44,13 +60,11 @@ public class BGWindmillStrike extends AbstractBGCard {
 
     public void calculateCardDamage(AbstractMonster mo) {
         int realBaseDamage = this.baseDamage;
-        if(wasRetainedLastTurn) this.baseDamage += this.magicNumber;
+        if (wasRetainedLastTurn) this.baseDamage += this.magicNumber;
         super.calculateCardDamage(mo);
         this.baseDamage = realBaseDamage;
         this.isDamageModified = (this.damage != this.baseDamage);
     }
-
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -63,6 +77,3 @@ public class BGWindmillStrike extends AbstractBGCard {
         return new BGWindmillStrike();
     }
 }
-
-
-

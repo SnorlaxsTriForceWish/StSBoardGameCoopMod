@@ -14,31 +14,38 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.FireBreathingPower;
 
 public class BGFireBreathing extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGFireBreathing");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGFireBreathing"
+    );
     public static final String ID = "BGFire Breathing";
 
-
     public BGFireBreathing() {
-        super("BGFire Breathing", cardStrings.NAME, "red/power/fire_breathing", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.POWER, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGFire Breathing",
+            cardStrings.NAME,
+            "red/power/fire_breathing",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.POWER,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseMagicNumber = 2;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new FireBreathingPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new FireBreathingPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -47,10 +54,7 @@ public class BGFireBreathing extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGFireBreathing();
     }
 }
-
-

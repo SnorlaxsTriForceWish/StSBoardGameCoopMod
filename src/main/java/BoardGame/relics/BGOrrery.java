@@ -4,19 +4,22 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 
-public class BGOrrery extends AbstractBGRelic  {
+public class BGOrrery extends AbstractBGRelic {
+
     public static final String ID = "BGOrrery";
 
     public BGOrrery() {
-        super("BGOrrery", "orrery.png", AbstractRelic.RelicTier.BOSS, AbstractRelic.LandingSound.CLINK);
+        super(
+            "BGOrrery",
+            "orrery.png",
+            AbstractRelic.RelicTier.BOSS,
+            AbstractRelic.LandingSound.CLINK
+        );
     }
-
 
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0];
     }
-
-
 
     public void onEquip() {
         (AbstractDungeon.getCurrRoom()).rewards.clear();
@@ -29,10 +32,7 @@ public class BGOrrery extends AbstractBGRelic  {
         (AbstractDungeon.getCurrRoom()).rewardPopOutTimer = 0.0F;
     }
 
-
     public AbstractRelic makeCopy() {
         return new BGOrrery();
     }
 }
-
-

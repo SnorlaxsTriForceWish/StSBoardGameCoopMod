@@ -12,17 +12,37 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGBattleHymn extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBattleHymn");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBattleHymn"
+    );
     public static final String ID = "BGBattleHymn";
 
     public BGBattleHymn() {
-        super("BGBattleHymn", cardStrings.NAME, "purple/power/battle_hymn", 1, cardStrings.DESCRIPTION, CardType.POWER, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.SELF);
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGBattleHymn",
+            cardStrings.NAME,
+            "purple/power/battle_hymn",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction(p, p, new BGBattleHymnPower(p, magicNumber), magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                p,
+                p,
+                new BGBattleHymnPower(p, magicNumber),
+                magicNumber
+            )
+        );
     }
 
     public void upgrade() {

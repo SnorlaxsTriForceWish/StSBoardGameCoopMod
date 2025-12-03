@@ -13,24 +13,35 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BGSetup extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGSetup");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGSetup"
+    );
     public static final String ID = "BGSetup";
 
     private AbstractMonster target;
 
     static Logger logger = LogManager.getLogger(BGSetup.class.getName());
+
     public BGSetup() {
-        super("BGSetup", cardStrings.NAME, "green/skill/setup", 0, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.UNCOMMON, CardTarget.SELF);
-
-
-
+        super(
+            "BGSetup",
+            cardStrings.NAME,
+            "green/skill/setup",
+            0,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
-        this.exhaust=true;
+        this.exhaust = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainEnergyAction(this.magicNumber));
+        addToBot((AbstractGameAction) new GainEnergyAction(this.magicNumber));
     }
 
     public void upgrade() {
@@ -42,10 +53,7 @@ public class BGSetup extends AbstractBGCard {
         initializeDescription();
     }
 
-
     public AbstractCard makeCopy() {
         return new BGSetup();
     }
 }
-
-

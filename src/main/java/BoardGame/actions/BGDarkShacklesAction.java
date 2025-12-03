@@ -12,7 +12,10 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
 
 public class BGDarkShacklesAction extends AbstractGameAction {
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("OpeningAction");
+
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(
+        "OpeningAction"
+    );
     public static final String[] TEXT = uiStrings.TEXT;
 
     private int blockAmount;
@@ -22,27 +25,27 @@ public class BGDarkShacklesAction extends AbstractGameAction {
         this.duration = 0.0F;
         this.actionType = AbstractGameAction.ActionType.WAIT;
         this.blockAmount = blockAmount;
-        this.player=player;
+        this.player = player;
         //this.targetMonster = m;
     }
-
 
     public void update() {
         for (AbstractMonster mo : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
             //avoid attacking dead monsters (and corresponding visual fx)
-            if (!mo.isDying && !mo.isDead && !mo.halfDead ) {
+            if (!mo.isDying && !mo.isDead && !mo.halfDead) {
                 if (mo.getIntentBaseDmg() >= 0) {
                     EnemyMoveInfo move = AbstractBGMonster.Field.publicMove.get(mo);
                     if (move != null) {
-                        addToBot((AbstractGameAction) new GainBlockAction((AbstractCreature) player, this.blockAmount));
+                        addToBot(
+                            (AbstractGameAction) new GainBlockAction(
+                                (AbstractCreature) player,
+                                this.blockAmount
+                            )
+                        );
                     }
                 }
             }
         }
         this.isDone = true;
-
-
     }
 }
-
-

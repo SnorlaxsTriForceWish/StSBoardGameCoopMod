@@ -15,44 +15,51 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 //TODO: if this is Played Twice, should it stack to 2?
 public class BGMadness extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGMadness");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGMadness"
+    );
     public static final String ID = "BGMadness";
 
     public BGMadness() {
-        super("BGMadness", cardStrings.NAME, "colorless/skill/madness", 0, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
+        super(
+            "BGMadness",
+            cardStrings.NAME,
+            "colorless/skill/madness",
+            0,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
 
-
-
-
-
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
-
-        this.exhaust=true;
-
+        this.exhaust = true;
     }
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGFreeCardPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
-
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGFreeCardPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
             upgradeName();
-            this.selfRetain=true;
+            this.selfRetain = true;
             this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGMadness();
     }
 }
-
-

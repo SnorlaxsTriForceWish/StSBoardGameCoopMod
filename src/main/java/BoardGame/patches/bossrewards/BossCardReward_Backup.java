@@ -228,7 +228,6 @@
 //        return false;
 //    }
 //
-
 //    public static void proceedButtonReturnToBossRewards(ProceedButton __instance){
 //        if(!(CardCrawlGame.dungeon instanceof AbstractBGDungeon))return;    //note that we should never get to this function in the first place if not BGdungeon
 //        if(AbstractDungeon.screen!=AbstractDungeon.CurrentScreen.NONE){

@@ -12,8 +12,11 @@ import com.megacrit.cardcrawl.vfx.RainingGoldEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
 public class BGGoldShrine extends AbstractImageEvent {
+
     public static final String ID = "BGGolden Shrine";
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGGolden Shrine");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGGolden Shrine"
+    );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
@@ -31,20 +34,18 @@ public class BGGoldShrine extends AbstractImageEvent {
     private CUR_SCREEN screen = CUR_SCREEN.INTRO;
 
     private enum CUR_SCREEN {
-        INTRO, COMPLETE;
+        INTRO,
+        COMPLETE,
     }
 
     public BGGoldShrine() {
         super(NAME, DIALOG_1, "images/events/goldShrine.jpg");
-
-            this.goldAmt = 2;
-
+        this.goldAmt = 2;
 
         this.imageEventText.setDialogOption(OPTIONS[0] + this.goldAmt + OPTIONS[1]);
         this.imageEventText.setDialogOption(OPTIONS[2]);
         //this.imageEventText.setDialogOption(OPTIONS[3]);
     }
-
 
     public void onEnterRoom() {
         CardCrawlGame.music.playTempBGM("SHRINE");
@@ -61,7 +62,6 @@ public class BGGoldShrine extends AbstractImageEvent {
     protected void buttonEffect(int buttonPressed) {
         AbstractCard regret;
         switch (this.screen) {
-
             case INTRO:
                 switch (buttonPressed) {
                     case 0:
@@ -76,11 +76,22 @@ public class BGGoldShrine extends AbstractImageEvent {
                     case 1:
                         this.screen = CUR_SCREEN.COMPLETE;
                         regret = AbstractDungeon.getCard(AbstractCard.CardRarity.CURSE);
-                        logMetricGainGoldAndCard("Golden Shrine", "Desecrate", (AbstractCard)regret, 7);
+                        logMetricGainGoldAndCard(
+                            "Golden Shrine",
+                            "Desecrate",
+                            (AbstractCard) regret,
+                            7
+                        );
                         AbstractBGDungeon.removeCardFromRewardDeck(regret);
                         AbstractDungeon.effectList.add(new RainingGoldEffect(275));
                         AbstractDungeon.player.gainGold(7);
-                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect((AbstractCard)regret, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+                        AbstractDungeon.effectList.add(
+                            new ShowCardAndObtainEffect(
+                                (AbstractCard) regret,
+                                Settings.WIDTH / 2.0F,
+                                Settings.HEIGHT / 2.0F
+                            )
+                        );
 
                         this.imageEventText.updateBodyText(DIALOG_3);
                         this.imageEventText.updateDialogOption(0, OPTIONS[3]);
@@ -101,5 +112,3 @@ public class BGGoldShrine extends AbstractImageEvent {
         }
     }
 }
-
-

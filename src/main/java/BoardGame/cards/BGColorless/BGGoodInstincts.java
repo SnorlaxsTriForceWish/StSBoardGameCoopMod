@@ -13,29 +13,36 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 //TODO: "to any player"
 public class BGGoodInstincts extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGGood Instincts");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGGood Instincts"
+    );
     public static final String ID = "BGGood Instincts";
 
     public BGGoodInstincts() {
-        super("BGGood Instincts", cardStrings.NAME, "colorless/skill/good_instincts", 0, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGGood Instincts",
+            cardStrings.NAME,
+            "colorless/skill/good_instincts",
+            0,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseBlock = 1;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -44,10 +51,7 @@ public class BGGoodInstincts extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGGoodInstincts();
     }
 }
-
-

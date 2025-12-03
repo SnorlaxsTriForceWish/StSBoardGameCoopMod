@@ -14,28 +14,42 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGMayhem extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGMayhem");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGMayhem"
+    );
     public static final String ID = "BGMayhem";
 
     public BGMayhem() {
-        super("BGMayhem", cardStrings.NAME, "colorless/power/mayhem", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.POWER, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.RARE, AbstractCard.CardTarget.SELF);
-
-
+        super(
+            "BGMayhem",
+            cardStrings.NAME,
+            "colorless/power/mayhem",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.POWER,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.RARE,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
-
     }
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGMayhemPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGMayhemPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
-
 
     public AbstractCard makeCopy() {
         return new BGMayhem();
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -44,6 +58,3 @@ public class BGMayhem extends AbstractBGCard {
         }
     }
 }
-
-
-

@@ -22,8 +22,11 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.CleaveEffect;
 
 public class BGAThousandCutsPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BoardGame:BGAThousandCutsPower";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGAThousandCutsPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGAThousandCutsPower"
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
@@ -36,72 +39,78 @@ public class BGAThousandCutsPower extends AbstractBGPower {
         loadRegion("thousandCuts");
     }
 
-
     public void updateDescription() {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
-
-    public void onShuffle(){
+    public void onShuffle() {
         flash();
-        addToBot((AbstractGameAction)new SFXAction("ATTACK_HEAVY"));
+        addToBot((AbstractGameAction) new SFXAction("ATTACK_HEAVY"));
         if (Settings.FAST_MODE) {
-            addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new CleaveEffect()));
+            addToBot((AbstractGameAction) new VFXAction((AbstractGameEffect) new CleaveEffect()));
         } else {
-            addToBot((AbstractGameAction)new VFXAction(this.owner, (AbstractGameEffect)new CleaveEffect(), 0.2F));
+            addToBot(
+                (AbstractGameAction) new VFXAction(
+                    this.owner,
+                    (AbstractGameEffect) new CleaveEffect(),
+                    0.2F
+                )
+            );
         }
-        addToBot((AbstractGameAction)new DamageAllEnemiesAction(this.owner,
-                DamageInfo.createDamageMatrix(this.amount, true), DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.NONE, true));
+        addToBot(
+            (AbstractGameAction) new DamageAllEnemiesAction(
+                this.owner,
+                DamageInfo.createDamageMatrix(this.amount, true),
+                DamageInfo.DamageType.THORNS,
+                AbstractGameAction.AttackEffect.NONE,
+                true
+            )
+        );
     }
 
-
-
-
-
-    @SpirePatch2(clz = ShuffleAction.class, method = "update",
-            paramtypez={})
+    @SpirePatch2(clz = ShuffleAction.class, method = "update", paramtypez = {})
     public static class ShuffleActionPatch {
+
         @SpirePostfixPatch
         public static void Postfix() {
-            if(!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) return;
-            for(AbstractPower p:AbstractDungeon.player.powers){
-                if(p instanceof AbstractBGPower){
-                    ((AbstractBGPower)p).onShuffle();
+            if (!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) return;
+            for (AbstractPower p : AbstractDungeon.player.powers) {
+                if (p instanceof AbstractBGPower) {
+                    ((AbstractBGPower) p).onShuffle();
                 }
             }
         }
     }
 
-    @SpirePatch2(clz = EmptyDeckShuffleAction.class, method = SpirePatch.CONSTRUCTOR,
-            paramtypez={})
+    @SpirePatch2(
+        clz = EmptyDeckShuffleAction.class,
+        method = SpirePatch.CONSTRUCTOR,
+        paramtypez = {}
+    )
     public static class EmptyDeckShuffleActionPatch {
+
         @SpirePostfixPatch
         public static void Postfix() {
-            if(!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) return;
-            for(AbstractPower p:AbstractDungeon.player.powers){
-                if(p instanceof AbstractBGPower){
-                    ((AbstractBGPower)p).onShuffle();
+            if (!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) return;
+            for (AbstractPower p : AbstractDungeon.player.powers) {
+                if (p instanceof AbstractBGPower) {
+                    ((AbstractBGPower) p).onShuffle();
                 }
             }
         }
     }
 
-    @SpirePatch2(clz = ShuffleAllAction.class, method = SpirePatch.CONSTRUCTOR,
-            paramtypez={})
+    @SpirePatch2(clz = ShuffleAllAction.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {})
     public static class ShuffleAllActionPatch {
+
         @SpirePostfixPatch
         public static void Postfix() {
-            if(!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) return;
-            for(AbstractPower p:AbstractDungeon.player.powers){
-                if(p instanceof AbstractBGPower){
-                    ((AbstractBGPower)p).onShuffle();
+            if (!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) return;
+            for (AbstractPower p : AbstractDungeon.player.powers) {
+                if (p instanceof AbstractBGPower) {
+                    ((AbstractBGPower) p).onShuffle();
                 }
             }
         }
     }
-
-
-
 }
-
-

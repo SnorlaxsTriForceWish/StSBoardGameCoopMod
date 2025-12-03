@@ -15,12 +15,24 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 //TODO: non-red cards have not yet been tagged as Strikes
 public class BGPerfectedStrike extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGPerfected Strike"); public static final String ID = "BGPerfected Strike";
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGPerfected Strike"
+    );
+    public static final String ID = "BGPerfected Strike";
 
     public BGPerfectedStrike() {
-        super("BGPerfected Strike", cardStrings.NAME, "red/attack/perfected_strike", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.ENEMY);
-
-
+        super(
+            "BGPerfected Strike",
+            cardStrings.NAME,
+            "red/attack/perfected_strike",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseDamage = 3;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
@@ -30,20 +42,20 @@ public class BGPerfectedStrike extends AbstractBGCard {
     public static int countCards(AbstractCard self) {
         int count = 0;
         for (AbstractCard c : AbstractDungeon.player.hand.group) {
-            if (isStrike(c) && c!=self) {
+            if (isStrike(c) && c != self) {
                 count++;
             }
         }
-//        for (AbstractCard c : AbstractDungeon.player.drawPile.group) {
-//            if (isStrike(c)) {
-//                count++;
-//            }
-//        }
-//        for (AbstractCard c : AbstractDungeon.player.discardPile.group) {
-//            if (isStrike(c)) {
-//                count++;
-//            }
-//        }
+        //        for (AbstractCard c : AbstractDungeon.player.drawPile.group) {
+        //            if (isStrike(c)) {
+        //                count++;
+        //            }
+        //        }
+        //        for (AbstractCard c : AbstractDungeon.player.discardPile.group) {
+        //            if (isStrike(c)) {
+        //                count++;
+        //            }
+        //        }
         return count;
     }
 
@@ -51,15 +63,15 @@ public class BGPerfectedStrike extends AbstractBGCard {
         return c.hasTag(AbstractCard.CardTags.STRIKE);
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.SLASH_DIAGONAL
+            )
+        );
     }
-
-
-
-
-
 
     public void calculateCardDamage(AbstractMonster mo) {
         int realBaseDamage = this.baseDamage;
@@ -69,12 +81,8 @@ public class BGPerfectedStrike extends AbstractBGCard {
 
         this.baseDamage = realBaseDamage;
 
-
         this.isDamageModified = (this.damage != this.baseDamage);
     }
-
-
-
 
     public void applyPowers() {
         int realBaseDamage = this.baseDamage;
@@ -84,15 +92,12 @@ public class BGPerfectedStrike extends AbstractBGCard {
 
         this.baseDamage = realBaseDamage;
 
-
         this.isDamageModified = (this.damage != this.baseDamage);
     }
-
 
     public AbstractCard makeCopy() {
         return new BGPerfectedStrike();
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -103,5 +108,3 @@ public class BGPerfectedStrike extends AbstractBGCard {
         }
     }
 }
-
-

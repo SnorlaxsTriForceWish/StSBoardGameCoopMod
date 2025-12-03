@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 
 public class BGGainMiracleAction extends AbstractGameAction {
+
     private int amount;
     private AbstractCard card;
     private AbstractPlayer player;
@@ -22,60 +23,65 @@ public class BGGainMiracleAction extends AbstractGameAction {
     public BGGainMiracleAction(int amount, AbstractCard card) {
         this.duration = 0.0F;
         this.actionType = ActionType.WAIT;
-        this.amount=amount;
-        this.card=card;
+        this.amount = amount;
+        this.card = card;
     }
+
     public BGGainMiracleAction(int amount) {
-        this(amount,null);
+        this(amount, null);
     }
-
-
-
 
     public void update() {
-        if(!AbstractDungeon.player.hasRelic("BoardGame:BGMiracles")) {
+        if (!AbstractDungeon.player.hasRelic("BoardGame:BGMiracles")) {
             AbstractRelic miracles = new BGMiracles();
-            AbstractDungeon.getCurrRoom().spawnRelicAndObtain((Settings.WIDTH / 2), (Settings.HEIGHT / 2), miracles);
+            AbstractDungeon.getCurrRoom().spawnRelicAndObtain(
+                (Settings.WIDTH / 2),
+                (Settings.HEIGHT / 2),
+                miracles
+            );
             ((AbstractBGRelic) miracles).setupObtainedDuringCombat();
         }
 
         AbstractRelic relic = AbstractDungeon.player.getRelic("BoardGame:BGMiracles");
-        for(int i=0;i<this.amount;i+=1){
-            relic.counter=relic.counter+1;
+        for (int i = 0; i < this.amount; i += 1) {
+            relic.counter = relic.counter + 1;
         }
-        if(relic.counter>5){
+        if (relic.counter > 5) {
             //addToTop
-            int surplus=relic.counter-5;
+            int surplus = relic.counter - 5;
             relic.counter = 5;
-            if(card!=null && !card.isInAutoplay){
+            if (card != null && !card.isInAutoplay) {
                 addToTop(new GainEnergyAction(surplus));
             }
-            if(!BoardGame.alreadyShowedMaxMiraclesWarning) {
-                BoardGame.alreadyShowedMaxMiraclesWarning=true;
+            if (!BoardGame.alreadyShowedMaxMiraclesWarning) {
+                BoardGame.alreadyShowedMaxMiraclesWarning = true;
                 //TODO: localization
-                AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, "I can't have more than 5 Miracles.", true));
+                AbstractDungeon.effectList.add(
+                    new ThoughtBubble(
+                        AbstractDungeon.player.dialogX,
+                        AbstractDungeon.player.dialogY,
+                        3.0F,
+                        "I can't have more than 5 Miracles.",
+                        true
+                    )
+                );
             }
         }
         //TODO: also check global token cap (5*number_of_Watchers) (only relevant if prismatic shard)
 
-        for(AbstractCard c : AbstractDungeon.player.hand.group){
+        for (AbstractCard c : AbstractDungeon.player.hand.group) {
             c.applyPowers();
         }
-        for(AbstractCard c : AbstractDungeon.player.drawPile.group){
+        for (AbstractCard c : AbstractDungeon.player.drawPile.group) {
             c.applyPowers();
         }
-        for(AbstractCard c : AbstractDungeon.player.discardPile.group){
+        for (AbstractCard c : AbstractDungeon.player.discardPile.group) {
             c.applyPowers();
         }
-        for(AbstractCard c : AbstractDungeon.player.exhaustPile.group){
+        for (AbstractCard c : AbstractDungeon.player.exhaustPile.group) {
             c.applyPowers();
         }
-
 
         this.isDone = true;
-
-
     }
 }
-
-

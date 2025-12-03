@@ -16,21 +16,42 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BGAccuracy extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGAccuracy");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGAccuracy"
+    );
     public static final String ID = "BGAccuracy";
 
     private AbstractMonster target;
 
     static Logger logger = LogManager.getLogger(BGAccuracy.class.getName());
+
     public BGAccuracy() {
-        super("BGAccuracy", cardStrings.NAME, "green/power/accuracy", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.POWER, BGSilent.Enums.BG_GREEN, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
+        super(
+            "BGAccuracy",
+            cardStrings.NAME,
+            "green/power/accuracy",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.POWER,
+            BGSilent.Enums.BG_GREEN,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
         //this.cardsToPreview = (AbstractCard)new BGShivSurrogate(); //TODO LATER: make this work
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGAccuracyPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGAccuracyPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {
@@ -44,5 +65,3 @@ public class BGAccuracy extends AbstractBGCard {
         return new BGAccuracy();
     }
 }
-
-

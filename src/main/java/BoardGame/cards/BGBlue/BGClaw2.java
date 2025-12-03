@@ -20,34 +20,51 @@ import com.megacrit.cardcrawl.vfx.combat.ClawEffect;
 //TODO: we've fixed BGClawAction to work on cards in limbo, but it might still not be compatible with Blasphemy 3x
 
 public class BGClaw2 extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGClaw2");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGClaw2"
+    );
     public static final String ID = "BGClaw2";
 
-
     public BGClaw2() {
-        super("BGClaw2", cardStrings.NAME, "blue/attack/claw", 0, cardStrings.DESCRIPTION, CardType.ATTACK, BGDefect.Enums.BG_BLUE, CardRarity.COMMON, CardTarget.ENEMY);
+        super(
+            "BGClaw2",
+            cardStrings.NAME,
+            "blue/attack/claw",
+            0,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.COMMON,
+            CardTarget.ENEMY
+        );
         this.baseDamage = 1;
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
 
-
-    public static int getClawPackCount(){
-        int c=Math.round(BoardGame.BoardGame.clawPackCount);
-        if(c<2)c=0;
-        if(c>8)c=8;
+    public static int getClawPackCount() {
+        int c = Math.round(BoardGame.BoardGame.clawPackCount);
+        if (c < 2) c = 0;
+        if (c > 8) c = 8;
         return c;
     }
 
-
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if (m != null)
-            addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new ClawEffect(m.hb.cX, m.hb.cY, Color.CYAN, Color.WHITE), 0.1F));
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.NONE));
-        addToBot((AbstractGameAction)new BGClawAction(this, this.magicNumber));
-
-
+        if (m != null) addToBot(
+            (AbstractGameAction) new VFXAction(
+                (AbstractGameEffect) new ClawEffect(m.hb.cX, m.hb.cY, Color.CYAN, Color.WHITE),
+                0.1F
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, DamageInfo.DamageType.NORMAL),
+                AbstractGameAction.AttackEffect.NONE
+            )
+        );
+        addToBot((AbstractGameAction) new BGClawAction(this, this.magicNumber));
     }
 
     public void upgrade() {
@@ -57,10 +74,7 @@ public class BGClaw2 extends AbstractBGCard {
         }
     }
 
-
-
     public AbstractCard makeCopy() {
         return new BGClaw2();
     }
 }
-

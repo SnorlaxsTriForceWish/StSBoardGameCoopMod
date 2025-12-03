@@ -13,26 +13,24 @@ import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.shop.StorePotion;
 import com.megacrit.cardcrawl.vfx.ObtainPotionEffect;
 
-public class BGSozu extends AbstractBGRelic  {
+public class BGSozu extends AbstractBGRelic {
+
     public static final String ID = "BGSozu";
 
     public BGSozu() {
         super("BGSozu", "sozu.png", AbstractRelic.RelicTier.BOSS, AbstractRelic.LandingSound.FLAT);
     }
 
-
     public String getUpdatedDescription() {
         if (AbstractDungeon.player != null) {
             return setDescription(AbstractDungeon.player.chosenClass);
         }
-        return setDescription((AbstractPlayer.PlayerClass)null);
+        return setDescription((AbstractPlayer.PlayerClass) null);
     }
-
 
     private String setDescription(AbstractPlayer.PlayerClass c) {
         return this.DESCRIPTIONS[1] + this.DESCRIPTIONS[0];
     }
-
 
     public void updateDescription(AbstractPlayer.PlayerClass c) {
         this.description = setDescription(c);
@@ -41,26 +39,23 @@ public class BGSozu extends AbstractBGRelic  {
         initializeTips();
     }
 
-
     public void onEquip() {
         AbstractDungeon.player.energy.energyMaster++;
     }
-
 
     public void onUnequip() {
         AbstractDungeon.player.energy.energyMaster--;
     }
 
-
     public AbstractRelic makeCopy() {
         return new BGSozu();
     }
 
+    @SpirePatch2(clz = ObtainPotionAction.class, method = "update", paramtypez = {})
+    public static class ObtainPotionActionPatch {
 
-    @SpirePatch2(clz= ObtainPotionAction.class,method="update",paramtypez = {})
-    public static class ObtainPotionActionPatch{
         @SpirePrefixPatch
-        public static SpireReturn<Void> Prefix(ObtainPotionAction __instance, float ___duration){
+        public static SpireReturn<Void> Prefix(ObtainPotionAction __instance, float ___duration) {
             if (___duration == Settings.ACTION_DUR_XFAST) {
                 if (AbstractDungeon.player.hasRelic("BGSozu")) {
                     AbstractDungeon.player.getRelic("BGSozu").flash();
@@ -71,9 +66,11 @@ public class BGSozu extends AbstractBGRelic  {
         }
     }
 
-    @SpirePatch2(clz= RewardItem.class,method="claimReward",paramtypez = {})
-    public static class RewardItemPatch{
-        @SpirePrefixPatch public static SpireReturn<Boolean> Prefix(RewardItem __instance){
+    @SpirePatch2(clz = RewardItem.class, method = "claimReward", paramtypez = {})
+    public static class RewardItemPatch {
+
+        @SpirePrefixPatch
+        public static SpireReturn<Boolean> Prefix(RewardItem __instance) {
             if (__instance.type == RewardItem.RewardType.POTION) {
                 if (AbstractDungeon.player.hasRelic("BGSozu")) {
                     AbstractDungeon.player.getRelic("BGSozu").flash();
@@ -84,9 +81,11 @@ public class BGSozu extends AbstractBGRelic  {
         }
     }
 
-    @SpirePatch2(clz= StorePotion.class,method="purchasePotion",paramtypez = {})
-    public static class StorePotionPatch{
-        @SpirePrefixPatch public static SpireReturn<Void> Prefix(){
+    @SpirePatch2(clz = StorePotion.class, method = "purchasePotion", paramtypez = {})
+    public static class StorePotionPatch {
+
+        @SpirePrefixPatch
+        public static SpireReturn<Void> Prefix() {
             if (AbstractDungeon.player.hasRelic("BGSozu")) {
                 AbstractDungeon.player.getRelic("BGSozu").flash();
                 return SpireReturn.Return();
@@ -95,19 +94,16 @@ public class BGSozu extends AbstractBGRelic  {
         }
     }
 
+    @SpirePatch2(clz = ObtainPotionEffect.class, method = "update", paramtypez = {})
+    public static class ObtainPotionEffectPatch {
 
-    @SpirePatch2(clz= ObtainPotionEffect.class,method="update",paramtypez = {})
-    public static class ObtainPotionEffectPatch{
-        @SpirePrefixPatch public static SpireReturn<Void> Prefix(ObtainPotionEffect __instance){
+        @SpirePrefixPatch
+        public static SpireReturn<Void> Prefix(ObtainPotionEffect __instance) {
             if (AbstractDungeon.player.hasRelic("BGSozu")) {
-                __instance.isDone=true;
+                __instance.isDone = true;
                 return SpireReturn.Return();
             }
             return SpireReturn.Continue();
         }
     }
-
-
 }
-
-

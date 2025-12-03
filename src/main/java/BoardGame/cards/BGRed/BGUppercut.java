@@ -17,33 +17,58 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGUppercut extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGUppercut");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGUppercut"
+    );
     public static final String ID = "BGUppercut";
 
     public BGUppercut() {
-        super("BGUppercut", cardStrings.NAME, "red/attack/uppercut", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.RARE, AbstractCard.CardTarget.ENEMY);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGUppercut",
+            cardStrings.NAME,
+            "red/attack/uppercut",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.RARE,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseDamage = 3;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)p, (AbstractPower)new BGVulnerablePower((AbstractCreature)m, this.magicNumber, false), this.magicNumber));
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)p, (AbstractPower)new BGWeakPower((AbstractCreature)m, 1, false), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.BLUNT_HEAVY
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) m,
+                (AbstractCreature) p,
+                (AbstractPower) new BGVulnerablePower(
+                    (AbstractCreature) m,
+                    this.magicNumber,
+                    false
+                ),
+                this.magicNumber
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) m,
+                (AbstractCreature) p,
+                (AbstractPower) new BGWeakPower((AbstractCreature) m, 1, false),
+                this.magicNumber
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -54,10 +79,7 @@ public class BGUppercut extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGUppercut();
     }
 }
-
-

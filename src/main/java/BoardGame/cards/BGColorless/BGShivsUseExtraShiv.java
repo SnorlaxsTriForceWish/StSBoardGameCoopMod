@@ -12,40 +12,45 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGShivsUseExtraShiv extends AbstractBGAttackCardChoice {
+
     public static final String ID = "BGShivsUseExtraShiv";
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGShivsUseExtraShiv");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGShivsUseExtraShiv"
+    );
 
     public BGShivsUseExtraShiv() {
-        super("BGShivsUseExtraShiv", cardStrings.NAME, "colorless/attack/shiv", -2, cardStrings.DESCRIPTION, AbstractCard.CardType.STATUS, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.SPECIAL, AbstractCard.CardTarget.NONE);
-        this.baseDamage=1;
-        if(AbstractDungeon.player!=null) {
+        super(
+            "BGShivsUseExtraShiv",
+            cardStrings.NAME,
+            "colorless/attack/shiv",
+            -2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.STATUS,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.SPECIAL,
+            AbstractCard.CardTarget.NONE
+        );
+        this.baseDamage = 1;
+        if (AbstractDungeon.player != null) {
             AbstractPower accuracy = AbstractDungeon.player.getPower("BGAccuracy");
             if (accuracy != null) {
                 this.damage = this.baseDamage + accuracy.amount;
             }
         }
-        this.isDamageModified=(this.baseDamage!=this.damage);
+        this.isDamageModified = (this.baseDamage != this.damage);
 
-        this.isInAutoplay=true; //bandage fix for extra shivs triggering dice lock
+        this.isInAutoplay = true; //bandage fix for extra shivs triggering dice lock
     }
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {}
 
-
-
     public void onChoseThisOption() {
-        addToTop(new BGUseShivAction(true,false,0,"Choose a target for Shiv."));;
+        addToTop(new BGUseShivAction(true, false, 0, "Choose a target for Shiv."));
     }
 
-
-
     public void upgrade() {}
-
 
     public AbstractCard makeCopy() {
         return new BGShivsUseExtraShiv();
     }
 }
-

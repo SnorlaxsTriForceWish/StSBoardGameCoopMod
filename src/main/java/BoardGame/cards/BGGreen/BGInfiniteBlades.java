@@ -16,23 +16,42 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BGInfiniteBlades extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGInfinite Blades");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGInfinite Blades"
+    );
     public static final String ID = "BGInfinite Blades";
 
     private AbstractMonster target;
 
     static Logger logger = LogManager.getLogger(BGInfiniteBlades.class.getName());
-    public BGInfiniteBlades() {
-        super("BGInfinite Blades", cardStrings.NAME, "green/power/infinite_blades", 1, cardStrings.DESCRIPTION, CardType.POWER, BGSilent.Enums.BG_GREEN, CardRarity.UNCOMMON, CardTarget.SELF);
 
+    public BGInfiniteBlades() {
+        super(
+            "BGInfinite Blades",
+            cardStrings.NAME,
+            "green/power/infinite_blades",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
         this.rawDescription = cardStrings.DESCRIPTION;
         this.baseMagicNumber = 1;
-        this.magicNumber=this.baseMagicNumber;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGInfiniteBladesPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
-
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGInfiniteBladesPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {
@@ -48,5 +67,3 @@ public class BGInfiniteBlades extends AbstractBGCard {
         return new BGInfiniteBlades();
     }
 }
-
-

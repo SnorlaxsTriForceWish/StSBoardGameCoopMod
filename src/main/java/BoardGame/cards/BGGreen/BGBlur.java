@@ -17,43 +17,55 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGBlur extends AbstractBGCard {
+
     public static final String ID = "BGBlur";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBlur");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBlur"
+    );
 
     public BGBlur() {
-        super("BGBlur", cardStrings.NAME, "green/skill/blur", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGSilent.Enums.BG_GREEN, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
+        super(
+            "BGBlur",
+            cardStrings.NAME,
+            "green/skill/blur",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseBlock = 2;
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
-        addToBot((AbstractGameAction)new BGGainBlockIfDiscardAction(this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
+        addToBot((AbstractGameAction) new BGGainBlockIfDiscardAction(this.magicNumber));
     }
 
     public void triggerOnGlowCheck() {
         this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        if (GameActionManager.totalDiscardedThisTurn > 0)
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-
+        if (GameActionManager.totalDiscardedThisTurn > 0) this.glowColor =
+            AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
     }
 
     protected void applyPowersToBlock() {
         super.applyPowersToBlock();
-        float tmp=this.baseMagicNumber;
-        for (AbstractPower p : AbstractDungeon.player.powers)
-            tmp = p.modifyBlock(tmp, this);
-        for (AbstractPower p : AbstractDungeon.player.powers)
-            tmp = p.modifyBlockLast(tmp);
-        if (this.baseMagicNumber != MathUtils.floor(tmp))
-            this.isMagicNumberModified = true;
-        if (tmp < 0.0F)
-            tmp = 0.0F;
+        float tmp = this.baseMagicNumber;
+        for (AbstractPower p : AbstractDungeon.player.powers) tmp = p.modifyBlock(tmp, this);
+        for (AbstractPower p : AbstractDungeon.player.powers) tmp = p.modifyBlockLast(tmp);
+        if (this.baseMagicNumber != MathUtils.floor(tmp)) this.isMagicNumberModified = true;
+        if (tmp < 0.0F) tmp = 0.0F;
         this.magicNumber = MathUtils.floor(tmp);
-
-
     }
 
     public void upgrade() {
@@ -67,6 +79,3 @@ public class BGBlur extends AbstractBGCard {
         return new BGBlur();
     }
 }
-
-
-

@@ -14,18 +14,38 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGBuffer extends AbstractBGCard {
+
     public static final String ID = "BGBuffer";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBuffer");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBuffer"
+    );
 
     public BGBuffer() {
-        super("BGBuffer", cardStrings.NAME, "blue/power/buffer", 2, cardStrings.DESCRIPTION, CardType.POWER, BGDefect.Enums.BG_BLUE, CardRarity.RARE, CardTarget.SELF);
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGBuffer",
+            cardStrings.NAME,
+            "blue/power/buffer",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGBufferPower((AbstractCreature)p, this.magicNumber, this), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGBufferPower((AbstractCreature) p, this.magicNumber, this),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {

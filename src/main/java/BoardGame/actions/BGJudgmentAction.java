@@ -1,4 +1,3 @@
-
 package BoardGame.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -8,8 +7,8 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
-public class BGJudgmentAction
-        extends AbstractGameAction {
+public class BGJudgmentAction extends AbstractGameAction {
+
     private int cutoff;
 
     public BGJudgmentAction(AbstractCreature target, int cutoff) {
@@ -20,13 +19,19 @@ public class BGJudgmentAction
     }
 
     public void update() {
-        if (this.duration == Settings.ACTION_DUR_FAST &&
-                this.target.currentHealth <= this.cutoff && this.target instanceof com.megacrit.cardcrawl.monsters.AbstractMonster) {
-            addToBot((AbstractGameAction) new DamageAction((AbstractCreature) target, new DamageInfo(source, target.currentHealth, DamageInfo.DamageType.HP_LOSS), AttackEffect.NONE));
+        if (
+            this.duration == Settings.ACTION_DUR_FAST &&
+            this.target.currentHealth <= this.cutoff &&
+            this.target instanceof com.megacrit.cardcrawl.monsters.AbstractMonster
+        ) {
+            addToBot(
+                (AbstractGameAction) new DamageAction(
+                    (AbstractCreature) target,
+                    new DamageInfo(source, target.currentHealth, DamageInfo.DamageType.HP_LOSS),
+                    AttackEffect.NONE
+                )
+            );
         }
         this.isDone = true;
     }
 }
-
-
-

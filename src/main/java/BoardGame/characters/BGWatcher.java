@@ -1,5 +1,8 @@
 package BoardGame.characters;
 
+import static BoardGame.BoardGame.*;
+import static com.megacrit.cardcrawl.helpers.ImageMaster.PURPLE_ORB_FLASH_VFX;
+
 import BoardGame.BoardGame;
 import BoardGame.cards.BGBlue.BGStrike_Blue;
 import BoardGame.cards.BGPurple.BGDefend_W;
@@ -36,35 +39,37 @@ import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbInterface;
 import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbPurple;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static BoardGame.BoardGame.*;
-import static com.megacrit.cardcrawl.helpers.ImageMaster.PURPLE_ORB_FLASH_VFX;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 //Wiki-page https://github.com/daviscook477/BaseMod/wiki/Custom-Characters
 //and https://github.com/daviscook477/BaseMod/wiki/Migrating-to-5.0
 //All text (starting description and loadout, anything labeled TEXT[]) can be found in DefaultMod-character-Strings.json in the resources
 
 public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
+
     public static final Logger logger = LogManager.getLogger(BoardGame.class.getName());
 
     // =============== CHARACTER ENUMERATORS =================
 
     public static class Enums {
+
         @SpireEnum
         public static PlayerClass BG_WATCHER;
+
         @SpireEnum(name = "BG_WATCHER_PURPLE_COLOR") // These two HAVE to have the same absolutely identical name.
         public static AbstractCard.CardColor BG_PURPLE;
+
         @SpireEnum(name = "BG_WATCHER_PURPLE_COLOR")
         public static CardLibrary.LibraryType LIBRARY_COLOR;
     }
 
     // =============== CHARACTER ENUMERATORS  =================
-    public String getMultiSwapButtonUrl(){return "BoardGameResources/images/icons/watcher.png";}
+    public String getMultiSwapButtonUrl() {
+        return "BoardGameResources/images/icons/watcher.png";
+    }
 
     // =============== BASE STATS =================
 
@@ -77,27 +82,25 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
 
     // =============== /BASE STATS/ =================
 
-
     // =============== STRINGS =================
 
     private static final String ID = makeID("BGWatcher");
-    private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
+    private static final CharacterStrings characterStrings =
+        CardCrawlGame.languagePack.getCharacterString(ID);
     private static final String[] NAMES = characterStrings.NAMES;
     private static final String[] TEXT = characterStrings.TEXT;
 
     // =============== /STRINGS/ =================
 
-
     // =============== TEXTURES OF BIG ENERGY ORB ===============
 
     public static final String[] orbTextures = {
-            "BoardGameResources/images/char/theWatcher/orb/layer1.png",
-            "BoardGameResources/images/char/theWatcher/orb/layer2.png",
-            "BoardGameResources/images/char/theWatcher/orb/layer3.png",
-            "BoardGameResources/images/char/theWatcher/orb/layer4.png",
-            "BoardGameResources/images/char/theWatcher/orb/layer5.png"};
-
-
+        "BoardGameResources/images/char/theWatcher/orb/layer1.png",
+        "BoardGameResources/images/char/theWatcher/orb/layer2.png",
+        "BoardGameResources/images/char/theWatcher/orb/layer3.png",
+        "BoardGameResources/images/char/theWatcher/orb/layer4.png",
+        "BoardGameResources/images/char/theWatcher/orb/layer5.png",
+    };
 
     // =============== /TEXTURES OF BIG ENERGY ORB/ ===============
 
@@ -105,28 +108,31 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
 
     public BGWatcher(String name, PlayerClass setClass) {
         super(name, setClass, new EnergyOrbPurple(), null, "");
-
-
-
         // =============== TEXTURES, ENERGY, LOADOUT =================
 
-//        initializeClass(null, // required call to load textures and setup energy/loadout.
-//                // I left these in DefaultMod.java (Ctrl+click them to see where they are, Ctrl+hover to see what they read.)
-//                THE_DEFAULT_SHOULDER_2, // campfire pose
-//                THE_DEFAULT_SHOULDER_1, // another campfire pose
-//                THE_DEFAULT_CORPSE, // dead corpse
-        initializeClass((String)null, "images/characters/watcher/shoulder2.png", "images/characters/watcher/shoulder.png", "images/characters/watcher/corpse.png",
-                getLoadout(), 20.0F, -10.0F, 220.0F, 290.0F, new EnergyManager(ENERGY_PER_TURN)); // energy manager
+        //        initializeClass(null, // required call to load textures and setup energy/loadout.
+        //                // I left these in DefaultMod.java (Ctrl+click them to see where they are, Ctrl+hover to see what they read.)
+        //                THE_DEFAULT_SHOULDER_2, // campfire pose
+        //                THE_DEFAULT_SHOULDER_1, // another campfire pose
+        //                THE_DEFAULT_CORPSE, // dead corpse
+        initializeClass(
+            (String) null,
+            "images/characters/watcher/shoulder2.png",
+            "images/characters/watcher/shoulder.png",
+            "images/characters/watcher/corpse.png",
+            getLoadout(),
+            20.0F,
+            -10.0F,
+            220.0F,
+            290.0F,
+            new EnergyManager(ENERGY_PER_TURN)
+        ); // energy manager
 
         // =============== /TEXTURES, ENERGY, LOADOUT/ =================
 
-
         // =============== ANIMATIONS =================
 
-        loadAnimation(
-                BGWATCHER_SKELETON_ATLAS,
-                BGWATCHER_SKELETON_JSON,
-                1.0f);
+        loadAnimation(BGWATCHER_SKELETON_ATLAS, BGWATCHER_SKELETON_JSON, 1.0f);
         //loadAnimation("images/characters/ironclad/idle/skeleton.atlas", "images/characters/ironclad/idle/skeleton.json", 1.0F);
         // AnimationState.TrackEntry e = state.setAnimation(0, "animation", true);
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
@@ -135,7 +141,6 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
 
         // =============== /ANIMATIONS/ =================
 
-
         // =============== TEXT BUBBLE LOCATION =================
 
         dialogX = (drawX + 0.0F * Settings.scale); // set location for text bubbles
@@ -143,8 +148,7 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
 
         // =============== /TEXT BUBBLE LOCATION/ =================
 
-
-        energyOrb = (EnergyOrbInterface)new EnergyOrbPurple();
+        energyOrb = (EnergyOrbInterface) new EnergyOrbPurple();
     }
 
     // =============== /CHARACTER CLASS END/ =================
@@ -156,9 +160,19 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
     // Starting description and loadout
     @Override
     public CharSelectInfo getLoadout() {
-        return new CharSelectInfo(NAMES[0], TEXT[0],
-                STARTING_HP, MAX_HP, ORB_SLOTS, STARTING_GOLD, CARD_DRAW, this, getStartingRelics(),
-                getStartingDeck(), false);
+        return new CharSelectInfo(
+            NAMES[0],
+            TEXT[0],
+            STARTING_HP,
+            MAX_HP,
+            ORB_SLOTS,
+            STARTING_GOLD,
+            CARD_DRAW,
+            this,
+            getStartingRelics(),
+            getStartingDeck(),
+            false
+        );
     }
 
     // Starting Deck
@@ -202,8 +216,11 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
     @Override
     public void doCharSelectScreenSelectEffect() {
         CardCrawlGame.sound.playA("SELECT_WATCHER", MathUtils.random(-0.15F, 0.15F));
-        CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.MED, ScreenShake.ShakeDur.SHORT, false);
-
+        CardCrawlGame.screenShake.shake(
+            ScreenShake.ShakeIntensity.MED,
+            ScreenShake.ShakeDur.SHORT,
+            false
+        );
     }
 
     // character Select on-button-press sound effect
@@ -281,12 +298,12 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
     @Override
     public AbstractGameAction.AttackEffect[] getSpireHeartSlashEffect() {
         return new AbstractGameAction.AttackEffect[] {
-                AbstractGameAction.AttackEffect.BLUNT_LIGHT,
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY,
-                AbstractGameAction.AttackEffect.BLUNT_LIGHT,
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY,
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY,
-                AbstractGameAction.AttackEffect.BLUNT_LIGHT
+            AbstractGameAction.AttackEffect.BLUNT_LIGHT,
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY,
+            AbstractGameAction.AttackEffect.BLUNT_LIGHT,
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY,
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY,
+            AbstractGameAction.AttackEffect.BLUNT_LIGHT,
         };
     }
 
@@ -306,14 +323,13 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
         return TEXT[2];
     }
 
-
     protected Color blockTextColor = new Color(0.9F, 0.9F, 0.9F, 0.0F);
     protected float blockScale = 1.0F;
-
 
     public Texture getCutsceneBg() {
         return ImageMaster.loadImage("images/scenes/purpleBg.jpg");
     }
+
     public List<CutscenePanel> getCutscenePanels() {
         List<CutscenePanel> panels = new ArrayList();
         panels.add(new CutscenePanel("images/scenes/watcher1.png", "WATCHER_HEART_PUNCH"));
@@ -322,11 +338,10 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
         return panels;
     }
 
-
     public void applyStartOfTurnRelics() {
         super.applyStartOfTurnRelics();
-        this.shivsPlayedThisTurn=0;
-        this.stanceChangedThisTurn=false;
+        this.shivsPlayedThisTurn = 0;
+        this.stanceChangedThisTurn = false;
     }
 
     //TODO: move addBlock to CustomBoardGameCreature class (which itself will require various sweeping changes to implement)
@@ -354,16 +369,13 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
         }
         this.currentBlock += MathUtils.floor(tmp);
 
-
-//        if (this.currentBlock >= 99 && this.isPlayer) {
-//            UnlockTracker.unlockAchievement("IMPERVIOUS");
-//        }
-
+        //        if (this.currentBlock >= 99 && this.isPlayer) {
+        //            UnlockTracker.unlockAchievement("IMPERVIOUS");
+        //        }
 
         if (this.currentBlock > 20) {
             this.currentBlock = 20;
         }
-
 
         if (this.currentBlock == 20 && this.isPlayer) {
             //UnlockTracker.unlockAchievement("BG_BARRICADED");
@@ -371,19 +383,11 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
 
         if (effect && this.currentBlock > 0) {
             gainBlockAnimation();
-        } else if (blockAmount > 0 &&
-                blockAmount > 0) {
+        } else if (blockAmount > 0 && blockAmount > 0) {
             Color tmpCol = Settings.GOLD_COLOR.cpy();
             tmpCol.a = this.blockTextColor.a;
             this.blockTextColor = tmpCol;
             this.blockScale = 5.0F;
         }
     }
-
-
-
-
-
-
-
 }

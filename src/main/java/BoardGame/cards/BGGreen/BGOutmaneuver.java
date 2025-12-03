@@ -13,29 +13,40 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 //TODO: activated status does not work with Play Twice effects. should it?
 
 public class BGOutmaneuver extends AbstractBGCard {
+
     public static final String ID = "BGOutmaneuver";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGOutmaneuver");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGOutmaneuver"
+    );
 
     public BGOutmaneuver() {
-        super("BGOutmaneuver", cardStrings.NAME, "green/skill/outmaneuver", 0, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(
+            "BGOutmaneuver",
+            cardStrings.NAME,
+            "green/skill/outmaneuver",
+            0,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
         this.baseMagicNumber = 2;
         this.magicNumber = this.baseMagicNumber;
-        this.selfRetain=true;
+        this.selfRetain = true;
     }
-
 
     public void triggerOnGlowCheck() {
         this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        if (this.wasRetainedLastTurn)
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-    }
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        if(this.wasRetainedLastTurn){
-            addToBot((AbstractGameAction)new GainEnergyAction(this.magicNumber));
-        }
+        if (this.wasRetainedLastTurn) this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
     }
 
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        if (this.wasRetainedLastTurn) {
+            addToBot((AbstractGameAction) new GainEnergyAction(this.magicNumber));
+        }
+    }
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -50,4 +61,3 @@ public class BGOutmaneuver extends AbstractBGCard {
         return new BGOutmaneuver();
     }
 }
-

@@ -1,4 +1,3 @@
-
 //TODO: don't show screen if there are less than 2 valid targets
 //TODO: close screen if combat ends (otherwise cursor becomes invisible until map)
 //TODO: extra safeguard for Juggernaut: once screen fades out, start autoclicking (otherwise screen stays black until player clicks several more times)
@@ -23,80 +22,75 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import java.util.ArrayList;
+import java.util.Objects;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
-
 public class OrbSelectScreen extends CustomScreen {
 
-    public boolean isDone=false;
-    public interface OrbSelectAction{
+    public boolean isDone = false;
+
+    public interface OrbSelectAction {
         void execute(int orbslot);
     }
 
     //public static boolean PAUSE_ACTION_QUEUE=false;
 
     final Logger logger = LogManager.getLogger(OrbSelectScreen.class.getName());
-    public static class Enum
-    {
+
+    public static class Enum {
+
         @SpireEnum
         public static AbstractDungeon.CurrentScreen ORB_SELECT;
     }
+
     @Override
-    public AbstractDungeon.CurrentScreen curScreen()
-    {
+    public AbstractDungeon.CurrentScreen curScreen() {
         return Enum.ORB_SELECT;
     }
-
 
     public OrbSelectAction action;
     public boolean prohibitDarkOrbs;
 
-    public String description="(DNT) Orb Select Screen.  Choose an Orb.";
-    public boolean allowCancel=false;       //dummied out
-    public OrbSelectAction cancelAction=null;    //dummied out
-    public AbstractMonster finaltarget=null;
-
+    public String description = "(DNT) Orb Select Screen.  Choose an Orb.";
+    public boolean allowCancel = false; //dummied out
+    public OrbSelectAction cancelAction = null; //dummied out
+    public AbstractMonster finaltarget = null;
 
     private void open(OrbSelectAction action, String description, boolean prohibitDarkOrbs) {
-        this.description=description;
-        this.action=action;
-        this.prohibitDarkOrbs=prohibitDarkOrbs;
+        this.description = description;
+        this.action = action;
+        this.prohibitDarkOrbs = prohibitDarkOrbs;
         //this.allowCancel=allowCancel;
         //this.cancelAction=cancelAction;
-        this.isDone=false;
-
+        this.isDone = false;
 
         //OrbSelectScreen.PAUSE_ACTION_QUEUE=true;
 
-        if (AbstractDungeon.screen != AbstractDungeon.CurrentScreen.NONE)
-            AbstractDungeon.previousScreen = AbstractDungeon.screen;
+        if (
+            AbstractDungeon.screen != AbstractDungeon.CurrentScreen.NONE
+        ) AbstractDungeon.previousScreen = AbstractDungeon.screen;
         reopen();
     }
 
-
     @Override
-    public void reopen()
-    {
+    public void reopen() {
         AbstractDungeon.screen = curScreen();
         AbstractDungeon.isScreenUp = true;
     }
 
     @Override
-    public void openingSettings()
-    {
+    public void openingSettings() {
         // Required if you want to reopen your screen when the settings screen closes
         AbstractDungeon.previousScreen = curScreen();
     }
 
-    @Override public void close()
-    {
-       // OrbSelectScreen.PAUSE_ACTION_QUEUE=false;
+    @Override
+    public void close() {
+        // OrbSelectScreen.PAUSE_ACTION_QUEUE=false;
 
         //logger.info("CLOSE TARGETSELECTSCREEN "+AbstractDungeon.screen+" "+AbstractDungeon.previousScreen);
         genericScreenOverlayReset();
@@ -106,28 +100,26 @@ public class OrbSelectScreen extends CustomScreen {
         //___hoveredMonster[0] = null;
     }
 
-
     @Override
     public void update() {
         //logger.info("OSS: update");
-        if(!((AbstractDungeon.getCurrRoom()).phase == AbstractRoom.RoomPhase.COMBAT)) {
-            isDone=true;
+        if (!((AbstractDungeon.getCurrRoom()).phase == AbstractRoom.RoomPhase.COMBAT)) {
+            isDone = true;
             AbstractDungeon.closeCurrentScreen();
             return;
         }
 
-
-        boolean moreThanOneOrbType=false;
-        String lastOrbID=null;
-        int firstValidOrbSlot=-1;
-        for(int i=0;i<AbstractDungeon.player.orbs.size();i+=1){
+        boolean moreThanOneOrbType = false;
+        String lastOrbID = null;
+        int firstValidOrbSlot = -1;
+        for (int i = 0; i < AbstractDungeon.player.orbs.size(); i += 1) {
             AbstractOrb o = AbstractDungeon.player.orbs.get(i);
-            if(!(o instanceof EmptyOrbSlot)) {
+            if (!(o instanceof EmptyOrbSlot)) {
                 if (!Objects.equals(o.ID, "Empty")) {
-                    if(Objects.equals(o.ID,"BGDark") && this.prohibitDarkOrbs){
+                    if (Objects.equals(o.ID, "BGDark") && this.prohibitDarkOrbs) {
                         continue;
                     }
-                    if(firstValidOrbSlot==-1) firstValidOrbSlot=i;
+                    if (firstValidOrbSlot == -1) firstValidOrbSlot = i;
                     if (!Objects.equals(o.ID, lastOrbID)) {
                         if (lastOrbID != null) {
                             moreThanOneOrbType = true;
@@ -139,14 +131,16 @@ public class OrbSelectScreen extends CustomScreen {
             }
         }
 
-        if(AbstractDungeon.player.orbs.isEmpty()){
-            isDone=true;
+        if (AbstractDungeon.player.orbs.isEmpty()) {
+            isDone = true;
             AbstractDungeon.closeCurrentScreen();
             return;
-        }else if(!moreThanOneOrbType){
-            if(!isDone) {
+        } else if (!moreThanOneOrbType) {
+            if (!isDone) {
                 isDone = true;
-                ((OrbSelectScreen) BaseMod.getCustomScreen(Enum.ORB_SELECT)).action.execute(firstValidOrbSlot);
+                ((OrbSelectScreen) BaseMod.getCustomScreen(Enum.ORB_SELECT)).action.execute(
+                    firstValidOrbSlot
+                );
             }
             AbstractDungeon.closeCurrentScreen();
             return;
@@ -154,17 +148,22 @@ public class OrbSelectScreen extends CustomScreen {
     }
 
     @Override
-    public void render(SpriteBatch sb){
+    public void render(SpriteBatch sb) {
         //FontHelper.renderDeckViewTip(sb, this.description, 96.0F * Settings.scale, Settings.CREAM_COLOR);
-        FontHelper.renderFontCentered(sb, FontHelper.buttonLabelFont, this.description, (Settings.WIDTH / 2), Settings.HEIGHT - 180.0F * Settings.scale, Settings.CREAM_COLOR);
+        FontHelper.renderFontCentered(
+            sb,
+            FontHelper.buttonLabelFont,
+            this.description,
+            (Settings.WIDTH / 2),
+            Settings.HEIGHT - 180.0F * Settings.scale,
+            Settings.CREAM_COLOR
+        );
     }
 
-    @SpirePatch2(clz= AbstractDungeon.class,method="update",paramtypez={})
+    @SpirePatch2(clz = AbstractDungeon.class, method = "update", paramtypez = {})
     public static class DungeonUpdatePatch {
-        @SpireInsertPatch(
-                locator = Locator.class,
-                localvars = {}
-        )
+
+        @SpireInsertPatch(locator = Locator.class, localvars = {})
         public static void Insert(AbstractDungeon __instance) {
             Logger logger = LogManager.getLogger(OrbSelectScreen.class.getName());
             //logger.info("Dungeon Update: " + AbstractDungeon.isScreenUp);
@@ -176,67 +175,91 @@ public class OrbSelectScreen extends CustomScreen {
                 __instance.currMapNode.room.update();
             }
         }
+
         private static class Locator extends SpireInsertLocator {
-            public int[] Locate(CtBehavior ctMethodToPatch) throws CannotCompileException, PatchingException {
-                Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractDungeon.class,"isScreenUp");
-                return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<Matcher>(), finalMatcher);
+
+            public int[] Locate(CtBehavior ctMethodToPatch)
+                throws CannotCompileException, PatchingException {
+                Matcher finalMatcher = new Matcher.FieldAccessMatcher(
+                    AbstractDungeon.class,
+                    "isScreenUp"
+                );
+                return LineFinder.findInOrder(
+                    ctMethodToPatch,
+                    new ArrayList<Matcher>(),
+                    finalMatcher
+                );
             }
         }
     }
-    @SpirePatch2(clz= AbstractRoom.class,method="update",paramtypez={})
-    public static class RoomInputPatch{
-        @SpireInsertPatch(
-                locator= Locator.class,
-                localvars={}
-        )
+
+    @SpirePatch2(clz = AbstractRoom.class, method = "update", paramtypez = {})
+    public static class RoomInputPatch {
+
+        @SpireInsertPatch(locator = Locator.class, localvars = {})
         public static void Insert(AbstractRoom __instance) {
             Logger logger = LogManager.getLogger(OrbSelectScreen.class.getName());
             //logger.info("Insert: "+AbstractDungeon.isScreenUp);
             if (AbstractDungeon.isScreenUp) {
-                if(AbstractDungeon.screen.equals(Enum.ORB_SELECT)){
-                    if (!__instance.monsters.areMonstersBasicallyDead() && AbstractDungeon.player.currentHealth > 0) {
+                if (AbstractDungeon.screen.equals(Enum.ORB_SELECT)) {
+                    if (
+                        !__instance.monsters.areMonstersBasicallyDead() &&
+                        AbstractDungeon.player.currentHealth > 0
+                    ) {
                         AbstractDungeon.player.updateInput();
                     }
                 }
             }
         }
+
         private static class Locator extends SpireInsertLocator {
-            public int[] Locate(CtBehavior ctMethodToPatch) throws CannotCompileException, PatchingException {
-                Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractDungeon.CurrentScreen.class,"equals");
-                return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<Matcher>(), finalMatcher);
+
+            public int[] Locate(CtBehavior ctMethodToPatch)
+                throws CannotCompileException, PatchingException {
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(
+                    AbstractDungeon.CurrentScreen.class,
+                    "equals"
+                );
+                return LineFinder.findInOrder(
+                    ctMethodToPatch,
+                    new ArrayList<Matcher>(),
+                    finalMatcher
+                );
             }
         }
     }
 
+    //    @SpirePatch2(clz= AbstractPlayer.class,method="updateSingleTargetInput",paramtypez={})
+    //    public static class temp{
+    //        @SpirePostfixPatch public static SpireReturn<Void> Prefix(AbstractMonster ___hoveredMonster){
+    //            Logger logger = LogManager.getLogger(OrbSelectScreen.class.getName());
+    //            //logger.info("updateinput: "+___hoveredMonster);
+    //            return SpireReturn.Continue();
+    //        }
+    //    }
 
-
-//    @SpirePatch2(clz= AbstractPlayer.class,method="updateSingleTargetInput",paramtypez={})
-//    public static class temp{
-//        @SpirePostfixPatch public static SpireReturn<Void> Prefix(AbstractMonster ___hoveredMonster){
-//            Logger logger = LogManager.getLogger(OrbSelectScreen.class.getName());
-//            //logger.info("updateinput: "+___hoveredMonster);
-//            return SpireReturn.Continue();
-//        }
-//    }
-
-    @SpirePatch2(clz= AbstractPlayer.class,method="updateInput",paramtypez={})
+    @SpirePatch2(clz = AbstractPlayer.class, method = "updateInput", paramtypez = {})
     public static class UpdateInputPatch {
-        @SpireInsertPatch(
-                locator= Locator.class,
-                localvars={}
-        )
-        public static SpireReturn<Void> Insert(AbstractPlayer __instance){
-            if(!AbstractDungeon.screen.equals(Enum.ORB_SELECT)){
+
+        @SpireInsertPatch(locator = Locator.class, localvars = {})
+        public static SpireReturn<Void> Insert(AbstractPlayer __instance) {
+            if (!AbstractDungeon.screen.equals(Enum.ORB_SELECT)) {
                 return SpireReturn.Continue();
             }
-            if( InputHelper.justClickedLeft || InputActionSet.confirm.isJustPressed() || CInputActionSet.select.isJustPressed()) {
+            if (
+                InputHelper.justClickedLeft ||
+                InputActionSet.confirm.isJustPressed() ||
+                CInputActionSet.select.isJustPressed()
+            ) {
                 //for(AbstractOrb o : __instance.orbs){
-                for (int i=0;i<__instance.orbs.size();i+=1){
+                for (int i = 0; i < __instance.orbs.size(); i += 1) {
                     AbstractOrb o = __instance.orbs.get(i);
-                    if(o.hb.hovered && !(o instanceof EmptyOrbSlot)){
+                    if (o.hb.hovered && !(o instanceof EmptyOrbSlot)) {
                         //execute effect here
-                        OrbSelectScreen screen=(OrbSelectScreen)BaseMod.getCustomScreen(OrbSelectScreen.Enum.ORB_SELECT);
-                        if(!(screen.prohibitDarkOrbs && (o instanceof BGDark))) {
+                        OrbSelectScreen screen = (OrbSelectScreen) BaseMod.getCustomScreen(
+                            OrbSelectScreen.Enum.ORB_SELECT
+                        );
+                        if (!(screen.prohibitDarkOrbs && (o instanceof BGDark))) {
                             if (!screen.isDone) {
                                 screen.isDone = true;
                                 screen.action.execute(i);
@@ -252,12 +275,19 @@ public class OrbSelectScreen extends CustomScreen {
         }
 
         private static class Locator extends SpireInsertLocator {
-            public int[] Locate(CtBehavior ctMethodToPatch) throws CannotCompileException, PatchingException {
-                Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractPlayer.class,"inSingleTargetMode");
-                return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<Matcher>(), finalMatcher);
+
+            public int[] Locate(CtBehavior ctMethodToPatch)
+                throws CannotCompileException, PatchingException {
+                Matcher finalMatcher = new Matcher.FieldAccessMatcher(
+                    AbstractPlayer.class,
+                    "inSingleTargetMode"
+                );
+                return LineFinder.findInOrder(
+                    ctMethodToPatch,
+                    new ArrayList<Matcher>(),
+                    finalMatcher
+                );
             }
         }
     }
-
-
 }

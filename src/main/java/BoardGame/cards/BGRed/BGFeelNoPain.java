@@ -14,30 +14,38 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.FeelNoPainPower;
 
 public class BGFeelNoPain extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGFeelNoPain");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGFeelNoPain"
+    );
     public static final String ID = "BGFeel No Pain";
 
     public BGFeelNoPain() {
-        super("BGFeel No Pain", cardStrings.NAME, "red/power/feel_no_pain", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.POWER, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGFeel No Pain",
+            cardStrings.NAME,
+            "red/power/feel_no_pain",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.POWER,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new FeelNoPainPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new FeelNoPainPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -47,10 +55,7 @@ public class BGFeelNoPain extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGFeelNoPain();
     }
 }
-
-

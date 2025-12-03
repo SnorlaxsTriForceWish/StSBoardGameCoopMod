@@ -11,12 +11,12 @@ import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
+public class BGGoldenIdolEvent extends AbstractImageEvent {
 
-public class BGGoldenIdolEvent
-        extends AbstractImageEvent
-{
     public static final String ID = "BGGolden Idol";
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGGolden Idol");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGGolden Idol"
+    );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
@@ -40,14 +40,12 @@ public class BGGoldenIdolEvent
 
     public BGGoldenIdolEvent() {
         super(NAME, DIALOG_START, "images/events/goldenIdol.jpg");
-
         this.imageEventText.setDialogOption(OPTIONS[0]);
         this.imageEventText.setDialogOption(OPTIONS[1]);
 
         this.damage = 1;
         this.maxHpLoss = 1;
     }
-
 
     public void onEnterRoom() {
         if (Settings.AMBIANCE_ON) {
@@ -58,17 +56,18 @@ public class BGGoldenIdolEvent
     protected void buttonEffect(int buttonPressed) {
         Injury injury;
         switch (this.screenNum) {
-
             case 0:
                 switch (buttonPressed) {
                     case 0:
                         this.imageEventText.updateBodyText(DIALOG_BOULDER);
-                        this.relicMetric=AbstractDungeon.returnRandomRelic(AbstractRelic.RelicTier.COMMON);
-                        AbstractDungeon.getCurrRoom().spawnRelicAndObtain((Settings.WIDTH / 2), (Settings.HEIGHT / 2),
-                                this.relicMetric);
-
-
-
+                        this.relicMetric = AbstractDungeon.returnRandomRelic(
+                            AbstractRelic.RelicTier.COMMON
+                        );
+                        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(
+                            (Settings.WIDTH / 2),
+                            (Settings.HEIGHT / 2),
+                            this.relicMetric
+                        );
 
                         CardCrawlGame.screenShake.mildRumble(5.0F);
                         CardCrawlGame.sound.play("BLUNT_HEAVY");
@@ -84,26 +83,27 @@ public class BGGoldenIdolEvent
                 this.imageEventText.clearRemainingOptions();
                 AbstractEvent.logMetricIgnored("Golden Idol");
                 return;
-
-
-
             case 1:
-
-                CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.MED, ScreenShake.ShakeDur.MED, false);
+                CardCrawlGame.screenShake.shake(
+                    ScreenShake.ShakeIntensity.MED,
+                    ScreenShake.ShakeDur.MED,
+                    false
+                );
                 this.imageEventText.updateBodyText(DIALOG_CHOSE_FIGHT);
                 CardCrawlGame.sound.play("BLUNT_FAST");
                 AbstractDungeon.player.damage(new DamageInfo(null, this.damage));
                 this.screenNum = 2;
                 this.imageEventText.updateDialogOption(0, OPTIONS[1]);
 
-                AbstractEvent.logMetricObtainRelicAndDamage("Golden Idol", "Take Damage", this.relicMetric, this.damage);
+                AbstractEvent.logMetricObtainRelicAndDamage(
+                    "Golden Idol",
+                    "Take Damage",
+                    this.relicMetric,
+                    this.damage
+                );
 
                 this.imageEventText.clearRemainingOptions();
                 return;
-
-
-
-
             case 2:
                 openMap();
                 return;
@@ -111,5 +111,3 @@ public class BGGoldenIdolEvent
         openMap();
     }
 }
-
-

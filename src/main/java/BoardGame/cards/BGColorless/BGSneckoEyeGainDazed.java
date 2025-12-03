@@ -12,30 +12,42 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGSneckoEyeGainDazed extends AbstractBGAttackCardChoice {
+
     public static final String ID = "BGSneckoEyeGainDazed";
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGSneckoEyeGainDazed");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGSneckoEyeGainDazed"
+    );
 
     public BGSneckoEyeGainDazed() {
-        super("BGSneckoEyeGainDazed", cardStrings.NAME, "red/attack/reckless_charge", -2, cardStrings.DESCRIPTION, AbstractCard.CardType.STATUS, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.SPECIAL, AbstractCard.CardTarget.NONE);
+        super(
+            "BGSneckoEyeGainDazed",
+            cardStrings.NAME,
+            "red/attack/reckless_charge",
+            -2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.STATUS,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.SPECIAL,
+            AbstractCard.CardTarget.NONE
+        );
     }
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {}
 
-
-
     public void onChoseThisOption() {
-        addToBot((AbstractGameAction)new MakeTempCardInDrawPileAction((AbstractCard)new BGDazed(), 1, false, true));
+        addToBot(
+            (AbstractGameAction) new MakeTempCardInDrawPileAction(
+                (AbstractCard) new BGDazed(),
+                1,
+                false,
+                true
+            )
+        );
     }
 
-
-
     public void upgrade() {}
-
 
     public AbstractCard makeCopy() {
         return new BGSneckoEyeGainDazed();
     }
 }
-

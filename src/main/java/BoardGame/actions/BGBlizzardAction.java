@@ -1,4 +1,3 @@
-
 package BoardGame.actions;
 
 import BoardGame.cards.BGRed.BGWhirlwind;
@@ -18,31 +17,27 @@ import com.megacrit.cardcrawl.vfx.combat.BlizzardEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class BGBlizzardAction
-        extends AbstractGameAction {
+public class BGBlizzardAction extends AbstractGameAction {
 
     private static final Logger logger = LogManager.getLogger(BGWhirlwind.class.getName());
     private int[] multiDamage;
 
-
     private AbstractPlayer p;
-
 
     public BGBlizzardAction(AbstractPlayer p, int[] multiDamage) {
         this.multiDamage = multiDamage;
-        this.damageType= DamageInfo.DamageType.NORMAL;
+        this.damageType = DamageInfo.DamageType.NORMAL;
         this.p = p;
         this.duration = Settings.ACTION_DUR_XFAST;
         this.actionType = ActionType.DAMAGE;
     }
 
-
     public void update() {
         int effect = 0;
-        for(AbstractOrb o : AbstractDungeon.player.orbs) {
+        for (AbstractOrb o : AbstractDungeon.player.orbs) {
             //TODO: do we want to include, or exclude, vanilla orbs?
-            if(o instanceof BGFrost || o instanceof Frost){
-                effect+=1;
+            if (o instanceof BGFrost || o instanceof Frost) {
+                effect += 1;
             }
         }
 
@@ -50,21 +45,47 @@ public class BGBlizzardAction
             for (int i = effect - 1; i >= 0; i--) {
                 //damage needs to be addToTop instead of addToBot, otherwise weakvuln checks will fail
                 //as a consequence, actions are added in reverse order from the original card
-                addToTop((AbstractGameAction) new DamageAllEnemiesAction( p,
-                        this.multiDamage, this.damageType, AttackEffect.BLUNT_HEAVY, true));
+                addToTop(
+                    (AbstractGameAction) new DamageAllEnemiesAction(
+                        p,
+                        this.multiDamage,
+                        this.damageType,
+                        AttackEffect.BLUNT_HEAVY,
+                        true
+                    )
+                );
                 if (Settings.FAST_MODE) {
-                    addToTop((AbstractGameAction)new VFXAction((AbstractGameEffect)new BlizzardEffect(effect,
-                            AbstractDungeon.getMonsters().shouldFlipVfx()), 0.25F));
+                    addToTop(
+                        (AbstractGameAction) new VFXAction(
+                            (AbstractGameEffect) new BlizzardEffect(
+                                effect,
+                                AbstractDungeon.getMonsters().shouldFlipVfx()
+                            ),
+                            0.25F
+                        )
+                    );
                 } else {
-                    addToTop((AbstractGameAction)new VFXAction((AbstractGameEffect)new BlizzardEffect(effect, AbstractDungeon.getMonsters().shouldFlipVfx()), 1.0F));
+                    addToTop(
+                        (AbstractGameAction) new VFXAction(
+                            (AbstractGameEffect) new BlizzardEffect(
+                                effect,
+                                AbstractDungeon.getMonsters().shouldFlipVfx()
+                            ),
+                            1.0F
+                        )
+                    );
                 }
             }
-        }else{
-            addToTop((AbstractGameAction)new DamageAllEnemiesAction(p,
-                    0, WeakVulnCancel.WEAKVULN_ZEROHITS, AttackEffect.NONE));
+        } else {
+            addToTop(
+                (AbstractGameAction) new DamageAllEnemiesAction(
+                    p,
+                    0,
+                    WeakVulnCancel.WEAKVULN_ZEROHITS,
+                    AttackEffect.NONE
+                )
+            );
         }
         this.isDone = true;
     }
 }
-
-

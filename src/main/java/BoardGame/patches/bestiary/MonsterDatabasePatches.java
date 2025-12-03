@@ -5,7 +5,6 @@ import Bestiary.database.MonsterInfo;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.google.gson.*;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,25 +12,24 @@ import java.io.InputStreamReader;
 
 public class MonsterDatabasePatches {
 
-
     private static String resourceStreamToString(InputStream in) throws IOException {
         StringBuilder sb = new StringBuilder();
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String read;
-        while ((read = br.readLine()) != null)
-            sb.append(read);
+        while ((read = br.readLine()) != null) sb.append(read);
         br.close();
         return sb.toString();
     }
 
-
-    @SpirePatch2(clz = MonsterDatabase.class,method="load",
-            requiredModId="ojb_Bestiary")
+    @SpirePatch2(clz = MonsterDatabase.class, method = "load", requiredModId = "ojb_Bestiary")
     public static class MonsterConstructorPostfix {
+
         @SpirePostfixPatch
         public static void Foo(MonsterDatabase __instance) {
-            InputStream in = __instance.getClass().getClassLoader().getResourceAsStream(
-                    "BoardGameResources/localization/eng/Bestiary-Monsters.json");
+            InputStream in = __instance
+                .getClass()
+                .getClassLoader()
+                .getResourceAsStream("BoardGameResources/localization/eng/Bestiary-Monsters.json");
             if (in == null) {
                 System.out.println("ERROR: failed to load monsters.json (not found?)");
                 return;
@@ -43,7 +41,7 @@ public class MonsterDatabasePatches {
                 if (o.has("monsters") && o.get("monsters").isJsonArray()) {
                     JsonArray arr = o.getAsJsonArray("monsters");
                     for (JsonElement elt : arr)
-                        __instance.insert((MonsterInfo)gson.fromJson(elt, MonsterInfo.class));
+                        __instance.insert((MonsterInfo) gson.fromJson(elt, MonsterInfo.class));
                     //System.out.println("Monsters.size is " + __instance.monsters.size());
                 }
             } catch (IOException e) {
@@ -52,6 +50,4 @@ public class MonsterDatabasePatches {
             }
         }
     }
-
-
 }

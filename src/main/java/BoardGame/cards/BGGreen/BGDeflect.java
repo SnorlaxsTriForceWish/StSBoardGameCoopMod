@@ -18,34 +18,48 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 //TODO: should this card glow, or is it obvious enough?
 
 public class BGDeflect extends AbstractBGCard {
+
     public static final String ID = "BGDeflect";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGDeflect");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGDeflect"
+    );
 
     public BGDeflect() {
-        super("BGDeflect", cardStrings.NAME, "green/skill/deflect", 0, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.COMMON, CardTarget.SELF);
+        super(
+            "BGDeflect",
+            cardStrings.NAME,
+            "green/skill/deflect",
+            0,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.COMMON,
+            CardTarget.SELF
+        );
         this.baseBlock = 1;
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
-        addToBot((AbstractGameAction)new BGGainBlockIfShivAction(this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
+        addToBot((AbstractGameAction) new BGGainBlockIfShivAction(this.magicNumber));
     }
-
 
     protected void applyPowersToBlock() {
         super.applyPowersToBlock();
-        float tmp=this.baseMagicNumber;
-        for (AbstractPower p : AbstractDungeon.player.powers)
-            tmp = p.modifyBlock(tmp, this);
-        for (AbstractPower p : AbstractDungeon.player.powers)
-            tmp = p.modifyBlockLast(tmp);
-        if (this.baseMagicNumber != MathUtils.floor(tmp))
-            this.isMagicNumberModified = true;
-        if (tmp < 0.0F)
-            tmp = 0.0F;
+        float tmp = this.baseMagicNumber;
+        for (AbstractPower p : AbstractDungeon.player.powers) tmp = p.modifyBlock(tmp, this);
+        for (AbstractPower p : AbstractDungeon.player.powers) tmp = p.modifyBlockLast(tmp);
+        if (this.baseMagicNumber != MathUtils.floor(tmp)) this.isMagicNumberModified = true;
+        if (tmp < 0.0F) tmp = 0.0F;
         this.magicNumber = MathUtils.floor(tmp);
     }
 
@@ -60,6 +74,3 @@ public class BGDeflect extends AbstractBGCard {
         return new BGDeflect();
     }
 }
-
-
-

@@ -14,19 +14,39 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGAmplify extends AbstractBGCard {
+
     public static final String ID = "BGAmplify";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGAmplify");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGAmplify"
+    );
 
     public BGAmplify() {
-        super("BGAmplify", cardStrings.NAME, "blue/skill/amplify", 1, cardStrings.DESCRIPTION, CardType.POWER, BGDefect.Enums.BG_BLUE, CardRarity.RARE, CardTarget.SELF);
+        super(
+            "BGAmplify",
+            cardStrings.NAME,
+            "blue/skill/amplify",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
         this.exhaust = true;
         this.baseMagicNumber = 3;
         this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGAmplifyPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGAmplifyPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {
@@ -40,4 +60,3 @@ public class BGAmplify extends AbstractBGCard {
         return new BGAmplify();
     }
 }
-

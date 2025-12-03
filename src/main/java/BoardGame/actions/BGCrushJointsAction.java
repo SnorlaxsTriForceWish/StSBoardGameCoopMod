@@ -8,12 +8,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-
 public class BGCrushJointsAction extends AbstractGameAction {
+
     private AbstractMonster m;
 
     private int magicNumber;
-
 
     public BGCrushJointsAction(AbstractMonster monster, int vulnAmount) {
         this.m = monster;
@@ -22,9 +21,19 @@ public class BGCrushJointsAction extends AbstractGameAction {
 
     public void update() {
         if (AbstractDungeon.player.stance.ID.equals("BGWrath")) {
-            addToTop((AbstractGameAction) new ApplyPowerAction((AbstractCreature) this.m, (AbstractCreature) AbstractDungeon.player, (AbstractPower) new BGVulnerablePower((AbstractCreature) this.m, this.magicNumber, false), this.magicNumber));
+            addToTop(
+                (AbstractGameAction) new ApplyPowerAction(
+                    (AbstractCreature) this.m,
+                    (AbstractCreature) AbstractDungeon.player,
+                    (AbstractPower) new BGVulnerablePower(
+                        (AbstractCreature) this.m,
+                        this.magicNumber,
+                        false
+                    ),
+                    this.magicNumber
+                )
+            );
         }
         this.isDone = true;
     }
 }
-

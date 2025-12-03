@@ -14,29 +14,37 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGApotheosis extends AbstractBGCard {
+
     public static final String ID = "BGApotheosis";
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGApotheosis");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGApotheosis"
+    );
 
     public BGApotheosis() {
-        super("BGApotheosis", cardStrings.NAME, "colorless/skill/apotheosis", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.POWER, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.RARE, AbstractCard.CardTarget.NONE);
-
-
-
-
-
-
-
-
-
+        super(
+            "BGApotheosis",
+            cardStrings.NAME,
+            "colorless/skill/apotheosis",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.POWER,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.RARE,
+            AbstractCard.CardTarget.NONE
+        );
         this.exhaust = true;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGApotheosisPower((AbstractCreature)p, 1), 0));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGApotheosisPower((AbstractCreature) p, 1),
+                0
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -45,10 +53,7 @@ public class BGApotheosis extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGApotheosis();
     }
 }
-
-

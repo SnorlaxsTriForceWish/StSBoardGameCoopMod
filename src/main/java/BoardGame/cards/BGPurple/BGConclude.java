@@ -18,27 +18,49 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.CleaveEffect;
 
 public class BGConclude extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGConclude");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGConclude"
+    );
     public static final String ID = "BGConclude";
 
     public BGConclude() {
-        super("BGConclude", cardStrings.NAME, "purple/attack/conclude", 1, cardStrings.DESCRIPTION, CardType.ATTACK, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.ALL_ENEMY);
-
-        this.baseDamage=1;
-        this.baseMagicNumber=2;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGConclude",
+            cardStrings.NAME,
+            "purple/attack/conclude",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.ALL_ENEMY
+        );
+        this.baseDamage = 1;
+        this.baseMagicNumber = 2;
+        this.magicNumber = this.baseMagicNumber;
     }
 
-
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        for(int i=0;i<this.magicNumber;i+=1) {
+        for (int i = 0; i < this.magicNumber; i += 1) {
             addToBot((AbstractGameAction) new SFXAction("ATTACK_HEAVY"));
-            addToBot((AbstractGameAction) new VFXAction((AbstractCreature) p, (AbstractGameEffect) new CleaveEffect(), 0.1F));
-            addToBot((AbstractGameAction)new DamageAllEnemiesAction((AbstractCreature)p,
-                    this.multiDamage, this.damageTypeForTurn, AbstractGameAction.AttackEffect.NONE));
+            addToBot(
+                (AbstractGameAction) new VFXAction(
+                    (AbstractCreature) p,
+                    (AbstractGameEffect) new CleaveEffect(),
+                    0.1F
+                )
+            );
+            addToBot(
+                (AbstractGameAction) new DamageAllEnemiesAction(
+                    (AbstractCreature) p,
+                    this.multiDamage,
+                    this.damageTypeForTurn,
+                    AbstractGameAction.AttackEffect.NONE
+                )
+            );
         }
-        addToBot((AbstractGameAction)new ApplyPowerAction(p, p, new BGConclusionPower(p, 0), 0));
+        addToBot((AbstractGameAction) new ApplyPowerAction(p, p, new BGConclusionPower(p, 0), 0));
     }
 
     public void upgrade() {
@@ -54,6 +76,3 @@ public class BGConclude extends AbstractBGCard {
         return new BGConclude();
     }
 }
-
-
-

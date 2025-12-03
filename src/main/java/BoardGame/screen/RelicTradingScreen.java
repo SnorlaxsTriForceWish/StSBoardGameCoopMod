@@ -11,10 +11,9 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
 
 public class RelicTradingScreen extends CustomScreen {
 
@@ -30,6 +29,7 @@ public class RelicTradingScreen extends CustomScreen {
     final Logger logger = LogManager.getLogger(RelicTradingScreen.class.getName());
 
     public static class Enum {
+
         @SpireEnum
         public static AbstractDungeon.CurrentScreen RELIC_TRADING;
     }
@@ -39,44 +39,48 @@ public class RelicTradingScreen extends CustomScreen {
         return RelicTradingScreen.Enum.RELIC_TRADING;
     }
 
-
     public RelicTradingScreen.RelicTradingAction action;
 
-    public String description="(DNT) Relic Select Screen.  Choose a Relic.";
-    public boolean displayRelicPrice=false;
+    public String description = "(DNT) Relic Select Screen.  Choose a Relic.";
+    public boolean displayRelicPrice = false;
 
-    public ArrayList<FakeTradingRelic>relics;
-    private void open(RelicTradingScreen.RelicTradingAction action, String description, boolean displayRelicPrice) {
+    public ArrayList<FakeTradingRelic> relics;
+
+    private void open(
+        RelicTradingScreen.RelicTradingAction action,
+        String description,
+        boolean displayRelicPrice
+    ) {
         AbstractDungeon.overlayMenu.showBlackScreen();
         this.action = action;
-        this.description=description;
-        this.displayRelicPrice=displayRelicPrice;
+        this.description = description;
+        this.displayRelicPrice = displayRelicPrice;
         //this.cancelAction=cancelAction;
         this.isDone = false;
 
-        relics=new ArrayList<>();
-        float step=0;
+        relics = new ArrayList<>();
+        float step = 0;
 
-        ArrayList<AbstractRelic> realrelics=AbstractBGRelic.getAllPayableRelics();
-        int total=realrelics.size();
-        int radius=0;
-        if(total>1)radius=250;
-        if(total==3)step+=.25;
-        for(AbstractRelic r : realrelics){
-            float t = (float) (step/total*Math.PI*2);
-            int x= (int) (radius*Math.cos(t));
-            int y= (int) (radius*2/3F*Math.sin(t));
+        ArrayList<AbstractRelic> realrelics = AbstractBGRelic.getAllPayableRelics();
+        int total = realrelics.size();
+        int radius = 0;
+        if (total > 1) radius = 250;
+        if (total == 3) step += .25;
+        for (AbstractRelic r : realrelics) {
+            float t = (float) ((step / total) * Math.PI * 2);
+            int x = (int) (radius * Math.cos(t));
+            int y = (int) (((radius * 2) / 3F) * Math.sin(t));
 
-            FakeTradingRelic ftr=new FakeTradingRelic(this,r,x,y);
+            FakeTradingRelic ftr = new FakeTradingRelic(this, r, x, y);
             relics.add(ftr);
-            step+=1;
+            step += 1;
         }
 
-        if (AbstractDungeon.screen != AbstractDungeon.CurrentScreen.NONE)
-            AbstractDungeon.previousScreen = AbstractDungeon.screen;
+        if (
+            AbstractDungeon.screen != AbstractDungeon.CurrentScreen.NONE
+        ) AbstractDungeon.previousScreen = AbstractDungeon.screen;
         reopen();
     }
-
 
     @Override
     public void reopen() {
@@ -98,7 +102,6 @@ public class RelicTradingScreen extends CustomScreen {
         AbstractDungeon.overlayMenu.hideBlackScreen();
     }
 
-
     @Override
     public void update() {
         //logger.info("RTS: update");
@@ -107,22 +110,28 @@ public class RelicTradingScreen extends CustomScreen {
             AbstractDungeon.closeCurrentScreen();
             return;
         }
-        for(FakeTradingRelic r : relics){
+        for (FakeTradingRelic r : relics) {
             r.update();
         }
-
     }
 
     @Override
     public void render(SpriteBatch sb) {
         //FontHelper.renderDeckViewTip(sb, this.description, 96.0F * Settings.scale, Settings.CREAM_COLOR);
-        FontHelper.renderFontCentered(sb, FontHelper.buttonLabelFont, this.description, (Settings.WIDTH / 2), Settings.HEIGHT - 180.0F * Settings.scale, Settings.CREAM_COLOR);
-        for(FakeTradingRelic r : relics){
+        FontHelper.renderFontCentered(
+            sb,
+            FontHelper.buttonLabelFont,
+            this.description,
+            (Settings.WIDTH / 2),
+            Settings.HEIGHT - 180.0F * Settings.scale,
+            Settings.CREAM_COLOR
+        );
+        for (FakeTradingRelic r : relics) {
             r.render(sb);
         }
     }
 
-    public void onRelicChosen(AbstractRelic relic){
+    public void onRelicChosen(AbstractRelic relic) {
         action.execute(relic);
         isDone = true;
         AbstractDungeon.closeCurrentScreen();

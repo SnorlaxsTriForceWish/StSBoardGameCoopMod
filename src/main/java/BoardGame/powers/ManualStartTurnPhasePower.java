@@ -1,4 +1,3 @@
 package BoardGame.powers;
 
-public interface ManualStartTurnPhasePower {
-}
+public interface ManualStartTurnPhasePower {}

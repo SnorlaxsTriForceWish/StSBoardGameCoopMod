@@ -14,33 +14,40 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGBodySlam extends AbstractBGCard {
+
     public static final String ID = "BGBody Slam";
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBodySlam");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBodySlam"
+    );
 
     public BGBodySlam() {
-        super("BGBody Slam", cardStrings.NAME, "red/attack/body_slam", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.COMMON, AbstractCard.CardTarget.ENEMY);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGBody Slam",
+            cardStrings.NAME,
+            "red/attack/body_slam",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.COMMON,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseDamage = 0;
     }
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         this.baseDamage = p.currentBlock;
         calculateCardDamage(m);
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, DamageInfo.DamageType.NORMAL),
+                AbstractGameAction.AttackEffect.BLUNT_HEAVY
+            )
+        );
         this.rawDescription = cardStrings.DESCRIPTION;
         initializeDescription();
     }
-
 
     public void applyPowers() {
         this.baseDamage = AbstractDungeon.player.currentBlock;
@@ -51,12 +58,10 @@ public class BGBodySlam extends AbstractBGCard {
         initializeDescription();
     }
 
-
     public void onMoveToDiscard() {
         this.rawDescription = cardStrings.DESCRIPTION;
         initializeDescription();
     }
-
 
     public void calculateCardDamage(AbstractMonster mo) {
         super.calculateCardDamage(mo);
@@ -65,7 +70,6 @@ public class BGBodySlam extends AbstractBGCard {
         initializeDescription();
     }
 
-
     public void upgrade() {
         if (!this.upgraded) {
             upgradeName();
@@ -73,10 +77,7 @@ public class BGBodySlam extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGBodySlam();
     }
 }
-
-

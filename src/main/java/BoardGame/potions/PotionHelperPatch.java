@@ -1,5 +1,7 @@
 package BoardGame.potions;
 
+import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRng;
+
 import BoardGame.dungeons.AbstractBGDungeon;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
@@ -10,24 +12,25 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PotionHelper;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.random.Random;
-
 import java.util.ArrayList;
 import java.util.Collections;
-
-import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRng;
-
 
 //TODO: change potion rarity to either COMMON or UNCOMMON depending on whether there are 1 or 2 of them in the potion deck
 public abstract class PotionHelperPatch {
 
-    public static ArrayList<String> potionDeck =new ArrayList<String>();
-    @SpirePatch(clz = PotionHelper.class, method = "getPotions",
-            paramtypez = {AbstractPlayer.PlayerClass.class, boolean.class})
+    public static ArrayList<String> potionDeck = new ArrayList<String>();
+
+    @SpirePatch(
+        clz = PotionHelper.class,
+        method = "getPotions",
+        paramtypez = { AbstractPlayer.PlayerClass.class, boolean.class }
+    )
     public static class PotionHelperGetPotionsPatch {
+
         @SpirePrefixPatch
         public static SpireReturn<ArrayList<String>> getPotions() {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
-                if(potionDeck.isEmpty()) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+                if (potionDeck.isEmpty()) {
                     potionDeck = new ArrayList<>();
                     //...these are listed in the order they appear in Tabletop Simulator's deck search
                     potionDeck.add("BoardGame:BGBlock Potion");
@@ -68,12 +71,12 @@ public abstract class PotionHelperPatch {
         }
     }
 
-    @SpirePatch(clz = PotionHelper.class, method = "getRandomPotion",
-            paramtypez = {Random.class})
+    @SpirePatch(clz = PotionHelper.class, method = "getRandomPotion", paramtypez = { Random.class })
     public static class PotionHelperGetRandomPotionPatch {
+
         @SpirePrefixPatch
         public static SpireReturn<AbstractPotion> getRandomPotion(Random rng) {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 String randomKey = potionDeck.remove(0);
                 //TODO: don't put potion on the bottom of the deck until it's been used!
                 potionDeck.add(randomKey);
@@ -84,12 +87,12 @@ public abstract class PotionHelperPatch {
         }
     }
 
-    @SpirePatch(clz = PotionHelper.class, method = "getRandomPotion",
-            paramtypez = {})
+    @SpirePatch(clz = PotionHelper.class, method = "getRandomPotion", paramtypez = {})
     public static class PotionHelperGetRandomPotionPatch2 {
+
         @SpirePrefixPatch
         public static SpireReturn<AbstractPotion> getRandomPotion() {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 String randomKey = potionDeck.remove(0);
                 //TODO: don't put potion on the bottom of the deck until it's been used!
                 potionDeck.add(randomKey);
@@ -99,25 +102,25 @@ public abstract class PotionHelperPatch {
             return SpireReturn.Continue();
         }
     }
-    @SpirePatch(clz = PotionHelper.class, method = "isAPotion",
-            paramtypez = {String.class})
+
+    @SpirePatch(clz = PotionHelper.class, method = "isAPotion", paramtypez = { String.class })
     public static class PotionHelperIsAPotionPatch {
+
         @SpirePrefixPatch
         public static SpireReturn<Boolean> isAPotion(String key) {
             if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
-                if (potionDeck.contains(key))
-                    return SpireReturn.Return(true);
+                if (potionDeck.contains(key)) return SpireReturn.Return(true);
             }
             return SpireReturn.Continue();
         }
     }
 
-    @SpirePatch(clz = PotionHelper.class, method = "getPotion",
-            paramtypez = {String.class})
+    @SpirePatch(clz = PotionHelper.class, method = "getPotion", paramtypez = { String.class })
     public static class PotionHelperGetPotionPatch {
+
         @SpirePrefixPatch
         public static SpireReturn<AbstractPotion> getPotion(String name) {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 switch (name) {
                     case "BoardGame:BGBlock Potion":
                         return SpireReturn.Return((AbstractPotion) new BGBlockPotion());
@@ -167,17 +170,23 @@ public abstract class PotionHelperPatch {
         }
     }
 
-    @SpirePatch(clz = AbstractDungeon.class, method = "returnRandomPotion",
-            paramtypez = {AbstractPotion.PotionRarity.class, boolean.class})
+    @SpirePatch(
+        clz = AbstractDungeon.class,
+        method = "returnRandomPotion",
+        paramtypez = { AbstractPotion.PotionRarity.class, boolean.class }
+    )
     public static class AbstractDungeonReturnRandomPotionPatch {
+
         @SpirePrefixPatch
-        public static SpireReturn<AbstractPotion> returnRandomPotion(AbstractPotion.PotionRarity rarity, boolean limited) {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+        public static SpireReturn<AbstractPotion> returnRandomPotion(
+            AbstractPotion.PotionRarity rarity,
+            boolean limited
+        ) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 AbstractPotion temp = PotionHelper.getRandomPotion();
                 return SpireReturn.Return(temp);
             }
             return SpireReturn.Continue();
         }
     }
-
 }

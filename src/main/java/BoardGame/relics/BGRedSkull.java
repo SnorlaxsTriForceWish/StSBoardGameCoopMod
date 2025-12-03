@@ -12,23 +12,29 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 //TODO: does this work if we buy it from The Courier after shuffling?
-public class BGRedSkull
-        extends AbstractBGRelic implements ClickableRelic {
+public class BGRedSkull extends AbstractBGRelic implements ClickableRelic {
+
     public static final String ID = "BGRed Skull";
 
     public BGRedSkull() {
-        super("BGRed Skull", "red_skull.png", AbstractRelic.RelicTier.COMMON, AbstractRelic.LandingSound.FLAT);
+        super(
+            "BGRed Skull",
+            "red_skull.png",
+            AbstractRelic.RelicTier.COMMON,
+            AbstractRelic.LandingSound.FLAT
+        );
     }
 
-    public int getPrice() {return 8;}
+    public int getPrice() {
+        return 8;
+    }
+
     private static final int STR_AMT = 1;
     private boolean isActive = false;
-
 
     public AbstractRelic makeCopy() {
         return new BGRedSkull();
     }
-
 
     private boolean usedThisTurn = false; // You can also have a relic be only usable once per combat. Check out Hubris for more examples, including other StSlib things.
     private boolean isPlayerTurn = false; // We should make sure the relic is only activateable during our turn, not the enemies'.
@@ -43,11 +49,12 @@ public class BGRedSkull
     }
 
     private static final String thoughtbubble = "(UNUSED) I can trigger #rRed #rSkull!"; //TODO: move to localization
-    public void onShuffle(){
-//        if(!usedThisTurn && !shuffledThisCombat){
-//            AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, thoughtbubble, true));
-//        }
-        shuffledThisCombat=true;
+
+    public void onShuffle() {
+        //        if(!usedThisTurn && !shuffledThisCombat){
+        //            AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, thoughtbubble, true));
+        //        }
+        shuffledThisCombat = true;
         if (!usedThisTurn && shuffledThisCombat) {
             //beginLongPulse();     // Pulse while the player can click on it.
             activate();
@@ -55,22 +62,34 @@ public class BGRedSkull
     }
 
     @Override
-    public void onRightClick() {// On right click
-        if(true)return;
-//        if (!isObtained || usedThisTurn || !isPlayerTurn || !shuffledThisCombat) {
-//            // If it has been used this turn, or the player doesn't actually have the relic (i.e. it's on display in the shop room), or it's the enemy's turn
-//            return; // Don't do anything.
-//        }
-//        activate();
+    public void onRightClick() {
+        // On right click
+        if (true) return;
+        //        if (!isObtained || usedThisTurn || !isPlayerTurn || !shuffledThisCombat) {
+        //            // If it has been used this turn, or the player doesn't actually have the relic (i.e. it's on display in the shop room), or it's the enemy's turn
+        //            return; // Don't do anything.
+        //        }
+        //        activate();
     }
 
-    public void activate(){
-        if (AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) { // Only if you're in combat
+    public void activate() {
+        if (
+            AbstractDungeon.getCurrRoom() != null &&
+            AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT
+        ) {
+            // Only if you're in combat
             usedThisTurn = true; // Set relic as "Used this turn"
             flash(); // Flash
             stopPulse(); // And stop the pulsing animation (which is started in atPreBattle() below)
 
-            addToTop((AbstractGameAction) new ApplyPowerAction((AbstractCreature) AbstractDungeon.player, (AbstractCreature) AbstractDungeon.player, (AbstractPower) new StrengthPower((AbstractCreature) AbstractDungeon.player, 1), 1));
+            addToTop(
+                (AbstractGameAction) new ApplyPowerAction(
+                    (AbstractCreature) AbstractDungeon.player,
+                    (AbstractCreature) AbstractDungeon.player,
+                    (AbstractPower) new StrengthPower((AbstractCreature) AbstractDungeon.player, 1),
+                    1
+                )
+            );
 
             /* Used Up (Combat) */
             {
@@ -91,7 +110,7 @@ public class BGRedSkull
 
     public void atTurnStart() {
         isPlayerTurn = true; // It's our turn!
-        if (!usedThisTurn && shuffledThisCombat) beginLongPulse();     // Pulse while the player can click on it.
+        if (!usedThisTurn && shuffledThisCombat) beginLongPulse(); // Pulse while the player can click on it.
     }
 
     @Override
@@ -99,7 +118,6 @@ public class BGRedSkull
         isPlayerTurn = false; // Not our turn now.
         stopPulse();
     }
-
 
     @Override
     public void onVictory() {
@@ -116,5 +134,3 @@ public class BGRedSkull
         }
     }
 }
-
-

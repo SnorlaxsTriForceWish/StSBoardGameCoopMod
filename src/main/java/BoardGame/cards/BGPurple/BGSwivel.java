@@ -12,21 +12,31 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGSwivel extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGSwivel");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGSwivel"
+    );
     public static final String ID = "BGSwivel";
 
     public BGSwivel() {
-        super("BGSwivel", cardStrings.NAME, "purple/skill/swivel", 2, cardStrings.DESCRIPTION, CardType.SKILL, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.SELF);
-
-        this.baseBlock=2;
+        super(
+            "BGSwivel",
+            cardStrings.NAME,
+            "purple/skill/swivel",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
+        this.baseBlock = 2;
     }
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new GainBlockAction(p,this.block));
-        addToBot(new ApplyPowerAction(p,p, new BGFreeAttackPower(p,1),1));
+        addToBot(new GainBlockAction(p, this.block));
+        addToBot(new ApplyPowerAction(p, p, new BGFreeAttackPower(p, 1), 1));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -35,10 +45,7 @@ public class BGSwivel extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGSwivel();
     }
 }
-
-

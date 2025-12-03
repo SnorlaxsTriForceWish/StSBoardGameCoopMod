@@ -14,26 +14,40 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGPommelStrike extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGPommelStrike");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGPommelStrike"
+    );
     public static final String ID = "BGPommel Strike";
 
     public BGPommelStrike() {
-        super("BGPommel Strike", cardStrings.NAME, "red/attack/pommel_strike", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.COMMON, AbstractCard.CardTarget.ENEMY);
-
-
-
+        super(
+            "BGPommel Strike",
+            cardStrings.NAME,
+            "red/attack/pommel_strike",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.COMMON,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseDamage = 2;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
         this.tags.add(AbstractCard.CardTags.STRIKE);
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-        addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)p, this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.SLASH_DIAGONAL
+            )
+        );
+        addToBot((AbstractGameAction) new DrawCardAction((AbstractCreature) p, this.magicNumber));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -45,10 +59,7 @@ public class BGPommelStrike extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGPommelStrike();
     }
 }
-
-

@@ -9,18 +9,20 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.Collections;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 //TODO: Echo Form doesn't play with DoubleAttack/DoubleSkill -- currently expends both at once!
 // Use DoubleSkill/Attack first, then Echo Form
 
 public class BGEchoFormPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BoardGame:BGEchoFormPower";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGEchoFormPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGEchoFormPower"
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
@@ -42,7 +44,7 @@ public class BGEchoFormPower extends AbstractBGPower {
     }
 
     public void updateDescription() {
-        if(cardsDoubledThisTurn==999) {
+        if (cardsDoubledThisTurn == 999) {
             this.description = DESCRIPTIONS[3];
             return;
         }
@@ -53,52 +55,63 @@ public class BGEchoFormPower extends AbstractBGPower {
         }
     }
 
-    public static boolean isEchoFormAvailable(){
+    public static boolean isEchoFormAvailable() {
         AbstractPower p = AbstractDungeon.player.getPower("BoardGame:BGEchoFormPower");
         if (p != null) {
-            if(((BGEchoFormPower)p).cardsDoubledThisTurn<p.amount){
+            if (((BGEchoFormPower) p).cardsDoubledThisTurn < p.amount) {
                 return true;
             }
         }
         return false;
     }
+
     public void atStartOfTurn() {
         this.cardsDoubledThisTurn = 0;
     }
 
     public void onAboutToUseCard(AbstractCard originalCard, AbstractCreature originalTarget) {
-
-        if(!isEchoFormAvailable()){
+        if (!isEchoFormAvailable()) {
             return;
         }
-        if(originalCard.type==AbstractCard.CardType.ATTACK && this.owner.getPower("BGDouble Attack")!=null){
+        if (
+            originalCard.type == AbstractCard.CardType.ATTACK &&
+            this.owner.getPower("BGDouble Attack") != null
+        ) {
             return;
         }
-        if(originalCard.type==AbstractCard.CardType.ATTACK && this.owner.getPower("BGTripleAttackPower")!=null){
+        if (
+            originalCard.type == AbstractCard.CardType.ATTACK &&
+            this.owner.getPower("BGTripleAttackPower") != null
+        ) {
             return;
         }
-        if(originalCard.type==AbstractCard.CardType.SKILL && this.owner.getPower("BoardGame:BGBurstPower")!=null){
+        if (
+            originalCard.type == AbstractCard.CardType.SKILL &&
+            this.owner.getPower("BoardGame:BGBurstPower") != null
+        ) {
             return;
         }
 
-
-        boolean copyOK=true;
-        if(originalCard instanceof AbstractBGCard){
-            if(((AbstractBGCard)originalCard).cannotBeCopied) copyOK=false;
-            if(((AbstractBGCard)originalCard).ignoreFurtherCopies) copyOK=false;
+        boolean copyOK = true;
+        if (originalCard instanceof AbstractBGCard) {
+            if (((AbstractBGCard) originalCard).cannotBeCopied) copyOK = false;
+            if (((AbstractBGCard) originalCard).ignoreFurtherCopies) copyOK = false;
         }
 
-        if (!originalCard.purgeOnUse &&
-                (originalCard.type==AbstractCard.CardType.ATTACK || originalCard.type == AbstractCard.CardType.SKILL)
-                && this.amount > 0 && copyOK) {
+        if (
+            !originalCard.purgeOnUse &&
+            (originalCard.type == AbstractCard.CardType.ATTACK ||
+                originalCard.type == AbstractCard.CardType.SKILL) &&
+            this.amount > 0 &&
+            copyOK
+        ) {
             flash();
             AbstractMonster m = null;
 
-
             AbstractCard copiedCard = originalCard.makeSameInstanceOf();
-            if(copiedCard instanceof AbstractBGCard){
-                ((AbstractBGCard)originalCard).ignoreFurtherCopies=true;
-                ((AbstractBGCard)copiedCard).ignoreFurtherCopies=true;
+            if (copiedCard instanceof AbstractBGCard) {
+                ((AbstractBGCard) originalCard).ignoreFurtherCopies = true;
+                ((AbstractBGCard) copiedCard).ignoreFurtherCopies = true;
             }
             BGDoubleAttackPower.swapOutQueueCard(copiedCard);
 
@@ -112,37 +125,33 @@ public class BGEchoFormPower extends AbstractBGPower {
 
             Logger logger = LogManager.getLogger(BGDoubleTapPower_DEPRECATED.class.getName());
             //logger.info("DoubleAttackPower instanceof check");
-            if(originalCard instanceof AbstractBGCard){
+            if (originalCard instanceof AbstractBGCard) {
                 //logger.info("set old card's copy reference: "+copiedCard);
-                ((AbstractBGCard)originalCard).copiedCard=(AbstractBGCard)copiedCard;
+                ((AbstractBGCard) originalCard).copiedCard = (AbstractBGCard) copiedCard;
             }
 
             //((AbstractBGCard)copiedCard).followUpCardChain=new ArrayList<>(Arrays.asList(copiedCard));
-            ((AbstractBGCard)copiedCard).followUpCardChain=new ArrayList<>(Collections.singletonList(originalCard));
+            ((AbstractBGCard) copiedCard).followUpCardChain = new ArrayList<>(
+                Collections.singletonList(originalCard)
+            );
 
+            //            if(originalCard.target== AbstractCard.CardTarget.ENEMY || originalCard.target== AbstractCard.CardTarget.SELF_AND_ENEMY) {
+            //                TargetSelectScreen.TargetSelectAction tssAction = (target) -> {
+            //                    //logger.info("DoubleTap tssAction.execute");
+            //                    if (target != null) {
+            //                        copiedCard.calculateCardDamage(target);
+            //                    }
+            //                    //logger.info("DoubleTap final target: "+target);
+            //                    addToBot((AbstractGameAction) new NewQueueCardAction(copiedCard, target, true, true));
+            //                };
+            //                //logger.info("DoubleTap addToTop");
+            //                addToBot((AbstractGameAction)new TargetSelectScreenAction(tssAction,"Choose a target for the copy of "+originalCard.name+"."));
+            //            }else {
+            //                //AbstractDungeon.actionManager.addCardQueueItem(new CardQueueItem(tmp, m, card.energyOnUse, true, true), true);
+            //                addToBot((AbstractGameAction) new NewQueueCardAction(copiedCard, null, true, true));
+            //            }
 
-//            if(originalCard.target== AbstractCard.CardTarget.ENEMY || originalCard.target== AbstractCard.CardTarget.SELF_AND_ENEMY) {
-//                TargetSelectScreen.TargetSelectAction tssAction = (target) -> {
-//                    //logger.info("DoubleTap tssAction.execute");
-//                    if (target != null) {
-//                        copiedCard.calculateCardDamage(target);
-//                    }
-//                    //logger.info("DoubleTap final target: "+target);
-//                    addToBot((AbstractGameAction) new NewQueueCardAction(copiedCard, target, true, true));
-//                };
-//                //logger.info("DoubleTap addToTop");
-//                addToBot((AbstractGameAction)new TargetSelectScreenAction(tssAction,"Choose a target for the copy of "+originalCard.name+"."));
-//            }else {
-//                //AbstractDungeon.actionManager.addCardQueueItem(new CardQueueItem(tmp, m, card.energyOnUse, true, true), true);
-//                addToBot((AbstractGameAction) new NewQueueCardAction(copiedCard, null, true, true));
-//            }
-
-
-            this.cardsDoubledThisTurn+=1;
+            this.cardsDoubledThisTurn += 1;
         }
     }
-
 }
-
-
-

@@ -13,35 +13,41 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGShrugItOff extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGShrug It Off");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGShrug It Off"
+    );
     public static final String ID = "BGShrug It Off";
 
     public BGShrugItOff() {
-        super("BGShrug It Off", cardStrings.NAME, "red/skill/shrug_it_off", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.COMMON, AbstractCard.CardTarget.SELF);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGShrug It Off",
+            cardStrings.NAME,
+            "red/skill/shrug_it_off",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.COMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseBlock = 2;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
-        addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)p, 1));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
+        addToBot((AbstractGameAction) new DrawCardAction((AbstractCreature) p, 1));
     }
-
 
     public AbstractCard makeCopy() {
         return new BGShrugItOff();
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -50,5 +56,3 @@ public class BGShrugItOff extends AbstractBGCard {
         }
     }
 }
-
-

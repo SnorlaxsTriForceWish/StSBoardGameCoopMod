@@ -12,7 +12,10 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 
 public class BGSpotWeaknessAction extends AbstractGameAction {
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("OpeningAction");
+
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(
+        "OpeningAction"
+    );
     public static final String[] TEXT = uiStrings.TEXT;
 
     private int damageIncrease;
@@ -23,25 +26,26 @@ public class BGSpotWeaknessAction extends AbstractGameAction {
         this.duration = 0.0F;
         this.actionType = AbstractGameAction.ActionType.WAIT;
         this.damageIncrease = damageIncrease;
-        this.maxDieNumber=maxDieNumber;
+        this.maxDieNumber = maxDieNumber;
     }
-
 
     public void update() {
         if (TheDie.monsterRoll <= this.maxDieNumber) {
-            addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, (AbstractPower)new StrengthPower((AbstractCreature)AbstractDungeon.player, this.damageIncrease), this.damageIncrease));
-
-
-        }
-        else {
-
-
+            addToBot(
+                (AbstractGameAction) new ApplyPowerAction(
+                    (AbstractCreature) AbstractDungeon.player,
+                    (AbstractCreature) AbstractDungeon.player,
+                    (AbstractPower) new StrengthPower(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damageIncrease
+                    ),
+                    this.damageIncrease
+                )
+            );
+        } else {
             //AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, TEXT[0], true));
         }
-
 
         this.isDone = true;
     }
 }
-
-

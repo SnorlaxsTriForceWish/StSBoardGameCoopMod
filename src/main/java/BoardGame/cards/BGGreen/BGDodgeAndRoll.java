@@ -12,22 +12,41 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGDodgeAndRoll extends AbstractBGCard {
+
     public static final String ID = "BGDodgeAndRoll";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGDodgeAndRoll");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGDodgeAndRoll"
+    );
+
     public BGDodgeAndRoll() {
-        super("BGDodgeAndRoll", cardStrings.NAME, "green/skill/dodge_and_roll", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.COMMON, CardTarget.SELF);
-        this.baseBlock=1;
-        this.baseMagicNumber=2;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGDodgeAndRoll",
+            cardStrings.NAME,
+            "green/skill/dodge_and_roll",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.COMMON,
+            CardTarget.SELF
+        );
+        this.baseBlock = 1;
+        this.baseMagicNumber = 2;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         //TODO: is this loop safe, or do we need a BGDodgeAndRollAction?
-        for(int i=0;i<this.magicNumber;i+=1) {
-            addToBot((AbstractGameAction) new GainBlockAction((AbstractCreature) p, (AbstractCreature) p, this.block));
+        for (int i = 0; i < this.magicNumber; i += 1) {
+            addToBot(
+                (AbstractGameAction) new GainBlockAction(
+                    (AbstractCreature) p,
+                    (AbstractCreature) p,
+                    this.block
+                )
+            );
         }
-
     }
 
     public void upgrade() {
@@ -43,4 +62,3 @@ public class BGDodgeAndRoll extends AbstractBGCard {
         return new BGDodgeAndRoll();
     }
 }
-

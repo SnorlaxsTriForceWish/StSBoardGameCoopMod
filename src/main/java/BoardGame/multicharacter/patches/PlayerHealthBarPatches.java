@@ -16,13 +16,18 @@ public class PlayerHealthBarPatches {
     //TODO LATER: note that we're technically rendering the health bar twice now; maybe don't do that
     @SpirePatch2(clz = AbstractPlayer.class, method = "render")
     public static class RenderHealthBarAbovePlayer {
+
         @SpirePostfixPatch
         public static void Foo(AbstractPlayer __instance, SpriteBatch sb) {
             final Logger logger = LogManager.getLogger(BGExordium.class.getName());
 
             if (GridBackground.isGridViewActive()) {
-                if (((AbstractDungeon.getCurrRoom()).phase == AbstractRoom.RoomPhase.COMBAT ||
-                        AbstractDungeon.getCurrRoom() instanceof com.megacrit.cardcrawl.rooms.MonsterRoom) && !__instance.isDead) {
+                if (
+                    ((AbstractDungeon.getCurrRoom()).phase == AbstractRoom.RoomPhase.COMBAT ||
+                        AbstractDungeon.getCurrRoom() instanceof
+                            com.megacrit.cardcrawl.rooms.MonsterRoom) &&
+                    !__instance.isDead
+                ) {
                     __instance.renderHealth(sb);
                 }
             }

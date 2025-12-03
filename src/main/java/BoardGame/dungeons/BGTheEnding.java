@@ -25,12 +25,11 @@ import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import com.megacrit.cardcrawl.scenes.AbstractScene;
 import com.megacrit.cardcrawl.scenes.TheEndingScene;
 import com.megacrit.cardcrawl.screens.DungeonMapScreen;
+import java.util.ArrayList;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
 
 public class BGTheEnding extends AbstractBGDungeon {
 
@@ -44,17 +43,18 @@ public class BGTheEnding extends AbstractBGDungeon {
 
     public BGTheEnding(AbstractPlayer p, ArrayList<String> theList) {
         super(NAME, "TheEnding", p, theList);
-
         if (scene != null) {
             scene.dispose();
         }
 
-        scene = (AbstractScene)new TheEndingScene();
+        scene = (AbstractScene) new TheEndingScene();
         fadeColor = Color.valueOf("140a1eff");
         sourceFadeColor = Color.valueOf("140a1eff");
 
         initializeLevelSpecificChances();
-        mapRng = new Random(Long.valueOf(Settings.seed.longValue() + (AbstractDungeon.actNum * 300)));
+        mapRng = new Random(
+            Long.valueOf(Settings.seed.longValue() + (AbstractDungeon.actNum * 300))
+        );
         generateSpecialMap();
         CardCrawlGame.music.changeBGM(id);
 
@@ -70,7 +70,7 @@ public class BGTheEnding extends AbstractBGDungeon {
             scene.dispose();
         }
 
-        scene = (AbstractScene)new TheEndingScene();
+        scene = (AbstractScene) new TheEndingScene();
         fadeColor = Color.valueOf("140a1eff");
         sourceFadeColor = Color.valueOf("140a1eff");
 
@@ -90,32 +90,42 @@ public class BGTheEnding extends AbstractBGDungeon {
 
         map = new ArrayList<>();
 
-
         ArrayList<MapRoomNode> row1 = new ArrayList<>();
         MapRoomNode restNode = new MapRoomNode(3, 0);
-        restNode.room = (AbstractRoom)new RestRoom();
+        restNode.room = (AbstractRoom) new RestRoom();
         MapRoomNode shopNode = new MapRoomNode(3, 1);
-        shopNode.room = (AbstractRoom)new ShopRoom();
+        shopNode.room = (AbstractRoom) new ShopRoom();
         MapRoomNode enemyNode = new MapRoomNode(3, 2);
-        if(ascensionLevel>=11) {
+        if (ascensionLevel >= 11) {
             enemyNode.room = (AbstractRoom) new MonsterRoomElite();
-        }else{
+        } else {
             enemyNode.room = (AbstractRoom) new EventRoom();
             enemyNode.room.setMapSymbol("E");
-            enemyNode.room.setMapImg(ImageMaster.MAP_NODE_ELITE,ImageMaster.MAP_NODE_ELITE_OUTLINE);
+            enemyNode.room.setMapImg(
+                ImageMaster.MAP_NODE_ELITE,
+                ImageMaster.MAP_NODE_ELITE_OUTLINE
+            );
         }
         MapRoomNode bossNode = new MapRoomNode(3, 3);
-        bossNode.room = (AbstractRoom)new MonsterRoomBoss();
+        bossNode.room = (AbstractRoom) new MonsterRoomBoss();
         MapRoomNode victoryNode = new MapRoomNode(3, 4);
-        victoryNode.room = (AbstractRoom)new TrueVictoryRoom();
-
+        victoryNode.room = (AbstractRoom) new TrueVictoryRoom();
 
         connectNode(restNode, shopNode);
         connectNode(shopNode, enemyNode);
-        enemyNode.addEdge(new MapEdge(enemyNode.x, enemyNode.y, enemyNode.offsetX, enemyNode.offsetY, bossNode.x, bossNode.y, bossNode.offsetX, bossNode.offsetY, false));
-
-
-
+        enemyNode.addEdge(
+            new MapEdge(
+                enemyNode.x,
+                enemyNode.y,
+                enemyNode.offsetX,
+                enemyNode.offsetY,
+                bossNode.x,
+                bossNode.y,
+                bossNode.offsetX,
+                bossNode.offsetY,
+                false
+            )
+        );
 
         row1.add(new MapRoomNode(0, 0));
         row1.add(new MapRoomNode(1, 0));
@@ -124,7 +134,6 @@ public class BGTheEnding extends AbstractBGDungeon {
         row1.add(new MapRoomNode(4, 0));
         row1.add(new MapRoomNode(5, 0));
         row1.add(new MapRoomNode(6, 0));
-
 
         ArrayList<MapRoomNode> row2 = new ArrayList<>();
         row2.add(new MapRoomNode(0, 1));
@@ -135,7 +144,6 @@ public class BGTheEnding extends AbstractBGDungeon {
         row2.add(new MapRoomNode(5, 1));
         row2.add(new MapRoomNode(6, 1));
 
-
         ArrayList<MapRoomNode> row3 = new ArrayList<>();
         row3.add(new MapRoomNode(0, 2));
         row3.add(new MapRoomNode(1, 2));
@@ -144,7 +152,6 @@ public class BGTheEnding extends AbstractBGDungeon {
         row3.add(new MapRoomNode(4, 2));
         row3.add(new MapRoomNode(5, 2));
         row3.add(new MapRoomNode(6, 2));
-
 
         ArrayList<MapRoomNode> row4 = new ArrayList<>();
         row4.add(new MapRoomNode(0, 3));
@@ -155,7 +162,6 @@ public class BGTheEnding extends AbstractBGDungeon {
         row4.add(new MapRoomNode(5, 3));
         row4.add(new MapRoomNode(6, 3));
 
-
         ArrayList<MapRoomNode> row5 = new ArrayList<>();
         row5.add(new MapRoomNode(0, 4));
         row5.add(new MapRoomNode(1, 4));
@@ -164,7 +170,6 @@ public class BGTheEnding extends AbstractBGDungeon {
         row5.add(new MapRoomNode(4, 4));
         row5.add(new MapRoomNode(5, 4));
         row5.add(new MapRoomNode(6, 4));
-
 
         map.add(row1);
         map.add(row2);
@@ -181,10 +186,20 @@ public class BGTheEnding extends AbstractBGDungeon {
     }
 
     private void connectNode(MapRoomNode src, MapRoomNode dst) {
-        src.addEdge(new MapEdge(src.x, src.y, src.offsetX, src.offsetY, dst.x, dst.y, dst.offsetX, dst.offsetY, false));
+        src.addEdge(
+            new MapEdge(
+                src.x,
+                src.y,
+                src.offsetX,
+                src.offsetY,
+                dst.x,
+                dst.y,
+                dst.offsetX,
+                dst.offsetY,
+                false
+            )
+        );
     }
-
-
 
     protected void initializeLevelSpecificChances() {
         shopRoomChance = 0.05F;
@@ -193,16 +208,13 @@ public class BGTheEnding extends AbstractBGDungeon {
         eventRoomChance = 0.22F;
         eliteRoomChance = 0.08F;
 
-
         smallChestChance = 0;
         mediumChestChance = 100;
         largeChestChance = 0;
 
-
         commonRelicChance = 0;
         uncommonRelicChance = 100;
         rareRelicChance = 0;
-
 
         colorlessRareChance = 0.3F;
         if (AbstractDungeon.ascensionLevel >= 12) {
@@ -211,8 +223,6 @@ public class BGTheEnding extends AbstractBGDungeon {
             cardUpgradedChance = 0.5F;
         }
     }
-
-
 
     protected void generateMonsters() {
         //TODO: when it comes time to add shield+spear, remember that "one row" AOE doesn't work against them (will probably require significant changes)
@@ -228,24 +238,15 @@ public class BGTheEnding extends AbstractBGDungeon {
         eliteMonsterList.add("BoardGame:Shield and Spear");
     }
 
-
-
     protected void generateWeakEnemies(int count) {}
-
-
 
     protected void generateStrongEnemies(int count) {}
 
-
-
     protected void generateElites(int count) {}
-
-
 
     protected ArrayList<String> generateExclusions() {
         return new ArrayList<>();
     }
-
 
     protected void initializeBoss() {
         bossList.add("The Heart");
@@ -253,11 +254,7 @@ public class BGTheEnding extends AbstractBGDungeon {
         bossList.add("The Heart");
     }
 
-
-
     protected void initializeEventList() {}
-
-
 
     protected void initializeEventImg() {
         if (eventBackgroundImg != null) {
@@ -269,55 +266,69 @@ public class BGTheEnding extends AbstractBGDungeon {
 
     protected void initializeShrineList() {}
 
-
-
-
-
-    @SpirePatch2(clz = DungeonMap.class, method = "calculateMapSize",
-            paramtypez={})
+    @SpirePatch2(clz = DungeonMap.class, method = "calculateMapSize", paramtypez = {})
     public static class calculateMapSizePatch {
+
         @SpirePostfixPatch
         public static float calculateMapSize(float __result) {
             final Logger logger = LogManager.getLogger(BGTheBeyond.class.getName());
-            if (CardCrawlGame.dungeon!=null && CardCrawlGame.dungeon instanceof BGTheEnding) {
+            if (CardCrawlGame.dungeon != null && CardCrawlGame.dungeon instanceof BGTheEnding) {
                 return Settings.MAP_DST_Y * 4.0F - 1380.0F * Settings.scale;
             }
             return __result;
         }
     }
 
-    @SpirePatch2(clz= DungeonMapScreen.class, method="open",
-            paramtypez={boolean.class})
-    public static class DungeonMapScreenCityScrollPatch{
-        @SpireInsertPatch(
-                locator= Locator.class,
-                localvars={}
-        )
-        public static void open(DungeonMapScreen __instance, boolean doScrollingAnimation, @ByRef float[] ___mapScrollUpperLimit) {
-            if(CardCrawlGame.dungeon!=null && CardCrawlGame.dungeon instanceof BGTheEnding){
-                ___mapScrollUpperLimit[0]= (float)(-300.0F * Settings.scale);
+    @SpirePatch2(clz = DungeonMapScreen.class, method = "open", paramtypez = { boolean.class })
+    public static class DungeonMapScreenCityScrollPatch {
+
+        @SpireInsertPatch(locator = Locator.class, localvars = {})
+        public static void open(
+            DungeonMapScreen __instance,
+            boolean doScrollingAnimation,
+            @ByRef float[] ___mapScrollUpperLimit
+        ) {
+            if (CardCrawlGame.dungeon != null && CardCrawlGame.dungeon instanceof BGTheEnding) {
+                ___mapScrollUpperLimit[0] = (float) (-300.0F * Settings.scale);
             }
         }
+
         private static class Locator extends SpireInsertLocator {
-            public int[] Locate(CtBehavior ctMethodToPatch) throws CannotCompileException, PatchingException {
-                Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractPlayer.class,"releaseCard");
-                return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<Matcher>(), finalMatcher);
+
+            public int[] Locate(CtBehavior ctMethodToPatch)
+                throws CannotCompileException, PatchingException {
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(
+                    AbstractPlayer.class,
+                    "releaseCard"
+                );
+                return LineFinder.findInOrder(
+                    ctMethodToPatch,
+                    new ArrayList<Matcher>(),
+                    finalMatcher
+                );
             }
         }
     }
 
+    @SpirePatch2(clz = MonsterRoomElite.class, method = "applyEmeraldEliteBuff", paramtypez = {})
+    public static class BurningEliteBuffPatch {
 
-
-
-    @SpirePatch2(clz= MonsterRoomElite.class,method="applyEmeraldEliteBuff",paramtypez={})
-    public static class BurningEliteBuffPatch{
         @SpirePrefixPatch
-        public static SpireReturn<Void> Prefix(){
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon){
-                if (Settings.isFinalActAvailable && (AbstractDungeon.getCurrMapNode()).hasEmeraldKey) {
+        public static SpireReturn<Void> Prefix() {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+                if (
+                    Settings.isFinalActAvailable && (AbstractDungeon.getCurrMapNode()).hasEmeraldKey
+                ) {
                     AbstractCard c = new BGBurn();
                     //TODO: the burns no longer overlap in center (good), but the left burn appears to be missing a "move to draw pile" animation (bad)
-                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new MakeTempCardInDrawPileAction((AbstractCard)c, 2,true,true));
+                    AbstractDungeon.actionManager.addToBottom(
+                        (AbstractGameAction) new MakeTempCardInDrawPileAction(
+                            (AbstractCard) c,
+                            2,
+                            true,
+                            true
+                        )
+                    );
                     return SpireReturn.Return();
                 }
             }
@@ -325,8 +336,13 @@ public class BGTheEnding extends AbstractBGDungeon {
         }
     }
 
-    @SpirePatch2(clz= AbstractRoom.class,method="addRelicToRewards",paramtypez={AbstractRelic.RelicTier.class})
-    public static class EliteSapphireKeyPatch{
+    @SpirePatch2(
+        clz = AbstractRoom.class,
+        method = "addRelicToRewards",
+        paramtypez = { AbstractRelic.RelicTier.class }
+    )
+    public static class EliteSapphireKeyPatch {
+
         @SpirePostfixPatch
         public static void Postfix(AbstractRoom __instance, AbstractRelic.RelicTier tier) {
             Logger logger = LogManager.getLogger(BGTheEnding.class.getName());
@@ -338,7 +354,8 @@ public class BGTheEnding extends AbstractBGDungeon {
                     if (Settings.isFinalActAvailable && !Settings.hasSapphireKey) {
                         logger.info("add the key");
                         __instance.addSapphireKey(
-                                __instance.rewards.get((__instance.rewards.size() - 1)));
+                            __instance.rewards.get((__instance.rewards.size() - 1))
+                        );
                         logger.info("done");
                     }
                 }
@@ -346,8 +363,4 @@ public class BGTheEnding extends AbstractBGDungeon {
             }
         }
     }
-
-
-
-
 }

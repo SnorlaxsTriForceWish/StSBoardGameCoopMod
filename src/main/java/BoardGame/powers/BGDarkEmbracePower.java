@@ -17,9 +17,6 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 //TODO: check if this still interacts properly with end-of-turn Mayhem
 public class BGDarkEmbracePower extends AbstractPower {
 
-
-
-
     public static final String POWER_ID = "BGDark Embrace";
     private static final PowerStrings powerStrings;
     public static final String NAME;
@@ -46,7 +43,6 @@ public class BGDarkEmbracePower extends AbstractPower {
         } else {
             this.description = DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2];
         }
-
     }
 
     public void onExhaust(AbstractCard card) {
@@ -59,18 +55,17 @@ public class BGDarkEmbracePower extends AbstractPower {
             //if(AbstractDungeon.player.endTurnQueued){
             //if(AbstractDungeon.player.isEndingTurn){
             //if (AbstractDungeon.actionManager.turnHasEnded) {
-            if(BGToggleDiscardingAtEndOfTurnFlagAction.Field.discardingCardsAtEndOfTurn.get(AbstractDungeon.actionManager)){
+            if (
+                BGToggleDiscardingAtEndOfTurnFlagAction.Field.discardingCardsAtEndOfTurn.get(
+                    AbstractDungeon.actionManager
+                )
+            ) {
                 //end turn: discard hand first, then draw
                 this.addToBot(new DrawCardAction(this.owner, this.amount));
-            }else{
+            } else {
                 //not end turn: draw before whatever caused us to exhaust enters discard pile
                 this.addToTop(new DrawCardAction(this.owner, this.amount));
             }
         }
-
     }
-
-
-
-
 }

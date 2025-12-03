@@ -14,17 +14,37 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.DrawPower;
 
 public class BGMachineLearning extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGMachineLearning");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGMachineLearning"
+    );
     public static final String ID = "BGMachineLearning";
 
     public BGMachineLearning() {
-        super("BGMachineLearning", cardStrings.NAME, "blue/power/machine_learning", 1, cardStrings.DESCRIPTION, CardType.POWER, BGDefect.Enums.BG_BLUE, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(
+            "BGMachineLearning",
+            cardStrings.NAME,
+            "blue/power/machine_learning",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = 1;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new DrawPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new DrawPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {

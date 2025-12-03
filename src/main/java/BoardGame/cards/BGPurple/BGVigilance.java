@@ -14,22 +14,31 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 //TODO: "to any player"
 public class BGVigilance extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGVigilance");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGVigilance"
+    );
     public static final String ID = "BGVigilance";
 
     public BGVigilance() {
-        super("BGVigilance", cardStrings.NAME, "purple/skill/vigilance", 2, cardStrings.DESCRIPTION, CardType.SKILL, BGWatcher.Enums.BG_PURPLE, CardRarity.BASIC, CardTarget.SELF);
-
-
+        super(
+            "BGVigilance",
+            cardStrings.NAME,
+            "purple/skill/vigilance",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.BASIC,
+            CardTarget.SELF
+        );
         this.baseBlock = 2;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, this.block));
-        addToBot((AbstractGameAction)new ChangeStanceAction("BGCalm"));
+        addToBot((AbstractGameAction) new GainBlockAction((AbstractCreature) p, this.block));
+        addToBot((AbstractGameAction) new ChangeStanceAction("BGCalm"));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -38,10 +47,7 @@ public class BGVigilance extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGVigilance();
     }
 }
-
-

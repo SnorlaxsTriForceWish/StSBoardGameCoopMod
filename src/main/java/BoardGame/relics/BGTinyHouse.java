@@ -10,7 +10,8 @@ import com.megacrit.cardcrawl.rewards.RewardItem;
 //TODO: TinyHouse rewards are not properly cleared upon entering next act? (read: get offered 2 potions if we skipped the one from tinyhouse)
 //TODO: BGTinyHouse breaks Neow's quickstart reward screen (rewards are autopicked) (maybe not an issue since potion stays on the menu if slots are full?)
 
-public class BGTinyHouse extends AbstractBGRelic  {
+public class BGTinyHouse extends AbstractBGRelic {
+
     public static final String ID = "BGTiny House";
 
     private static final int GOLD_AMT = 3;
@@ -18,7 +19,12 @@ public class BGTinyHouse extends AbstractBGRelic  {
     private static final int HP_AMT = 5;
 
     public BGTinyHouse() {
-        super("BGTiny House", "tinyHouse.png", AbstractRelic.RelicTier.BOSS, AbstractRelic.LandingSound.FLAT);
+        super(
+            "BGTiny House",
+            "tinyHouse.png",
+            AbstractRelic.RelicTier.BOSS,
+            AbstractRelic.LandingSound.FLAT
+        );
     }
 
     public String getUpdatedDescription() {
@@ -26,9 +32,10 @@ public class BGTinyHouse extends AbstractBGRelic  {
     }
 
     public void onEquip() {
-        boolean prevNCIR=false;
-        if(AbstractDungeon.getCurrRoom().event!=null)AbstractDungeon.getCurrRoom().event.noCardsInRewards=false;
-
+        boolean prevNCIR = false;
+        if (
+            AbstractDungeon.getCurrRoom().event != null
+        ) AbstractDungeon.getCurrRoom().event.noCardsInRewards = false;
 
         //card is already added to rewards by default in CombatRewardScreen.setupItemReward
 
@@ -41,23 +48,24 @@ public class BGTinyHouse extends AbstractBGRelic  {
         AbstractDungeon.combatRewardScreen.rewards.clear();
 
         AbstractDungeon.combatRewardScreen.rewards.add(new RewardItem());
-        AbstractDungeon.combatRewardScreen.rewards.add(new RewardItem(PotionHelper.getRandomPotion()));
+        AbstractDungeon.combatRewardScreen.rewards.add(
+            new RewardItem(PotionHelper.getRandomPotion())
+        );
         AbstractDungeon.combatRewardScreen.rewards.add(new RewardItem(GOLD_AMT));
         AbstractDungeon.combatRewardScreen.rewards.add(new TinyHouseUpgrade1Card(1));
         AbstractDungeon.combatRewardScreen.positionRewards();
 
         (AbstractDungeon.getCurrRoom()).rewardPopOutTimer = 0.0F;
-        if(AbstractDungeon.getCurrRoom().event!=null)AbstractDungeon.getCurrRoom().event.noCardsInRewards=prevNCIR;
+        if (
+            AbstractDungeon.getCurrRoom().event != null
+        ) AbstractDungeon.getCurrRoom().event.noCardsInRewards = prevNCIR;
 
         AbstractDungeon.overlayMenu.proceedButton.show();
         AbstractDungeon.overlayMenu.proceedButton.setLabel("Skip Rewards"); //TODO: localization, or copy from CallingBell.DESCRIPTIONS[2]
         AbstractDungeon.overlayMenu.cancelButton.hideInstantly();
-
-
     }
 
     public AbstractRelic makeCopy() {
         return new BGTinyHouse();
     }
 }
-

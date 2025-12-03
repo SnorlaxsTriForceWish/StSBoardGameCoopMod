@@ -1,5 +1,8 @@
 package BoardGame.relics;
 
+import static BoardGame.BoardGame.makeRelicOutlinePath;
+import static BoardGame.BoardGame.makeRelicPath;
+
 import BoardGame.BoardGame;
 import BoardGame.util.TextureLoader;
 import basemod.abstracts.CustomRelic;
@@ -14,10 +17,9 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
 
-import static BoardGame.BoardGame.makeRelicOutlinePath;
-import static BoardGame.BoardGame.makeRelicPath;
+public class DefaultClickableRelic extends CustomRelic implements ClickableRelic {
 
-public class DefaultClickableRelic extends CustomRelic implements ClickableRelic { // You must implement things you want to use from StSlib
+    // You must implement things you want to use from StSlib
     /*
      * https://github.com/daviscook477/BaseMod/wiki/Custom-Relics
      * StSLib for Clickable Relics
@@ -28,36 +30,52 @@ public class DefaultClickableRelic extends CustomRelic implements ClickableRelic
     // ID, images, text.
     public static final String ID = BoardGame.makeID("DefaultClickableRelic");
 
-    private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("default_clickable_relic.png"));
-    private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("default_clickable_relic.png"));
+    private static final Texture IMG = TextureLoader.getTexture(
+        makeRelicPath("default_clickable_relic.png")
+    );
+    private static final Texture OUTLINE = TextureLoader.getTexture(
+        makeRelicOutlinePath("default_clickable_relic.png")
+    );
 
     private boolean usedThisTurn = false; // You can also have a relic be only usable once per combat. Check out Hubris for more examples, including other StSlib things.
     private boolean isPlayerTurn = false; // We should make sure the relic is only activateable during our turn, not the enemies'.
 
     public DefaultClickableRelic() {
         super(ID, IMG, OUTLINE, RelicTier.COMMON, LandingSound.CLINK);
-
         tips.clear();
         tips.add(new PowerTip(name, description));
     }
 
-
     @Override
-    public void onRightClick() {// On right click
+    public void onRightClick() {
+        // On right click
         if (!isObtained || usedThisTurn || !isPlayerTurn) {
             // If it has been used this turn, or the player doesn't actually have the relic (i.e. it's on display in the shop room), or it's the enemy's turn
             return; // Don't do anything.
         }
-        
-        if (AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) { // Only if you're in combat
+
+        if (
+            AbstractDungeon.getCurrRoom() != null &&
+            AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT
+        ) {
+            // Only if you're in combat
             usedThisTurn = true; // Set relic as "Used this turn"
             flash(); // Flash
             stopPulse(); // And stop the pulsing animation (which is started in atPreBattle() below)
 
-            AbstractDungeon.actionManager.addToBottom(new TalkAction(true, DESCRIPTIONS[1], 4.0f, 2.0f)); // Player speech bubble saying "YOU ARE MINE!" (See relic strings)
+            AbstractDungeon.actionManager.addToBottom(
+                new TalkAction(true, DESCRIPTIONS[1], 4.0f, 2.0f)
+            ); // Player speech bubble saying "YOU ARE MINE!" (See relic strings)
             AbstractDungeon.actionManager.addToBottom(new SFXAction("MONSTER_COLLECTOR_DEBUFF")); // Sound Effect Action of The Collector Nails
-            AbstractDungeon.actionManager.addToBottom(new VFXAction( // Visual Effect Action of the nails applies on a random monster's position.
-                    new CollectorCurseEffect(AbstractDungeon.getRandomMonster().hb.cX, AbstractDungeon.getRandomMonster().hb.cY), 2.0F));
+            AbstractDungeon.actionManager.addToBottom(
+                new VFXAction( // Visual Effect Action of the nails applies on a random monster's position.
+                    new CollectorCurseEffect(
+                        AbstractDungeon.getRandomMonster().hb.cX,
+                        AbstractDungeon.getRandomMonster().hb.cY
+                    ),
+                    2.0F
+                )
+            );
 
             AbstractDungeon.actionManager.addToBottom(new EvokeOrbAction(1)); // Evoke your rightmost orb
         }
@@ -75,25 +93,24 @@ public class DefaultClickableRelic extends CustomRelic implements ClickableRelic
          *
          */
     }
-    
+
     @Override
     public void atPreBattle() {
         usedThisTurn = false; // Make sure usedThisTurn is set to false at the start of each combat.
-        beginLongPulse();     // Pulse while the player can click on it.
+        beginLongPulse(); // Pulse while the player can click on it.
     }
 
     public void atTurnStart() {
-        usedThisTurn = false;  // Resets the used this turn. You can remove this to use a relic only once per combat rather than per turn.
+        usedThisTurn = false; // Resets the used this turn. You can remove this to use a relic only once per combat rather than per turn.
         isPlayerTurn = true; // It's our turn!
         beginLongPulse(); // Pulse while the player can click on it.
     }
-    
+
     @Override
     public void onPlayerEndTurn() {
         isPlayerTurn = false; // Not our turn now.
         stopPulse();
     }
-    
 
     @Override
     public void onVictory() {
@@ -105,5 +122,4 @@ public class DefaultClickableRelic extends CustomRelic implements ClickableRelic
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0];
     }
-
 }

@@ -18,34 +18,55 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 //TODO: are any other for-loop multi-hit cards missing WEAKVULN_ZEROHITS?
 
 public class BGBrilliance extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBrilliance");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBrilliance"
+    );
     public static final String ID = "BGBrilliance";
 
     public BGBrilliance() {
-        super("BGBrilliance", cardStrings.NAME, "purple/attack/brilliance", 1, cardStrings.DESCRIPTION, CardType.ATTACK, BGWatcher.Enums.BG_PURPLE, CardRarity.RARE, CardTarget.ENEMY);
-
-        this.baseDamage=2;
+        super(
+            "BGBrilliance",
+            cardStrings.NAME,
+            "purple/attack/brilliance",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.RARE,
+            CardTarget.ENEMY
+        );
+        this.baseDamage = 2;
     }
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         //TODO: do we need to move this to an action since a relic is involved??
-        int count=0;
+        int count = 0;
         AbstractRelic r = p.getRelic("BoardGame:BGMiracles");
         if (r != null) {
-            count=r.counter;
+            count = r.counter;
         }
 
-        if(count>0){
+        if (count > 0) {
             for (int i = 0; i < count; i += 1) {
-                addToBot((AbstractGameAction) new DamageAction((AbstractCreature) m, new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.FIRE));
+                addToBot(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) m,
+                        new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                        AbstractGameAction.AttackEffect.FIRE
+                    )
+                );
                 addToBot((AbstractGameAction) new WaitAction(0.15F));
             }
-        }else{
-            addToBot((AbstractGameAction) new DamageAction((AbstractCreature) m, new DamageInfo((AbstractCreature) p, 0, WeakVulnCancel.WEAKVULN_ZEROHITS), AbstractGameAction.AttackEffect.NONE));
+        } else {
+            addToBot(
+                (AbstractGameAction) new DamageAction(
+                    (AbstractCreature) m,
+                    new DamageInfo((AbstractCreature) p, 0, WeakVulnCancel.WEAKVULN_ZEROHITS),
+                    AbstractGameAction.AttackEffect.NONE
+                )
+            );
         }
-
     }
 
     public void upgrade() {
@@ -59,6 +80,3 @@ public class BGBrilliance extends AbstractBGCard {
         return new BGBrilliance();
     }
 }
-
-
-

@@ -5,15 +5,14 @@ import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-
 public class BGTalkToTheHandAction extends AbstractGameAction {
+
     private AbstractPlayer p;
 
     private int block;
 
-
-    public BGTalkToTheHandAction(AbstractPlayer p,int block) {
-        this.p=p;
+    public BGTalkToTheHandAction(AbstractPlayer p, int block) {
+        this.p = p;
         this.block = block;
     }
 
@@ -27,4 +26,3 @@ public class BGTalkToTheHandAction extends AbstractGameAction {
         this.isDone = true;
     }
 }
-

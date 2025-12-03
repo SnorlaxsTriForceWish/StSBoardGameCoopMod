@@ -13,21 +13,39 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGCloakAndDagger extends AbstractBGCard {
+
     public static final String ID = "BGCloakAndDagger";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGCloakAndDagger");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGCloakAndDagger"
+    );
 
     public BGCloakAndDagger() {
-        super("BGCloakAndDagger", cardStrings.NAME, "green/skill/cloak_and_dagger", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.COMMON, CardTarget.SELF);
+        super(
+            "BGCloakAndDagger",
+            cardStrings.NAME,
+            "green/skill/cloak_and_dagger",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.COMMON,
+            CardTarget.SELF
+        );
         this.baseBlock = 1;
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new BGGainShivAction(this.magicNumber));
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
-
+        addToBot((AbstractGameAction) new BGGainShivAction(this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
     }
 
     public void upgrade() {
@@ -43,6 +61,3 @@ public class BGCloakAndDagger extends AbstractBGCard {
         return new BGCloakAndDagger();
     }
 }
-
-
-

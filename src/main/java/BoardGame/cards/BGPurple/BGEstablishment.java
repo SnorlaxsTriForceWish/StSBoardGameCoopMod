@@ -12,21 +12,38 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGEstablishment extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGEstablishment");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGEstablishment"
+    );
     public static final String ID = "BGEstablishment";
 
     public BGEstablishment() {
-        super("BGEstablishment", cardStrings.NAME, "purple/power/establishment", 1, cardStrings.DESCRIPTION, CardType.POWER, BGWatcher.Enums.BG_PURPLE, CardRarity.RARE, CardTarget.SELF);
-
-        baseMagicNumber=1;
-        magicNumber=baseMagicNumber;
+        super(
+            "BGEstablishment",
+            cardStrings.NAME,
+            "purple/power/establishment",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
+        baseMagicNumber = 1;
+        magicNumber = baseMagicNumber;
     }
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new BGEstablishmentPower(AbstractDungeon.player, magicNumber),magicNumber));
+        addToBot(
+            new ApplyPowerAction(
+                AbstractDungeon.player,
+                AbstractDungeon.player,
+                new BGEstablishmentPower(AbstractDungeon.player, magicNumber),
+                magicNumber
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -37,10 +54,7 @@ public class BGEstablishment extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGEstablishment();
     }
 }
-
-

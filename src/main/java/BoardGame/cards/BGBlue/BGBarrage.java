@@ -13,19 +13,37 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGBarrage extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBarrage");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBarrage"
+    );
     public static final String ID = "BGBarrage";
 
-
     public BGBarrage() {
-        super("BGBarrage", cardStrings.NAME, "blue/attack/barrage", 1, cardStrings.DESCRIPTION, CardType.ATTACK, BGDefect.Enums.BG_BLUE, CardRarity.COMMON, CardTarget.ENEMY);
+        super(
+            "BGBarrage",
+            cardStrings.NAME,
+            "blue/attack/barrage",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.COMMON,
+            CardTarget.ENEMY
+        );
         this.baseDamage = 1;
-        this.baseMagicNumber=0;
-        this.magicNumber=this.baseMagicNumber;
+        this.baseMagicNumber = 0;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new BGBarrageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, DamageInfo.DamageType.NORMAL), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new BGBarrageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, DamageInfo.DamageType.NORMAL),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {

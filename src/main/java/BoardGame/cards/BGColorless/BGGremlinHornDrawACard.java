@@ -13,30 +13,37 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGGremlinHornDrawACard extends AbstractBGAttackCardChoice {
+
     public static final String ID = "BGGremlinHornDrawACard";
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGGremlinHornDrawACard");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGGremlinHornDrawACard"
+    );
 
     public BGGremlinHornDrawACard() {
-        super("BGGremlinHornDrawACard", cardStrings.NAME, "colorless/skill/finesse", -2, cardStrings.DESCRIPTION, AbstractCard.CardType.STATUS, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.SPECIAL, AbstractCard.CardTarget.NONE);
+        super(
+            "BGGremlinHornDrawACard",
+            cardStrings.NAME,
+            "colorless/skill/finesse",
+            -2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.STATUS,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.SPECIAL,
+            AbstractCard.CardTarget.NONE
+        );
     }
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {}
 
-
-
     public void onChoseThisOption() {
-        addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)AbstractDungeon.player, 1));
+        addToBot(
+            (AbstractGameAction) new DrawCardAction((AbstractCreature) AbstractDungeon.player, 1)
+        );
     }
 
-
-
     public void upgrade() {}
-
 
     public AbstractCard makeCopy() {
         return new BGGremlinHornDrawACard();
     }
 }
-

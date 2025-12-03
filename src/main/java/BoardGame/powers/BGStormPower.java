@@ -9,9 +9,12 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 
 public class BGStormPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGStormPower";
 
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGStormPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGStormPower"
+    );
 
     public static final String NAME = powerStrings.NAME;
 
@@ -28,9 +31,9 @@ public class BGStormPower extends AbstractBGPower {
 
     public void atStartOfTurnPostDraw() {
         flash();
-        for (int i = 0; i < this.amount; i++)
-            addToBot((AbstractGameAction)new BGChannelAction((AbstractOrb)new BGLightning()));
-
+        for (int i = 0; i < this.amount; i++) addToBot(
+            (AbstractGameAction) new BGChannelAction((AbstractOrb) new BGLightning())
+        );
     }
 
     public void updateDescription() {

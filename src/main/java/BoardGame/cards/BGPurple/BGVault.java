@@ -18,22 +18,37 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.WhirlwindEffect;
 
 public class BGVault extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGVault");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGVault"
+    );
     public static final String ID = "BGVault";
 
     public BGVault() {
-        super("BGVault", cardStrings.NAME, "purple/skill/vault", 3, cardStrings.DESCRIPTION, CardType.SKILL, BGWatcher.Enums.BG_PURPLE, CardRarity.RARE, CardTarget.SELF);
+        super(
+            "BGVault",
+            cardStrings.NAME,
+            "purple/skill/vault",
+            3,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
         this.exhaust = true;
-
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new WhirlwindEffect(new Color(1.0F, 0.9F, 0.4F, 1.0F), true)));
-        addToBot(new SFXAction("END_TURN",0.05F));
+        addToBot(
+            (AbstractGameAction) new VFXAction(
+                (AbstractGameEffect) new WhirlwindEffect(new Color(1.0F, 0.9F, 0.4F, 1.0F), true)
+            )
+        );
+        addToBot(new SFXAction("END_TURN", 0.05F));
         addToBot(new BGVaultDiscardAction());
         addToBot(new DrawCardAction(5));
         addToBot(new GainEnergyAction(3));
-
     }
 
     public void upgrade() {

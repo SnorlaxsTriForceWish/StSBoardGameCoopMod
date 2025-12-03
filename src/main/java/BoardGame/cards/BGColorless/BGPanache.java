@@ -14,24 +14,38 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGPanache extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGPanache");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGPanache"
+    );
     public static final String ID = "BGPanache";
 
     public BGPanache() {
-        super("BGPanache", cardStrings.NAME, "colorless/power/panache", 0, cardStrings.DESCRIPTION, AbstractCard.CardType.POWER, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
-
-
-
-
+        super(
+            "BGPanache",
+            cardStrings.NAME,
+            "colorless/power/panache",
+            0,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.POWER,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseMagicNumber = 3;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGPanachePower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGPanachePower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -40,10 +54,7 @@ public class BGPanache extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGPanache();
     }
 }
-
-

@@ -12,23 +12,21 @@ import com.megacrit.cardcrawl.vfx.PlayerTurnEffect;
 
 //Block reset is handled in MultiCharacter.loseBlock
 public class StartOfTurnEnergyPatches {
-    @SpirePatch2(clz = PlayerTurnEffect.class, method = SpirePatch.CONSTRUCTOR,
-            paramtypez={})
+
+    @SpirePatch2(clz = PlayerTurnEffect.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {})
     public static class Foo {
+
         @SpirePostfixPatch
         public static void Bar() {
-            if(AbstractDungeon.player instanceof MultiCharacter) {
+            if (AbstractDungeon.player instanceof MultiCharacter) {
                 for (AbstractPlayer c : MultiCharacter.getSubcharacters()) {
                     ContextPatches.pushPlayerContext(c);
                     AbstractDungeon.player.energy.recharge();
-                    for (AbstractRelic r : AbstractDungeon.player.relics)
-                        r.onEnergyRecharge();
-                    for (AbstractPower p : AbstractDungeon.player.powers)
-                        p.onEnergyRecharge();
+                    for (AbstractRelic r : AbstractDungeon.player.relics) r.onEnergyRecharge();
+                    for (AbstractPower p : AbstractDungeon.player.powers) p.onEnergyRecharge();
                     ContextPatches.popPlayerContext();
                 }
             }
         }
     }
-
 }

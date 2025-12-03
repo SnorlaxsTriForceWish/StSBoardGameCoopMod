@@ -14,17 +14,37 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGAfterImage extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGAfterImage");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGAfterImage"
+    );
     public static final String ID = "BGAfterImage";
 
     public BGAfterImage() {
-        super("BGAfterImage", cardStrings.NAME, "green/power/after_image", 1, cardStrings.DESCRIPTION, CardType.POWER, BGSilent.Enums.BG_GREEN, CardRarity.RARE, CardTarget.SELF);
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGAfterImage",
+            cardStrings.NAME,
+            "green/power/after_image",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGAfterImagePower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGAfterImagePower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {
@@ -34,15 +54,7 @@ public class BGAfterImage extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGAfterImage();
     }
-
-
-
-
-
 }
-
-

@@ -6,12 +6,14 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class BGSimmeringFuryPower extends AbstractBGPower {
+
     public static final String POWER_ID = BoardGame.makeID("BGSimmeringFuryPower");
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGSimmeringFuryPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGSimmeringFuryPower"
+    );
 
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
-
 
     public BGSimmeringFuryPower(AbstractCreature owner, int amount) {
         this.name = NAME;
@@ -29,7 +31,4 @@ public class BGSimmeringFuryPower extends AbstractBGPower {
     }
 
     //actual implementation is done in BGWrathStance
-
 }
-
-

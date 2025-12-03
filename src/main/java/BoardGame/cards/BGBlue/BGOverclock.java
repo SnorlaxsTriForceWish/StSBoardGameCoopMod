@@ -14,19 +14,36 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGOverclock extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGOverclock");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGOverclock"
+    );
     public static final String ID = "BGOverclock";
 
     public BGOverclock() {
-        super("BGOverclock", cardStrings.NAME, "blue/skill/overclock", 0, cardStrings.DESCRIPTION, CardType.SKILL, BGDefect.Enums.BG_BLUE, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(
+            "BGOverclock",
+            cardStrings.NAME,
+            "blue/skill/overclock",
+            0,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
         this.baseMagicNumber = 2;
         this.magicNumber = this.baseMagicNumber;
-        this.cardsToPreview = (AbstractCard)new BGDazed();
+        this.cardsToPreview = (AbstractCard) new BGDazed();
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)p, this.magicNumber, false));
-        addToBot((AbstractGameAction)new MakeTempCardInDiscardAction((AbstractCard)new BGDazed(), 1));
+        addToBot(
+            (AbstractGameAction) new DrawCardAction((AbstractCreature) p, this.magicNumber, false)
+        );
+        addToBot(
+            (AbstractGameAction) new MakeTempCardInDiscardAction((AbstractCard) new BGDazed(), 1)
+        );
     }
 
     public void upgrade() {

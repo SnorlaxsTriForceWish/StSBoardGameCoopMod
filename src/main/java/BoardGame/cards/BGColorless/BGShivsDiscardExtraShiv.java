@@ -11,34 +11,39 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class BGShivsDiscardExtraShiv extends AbstractBGAttackCardChoice {
+
     public static final String ID = "BGShivsDiscardExtraShiv";
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGShivsDiscardExtraShiv");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGShivsDiscardExtraShiv"
+    );
 
     public BGShivsDiscardExtraShiv() {
-        super("BGShivsDiscardExtraShiv", cardStrings.NAME, "green/skill/crippling_poison", -2, cardStrings.DESCRIPTION, CardType.STATUS, BGColorless.Enums.CARD_COLOR, CardRarity.SPECIAL, CardTarget.NONE);
-        this.isInAutoplay=true; //bandage fix for extra shivs triggering dice lock
+        super(
+            "BGShivsDiscardExtraShiv",
+            cardStrings.NAME,
+            "green/skill/crippling_poison",
+            -2,
+            cardStrings.DESCRIPTION,
+            CardType.STATUS,
+            BGColorless.Enums.CARD_COLOR,
+            CardRarity.SPECIAL,
+            CardTarget.NONE
+        );
+        this.isInAutoplay = true; //bandage fix for extra shivs triggering dice lock
     }
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {}
 
-
-
     public void onChoseThisOption() {
-        AbstractRelic relic= AbstractDungeon.player.getRelic("BoardGame:BGShivs");
-        if(relic!=null){
-            relic.counter=relic.counter-1;
+        AbstractRelic relic = AbstractDungeon.player.getRelic("BoardGame:BGShivs");
+        if (relic != null) {
+            relic.counter = relic.counter - 1;
         }
     }
 
-
-
     public void upgrade() {}
-
 
     public AbstractCard makeCopy() {
         return new BGShivsDiscardExtraShiv();
     }
 }
-

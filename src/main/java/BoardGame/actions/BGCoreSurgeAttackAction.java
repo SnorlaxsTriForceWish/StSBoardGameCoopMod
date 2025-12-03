@@ -8,25 +8,31 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGCoreSurgeAttackAction extends AbstractGameAction {
+
     private AbstractCard card;
     private AbstractPlayer p;
     private AbstractMonster m;
 
     public BGCoreSurgeAttackAction(AbstractCard card, AbstractPlayer p, AbstractMonster m) {
         this.card = card;
-        this.p=p;
+        this.p = p;
         this.m = m;
     }
 
     public void update() {
         card.applyPowers();
         card.calculateCardDamage(m);
-        addToBot(new DamageAction(m, new DamageInfo(p, card.damage, card.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        addToBot(
+            new DamageAction(
+                m,
+                new DamageInfo(p, card.damage, card.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.BLUNT_HEAVY
+            )
+        );
 
         this.isDone = true;
     }
 }
-
 
 /* Location:              C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\desktop-1.0.jar!\com\megacrit\cardcrawl\actions\defect\GashAction.class
  * Java compiler version: 8 (52.0)

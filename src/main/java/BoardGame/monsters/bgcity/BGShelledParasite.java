@@ -31,10 +31,13 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.SpeechBubble;
 import com.megacrit.cardcrawl.vfx.combat.BiteEffect;
 
+public class BGShelledParasite
+    extends AbstractBGMonster
+    implements DieControlledMoves, BGDamageIcons {
 
-public class BGShelledParasite extends AbstractBGMonster implements DieControlledMoves, BGDamageIcons {
     public static final String ID = "BGShelled Parasite";
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("Shelled Parasite");
+    private static final MonsterStrings monsterStrings =
+        CardCrawlGame.languagePack.getMonsterStrings("Shelled Parasite");
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
@@ -55,10 +58,11 @@ public class BGShelledParasite extends AbstractBGMonster implements DieControlle
 
     public BGShelledParasite(float x, float y) {
         super(NAME, "BGShelled Parasite", 72, 20.0F, -6.0F, 350.0F, 260.0F, null, x, y);
-
-        loadAnimation("images/monsters/theCity/shellMonster/skeleton.atlas", "images/monsters/theCity/shellMonster/skeleton.json", 1.0F);
-
-
+        loadAnimation(
+            "images/monsters/theCity/shellMonster/skeleton.atlas",
+            "images/monsters/theCity/shellMonster/skeleton.json",
+            1.0F
+        );
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
@@ -67,70 +71,152 @@ public class BGShelledParasite extends AbstractBGMonster implements DieControlle
 
         this.dialogX = -50.0F * Settings.scale;
 
-        if(AbstractDungeon.ascensionLevel<7)
-            setHp(18);
-        else
-            setHp(16);
+        if (AbstractDungeon.ascensionLevel < 7) setHp(18);
+        else setHp(16);
 
-
-
-        this.damage.add(new DamageInfo((AbstractCreature)this, 4));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 3));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 2));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 4));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 3));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 2));
     }
-    private static final int A_2_DOUBLE_STRIKE_DMG = 7; private static final int A_2_SUCK_DMG = 12; private int fellDmg; private int doubleStrikeDmg; private int suckDmg; private static final int DOUBLE_STRIKE_COUNT = 2; private static final int FELL_FRAIL_AMT = 2; private static final byte FELL = 1; private static final byte DOUBLE_STRIKE = 2; private static final byte LIFE_SUCK = 3; private static final byte STUNNED = 4; private boolean firstMove = true; public static final String ARMOR_BREAK = "ARMOR_BREAK";
+
+    private static final int A_2_DOUBLE_STRIKE_DMG = 7;
+    private static final int A_2_SUCK_DMG = 12;
+    private int fellDmg;
+    private int doubleStrikeDmg;
+    private int suckDmg;
+    private static final int DOUBLE_STRIKE_COUNT = 2;
+    private static final int FELL_FRAIL_AMT = 2;
+    private static final byte FELL = 1;
+    private static final byte DOUBLE_STRIKE = 2;
+    private static final byte LIFE_SUCK = 3;
+    private static final byte STUNNED = 4;
+    private boolean firstMove = true;
+    public static final String ARMOR_BREAK = "ARMOR_BREAK";
+
     public BGShelledParasite() {
         this(-20.0F, 10.0F);
     }
-
-
-
 
     public void takeTurn() {
         int i;
         switch (this.nextMove) {
             case 1:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateSlowAttackAction((AbstractCreature)this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new WaitAction(0.3F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(0), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new GainBlockAction((AbstractCreature)this, 2));
-                setMove((byte)2, AbstractMonster.Intent.ATTACK_DEBUFF, ((DamageInfo)this.damage.get(1)).base);
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new AnimateSlowAttackAction((AbstractCreature) this)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new WaitAction(0.3F)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(0),
+                        AbstractGameAction.AttackEffect.BLUNT_HEAVY
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new GainBlockAction((AbstractCreature) this, 2)
+                );
+                setMove(
+                    (byte) 2,
+                    AbstractMonster.Intent.ATTACK_DEBUFF,
+                    ((DamageInfo) this.damage.get(1)).base
+                );
                 break;
             case 2:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateHopAction((AbstractCreature)this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new WaitAction(0.2F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(1), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)this, (AbstractPower)new BGVulnerablePower((AbstractCreature)AbstractDungeon.player, 1, true), 1));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new GainBlockAction((AbstractCreature)this, 2));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new AnimateHopAction((AbstractCreature) this)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new WaitAction(0.2F)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(1),
+                        AbstractGameAction.AttackEffect.BLUNT_LIGHT
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ApplyPowerAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        (AbstractCreature) this,
+                        (AbstractPower) new BGVulnerablePower(
+                            (AbstractCreature) AbstractDungeon.player,
+                            1,
+                            true
+                        ),
+                        1
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new GainBlockAction((AbstractCreature) this, 2)
+                );
 
-                AbstractMonster mo = AbstractDungeon.getCurrRoom().monsters.getMonster(BGFungiBeast.ID);
-                if(mo!=null && !mo.isDead && !mo.halfDead && !mo.isDying && !mo.isEscaping) {
-                    if(mo.getIntentBaseDmg()>0) {
-                        addToBot(new ApplyPowerAction((AbstractCreature) mo, (AbstractCreature) mo, (AbstractPower) new BGVulnerableWatchPlayerPower((AbstractCreature) mo, 1, false), 1));
+                AbstractMonster mo = AbstractDungeon.getCurrRoom().monsters.getMonster(
+                    BGFungiBeast.ID
+                );
+                if (mo != null && !mo.isDead && !mo.halfDead && !mo.isDying && !mo.isEscaping) {
+                    if (mo.getIntentBaseDmg() > 0) {
+                        addToBot(
+                            new ApplyPowerAction(
+                                (AbstractCreature) mo,
+                                (AbstractCreature) mo,
+                                (AbstractPower) new BGVulnerableWatchPlayerPower(
+                                    (AbstractCreature) mo,
+                                    1,
+                                    false
+                                ),
+                                1
+                            )
+                        );
                         addToBot(new BGForcedWaitAction(1.0F));
                     }
                 }
 
-                setMove((byte)3, AbstractMonster.Intent.ATTACK_DEFEND, ((DamageInfo)this.damage.get(2)).base);
+                setMove(
+                    (byte) 3,
+                    AbstractMonster.Intent.ATTACK_DEFEND,
+                    ((DamageInfo) this.damage.get(2)).base
+                );
                 break;
             case 3:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ChangeStateAction(this, "ATTACK"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new WaitAction(0.4F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new VFXAction((AbstractGameEffect)new BiteEffect(AbstractDungeon.player.hb.cX +
-                        MathUtils.random(-25.0F, 25.0F) * Settings.scale, AbstractDungeon.player.hb.cY +
-                        MathUtils.random(-25.0F, 25.0F) * Settings.scale, Color.GOLD
-                        .cpy()), 0.0F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(2), AbstractGameAction.AttackEffect.NONE));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new GainBlockAction((AbstractCreature)this, 2));
-                setMove((byte)2, AbstractMonster.Intent.ATTACK_DEBUFF, ((DamageInfo)this.damage.get(1)).base);
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ChangeStateAction(this, "ATTACK")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new WaitAction(0.4F)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new VFXAction(
+                        (AbstractGameEffect) new BiteEffect(
+                            AbstractDungeon.player.hb.cX +
+                                MathUtils.random(-25.0F, 25.0F) * Settings.scale,
+                            AbstractDungeon.player.hb.cY +
+                                MathUtils.random(-25.0F, 25.0F) * Settings.scale,
+                            Color.GOLD.cpy()
+                        ),
+                        0.0F
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(2),
+                        AbstractGameAction.AttackEffect.NONE
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new GainBlockAction((AbstractCreature) this, 2)
+                );
+                setMove(
+                    (byte) 2,
+                    AbstractMonster.Intent.ATTACK_DEBUFF,
+                    ((DamageInfo) this.damage.get(1)).base
+                );
                 break;
         }
-
     }
-
 
     public void changeState(String stateName) {
         switch (stateName) {
@@ -139,17 +225,26 @@ public class BGShelledParasite extends AbstractBGMonster implements DieControlle
                 this.state.addAnimation(0, "Idle", true, 0.0F);
                 break;
             case "ARMOR_BREAK":
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateHopAction((AbstractCreature)this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new WaitAction(0.3F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateHopAction((AbstractCreature)this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new WaitAction(0.3F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateHopAction((AbstractCreature)this));
-                setMove((byte)4, AbstractMonster.Intent.STUN);
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new AnimateHopAction((AbstractCreature) this)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new WaitAction(0.3F)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new AnimateHopAction((AbstractCreature) this)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new WaitAction(0.3F)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new AnimateHopAction((AbstractCreature) this)
+                );
+                setMove((byte) 4, AbstractMonster.Intent.STUN);
                 createIntent();
                 break;
         }
     }
-
 
     public void damage(DamageInfo info) {
         super.damage(info);
@@ -159,18 +254,27 @@ public class BGShelledParasite extends AbstractBGMonster implements DieControlle
         }
     }
 
-
-
     protected void getMove(int num) {
-        setMove((byte)1, AbstractMonster.Intent.ATTACK_DEFEND, ((DamageInfo)this.damage.get(0)).base); return;
+        setMove(
+            (byte) 1,
+            AbstractMonster.Intent.ATTACK_DEFEND,
+            ((DamageInfo) this.damage.get(0)).base
+        );
+        return;
     }
 
     @Override
     public void dieMove(int roll) {
-        if(this.nextMove==2){
-            if(!this.halfDead && !this.isDying && !this.isEscaping)AbstractDungeon.effectList.add(new SpeechBubble(this.hb.cX + this.dialogX, this.hb.cY + this.dialogY, 2.5F, "@6.022140857×10^23@", false));
+        if (this.nextMove == 2) {
+            if (!this.halfDead && !this.isDying && !this.isEscaping) AbstractDungeon.effectList.add(
+                new SpeechBubble(
+                    this.hb.cX + this.dialogX,
+                    this.hb.cY + this.dialogY,
+                    2.5F,
+                    "@6.022140857×10^23@",
+                    false
+                )
+            );
         }
     }
 }
-
-

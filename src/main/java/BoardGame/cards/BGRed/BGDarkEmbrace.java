@@ -14,27 +14,36 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGDarkEmbrace extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("Dark Embrace");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "Dark Embrace"
+    );
     public static final String ID = "BGDark Embrace";
 
     public BGDarkEmbrace() {
-        super("BGDark Embrace", cardStrings.NAME, "red/power/dark_embrace", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.POWER, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
+        super(
+            "BGDark Embrace",
+            cardStrings.NAME,
+            "red/power/dark_embrace",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.POWER,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
     }
-
-
-
-
-
-
-
-
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGDarkEmbracePower((AbstractCreature)p, 1), 1));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGDarkEmbracePower((AbstractCreature) p, 1),
+                1
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -43,10 +52,7 @@ public class BGDarkEmbrace extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGDarkEmbrace();
     }
 }
-
-

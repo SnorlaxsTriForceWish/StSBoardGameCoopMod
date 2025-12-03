@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 
 public class BGDestroyFairyPotionAction extends AbstractGameAction {
+
     @Override
     public void update() {
         for (AbstractPotion p : AbstractDungeon.player.potions) {

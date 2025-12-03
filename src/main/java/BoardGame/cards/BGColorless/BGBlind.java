@@ -14,37 +14,39 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGBlind extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBlind");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBlind"
+    );
     public static final String ID = "BGBlind";
 
     public BGBlind() {
-        super("BGBlind", cardStrings.NAME, "colorless/skill/blind", 0, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.ENEMY);
-
-
-
-
-
-
-
-
-
-        this.exhaust=true;
+        super(
+            "BGBlind",
+            cardStrings.NAME,
+            "colorless/skill/blind",
+            0,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.ENEMY
+        );
+        this.exhaust = true;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)p, (AbstractPower)new BGWeakPower((AbstractCreature)m, this.magicNumber, false), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) m,
+                (AbstractCreature) p,
+                (AbstractPower) new BGWeakPower((AbstractCreature) m, this.magicNumber, false),
+                this.magicNumber
+            )
+        );
     }
-
-
-
-
-
-
-
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -56,10 +58,7 @@ public class BGBlind extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGBlind();
     }
 }
-
-

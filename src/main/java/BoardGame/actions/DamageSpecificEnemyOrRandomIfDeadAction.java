@@ -1,6 +1,5 @@
 package BoardGame.actions;
 
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -12,17 +11,30 @@ public class DamageSpecificEnemyOrRandomIfDeadAction extends AbstractGameAction 
     private DamageInfo info;
     private AbstractCreature originaltarget;
 
-    public DamageSpecificEnemyOrRandomIfDeadAction(AbstractCreature originaltarget, DamageInfo info, AbstractGameAction.AttackEffect effect) {
+    public DamageSpecificEnemyOrRandomIfDeadAction(
+        AbstractCreature originaltarget,
+        DamageInfo info,
+        AbstractGameAction.AttackEffect effect
+    ) {
         this.info = info;
         this.actionType = AbstractGameAction.ActionType.DAMAGE;
         this.attackEffect = effect;
         this.originaltarget = originaltarget;
     }
 
-
     public void update() {
-        if (originaltarget == null || originaltarget.halfDead || originaltarget.isDead || originaltarget.isDying || originaltarget.isEscaping) {
-            this.target = (AbstractCreature) AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
+        if (
+            originaltarget == null ||
+            originaltarget.halfDead ||
+            originaltarget.isDead ||
+            originaltarget.isDying ||
+            originaltarget.isEscaping
+        ) {
+            this.target = (AbstractCreature) AbstractDungeon.getMonsters().getRandomMonster(
+                null,
+                true,
+                AbstractDungeon.cardRandomRng
+            );
         } else {
             this.target = originaltarget;
         }
@@ -30,9 +42,6 @@ public class DamageSpecificEnemyOrRandomIfDeadAction extends AbstractGameAction 
             addToTop(new DamageAction(this.target, this.info, this.attackEffect));
         }
 
-
-
         this.isDone = true;
     }
 }
-

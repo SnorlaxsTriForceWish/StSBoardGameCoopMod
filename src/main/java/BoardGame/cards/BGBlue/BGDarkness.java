@@ -13,16 +13,28 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 
 public class BGDarkness extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGDarkness");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGDarkness"
+    );
     public static final String ID = "BGDarkness";
 
     public BGDarkness() {
-        super("BGDarkness", cardStrings.NAME, "blue/skill/darkness", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGDefect.Enums.BG_BLUE, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(
+            "BGDarkness",
+            cardStrings.NAME,
+            "blue/skill/darkness",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new BGChannelAction((AbstractOrb)new BGDark()));
-
+        addToBot((AbstractGameAction) new BGChannelAction((AbstractOrb) new BGDark()));
     }
 
     public void upgrade() {

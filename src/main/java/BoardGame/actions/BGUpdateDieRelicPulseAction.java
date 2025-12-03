@@ -10,9 +10,8 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 public class BGUpdateDieRelicPulseAction extends AbstractGameAction {
 
     public BGUpdateDieRelicPulseAction() {
-        this.target=AbstractDungeon.player;
+        this.target = AbstractDungeon.player;
     }
-
 
     public void update() {
         //final Logger logger = LogManager.getLogger(BoardGame.class.getName());
@@ -23,27 +22,24 @@ public class BGUpdateDieRelicPulseAction extends AbstractGameAction {
             return;
         }
 
-        AbstractPower any=(AbstractDungeon.player.getPower("BGTriggerAnyDiePower"));
-        AbstractPower two=(AbstractDungeon.player.getPower("BGTrigger2DiePower"));
-        for(AbstractRelic relic : AbstractDungeon.player.relics){
-            if(relic instanceof DieControlledRelic){
-                if(any!=null && any.amount>0){
+        AbstractPower any = (AbstractDungeon.player.getPower("BGTriggerAnyDiePower"));
+        AbstractPower two = (AbstractDungeon.player.getPower("BGTrigger2DiePower"));
+        for (AbstractRelic relic : AbstractDungeon.player.relics) {
+            if (relic instanceof DieControlledRelic) {
+                if (any != null && any.amount > 0) {
                     relic.beginLongPulse();
-                }else{
+                } else {
                     relic.stopPulse();
                 }
             }
-            if(relic instanceof NilrysCodexCompatible){
-                if(two!=null && two.amount>0){
+            if (relic instanceof NilrysCodexCompatible) {
+                if (two != null && two.amount > 0) {
                     relic.beginLongPulse();
-                }else{
+                } else {
                     relic.stopPulse();
                 }
             }
-
         }
         this.isDone = true;
-
-
     }
 }

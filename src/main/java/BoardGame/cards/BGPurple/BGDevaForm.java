@@ -12,21 +12,38 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGDevaForm extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGDevaForm");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGDevaForm"
+    );
     public static final String ID = "BGDevaForm";
 
     public BGDevaForm() {
-        super("BGDevaForm", cardStrings.NAME, "purple/power/deva_form", 2, cardStrings.DESCRIPTION, CardType.POWER, BGWatcher.Enums.BG_PURPLE, CardRarity.RARE, CardTarget.SELF);
-
-        baseMagicNumber=1;
-        magicNumber=baseMagicNumber;
+        super(
+            "BGDevaForm",
+            cardStrings.NAME,
+            "purple/power/deva_form",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
+        baseMagicNumber = 1;
+        magicNumber = baseMagicNumber;
     }
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new BGDevaFormPower(AbstractDungeon.player, magicNumber),magicNumber));
+        addToBot(
+            new ApplyPowerAction(
+                AbstractDungeon.player,
+                AbstractDungeon.player,
+                new BGDevaFormPower(AbstractDungeon.player, magicNumber),
+                magicNumber
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -37,10 +54,7 @@ public class BGDevaForm extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGDevaForm();
     }
 }
-
-

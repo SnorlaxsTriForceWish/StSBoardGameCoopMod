@@ -12,17 +12,37 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.watcher.NirvanaPower;
 
 public class BGNirvana extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGNirvana");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGNirvana"
+    );
     public static final String ID = "BGNirvana";
 
     public BGNirvana() {
-        super("BGNirvana", cardStrings.NAME, "purple/power/nirvana", 1, cardStrings.DESCRIPTION, CardType.POWER, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.SELF);
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGNirvana",
+            cardStrings.NAME,
+            "purple/power/nirvana",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction(p, p, new NirvanaPower(p, magicNumber), magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                p,
+                p,
+                new NirvanaPower(p, magicNumber),
+                magicNumber
+            )
+        );
     }
 
     public void upgrade() {

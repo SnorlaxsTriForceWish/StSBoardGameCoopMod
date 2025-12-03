@@ -5,10 +5,12 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
-public class BGFlightPower
-        extends AbstractBGPower {
+public class BGFlightPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGFlight";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGFlight");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGFlight"
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
@@ -23,19 +25,13 @@ public class BGFlightPower
         this.priority = 50;
     }
 
-
     public void playApplyPowerSfx() {
         CardCrawlGame.sound.play("POWER_FLIGHT", 0.05F);
     }
 
-
     public void updateDescription() {
         this.description = DESCRIPTIONS[0];
     }
-
-
-
-
 
     public float atDamageFinalReceive(float damage, DamageInfo.DamageType type) {
         return calculateDamageTakenAmount(damage, type);
@@ -43,13 +39,8 @@ public class BGFlightPower
 
     private float calculateDamageTakenAmount(float damage, DamageInfo.DamageType type) {
         if (type != DamageInfo.DamageType.HP_LOSS && type != DamageInfo.DamageType.THORNS) {
-            if(damage>1)
-                return 1;
+            if (damage > 1) return 1;
         }
         return damage;
     }
-
-
 }
-
-

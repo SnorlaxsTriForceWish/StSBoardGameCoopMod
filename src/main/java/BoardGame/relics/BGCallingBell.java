@@ -11,34 +11,44 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
-public class BGCallingBell
-        extends AbstractBGRelic
-{
+public class BGCallingBell extends AbstractBGRelic {
+
     public static final String ID = "BGCalling Bell";
     private boolean relicsReceived = true;
 
     public BGCallingBell() {
-        super("BGCalling Bell", "bell.png", AbstractRelic.RelicTier.BOSS, AbstractRelic.LandingSound.SOLID);
+        super(
+            "BGCalling Bell",
+            "bell.png",
+            AbstractRelic.RelicTier.BOSS,
+            AbstractRelic.LandingSound.SOLID
+        );
     }
-
 
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0];
     }
 
-
     public void onEquip() {
-
         this.relicsReceived = false;
         AbstractDungeon.combatRewardScreen.open();
         AbstractDungeon.combatRewardScreen.rewards.clear();
 
-        AbstractDungeon.combatRewardScreen.rewards.add(new RewardItem(
-                AbstractDungeon.returnRandomScreenlessRelic(AbstractRelic.RelicTier.COMMON)));
-        AbstractDungeon.combatRewardScreen.rewards.add(new RewardItem(
-                AbstractDungeon.returnRandomScreenlessRelic(AbstractRelic.RelicTier.COMMON)));
-        AbstractDungeon.combatRewardScreen.rewards.add(new RewardItem(
-                AbstractDungeon.returnRandomScreenlessRelic(AbstractRelic.RelicTier.COMMON)));
+        AbstractDungeon.combatRewardScreen.rewards.add(
+            new RewardItem(
+                AbstractDungeon.returnRandomScreenlessRelic(AbstractRelic.RelicTier.COMMON)
+            )
+        );
+        AbstractDungeon.combatRewardScreen.rewards.add(
+            new RewardItem(
+                AbstractDungeon.returnRandomScreenlessRelic(AbstractRelic.RelicTier.COMMON)
+            )
+        );
+        AbstractDungeon.combatRewardScreen.rewards.add(
+            new RewardItem(
+                AbstractDungeon.returnRandomScreenlessRelic(AbstractRelic.RelicTier.COMMON)
+            )
+        );
 
         AbstractDungeon.combatRewardScreen.positionRewards();
         AbstractDungeon.overlayMenu.proceedButton.setLabel(this.DESCRIPTIONS[2]);
@@ -46,22 +56,23 @@ public class BGCallingBell
         (AbstractDungeon.getCurrRoom()).rewardPopOutTimer = 0.25F;
     }
 
-
     public void update() {
         super.update();
-        if (!this.relicsReceived && AbstractDungeon.screen != AbstractDungeon.CurrentScreen.COMBAT_REWARD) {
+        if (
+            !this.relicsReceived &&
+            AbstractDungeon.screen != AbstractDungeon.CurrentScreen.COMBAT_REWARD
+        ) {
             AbstractDungeon.combatRewardScreen.rewards.clear();
             CardGroup group = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
             AbstractCard randomcurse = AbstractDungeon.getCard(AbstractCard.CardRarity.CURSE);
             AbstractBGDungeon.removeCardFromRewardDeck(randomcurse);
-            UnlockTracker.markCardAsSeen(((AbstractCard)randomcurse).cardID);
+            UnlockTracker.markCardAsSeen(((AbstractCard) randomcurse).cardID);
             group.addToBottom(randomcurse.makeCopy());
 
             AbstractDungeon.gridSelectScreen.openConfirmationGrid(group, this.DESCRIPTIONS[1]);
             CardCrawlGame.sound.playA("BELL", MathUtils.random(-0.2F, -0.3F));
 
             this.relicsReceived = true;
-
         }
 
         if (this.hb.hovered && InputHelper.justClickedLeft) {
@@ -70,10 +81,7 @@ public class BGCallingBell
         }
     }
 
-
     public AbstractRelic makeCopy() {
         return new BGCallingBell();
     }
 }
-
-

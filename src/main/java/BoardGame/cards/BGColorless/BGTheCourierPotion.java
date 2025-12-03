@@ -12,33 +12,41 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
-
 import java.util.ArrayList;
 
 public class BGTheCourierPotion extends AbstractBGAttackCardChoice {
+
     public static final String ID = "BGTheCourierPotion";
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGTheCourierPotion");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGTheCourierPotion"
+    );
 
     public BGTheCourierPotion() {
-        super("BGTheCourierPotion", cardStrings.NAME, "green/skill/alchemize", -2, cardStrings.DESCRIPTION, CardType.STATUS, BGColorless.Enums.CARD_COLOR, CardRarity.SPECIAL, CardTarget.NONE);
+        super(
+            "BGTheCourierPotion",
+            cardStrings.NAME,
+            "green/skill/alchemize",
+            -2,
+            cardStrings.DESCRIPTION,
+            CardType.STATUS,
+            BGColorless.Enums.CARD_COLOR,
+            CardRarity.SPECIAL,
+            CardTarget.NONE
+        );
     }
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         onChoseThisOption();
     }
+
     public void onChoseThisOption() {
         AbstractPotion p = AbstractDungeon.returnRandomPotion(true);
-        EntropicBrewPotionButton button=EntropicBrewPotionButton.SetupButton(p,true);
+        EntropicBrewPotionButton button = EntropicBrewPotionButton.SetupButton(p, true);
         ArrayList<AbstractCard> stanceChoices = new ArrayList<>();
         stanceChoices.add(new BGTheCourierConfirmPurchase(button));
         stanceChoices.add(new BGTheCourierDiscardPurchase(button));
-        addToBot((AbstractGameAction)new ChooseOneAction(stanceChoices));
-
-
+        addToBot((AbstractGameAction) new ChooseOneAction(stanceChoices));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -51,4 +59,3 @@ public class BGTheCourierPotion extends AbstractBGAttackCardChoice {
         return new BGTheCourierPotion();
     }
 }
-

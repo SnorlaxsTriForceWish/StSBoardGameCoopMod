@@ -1,5 +1,7 @@
 package BoardGame.cards;
 
+import static BoardGame.BoardGame.makeCardPath;
+
 import BoardGame.BoardGame;
 import BoardGame.characters.BGIronclad;
 import basemod.AutoAdd;
@@ -9,8 +11,6 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
-import static BoardGame.BoardGame.makeCardPath;
 
 // public class ${NAME} extends AbstractDynamicCard
 @AutoAdd.Ignore // Remove this line when you make a template. Refer to https://github.com/daviscook477/BaseMod/wiki/AutoAdd if you want to know what it does.
@@ -38,42 +38,43 @@ public class CardTemplate extends AbstractDynamicCard {
 
     // public static final String ID = DefaultMod.makeID(${NAME}.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
     public static final String ID = BoardGame.makeID("DefaultCommonAttack"); // DELETE THIS ONE.
-    public static final String IMG = makeCardPath("Attack.png");// "public static final String IMG = makeCardPath("${NAME}.png");
+    public static final String IMG = makeCardPath("Attack.png"); // "public static final String IMG = makeCardPath("${NAME}.png");
     // This does mean that you will need to have an image with the same NAME as the card in your image folder for it to run correctly.
 
-
     // /TEXT DECLARATION/
-
 
     // STAT DECLARATION
 
     private static final CardRarity RARITY = CardRarity.COMMON; //  Up to you, I like auto-complete on these
-    private static final CardTarget TARGET = CardTarget.ENEMY;  //   since they don't change much.
-    private static final CardType TYPE = CardType.ATTACK;       //
+    private static final CardTarget TARGET = CardTarget.ENEMY; //   since they don't change much.
+    private static final CardType TYPE = CardType.ATTACK; //
     public static final CardColor COLOR = BGIronclad.Enums.BG_RED;
 
-    private static final int COST = 1;  // COST = ${COST}
+    private static final int COST = 1; // COST = ${COST}
     private static final int UPGRADED_COST = 0; // UPGRADED_COST = ${UPGRADED_COST}
 
-    private static final int DAMAGE = 7;    // DAMAGE = ${DAMAGE}
-    private static final int UPGRADE_PLUS_DMG = 2;  // UPGRADE_PLUS_DMG = ${UPGRADED_DAMAGE_INCREASE}
+    private static final int DAMAGE = 7; // DAMAGE = ${DAMAGE}
+    private static final int UPGRADE_PLUS_DMG = 2; // UPGRADE_PLUS_DMG = ${UPGRADED_DAMAGE_INCREASE}
 
     // /STAT DECLARATION/
 
-
-    public CardTemplate() { // public ${NAME}() - This one and the one right under the imports are the most important ones, don't forget them
+    public CardTemplate() {
+        // public ${NAME}() - This one and the one right under the imports are the most important ones, don't forget them
         super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
         baseDamage = DAMAGE;
     }
-
 
     // Actions the card should do.
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(
-                new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+            new DamageAction(
+                m,
+                new DamageInfo(p, damage, damageTypeForTurn),
+                AbstractGameAction.AttackEffect.SLASH_HORIZONTAL
+            )
+        );
     }
-
 
     // Upgraded stats.
     @Override

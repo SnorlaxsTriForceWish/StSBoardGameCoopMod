@@ -15,20 +15,25 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class BGInvinciblePlayerPower extends AbstractBGPower {
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGIntangible");
+
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGIntangible"
+    );
     public static final String POWER_ID = "BGIntangible";
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    public BGInvinciblePlayerPower(AbstractCreature owner, int turns) { //TODO: not using "turns" atm (BGWraithFormPower handles that)
+    public BGInvinciblePlayerPower(AbstractCreature owner, int turns) {
+        //TODO: not using "turns" atm (BGWraithFormPower handles that)
         this.name = NAME;
         this.ID = "BGIntangible";
         this.owner = owner;
         this.amount = 1;
-        if(owner instanceof AbstractPlayer){
-            AbstractRelic r=((AbstractPlayer)owner).getRelic("BoardGame:BGTheDieRelic");
-            if(r!=null){
-                if(((BGTheDieRelic)r).tookDamageThisTurn) { //TODO: move flag to AbstractBGPlayer, if possible (but requires turn start event)
+        if (owner instanceof AbstractPlayer) {
+            AbstractRelic r = ((AbstractPlayer) owner).getRelic("BoardGame:BGTheDieRelic");
+            if (r != null) {
+                if (((BGTheDieRelic) r).tookDamageThisTurn) {
+                    //TODO: move flag to AbstractBGPlayer, if possible (but requires turn start event)
                     this.amount = 0;
                 }
             }
@@ -59,39 +64,47 @@ public class BGInvinciblePlayerPower extends AbstractBGPower {
         }
     }
 
-
     public void atStartOfTurn() {
         //flash();
 
-        addToBot((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, "BGIntangible"));
+        addToBot(
+            (AbstractGameAction) new RemoveSpecificPowerAction(
+                this.owner,
+                this.owner,
+                "BGIntangible"
+            )
+        );
     }
 
-
-    @SpirePatch2(clz = AbstractCreature.class, method = "decrementBlock",
-            paramtypez={DamageInfo.class, int.class})
+    @SpirePatch2(
+        clz = AbstractCreature.class,
+        method = "decrementBlock",
+        paramtypez = { DamageInfo.class, int.class }
+    )
     public static class InvincibleDecrementBlockPatch {
+
         @SpirePostfixPatch
-        public static int decrementBlock(int __result,AbstractCreature __instance, DamageInfo info, int damageAmount) {
-            if(__instance.hasPower("BGIntangible")){
-                AbstractPower p=__instance.getPower("BGIntangible");
-                if(__result>p.amount){
-                    __result=p.amount;
+        public static int decrementBlock(
+            int __result,
+            AbstractCreature __instance,
+            DamageInfo info,
+            int damageAmount
+        ) {
+            if (__instance.hasPower("BGIntangible")) {
+                AbstractPower p = __instance.getPower("BGIntangible");
+                if (__result > p.amount) {
+                    __result = p.amount;
                 }
-                p.amount-=__result;
+                p.amount -= __result;
                 p.updateDescription();
             }
-            if(__result>0 && __instance==AbstractDungeon.player){
-                AbstractRelic r=((AbstractPlayer)__instance).getRelic("BoardGame:BGTheDieRelic");
-                if(r!=null){
-                    ((BGTheDieRelic)r).tookDamageThisTurn=true;
+            if (__result > 0 && __instance == AbstractDungeon.player) {
+                AbstractRelic r = ((AbstractPlayer) __instance).getRelic("BoardGame:BGTheDieRelic");
+                if (r != null) {
+                    ((BGTheDieRelic) r).tookDamageThisTurn = true;
                 }
             }
             return __result;
         }
     }
-
-
-
 }
-
-

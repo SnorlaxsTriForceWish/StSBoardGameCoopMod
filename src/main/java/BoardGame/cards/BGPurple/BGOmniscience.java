@@ -12,19 +12,32 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGOmniscience extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGOmniscience");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGOmniscience"
+    );
     public static final String ID = "BGOmniscience";
 
     public BGOmniscience() {
-        super("BGOmniscience", cardStrings.NAME, "purple/skill/omniscience", 3, cardStrings.DESCRIPTION, CardType.SKILL, BGWatcher.Enums.BG_PURPLE, CardRarity.RARE, CardTarget.SELF);
+        super(
+            "BGOmniscience",
+            cardStrings.NAME,
+            "purple/skill/omniscience",
+            3,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
         this.exhaust = true;
-        baseMagicNumber=2;
-        magicNumber=baseMagicNumber;
+        baseMagicNumber = 2;
+        magicNumber = baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new BGOmniscienceAction(this.magicNumber));
-        addToBot(new ShuffleAction(p.drawPile,true));
+        addToBot((AbstractGameAction) new BGOmniscienceAction(this.magicNumber));
+        addToBot(new ShuffleAction(p.drawPile, true));
     }
 
     public void upgrade() {

@@ -12,15 +12,28 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGStudy extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGStudy");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGStudy"
+    );
     public static final String ID = "BGStudy";
 
     public BGStudy() {
-        super("BGStudy", cardStrings.NAME, "purple/power/study", 2, cardStrings.DESCRIPTION, CardType.POWER, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(
+            "BGStudy",
+            cardStrings.NAME,
+            "purple/power/study",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction(p, p, new BGStudyPower(p, 2), 2));
+        addToBot((AbstractGameAction) new ApplyPowerAction(p, p, new BGStudyPower(p, 2), 2));
     }
 
     public void upgrade() {

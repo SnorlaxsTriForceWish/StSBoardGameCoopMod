@@ -20,8 +20,10 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.SpeechBubble;
 
 public class BGGremlinSneaky extends AbstractBGMonster implements BGDamageIcons {
+
     public static final String ID = "BGGremlinSneaky";
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("GremlinThief");
+    private static final MonsterStrings monsterStrings =
+        CardCrawlGame.languagePack.getMonsterStrings("GremlinThief");
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
@@ -34,62 +36,93 @@ public class BGGremlinSneaky extends AbstractBGMonster implements BGDamageIcons 
     private static final int HP_MIN = 10;
 
     private boolean leader;
+
     public BGGremlinSneaky(float x, float y, boolean leader) {
         super(NAME, "BGGremlinSneaky", 14, 0.0F, 0.0F, 120.0F, 160.0F, null, x, y);
         this.dialogY = 50.0F * Settings.scale;
-        this.leader=leader;
+        this.leader = leader;
 
         setHp(2);
 
-        this.damage.add(new DamageInfo((AbstractCreature)this, 2));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 2));
 
-        loadAnimation("images/monsters/theBottom/thiefGremlin/skeleton.atlas", "images/monsters/theBottom/thiefGremlin/skeleton.json", 1.0F);
-
-
+        loadAnimation(
+            "images/monsters/theBottom/thiefGremlin/skeleton.atlas",
+            "images/monsters/theBottom/thiefGremlin/skeleton.json",
+            1.0F
+        );
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "animation", true);
         e.setTime(e.getEndTime() * MathUtils.random());
     }
-    private static final int HP_MAX = 14; private static final int A_2_HP_MIN = 11; private static final int A_2_HP_MAX = 15; private int thiefDamage;
+
+    private static final int HP_MAX = 14;
+    private static final int A_2_HP_MIN = 11;
+    private static final int A_2_HP_MAX = 15;
+    private int thiefDamage;
 
     public void usePreBattleAction() {
         if (this.leader) {
-            AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new BGSpawnTwoGremlinsAction());
+            AbstractDungeon.actionManager.addToBottom(
+                (AbstractGameAction) new BGSpawnTwoGremlinsAction()
+            );
         }
     }
 
     public void takeTurn() {
         switch (this.nextMove) {
             case 1:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateSlowAttackAction((AbstractCreature)this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(0), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new AnimateSlowAttackAction((AbstractCreature) this)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(0),
+                        AbstractGameAction.AttackEffect.SLASH_HORIZONTAL
+                    )
+                );
 
                 if (true) {
-                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SetMoveAction(this, (byte)1, AbstractMonster.Intent.ATTACK, 2));
+                    AbstractDungeon.actionManager.addToBottom(
+                        (AbstractGameAction) new SetMoveAction(
+                            this,
+                            (byte) 1,
+                            AbstractMonster.Intent.ATTACK,
+                            2
+                        )
+                    );
                     break;
                 }
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SetMoveAction(this, (byte)99, AbstractMonster.Intent.ESCAPE));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new SetMoveAction(
+                        this,
+                        (byte) 99,
+                        AbstractMonster.Intent.ESCAPE
+                    )
+                );
                 break;
 
-//            case 99:
-//                playSfx();
-//                AbstractDungeon.effectList.add(new SpeechBubble(this.hb.cX + this.dialogX, this.hb.cY + this.dialogY, 2.5F, DIALOG[1], false));
-//
-//                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new EscapeAction(this));
-//                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SetMoveAction(this, (byte)99, AbstractMonster.Intent.ESCAPE));
-//                break;
+            //            case 99:
+            //                playSfx();
+            //                AbstractDungeon.effectList.add(new SpeechBubble(this.hb.cX + this.dialogX, this.hb.cY + this.dialogY, 2.5F, DIALOG[1], false));
+            //
+            //                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new EscapeAction(this));
+            //                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SetMoveAction(this, (byte)99, AbstractMonster.Intent.ESCAPE));
+            //                break;
         }
     }
-
-
 
     private void playSfx() {
         int roll = MathUtils.random(1);
         if (roll == 0) {
-            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("VO_GREMLINSPAZZY_1A"));
+            AbstractDungeon.actionManager.addToBottom(
+                (AbstractGameAction) new SFXAction("VO_GREMLINSPAZZY_1A")
+            );
         } else {
-            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("VO_GREMLINSPAZZY_1B"));
+            AbstractDungeon.actionManager.addToBottom(
+                (AbstractGameAction) new SFXAction("VO_GREMLINSPAZZY_1B")
+            );
         }
     }
 
@@ -104,35 +137,29 @@ public class BGGremlinSneaky extends AbstractBGMonster implements BGDamageIcons 
         }
     }
 
-
     public void die() {
         super.die();
         playDeathSfx();
     }
 
-
     public void escapeNext() {
-        if (!this.cannotEscape &&
-                !this.escapeNext) {
+        if (!this.cannotEscape && !this.escapeNext) {
             this.escapeNext = true;
-            AbstractDungeon.effectList.add(new SpeechBubble(this.dialogX, this.dialogY, 3.0F, DIALOG[2], false));
+            AbstractDungeon.effectList.add(
+                new SpeechBubble(this.dialogX, this.dialogY, 3.0F, DIALOG[2], false)
+            );
         }
     }
 
-
-
     protected void getMove(int num) {
-        setMove((byte)1, AbstractMonster.Intent.ATTACK, ((DamageInfo)this.damage.get(0)).base);
+        setMove((byte) 1, AbstractMonster.Intent.ATTACK, ((DamageInfo) this.damage.get(0)).base);
     }
 
-
-//    public void deathReact() {
-//        if (this.intent != AbstractMonster.Intent.ESCAPE && !this.isDying) {
-//            AbstractDungeon.effectList.add(new SpeechBubble(this.dialogX, this.dialogY, 3.0F, DIALOG[2], false));
-//            setMove((byte)99, AbstractMonster.Intent.ESCAPE);
-//            createIntent();
-//        }
-//    }
+    //    public void deathReact() {
+    //        if (this.intent != AbstractMonster.Intent.ESCAPE && !this.isDying) {
+    //            AbstractDungeon.effectList.add(new SpeechBubble(this.dialogX, this.dialogY, 3.0F, DIALOG[2], false));
+    //            setMove((byte)99, AbstractMonster.Intent.ESCAPE);
+    //            createIntent();
+    //        }
+    //    }
 }
-
-

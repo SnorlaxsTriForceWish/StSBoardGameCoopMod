@@ -1,5 +1,8 @@
 package BoardGame.characters;
 
+import static BoardGame.BoardGame.*;
+import static BoardGame.characters.BGIronclad.Enums.BG_RED;
+
 import BoardGame.BoardGame;
 import BoardGame.cards.BGRed.BGBash;
 import BoardGame.cards.BGRed.BGDefend_Red;
@@ -32,35 +35,37 @@ import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbInterface;
 import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbRed;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
-
-import static BoardGame.BoardGame.*;
-import static BoardGame.characters.BGIronclad.Enums.BG_RED;
 
 //Wiki-page https://github.com/daviscook477/BaseMod/wiki/Custom-Characters
 //and https://github.com/daviscook477/BaseMod/wiki/Migrating-to-5.0
 //All text (starting description and loadout, anything labeled TEXT[]) can be found in DefaultMod-character-Strings.json in the resources
 
 public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
+
     public static final Logger logger = LogManager.getLogger(BoardGame.class.getName());
 
     // =============== CHARACTER ENUMERATORS =================
 
     public static class Enums {
+
         @SpireEnum
         public static AbstractPlayer.PlayerClass BG_IRONCLAD;
+
         @SpireEnum(name = "BG_IRONCLAD_RED_COLOR") // These two HAVE to have the same absolutely identical name.
         public static AbstractCard.CardColor BG_RED;
+
         @SpireEnum(name = "BG_IRONCLAD_RED_COLOR")
         public static CardLibrary.LibraryType LIBRARY_COLOR;
     }
 
     // =============== CHARACTER ENUMERATORS  =================
 
-    public String getMultiSwapButtonUrl(){return "BoardGameResources/images/icons/ironclad.png";}
+    public String getMultiSwapButtonUrl() {
+        return "BoardGameResources/images/icons/ironclad.png";
+    }
 
     // =============== BASE STATS =================
 
@@ -73,72 +78,80 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
 
     // =============== /BASE STATS/ =================
 
-
     // =============== STRINGS =================
 
     private static final String ID = makeID("BGIronclad");
-    private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
+    private static final CharacterStrings characterStrings =
+        CardCrawlGame.languagePack.getCharacterString(ID);
     private static final String[] NAMES = characterStrings.NAMES;
     private static final String[] TEXT = characterStrings.TEXT;
 
     // =============== /STRINGS/ =================
 
-
     // =============== TEXTURES OF BIG ENERGY ORB ===============
 
     public static final String[] orbTextures = {
-            "BoardGameResources/images/char/defaultCharacter/orb/layer1.png",
-            "BoardGameResources/images/char/defaultCharacter/orb/layer2.png",
-            "BoardGameResources/images/char/defaultCharacter/orb/layer3.png",
-            "BoardGameResources/images/char/defaultCharacter/orb/layer4.png",
-            "BoardGameResources/images/char/defaultCharacter/orb/layer5.png",
-            "BoardGameResources/images/char/defaultCharacter/orb/layer6.png",
-            "BoardGameResources/images/char/defaultCharacter/orb/layer1d.png",
-            "BoardGameResources/images/char/defaultCharacter/orb/layer2d.png",
-            "BoardGameResources/images/char/defaultCharacter/orb/layer3d.png",
-            "BoardGameResources/images/char/defaultCharacter/orb/layer4d.png",
-            "BoardGameResources/images/char/defaultCharacter/orb/layer5d.png",};
+        "BoardGameResources/images/char/defaultCharacter/orb/layer1.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer2.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer3.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer4.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer5.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer6.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer1d.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer2d.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer3d.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer4d.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer5d.png",
+    };
 
     // =============== /TEXTURES OF BIG ENERGY ORB/ ===============
 
     // =============== CHARACTER CLASS START =================
 
     public BGIronclad(String name, PlayerClass setClass) {
-        super(name, setClass, orbTextures,
-                "BoardGameResources/images/char/defaultCharacter/orb/vfx.png", null,
-            "");
-//                new SpriterAnimation(
-//                        "BoardGameResources/images/char/defaultCharacter/Spriter/theDefaultAnimation.scml"));
-
-
+        super(
+            name,
+            setClass,
+            orbTextures,
+            "BoardGameResources/images/char/defaultCharacter/orb/vfx.png",
+            null,
+            ""
+        );
+        //                new SpriterAnimation(
+        //                        "BoardGameResources/images/char/defaultCharacter/Spriter/theDefaultAnimation.scml"));
 
         // =============== TEXTURES, ENERGY, LOADOUT =================
 
-//        initializeClass(null, // required call to load textures and setup energy/loadout.
-//                // I left these in DefaultMod.java (Ctrl+click them to see where they are, Ctrl+hover to see what they read.)
-//                THE_DEFAULT_SHOULDER_2, // campfire pose
-//                THE_DEFAULT_SHOULDER_1, // another campfire pose
-//                THE_DEFAULT_CORPSE, // dead corpse
-        initializeClass((String)null, "images/characters/ironclad/shoulder2.png", "images/characters/ironclad/shoulder.png", "images/characters/ironclad/corpse.png",
-                getLoadout(), 20.0F, -10.0F, 220.0F, 290.0F, new EnergyManager(ENERGY_PER_TURN)); // energy manager
+        //        initializeClass(null, // required call to load textures and setup energy/loadout.
+        //                // I left these in DefaultMod.java (Ctrl+click them to see where they are, Ctrl+hover to see what they read.)
+        //                THE_DEFAULT_SHOULDER_2, // campfire pose
+        //                THE_DEFAULT_SHOULDER_1, // another campfire pose
+        //                THE_DEFAULT_CORPSE, // dead corpse
+        initializeClass(
+            (String) null,
+            "images/characters/ironclad/shoulder2.png",
+            "images/characters/ironclad/shoulder.png",
+            "images/characters/ironclad/corpse.png",
+            getLoadout(),
+            20.0F,
+            -10.0F,
+            220.0F,
+            290.0F,
+            new EnergyManager(ENERGY_PER_TURN)
+        ); // energy manager
 
         // =============== /TEXTURES, ENERGY, LOADOUT/ =================
 
-
         // =============== ANIMATIONS =================
 
-        loadAnimation(
-                BGIRONCLAD_SKELETON_ATLAS,
-                BGIRONCLAD_SKELETON_JSON,
-                1.0f);
+        loadAnimation(BGIRONCLAD_SKELETON_ATLAS, BGIRONCLAD_SKELETON_JSON, 1.0f);
         //loadAnimation("images/characters/ironclad/idle/skeleton.atlas", "images/characters/ironclad/idle/skeleton.json", 1.0F);
-       // AnimationState.TrackEntry e = state.setAnimation(0, "animation", true);
+        // AnimationState.TrackEntry e = state.setAnimation(0, "animation", true);
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
         e.setTimeScale(0.6F);
         //e.setTime(e.getEndTime() * MathUtils.random());
 
         // =============== /ANIMATIONS/ =================
-
 
         // =============== TEXT BUBBLE LOCATION =================
 
@@ -147,7 +160,7 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
 
         // =============== /TEXT BUBBLE LOCATION/ =================
 
-        energyOrb = (EnergyOrbInterface)new EnergyOrbRed();
+        energyOrb = (EnergyOrbInterface) new EnergyOrbRed();
     }
 
     public Texture getEnergyImage() {
@@ -159,9 +172,19 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
     // Starting description and loadout
     @Override
     public CharSelectInfo getLoadout() {
-        return new CharSelectInfo(NAMES[0], TEXT[0],
-                STARTING_HP, MAX_HP, ORB_SLOTS, STARTING_GOLD, CARD_DRAW, this, getStartingRelics(),
-                getStartingDeck(), false);
+        return new CharSelectInfo(
+            NAMES[0],
+            TEXT[0],
+            STARTING_HP,
+            MAX_HP,
+            ORB_SLOTS,
+            STARTING_GOLD,
+            CARD_DRAW,
+            this,
+            getStartingRelics(),
+            getStartingDeck(),
+            false
+        );
     }
 
     // Starting Deck
@@ -182,23 +205,23 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
         retVal.add(BGDefend_Red.ID);
         retVal.add(BGBash.ID);
 
-//        retVal.add(BGFeed.ID);
-//        retVal.add(BGFeed.ID);
-//        retVal.add(BGStrike_Red.ID);
-//        retVal.add(BGStrike_Red.ID);
-//        retVal.add(BGBash.ID);
-//        retVal.add(BGFlameBarrier.ID);
-//        retVal.add(BGStrike_Red.ID);
-//        retVal.add(BGBash.ID);
+        //        retVal.add(BGFeed.ID);
+        //        retVal.add(BGFeed.ID);
+        //        retVal.add(BGStrike_Red.ID);
+        //        retVal.add(BGStrike_Red.ID);
+        //        retVal.add(BGBash.ID);
+        //        retVal.add(BGFlameBarrier.ID);
+        //        retVal.add(BGStrike_Red.ID);
+        //        retVal.add(BGBash.ID);
 
         return retVal;
     }
 
-    // Starting Relics	
+    // Starting Relics
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
 
-        logger.info("getStartingRelics: "+BGTheDieRelic.ID+" "+BGBurningBlood.ID);
+        logger.info("getStartingRelics: " + BGTheDieRelic.ID + " " + BGBurningBlood.ID);
         retVal.add(BGTheDieRelic.ID);
         retVal.add(BGBurningBlood.ID);
         //retVal.add(FrozenEye.ID);
@@ -215,8 +238,11 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
     @Override
     public void doCharSelectScreenSelectEffect() {
         CardCrawlGame.sound.playA("ATTACK_HEAVY", MathUtils.random(-0.2F, 0.2F));
-        CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.MED, ScreenShake.ShakeDur.SHORT, true);
-
+        CardCrawlGame.screenShake.shake(
+            ScreenShake.ShakeIntensity.MED,
+            ScreenShake.ShakeDur.SHORT,
+            true
+        );
     }
 
     // character Select on-button-press sound effect
@@ -293,10 +319,11 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
     // Attack effects are the same as used in DamageAction and the like.
     @Override
     public AbstractGameAction.AttackEffect[] getSpireHeartSlashEffect() {
-        return new AbstractGameAction.AttackEffect[]{
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY,
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY,
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY};
+        return new AbstractGameAction.AttackEffect[] {
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY,
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY,
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY,
+        };
     }
 
     // Should return a string containing what text is shown when your character is
@@ -315,16 +342,13 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
         return TEXT[2];
     }
 
-
     protected Color blockTextColor = new Color(0.9F, 0.9F, 0.9F, 0.0F);
     protected float blockScale = 1.0F;
 
-
-
     public void applyStartOfTurnRelics() {
         super.applyStartOfTurnRelics();
-        this.shivsPlayedThisTurn=0;
-        this.stanceChangedThisTurn=false;
+        this.shivsPlayedThisTurn = 0;
+        this.stanceChangedThisTurn = false;
     }
 
     //TODO: move addBlock to CustomBoardGameCreature class (which itself will require various sweeping changes to implement)
@@ -352,16 +376,13 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
         }
         this.currentBlock += MathUtils.floor(tmp);
 
-
-//        if (this.currentBlock >= 99 && this.isPlayer) {
-//            UnlockTracker.unlockAchievement("IMPERVIOUS");
-//        }
-
+        //        if (this.currentBlock >= 99 && this.isPlayer) {
+        //            UnlockTracker.unlockAchievement("IMPERVIOUS");
+        //        }
 
         if (this.currentBlock > 20) {
             this.currentBlock = 20;
         }
-
 
         if (this.currentBlock == 20 && this.isPlayer) {
             //UnlockTracker.unlockAchievement("BG_BARRICADED");
@@ -369,13 +390,11 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
 
         if (effect && this.currentBlock > 0) {
             gainBlockAnimation();
-        } else if (blockAmount > 0 &&
-                blockAmount > 0) {
+        } else if (blockAmount > 0 && blockAmount > 0) {
             Color tmpCol = Settings.GOLD_COLOR.cpy();
             tmpCol.a = this.blockTextColor.a;
             this.blockTextColor = tmpCol;
             this.blockScale = 5.0F;
         }
     }
-
 }

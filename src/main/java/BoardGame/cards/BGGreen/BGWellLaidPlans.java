@@ -14,16 +14,36 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.RetainCardPower;
 
 public class BGWellLaidPlans extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGWellLaidPlans");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGWellLaidPlans"
+    );
 
     public BGWellLaidPlans() {
-        super("BGWellLaidPlans", cardStrings.NAME, "green/power/well_laid_plans", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.POWER, BGSilent.Enums.BG_GREEN, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.NONE);
+        super(
+            "BGWellLaidPlans",
+            cardStrings.NAME,
+            "green/power/well_laid_plans",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.POWER,
+            BGSilent.Enums.BG_GREEN,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.NONE
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = 1;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new RetainCardPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new RetainCardPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {
@@ -39,4 +59,3 @@ public class BGWellLaidPlans extends AbstractBGCard {
         return new BGWellLaidPlans();
     }
 }
-

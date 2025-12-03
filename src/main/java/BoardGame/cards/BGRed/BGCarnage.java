@@ -19,41 +19,65 @@ import com.megacrit.cardcrawl.vfx.StarBounceEffect;
 import com.megacrit.cardcrawl.vfx.combat.ViolentAttackEffect;
 
 public class BGCarnage extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGCarnage");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGCarnage"
+    );
     public static final String ID = "BGCarnage";
 
     public BGCarnage() {
-        super("BGCarnage", cardStrings.NAME, "red/attack/carnage", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.ENEMY);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGCarnage",
+            cardStrings.NAME,
+            "red/attack/carnage",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseDamage = 4;
         this.isEthereal = true;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (Settings.FAST_MODE) {
-            addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new ViolentAttackEffect(m.hb.cX, m.hb.cY, Color.RED)));
+            addToBot(
+                (AbstractGameAction) new VFXAction(
+                    (AbstractGameEffect) new ViolentAttackEffect(m.hb.cX, m.hb.cY, Color.RED)
+                )
+            );
             for (int i = 0; i < 5; i++) {
-                addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new StarBounceEffect(m.hb.cX, m.hb.cY)));
+                addToBot(
+                    (AbstractGameAction) new VFXAction(
+                        (AbstractGameEffect) new StarBounceEffect(m.hb.cX, m.hb.cY)
+                    )
+                );
             }
         } else {
-            addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new ViolentAttackEffect(m.hb.cX, m.hb.cY, Color.RED), 0.4F));
+            addToBot(
+                (AbstractGameAction) new VFXAction(
+                    (AbstractGameEffect) new ViolentAttackEffect(m.hb.cX, m.hb.cY, Color.RED),
+                    0.4F
+                )
+            );
             for (int i = 0; i < 5; i++) {
-                addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new StarBounceEffect(m.hb.cX, m.hb.cY)));
+                addToBot(
+                    (AbstractGameAction) new VFXAction(
+                        (AbstractGameEffect) new StarBounceEffect(m.hb.cX, m.hb.cY)
+                    )
+                );
             }
         }
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.BLUNT_HEAVY
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -62,10 +86,7 @@ public class BGCarnage extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGCarnage();
     }
 }
-
-

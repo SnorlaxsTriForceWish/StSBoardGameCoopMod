@@ -23,7 +23,9 @@ import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 public class BGDonu extends AbstractBGMonster implements BGDamageIcons {
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("Donu");
+
+    private static final MonsterStrings monsterStrings =
+        CardCrawlGame.languagePack.getMonsterStrings("Donu");
     public static final String ID = "BGDonu";
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
@@ -45,9 +47,11 @@ public class BGDonu extends AbstractBGMonster implements BGDamageIcons {
 
     public BGDonu() {
         super(NAME, "BGDonu", 250, 0.0F, -20.0F, 390.0F, 390.0F, null, 100.0F, 20.0F);
-        loadAnimation("images/monsters/theForest/donu/skeleton.atlas", "images/monsters/theForest/donu/skeleton.json", 1.0F);
-
-
+        loadAnimation(
+            "images/monsters/theForest/donu/skeleton.atlas",
+            "images/monsters/theForest/donu/skeleton.json",
+            1.0F
+        );
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
@@ -58,25 +62,24 @@ public class BGDonu extends AbstractBGMonster implements BGDamageIcons {
         this.dialogX = -200.0F * Settings.scale;
         this.dialogY = 10.0F * Settings.scale;
 
-//        if (AbstractDungeon.ascensionLevel >= 9) {
-//            setHp(265);
-//        } else {
-//            setHp(250);
-//        }
-//
-//        if (AbstractDungeon.ascensionLevel >= 4) {
-//            this.beamDmg = 12;
-//        } else {
-//            this.beamDmg = 10;
-//        }
+        //        if (AbstractDungeon.ascensionLevel >= 9) {
+        //            setHp(265);
+        //        } else {
+        //            setHp(250);
+        //        }
+        //
+        //        if (AbstractDungeon.ascensionLevel >= 4) {
+        //            this.beamDmg = 12;
+        //        } else {
+        //            this.beamDmg = 10;
+        //        }
 
-        setHp((AbstractDungeon.ascensionLevel<10) ? 50 : 55);
-        this.beamDmg=3;
+        setHp((AbstractDungeon.ascensionLevel < 10) ? 50 : 55);
+        this.beamDmg = 3;
 
-        this.damage.add(new DamageInfo((AbstractCreature)this, this.beamDmg));
+        this.damage.add(new DamageInfo((AbstractCreature) this, this.beamDmg));
         this.isAttacking = false;
     }
-
 
     public void changeState(String stateName) {
         switch (stateName) {
@@ -87,7 +90,6 @@ public class BGDonu extends AbstractBGMonster implements BGDamageIcons {
         }
     }
 
-
     public void damage(DamageInfo info) {
         super.damage(info);
         if (info.owner != null && info.type != DamageInfo.DamageType.THORNS && info.output > 0) {
@@ -96,50 +98,70 @@ public class BGDonu extends AbstractBGMonster implements BGDamageIcons {
         }
     }
 
-
-//    public void usePreBattleAction() {
-//        if (AbstractDungeon.ascensionLevel >= 19) {
-//            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new ArtifactPower((AbstractCreature)this, 3)));
-//        } else {
-//
-//            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new ArtifactPower((AbstractCreature)this, 2)));
-//        }
-//    }
-
+    //    public void usePreBattleAction() {
+    //        if (AbstractDungeon.ascensionLevel >= 19) {
+    //            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new ArtifactPower((AbstractCreature)this, 3)));
+    //        } else {
+    //
+    //            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new ArtifactPower((AbstractCreature)this, 2)));
+    //        }
+    //    }
 
     public void takeTurn() {
         int i;
         switch (this.nextMove) {
             case 0:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ChangeStateAction(this, "ATTACK"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new WaitAction(0.5F));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ChangeStateAction(this, "ATTACK")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new WaitAction(0.5F)
+                );
                 for (i = 0; i < 2; i++) {
-                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                            .get(0), AbstractGameAction.AttackEffect.FIRE));
+                    AbstractDungeon.actionManager.addToBottom(
+                        (AbstractGameAction) new DamageAction(
+                            (AbstractCreature) AbstractDungeon.player,
+                            this.damage.get(0),
+                            AbstractGameAction.AttackEffect.FIRE
+                        )
+                    );
                 }
                 this.isAttacking = false;
                 break;
             case 2:
                 for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
-                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("MONSTER_DONU_DEFENSE"));
-                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)this, (AbstractPower)new StrengthPower((AbstractCreature)m, 1), 1));
+                    AbstractDungeon.actionManager.addToBottom(
+                        (AbstractGameAction) new SFXAction("MONSTER_DONU_DEFENSE")
+                    );
+                    AbstractDungeon.actionManager.addToBottom(
+                        (AbstractGameAction) new ApplyPowerAction(
+                            (AbstractCreature) m,
+                            (AbstractCreature) this,
+                            (AbstractPower) new StrengthPower((AbstractCreature) m, 1),
+                            1
+                        )
+                    );
                 }
 
                 this.isAttacking = true;
                 break;
         }
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new RollMoveAction(this));
+        AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new RollMoveAction(this));
     }
-
 
     protected void getMove(int num) {
         if (this.isAttacking) {
-            setMove((byte)0, AbstractMonster.Intent.ATTACK, ((DamageInfo)this.damage.get(0)).base, 2, true);
+            setMove(
+                (byte) 0,
+                AbstractMonster.Intent.ATTACK,
+                ((DamageInfo) this.damage.get(0)).base,
+                2,
+                true
+            );
         } else {
-            setMove(CIRCLE_NAME, (byte)2, AbstractMonster.Intent.BUFF);
+            setMove(CIRCLE_NAME, (byte) 2, AbstractMonster.Intent.BUFF);
         }
     }
-
 
     public void die() {
         super.die();
@@ -153,5 +175,3 @@ public class BGDonu extends AbstractBGMonster implements BGDamageIcons {
         }
     }
 }
-
-

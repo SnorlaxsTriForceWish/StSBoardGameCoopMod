@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 
 public class BGDarkOrbEvokeAction extends AbstractGameAction {
+
     private DamageInfo info;
 
     private static final float DURATION = 0.1F;
@@ -27,10 +28,16 @@ public class BGDarkOrbEvokeAction extends AbstractGameAction {
 
     public void update() {
         if (this.duration == 0.1F) {
-
-            TargetSelectScreen.TargetSelectAction tssAction = (target) -> {
+            TargetSelectScreen.TargetSelectAction tssAction = target -> {
                 if (target != null) {
-                    AbstractDungeon.effectList.add(new FlashAtkImgEffect(target.hb.cX, target.hb.cY, this.attackEffect, this.muteSfx));
+                    AbstractDungeon.effectList.add(
+                        new FlashAtkImgEffect(
+                            target.hb.cX,
+                            target.hb.cY,
+                            this.attackEffect,
+                            this.muteSfx
+                        )
+                    );
                     if (this.attackEffect == AbstractGameAction.AttackEffect.POISON) {
                         target.tint.color = Color.CHARTREUSE.cpy();
                         target.tint.changeColor(Color.WHITE.cpy());
@@ -39,13 +46,18 @@ public class BGDarkOrbEvokeAction extends AbstractGameAction {
                         target.tint.changeColor(Color.WHITE.cpy());
                     }
                     target.damage(this.info);
-                    if ((AbstractDungeon.getCurrRoom()).monsters.areMonstersBasicallyDead())
-                        AbstractDungeon.actionManager.clearPostCombatActions();
-                    if (!Settings.FAST_MODE)
-                        addToTop((AbstractGameAction)new WaitAction(0.1F));
+                    if (
+                        (AbstractDungeon.getCurrRoom()).monsters.areMonstersBasicallyDead()
+                    ) AbstractDungeon.actionManager.clearPostCombatActions();
+                    if (!Settings.FAST_MODE) addToTop((AbstractGameAction) new WaitAction(0.1F));
                 }
             };
-            addToTop((AbstractGameAction)new TargetSelectScreenAction(tssAction,"Choose a target for Dark Orb."));
+            addToTop(
+                (AbstractGameAction) new TargetSelectScreenAction(
+                    tssAction,
+                    "Choose a target for Dark Orb."
+                )
+            );
         }
 
         tickDuration();

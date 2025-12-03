@@ -12,17 +12,37 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGLikeWater extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGLikeWater");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGLikeWater"
+    );
     public static final String ID = "BGLikeWater";
 
     public BGLikeWater() {
-        super("BGLikeWater", cardStrings.NAME, "purple/power/like_water", 1, cardStrings.DESCRIPTION, CardType.POWER, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.SELF);
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGLikeWater",
+            cardStrings.NAME,
+            "purple/power/like_water",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction(p, p, new BGLikeWaterPower(p, magicNumber), magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                p,
+                p,
+                new BGLikeWaterPower(p, magicNumber),
+                magicNumber
+            )
+        );
     }
 
     public void upgrade() {

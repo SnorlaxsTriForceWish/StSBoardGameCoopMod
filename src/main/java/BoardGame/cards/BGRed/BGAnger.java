@@ -18,40 +18,52 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.VerticalAuraEffect;
 
 public class BGAnger extends AbstractBGCard {
+
     public static final String ID = "BGAnger";
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGAnger");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGAnger"
+    );
 
     public BGAnger() {
-        super("BGAnger", cardStrings.NAME, "red/attack/anger", 0, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.COMMON, AbstractCard.CardTarget.ENEMY);
-
-
-
-
-
-
-
-
-
+        super(
+            "BGAnger",
+            cardStrings.NAME,
+            "red/attack/anger",
+            0,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.COMMON,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseDamage = 1;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-
-
         //addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGInstantReboundPower((AbstractCreature)p), 1));
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        addToBot((AbstractGameAction)new VFXAction((AbstractCreature)p, (AbstractGameEffect)new VerticalAuraEffect(Color.FIREBRICK, p.hb.cX, p.hb.cY), 0.0F));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.BLUNT_HEAVY
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new VFXAction(
+                (AbstractCreature) p,
+                (AbstractGameEffect) new VerticalAuraEffect(Color.FIREBRICK, p.hb.cX, p.hb.cY),
+                0.0F
+            )
+        );
         //addToBot((AbstractGameAction)new MakeTempCardInDiscardAction(makeStatEquivalentCopy(), 1));   //vanilla anger - do not use
 
         //TODO: proper "isThisACopy" check
-        if(!this.purgeOnUse) {
+        if (!this.purgeOnUse) {
             this.purgeOnUse = true;
             AbstractCard copy = this.makeStatEquivalentCopy();
             addToBot(new MakeTempCardInDrawPileAction(copy, 1, false, true));
         }
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -60,10 +72,7 @@ public class BGAnger extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGAnger();
     }
 }
-
-

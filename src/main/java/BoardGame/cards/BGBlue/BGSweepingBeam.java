@@ -18,12 +18,24 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.SweepingBeamEffect;
 
 public class BGSweepingBeam extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGSweepingBeam");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGSweepingBeam"
+    );
     public static final String ID = "BGSweepingBeam";
 
-
     public BGSweepingBeam() {
-        super("BGSweepingBeam", cardStrings.NAME, "blue/attack/sweeping_beam", 1, cardStrings.DESCRIPTION, CardType.ATTACK, BGDefect.Enums.BG_BLUE, CardRarity.COMMON, CardTarget.ALL_ENEMY);
+        super(
+            "BGSweepingBeam",
+            cardStrings.NAME,
+            "blue/attack/sweeping_beam",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.COMMON,
+            CardTarget.ALL_ENEMY
+        );
         this.baseDamage = 1;
         this.isMultiDamage = true;
         this.baseMagicNumber = 1;
@@ -31,11 +43,27 @@ public class BGSweepingBeam extends AbstractBGCard {
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new SFXAction("ATTACK_DEFECT_BEAM"));
-        addToBot((AbstractGameAction)new VFXAction((AbstractCreature)p, (AbstractGameEffect)new SweepingBeamEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, AbstractDungeon.player.flipHorizontal), 0.4F));
-        addToBot((AbstractGameAction)new DamageAllEnemiesAction((AbstractCreature)p,
-                this.multiDamage, this.damageTypeForTurn, AbstractGameAction.AttackEffect.FIRE));
-        addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)p, this.magicNumber));
+        addToBot((AbstractGameAction) new SFXAction("ATTACK_DEFECT_BEAM"));
+        addToBot(
+            (AbstractGameAction) new VFXAction(
+                (AbstractCreature) p,
+                (AbstractGameEffect) new SweepingBeamEffect(
+                    AbstractDungeon.player.hb.cX,
+                    AbstractDungeon.player.hb.cY,
+                    AbstractDungeon.player.flipHorizontal
+                ),
+                0.4F
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new DamageAllEnemiesAction(
+                (AbstractCreature) p,
+                this.multiDamage,
+                this.damageTypeForTurn,
+                AbstractGameAction.AttackEffect.FIRE
+            )
+        );
+        addToBot((AbstractGameAction) new DrawCardAction((AbstractCreature) p, this.magicNumber));
     }
 
     public void upgrade() {

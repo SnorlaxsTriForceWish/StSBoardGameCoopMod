@@ -1,4 +1,3 @@
-
 package BoardGame.actions;
 
 import BoardGame.cards.BGRed.BGWhirlwind;
@@ -9,17 +8,14 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class BGWreathOfFlameAction
-        extends AbstractGameAction {
+public class BGWreathOfFlameAction extends AbstractGameAction {
 
     private static final Logger logger = LogManager.getLogger(BGWhirlwind.class.getName());
     private boolean dontExpendResources = false;
     private int energyOnUse = -1;
-    private static final int extrahits=0;
-
+    private static final int extrahits = 0;
 
     private AbstractPlayer p;
-
 
     public BGWreathOfFlameAction(AbstractPlayer p, boolean dontExpendResources, int energyOnUse) {
         this.p = p;
@@ -28,7 +24,6 @@ public class BGWreathOfFlameAction
         this.actionType = ActionType.SPECIAL;
         this.energyOnUse = energyOnUse;
     }
-
 
     public void update() {
         int effect = EnergyPanel.totalCount;
@@ -43,8 +38,7 @@ public class BGWreathOfFlameAction
         }
 
         if (effect > 0) {
-            addToTop(new GainTemporaryStrengthIfNotCappedAction(p,effect));
-
+            addToTop(new GainTemporaryStrengthIfNotCappedAction(p, effect));
 
             //logger.info("BGWhirlwindAction: subtract energy "+this.energyOnUse);
             if (!this.dontExpendResources) {
@@ -55,5 +49,3 @@ public class BGWreathOfFlameAction
         this.isDone = true;
     }
 }
-
-

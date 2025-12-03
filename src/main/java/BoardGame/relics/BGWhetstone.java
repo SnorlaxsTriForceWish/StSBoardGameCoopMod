@@ -9,26 +9,35 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class BGWhetstone
-        extends AbstractBGRelic implements ClickableRelic
-{
+public class BGWhetstone extends AbstractBGRelic implements ClickableRelic {
+
     public static final String ID = "BGWhetstone";
     private static final int CARD_AMT = 1;
-    private boolean cardsSelected=false;
+    private boolean cardsSelected = false;
 
-    public boolean activated=false;
+    public boolean activated = false;
 
     public BGWhetstone() {
-        super("BGWhetstone", "whetstone.png", AbstractRelic.RelicTier.COMMON, AbstractRelic.LandingSound.SOLID);
+        super(
+            "BGWhetstone",
+            "whetstone.png",
+            AbstractRelic.RelicTier.COMMON,
+            AbstractRelic.LandingSound.SOLID
+        );
     }
-    public int getPrice() {return 7;}
-    public boolean usableAsPayment(){return this.counter>-2;}
+
+    public int getPrice() {
+        return 7;
+    }
+
+    public boolean usableAsPayment() {
+        return this.counter > -2;
+    }
 
     public void setCounter(int setCounter) {
         this.counter = setCounter;
@@ -38,41 +47,49 @@ public class BGWhetstone
         }
     }
 
-
-
     public AbstractRelic makeCopy() {
         return new BGWhetstone();
     }
 
-
     private boolean usedThisTurn = false; // You can also have a relic be only usable once per combat. Check out Hubris for more examples, including other StSlib things.
 
     public String getUpdatedDescription() {
-        String desc=this.DESCRIPTIONS[0];
+        String desc = this.DESCRIPTIONS[0];
         //if(this.usedUp)desc+=DieControlledRelic.USED_THIS_COMBAT; else desc+=DieControlledRelic.RIGHT_CLICK_TO_ACTIVATE;
-        desc+=DieControlledRelic.RIGHT_CLICK_TO_ACTIVATE;
+        desc += DieControlledRelic.RIGHT_CLICK_TO_ACTIVATE;
         return desc;
     }
 
-    public static final List<AbstractDungeon.CurrentScreen> blockingScreens =
-            Arrays.asList(AbstractDungeon.CurrentScreen.GRID,
-        AbstractDungeon.CurrentScreen.TRANSFORM);
+    public static final List<AbstractDungeon.CurrentScreen> blockingScreens = Arrays.asList(
+        AbstractDungeon.CurrentScreen.GRID,
+        AbstractDungeon.CurrentScreen.TRANSFORM
+    );
 
     @Override
-    public void onRightClick() {// On right click
-        if (!isObtained || usedThisTurn || AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT ) {
+    public void onRightClick() {
+        // On right click
+        if (
+            !isObtained ||
+            usedThisTurn ||
+            AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT
+        ) {
             return;
         }
-        if(AbstractDungeon.isScreenUp && AbstractDungeon.screen != AbstractDungeon.CurrentScreen.MAP){
+        if (
+            AbstractDungeon.isScreenUp &&
+            AbstractDungeon.screen != AbstractDungeon.CurrentScreen.MAP
+        ) {
             return;
         }
-        if(AbstractDungeon.isScreenUp &&
-                BGWhetstone.blockingScreens.contains(AbstractDungeon.previousScreen)){
+        if (
+            AbstractDungeon.isScreenUp &&
+            BGWhetstone.blockingScreens.contains(AbstractDungeon.previousScreen)
+        ) {
             return;
         }
 
-        if(true){
-            activated=true;
+        if (true) {
+            activated = true;
             usedThisTurn = true; // Set relic as "Used this turn"
             setCounter(-2);
             flash(); // Flash
@@ -110,43 +127,55 @@ public class BGWhetstone
                 if (tmp.group.size() <= 1) {
                     giveCards(tmp.group);
                 } else if (!AbstractDungeon.isScreenUp) {
-                    AbstractDungeon.gridSelectScreen.open(tmp, 1, this.DESCRIPTIONS[1], false, false, false, false);
+                    AbstractDungeon.gridSelectScreen.open(
+                        tmp,
+                        1,
+                        this.DESCRIPTIONS[1],
+                        false,
+                        false,
+                        false,
+                        false
+                    );
                 } else {
                     AbstractDungeon.dynamicBanner.hide();
                     AbstractDungeon.previousScreen = AbstractDungeon.screen;
-                    AbstractDungeon.gridSelectScreen.open(tmp, 1, this.DESCRIPTIONS[1], false, false, false, false);
+                    AbstractDungeon.gridSelectScreen.open(
+                        tmp,
+                        1,
+                        this.DESCRIPTIONS[1],
+                        false,
+                        false,
+                        false,
+                        false
+                    );
                 }
             }
         }
     }
-
 
     @Override
     public void atPreBattle() {
         stopPulse();
     }
 
-
-
     @Override
     public void onVictory() {
-        if(!usedUp) {
+        if (!usedUp) {
             beginLongPulse();
         }
     }
 
-
     public void update() {
         super.update();
-        if(activated) {
-            if (!this.cardsSelected &&
-                    AbstractDungeon.gridSelectScreen.selectedCards.size() == 1) {
+        if (activated) {
+            if (!this.cardsSelected && AbstractDungeon.gridSelectScreen.selectedCards.size() == 1) {
                 giveCards(AbstractDungeon.gridSelectScreen.selectedCards);
                 setCounter(-2);
-                activated=false;
+                activated = false;
             }
         }
     }
+
     public void giveCards(ArrayList<AbstractCard> group) {
         this.cardsSelected = true;
         float displayCount = 0.0F;
@@ -158,13 +187,12 @@ public class BGWhetstone
             //logMetricCardUpgrade("Accursed Blacksmith", "Forge", c);
             //AbstractDungeon.player.bottledCardUpgradeCheck(AbstractDungeon.gridSelectScreen.selectedCards.get(0));
             AbstractDungeon.effectsQueue.add(new ShowCardBrieflyEffect(c.makeStatEquivalentCopy()));
-            AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+            AbstractDungeon.topLevelEffects.add(
+                new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F)
+            );
             this.cardsSelected = false;
         }
         AbstractDungeon.gridSelectScreen.selectedCards.clear();
         (AbstractDungeon.getCurrRoom()).rewardPopOutTimer = 0.25F;
     }
-
 }
-
-

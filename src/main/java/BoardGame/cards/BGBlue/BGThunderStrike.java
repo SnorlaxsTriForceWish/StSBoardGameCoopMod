@@ -12,19 +12,33 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGThunderStrike extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGThunderStrike");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGThunderStrike"
+    );
     public static final String ID = "BGThunderStrike";
 
     public BGThunderStrike() {
-        super("BGThunderStrike", cardStrings.NAME, "blue/attack/thunder_strike", 3, cardStrings.DESCRIPTION, CardType.ATTACK, BGDefect.Enums.BG_BLUE, CardRarity.RARE, CardTarget.ALL_ENEMY);
-        this.baseDamage=4;
+        super(
+            "BGThunderStrike",
+            cardStrings.NAME,
+            "blue/attack/thunder_strike",
+            3,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.RARE,
+            CardTarget.ALL_ENEMY
+        );
+        this.baseDamage = 4;
         this.isMultiDamage = true;
         this.tags.add(AbstractCard.CardTags.STRIKE);
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new BGThunderStrikeAction(AbstractDungeon.player,this.multiDamage));
-
+        addToBot(
+            (AbstractGameAction) new BGThunderStrikeAction(AbstractDungeon.player, this.multiDamage)
+        );
     }
 
     public void upgrade() {

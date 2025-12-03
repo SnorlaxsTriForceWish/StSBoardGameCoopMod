@@ -12,12 +12,16 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 public class GainEnergyAndEnableControlsMultiAction extends AbstractGameAction {
 
     public GainEnergyAndEnableControlsMultiAction() {
-        setValues((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, 0);
+        setValues(
+            (AbstractCreature) AbstractDungeon.player,
+            (AbstractCreature) AbstractDungeon.player,
+            0
+        );
     }
 
     public void update() {
         if (this.duration == 0.5F) {
-            for(AbstractPlayer s : MultiCharacter.getSubcharacters()) {
+            for (AbstractPlayer s : MultiCharacter.getSubcharacters()) {
                 ContextPatches.pushPlayerContext(s);
 
                 int energyGain = AbstractDungeon.player.energy.energyMaster;
@@ -25,18 +29,14 @@ public class GainEnergyAndEnableControlsMultiAction extends AbstractGameAction {
                 AbstractDungeon.actionManager.updateEnergyGain(energyGain);
                 for (AbstractCard c : AbstractDungeon.player.hand.group)
                     c.triggerOnGainEnergy(energyGain, false);
-                for (AbstractRelic r : AbstractDungeon.player.relics)
-                    r.onEnergyRecharge();
-                for (AbstractPower p : AbstractDungeon.player.powers)
-                    p.onEnergyRecharge();
+                for (AbstractRelic r : AbstractDungeon.player.relics) r.onEnergyRecharge();
+                for (AbstractPower p : AbstractDungeon.player.powers) p.onEnergyRecharge();
 
                 ContextPatches.popPlayerContext();
             }
 
             AbstractDungeon.actionManager.turnHasEnded = false;
-
         }
         tickDuration();
     }
 }
-

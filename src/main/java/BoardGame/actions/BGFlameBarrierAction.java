@@ -14,7 +14,10 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
 
 public class BGFlameBarrierAction extends AbstractGameAction {
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("OpeningAction");
+
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(
+        "OpeningAction"
+    );
     public static final String[] TEXT = uiStrings.TEXT;
 
     private int thornsDamage;
@@ -24,10 +27,9 @@ public class BGFlameBarrierAction extends AbstractGameAction {
         this.duration = 0.0F;
         this.actionType = AbstractGameAction.ActionType.WAIT;
         this.thornsDamage = thornsDamage;
-        this.player=player;
+        this.player = player;
         //this.targetMonster = m;
     }
-
 
     public void update() {
         for (AbstractMonster mo : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
@@ -39,23 +41,51 @@ public class BGFlameBarrierAction extends AbstractGameAction {
                     if (move != null) {
                         if (move.isMultiDamage && move.multiplier > 1) {
                             for (int i = 1; i <= move.multiplier; i += 1) {
-                                addToBot((AbstractGameAction) new DamageAction((AbstractCreature) mo, new DamageInfo((AbstractCreature) this.player, this.thornsDamage, DamageInfo.DamageType.THORNS), AttackEffect.FIRE));
+                                addToBot(
+                                    (AbstractGameAction) new DamageAction(
+                                        (AbstractCreature) mo,
+                                        new DamageInfo(
+                                            (AbstractCreature) this.player,
+                                            this.thornsDamage,
+                                            DamageInfo.DamageType.THORNS
+                                        ),
+                                        AttackEffect.FIRE
+                                    )
+                                );
                             }
-                        } else if(mo instanceof MixedAttacks && ((MixedAttacks)mo).isMixedAttacking()){
+                        } else if (
+                            mo instanceof MixedAttacks && ((MixedAttacks) mo).isMixedAttacking()
+                        ) {
                             for (int i = 1; i <= 2; i += 1) {
-                                addToBot((AbstractGameAction) new DamageAction((AbstractCreature) mo, new DamageInfo((AbstractCreature) this.player, this.thornsDamage, DamageInfo.DamageType.THORNS), AttackEffect.FIRE));
+                                addToBot(
+                                    (AbstractGameAction) new DamageAction(
+                                        (AbstractCreature) mo,
+                                        new DamageInfo(
+                                            (AbstractCreature) this.player,
+                                            this.thornsDamage,
+                                            DamageInfo.DamageType.THORNS
+                                        ),
+                                        AttackEffect.FIRE
+                                    )
+                                );
                             }
                         } else {
-                            addToBot((AbstractGameAction) new DamageAction((AbstractCreature) mo, new DamageInfo((AbstractCreature) this.player, this.thornsDamage, DamageInfo.DamageType.THORNS), AttackEffect.FIRE));
+                            addToBot(
+                                (AbstractGameAction) new DamageAction(
+                                    (AbstractCreature) mo,
+                                    new DamageInfo(
+                                        (AbstractCreature) this.player,
+                                        this.thornsDamage,
+                                        DamageInfo.DamageType.THORNS
+                                    ),
+                                    AttackEffect.FIRE
+                                )
+                            );
                         }
                     }
                 }
             }
         }
         this.isDone = true;
-
-
     }
 }
-
-

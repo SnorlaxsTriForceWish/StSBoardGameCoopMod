@@ -1,6 +1,5 @@
 //use NoSkillsPower+VelvetChoker as a base for BGTimeWarpPower
 
-
 package BoardGame.monsters.bgbeyond;
 
 import BoardGame.cards.BGStatus.BGDazed;
@@ -36,7 +35,9 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.ShockWaveEffect;
 
 public class BGTimeEater extends AbstractBGMonster implements BGDamageIcons {
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("TimeEater");
+
+    private static final MonsterStrings monsterStrings =
+        CardCrawlGame.languagePack.getMonsterStrings("TimeEater");
     public static final String ID = "BGTimeEater";
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
@@ -57,17 +58,18 @@ public class BGTimeEater extends AbstractBGMonster implements BGDamageIcons {
     private int headSlamDmg;
     private static final int HEAD_SLAM_STICKY = 1;
     private static final int RIPPLE_DEBUFF_TURNS = 1;
-    private boolean usedHaste = false, firstTurn = true;
-    private int turnCount=0;
-    private boolean phase2=false;
+    private boolean usedHaste = false,
+        firstTurn = true;
+    private int turnCount = 0;
+    private boolean phase2 = false;
 
     public BGTimeEater() {
         super(NAME, "BGTimeEater", 456, -10.0F, -30.0F, 476.0F, 410.0F, null, -50.0F, 30.0F);
-
-
-        loadAnimation("images/monsters/theForest/timeEater/skeleton.atlas", "images/monsters/theForest/timeEater/skeleton.json", 1.0F);
-
-
+        loadAnimation(
+            "images/monsters/theForest/timeEater/skeleton.atlas",
+            "images/monsters/theForest/timeEater/skeleton.json",
+            1.0F
+        );
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
@@ -78,19 +80,21 @@ public class BGTimeEater extends AbstractBGMonster implements BGDamageIcons {
         this.dialogX = -200.0F * Settings.scale;
         this.dialogY = 10.0F * Settings.scale;
 
+        setHp((AbstractDungeon.ascensionLevel < 10) ? 60 : 64);
 
-        setHp((AbstractDungeon.ascensionLevel<10) ? 60 : 64);
+        this.reverbDmg = (AbstractDungeon.ascensionLevel < 10) ? 2 : 3;
+        this.headSlamDmg = 6;
 
-        this.reverbDmg=(AbstractDungeon.ascensionLevel<10) ? 2 : 3;
-        this.headSlamDmg=6;
-
-        this.damage.add(new DamageInfo((AbstractCreature)this, this.reverbDmg, DamageInfo.DamageType.NORMAL));
-        this.damage.add(new DamageInfo((AbstractCreature)this, this.headSlamDmg, DamageInfo.DamageType.NORMAL));
+        this.damage.add(
+            new DamageInfo((AbstractCreature) this, this.reverbDmg, DamageInfo.DamageType.NORMAL)
+        );
+        this.damage.add(
+            new DamageInfo((AbstractCreature) this, this.headSlamDmg, DamageInfo.DamageType.NORMAL)
+        );
     }
 
-
     public void usePreBattleAction() {
-        if(!AbstractDungeon.player.hasRelic("BGWhite Beast Statue")) {
+        if (!AbstractDungeon.player.hasRelic("BGWhite Beast Statue")) {
             (AbstractDungeon.getCurrRoom()).rewardAllowed = false; //game is hardcoded to check for TheBeyond / TheEnding dungeons.  here's a workaround -- but mind this also interferes with White Beast Statue
         }
         CardCrawlGame.music.unsilenceBGM();
@@ -98,51 +102,150 @@ public class BGTimeEater extends AbstractBGMonster implements BGDamageIcons {
         AbstractDungeon.getCurrRoom().playBgmInstantly("BOSS_BEYOND");
         UnlockTracker.markBossAsSeen("WIZARD");
         (AbstractDungeon.getCurrRoom()).cannotLose = true;
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new BGTimeEaterPhase2WarningPower((AbstractCreature)this)));
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)this, (AbstractPower)new BGTimeWarpPower((AbstractCreature)AbstractDungeon.player, 5), 5));
+        AbstractDungeon.actionManager.addToBottom(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) this,
+                (AbstractCreature) this,
+                (AbstractPower) new BGTimeEaterPhase2WarningPower((AbstractCreature) this)
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) AbstractDungeon.player,
+                (AbstractCreature) this,
+                (AbstractPower) new BGTimeWarpPower((AbstractCreature) AbstractDungeon.player, 5),
+                5
+            )
+        );
         //addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)this, (AbstractPower)new BGFooPower((AbstractCreature)AbstractDungeon.player, 5), 5));
-
     }
 
     public void takeTurn() {
         int i;
         if (this.firstTurn) {
-            if (AbstractDungeon.player.chosenClass == AbstractPlayer.PlayerClass.WATCHER || AbstractDungeon.player instanceof BGWatcher) {
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new TalkAction((AbstractCreature)this, DIALOG[2], 0.5F, 2.0F));
+            if (
+                AbstractDungeon.player.chosenClass == AbstractPlayer.PlayerClass.WATCHER ||
+                AbstractDungeon.player instanceof BGWatcher
+            ) {
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new TalkAction(
+                        (AbstractCreature) this,
+                        DIALOG[2],
+                        0.5F,
+                        2.0F
+                    )
+                );
             } else {
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new TalkAction((AbstractCreature)this, DIALOG[0], 0.5F, 2.0F));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new TalkAction(
+                        (AbstractCreature) this,
+                        DIALOG[0],
+                        0.5F,
+                        2.0F
+                    )
+                );
             }
             this.firstTurn = false;
         }
         switch (this.nextMove) {
             case 0:
                 for (i = 0; i < 2; i++) {
-                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new VFXAction((AbstractCreature)this, (AbstractGameEffect)new ShockWaveEffect(this.hb.cX, this.hb.cY, Settings.BLUE_TEXT_COLOR, ShockWaveEffect.ShockWaveType.CHAOTIC), 0.75F));
-                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                            .get(0), AbstractGameAction.AttackEffect.FIRE));
-
+                    AbstractDungeon.actionManager.addToBottom(
+                        (AbstractGameAction) new VFXAction(
+                            (AbstractCreature) this,
+                            (AbstractGameEffect) new ShockWaveEffect(
+                                this.hb.cX,
+                                this.hb.cY,
+                                Settings.BLUE_TEXT_COLOR,
+                                ShockWaveEffect.ShockWaveType.CHAOTIC
+                            ),
+                            0.75F
+                        )
+                    );
+                    AbstractDungeon.actionManager.addToBottom(
+                        (AbstractGameAction) new DamageAction(
+                            (AbstractCreature) AbstractDungeon.player,
+                            this.damage.get(0),
+                            AbstractGameAction.AttackEffect.FIRE
+                        )
+                    );
                 }
-                addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)this, (AbstractPower)new BGTimeWarpPower((AbstractCreature)AbstractDungeon.player, 4), 4));
+                addToBot(
+                    (AbstractGameAction) new ApplyPowerAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        (AbstractCreature) this,
+                        (AbstractPower) new BGTimeWarpPower(
+                            (AbstractCreature) AbstractDungeon.player,
+                            4
+                        ),
+                        4
+                    )
+                );
                 break;
             case 1:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new MakeTempCardInDiscardAction((AbstractCard)new BGSlimed(), 3));
-                addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)this, (AbstractPower)new BGTimeWarpPower((AbstractCreature)AbstractDungeon.player, 3), 3));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new MakeTempCardInDiscardAction(
+                        (AbstractCard) new BGSlimed(),
+                        3
+                    )
+                );
+                addToBot(
+                    (AbstractGameAction) new ApplyPowerAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        (AbstractCreature) this,
+                        (AbstractPower) new BGTimeWarpPower(
+                            (AbstractCreature) AbstractDungeon.player,
+                            3
+                        ),
+                        3
+                    )
+                );
                 break;
-
             case 2:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ChangeStateAction(this, "ATTACK"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new WaitAction(0.4F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(1), AbstractGameAction.AttackEffect.POISON));
-                addToBot((AbstractGameAction)new MakeTempCardInDrawPileAction((AbstractCard)new BGDazed(), 1, false, true));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new StrengthPower((AbstractCreature)this, 1), 1));
-                addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)this, (AbstractPower)new BGTimeWarpPower((AbstractCreature)AbstractDungeon.player, 5), 5));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ChangeStateAction(this, "ATTACK")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new WaitAction(0.4F)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(1),
+                        AbstractGameAction.AttackEffect.POISON
+                    )
+                );
+                addToBot(
+                    (AbstractGameAction) new MakeTempCardInDrawPileAction(
+                        (AbstractCard) new BGDazed(),
+                        1,
+                        false,
+                        true
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ApplyPowerAction(
+                        (AbstractCreature) this,
+                        (AbstractCreature) this,
+                        (AbstractPower) new StrengthPower((AbstractCreature) this, 1),
+                        1
+                    )
+                );
+                addToBot(
+                    (AbstractGameAction) new ApplyPowerAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        (AbstractCreature) this,
+                        (AbstractPower) new BGTimeWarpPower(
+                            (AbstractCreature) AbstractDungeon.player,
+                            5
+                        ),
+                        5
+                    )
+                );
                 break;
-
         }
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new RollMoveAction(this));
+        AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new RollMoveAction(this));
     }
-
 
     public void changeState(String stateName) {
         switch (stateName) {
@@ -153,7 +256,6 @@ public class BGTimeEater extends AbstractBGMonster implements BGDamageIcons {
         }
     }
 
-
     public void damage(DamageInfo info) {
         super.damage(info);
         if (info.owner != null && info.type != DamageInfo.DamageType.THORNS && info.output > 0) {
@@ -162,23 +264,18 @@ public class BGTimeEater extends AbstractBGMonster implements BGDamageIcons {
         }
     }
 
-
     protected void getMove(int num) {
         //to make things slightly more organized here, first turn is turn 0, not turn 1
-        if(turnCount%3==0){
-            setMove((byte)0,AbstractMonster.Intent.ATTACK,damage.get(0).base,2,true);
-        }else if(turnCount%3==1){
-            setMove((byte)1,AbstractMonster.Intent.DEBUFF);
-        }else if(turnCount%3==2){
-            setMove((byte)2,AbstractMonster.Intent.ATTACK_BUFF,damage.get(1).base);
+        if (turnCount % 3 == 0) {
+            setMove((byte) 0, AbstractMonster.Intent.ATTACK, damage.get(0).base, 2, true);
+        } else if (turnCount % 3 == 1) {
+            setMove((byte) 1, AbstractMonster.Intent.DEBUFF);
+        } else if (turnCount % 3 == 2) {
+            setMove((byte) 2, AbstractMonster.Intent.ATTACK_BUFF, damage.get(1).base);
         }
 
-        turnCount+=1;
-
+        turnCount += 1;
     }
-
-
-
 
     public void die() {
         if (!(AbstractDungeon.getCurrRoom()).cannotLose) {
@@ -189,19 +286,63 @@ public class BGTimeEater extends AbstractBGMonster implements BGDamageIcons {
             UnlockTracker.hardUnlockOverride("WIZARD");
             UnlockTracker.unlockAchievement("TIME_EATER");
             onFinalBossVictoryLogic();
-        }else{
-            if(!phase2) {
+        } else {
+            if (!phase2) {
                 phase2 = true;
 
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new ShoutAction((AbstractCreature) this, DIALOG[1], 2.0F, 3.0F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new WaitAction(1.0F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new TextAboveCreatureAction((AbstractCreature)this, "Haste"));    //TODO: localization
-                addToBot((AbstractGameAction) new RemoveSpecificPowerAction((AbstractCreature) this, (AbstractCreature) this, "BGTimeEaterPhase2WarningPower"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new HealAction((AbstractCreature) this, (AbstractCreature) this,
-                        (AbstractDungeon.ascensionLevel<10) ? 30 : 32));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new StrengthPower((AbstractCreature)this, 1), 1));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new RemoveSpecificPowerAction((AbstractCreature)this,(AbstractCreature)this,"BGVulnerable"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new RemoveSpecificPowerAction((AbstractCreature)this,(AbstractCreature)this,"BGWeakened"));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ShoutAction(
+                        (AbstractCreature) this,
+                        DIALOG[1],
+                        2.0F,
+                        3.0F
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new WaitAction(1.0F)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new TextAboveCreatureAction(
+                        (AbstractCreature) this,
+                        "Haste"
+                    )
+                ); //TODO: localization
+                addToBot(
+                    (AbstractGameAction) new RemoveSpecificPowerAction(
+                        (AbstractCreature) this,
+                        (AbstractCreature) this,
+                        "BGTimeEaterPhase2WarningPower"
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new HealAction(
+                        (AbstractCreature) this,
+                        (AbstractCreature) this,
+                        (AbstractDungeon.ascensionLevel < 10) ? 30 : 32
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ApplyPowerAction(
+                        (AbstractCreature) this,
+                        (AbstractCreature) this,
+                        (AbstractPower) new StrengthPower((AbstractCreature) this, 1),
+                        1
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new RemoveSpecificPowerAction(
+                        (AbstractCreature) this,
+                        (AbstractCreature) this,
+                        "BGVulnerable"
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new RemoveSpecificPowerAction(
+                        (AbstractCreature) this,
+                        (AbstractCreature) this,
+                        "BGWeakened"
+                    )
+                );
                 AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new CanLoseAction());
                 //AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new SetMoveAction((AbstractMonster) this, (byte) 4, Intent.BUFF));
                 //setMove((byte) 4, AbstractMonster.Intent.BUFF);
@@ -209,5 +350,3 @@ public class BGTimeEater extends AbstractBGMonster implements BGDamageIcons {
         }
     }
 }
-
-

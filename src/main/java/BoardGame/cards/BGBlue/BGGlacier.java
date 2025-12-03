@@ -15,17 +15,36 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 
 public class BGGlacier extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGGlacier");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGGlacier"
+    );
     public static final String ID = "BGGlacier";
 
     public BGGlacier() {
-        super("BGGlacier", cardStrings.NAME, "blue/skill/glacier", 2, cardStrings.DESCRIPTION, CardType.SKILL, BGDefect.Enums.BG_BLUE, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(
+            "BGGlacier",
+            cardStrings.NAME,
+            "blue/skill/glacier",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
         this.baseBlock = 2;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
-        addToBot((AbstractGameAction)new BGChannelAction((AbstractOrb)new BGFrost()));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
+        addToBot((AbstractGameAction) new BGChannelAction((AbstractOrb) new BGFrost()));
     }
 
     public void upgrade() {
@@ -41,5 +60,3 @@ public class BGGlacier extends AbstractBGCard {
         return new BGGlacier();
     }
 }
-
-

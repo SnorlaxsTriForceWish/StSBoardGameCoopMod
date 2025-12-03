@@ -18,49 +18,70 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.IronWaveEffect;
 
 public class BGIronWaveShield extends AbstractBGAttackCardChoice {
+
     public static final String ID = "BGIronWaveShield";
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGIronWaveShield");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGIronWaveShield"
+    );
 
     public BGIronWaveShield() {
-        super("BGIronWaveShield", cardStrings.NAME, "colorless/skill/calm", -2, cardStrings.DESCRIPTION, AbstractCard.CardType.STATUS, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.COMMON, AbstractCard.CardTarget.NONE);
+        super(
+            "BGIronWaveShield",
+            cardStrings.NAME,
+            "colorless/skill/calm",
+            -2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.STATUS,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.COMMON,
+            AbstractCard.CardTarget.NONE
+        );
         this.baseDamage = 1;
         this.baseBlock = 2;
     }
 
-
-//    public void setTargets(AbstractPlayer p, AbstractMonster m){
-//        this.p=p;
-//        this.m=m;
-//    }
-
-
+    //    public void setTargets(AbstractPlayer p, AbstractMonster m){
+    //        this.p=p;
+    //        this.m=m;
+    //    }
 
     public void use(AbstractPlayer p, AbstractMonster m) {}
-
-
-
-
-
 
     public void onChoseThisOption() {
         applyPowers();
         calculateCardDamage(this.m);
-        addToTop((AbstractGameAction) new DamageAction((AbstractCreature) this.m, new DamageInfo((AbstractCreature) this.p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_VERTICAL));
+        addToTop(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) this.m,
+                new DamageInfo((AbstractCreature) this.p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.SLASH_VERTICAL
+            )
+        );
         addToBot((AbstractGameAction) new WaitAction(0.1F));
         if (this.p != null && this.m != null) {
-            addToBot((AbstractGameAction) new VFXAction((AbstractGameEffect) new IronWaveEffect(this.p.hb.cX, this.p.hb.cY, this.m.hb.cX), 0.5F));
+            addToBot(
+                (AbstractGameAction) new VFXAction(
+                    (AbstractGameEffect) new IronWaveEffect(
+                        this.p.hb.cX,
+                        this.p.hb.cY,
+                        this.m.hb.cX
+                    ),
+                    0.5F
+                )
+            );
         }
-        addToBot((AbstractGameAction) new GainBlockAction((AbstractCreature) this.p, (AbstractCreature) this.p, this.block));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) this.p,
+                (AbstractCreature) this.p,
+                this.block
+            )
+        );
     }
 
-
-
     public void upgrade() {}
-
 
     public AbstractCard makeCopy() {
         return new BGIronWaveShield();
     }
 }
-
-

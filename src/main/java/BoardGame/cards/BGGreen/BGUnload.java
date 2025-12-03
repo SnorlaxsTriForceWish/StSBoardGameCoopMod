@@ -14,19 +14,37 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGUnload extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGUnload");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGUnload"
+    );
     public static final String ID = "BGUnload";
 
     public BGUnload() {
-        super("BGUnload", cardStrings.NAME, "green/attack/unload", 1, cardStrings.DESCRIPTION, CardType.ATTACK, BGSilent.Enums.BG_GREEN, CardRarity.RARE, CardTarget.ENEMY);
-
+        super(
+            "BGUnload",
+            cardStrings.NAME,
+            "green/attack/unload",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.RARE,
+            CardTarget.ENEMY
+        );
         this.baseDamage = 2;
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.SLASH_DIAGONAL
+            )
+        );
         addToBot(new BGUnloadAction(this.magicNumber));
     }
 
@@ -41,5 +59,3 @@ public class BGUnload extends AbstractBGCard {
         return new BGUnload();
     }
 }
-
-

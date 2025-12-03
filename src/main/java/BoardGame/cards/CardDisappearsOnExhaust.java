@@ -11,13 +11,16 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 
 public interface CardDisappearsOnExhaust {
-
-    @SpirePatch(clz = CardGroup.class, method = "moveToExhaustPile",
-            paramtypez = {AbstractCard.class})
+    @SpirePatch(
+        clz = CardGroup.class,
+        method = "moveToExhaustPile",
+        paramtypez = { AbstractCard.class }
+    )
     public static class CardGroupExhaustPatch {
+
         @SpirePrefixPatch
-        public static SpireReturn<Void> moveToExhaustPile(CardGroup __instance, AbstractCard c){
-            if(c instanceof CardDisappearsOnExhaust){
+        public static SpireReturn<Void> moveToExhaustPile(CardGroup __instance, AbstractCard c) {
+            if (c instanceof CardDisappearsOnExhaust) {
                 for (AbstractRelic r : AbstractDungeon.player.relics) {
                     r.onExhaust(c);
                 }
@@ -42,11 +45,7 @@ public interface CardDisappearsOnExhaust {
                 return SpireReturn.Return();
             }
 
-
             return SpireReturn.Continue();
         }
-
     }
-
-
 }

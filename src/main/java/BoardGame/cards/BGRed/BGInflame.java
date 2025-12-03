@@ -1,4 +1,5 @@
 package BoardGame.cards.BGRed;
+
 import BoardGame.cards.AbstractBGCard;
 import BoardGame.characters.BGIronclad;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -16,31 +17,45 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
 
 public class BGInflame extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGInflame");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGInflame"
+    );
     public static final String ID = "BGInflame";
 
     public BGInflame() {
-        super("BGInflame", cardStrings.NAME, "red/power/inflame", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.POWER, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGInflame",
+            cardStrings.NAME,
+            "red/power/inflame",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.POWER,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new VFXAction((AbstractCreature)p, (AbstractGameEffect)new InflameEffect((AbstractCreature)p), 1.0F));
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new StrengthPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new VFXAction(
+                (AbstractCreature) p,
+                (AbstractGameEffect) new InflameEffect((AbstractCreature) p),
+                1.0F
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new StrengthPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -50,10 +65,7 @@ public class BGInflame extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGInflame();
     }
 }
-
-

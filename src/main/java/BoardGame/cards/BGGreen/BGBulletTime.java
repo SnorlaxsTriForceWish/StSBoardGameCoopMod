@@ -17,19 +17,37 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.NoDrawPower;
 
 public class BGBulletTime extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("Bullet Time");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "Bullet Time"
+    );
     public static final String ID = "BGBulletTime";
 
     public BGBulletTime() {
-        super("BGBulletTime", cardStrings.NAME, "green/skill/bullet_time", 3, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.RARE, CardTarget.NONE);
-
+        super(
+            "BGBulletTime",
+            cardStrings.NAME,
+            "green/skill/bullet_time",
+            3,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.RARE,
+            CardTarget.NONE
+        );
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new NoDrawPower((AbstractCreature)p), 1));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new NoDrawPower((AbstractCreature) p),
+                1
+            )
+        );
         //addToBot((AbstractGameAction)new ApplyBulletTimeAction());
-        addToBot((AbstractGameAction)new BGApplyBulletTimeAction());
+        addToBot((AbstractGameAction) new BGApplyBulletTimeAction());
     }
 
     public void upgrade() {
@@ -39,10 +57,7 @@ public class BGBulletTime extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGBulletTime();
     }
 }
-
-

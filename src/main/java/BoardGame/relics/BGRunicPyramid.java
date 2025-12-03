@@ -1,4 +1,3 @@
-
 // copy RetainCardPower (99 stacks)
 //but don't actually use RetainCardPower itself, since it doesn't wear off at end of turn
 
@@ -15,49 +14,72 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
-
 public class BGRunicPyramid extends AbstractBGRelic implements ClickableRelic {
+
     public static final String ID = "BGRunic Pyramid";
 
     public BGRunicPyramid() {
-        super("BGRunic Pyramid", "runicPyramid.png", AbstractRelic.RelicTier.COMMON, AbstractRelic.LandingSound.FLAT);
+        super(
+            "BGRunic Pyramid",
+            "runicPyramid.png",
+            AbstractRelic.RelicTier.COMMON,
+            AbstractRelic.LandingSound.FLAT
+        );
     }
 
-    public int getPrice() {return 6;}
-
-
+    public int getPrice() {
+        return 6;
+    }
 
     public AbstractRelic makeCopy() {
         return new BGRunicPyramid();
     }
 
-
     private boolean usedThisTurn = false; // You can also have a relic be only usable once per combat. Check out Hubris for more examples, including other StSlib things.
     private boolean isPlayerTurn = false; // We should make sure the relic is only activateable during our turn, not the enemies'.
 
-
     public String getUpdatedDescription() {
-        String desc=this.DESCRIPTIONS[0];
-        if(this.usedUp)desc+=DieControlledRelic.USED_THIS_COMBAT; else desc+=DieControlledRelic.RIGHT_CLICK_TO_ACTIVATE;
+        String desc = this.DESCRIPTIONS[0];
+        if (this.usedUp) desc += DieControlledRelic.USED_THIS_COMBAT;
+        else desc += DieControlledRelic.RIGHT_CLICK_TO_ACTIVATE;
         return desc;
     }
 
-
     @Override
-    public void onRightClick() {// On right click
-        if (!isObtained || usedThisTurn || !isPlayerTurn ) {
+    public void onRightClick() {
+        // On right click
+        if (!isObtained || usedThisTurn || !isPlayerTurn) {
             // If it has been used this turn, or the player doesn't actually have the relic (i.e. it's on display in the shop room), or it's the enemy's turn
             return; // Don't do anything.
         }
 
-        if (AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) { // Only if you're in combat
+        if (
+            AbstractDungeon.getCurrRoom() != null &&
+            AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT
+        ) {
+            // Only if you're in combat
             usedThisTurn = true; // Set relic as "Used this turn"
             flash(); // Flash
             stopPulse(); // And stop the pulsing animation (which is started in atPreBattle() below)
 
-            addToBot((AbstractGameAction)new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player,(AbstractPower)new BGOneTurnRetainCardPower((AbstractCreature)AbstractDungeon.player)));
+            addToBot(
+                (AbstractGameAction) new ApplyPowerAction(
+                    AbstractDungeon.player,
+                    AbstractDungeon.player,
+                    (AbstractPower) new BGOneTurnRetainCardPower(
+                        (AbstractCreature) AbstractDungeon.player
+                    )
+                )
+            );
 
-            /* Used Up (Combat) */ {this.grayscale = true; this.usedUp=true; this.description = getUpdatedDescription();this.tips.clear();this.tips.add(new PowerTip(this.name, this.description));initializeTips();}
+            /* Used Up (Combat) */ {
+                this.grayscale = true;
+                this.usedUp = true;
+                this.description = getUpdatedDescription();
+                this.tips.clear();
+                this.tips.add(new PowerTip(this.name, this.description));
+                initializeTips();
+            }
         }
     }
 
@@ -68,7 +90,7 @@ public class BGRunicPyramid extends AbstractBGRelic implements ClickableRelic {
 
     public void atTurnStart() {
         isPlayerTurn = true; // It's our turn!
-        if(!usedThisTurn)beginLongPulse();     // Pulse while the player can click on it.
+        if (!usedThisTurn) beginLongPulse(); // Pulse while the player can click on it.
     }
 
     @Override
@@ -77,13 +99,16 @@ public class BGRunicPyramid extends AbstractBGRelic implements ClickableRelic {
         stopPulse();
     }
 
-
     @Override
     public void onVictory() {
         stopPulse(); // Don't keep pulsing past the victory screen/outside of combat.
-        /* Unused Up */ { this.grayscale = false; this.usedUp=false; this.description = getUpdatedDescription();this.tips.clear();this.tips.add(new PowerTip(this.name, this.description));initializeTips();}
+        /* Unused Up */ {
+            this.grayscale = false;
+            this.usedUp = false;
+            this.description = getUpdatedDescription();
+            this.tips.clear();
+            this.tips.add(new PowerTip(this.name, this.description));
+            initializeTips();
+        }
     }
-
 }
-
-

@@ -9,11 +9,24 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGAscendersBane extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGAscendersBane");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGAscendersBane"
+    );
     public static final String ID = "BGAscendersBane";
 
     public BGAscendersBane() {
-        super("BGAscendersBane", cardStrings.NAME, "curse/ascenders_bane", -2, cardStrings.DESCRIPTION, CardType.CURSE, BGCurse.Enums.BG_CURSE, CardRarity.CURSE, CardTarget.NONE);
+        super(
+            "BGAscendersBane",
+            cardStrings.NAME,
+            "curse/ascenders_bane",
+            -2,
+            cardStrings.DESCRIPTION,
+            CardType.CURSE,
+            BGCurse.Enums.BG_CURSE,
+            CardRarity.CURSE,
+            CardTarget.NONE
+        );
         this.isEthereal = true;
     }
 
@@ -25,4 +38,3 @@ public class BGAscendersBane extends AbstractBGCard {
         return new BGAscendersBane();
     }
 }
-

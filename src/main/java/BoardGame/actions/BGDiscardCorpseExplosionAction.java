@@ -6,15 +6,17 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 public class BGDiscardCorpseExplosionAction extends AbstractGameAction {
+
     private AbstractCard card;
 
     public BGDiscardCorpseExplosionAction(AbstractCard card) {
-        this.card=card;
-        setValues((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player);
-        this.actionType = ActionType.DISCARD;   //TODO: does this line break anything?
+        this.card = card;
+        setValues(
+            (AbstractCreature) AbstractDungeon.player,
+            (AbstractCreature) AbstractDungeon.player
+        );
+        this.actionType = ActionType.DISCARD; //TODO: does this line break anything?
     }
-
-
 
     public void update() {
         AbstractDungeon.player.discardPile.addToTop(card);
@@ -22,5 +24,3 @@ public class BGDiscardCorpseExplosionAction extends AbstractGameAction {
         this.isDone = true;
     }
 }
-
-

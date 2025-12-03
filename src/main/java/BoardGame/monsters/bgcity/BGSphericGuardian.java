@@ -21,8 +21,10 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.BarricadePower;
 
 public class BGSphericGuardian extends AbstractBGMonster implements BGDamageIcons {
+
     public static final String ID = "BGSphericGuardian";
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("SphericGuardian");
+    private static final MonsterStrings monsterStrings =
+        CardCrawlGame.languagePack.getMonsterStrings("SphericGuardian");
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
@@ -39,19 +41,31 @@ public class BGSphericGuardian extends AbstractBGMonster implements BGDamageIcon
     public BGSphericGuardian() {
         this(0.0F, 0.0F);
     }
-    private static final int HARDEN_BLOCK = 15; private static final int FRAIL_AMT = 5; private static final int ACTIVATE_BLOCK = 25; private static final int ARTIFACT_AMT = 3; private static final int STARTING_BLOCK_AMT = 40; private static final byte BIG_ATTACK = 1; private static final byte INITIAL_BLOCK_GAIN = 2; private static final byte BLOCK_ATTACK = 3; private static final byte FRAIL_ATTACK = 4; private boolean firstMove = true, secondMove = true;
+
+    private static final int HARDEN_BLOCK = 15;
+    private static final int FRAIL_AMT = 5;
+    private static final int ACTIVATE_BLOCK = 25;
+    private static final int ARTIFACT_AMT = 3;
+    private static final int STARTING_BLOCK_AMT = 40;
+    private static final byte BIG_ATTACK = 1;
+    private static final byte INITIAL_BLOCK_GAIN = 2;
+    private static final byte BLOCK_ATTACK = 3;
+    private static final byte FRAIL_ATTACK = 4;
+    private boolean firstMove = true,
+        secondMove = true;
+
     public BGSphericGuardian(float x, float y) {
         super(NAME, "BGSphericGuardian", 20, 0.0F, 10.0F, 280.0F, 280.0F, null, x, y);
-
         setHp(5);
 
-        this.damage.add(new DamageInfo((AbstractCreature)this, 2));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 5));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 2));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 5));
 
-        loadAnimation("images/monsters/theCity/sphere/skeleton.atlas", "images/monsters/theCity/sphere/skeleton.json", 1.0F);
-
-
-
+        loadAnimation(
+            "images/monsters/theCity/sphere/skeleton.atlas",
+            "images/monsters/theCity/sphere/skeleton.json",
+            1.0F
+        );
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
@@ -60,36 +74,57 @@ public class BGSphericGuardian extends AbstractBGMonster implements BGDamageIcon
         this.state.setTimeScale(0.8F);
     }
 
-
     public void usePreBattleAction() {
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new BarricadePower((AbstractCreature)this)));
+        AbstractDungeon.actionManager.addToBottom(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) this,
+                (AbstractCreature) this,
+                (AbstractPower) new BarricadePower((AbstractCreature) this)
+            )
+        );
 
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new GainBlockAction((AbstractCreature)this, (AbstractCreature)this, 10));
+        AbstractDungeon.actionManager.addToBottom(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) this,
+                (AbstractCreature) this,
+                10
+            )
+        );
     }
-
 
     public void takeTurn() {
         switch (this.nextMove) {
             case 1:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateSlowAttackAction((AbstractCreature)this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(0), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new GainBlockAction((AbstractCreature)this,5));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new AnimateSlowAttackAction((AbstractCreature) this)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(0),
+                        AbstractGameAction.AttackEffect.BLUNT_LIGHT
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new GainBlockAction((AbstractCreature) this, 5)
+                );
                 setMove((byte) 2, AbstractMonster.Intent.ATTACK, 5);
                 break;
             case 2:
-
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateFastAttackAction((AbstractCreature)this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(1), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new AnimateFastAttackAction((AbstractCreature) this)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(1),
+                        AbstractGameAction.AttackEffect.BLUNT_HEAVY
+                    )
+                );
                 setMove((byte) 1, AbstractMonster.Intent.ATTACK_DEFEND, 2);
                 break;
-
-
         }
-
     }
-
 
     public void changeState(String key) {
         switch (key) {
@@ -101,9 +136,6 @@ public class BGSphericGuardian extends AbstractBGMonster implements BGDamageIcon
         }
     }
 
-
-
-
     public void damage(DamageInfo info) {
         super.damage(info);
         if (info.owner != null && info.type != DamageInfo.DamageType.THORNS && info.output > 0) {
@@ -113,20 +145,20 @@ public class BGSphericGuardian extends AbstractBGMonster implements BGDamageIcon
         }
     }
 
-
     protected void getMove(int num) {
-            setMove((byte) 1, AbstractMonster.Intent.ATTACK_DEFEND, 2);
+        setMove((byte) 1, AbstractMonster.Intent.ATTACK_DEFEND, 2);
     }
-
 
     public void die() {
         super.die();
         if (MathUtils.randomBoolean()) {
-            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("SPHERE_DETECT_VO_1"));
+            AbstractDungeon.actionManager.addToBottom(
+                (AbstractGameAction) new SFXAction("SPHERE_DETECT_VO_1")
+            );
         } else {
-            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("SPHERE_DETECT_VO_2"));
+            AbstractDungeon.actionManager.addToBottom(
+                (AbstractGameAction) new SFXAction("SPHERE_DETECT_VO_2")
+            );
         }
     }
 }
-
-

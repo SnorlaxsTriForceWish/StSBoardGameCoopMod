@@ -13,36 +13,48 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGWorship extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGWorship");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGWorship"
+    );
     public static final String ID = "BGWorship";
 
     public BGWorship() {
-        super("BGWorship", cardStrings.NAME, "purple/skill/worship", -1, cardStrings.DESCRIPTION, CardType.SKILL, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.SELF);
-
-        this.exhaust=true;
+        super(
+            "BGWorship",
+            cardStrings.NAME,
+            "purple/skill/worship",
+            -1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
+        this.exhaust = true;
     }
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         BGXCostCardAction.XCostInfo info = BGXCostCardAction.preProcessCard(this);
-        addToBot((AbstractGameAction)new BGXCostCardAction(this, info,
-                (e,d)->addToTop((AbstractGameAction)new BGWorshipAction(AbstractDungeon.player, d, e,this))));
+        addToBot(
+            (AbstractGameAction) new BGXCostCardAction(this, info, (e, d) ->
+                addToTop(
+                    (AbstractGameAction) new BGWorshipAction(AbstractDungeon.player, d, e, this)
+                )
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
             upgradeName();
-            this.selfRetain=true;
+            this.selfRetain = true;
             this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGWorship();
     }
 }
-
-

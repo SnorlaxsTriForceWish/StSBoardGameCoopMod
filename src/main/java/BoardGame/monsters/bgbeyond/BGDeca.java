@@ -20,7 +20,9 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 public class BGDeca extends AbstractBGMonster implements BGDamageIcons {
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("Deca");
+
+    private static final MonsterStrings monsterStrings =
+        CardCrawlGame.languagePack.getMonsterStrings("Deca");
     public static final String ID = "BGDeca";
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
@@ -45,9 +47,11 @@ public class BGDeca extends AbstractBGMonster implements BGDamageIcons {
 
     public BGDeca() {
         super(NAME, "BGDeca", 250, 0.0F, -26.0F, 390.0F, 390.0F, null, -350.0F, 30.0F);
-        loadAnimation("images/monsters/theForest/deca/skeleton.atlas", "images/monsters/theForest/deca/skeleton.json", 1.0F);
-
-
+        loadAnimation(
+            "images/monsters/theForest/deca/skeleton.atlas",
+            "images/monsters/theForest/deca/skeleton.json",
+            1.0F
+        );
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
@@ -58,26 +62,25 @@ public class BGDeca extends AbstractBGMonster implements BGDamageIcons {
         this.dialogX = -200.0F * Settings.scale;
         this.dialogY = 10.0F * Settings.scale;
 
-//        if (AbstractDungeon.ascensionLevel >= 9) {
-//            setHp(265);
-//        } else {
-//            setHp(250);
-//        }
-//
-//        if (AbstractDungeon.ascensionLevel >= 4) {
-//            this.beamDmg = 12;
-//        } else {
-//            this.beamDmg = 10;
-//        }
+        //        if (AbstractDungeon.ascensionLevel >= 9) {
+        //            setHp(265);
+        //        } else {
+        //            setHp(250);
+        //        }
+        //
+        //        if (AbstractDungeon.ascensionLevel >= 4) {
+        //            this.beamDmg = 12;
+        //        } else {
+        //            this.beamDmg = 10;
+        //        }
 
-        setHp((AbstractDungeon.ascensionLevel<10) ? 50 : 55);
-        slimeAmt =(AbstractDungeon.ascensionLevel<10) ? 1 : 2;
-        this.beamDmg=3;
+        setHp((AbstractDungeon.ascensionLevel < 10) ? 50 : 55);
+        slimeAmt = (AbstractDungeon.ascensionLevel < 10) ? 1 : 2;
+        this.beamDmg = 3;
 
-        this.damage.add(new DamageInfo((AbstractCreature)this, this.beamDmg));
+        this.damage.add(new DamageInfo((AbstractCreature) this, this.beamDmg));
         this.isAttacking = true;
     }
-
 
     public void changeState(String stateName) {
         switch (stateName) {
@@ -88,7 +91,6 @@ public class BGDeca extends AbstractBGMonster implements BGDamageIcons {
         }
     }
 
-
     public void damage(DamageInfo info) {
         super.damage(info);
         if (info.owner != null && info.type != DamageInfo.DamageType.THORNS && info.output > 0) {
@@ -97,20 +99,19 @@ public class BGDeca extends AbstractBGMonster implements BGDamageIcons {
         }
     }
 
-
     public void usePreBattleAction() {
-        if(!AbstractDungeon.player.hasRelic("BGWhite Beast Statue")) {
+        if (!AbstractDungeon.player.hasRelic("BGWhite Beast Statue")) {
             (AbstractDungeon.getCurrRoom()).rewardAllowed = false; //game is hardcoded to check for TheBeyond / TheEnding dungeons.  here's a workaround -- but mind this also interferes with White Beast Statue
         }
         CardCrawlGame.music.unsilenceBGM();
         AbstractDungeon.scene.fadeOutAmbiance();
         AbstractDungeon.getCurrRoom().playBgmInstantly("BOSS_BEYOND");
-//        if (AbstractDungeon.ascensionLevel >= 19) {
-//            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new ArtifactPower((AbstractCreature)this, 3)));
-//        } else {
-//
-//            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new ArtifactPower((AbstractCreature)this, 2)));
-//        }
+        //        if (AbstractDungeon.ascensionLevel >= 19) {
+        //            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new ArtifactPower((AbstractCreature)this, 3)));
+        //        } else {
+        //
+        //            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new ArtifactPower((AbstractCreature)this, 2)));
+        //        }
 
         UnlockTracker.markBossAsSeen("DONUT");
     }
@@ -119,44 +120,68 @@ public class BGDeca extends AbstractBGMonster implements BGDamageIcons {
         int i;
         switch (this.nextMove) {
             case 0:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ChangeStateAction(this, "ATTACK"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new WaitAction(0.5F));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ChangeStateAction(this, "ATTACK")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new WaitAction(0.5F)
+                );
                 for (i = 0; i < 2; i++) {
-                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                            .get(0), AbstractGameAction.AttackEffect.FIRE));
+                    AbstractDungeon.actionManager.addToBottom(
+                        (AbstractGameAction) new DamageAction(
+                            (AbstractCreature) AbstractDungeon.player,
+                            this.damage.get(0),
+                            AbstractGameAction.AttackEffect.FIRE
+                        )
+                    );
                 }
                 //AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new MakeTempCardInDiscardAction((AbstractCard)new Dazed(), 2));
                 this.isAttacking = false;
                 break;
             case 2:
-//                for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
-//                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new GainBlockAction((AbstractCreature)m, (AbstractCreature)this, 16));
-//                    if (AbstractDungeon.ascensionLevel >= 19) {
-//                        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)this, (AbstractPower)new PlatedArmorPower((AbstractCreature)m, 3), 3));
-//                    }
-//                }
-                addToBot((AbstractGameAction)new MakeTempCardInDrawPileAction((AbstractCard)new BGDazed(), 1, false, true));
-                addToBot((AbstractGameAction)new MakeTempCardInDiscardAction((AbstractCard)new BGSlimed(), slimeAmt));
+                //                for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
+                //                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new GainBlockAction((AbstractCreature)m, (AbstractCreature)this, 16));
+                //                    if (AbstractDungeon.ascensionLevel >= 19) {
+                //                        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)this, (AbstractPower)new PlatedArmorPower((AbstractCreature)m, 3), 3));
+                //                    }
+                //                }
+                addToBot(
+                    (AbstractGameAction) new MakeTempCardInDrawPileAction(
+                        (AbstractCard) new BGDazed(),
+                        1,
+                        false,
+                        true
+                    )
+                );
+                addToBot(
+                    (AbstractGameAction) new MakeTempCardInDiscardAction(
+                        (AbstractCard) new BGSlimed(),
+                        slimeAmt
+                    )
+                );
                 this.isAttacking = true;
                 break;
         }
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new RollMoveAction(this));
+        AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new RollMoveAction(this));
     }
-
 
     protected void getMove(int num) {
         if (this.isAttacking) {
-            setMove((byte) 0, AbstractMonster.Intent.ATTACK, ((DamageInfo) this.damage.get(0)).base, 2, true);
+            setMove(
+                (byte) 0,
+                AbstractMonster.Intent.ATTACK,
+                ((DamageInfo) this.damage.get(0)).base,
+                2,
+                true
+            );
         }
-//        else if (AbstractDungeon.ascensionLevel >= 19) {
-//            setMove((byte)2, AbstractMonster.Intent.DEFEND_BUFF);
-//      }
-         else {
-            setMove((byte)2, AbstractMonster.Intent.DEBUFF);
+        //        else if (AbstractDungeon.ascensionLevel >= 19) {
+        //            setMove((byte)2, AbstractMonster.Intent.DEFEND_BUFF);
+        //      }
+        else {
+            setMove((byte) 2, AbstractMonster.Intent.DEBUFF);
         }
     }
-
-
 
     public void die() {
         super.die();
@@ -170,5 +195,3 @@ public class BGDeca extends AbstractBGMonster implements BGDamageIcons {
         }
     }
 }
-
-

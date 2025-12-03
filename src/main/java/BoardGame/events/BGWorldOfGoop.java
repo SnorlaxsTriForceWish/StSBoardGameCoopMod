@@ -1,6 +1,5 @@
 package BoardGame.events;
 
-
 import BoardGame.dungeons.AbstractBGDungeon;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -18,9 +17,12 @@ import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 
 public class BGWorldOfGoop extends AbstractImageEvent {
+
     public static final String ID = "BGWorldOfGoop";
 
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGWorldOfGoop");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGWorldOfGoop"
+    );
 
     public static final String NAME = eventStrings.NAME;
 
@@ -44,22 +46,23 @@ public class BGWorldOfGoop extends AbstractImageEvent {
     private int goldLoss = 1;
 
     private enum CurScreen {
-        INTRO, RESULT;
+        INTRO,
+        RESULT,
     }
 
     public BGWorldOfGoop() {
         super(NAME, DIALOG_1, "images/events/goopPuddle.jpg");
-
-        if (this.goldLoss > AbstractDungeon.player.gold)
-            this.goldLoss = AbstractDungeon.player.gold;
-        this.imageEventText.setDialogOption(OPTIONS[0] + this.gold + OPTIONS[1] + this.damage + OPTIONS[2]);
+        if (this.goldLoss > AbstractDungeon.player.gold) this.goldLoss =
+            AbstractDungeon.player.gold;
+        this.imageEventText.setDialogOption(
+            OPTIONS[0] + this.gold + OPTIONS[1] + this.damage + OPTIONS[2]
+        );
         this.imageEventText.setDialogOption(OPTIONS[6]);
         this.imageEventText.setDialogOption(OPTIONS[3] + this.goldLoss + OPTIONS[4]);
     }
 
     public void onEnterRoom() {
-        if (Settings.AMBIANCE_ON)
-            CardCrawlGame.sound.play("EVENT_SPIRITS");
+        if (Settings.AMBIANCE_ON) CardCrawlGame.sound.play("EVENT_SPIRITS");
     }
 
     protected void buttonEffect(int buttonPressed) {
@@ -69,28 +72,63 @@ public class BGWorldOfGoop extends AbstractImageEvent {
                     case 0:
                         this.imageEventText.updateBodyText(GOLD_DIALOG);
                         this.imageEventText.clearAllDialogs();
-                        AbstractDungeon.player.damage(new DamageInfo((AbstractCreature)AbstractDungeon.player, this.damage));
-                        AbstractDungeon.effectList.add(new FlashAtkImgEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, AbstractGameAction.AttackEffect.FIRE));
-                        AbstractDungeon.effectList.add(new RainingGoldEffect(this.gold*20));
+                        AbstractDungeon.player.damage(
+                            new DamageInfo((AbstractCreature) AbstractDungeon.player, this.damage)
+                        );
+                        AbstractDungeon.effectList.add(
+                            new FlashAtkImgEffect(
+                                AbstractDungeon.player.hb.cX,
+                                AbstractDungeon.player.hb.cY,
+                                AbstractGameAction.AttackEffect.FIRE
+                            )
+                        );
+                        AbstractDungeon.effectList.add(new RainingGoldEffect(this.gold * 20));
                         AbstractDungeon.player.gainGold(this.gold);
                         this.imageEventText.setDialogOption(OPTIONS[5]);
                         this.screen = CurScreen.RESULT;
-                        AbstractEvent.logMetricGainGoldAndDamage("World of Goop", "Gather Gold", this.gold, this.damage);
+                        AbstractEvent.logMetricGainGoldAndDamage(
+                            "World of Goop",
+                            "Gather Gold",
+                            this.gold,
+                            this.damage
+                        );
                         break;
                     case 1:
                         this.imageEventText.updateBodyText(RELIC_DIALOG);
                         this.imageEventText.clearAllDialogs();
-                        AbstractDungeon.effectList.add(new FlashAtkImgEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, AbstractGameAction.AttackEffect.LIGHTNING));
+                        AbstractDungeon.effectList.add(
+                            new FlashAtkImgEffect(
+                                AbstractDungeon.player.hb.cX,
+                                AbstractDungeon.player.hb.cY,
+                                AbstractGameAction.AttackEffect.LIGHTNING
+                            )
+                        );
                         AbstractRelic r = AbstractDungeon.returnRandomScreenlessRelic(
-                                AbstractDungeon.returnRandomRelicTier());
-                        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F, r);
+                            AbstractDungeon.returnRandomRelicTier()
+                        );
+                        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(
+                            Settings.WIDTH / 2.0F,
+                            Settings.HEIGHT / 2.0F,
+                            r
+                        );
                         AbstractCard curse = AbstractDungeon.getCard(AbstractCard.CardRarity.CURSE);
-                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect((AbstractCard) curse, (Settings.WIDTH / 2), (Settings.HEIGHT / 2)));
+                        AbstractDungeon.effectList.add(
+                            new ShowCardAndObtainEffect(
+                                (AbstractCard) curse,
+                                (Settings.WIDTH / 2),
+                                (Settings.HEIGHT / 2)
+                            )
+                        );
                         AbstractBGDungeon.removeCardFromRewardDeck(curse);
 
                         this.imageEventText.setDialogOption(OPTIONS[5]);
                         this.screen = CurScreen.RESULT;
-                        AbstractEvent.logMetricObtainCardAndRelic("World of Goop", "Gain Relic", curse, r);
+                        AbstractEvent.logMetricObtainCardAndRelic(
+                            "World of Goop",
+                            "Gain Relic",
+                            curse,
+                            r
+                        );
                         break;
                     case 2:
                         this.imageEventText.updateBodyText(LEAVE_DIALOG);
@@ -106,7 +144,6 @@ public class BGWorldOfGoop extends AbstractImageEvent {
         openMap();
     }
 }
-
 
 /* Location:              C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\desktop-1.0.jar!\com\megacrit\cardcrawl\events\exordium\GoopPuddle.class
  * Java compiler version: 8 (52.0)

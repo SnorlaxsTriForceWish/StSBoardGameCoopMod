@@ -10,21 +10,17 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class BGActivateDieAbilityAction
-        extends AbstractGameAction {
+public class BGActivateDieAbilityAction extends AbstractGameAction {
+
     private DamageInfo info;
     private DieControlledRelic relic = null;
-
 
     public BGActivateDieAbilityAction(DieControlledRelic relic) {
         //final Logger logger = LogManager.getLogger(BoardGame.class.getName());
         //logger.info("BGActivateDieAbilityAction: constructor");
-        this.target=AbstractDungeon.player;
-        this.relic=relic;
+        this.target = AbstractDungeon.player;
+        this.relic = relic;
     }
-
-
-
 
     public void update() {
         //final Logger logger = LogManager.getLogger(BoardGame.class.getName());
@@ -35,33 +31,35 @@ public class BGActivateDieAbilityAction
             return;
         }
 
-        AbstractPower any=AbstractDungeon.player.getPower("BGTriggerAnyDieAbilityPower");
-        AbstractPower two=AbstractDungeon.player.getPower("BGTrigger2DieAbilityPower");
-        if(two!=null){
-            if(relic instanceof NilrysCodexCompatible){
-                ((BGTrigger2DieAbilityPower)two).doNotActivateOnRemove=true;
-                addToTop((AbstractGameAction)new RemoveSpecificPowerAction(AbstractDungeon.player,AbstractDungeon.player, "BGTrigger2DieAbilityPower"));
+        AbstractPower any = AbstractDungeon.player.getPower("BGTriggerAnyDieAbilityPower");
+        AbstractPower two = AbstractDungeon.player.getPower("BGTrigger2DieAbilityPower");
+        if (two != null) {
+            if (relic instanceof NilrysCodexCompatible) {
+                ((BGTrigger2DieAbilityPower) two).doNotActivateOnRemove = true;
+                addToTop(
+                    (AbstractGameAction) new RemoveSpecificPowerAction(
+                        AbstractDungeon.player,
+                        AbstractDungeon.player,
+                        "BGTrigger2DieAbilityPower"
+                    )
+                );
                 ((NilrysCodexCompatible) relic).Trigger2Ability();
-                this.isDone=true;
+                this.isDone = true;
                 return;
             }
         }
 
-        if(any!=null){
-            ((BGTriggerAnyDieAbilityPower)any).doNotActivateOnRemove=true;
-            addToTop((AbstractGameAction)new RemoveSpecificPowerAction(AbstractDungeon.player,AbstractDungeon.player, "BGTriggerAnyDieAbilityPower"));
+        if (any != null) {
+            ((BGTriggerAnyDieAbilityPower) any).doNotActivateOnRemove = true;
+            addToTop(
+                (AbstractGameAction) new RemoveSpecificPowerAction(
+                    AbstractDungeon.player,
+                    AbstractDungeon.player,
+                    "BGTriggerAnyDieAbilityPower"
+                )
+            );
             relic.activateDieAbility();
         }
-        this.isDone=true;
-
-
-
-
+        this.isDone = true;
     }
-
-
-
-
 }
-
-

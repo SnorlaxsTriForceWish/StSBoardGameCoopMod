@@ -16,54 +16,70 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 //TODO: activated status does not work with Play Twice effects. should it?
 public class BGPerseverance extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGPerseverance");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGPerseverance"
+    );
     public static final String ID = "BGPerseverance";
 
     public BGPerseverance() {
-        super("BGPerseverance", cardStrings.NAME, "purple/skill/perseverance", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.SELF);
-
-        this.selfRetain=true;
-        this.baseBlock=1;
-        this.baseMagicNumber=2;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGPerseverance",
+            cardStrings.NAME,
+            "purple/skill/perseverance",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
+        this.selfRetain = true;
+        this.baseBlock = 1;
+        this.baseMagicNumber = 2;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void triggerOnGlowCheck() {
-        this
-                .glowColor = shouldGlow() ? AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy() : AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+        this.glowColor = shouldGlow()
+            ? AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy()
+            : AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
     }
 
     private boolean shouldGlow() {
-        if(wasRetainedLastTurn)
-                return true;
+        if (wasRetainedLastTurn) return true;
 
         return false;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
-        if(this.wasRetainedLastTurn){
-            addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
+        if (this.wasRetainedLastTurn) {
+            addToBot(
+                (AbstractGameAction) new GainBlockAction(
+                    (AbstractCreature) p,
+                    (AbstractCreature) p,
+                    this.magicNumber
+                )
+            );
         }
-
     }
 
     protected void applyPowersToBlock() {
         super.applyPowersToBlock();
-        float tmp=this.baseMagicNumber;
-        for (AbstractPower p : AbstractDungeon.player.powers)
-            tmp = p.modifyBlock(tmp, this);
-        for (AbstractPower p : AbstractDungeon.player.powers)
-            tmp = p.modifyBlockLast(tmp);
-        if (this.baseMagicNumber != MathUtils.floor(tmp))
-            this.isMagicNumberModified = true;
-        if (tmp < 0.0F)
-            tmp = 0.0F;
+        float tmp = this.baseMagicNumber;
+        for (AbstractPower p : AbstractDungeon.player.powers) tmp = p.modifyBlock(tmp, this);
+        for (AbstractPower p : AbstractDungeon.player.powers) tmp = p.modifyBlockLast(tmp);
+        if (this.baseMagicNumber != MathUtils.floor(tmp)) this.isMagicNumberModified = true;
+        if (tmp < 0.0F) tmp = 0.0F;
         this.magicNumber = MathUtils.floor(tmp);
     }
-
-
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -76,6 +92,3 @@ public class BGPerseverance extends AbstractBGCard {
         return new BGPerseverance();
     }
 }
-
-
-

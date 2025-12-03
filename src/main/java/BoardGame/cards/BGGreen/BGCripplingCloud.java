@@ -16,12 +16,25 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGCripplingCloud extends AbstractBGCard {
+
     public static final String ID = "BGCripplingCloud";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGCripplingCloud");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGCripplingCloud"
+    );
 
     public BGCripplingCloud() {
-        super("BGCripplingCloud", cardStrings.NAME, "green/skill/crippling_poison", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGSilent.Enums.BG_GREEN, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.ALL_ENEMY);
+        super(
+            "BGCripplingCloud",
+            cardStrings.NAME,
+            "green/skill/crippling_poison",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.ALL_ENEMY
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
         this.exhaust = true;
@@ -32,8 +45,26 @@ public class BGCripplingCloud extends AbstractBGCard {
             flash();
             for (AbstractMonster monster : (AbstractDungeon.getMonsters()).monsters) {
                 if (!monster.isDead && !monster.isDying) {
-                    addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)monster, (AbstractCreature)p, (AbstractPower)new BGPoisonPower((AbstractCreature)monster, (AbstractCreature)p, this.magicNumber), this.magicNumber));
-                    addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)monster, (AbstractCreature)p, (AbstractPower)new BGWeakPower((AbstractCreature)monster, 1, false), 1));
+                    addToBot(
+                        (AbstractGameAction) new ApplyPowerAction(
+                            (AbstractCreature) monster,
+                            (AbstractCreature) p,
+                            (AbstractPower) new BGPoisonPower(
+                                (AbstractCreature) monster,
+                                (AbstractCreature) p,
+                                this.magicNumber
+                            ),
+                            this.magicNumber
+                        )
+                    );
+                    addToBot(
+                        (AbstractGameAction) new ApplyPowerAction(
+                            (AbstractCreature) monster,
+                            (AbstractCreature) p,
+                            (AbstractPower) new BGWeakPower((AbstractCreature) monster, 1, false),
+                            1
+                        )
+                    );
                 }
             }
         }
@@ -52,4 +83,3 @@ public class BGCripplingCloud extends AbstractBGCard {
         return new BGCripplingCloud();
     }
 }
-

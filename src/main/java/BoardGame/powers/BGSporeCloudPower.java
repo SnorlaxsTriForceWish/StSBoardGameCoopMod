@@ -9,7 +9,10 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 
 //TODO: Vuln should go to character in same row, not character who killed it
 public class BGSporeCloudPower extends AbstractBGPower {
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("Spore Cloud");
+
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "Spore Cloud"
+    );
     public static final String POWER_ID = "BGSpore Cloud";
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
@@ -23,12 +26,9 @@ public class BGSporeCloudPower extends AbstractBGPower {
         loadRegion("sporeCloud");
     }
 
-
     public void updateDescription() {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
-
-
 
     public void onDeath() {
         if (AbstractDungeon.getCurrRoom().isBattleEnding()) {
@@ -36,8 +36,13 @@ public class BGSporeCloudPower extends AbstractBGPower {
         }
         CardCrawlGame.sound.play("SPORE_CLOUD_RELEASE");
         flashWithoutSound();
-        addToTop((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, null, new BGVulnerablePower((AbstractCreature)AbstractDungeon.player, this.amount, true), this.amount));
+        addToTop(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) AbstractDungeon.player,
+                null,
+                new BGVulnerablePower((AbstractCreature) AbstractDungeon.player, this.amount, true),
+                this.amount
+            )
+        );
     }
 }
-
-

@@ -13,12 +13,25 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGTactician extends AbstractBGCard {
+
     public static final String ID = "BGTactician";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGTactician");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGTactician"
+    );
 
     public BGTactician() {
-        super("BGTactician", cardStrings.NAME, "green/skill/tactician", -2, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGSilent.Enums.BG_GREEN, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.NONE);
+        super(
+            "BGTactician",
+            cardStrings.NAME,
+            "green/skill/tactician",
+            -2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.NONE
+        );
         this.baseMagicNumber = 2;
         this.magicNumber = this.baseMagicNumber;
     }
@@ -31,8 +44,8 @@ public class BGTactician extends AbstractBGCard {
     }
 
     public void triggerOnManualDiscard() {
-        addToTop((AbstractGameAction)new GainEnergyAction(this.magicNumber));
-        addToTop(new ExhaustSpecificCardAction(this, AbstractDungeon.player.discardPile,true));
+        addToTop((AbstractGameAction) new GainEnergyAction(this.magicNumber));
+        addToTop(new ExhaustSpecificCardAction(this, AbstractDungeon.player.discardPile, true));
     }
 
     public AbstractCard makeCopy() {
@@ -48,5 +61,3 @@ public class BGTactician extends AbstractBGCard {
         }
     }
 }
-
-

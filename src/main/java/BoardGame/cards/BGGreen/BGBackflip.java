@@ -13,17 +13,37 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGBackflip extends AbstractBGCard {
+
     public static final String ID = "BGBackflip";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBackflip");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBackflip"
+    );
+
     public BGBackflip() {
-        super("BGBackflip", cardStrings.NAME, "green/skill/backflip", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.COMMON, CardTarget.SELF);
-        this.baseBlock=1;
+        super(
+            "BGBackflip",
+            cardStrings.NAME,
+            "green/skill/backflip",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.COMMON,
+            CardTarget.SELF
+        );
+        this.baseBlock = 1;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
-        addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)p, 2));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
+        addToBot((AbstractGameAction) new DrawCardAction((AbstractCreature) p, 2));
     }
 
     public void upgrade() {
@@ -37,4 +57,3 @@ public class BGBackflip extends AbstractBGCard {
         return new BGBackflip();
     }
 }
-

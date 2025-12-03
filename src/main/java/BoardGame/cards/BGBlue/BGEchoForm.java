@@ -14,17 +14,37 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGEchoForm extends AbstractBGCard {
+
     public static final String ID = "BGEchoForm";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGEchoForm");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGEchoForm"
+    );
 
     public BGEchoForm() {
-        super("BGEchoForm", cardStrings.NAME, "blue/power/echo_form", 3, cardStrings.DESCRIPTION, CardType.POWER, BGDefect.Enums.BG_BLUE, CardRarity.RARE, CardTarget.SELF);
+        super(
+            "BGEchoForm",
+            cardStrings.NAME,
+            "blue/power/echo_form",
+            3,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
         this.isEthereal = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGEchoFormPower((AbstractCreature)p, 1), 1));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGEchoFormPower((AbstractCreature) p, 1),
+                1
+            )
+        );
     }
 
     public void upgrade() {

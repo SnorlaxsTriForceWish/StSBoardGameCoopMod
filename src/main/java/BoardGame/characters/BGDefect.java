@@ -1,5 +1,7 @@
 package BoardGame.characters;
 
+import static BoardGame.BoardGame.*;
+
 //TODO: updateOrb incorrectly sets orb's angle1 spin rate very high (appears to be based on Ironclad animation; vanilla Defect orb angle1 does not change)
 //TODO: does Recycle interact correctly with card cost changes?
 
@@ -37,35 +39,38 @@ import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbBlue;
 import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbInterface;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static BoardGame.BoardGame.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 //Wiki-page https://github.com/daviscook477/BaseMod/wiki/Custom-Characters
 //and https://github.com/daviscook477/BaseMod/wiki/Migrating-to-5.0
 //All text (starting description and loadout, anything labeled TEXT[]) can be found in DefaultMod-character-Strings.json in the resources
 
 public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
+
     public static final Logger logger = LogManager.getLogger(BoardGame.class.getName());
 
     // =============== CHARACTER ENUMERATORS =================
 
     public static class Enums {
+
         @SpireEnum
         public static PlayerClass BG_DEFECT;
+
         @SpireEnum(name = "BG_DEFECT_BLUE_COLOR") // These two HAVE to have the same absolutely identical name.
         public static AbstractCard.CardColor BG_BLUE;
+
         @SpireEnum(name = "BG_DEFECT_BLUE_COLOR")
         public static CardLibrary.LibraryType LIBRARY_COLOR;
     }
 
     // =============== CHARACTER ENUMERATORS  =================
 
-    public String getMultiSwapButtonUrl(){return "BoardGameResources/images/icons/defect.png";}
+    public String getMultiSwapButtonUrl() {
+        return "BoardGameResources/images/icons/defect.png";
+    }
 
     // =============== BASE STATS =================
 
@@ -78,63 +83,70 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
 
     // =============== /BASE STATS/ =================
 
-
     // =============== STRINGS =================
 
     private static final String ID = makeID("BGDefect");
-    private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
+    private static final CharacterStrings characterStrings =
+        CardCrawlGame.languagePack.getCharacterString(ID);
     private static final String[] NAMES = characterStrings.NAMES;
     private static final String[] TEXT = characterStrings.TEXT;
 
     // =============== /STRINGS/ =================
 
-
     // =============== TEXTURES OF BIG ENERGY ORB ===============
 
     public static final String[] orbTextures = {
-            "BoardGameResources/images/char/theDefect/orb/layer1.png",
-            "BoardGameResources/images/char/theDefect/orb/layer2.png",
-            "BoardGameResources/images/char/theDefect/orb/layer3.png",
-            "BoardGameResources/images/char/theDefect/orb/layer4.png",
-            "BoardGameResources/images/char/theDefect/orb/layer5.png",
-            "BoardGameResources/images/char/theDefect/orb/layer6.png",
-            "BoardGameResources/images/char/theDefect/orb/layer1d.png",
-            "BoardGameResources/images/char/theDefect/orb/layer2d.png",
-            "BoardGameResources/images/char/theDefect/orb/layer3d.png",
-            "BoardGameResources/images/char/theDefect/orb/layer4d.png",
-            "BoardGameResources/images/char/theDefect/orb/layer5d.png",};
+        "BoardGameResources/images/char/theDefect/orb/layer1.png",
+        "BoardGameResources/images/char/theDefect/orb/layer2.png",
+        "BoardGameResources/images/char/theDefect/orb/layer3.png",
+        "BoardGameResources/images/char/theDefect/orb/layer4.png",
+        "BoardGameResources/images/char/theDefect/orb/layer5.png",
+        "BoardGameResources/images/char/theDefect/orb/layer6.png",
+        "BoardGameResources/images/char/theDefect/orb/layer1d.png",
+        "BoardGameResources/images/char/theDefect/orb/layer2d.png",
+        "BoardGameResources/images/char/theDefect/orb/layer3d.png",
+        "BoardGameResources/images/char/theDefect/orb/layer4d.png",
+        "BoardGameResources/images/char/theDefect/orb/layer5d.png",
+    };
+
     // =============== /TEXTURES OF BIG ENERGY ORB/ ===============
-
-
 
     // =============== CHARACTER CLASS START =================
 
     public BGDefect(String name, PlayerClass setClass) {
-        super(name, setClass, orbTextures,
-                "BoardGameResources/images/char/theDefect/orb/vfx.png", null,
-                "");
-
-
-
+        super(
+            name,
+            setClass,
+            orbTextures,
+            "BoardGameResources/images/char/theDefect/orb/vfx.png",
+            null,
+            ""
+        );
         // =============== TEXTURES, ENERGY, LOADOUT =================
 
-//        initializeClass(null, // required call to load textures and setup energy/loadout.
-//                // I left these in DefaultMod.java (Ctrl+click them to see where they are, Ctrl+hover to see what they read.)
-//                THE_DEFAULT_SHOULDER_2, // campfire pose
-//                THE_DEFAULT_SHOULDER_1, // another campfire pose
-//                THE_DEFAULT_CORPSE, // dead corpse
-        initializeClass((String)null, "images/characters/defect/shoulder2.png", "images/characters/defect/shoulder.png", "images/characters/defect/corpse.png",
-                getLoadout(), 20.0F, -10.0F, 220.0F, 290.0F, new EnergyManager(ENERGY_PER_TURN)); // energy manager
+        //        initializeClass(null, // required call to load textures and setup energy/loadout.
+        //                // I left these in DefaultMod.java (Ctrl+click them to see where they are, Ctrl+hover to see what they read.)
+        //                THE_DEFAULT_SHOULDER_2, // campfire pose
+        //                THE_DEFAULT_SHOULDER_1, // another campfire pose
+        //                THE_DEFAULT_CORPSE, // dead corpse
+        initializeClass(
+            (String) null,
+            "images/characters/defect/shoulder2.png",
+            "images/characters/defect/shoulder.png",
+            "images/characters/defect/corpse.png",
+            getLoadout(),
+            20.0F,
+            -10.0F,
+            220.0F,
+            290.0F,
+            new EnergyManager(ENERGY_PER_TURN)
+        ); // energy manager
 
         // =============== /TEXTURES, ENERGY, LOADOUT/ =================
 
-
         // =============== ANIMATIONS =================
 
-        loadAnimation(
-                BGDEFECT_SKELETON_ATLAS,
-                BGDEFECT_SKELETON_JSON,
-                1.0f);
+        loadAnimation(BGDEFECT_SKELETON_ATLAS, BGDEFECT_SKELETON_JSON, 1.0f);
         //loadAnimation("images/characters/ironclad/idle/skeleton.atlas", "images/characters/ironclad/idle/skeleton.json", 1.0F);
         // AnimationState.TrackEntry e = state.setAnimation(0, "animation", true);
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
@@ -143,7 +155,6 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
 
         // =============== /ANIMATIONS/ =================
 
-
         // =============== TEXT BUBBLE LOCATION =================
 
         dialogX = (drawX + 0.0F * Settings.scale); // set location for text bubbles
@@ -151,8 +162,7 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
 
         // =============== /TEXT BUBBLE LOCATION/ =================
 
-
-        energyOrb = (EnergyOrbInterface)new EnergyOrbBlue();
+        energyOrb = (EnergyOrbInterface) new EnergyOrbBlue();
     }
 
     public Texture getEnergyImage() {
@@ -164,9 +174,19 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
     // Starting description and loadout
     @Override
     public CharSelectInfo getLoadout() {
-        return new CharSelectInfo(NAMES[0], TEXT[0],
-                STARTING_HP, MAX_HP, ORB_SLOTS, STARTING_GOLD, CARD_DRAW, this, getStartingRelics(),
-                getStartingDeck(), false);
+        return new CharSelectInfo(
+            NAMES[0],
+            TEXT[0],
+            STARTING_HP,
+            MAX_HP,
+            ORB_SLOTS,
+            STARTING_GOLD,
+            CARD_DRAW,
+            this,
+            getStartingRelics(),
+            getStartingDeck(),
+            false
+        );
     }
 
     // Starting Deck
@@ -194,7 +214,7 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
 
-        logger.info("getStartingRelics: "+BGTheDieRelic.ID+" + BGCrackedCore");
+        logger.info("getStartingRelics: " + BGTheDieRelic.ID + " + BGCrackedCore");
         retVal.add(BGTheDieRelic.ID);
         retVal.add(BGCrackedCore.ID);
 
@@ -210,8 +230,11 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
     @Override
     public void doCharSelectScreenSelectEffect() {
         CardCrawlGame.sound.playA("ATTACK_MAGIC_BEAM_SHORT", MathUtils.random(-0.2F, 0.2F));
-        CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.MED, ScreenShake.ShakeDur.SHORT, false);
-
+        CardCrawlGame.screenShake.shake(
+            ScreenShake.ShakeIntensity.MED,
+            ScreenShake.ShakeDur.SHORT,
+            false
+        );
     }
 
     // character Select on-button-press sound effect
@@ -288,13 +311,13 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
     // Attack effects are the same as used in DamageAction and the like.
     @Override
     public AbstractGameAction.AttackEffect[] getSpireHeartSlashEffect() {
-        return new AbstractGameAction.AttackEffect[]{
-                AbstractGameAction.AttackEffect.SLASH_HEAVY,
-                AbstractGameAction.AttackEffect.FIRE,
-                AbstractGameAction.AttackEffect.SLASH_DIAGONAL,
-                AbstractGameAction.AttackEffect.SLASH_HEAVY,
-                AbstractGameAction.AttackEffect.FIRE,
-                AbstractGameAction.AttackEffect.SLASH_DIAGONAL
+        return new AbstractGameAction.AttackEffect[] {
+            AbstractGameAction.AttackEffect.SLASH_HEAVY,
+            AbstractGameAction.AttackEffect.FIRE,
+            AbstractGameAction.AttackEffect.SLASH_DIAGONAL,
+            AbstractGameAction.AttackEffect.SLASH_HEAVY,
+            AbstractGameAction.AttackEffect.FIRE,
+            AbstractGameAction.AttackEffect.SLASH_DIAGONAL,
         };
     }
 
@@ -314,14 +337,13 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
         return TEXT[2];
     }
 
-
     protected Color blockTextColor = new Color(0.9F, 0.9F, 0.9F, 0.0F);
     protected float blockScale = 1.0F;
-
 
     public Texture getCutsceneBg() {
         return ImageMaster.loadImage("images/scenes/blueBg.jpg");
     }
+
     public List<CutscenePanel> getCutscenePanels() {
         List<CutscenePanel> panels = new ArrayList();
         panels.add(new CutscenePanel("images/scenes/defect1.png", "ATTACK_MAGIC_BEAM_SHORT"));
@@ -330,11 +352,10 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
         return panels;
     }
 
-
     public void applyStartOfTurnRelics() {
         super.applyStartOfTurnRelics();
-        this.shivsPlayedThisTurn=0;
-        this.stanceChangedThisTurn=false;
+        this.shivsPlayedThisTurn = 0;
+        this.stanceChangedThisTurn = false;
     }
 
     //TODO: move addBlock to CustomBoardGameCreature class (which itself will require various sweeping changes to implement)
@@ -362,16 +383,13 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
         }
         this.currentBlock += MathUtils.floor(tmp);
 
-
-//        if (this.currentBlock >= 99 && this.isPlayer) {
-//            UnlockTracker.unlockAchievement("IMPERVIOUS");
-//        }
-
+        //        if (this.currentBlock >= 99 && this.isPlayer) {
+        //            UnlockTracker.unlockAchievement("IMPERVIOUS");
+        //        }
 
         if (this.currentBlock > 20) {
             this.currentBlock = 20;
         }
-
 
         if (this.currentBlock == 20 && this.isPlayer) {
             //UnlockTracker.unlockAchievement("BG_BARRICADED");
@@ -379,19 +397,11 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
 
         if (effect && this.currentBlock > 0) {
             gainBlockAnimation();
-        } else if (blockAmount > 0 &&
-                blockAmount > 0) {
+        } else if (blockAmount > 0 && blockAmount > 0) {
             Color tmpCol = Settings.GOLD_COLOR.cpy();
             tmpCol.a = this.blockTextColor.a;
             this.blockTextColor = tmpCol;
             this.blockScale = 5.0F;
         }
     }
-
-
-
-
-
-
-
 }

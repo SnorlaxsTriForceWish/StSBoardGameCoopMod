@@ -1,10 +1,10 @@
 package BoardGame.variables;
 
+import static BoardGame.BoardGame.makeID;
+
 import BoardGame.cards.AbstractBGCard;
 import basemod.abstracts.DynamicVariable;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-
-import static BoardGame.BoardGame.makeID;
 
 public class DefaultSecondMagicNumber extends DynamicVariable {
 
@@ -21,7 +21,6 @@ public class DefaultSecondMagicNumber extends DynamicVariable {
     @Override
     public boolean isModified(AbstractCard card) {
         return ((AbstractBGCard) card).isDefaultSecondMagicNumberModified;
-
     }
 
     @Override

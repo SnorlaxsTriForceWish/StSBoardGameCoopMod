@@ -7,8 +7,11 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class BGExplosivePower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGExplosive";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGExplosive");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGExplosive"
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
     private static final int DAMAGE_AMOUNT = 30;
@@ -22,15 +25,14 @@ public class BGExplosivePower extends AbstractBGPower {
         loadRegion("explosive");
     }
 
-
     public void updateDescription() {
         if (this.amount == 1) {
             this.description = DESCRIPTIONS[3];
         } else {
-            this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + 10 + DESCRIPTIONS[2];
+            this.description =
+                DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + 10 + DESCRIPTIONS[2];
         }
     }
-
 
     public void duringTurn() {
         if (this.amount == 1 && !this.owner.isDying) {
@@ -39,10 +41,10 @@ public class BGExplosivePower extends AbstractBGPower {
             //DamageInfo damageInfo = new DamageInfo(this.owner, 30, DamageInfo.DamageType.THORNS);
             //addToBot((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, damageInfo, AbstractGameAction.AttackEffect.FIRE, true));
         } else {
-            addToBot((AbstractGameAction)new ReducePowerAction(this.owner, this.owner, "Explosive", 1));
+            addToBot(
+                (AbstractGameAction) new ReducePowerAction(this.owner, this.owner, "Explosive", 1)
+            );
             updateDescription();
         }
     }
 }
-
-

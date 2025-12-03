@@ -1,6 +1,5 @@
 package BoardGame.powers;
 
-
 import BoardGame.cards.AbstractBGCard;
 import BoardGame.patches.BGAboutToUseCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -12,16 +11,18 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class BGDoubleAttackPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGDouble Attack";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGDouble Attack");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGDouble Attack"
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
@@ -49,34 +50,37 @@ public class BGDoubleAttackPower extends AbstractBGPower {
 
     //public void onUseCard(AbstractCard card, UseCardAction action) {
     public void onAboutToUseCard(AbstractCard originalCard, AbstractCreature originalTarget) {
-
-        if(this.owner.getPower("BGDouble Tap")!=null){
+        if (this.owner.getPower("BGDouble Tap") != null) {
             //neither Double Tap nor Double Attack stack in the BG
             //it's slightly more likely that Double Tap will be available twice, so use it up first
             return;
         }
-        if(this.owner.getPower("BGTripleAttackPower")!=null){
+        if (this.owner.getPower("BGTripleAttackPower") != null) {
             //same check for Blasphemy tripleattack
             return;
         }
 
-        boolean copyOK=true;
-        if(originalCard instanceof AbstractBGCard){
+        boolean copyOK = true;
+        if (originalCard instanceof AbstractBGCard) {
             //in addition to the cannotBeCopied flag, also check if the card itself is a copy
-            if(((AbstractBGCard)originalCard).cannotBeCopied) copyOK=false;
-            if(((AbstractBGCard)originalCard).ignoreFurtherCopies) copyOK=false;
+            if (((AbstractBGCard) originalCard).cannotBeCopied) copyOK = false;
+            if (((AbstractBGCard) originalCard).ignoreFurtherCopies) copyOK = false;
         }
 
-        if (!originalCard.purgeOnUse && originalCard.type == AbstractCard.CardType.ATTACK && this.amount > 0 && copyOK) {
+        if (
+            !originalCard.purgeOnUse &&
+            originalCard.type == AbstractCard.CardType.ATTACK &&
+            this.amount > 0 &&
+            copyOK
+        ) {
             flash();
             AbstractMonster m = null;
 
-
             AbstractCard copiedCard = originalCard.makeSameInstanceOf();
             //note that if the copied card is not a BG card, stacks of doubleattack will be improperly consumed on the new copy
-            if(copiedCard instanceof AbstractBGCard){
-                ((AbstractBGCard)originalCard).ignoreFurtherCopies=true;
-                ((AbstractBGCard)copiedCard).ignoreFurtherCopies=true;
+            if (copiedCard instanceof AbstractBGCard) {
+                ((AbstractBGCard) originalCard).ignoreFurtherCopies = true;
+                ((AbstractBGCard) copiedCard).ignoreFurtherCopies = true;
             }
             BGDoubleAttackPower.swapOutQueueCard(copiedCard);
 
@@ -90,52 +94,66 @@ public class BGDoubleAttackPower extends AbstractBGPower {
 
             Logger logger = LogManager.getLogger(BGDoubleTapPower_DEPRECATED.class.getName());
             //logger.info("DoubleAttackPower instanceof check");
-            if(originalCard instanceof AbstractBGCard){
+            if (originalCard instanceof AbstractBGCard) {
                 //logger.info("set old card's copy reference: "+copiedCard);
-                ((AbstractBGCard)originalCard).copiedCard=(AbstractBGCard)copiedCard;
+                ((AbstractBGCard) originalCard).copiedCard = (AbstractBGCard) copiedCard;
             }
 
             //((AbstractBGCard)copiedCard).followUpCardChain=new ArrayList<>(Arrays.asList(originalCard));
-            ((AbstractBGCard)copiedCard).followUpCardChain=new ArrayList<>(Collections.singletonList(originalCard));
+            ((AbstractBGCard) copiedCard).followUpCardChain = new ArrayList<>(
+                Collections.singletonList(originalCard)
+            );
 
             //AbstractDungeon.actionManager.addCardQueueItem(new CardQueueItem(tmp, m, card.energyOnUse, true, true), true);
 
             //logger.info("DoubleTap card target type: "+card.target);
-//            if(originalCard.target == AbstractCard.CardTarget.ENEMY || originalCard.target== AbstractCard.CardTarget.SELF_AND_ENEMY) {
-//                TargetSelectScreen.TargetSelectAction tssAction = (target) -> {
-//                    //logger.info("DoubleTap tssAction.execute");
-//                    if (target != null) {
-//                        originalCard.calculateCardDamage(target);
-//                    }
-//                    //logger.info("DoubleTap final target: "+target);
-//                    addToBot((AbstractGameAction) new NewQueueCardAction(originalCard, target, true, true));
-//                };
-//                //logger.info("DoubleTap addToTop");
-//                addToBot((AbstractGameAction)new TargetSelectScreenAction(tssAction,"Choose a target for "+originalCard.name+"."));
-//            }else{
-//                addToBot((AbstractGameAction) new NewQueueCardAction(originalCard, null, true, true));
-//            }
+            //            if(originalCard.target == AbstractCard.CardTarget.ENEMY || originalCard.target== AbstractCard.CardTarget.SELF_AND_ENEMY) {
+            //                TargetSelectScreen.TargetSelectAction tssAction = (target) -> {
+            //                    //logger.info("DoubleTap tssAction.execute");
+            //                    if (target != null) {
+            //                        originalCard.calculateCardDamage(target);
+            //                    }
+            //                    //logger.info("DoubleTap final target: "+target);
+            //                    addToBot((AbstractGameAction) new NewQueueCardAction(originalCard, target, true, true));
+            //                };
+            //                //logger.info("DoubleTap addToTop");
+            //                addToBot((AbstractGameAction)new TargetSelectScreenAction(tssAction,"Choose a target for "+originalCard.name+"."));
+            //            }else{
+            //                addToBot((AbstractGameAction) new NewQueueCardAction(originalCard, null, true, true));
+            //            }
 
             this.amount--;
             if (this.amount == 0) {
-                addToBot((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, "BGDouble Attack"));
+                addToBot(
+                    (AbstractGameAction) new RemoveSpecificPowerAction(
+                        this.owner,
+                        this.owner,
+                        "BGDouble Attack"
+                    )
+                );
             }
         }
     }
 
-
     public void atEndOfTurn(boolean isPlayer) {
-        if (isPlayer)
-            addToBot((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, "BGDouble Attack"));
+        if (isPlayer) addToBot(
+            (AbstractGameAction) new RemoveSpecificPowerAction(
+                this.owner,
+                this.owner,
+                "BGDouble Attack"
+            )
+        );
     }
 
+    public static void swapOutQueueCard(AbstractCard newCopy) {
+        AbstractCard originalCard = BGAboutToUseCard.cardQueueItemInstance.card;
+        BGAboutToUseCard.cardQueueItemInstance.card = newCopy;
 
+        for (
+            Iterator<AbstractCard> c = AbstractDungeon.player.hand.group.iterator();
+            c.hasNext();
 
-    public static void swapOutQueueCard(AbstractCard newCopy){
-        AbstractCard originalCard=BGAboutToUseCard.cardQueueItemInstance.card;
-        BGAboutToUseCard.cardQueueItemInstance.card=newCopy;
-
-        for (Iterator<AbstractCard> c = AbstractDungeon.player.hand.group.iterator(); c.hasNext(); ) {
+        ) {
             AbstractCard e = c.next();
             if (e == originalCard) {
                 AbstractDungeon.player.limbo.addToTop(e);
@@ -143,7 +161,11 @@ public class BGDoubleAttackPower extends AbstractBGPower {
             }
         }
         //weave check
-        for (Iterator<AbstractCard> c = AbstractDungeon.player.discardPile.group.iterator(); c.hasNext(); ) {
+        for (
+            Iterator<AbstractCard> c = AbstractDungeon.player.discardPile.group.iterator();
+            c.hasNext();
+
+        ) {
             AbstractCard e = c.next();
             if (e == originalCard) {
                 AbstractDungeon.player.limbo.addToTop(e);
@@ -151,7 +173,11 @@ public class BGDoubleAttackPower extends AbstractBGPower {
             }
         }
         //we don't THINK we ever need to check the draw pile, but it won't hurt
-        for (Iterator<AbstractCard> c = AbstractDungeon.player.drawPile.group.iterator(); c.hasNext(); ) {
+        for (
+            Iterator<AbstractCard> c = AbstractDungeon.player.drawPile.group.iterator();
+            c.hasNext();
+
+        ) {
             AbstractCard e = c.next();
             if (e == originalCard) {
                 AbstractDungeon.player.limbo.addToTop(e);
@@ -160,12 +186,9 @@ public class BGDoubleAttackPower extends AbstractBGPower {
         }
 
         //TODO: do we need to do this, or does queuecard handle it for us?
-//        if(BGAboutToUseCard.cardQueueItemInstance.monster!=null){
-//            newCopy.applyPowers();
-//            newCopy.calculateCardDamage(BGAboutToUseCard.cardQueueItemInstance.monster);
-//        }
+        //        if(BGAboutToUseCard.cardQueueItemInstance.monster!=null){
+        //            newCopy.applyPowers();
+        //            newCopy.calculateCardDamage(BGAboutToUseCard.cardQueueItemInstance.monster);
+        //        }
     }
 }
-
-
-

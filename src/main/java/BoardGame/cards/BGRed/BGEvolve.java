@@ -17,30 +17,38 @@ import com.megacrit.cardcrawl.powers.EvolvePower;
 //TODO: many cards disagree whether it's "draw a card" or "draw 1 card", check physical copies when available
 
 public class BGEvolve extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGEvolve");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGEvolve"
+    );
     public static final String ID = "BGEvolve";
 
     public BGEvolve() {
-        super("BGEvolve", cardStrings.NAME, "red/power/evolve", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.POWER, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGEvolve",
+            cardStrings.NAME,
+            "red/power/evolve",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.POWER,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new EvolvePower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new EvolvePower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -52,10 +60,7 @@ public class BGEvolve extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGEvolve();
     }
 }
-
-

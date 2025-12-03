@@ -18,22 +18,33 @@ public class ToolboxButton extends Button {
 
     //public boolean visible=false;
 
-    public static String relicList="";
+    public static String relicList = "";
 
-    public boolean visible=false;
-    public boolean isDisabled=true;
+    public boolean visible = false;
+    public boolean isDisabled = true;
+
     public ToolboxButton() {
-        super((Settings.WIDTH / 2)-150*Settings.scale, (Settings.HEIGHT / 2)-200*Settings.scale,TextureLoader.getTexture("BoardGameResources/images/ui/dice/Toolbox.png"));
+        super(
+            (Settings.WIDTH / 2) - 150 * Settings.scale,
+            (Settings.HEIGHT / 2) - 200 * Settings.scale,
+            TextureLoader.getTexture("BoardGameResources/images/ui/dice/Toolbox.png")
+        );
     }
+
     private static Logger logger = LogManager.getLogger(AbstractBGRelic.class.getName());
+
     public void update() {
         super.update();
-        if(this.visible) {
+        if (this.visible) {
             if (AbstractDungeon.player.hasRelic("BGToolbox")) {
                 AbstractRelic r = AbstractDungeon.player.getRelic("BGToolbox");
                 if (this.visible) {
                     this.isDisabled = false;
-                    if (AbstractDungeon.isScreenUp || AbstractDungeon.player.isDraggingCard || AbstractDungeon.player.inSingleTargetMode) {
+                    if (
+                        AbstractDungeon.isScreenUp ||
+                        AbstractDungeon.player.isDraggingCard ||
+                        AbstractDungeon.player.inSingleTargetMode
+                    ) {
                         //TODO: what is "inSingleTargetMode"?
                         this.isDisabled = true;
                     }
@@ -63,34 +74,34 @@ public class ToolboxButton extends Button {
                 this.visible = false;
             }
         }
-        if(this.pressed){this.pressed=false;}
-    }
-
-
-
-    public void render(SpriteBatch sb){
-        AbstractRelic r;
-        if (AbstractDungeon.player.hasRelic("BGToolbox")) {
-           r = AbstractDungeon.player.getRelic("BGToolbox");
-        }else return;
-
-        if(!visible || !((BGToolbox) r).isUsable())return;
-        super.render(sb);
-        String desc="Activate #yToolbox. NL You can undo this before locking in the roll.";
-        String desc2="Deactivate #yToolbox.";
-
-        int abacus= TheDie.initialRoll+1;if(abacus>6)abacus=1;
-        int toolbox=TheDie.initialRoll-1;if(toolbox<1)toolbox=6;
-
-        if (this.hb.hovered && !AbstractDungeon.isScreenUp && !Settings.isTouchScreen) {
-            TipHelper.renderGenericTip(this.x - 90.0F * Settings.scale, this.y + 300.0F * Settings.scale,
-                    "-1",
-                    (TheDie.monsterRoll==toolbox) ? desc2 : desc
-            );
+        if (this.pressed) {
+            this.pressed = false;
         }
     }
 
+    public void render(SpriteBatch sb) {
+        AbstractRelic r;
+        if (AbstractDungeon.player.hasRelic("BGToolbox")) {
+            r = AbstractDungeon.player.getRelic("BGToolbox");
+        } else return;
 
+        if (!visible || !((BGToolbox) r).isUsable()) return;
+        super.render(sb);
+        String desc = "Activate #yToolbox. NL You can undo this before locking in the roll.";
+        String desc2 = "Deactivate #yToolbox.";
 
+        int abacus = TheDie.initialRoll + 1;
+        if (abacus > 6) abacus = 1;
+        int toolbox = TheDie.initialRoll - 1;
+        if (toolbox < 1) toolbox = 6;
 
+        if (this.hb.hovered && !AbstractDungeon.isScreenUp && !Settings.isTouchScreen) {
+            TipHelper.renderGenericTip(
+                this.x - 90.0F * Settings.scale,
+                this.y + 300.0F * Settings.scale,
+                "-1",
+                (TheDie.monsterRoll == toolbox) ? desc2 : desc
+            );
+        }
+    }
 }

@@ -14,10 +14,12 @@ import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.potions.PotionSlot;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class BGTheJoust
-        extends AbstractImageEvent implements LockRelicsEvent {
+public class BGTheJoust extends AbstractImageEvent implements LockRelicsEvent {
+
     public static final String ID = "BGTheJoust";
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGTheJoust");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGTheJoust"
+    );
 
     public static final String NAME = eventStrings.NAME;
 
@@ -58,28 +60,34 @@ public class BGTheJoust
     private int clangCount = 0;
 
     private enum CUR_SCREEN {
-        HALT, EXPLANATION, CHOOSE_POTION, PRE_JOUST, JOUST, COMPLETE, GAMBLEBREW;
+        HALT,
+        EXPLANATION,
+        CHOOSE_POTION,
+        PRE_JOUST,
+        JOUST,
+        COMPLETE,
+        GAMBLEBREW,
     }
 
     public int knightMessageIndex;
     public int winMessageIndex;
     public int loseMessageIndex;
 
-    public boolean reliclock=false;
-    public boolean relicsLocked(){
+    public boolean reliclock = false;
+
+    public boolean relicsLocked() {
         return reliclock;
     }
 
     public BGTheJoust() {
         super(NAME, HALT_MSG, "images/events/joust.jpg");
         this.imageEventText.setDialogOption(OPTIONS[0]);
-        reliclock=true;
+        reliclock = true;
 
         //TODO: MAYBE use event random number... but probably not
-        knightMessageIndex=Math.random()>0.5 ? 2 : 3;
-        winMessageIndex=knightMessageIndex==2 ? 6 : 5;
-        loseMessageIndex=knightMessageIndex==2 ? 5 : 6;
-
+        knightMessageIndex = Math.random() > 0.5 ? 2 : 3;
+        winMessageIndex = knightMessageIndex == 2 ? 6 : 5;
+        loseMessageIndex = knightMessageIndex == 2 ? 5 : 6;
     }
 
     public void update() {
@@ -89,15 +97,27 @@ public class BGTheJoust
             if (this.joustTimer < 0.0F) {
                 this.clangCount++;
                 if (this.clangCount == 1) {
-                    CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.HIGH, ScreenShake.ShakeDur.MED, false);
+                    CardCrawlGame.screenShake.shake(
+                        ScreenShake.ShakeIntensity.HIGH,
+                        ScreenShake.ShakeDur.MED,
+                        false
+                    );
                     CardCrawlGame.sound.play("BLUNT_HEAVY");
                     this.joustTimer = 1.0F;
                 } else if (this.clangCount == 2) {
-                    CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.MED, ScreenShake.ShakeDur.SHORT, false);
+                    CardCrawlGame.screenShake.shake(
+                        ScreenShake.ShakeIntensity.MED,
+                        ScreenShake.ShakeDur.SHORT,
+                        false
+                    );
                     CardCrawlGame.sound.play("BLUNT_FAST");
                     this.joustTimer = 0.25F;
                 } else if (this.clangCount == 3) {
-                    CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.MED, ScreenShake.ShakeDur.LONG, false);
+                    CardCrawlGame.screenShake.shake(
+                        ScreenShake.ShakeIntensity.MED,
+                        ScreenShake.ShakeDur.LONG,
+                        false
+                    );
                     CardCrawlGame.sound.play("BLUNT_HEAVY");
                     this.joustTimer = 0.0F;
                 }
@@ -112,7 +132,7 @@ public class BGTheJoust
                 this.imageEventText.updateBodyText(EXPL_MSG);
                 this.imageEventText.clearAllDialogs();
 
-                if (AbstractDungeon.player.gold>=2) {
+                if (AbstractDungeon.player.gold >= 2) {
                     this.imageEventText.setDialogOption(OPTIONS[1]);
                 } else {
                     this.imageEventText.setDialogOption(OPTIONS[8], true);
@@ -141,7 +161,7 @@ public class BGTheJoust
                     this.imageEventText.updateBodyText(DESCRIPTIONS[9]);
                     this.screen = CUR_SCREEN.COMPLETE;
                     break;
-                } else if(buttonPressed==0) {
+                } else if (buttonPressed == 0) {
                     AbstractDungeon.player.loseGold(2);
                     this.imageEventText.updateBodyText(DESCRIPTIONS[knightMessageIndex]);
                     this.imageEventText.clearAllDialogs();
@@ -149,8 +169,8 @@ public class BGTheJoust
                     this.imageEventText.clearRemainingOptions();
                     this.screen = CUR_SCREEN.PRE_JOUST;
                     break;
-                } else if(buttonPressed==1) {
-                    RelicTradingScreen.RelicTradingAction action = (relic) -> {
+                } else if (buttonPressed == 1) {
+                    RelicTradingScreen.RelicTradingAction action = relic -> {
                         AbstractDungeon.player.loseRelic(relic.relicId);
                         this.imageEventText.updateBodyText(DESCRIPTIONS[knightMessageIndex]);
                         this.imageEventText.clearAllDialogs();
@@ -159,53 +179,55 @@ public class BGTheJoust
                         this.screen = CUR_SCREEN.PRE_JOUST;
                     };
                     //TODO: localization
-                    BaseMod.openCustomScreen(RelicTradingScreen.Enum.RELIC_TRADING, action, "Choose a Relic to wager.", false);
+                    BaseMod.openCustomScreen(
+                        RelicTradingScreen.Enum.RELIC_TRADING,
+                        action,
+                        "Choose a Relic to wager.",
+                        false
+                    );
                     break;
-                } else if(buttonPressed==2) {
+                } else if (buttonPressed == 2) {
                     this.screen = CUR_SCREEN.CHOOSE_POTION;
                     this.imageEventText.clearAllDialogs();
-                    for(AbstractPotion p : AbstractDungeon.player.potions) {
-                        if(!(p instanceof PotionSlot)) {
+                    for (AbstractPotion p : AbstractDungeon.player.potions) {
+                        if (!(p instanceof PotionSlot)) {
                             this.imageEventText.setDialogOption(OPTIONS[6] + p.name + OPTIONS[7]);
                         }
                     }
                     break;
                 }
-
-
             case PRE_JOUST:
                 this.imageEventText.updateBodyText(COMBAT_MSG);
                 this.imageEventText.clearAllDialogs();
                 this.imageEventText.setDialogOption(OPTIONS[4]);
-                playerWins=false;
+                playerWins = false;
                 int random = AbstractDungeon.miscRng.random(1, 6);
-                if(random>=4) {
+                if (random >= 4) {
                     playerWins = true;
-                }else if(random==3 && AbstractDungeon.player.hasRelic("BGTheAbacus")){
+                } else if (random == 3 && AbstractDungeon.player.hasRelic("BGTheAbacus")) {
                     AbstractDungeon.player.getRelic("BGTheAbacus").flash();
-                    playerWins=true;
-                }else if(random==1 && AbstractDungeon.player.hasRelic("BGToolbox")){
+                    playerWins = true;
+                } else if (random == 1 && AbstractDungeon.player.hasRelic("BGToolbox")) {
                     AbstractDungeon.player.getRelic("BGToolbox").flash();
-                    playerWins=true;
+                    playerWins = true;
                 }
-                if(!playerWins){
+                if (!playerWins) {
                     //TODO: if player wagers a die relic, does it still (incorrectly) take effect here?
-                    AbstractRelic r=AbstractDungeon.player.getRelic("BGGambling Chip");
-                    if(r!=null){
+                    AbstractRelic r = AbstractDungeon.player.getRelic("BGGambling Chip");
+                    if (r != null) {
                         r.flash();
                         random = AbstractDungeon.miscRng.random(1, 6);
-                        if(random>=4) {
+                        if (random >= 4) {
                             playerWins = true;
-                        }else if(random==3 && AbstractDungeon.player.hasRelic("BGTheAbacus")){
+                        } else if (random == 3 && AbstractDungeon.player.hasRelic("BGTheAbacus")) {
                             AbstractDungeon.player.getRelic("BGTheAbacus").flash();
-                            playerWins=true;
-                        }else if(random==1 && AbstractDungeon.player.hasRelic("BGToolbox")){
+                            playerWins = true;
+                        } else if (random == 1 && AbstractDungeon.player.hasRelic("BGToolbox")) {
                             AbstractDungeon.player.getRelic("BGToolbox").flash();
-                            playerWins=true;
+                            playerWins = true;
                         }
                     }
                 }
-
 
                 this.screen = CUR_SCREEN.JOUST;
                 this.joustTimer = 0.01F;
@@ -225,7 +247,7 @@ public class BGTheJoust
                     tmp = DESCRIPTIONS[loseMessageIndex];
                     tmp = tmp + BET_LOSE_MSG;
                     this.imageEventText.updateBodyText(tmp);
-                    if(BGGamblersBrew.doesPlayerHaveGamblersBrew()>-1) {
+                    if (BGGamblersBrew.doesPlayerHaveGamblersBrew() > -1) {
                         this.screen = CUR_SCREEN.GAMBLEBREW;
                         this.imageEventText.clearAllDialogs();
                         this.imageEventText.setDialogOption(OPTIONS[5]);
@@ -236,25 +258,23 @@ public class BGTheJoust
                     logMetricLoseGold("The Joust", "Lost Bet", 2);
                 }
                 this.screen = CUR_SCREEN.COMPLETE;
-                reliclock=false;
+                reliclock = false;
                 break;
             case COMPLETE:
-                reliclock=false;
+                reliclock = false;
                 openMap();
                 break;
-
             case CHOOSE_POTION:
-                int i=-1;
+                int i = -1;
                 AbstractPotion p = null;
                 //find the potion corresponding to the button we just clicked on...
-                for(AbstractPotion q : AbstractDungeon.player.potions) {
-                    if(!(q instanceof PotionSlot)) {
-                        i+=1;
-                        if(i==buttonPressed)
-                            p = q;
+                for (AbstractPotion q : AbstractDungeon.player.potions) {
+                    if (!(q instanceof PotionSlot)) {
+                        i += 1;
+                        if (i == buttonPressed) p = q;
                     }
                 }
-                if(p!=null) {
+                if (p != null) {
                     AbstractDungeon.topPanel.destroyPotion(p.slot);
                 }
                 //TODO: if p==null, quit event instead of proceeding to joust
@@ -264,20 +284,19 @@ public class BGTheJoust
                 this.screen = CUR_SCREEN.PRE_JOUST;
                 break;
             case GAMBLEBREW:
-
-                int slot=BGGamblersBrew.doesPlayerHaveGamblersBrew();
-                if(slot>-1 && buttonPressed==1) {
+                int slot = BGGamblersBrew.doesPlayerHaveGamblersBrew();
+                if (slot > -1 && buttonPressed == 1) {
                     AbstractDungeon.topPanel.destroyPotion(slot);
                     AbstractDungeon.player.gainGold(6);
                     CardCrawlGame.sound.play("GOLD_GAIN");
                     //TODO: log item wagered
                     logMetricGainGold("The Joust", "Won Bet", 6);
-                }else{
+                } else {
                     //TODO: log item wagered
                     logMetricLoseGold("The Joust", "Lost Bet", 2);
                 }
                 this.screen = CUR_SCREEN.COMPLETE;
-                reliclock=false;
+                reliclock = false;
                 openMap();
                 break;
         }

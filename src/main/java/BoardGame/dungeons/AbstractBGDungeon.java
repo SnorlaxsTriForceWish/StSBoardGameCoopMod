@@ -1,9 +1,9 @@
 package BoardGame.dungeons;
 
+import BoardGame.cards.*;
 import BoardGame.cards.BGBlue.BGClaw;
 import BoardGame.cards.BGBlue.BGClaw2;
 import BoardGame.cards.BGCurse.*;
-import BoardGame.cards.*;
 import BoardGame.characters.*;
 import BoardGame.events.BGColosseum;
 import BoardGame.events.BGDeadAdventurer;
@@ -45,34 +45,36 @@ import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import com.megacrit.cardcrawl.screens.CardRewardScreen;
 import com.megacrit.cardcrawl.screens.CombatRewardScreen;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
-import javassist.CannotCompileException;
-import javassist.CtBehavior;
-
 import java.util.ArrayList;
 import java.util.Collections;
+import javassist.CannotCompileException;
+import javassist.CtBehavior;
 
 //TODO: decks are not getting shuffled upon starting a new game (initializedCardPools never gets set back to true) (can we just change it to non-static??)
 
 public abstract class AbstractBGDungeon extends AbstractDungeon {
-    public static boolean initializedCardPools=false;
+
+    public static boolean initializedCardPools = false;
     public static CardGroup rewardDeck = new CardGroup(CardGroup.CardGroupType.CARD_POOL);
     public static CardGroup rareRewardDeck = new CardGroup(CardGroup.CardGroupType.CARD_POOL);
     public static CardGroup cursesRewardDeck = new CardGroup(CardGroup.CardGroupType.CARD_POOL);
     public static CardGroup colorlessRewardDeck = new CardGroup(CardGroup.CardGroupType.CARD_POOL);
 
+    public static ArrayList<CardGroup> physicalRewardDecks = new ArrayList<>();
+    public static ArrayList<CardGroup> physicalRareRewardDecks = new ArrayList<>();
 
-    public static ArrayList<CardGroup> physicalRewardDecks=new ArrayList<>();
-    public static ArrayList<CardGroup> physicalRareRewardDecks=new ArrayList<>();
+    public static boolean forceRareRewards = false;
+    public static int forceSpecificColor = -999;
 
-
-    public static boolean forceRareRewards=false;
-    public static int forceSpecificColor=-999;
-
-    public AbstractBGDungeon(String name, String levelId, AbstractPlayer p, ArrayList<String> newSpecialOneTimeEventList) {
+    public AbstractBGDungeon(
+        String name,
+        String levelId,
+        AbstractPlayer p,
+        ArrayList<String> newSpecialOneTimeEventList
+    ) {
         super(name, levelId, p, newSpecialOneTimeEventList);
-
-        forceRareRewards=false;
-        forceSpecificColor=-999;
+        forceRareRewards = false;
+        forceSpecificColor = -999;
         //Settings.isFinalActAvailable=false;
     }
 
@@ -80,60 +82,68 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
         super(name, p, saveFile);
     }
 
-
-
-    @SpirePatch2(clz = CardCrawlGame.class, method = "getDungeon",
-            paramtypez={String.class, AbstractPlayer.class})
+    @SpirePatch2(
+        clz = CardCrawlGame.class,
+        method = "getDungeon",
+        paramtypez = { String.class, AbstractPlayer.class }
+    )
     public static class getDungeonPatch {
+
         @SpirePrefixPatch
         public static SpireReturn<AbstractDungeon> Prefix(@ByRef String[] key, AbstractPlayer p) {
-            if(p instanceof AbstractBGPlayer) {
-                if (key[0].equals("BoardGameSetupDungeon")){
-//                    //logger.info("BoardGame SETUPDUNGEON DETECTED");
-//                    ArrayList<String>emptyList = new ArrayList<>();
-//                    return SpireReturn.Return((AbstractDungeon)new BGSetupDungeon(p, emptyList));
-                }else if (key[0].equals("Exordium")) {
+            if (p instanceof AbstractBGPlayer) {
+                if (key[0].equals("BoardGameSetupDungeon")) {
+                    //                    //logger.info("BoardGame SETUPDUNGEON DETECTED");
+                    //                    ArrayList<String>emptyList = new ArrayList<>();
+                    //                    return SpireReturn.Return((AbstractDungeon)new BGSetupDungeon(p, emptyList));
+                } else if (key[0].equals("Exordium")) {
                     //logger.info("BoardGame EXORDIUM DETECTED");
                     //do not change the key itself.  game is hard-coded in several places to check for "Exordium"
-                    ArrayList<String>emptyList = new ArrayList<>();
-                    return SpireReturn.Return((AbstractDungeon)new BGExordium(p, emptyList));
-                }else if(key[0].equals("TheCity")){
-                    ArrayList<String>emptyList = new ArrayList<>();
-                    return SpireReturn.Return((AbstractDungeon)new BGTheCity(p, emptyList));
-                }else if(key[0].equals("TheBeyond")){
-                    ArrayList<String>emptyList = new ArrayList<>();
-                    return SpireReturn.Return((AbstractDungeon)new BGTheBeyond(p, emptyList));
-                }else if(key[0].equals("TheEnding")){
-                    ArrayList<String>emptyList = new ArrayList<>();
-                    return SpireReturn.Return((AbstractDungeon)new BGTheEnding(p, emptyList));
-
+                    ArrayList<String> emptyList = new ArrayList<>();
+                    return SpireReturn.Return((AbstractDungeon) new BGExordium(p, emptyList));
+                } else if (key[0].equals("TheCity")) {
+                    ArrayList<String> emptyList = new ArrayList<>();
+                    return SpireReturn.Return((AbstractDungeon) new BGTheCity(p, emptyList));
+                } else if (key[0].equals("TheBeyond")) {
+                    ArrayList<String> emptyList = new ArrayList<>();
+                    return SpireReturn.Return((AbstractDungeon) new BGTheBeyond(p, emptyList));
+                } else if (key[0].equals("TheEnding")) {
+                    ArrayList<String> emptyList = new ArrayList<>();
+                    return SpireReturn.Return((AbstractDungeon) new BGTheEnding(p, emptyList));
                 }
             }
             return SpireReturn.Continue();
         }
     }
 
-
-    @SpirePatch2(clz = CardCrawlGame.class, method = "getDungeon",
-            paramtypez={String.class, AbstractPlayer.class, SaveFile.class})
+    @SpirePatch2(
+        clz = CardCrawlGame.class,
+        method = "getDungeon",
+        paramtypez = { String.class, AbstractPlayer.class, SaveFile.class }
+    )
     public static class getDungeonPatch2 {
+
         @SpirePrefixPatch
-        public static SpireReturn<AbstractDungeon> Prefix(@ByRef String[] key, AbstractPlayer p, SaveFile saveFile) {
+        public static SpireReturn<AbstractDungeon> Prefix(
+            @ByRef String[] key,
+            AbstractPlayer p,
+            SaveFile saveFile
+        ) {
             //logger.info("SAVEFILE CHECK GOES HERE "+key[0]+" "+p);
-            if(p instanceof AbstractBGPlayer) {
+            if (p instanceof AbstractBGPlayer) {
                 if (key[0].equals("BoardGameSetupDungeon")) {
-//                    return SpireReturn.Return((AbstractDungeon)new BGSetupDungeon(p, saveFile));
-                }else if (key[0].equals("Exordium")) {
+                    //                    return SpireReturn.Return((AbstractDungeon)new BGSetupDungeon(p, saveFile));
+                } else if (key[0].equals("Exordium")) {
                     //logger.info("BoardGame EXORDIUM DETECTED (savefile)");
                     //do not change key.  game is hard-coded to check for "Exordium"
-                    return SpireReturn.Return((AbstractDungeon)new BGExordium(p, saveFile));
-                }else if(key[0].equals("TheCity")){
-                    ArrayList<String>emptyList = new ArrayList<>();
-                    return SpireReturn.Return((AbstractDungeon)new BGTheCity(p, saveFile));
-                }else if(key[0].equals("TheBeyond")) {
+                    return SpireReturn.Return((AbstractDungeon) new BGExordium(p, saveFile));
+                } else if (key[0].equals("TheCity")) {
+                    ArrayList<String> emptyList = new ArrayList<>();
+                    return SpireReturn.Return((AbstractDungeon) new BGTheCity(p, saveFile));
+                } else if (key[0].equals("TheBeyond")) {
                     ArrayList<String> emptyList = new ArrayList<>();
                     return SpireReturn.Return((AbstractDungeon) new BGTheBeyond(p, saveFile));
-                }else if(key[0].equals("TheEnding")) {
+                } else if (key[0].equals("TheEnding")) {
                     ArrayList<String> emptyList = new ArrayList<>();
                     return SpireReturn.Return((AbstractDungeon) new BGTheEnding(p, saveFile));
                 }
@@ -142,41 +152,52 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
         }
     }
 
-
-    @SpirePatch(clz = AbstractDungeon.class, method = "initializeCardPools",
-            paramtypez = {})
+    @SpirePatch(clz = AbstractDungeon.class, method = "initializeCardPools", paramtypez = {})
     public static class initializeCardPoolsPatch {
+
         @SpirePrefixPatch
         public static void initializeCardPools() {
-            if(!(CardCrawlGame.dungeon instanceof AbstractBGDungeon))return;
+            if (!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) return;
             //TODO: the correct solution here is to load the card pools when loading a savefile, which unfortunately involves saving the card pools first
             if (!initializedCardPools) {
                 logger.info("----------BoardGame mod is resetting ALL reward decks----------");
                 //TODO: there is an extraordinary amount of Logger spam between here and Results.  should we be concerned about things loading out of order?
-                initializedCardPools=true;
+                initializedCardPools = true;
                 physicalRewardDecks.clear();
                 physicalRareRewardDecks.clear();
 
-                for(int i=0;i<4;i+=1){
-                    CardGroup rewards=new CardGroup(CardGroup.CardGroupType.CARD_POOL);
-                    CardGroup rares=new CardGroup(CardGroup.CardGroupType.CARD_POOL);
+                for (int i = 0; i < 4; i += 1) {
+                    CardGroup rewards = new CardGroup(CardGroup.CardGroupType.CARD_POOL);
+                    CardGroup rares = new CardGroup(CardGroup.CardGroupType.CARD_POOL);
                     AbstractCard gt;
-                    if(i==0)gt=new BGGoldenTicket_R();
-                    else if(i==1)gt=new BGGoldenTicket_G();
-                    else if(i==2)gt=new BGGoldenTicket_B();
-                    else gt=new BGGoldenTicket_W();
+                    if (i == 0) gt = new BGGoldenTicket_R();
+                    else if (i == 1) gt = new BGGoldenTicket_G();
+                    else if (i == 2) gt = new BGGoldenTicket_B();
+                    else gt = new BGGoldenTicket_W();
                     rewards.addToTop(gt.makeCopy());
                     rewards.addToTop(gt.makeCopy());
                     ArrayList<AbstractCard> tmpPool = new ArrayList<>();
-                    if(i==0) new BGIronclad("Ironclad physical card pool", BGIronclad.Enums.BG_IRONCLAD).getCardPool(tmpPool);
-                    else if(i==1) new BGSilent("Silent physical card pool", BGSilent.Enums.BG_SILENT).getCardPool(tmpPool);
-                    else if(i==2) new BGDefect("Defect physical card pool", BGDefect.Enums.BG_DEFECT).getCardPool(tmpPool);
-                    else if(i==3) new BGWatcher("Watcher physical card pool", BGWatcher.Enums.BG_WATCHER).getCardPool(tmpPool);
+                    if (i == 0) new BGIronclad(
+                        "Ironclad physical card pool",
+                        BGIronclad.Enums.BG_IRONCLAD
+                    ).getCardPool(tmpPool);
+                    else if (i == 1) new BGSilent(
+                        "Silent physical card pool",
+                        BGSilent.Enums.BG_SILENT
+                    ).getCardPool(tmpPool);
+                    else if (i == 2) new BGDefect(
+                        "Defect physical card pool",
+                        BGDefect.Enums.BG_DEFECT
+                    ).getCardPool(tmpPool);
+                    else if (i == 3) new BGWatcher(
+                        "Watcher physical card pool",
+                        BGWatcher.Enums.BG_WATCHER
+                    ).getCardPool(tmpPool);
                     for (AbstractCard c : tmpPool) {
                         switch (c.rarity) {
                             case COMMON:
-                                if(c instanceof BGClaw2)break; //these get added in later
-                                if(c instanceof BGClaw && BGClaw2.getClawPackCount()>0)break;   //if we ARE using claw pack, don't add regular Claws
+                                if (c instanceof BGClaw2) break; //these get added in later
+                                if (c instanceof BGClaw && BGClaw2.getClawPackCount() > 0) break; //if we ARE using claw pack, don't add regular Claws
                                 rewards.addToTop(c.makeCopy());
                                 rewards.addToTop(c.makeCopy());
                                 break;
@@ -184,12 +205,12 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
                                 rewards.addToTop(c.makeCopy());
                                 break;
                             case RARE:
-                                if(!(c instanceof BGGoldenTicket)) rares.addToTop(c.makeCopy());
+                                if (!(c instanceof BGGoldenTicket)) rares.addToTop(c.makeCopy());
                                 break;
                         }
                     }
-                    if(i==2){
-                        for(int j=0;j<BGClaw2.getClawPackCount();j+=1){
+                    if (i == 2) {
+                        for (int j = 0; j < BGClaw2.getClawPackCount(); j += 1) {
                             rewards.addToTop(new BGClaw2());
                         }
                     }
@@ -199,15 +220,18 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
                     physicalRareRewardDecks.add(rares);
                 }
 
+                AbstractBGDungeon.cursesRewardDeck = new CardGroup(
+                    CardGroup.CardGroupType.CARD_POOL
+                );
+                AbstractBGDungeon.colorlessRewardDeck = new CardGroup(
+                    CardGroup.CardGroupType.CARD_POOL
+                );
 
-                AbstractBGDungeon.cursesRewardDeck = new CardGroup(CardGroup.CardGroupType.CARD_POOL);
-                AbstractBGDungeon.colorlessRewardDeck = new CardGroup(CardGroup.CardGroupType.CARD_POOL);
-
-                int whoAmI=0;
-                if(AbstractDungeon.player instanceof BGIronclad) whoAmI=0;
-                else if(AbstractDungeon.player instanceof BGSilent) whoAmI=1;
-                else if(AbstractDungeon.player instanceof BGDefect) whoAmI=2;
-                else if(AbstractDungeon.player instanceof BGWatcher) whoAmI=3;
+                int whoAmI = 0;
+                if (AbstractDungeon.player instanceof BGIronclad) whoAmI = 0;
+                else if (AbstractDungeon.player instanceof BGSilent) whoAmI = 1;
+                else if (AbstractDungeon.player instanceof BGDefect) whoAmI = 2;
+                else if (AbstractDungeon.player instanceof BGWatcher) whoAmI = 3;
                 AbstractBGDungeon.rewardDeck = physicalRewardDecks.get(whoAmI);
                 AbstractBGDungeon.rareRewardDeck = physicalRareRewardDecks.get(whoAmI);
 
@@ -226,64 +250,88 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
                 cursesRewardDeck.addToTop(new BGDecay());
                 cursesRewardDeck.shuffle(cardRng);
 
-
                 ArrayList<AbstractCard> tmpPool = new ArrayList<>();
                 new BGColorless().getCardPool(tmpPool);
                 //logger.info("Adding colorless cards to reward deck?:");
                 for (AbstractCard c : tmpPool) {
                     //logger.info("Add "+c);
-                    if(c.type!=AbstractCard.CardType.STATUS && c.rarity != AbstractCard.CardRarity.SPECIAL
+                    if (
+                        c.type != AbstractCard.CardType.STATUS &&
+                        c.rarity != AbstractCard.CardRarity.SPECIAL
                     ) {
                         colorlessRewardDeck.addToTop(c.makeCopy());
                     }
                 }
                 colorlessRewardDeck.shuffle(cardRng);
 
-
                 logger.info("Results:");
-                logger.info("Ironclad physical deck contains "+physicalRewardDecks.get(0).size()+" cards");
-                logger.info("Silent physical deck contains "+physicalRewardDecks.get(1).size()+" cards");
-                logger.info("Defect physical deck contains "+physicalRewardDecks.get(2).size()+" cards");
-                logger.info("Watcher physical deck contains "+physicalRewardDecks.get(3).size()+" cards");
-                logger.info("Colorless deck contains "+colorlessRewardDeck.size()+" cards");
-                logger.info("Curses deck contains "+cursesRewardDeck.size()+" cards");
-                logger.info("Current reward deck "+whoAmI+" is "+physicalRewardDecks.get(whoAmI).size()+" cards");
+                logger.info(
+                    "Ironclad physical deck contains " +
+                        physicalRewardDecks.get(0).size() +
+                        " cards"
+                );
+                logger.info(
+                    "Silent physical deck contains " + physicalRewardDecks.get(1).size() + " cards"
+                );
+                logger.info(
+                    "Defect physical deck contains " + physicalRewardDecks.get(2).size() + " cards"
+                );
+                logger.info(
+                    "Watcher physical deck contains " + physicalRewardDecks.get(3).size() + " cards"
+                );
+                logger.info("Colorless deck contains " + colorlessRewardDeck.size() + " cards");
+                logger.info("Curses deck contains " + cursesRewardDeck.size() + " cards");
+                logger.info(
+                    "Current reward deck " +
+                        whoAmI +
+                        " is " +
+                        physicalRewardDecks.get(whoAmI).size() +
+                        " cards"
+                );
             }
         }
     }
 
     public static AbstractCard DrawFromRewardDeck() {
-        if(forceSpecificColor<0)
-            return DrawFromRewardDeck(rewardDeck,rareRewardDeck);
-        else
-            return DrawFromRewardDeck(physicalRewardDecks.get(forceSpecificColor),physicalRareRewardDecks.get(forceSpecificColor));
+        if (forceSpecificColor < 0) return DrawFromRewardDeck(rewardDeck, rareRewardDeck);
+        else return DrawFromRewardDeck(
+            physicalRewardDecks.get(forceSpecificColor),
+            physicalRareRewardDecks.get(forceSpecificColor)
+        );
     }
+
     public static AbstractCard DrawFromRewardDeck(CardGroup deck) {
-        return DrawFromRewardDeck(deck,null);
+        return DrawFromRewardDeck(deck, null);
     }
-    public static AbstractCard DrawFromRewardDeck(CardGroup deck, CardGroup raredeck){
+
+    public static AbstractCard DrawFromRewardDeck(CardGroup deck, CardGroup raredeck) {
         AbstractCard card = null;
-        int tempsize=deck.size();
-        if(deck.size()>0) {
+        int tempsize = deck.size();
+        if (deck.size() > 0) {
             card = deck.getTopCard();
             deck.removeTopCard();
-            deck.addToBottom(card.makeCopy());  //card gets copied here because we may have upgraded card after drawing it.
+            deck.addToBottom(card.makeCopy()); //card gets copied here because we may have upgraded card after drawing it.
         }
-        AbstractCard tempcard=card;
-        if(card instanceof BGGoldenTicket){
+        AbstractCard tempcard = card;
+        if (card instanceof BGGoldenTicket) {
             //card = DrawFromRareRewardDeck();
-            if(raredeck!=null)card=DrawFromRewardDeck(raredeck);
+            if (raredeck != null) card = DrawFromRewardDeck(raredeck);
         }
-        logger.info("AbstractBGDungeon: drew reward card "+card);
-        if(card==null){
-            logger.info("PANIC!  Card was null?!  Originally drew "+tempcard+" from deck of size "+tempsize);
+        logger.info("AbstractBGDungeon: drew reward card " + card);
+        if (card == null) {
+            logger.info(
+                "PANIC!  Card was null?!  Originally drew " +
+                    tempcard +
+                    " from deck of size " +
+                    tempsize
+            );
         }
         return card;
     }
 
-    public static AbstractCard DrawFromRareRewardDeck(){
-        AbstractCard card=null;
-        if(rareRewardDeck.size()>0) {
+    public static AbstractCard DrawFromRareRewardDeck() {
+        AbstractCard card = null;
+        if (rareRewardDeck.size() > 0) {
             card = rareRewardDeck.getTopCard();
             rareRewardDeck.removeTopCard();
             rareRewardDeck.addToBottom(card.makeCopy());
@@ -291,18 +339,19 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
         return card;
     }
 
-    public static AbstractCard DrawFromColorlessRewardDeck(){
-        AbstractCard card=null;
-        if(colorlessRewardDeck.size()>0) {
+    public static AbstractCard DrawFromColorlessRewardDeck() {
+        AbstractCard card = null;
+        if (colorlessRewardDeck.size() > 0) {
             card = colorlessRewardDeck.getTopCard();
             colorlessRewardDeck.removeTopCard();
             colorlessRewardDeck.addToBottom(card.makeCopy());
         }
         return card;
     }
-    public static AbstractCard DrawFromCursesRewardDeck(){
-        AbstractCard card=null;
-        if(cursesRewardDeck.size()>0) {
+
+    public static AbstractCard DrawFromCursesRewardDeck() {
+        AbstractCard card = null;
+        if (cursesRewardDeck.size() > 0) {
             card = cursesRewardDeck.getTopCard();
             cursesRewardDeck.removeTopCard();
             cursesRewardDeck.addToBottom(card);
@@ -310,12 +359,12 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
         return card;
     }
 
-    @SpirePatch(clz = AbstractDungeon.class, method = "getRewardCards",
-            paramtypez = {})
+    @SpirePatch(clz = AbstractDungeon.class, method = "getRewardCards", paramtypez = {})
     public static class getRewardCardsPatch {
+
         @SpirePrefixPatch
         public static SpireReturn<ArrayList<AbstractCard>> getRewardCards() {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 ArrayList<AbstractCard> retVal = new ArrayList<>();
                 int numCards = 3;
                 for (AbstractRelic r : player.relics) {
@@ -324,24 +373,32 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
                 if (ModHelper.isModEnabled("Binary")) {
                     numCards--;
                 }
-                if(AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss && CardCrawlGame.dungeon instanceof BGTheBeyond){
+                if (
+                    AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss &&
+                    CardCrawlGame.dungeon instanceof BGTheBeyond
+                ) {
                     //no card drops allowed in act3 boss room
                     numCards = 0;
                 }
-                boolean rare=false;
-                if((getCurrRoom() instanceof MonsterRoomBoss) || AbstractBGDungeon.forceRareRewards==true)
-                    rare=true;
+                boolean rare = false;
+                if (
+                    (getCurrRoom() instanceof MonsterRoomBoss) ||
+                    AbstractBGDungeon.forceRareRewards == true
+                ) rare = true;
                 for (int i = 0; i < numCards; i++) {
-                    AbstractCard card=null;
-                    if(!rare)
-                        card = DrawFromRewardDeck();
-                    else
-                        card  = DrawFromRareRewardDeck();
+                    AbstractCard card = null;
+                    if (!rare) card = DrawFromRewardDeck();
+                    else card = DrawFromRareRewardDeck();
 
-                    if(card!=null) {
-                        if(CardCrawlGame.dungeon instanceof AbstractBGDungeon
-                                && (!(CardCrawlGame.dungeon instanceof BGExordium) && getCurrRoom() instanceof MonsterRoomElite)
-                                || (getCurrRoom() instanceof EventRoom && getCurrRoom().event instanceof BGColosseum && ((BGColosseum)getCurrRoom().event).isElite)){
+                    if (card != null) {
+                        if (
+                            (CardCrawlGame.dungeon instanceof AbstractBGDungeon &&
+                                (!(CardCrawlGame.dungeon instanceof BGExordium) &&
+                                    getCurrRoom() instanceof MonsterRoomElite)) ||
+                            (getCurrRoom() instanceof EventRoom &&
+                                getCurrRoom().event instanceof BGColosseum &&
+                                ((BGColosseum) getCurrRoom().event).isElite)
+                        ) {
                             card.upgrade();
                         }
                         for (AbstractRelic r : player.relics) {
@@ -357,12 +414,12 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
         }
     }
 
-    @SpirePatch(clz = AbstractDungeon.class, method = "getColorlessRewardCards",
-            paramtypez = {})
+    @SpirePatch(clz = AbstractDungeon.class, method = "getColorlessRewardCards", paramtypez = {})
     public static class AbstractDungeonGetColorlessRewardCardsPatch {
+
         @SpirePrefixPatch
         public static SpireReturn<ArrayList<AbstractCard>> getColorlessRewardCards() {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 ArrayList<AbstractCard> retVal = new ArrayList<>();
                 int numCards = 3;
                 for (AbstractRelic r : player.relics) {
@@ -385,10 +442,14 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
     }
 
     //CardRewardScreen handles "pick 1 of X cards to add to your deck"
-        // -- patch removes the chosen card from the rewards deck
-    @SpirePatch2(clz = CardRewardScreen.class, method = "acquireCard",
-            paramtypez = {AbstractCard.class})
+    // -- patch removes the chosen card from the rewards deck
+    @SpirePatch2(
+        clz = CardRewardScreen.class,
+        method = "acquireCard",
+        paramtypez = { AbstractCard.class }
+    )
     public static class acquireCardPatch {
+
         @SpirePostfixPatch
         private static void acquireCard(AbstractCard hoveredCard) {
             if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
@@ -398,13 +459,17 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
     }
 
     //AbstractDungeon.getCard handles all other instances of "produce a random card"
-        // including cases where the card is not removed from the rewards deck
-    @SpirePatch(clz = AbstractDungeon.class, method = "getCard",
-            paramtypez = {AbstractCard.CardRarity.class})
+    // including cases where the card is not removed from the rewards deck
+    @SpirePatch(
+        clz = AbstractDungeon.class,
+        method = "getCard",
+        paramtypez = { AbstractCard.CardRarity.class }
+    )
     public static class getCardPatch1 {
+
         @SpirePrefixPatch
         public static SpireReturn<AbstractCard> getCard(AbstractCard.CardRarity rarity) {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 switch (rarity) {
                     case COMMON:
                     case UNCOMMON:
@@ -419,50 +484,66 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
         }
     }
 
-    @SpirePatch(clz = AbstractDungeon.class, method = "getCard",
-            paramtypez = {AbstractCard.CardRarity.class, Random.class})
+    @SpirePatch(
+        clz = AbstractDungeon.class,
+        method = "getCard",
+        paramtypez = { AbstractCard.CardRarity.class, Random.class }
+    )
     public static class getCardPatch2 {
+
         @SpirePrefixPatch
-        public static SpireReturn<AbstractCard> getCard(AbstractCard.CardRarity rarity, Random rng) {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon)
-                return SpireReturn.Return(AbstractDungeon.getCard(rarity));
-            else
-                return SpireReturn.Continue();
-        }
-    }
-    @SpirePatch(clz = AbstractDungeon.class, method = "getCardWithoutRng",
-            paramtypez = {AbstractCard.CardRarity.class})
-    public static class getCardPatch3 {
-        @SpirePrefixPatch
-        public static SpireReturn<AbstractCard> getCardWithoutRng(AbstractCard.CardRarity rarity) {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon)
-                return SpireReturn.Return(AbstractDungeon.getCard(rarity));
-            else
-                return SpireReturn.Continue();
+        public static SpireReturn<AbstractCard> getCard(
+            AbstractCard.CardRarity rarity,
+            Random rng
+        ) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) return SpireReturn.Return(
+                AbstractDungeon.getCard(rarity)
+            );
+            else return SpireReturn.Continue();
         }
     }
 
-    @SpirePatch(clz = AbstractDungeon.class, method = "getColorlessCardFromPool",
-            paramtypez = {AbstractCard.CardRarity.class})
-    public static class getCardPatch4 {
+    @SpirePatch(
+        clz = AbstractDungeon.class,
+        method = "getCardWithoutRng",
+        paramtypez = { AbstractCard.CardRarity.class }
+    )
+    public static class getCardPatch3 {
+
         @SpirePrefixPatch
-        public static SpireReturn<AbstractCard> getColorlessCardFromPool(AbstractCard.CardRarity rarity) {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+        public static SpireReturn<AbstractCard> getCardWithoutRng(AbstractCard.CardRarity rarity) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) return SpireReturn.Return(
+                AbstractDungeon.getCard(rarity)
+            );
+            else return SpireReturn.Continue();
+        }
+    }
+
+    @SpirePatch(
+        clz = AbstractDungeon.class,
+        method = "getColorlessCardFromPool",
+        paramtypez = { AbstractCard.CardRarity.class }
+    )
+    public static class getCardPatch4 {
+
+        @SpirePrefixPatch
+        public static SpireReturn<AbstractCard> getColorlessCardFromPool(
+            AbstractCard.CardRarity rarity
+        ) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 return SpireReturn.Return(DrawFromColorlessRewardDeck());
             }
             return SpireReturn.Continue();
         }
     }
 
-    private static void removeOneCardFromOneDeck(String cardname, CardGroup deck){
-
-        if(deck.removeCard(cardname)){
-           logger.info("Successfully removed "+cardname+" from a reward deck");
+    private static void removeOneCardFromOneDeck(String cardname, CardGroup deck) {
+        if (deck.removeCard(cardname)) {
+            logger.info("Successfully removed " + cardname + " from a reward deck");
         }
-
     }
 
-    public static void removeCardFromRewardDeck(AbstractCard card){
+    public static void removeCardFromRewardDeck(AbstractCard card) {
         //TODO: check if card came from a different color deck too!
         removeOneCardFromOneDeck(card.cardID, AbstractBGDungeon.rewardDeck);
         removeOneCardFromOneDeck(card.cardID, AbstractBGDungeon.rareRewardDeck);
@@ -471,13 +552,20 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
         //TODO: if remove was unsuccessful, complain loudly
     }
 
-
-    @SpirePatch(clz = AbstractDungeon.class, method = "transformCard",
-            paramtypez = {AbstractCard.class, boolean.class, Random.class})
+    @SpirePatch(
+        clz = AbstractDungeon.class,
+        method = "transformCard",
+        paramtypez = { AbstractCard.class, boolean.class, Random.class }
+    )
     public static class AbstractDungeonTransformCardPatch {
+
         @SpirePrefixPatch
-        public static SpireReturn<Void> transformCardPatch(AbstractCard c, boolean autoUpgrade, Random rng) {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon){
+        public static SpireReturn<Void> transformCardPatch(
+            AbstractCard c,
+            boolean autoUpgrade,
+            Random rng
+        ) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 transformedCard = DrawFromRewardDeck();
                 //TODO: not allowed to transform BGCurses (also, colorless cards transform into color cards)
                 UnlockTracker.markCardAsSeen(transformedCard.cardID);
@@ -492,12 +580,13 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
             return SpireReturn.Continue();
         }
     }
-    @SpirePatch(clz = AbstractDungeon.class, method = "getTransformedCard",
-            paramtypez = {})
+
+    @SpirePatch(clz = AbstractDungeon.class, method = "getTransformedCard", paramtypez = {})
     public static class getTransformedCardPatch {
+
         @SpirePrefixPatch
         public static SpireReturn<AbstractCard> getTransformedCard() {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon){
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 AbstractCard retVal = transformedCard;
                 AbstractBGDungeon.removeCardFromRewardDeck(transformedCard);
                 transformedCard = null;
@@ -507,37 +596,34 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
         }
     }
 
-
-
-    @SpirePatch2(clz = EventHelper.class, method = "roll",
-            paramtypez = {Random.class})
+    @SpirePatch2(clz = EventHelper.class, method = "roll", paramtypez = { Random.class })
     public static class EventHelperrollPatch {
+
         @SpirePrefixPatch
-        public static SpireReturn<EventHelper.RoomResult> roll (Random eventRng){
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon){
+        public static SpireReturn<EventHelper.RoomResult> roll(Random eventRng) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 //TODO: on ascension 3+, check the top event card + AbstractDungeon.floorNum first
-                if(true) {
+                if (true) {
                     return SpireReturn.Return(EventHelper.RoomResult.EVENT);
-                }else if(false) {
+                } else if (false) {
                     return SpireReturn.Return(EventHelper.RoomResult.MONSTER);
-                }else if(false){
+                } else if (false) {
                     return SpireReturn.Return(EventHelper.RoomResult.SHOP);
                 }
             }
             return SpireReturn.Continue();
-
         }
     }
 
-    @SpirePatch2(clz = CombatRewardScreen.class, method = "setupItemReward",
-            paramtypez = {})
+    @SpirePatch2(clz = CombatRewardScreen.class, method = "setupItemReward", paramtypez = {})
     public static class noCardsAtBossPatch {
-        @SpireInsertPatch(
-                locator= Locator.class,
-                localvars={}
-        )
+
+        @SpireInsertPatch(locator = Locator.class, localvars = {})
         public static SpireReturn<Void> open(CombatRewardScreen __instance) {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon && AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss){
+            if (
+                CardCrawlGame.dungeon instanceof AbstractBGDungeon &&
+                AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss
+            ) {
                 //skip card reward, but finish remainder of setupItemReward function
                 AbstractDungeon.overlayMenu.proceedButton.show();
                 __instance.hasTakenAll = false;
@@ -546,52 +632,68 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
             }
             return SpireReturn.Continue();
         }
+
         private static class Locator extends SpireInsertLocator {
-            public int[] Locate(CtBehavior ctMethodToPatch) throws CannotCompileException, PatchingException {
-                Matcher finalMatcher = new Matcher.MethodCallMatcher(ModHelper.class,"isModEnabled");
-                return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<Matcher>(), finalMatcher);
+
+            public int[] Locate(CtBehavior ctMethodToPatch)
+                throws CannotCompileException, PatchingException {
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(
+                    ModHelper.class,
+                    "isModEnabled"
+                );
+                return LineFinder.findInOrder(
+                    ctMethodToPatch,
+                    new ArrayList<Matcher>(),
+                    finalMatcher
+                );
             }
         }
     }
 
-
-    @SpirePatch2(clz = AbstractRoom.class, method = "addGoldToRewards",
-            paramtypez = {int.class})
+    @SpirePatch2(clz = AbstractRoom.class, method = "addGoldToRewards", paramtypez = { int.class })
     public static class addGoldToRewardsPatch {
+
         @SpirePrefixPatch
         public static SpireReturn<Void> addGoldToRewards(AbstractRoom __instance, int gold) {
             //TODO: if multicharacter, need completely different reward interface
-            if(AbstractDungeon.player instanceof MultiCharacter) return SpireReturn.Continue();
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+            if (AbstractDungeon.player instanceof MultiCharacter) return SpireReturn.Continue();
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 //logger.info("Encounter: "+AbstractDungeon.monsterList.get(0));  // <-- works as expected
-                String encounter="";
+                String encounter = "";
 
                 int goldModifier = 0;
-                if(__instance instanceof MonsterRoomBoss) {
+                if (__instance instanceof MonsterRoomBoss) {
                     encounter = AbstractDungeon.bossKey;
-                    logger.info("Boss key: "+AbstractDungeon.bossKey);
-                    if(AbstractDungeon.ascensionLevel>=10) {
+                    logger.info("Boss key: " + AbstractDungeon.bossKey);
+                    if (AbstractDungeon.ascensionLevel >= 10) {
                         //TODO: doublecheck this isn't affecting Tiny House
                         goldModifier = -1;
                     }
-                }else if(__instance instanceof MonsterRoomElite){
+                } else if (__instance instanceof MonsterRoomElite) {
                     encounter = AbstractDungeon.eliteMonsterList.get(0);
-                }else if(__instance instanceof MonsterRoom){
+                } else if (__instance instanceof MonsterRoom) {
                     encounter = AbstractDungeon.monsterList.get(0);
-                }else if(__instance instanceof TreasureRoom){
-                    gold=0;
-                }else if(__instance instanceof EventRoom && __instance.event instanceof BGColosseum){
-                    encounter = ((BGColosseum)__instance.event).encounterID;
-                }else if(__instance instanceof EventRoom && __instance.event instanceof BGDeadAdventurer){
-                    encounter = ((BGDeadAdventurer)__instance.event).encounterID;
-                }else if(__instance instanceof EventRoom && __instance.event instanceof BGHallwayEncounter){
-                    encounter = ((BGHallwayEncounter)__instance.event).encounterID;
+                } else if (__instance instanceof TreasureRoom) {
+                    gold = 0;
+                } else if (
+                    __instance instanceof EventRoom && __instance.event instanceof BGColosseum
+                ) {
+                    encounter = ((BGColosseum) __instance.event).encounterID;
+                } else if (
+                    __instance instanceof EventRoom && __instance.event instanceof BGDeadAdventurer
+                ) {
+                    encounter = ((BGDeadAdventurer) __instance.event).encounterID;
+                } else if (
+                    __instance instanceof EventRoom &&
+                    __instance.event instanceof BGHallwayEncounter
+                ) {
+                    encounter = ((BGHallwayEncounter) __instance.event).encounterID;
                 }
-                if(MonsterGroupRewardsList.rewards.containsKey(encounter)){
-                    gold=MonsterGroupRewardsList.rewards.get(encounter).gold;
+                if (MonsterGroupRewardsList.rewards.containsKey(encounter)) {
+                    gold = MonsterGroupRewardsList.rewards.get(encounter).gold;
                 }
-                if(gold>0) {
-                    gold+=goldModifier;
+                if (gold > 0) {
+                    gold += goldModifier;
                     for (RewardItem i : __instance.rewards) {
                         if (i.type == RewardItem.RewardType.GOLD) {
                             i.incrementGold(gold);
@@ -606,119 +708,163 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
         }
     }
 
-    @SpirePatch2(clz = AbstractRoom.class, method = "addPotionToRewards",
-            paramtypez = {})
+    @SpirePatch2(clz = AbstractRoom.class, method = "addPotionToRewards", paramtypez = {})
     public static class addPotionToRewardsPatch {
+
         @SpirePrefixPatch
         public static SpireReturn<Void> addPotionToRewards(AbstractRoom __instance) {
             //TODO: if multicharacter, need completely different reward interface
-            if(AbstractDungeon.player instanceof MultiCharacter) return SpireReturn.Continue();
-            boolean potion=false;
-            String encounter="";
+            if (AbstractDungeon.player instanceof MultiCharacter) return SpireReturn.Continue();
+            boolean potion = false;
+            String encounter = "";
             //BoardGame.logger.info("addPotionToRewardsPatch...");
-            if(__instance instanceof MonsterRoomBoss){
+            if (__instance instanceof MonsterRoomBoss) {
                 //BoardGame.logger.info("...MonsterRoomBoss...");
                 encounter = "NO POTION";
-            }else if(__instance instanceof MonsterRoomElite){
+            } else if (__instance instanceof MonsterRoomElite) {
                 encounter = AbstractDungeon.eliteMonsterList.get(0);
-            }else if(__instance instanceof MonsterRoom) {
+            } else if (__instance instanceof MonsterRoom) {
                 encounter = AbstractDungeon.monsterList.get(0);
-            }else if(__instance instanceof EventRoom && __instance.event instanceof BGColosseum){
-                encounter = ((BGColosseum)__instance.event).encounterID;
-            }else if(__instance instanceof EventRoom && __instance.event instanceof BGDeadAdventurer){
-                encounter = ((BGDeadAdventurer)__instance.event).encounterID;
-            }else if(__instance instanceof EventRoom && __instance.event instanceof BGHallwayEncounter){
-                encounter = ((BGHallwayEncounter)__instance.event).encounterID;
+            } else if (__instance instanceof EventRoom && __instance.event instanceof BGColosseum) {
+                encounter = ((BGColosseum) __instance.event).encounterID;
+            } else if (
+                __instance instanceof EventRoom && __instance.event instanceof BGDeadAdventurer
+            ) {
+                encounter = ((BGDeadAdventurer) __instance.event).encounterID;
+            } else if (
+                __instance instanceof EventRoom && __instance.event instanceof BGHallwayEncounter
+            ) {
+                encounter = ((BGHallwayEncounter) __instance.event).encounterID;
             }
-            if(MonsterGroupRewardsList.rewards.containsKey(encounter)){
-                potion=MonsterGroupRewardsList.rewards.get(encounter).potion;
+            if (MonsterGroupRewardsList.rewards.containsKey(encounter)) {
+                potion = MonsterGroupRewardsList.rewards.get(encounter).potion;
             }
-            if(potion){
-                CardCrawlGame.metricData.potions_floor_spawned.add(Integer.valueOf(AbstractDungeon.floorNum));
+            if (potion) {
+                CardCrawlGame.metricData.potions_floor_spawned.add(
+                    Integer.valueOf(AbstractDungeon.floorNum)
+                );
                 __instance.rewards.add(new RewardItem(AbstractDungeon.returnRandomPotion()));
             }
-            if(AbstractDungeon.player.hasRelic("BGWhite Beast Statue")){
+            if (AbstractDungeon.player.hasRelic("BGWhite Beast Statue")) {
                 //BoardGame.logger.info("...BGWhite Beast Statue...");
 
-                CardCrawlGame.metricData.potions_floor_spawned.add(Integer.valueOf(AbstractDungeon.floorNum));
+                CardCrawlGame.metricData.potions_floor_spawned.add(
+                    Integer.valueOf(AbstractDungeon.floorNum)
+                );
                 __instance.rewards.add(new RewardItem(AbstractDungeon.returnRandomPotion()));
-
-            }else if(ReflectionHacks.getPrivate(AbstractDungeon.combatRewardScreen, CombatRewardScreen.class,"labelOverride")
-                    ==CardCrawlGame.languagePack.getRelicStrings("BGTiny House").DESCRIPTIONS[3]){
-                CardCrawlGame.metricData.potions_floor_spawned.add(Integer.valueOf(AbstractDungeon.floorNum));
+            } else if (
+                ReflectionHacks.getPrivate(
+                    AbstractDungeon.combatRewardScreen,
+                    CombatRewardScreen.class,
+                    "labelOverride"
+                ) ==
+                CardCrawlGame.languagePack.getRelicStrings("BGTiny House").DESCRIPTIONS[3]
+            ) {
+                CardCrawlGame.metricData.potions_floor_spawned.add(
+                    Integer.valueOf(AbstractDungeon.floorNum)
+                );
                 __instance.rewards.add(new RewardItem(AbstractDungeon.returnRandomPotion()));
             }
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 return SpireReturn.Return();
             }
             return SpireReturn.Continue();
         }
     }
 
-
-    @SpirePatch2(clz = MonsterHelper.class, method = "getEncounter",
-            paramtypez = {String.class})
+    @SpirePatch2(clz = MonsterHelper.class, method = "getEncounter", paramtypez = { String.class })
     public static class getEncounterPatch {
+
         @SpirePrefixPatch
         public static SpireReturn<MonsterGroup> getEncounter(String key) {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 switch (key) {
                     case "The Guardian":
-                        return SpireReturn.Return(new MonsterGroup((AbstractMonster) new BGTheGuardian()));
+                        return SpireReturn.Return(
+                            new MonsterGroup((AbstractMonster) new BGTheGuardian())
+                        );
                     case "Hexaghost":
-                        return SpireReturn.Return(new MonsterGroup((AbstractMonster) new BGHexaghost()));
+                        return SpireReturn.Return(
+                            new MonsterGroup((AbstractMonster) new BGHexaghost())
+                        );
                     case "Slime Boss":
-                        return SpireReturn.Return(new MonsterGroup((AbstractMonster) new BGSlimeBoss()));
+                        return SpireReturn.Return(
+                            new MonsterGroup((AbstractMonster) new BGSlimeBoss())
+                        );
                     case "Automaton":
-                        return SpireReturn.Return(new MonsterGroup((AbstractMonster) new BGBronzeAutomaton()));
+                        return SpireReturn.Return(
+                            new MonsterGroup((AbstractMonster) new BGBronzeAutomaton())
+                        );
                     case "Collector":
-                        return SpireReturn.Return(new MonsterGroup((AbstractMonster) new BGTheCollector()));
+                        return SpireReturn.Return(
+                            new MonsterGroup((AbstractMonster) new BGTheCollector())
+                        );
                     case "Champ":
-                        return SpireReturn.Return(new MonsterGroup((AbstractMonster) new BGChamp()));
+                        return SpireReturn.Return(
+                            new MonsterGroup((AbstractMonster) new BGChamp())
+                        );
                     case "Time Eater":
-                        return SpireReturn.Return(new MonsterGroup((AbstractMonster) new BGTimeEater()));
+                        return SpireReturn.Return(
+                            new MonsterGroup((AbstractMonster) new BGTimeEater())
+                        );
                     case "Awakened One":
-                        return SpireReturn.Return(new MonsterGroup(new AbstractMonster[] {
-                                (AbstractMonster)new BGCultist(-590.0F, 10.0F, false),
-                                (AbstractMonster)new BGCultist(-298.0F, -10.0F, false),
-                                (AbstractMonster)new BGAwakenedOne(100.0F, 15.0F) }));
+                        return SpireReturn.Return(
+                            new MonsterGroup(
+                                new AbstractMonster[] {
+                                    (AbstractMonster) new BGCultist(-590.0F, 10.0F, false),
+                                    (AbstractMonster) new BGCultist(-298.0F, -10.0F, false),
+                                    (AbstractMonster) new BGAwakenedOne(100.0F, 15.0F),
+                                }
+                            )
+                        );
                     case "Donu and Deca":
-                        return SpireReturn.Return(new MonsterGroup(new AbstractMonster[] {
-                                (AbstractMonster)new BGDeca(),
-                                (AbstractMonster)new BGDonu() }));
+                        return SpireReturn.Return(
+                            new MonsterGroup(
+                                new AbstractMonster[] {
+                                    (AbstractMonster) new BGDeca(),
+                                    (AbstractMonster) new BGDonu(),
+                                }
+                            )
+                        );
                     case "The Heart":
-                        return SpireReturn.Return(new MonsterGroup(new AbstractMonster[] {
-                                (AbstractMonster)new BGCorruptHeart()}));
+                        return SpireReturn.Return(
+                            new MonsterGroup(
+                                new AbstractMonster[] { (AbstractMonster) new BGCorruptHeart() }
+                            )
+                        );
                 }
             }
             return SpireReturn.Continue();
         }
     }
 
-
-    public void nextRoomTransition(SaveFile saveFile){
+    public void nextRoomTransition(SaveFile saveFile) {
         super.nextRoomTransition(saveFile);
-        EntropicBrewPotionButton.TopPanelEntropicInterface.entropicBrewPotionButtons.set(AbstractDungeon.topPanel, new ArrayList<>());
+        EntropicBrewPotionButton.TopPanelEntropicInterface.entropicBrewPotionButtons.set(
+            AbstractDungeon.topPanel,
+            new ArrayList<>()
+        );
     }
 
-
-    public void populateMonsterList(ArrayList<MonsterInfo> monsters, int numMonsters, boolean elites) {
+    public void populateMonsterList(
+        ArrayList<MonsterInfo> monsters,
+        int numMonsters,
+        boolean elites
+    ) {
         //TODO: monsters go to the bottom of the monster deck after they're selected
         // (rather than reshuffling the entire deck when it's depleted)
         // (but First Encounter monsters don't go back into the deck)
         //TODO: should we ignore numMonsters and always use monsters.size() instead?
-        numMonsters=Math.min(numMonsters,monsters.size());
+        numMonsters = Math.min(numMonsters, monsters.size());
         Collections.shuffle(monsters, new java.util.Random(monsterRng.randomLong()));
-        if(!elites) {
+        if (!elites) {
             for (int i = 0; i < numMonsters; ++i) {
                 monsterList.add(monsters.get(i).name);
             }
-        }else{
+        } else {
             for (int i = 0; i < numMonsters; ++i) {
                 eliteMonsterList.add(monsters.get(i).name);
             }
         }
     }
-
 }
-

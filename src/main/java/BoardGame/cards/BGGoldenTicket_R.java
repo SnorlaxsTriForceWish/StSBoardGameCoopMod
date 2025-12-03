@@ -11,9 +11,11 @@ public class BGGoldenTicket_R extends BGGoldenTicket {
 
     public static final String ID = BoardGame.makeID("GoldenTicket_R");
     public static final CardColor COLOR = BGIronclad.Enums.BG_RED;
+
     public BGGoldenTicket_R() {
         super(ID, COLOR);
     }
+
     public AbstractCard makeCopy() {
         return new BGGoldenTicket_R();
     }

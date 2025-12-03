@@ -1,4 +1,5 @@
 package BoardGame.cards.BGRed;
+
 import BoardGame.cards.AbstractBGCard;
 import BoardGame.characters.BGIronclad;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -13,34 +14,41 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 //TODO: "to any player"
 public class BGTrueGrit extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGTrue Grit");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGTrue Grit"
+    );
     public static final String ID = "BGTrue Grit";
 
     public BGTrueGrit() {
-        super("BGTrue Grit", cardStrings.NAME, "red/skill/true_grit", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.COMMON, AbstractCard.CardTarget.SELF);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGTrue Grit",
+            cardStrings.NAME,
+            "red/skill/true_grit",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.COMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseBlock = 1;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
         if (true) {
-            addToBot((AbstractGameAction)new ExhaustAction(1, false));
+            addToBot((AbstractGameAction) new ExhaustAction(1, false));
         } else {
-            addToBot((AbstractGameAction)new ExhaustAction(1, true, false, false));
+            addToBot((AbstractGameAction) new ExhaustAction(1, true, false, false));
         }
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -51,10 +59,7 @@ public class BGTrueGrit extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGTrueGrit();
     }
 }
-
-

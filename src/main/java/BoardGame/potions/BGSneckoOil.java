@@ -14,43 +14,61 @@ import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 public class BGSneckoOil extends AbstractPotion {
-    private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString("BoardGame:BGSneckoOil");
+
+    private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
+        "BoardGame:BGSneckoOil"
+    );
 
     public static final String POTION_ID = "BGSneckoOil";
 
-
     public BGSneckoOil() {
-        super(potionStrings.NAME, "BGSneckoOil", AbstractPotion.PotionRarity.RARE, AbstractPotion.PotionSize.SNECKO, AbstractPotion.PotionColor.SNECKO);
+        super(
+            potionStrings.NAME,
+            "BGSneckoOil",
+            AbstractPotion.PotionRarity.RARE,
+            AbstractPotion.PotionSize.SNECKO,
+            AbstractPotion.PotionColor.SNECKO
+        );
         this.isThrown = false;
     }
 
-    public int getPrice() {return 3;}
+    public int getPrice() {
+        return 3;
+    }
 
     public void initializeData() {
         this.potency = getPotency();
-        this.description = potionStrings.DESCRIPTIONS[0] + this.potency + potionStrings.DESCRIPTIONS[1];
+        this.description =
+            potionStrings.DESCRIPTIONS[0] + this.potency + potionStrings.DESCRIPTIONS[1];
         this.tips.clear();
         this.tips.add(new PowerTip(this.name, this.description));
     }
 
-
     public void use(AbstractCreature target) {
         if ((AbstractDungeon.getCurrRoom()).phase == AbstractRoom.RoomPhase.COMBAT) {
-            addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)AbstractDungeon.player, this.potency));
+            addToBot(
+                (AbstractGameAction) new DrawCardAction(
+                    (AbstractCreature) AbstractDungeon.player,
+                    this.potency
+                )
+            );
             //addToBot((AbstractGameAction)new RandomizeHandCostAction());
-            addToBot((AbstractGameAction)new MakeTempCardInDrawPileAction((AbstractCard)new BGDazed(), 2, false, true));
+            addToBot(
+                (AbstractGameAction) new MakeTempCardInDrawPileAction(
+                    (AbstractCard) new BGDazed(),
+                    2,
+                    false,
+                    true
+                )
+            );
         }
     }
-
 
     public int getPotency(int ascensionLevel) {
         return 5;
     }
 
-
     public AbstractPotion makeCopy() {
         return new BGSneckoOil();
     }
 }
-
-

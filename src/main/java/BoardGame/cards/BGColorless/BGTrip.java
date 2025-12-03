@@ -14,54 +14,55 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGTrip extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGTrip");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGTrip"
+    );
     public static final String ID = "BGTrip";
 
     public BGTrip() {
-        super("BGTrip", cardStrings.NAME, "colorless/skill/trip", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.ENEMY);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGTrip",
+            cardStrings.NAME,
+            "colorless/skill/trip",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseMagicNumber = 2;
         this.magicNumber = this.baseMagicNumber;
-        this.exhaust=true;
+        this.exhaust = true;
     }
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)p, (AbstractPower)new BGVulnerablePower((AbstractCreature)m, this.magicNumber, false), this.magicNumber));
-
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) m,
+                (AbstractCreature) p,
+                (AbstractPower) new BGVulnerablePower(
+                    (AbstractCreature) m,
+                    this.magicNumber,
+                    false
+                ),
+                this.magicNumber
+            )
+        );
     }
-
-
-
-
-
-
-
-
 
     public AbstractCard makeCopy() {
         return new BGTrip();
     }
 
-
     public void upgrade() {
         if (!this.upgraded) {
             upgradeName();
             this.upgradeMagicNumber(1);
-//            this.target = AbstractCard.CardTarget.ALL_ENEMY;
+            //            this.target = AbstractCard.CardTarget.ALL_ENEMY;
             this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
         }
     }
 }
-
-

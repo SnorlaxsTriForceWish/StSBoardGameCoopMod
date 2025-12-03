@@ -1,4 +1,3 @@
-
 package BoardGame.monsters.bgexordium;
 
 import BoardGame.actions.BGSpawnTwoGremlinsAction;
@@ -25,7 +24,9 @@ import com.megacrit.cardcrawl.powers.AngryPower;
 import com.megacrit.cardcrawl.vfx.SpeechBubble;
 
 public class BGGremlinAngry extends AbstractBGMonster implements BGDamageIcons {
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("GremlinWarrior");
+
+    private static final MonsterStrings monsterStrings =
+        CardCrawlGame.languagePack.getMonsterStrings("GremlinWarrior");
     public static final String ID = "BGGremlinAngry";
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
@@ -38,70 +39,114 @@ public class BGGremlinAngry extends AbstractBGMonster implements BGDamageIcons {
     private static final int A_2_HP_MIN = 21;
     private static final int A_2_HP_MAX = 25;
     private boolean leader;
+
     public BGGremlinAngry(float x, float y, boolean leader) {
         super(NAME, "BGGremlinAngry", 24, -4.0F, 12.0F, 130.0F, 194.0F, null, x, y);
         this.dialogY = 30.0F * Settings.scale;
-        this.leader=leader;
-
+        this.leader = leader;
 
         setHp(4);
 
+        this.damage.add(new DamageInfo((AbstractCreature) this, 1));
 
-        this.damage.add(new DamageInfo((AbstractCreature)this, 1));
-
-
-        loadAnimation("images/monsters/theBottom/angryGremlin/skeleton.atlas", "images/monsters/theBottom/angryGremlin/skeleton.json", 1.0F);
-
-
+        loadAnimation(
+            "images/monsters/theBottom/angryGremlin/skeleton.atlas",
+            "images/monsters/theBottom/angryGremlin/skeleton.json",
+            1.0F
+        );
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
     }
 
-
     public void usePreBattleAction() {
-        if(this.leader){
-            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new BGSpawnTwoGremlinsAction());
+        if (this.leader) {
+            AbstractDungeon.actionManager.addToBottom(
+                (AbstractGameAction) new BGSpawnTwoGremlinsAction()
+            );
         }
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new AngryPower((AbstractCreature)this, 1)));
-
+        AbstractDungeon.actionManager.addToBottom(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) this,
+                (AbstractCreature) this,
+                (AbstractPower) new AngryPower((AbstractCreature) this, 1)
+            )
+        );
     }
-
 
     public void takeTurn() {
         switch (this.nextMove) {
             case 1:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateSlowAttackAction((AbstractCreature)this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(0), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new AnimateSlowAttackAction((AbstractCreature) this)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(0),
+                        AbstractGameAction.AttackEffect.SLASH_DIAGONAL
+                    )
+                );
 
                 if (this.escapeNext) {
-                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SetMoveAction(this, (byte)99, AbstractMonster.Intent.ESCAPE)); break;
+                    AbstractDungeon.actionManager.addToBottom(
+                        (AbstractGameAction) new SetMoveAction(
+                            this,
+                            (byte) 99,
+                            AbstractMonster.Intent.ESCAPE
+                        )
+                    );
+                    break;
                 }
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SetMoveAction(this, (byte)1, AbstractMonster.Intent.ATTACK, ((DamageInfo)this.damage
-                        .get(0)).base));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new SetMoveAction(
+                        this,
+                        (byte) 1,
+                        AbstractMonster.Intent.ATTACK,
+                        ((DamageInfo) this.damage.get(0)).base
+                    )
+                );
                 break;
-
             case 99:
                 playSfx();
-                AbstractDungeon.effectList.add(new SpeechBubble(this.hb.cX + this.dialogX, this.hb.cY + this.dialogY, 2.5F, DIALOG[1], false));
+                AbstractDungeon.effectList.add(
+                    new SpeechBubble(
+                        this.hb.cX + this.dialogX,
+                        this.hb.cY + this.dialogY,
+                        2.5F,
+                        DIALOG[1],
+                        false
+                    )
+                );
 
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new EscapeAction(this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SetMoveAction(this, (byte)99, AbstractMonster.Intent.ESCAPE));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new EscapeAction(this)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new SetMoveAction(
+                        this,
+                        (byte) 99,
+                        AbstractMonster.Intent.ESCAPE
+                    )
+                );
                 break;
         }
     }
 
-
-
     private void playSfx() {
         int roll = MathUtils.random(2);
         if (roll == 0) {
-            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("VO_GREMLINANGRY_1A"));
+            AbstractDungeon.actionManager.addToBottom(
+                (AbstractGameAction) new SFXAction("VO_GREMLINANGRY_1A")
+            );
         } else if (roll == 1) {
-            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("VO_GREMLINANGRY_1B"));
+            AbstractDungeon.actionManager.addToBottom(
+                (AbstractGameAction) new SFXAction("VO_GREMLINANGRY_1B")
+            );
         } else {
-            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("VO_GREMLINANGRY_1C"));
+            AbstractDungeon.actionManager.addToBottom(
+                (AbstractGameAction) new SFXAction("VO_GREMLINANGRY_1C")
+            );
         }
     }
 
@@ -114,35 +159,29 @@ public class BGGremlinAngry extends AbstractBGMonster implements BGDamageIcons {
         }
     }
 
-
     public void die() {
         super.die();
         playDeathSfx();
     }
 
-
     public void escapeNext() {
-        if (!this.cannotEscape &&
-                !this.escapeNext) {
+        if (!this.cannotEscape && !this.escapeNext) {
             this.escapeNext = true;
-            AbstractDungeon.effectList.add(new SpeechBubble(this.dialogX, this.dialogY, 3.0F, DIALOG[2], false));
+            AbstractDungeon.effectList.add(
+                new SpeechBubble(this.dialogX, this.dialogY, 3.0F, DIALOG[2], false)
+            );
         }
     }
 
-
-
     protected void getMove(int num) {
-        setMove((byte)1, AbstractMonster.Intent.ATTACK, ((DamageInfo)this.damage.get(0)).base);
+        setMove((byte) 1, AbstractMonster.Intent.ATTACK, ((DamageInfo) this.damage.get(0)).base);
     }
 
-
-//    public void deathReact() {
-//        if (this.intent != AbstractMonster.Intent.ESCAPE && !this.isDying) {
-//            AbstractDungeon.effectList.add(new SpeechBubble(this.dialogX, this.dialogY, 3.0F, DIALOG[2], false));
-//            setMove((byte)99, AbstractMonster.Intent.ESCAPE);
-//            createIntent();
-//        }
-//    }
+    //    public void deathReact() {
+    //        if (this.intent != AbstractMonster.Intent.ESCAPE && !this.isDying) {
+    //            AbstractDungeon.effectList.add(new SpeechBubble(this.dialogX, this.dialogY, 3.0F, DIALOG[2], false));
+    //            setMove((byte)99, AbstractMonster.Intent.ESCAPE);
+    //            createIntent();
+    //        }
+    //    }
 }
-
-

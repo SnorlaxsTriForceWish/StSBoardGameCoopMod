@@ -8,8 +8,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class BGStudyPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGStudyPower";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGStudyPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGStudyPower"
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
@@ -22,7 +25,6 @@ public class BGStudyPower extends AbstractBGPower {
         loadRegion("draw");
     }
 
-
     public void updateDescription() {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
@@ -30,9 +32,12 @@ public class BGStudyPower extends AbstractBGPower {
     public void atStartOfTurnPostDraw() {
         if (AbstractDungeon.player.stance.ID.equals("BGCalm")) {
             this.flash();
-            addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)AbstractDungeon.player, 2));
+            addToBot(
+                (AbstractGameAction) new DrawCardAction(
+                    (AbstractCreature) AbstractDungeon.player,
+                    2
+                )
+            );
         }
     }
 }
-
-

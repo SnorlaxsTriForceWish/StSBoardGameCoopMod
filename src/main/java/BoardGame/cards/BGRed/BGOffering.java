@@ -1,6 +1,5 @@
 package BoardGame.cards.BGRed;
 
-
 import BoardGame.cards.AbstractBGCard;
 import BoardGame.characters.BGIronclad;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -19,37 +18,45 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.OfferingEffect;
 
 public class BGOffering extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGOffering");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGOffering"
+    );
     public static final String ID = "BGOffering";
 
     public BGOffering() {
-        super("BGOffering", cardStrings.NAME, "red/skill/offering", 0, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.RARE, AbstractCard.CardTarget.SELF);
-
-
-
-
-
-
-
-
-
+        super(
+            "BGOffering",
+            cardStrings.NAME,
+            "red/skill/offering",
+            0,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.RARE,
+            AbstractCard.CardTarget.SELF
+        );
         this.exhaust = true;
         this.baseMagicNumber = 3;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (Settings.FAST_MODE) {
-            addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new OfferingEffect(), 0.1F));
+            addToBot(
+                (AbstractGameAction) new VFXAction((AbstractGameEffect) new OfferingEffect(), 0.1F)
+            );
         } else {
-            addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new OfferingEffect(), 0.5F));
+            addToBot(
+                (AbstractGameAction) new VFXAction((AbstractGameEffect) new OfferingEffect(), 0.5F)
+            );
         }
-        addToBot((AbstractGameAction)new LoseHPAction((AbstractCreature)p, (AbstractCreature)p, 1));
-        addToBot((AbstractGameAction)new GainEnergyAction(2));
-        addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)p, this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new LoseHPAction((AbstractCreature) p, (AbstractCreature) p, 1)
+        );
+        addToBot((AbstractGameAction) new GainEnergyAction(2));
+        addToBot((AbstractGameAction) new DrawCardAction((AbstractCreature) p, this.magicNumber));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -60,10 +67,7 @@ public class BGOffering extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGOffering();
     }
 }
-
-

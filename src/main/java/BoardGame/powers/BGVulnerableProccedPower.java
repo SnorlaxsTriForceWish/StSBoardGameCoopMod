@@ -13,8 +13,11 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGVulnerableProccedPower extends AbstractBGPower implements InvisiblePower {
+
     public static final String POWER_ID = BoardGame.makeID("VulnerableProcced");
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        POWER_ID
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
     private boolean justApplied = false;
@@ -28,47 +31,44 @@ public class BGVulnerableProccedPower extends AbstractBGPower implements Invisib
         updateDescription();
         loadRegion("shackle");
 
-//        if (isSourceMonster) {
-//            this.justApplied = true;
-//        }
+        //        if (isSourceMonster) {
+        //            this.justApplied = true;
+        //        }
 
         this.type = AbstractPower.PowerType.BUFF;
         this.isTurnBased = false;
 
-
         this.priority = 99;
     }
 
-
-
-
-//    public void atEndOfTurn(boolean isPlayer) {
-//        //if player, wears off at end of monster action
-//        if(this.owner==AbstractDungeon.player) {
-//            addToBot((AbstractGameAction) new ReducePowerAction(this.owner, this.owner, "BGVulnerable", 1));
-//            addToBot((AbstractGameAction) new RemoveSpecificPowerAction(this.owner, this.owner, "VulnerableProcced"));
-//        }
-//    }
+    //    public void atEndOfTurn(boolean isPlayer) {
+    //        //if player, wears off at end of monster action
+    //        if(this.owner==AbstractDungeon.player) {
+    //            addToBot((AbstractGameAction) new ReducePowerAction(this.owner, this.owner, "BGVulnerable", 1));
+    //            addToBot((AbstractGameAction) new RemoveSpecificPowerAction(this.owner, this.owner, "VulnerableProcced"));
+    //        }
+    //    }
 
     public void onAfterUseCard(AbstractCard card, UseCardAction action) {
         //if monster, wears off after card resolves
         //be careful when using with "slow" cards -- damage action must go on top of stack
-        addToTop((AbstractGameAction) new RemoveSpecificPowerAction(this.owner, this.owner, "VulnerableProcced"));
-        addToTop((AbstractGameAction) new ReducePowerAction(this.owner, this.owner, "BGVulnerable", 1));
-
+        addToTop(
+            (AbstractGameAction) new RemoveSpecificPowerAction(
+                this.owner,
+                this.owner,
+                "VulnerableProcced"
+            )
+        );
+        addToTop(
+            (AbstractGameAction) new ReducePowerAction(this.owner, this.owner, "BGVulnerable", 1)
+        );
     }
 
     public void updateDescription() {
         this.description = DESCRIPTIONS[0];
     }
 
-
-
     public void stackPower(int stackAmount) {
-        this.amount=1;
+        this.amount = 1;
     }
-
-
 }
-
-

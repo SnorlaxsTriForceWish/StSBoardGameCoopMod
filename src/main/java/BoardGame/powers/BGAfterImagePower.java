@@ -13,11 +13,9 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import java.util.ArrayList;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
-
-import java.util.ArrayList;
-
 
 //it appears that only DiscardAction is used to discard cards
 // (DiscardSpecificCardAction does not apply to the board game)
@@ -29,9 +27,12 @@ import java.util.ArrayList;
 //TODO: decide whether CorpseExplosion procs AfterImage
 
 public class BGAfterImagePower extends AbstractBGPower {
+
     public static final String POWER_ID = "BoardGame:BGAfterImagePower";
 
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGAfterImagePower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGAfterImagePower"
+    );
 
     public BGAfterImagePower(AbstractCreature owner, int amount) {
         this.name = powerStrings.NAME;
@@ -43,67 +44,100 @@ public class BGAfterImagePower extends AbstractBGPower {
     }
 
     public void updateDescription() {
-        this.description = powerStrings.DESCRIPTIONS[0] + this.amount + powerStrings.DESCRIPTIONS[1];
+        this.description =
+            powerStrings.DESCRIPTIONS[0] + this.amount + powerStrings.DESCRIPTIONS[1];
     }
 
-
-    public void onDiscardAction(){
+    public void onDiscardAction() {
         //public void onDiscardAction(int amount, int handSize, boolean endTurn){
         //if(endTurn==false && amount>0 && handSize>0){
-        if(true){
+        if (true) {
             if (Settings.FAST_MODE) {
-                addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature) AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, this.amount, true));
+                addToBot(
+                    (AbstractGameAction) new GainBlockAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.amount,
+                        true
+                    )
+                );
             } else {
-                addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, this.amount));
+                addToBot(
+                    (AbstractGameAction) new GainBlockAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.amount
+                    )
+                );
             }
             flash();
         }
     }
 
+    @SpirePatch2(clz = DiscardAction.class, method = SpirePatch.CLASS)
+    public static class DiscardTotalField {
 
-
-    @SpirePatch2(clz=DiscardAction.class,method=SpirePatch.CLASS)
-    public static class DiscardTotalField{
-        public static SpireField<Integer> discardTotal = new SpireField<>(()->0);
+        public static SpireField<Integer> discardTotal = new SpireField<>(() -> 0);
     }
-    @SpirePatch2(clz= DiscardAction.class,method="update",paramtypez={})
+
+    @SpirePatch2(clz = DiscardAction.class, method = "update", paramtypez = {})
     public static class RecordDiscardTotalBeforeDiscardActionPatch {
+
         @SpireInsertPatch(
-                locator = BGAfterImagePower.RecordDiscardTotalBeforeDiscardActionPatch.Locator.class,
-                localvars = {}
+            locator = BGAfterImagePower.RecordDiscardTotalBeforeDiscardActionPatch.Locator.class,
+            localvars = {}
         )
         public static void Insert(DiscardAction __instance) {
-            if(!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)){
+            if (!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) {
                 return;
             }
-            DiscardTotalField.discardTotal.set(__instance, GameActionManager.totalDiscardedThisTurn);
+            DiscardTotalField.discardTotal.set(
+                __instance,
+                GameActionManager.totalDiscardedThisTurn
+            );
         }
+
         private static class Locator extends SpireInsertLocator {
-            public int[] Locate(CtBehavior ctMethodToPatch) throws CannotCompileException, PatchingException {
-                Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractDungeon.class, "getMonsters");
-                return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<Matcher>(), finalMatcher);
+
+            public int[] Locate(CtBehavior ctMethodToPatch)
+                throws CannotCompileException, PatchingException {
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(
+                    AbstractDungeon.class,
+                    "getMonsters"
+                );
+                return LineFinder.findInOrder(
+                    ctMethodToPatch,
+                    new ArrayList<Matcher>(),
+                    finalMatcher
+                );
             }
         }
     }
 
-    @SpirePatch2(clz= DiscardAction.class,method="update",paramtypez={})
+    @SpirePatch2(clz = DiscardAction.class, method = "update", paramtypez = {})
     public static class CheckDiscardTotalAfterDiscardActionPatch {
+
         @SpirePostfixPatch
         public static void Postfix(DiscardAction __instance, @ByRef boolean[] ___endTurn) {
-            if(!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)){
+            if (!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) {
                 return;
             }
-            if(___endTurn[0]){
+            if (___endTurn[0]) {
                 return;
             }
-            if(__instance.isDone) {
+            if (__instance.isDone) {
                 //BoardGame.BoardGame.logger.info("BGAfterImagePower.update.postfix.isDone...");
                 //BoardGame.BoardGame.logger.info("...compare "+GameActionManager.totalDiscardedThisTurn+" , "+DiscardTotalField.discardTotal.get(__instance)+" ...");
-                if(GameActionManager.totalDiscardedThisTurn>DiscardTotalField.discardTotal.get(__instance)){
+                if (
+                    GameActionManager.totalDiscardedThisTurn >
+                    DiscardTotalField.discardTotal.get(__instance)
+                ) {
                     //BoardGame.BoardGame.logger.info("...success!  gain 1 block if we have afterimage");
-                    AbstractPower pw=AbstractDungeon.player.getPower("BoardGame:BGAfterImagePower");
-                    if(pw!=null){
-                        ((BGAfterImagePower)pw).onDiscardAction();
+                    AbstractPower pw = AbstractDungeon.player.getPower(
+                        "BoardGame:BGAfterImagePower"
+                    );
+                    if (pw != null) {
+                        ((BGAfterImagePower) pw).onDiscardAction();
                     }
                     //and make sure this doesn't trigger a second time for whatever unforeseen reason
                     DiscardTotalField.discardTotal.set(__instance, 0);
@@ -111,6 +145,4 @@ public class BGAfterImagePower extends AbstractBGPower {
             }
         }
     }
-
 }
-

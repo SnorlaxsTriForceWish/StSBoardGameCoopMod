@@ -14,12 +14,11 @@ import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import java.util.ArrayList;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
 
 //at the moment, we're only using this class as a way to implement clickable powers
 // Note that some cards use vanilla powers instead of BG powers and won't extend this class
@@ -27,37 +26,39 @@ import java.util.ArrayList;
 public class AbstractBGPower extends AbstractPower {
 
     //TODO: clickbox is not entirely correct size
-    private static final float iconsize=48*1.17F;
+    private static final float iconsize = 48 * 1.17F;
     public Hitbox hb;
 
     public static final Logger logger = LogManager.getLogger(AbstractBGPower.class.getName());
-    public AbstractBGPower(){
+
+    public AbstractBGPower() {
         super();
-        hb=new Hitbox(iconsize,iconsize);
+        hb = new Hitbox(iconsize, iconsize);
         //logger.info("AbstractBGPower.hb created");
     }
 
+    public boolean clickable = false;
+    public boolean onCooldown = false;
+    public boolean autoActivate = false;
+    public boolean isCurrentlyPlayerTurn = true; //TODO: this will break if Mayhem applies a power at end of turn
 
-
-    public boolean clickable=false;
-    public boolean onCooldown=false;
-    public boolean autoActivate=false;
-    public boolean isCurrentlyPlayerTurn=true; //TODO: this will break if Mayhem applies a power at end of turn
-     public void onRightClick(){
+    public void onRightClick() {
         //override
-     }
-    public void onShuffle(){
-         //override
     }
 
-     public void atStartOfTurnPostDraw(){
-         super.atStartOfTurnPostDraw();
-         isCurrentlyPlayerTurn=true;
-         onCooldown=false;
-         updateDescription();
-     }
-    public void atEndTurnQueued(){
-         //TODO: is this correct, or does it need to move to preendofturncards?  (note that this is a custom event called during endturnpatch)
+    public void onShuffle() {
+        //override
+    }
+
+    public void atStartOfTurnPostDraw() {
+        super.atStartOfTurnPostDraw();
+        isCurrentlyPlayerTurn = true;
+        onCooldown = false;
+        updateDescription();
+    }
+
+    public void atEndTurnQueued() {
+        //TODO: is this correct, or does it need to move to preendofturncards?  (note that this is a custom event called during endturnpatch)
         if (autoActivate) {
             onRightClick();
         }
@@ -66,64 +67,68 @@ public class AbstractBGPower extends AbstractPower {
 
     public void atEndOfTurn(boolean isPlayer) {
         super.atEndOfTurn(isPlayer);
-        isCurrentlyPlayerTurn=false;
+        isCurrentlyPlayerTurn = false;
         updateDescription();
     }
 
+    @SpirePatch2(clz = AbstractPlayer.class, method = "updateInput", paramtypez = {})
+    public static class EndTurnPatch {
 
-
-    @SpirePatch2(clz= AbstractPlayer.class, method="updateInput",
-            paramtypez={})
-    public static class EndTurnPatch{
-        @SpireInsertPatch(
-                locator= AbstractBGPower.EndTurnPatch.Locator.class,
-                localvars={}
-        )
+        @SpireInsertPatch(locator = AbstractBGPower.EndTurnPatch.Locator.class, localvars = {})
         public static SpireReturn<Void> updateInput(AbstractPlayer __instance) {
             //BoardGame.logger.info("EndTurn is queued, run a BG power check...");
-            for(AbstractPower power : __instance.powers){
-                if(power instanceof AbstractBGPower){
-                    ((AbstractBGPower)power).atEndTurnQueued();
+            for (AbstractPower power : __instance.powers) {
+                if (power instanceof AbstractBGPower) {
+                    ((AbstractBGPower) power).atEndTurnQueued();
                 }
             }
             //BoardGame.logger.info("BG power check is done, call actionManager.update...");
             AbstractDungeon.actionManager.update();
             //BoardGame.logger.info("Now look at the action list again...");
-            if (AbstractDungeon.actionManager.cardQueue.isEmpty() && !AbstractDungeon.actionManager.hasControl) {
+            if (
+                AbstractDungeon.actionManager.cardQueue.isEmpty() &&
+                !AbstractDungeon.actionManager.hasControl
+            ) {
                 //BoardGame.logger.info("Actions are empty, proceed");
                 return SpireReturn.Continue();
-            }
-            else {
+            } else {
                 //BoardGame.logger.info("Queue is not empty, abort");
                 return SpireReturn.Return();
             }
         }
+
         private static class Locator extends SpireInsertLocator {
-            public int[] Locate(CtBehavior ctMethodToPatch) throws CannotCompileException, PatchingException {
-                Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractPlayer.class,"endTurnQueued");
-                return new int[] {LineFinder.findAllInOrder(ctMethodToPatch, new ArrayList<Matcher>(), finalMatcher)[1]};
+
+            public int[] Locate(CtBehavior ctMethodToPatch)
+                throws CannotCompileException, PatchingException {
+                Matcher finalMatcher = new Matcher.FieldAccessMatcher(
+                    AbstractPlayer.class,
+                    "endTurnQueued"
+                );
+                return new int[] {
+                    LineFinder.findAllInOrder(
+                        ctMethodToPatch,
+                        new ArrayList<Matcher>(),
+                        finalMatcher
+                    )[1],
+                };
             }
         }
     }
 
-     public String getRightClickDescriptionText(){
-        if(!clickable)
-         return "";
-        else if (onCooldown)
-            return " (On cooldown.)";
-        else if (!autoActivate)
-            return " #bRight-click to activate.";
-        else
-            return " #bRight-click to activate. (Auto-activates at end of turn.)";
-
-     }
+    public String getRightClickDescriptionText() {
+        if (!clickable) return "";
+        else if (onCooldown) return " (On cooldown.)";
+        else if (!autoActivate) return " #bRight-click to activate.";
+        else return " #bRight-click to activate. (Auto-activates at end of turn.)";
+    }
 
     public void update(int slot) {
-         //TODO: can we add a tooltip like with FakeTradingRelic to make it clear when the hitbox is mousedover?
-         super.update(slot);
+        //TODO: can we add a tooltip like with FakeTradingRelic to make it clear when the hitbox is mousedover?
+        super.update(slot);
 
         hb.update();
-        if(clickable) {
+        if (clickable) {
             if (hb.hovered) {
                 //logger.info("AbstractBGPower.hb hovered");
                 if (InputHelper.justClickedRight) {
@@ -138,18 +143,16 @@ public class AbstractBGPower extends AbstractPower {
                         //TODO: also call all AbstractBGPower.onRightclickPower (NYI) to trigger wildcard powers
                         onRightClick();
                         updateDescription();
-
                     }
                 }
             }
         }
     }
 
-     public void renderIcons(SpriteBatch sb, float x, float y, Color c) {
-        super.renderIcons(sb,x,y,c);
-         hb.move(x - this.region48.packedWidth / 2.0F, y - this.region48.packedHeight / 2.0F);
-     }
+    public void renderIcons(SpriteBatch sb, float x, float y, Color c) {
+        super.renderIcons(sb, x, y, c);
+        hb.move(x - this.region48.packedWidth / 2.0F, y - this.region48.packedHeight / 2.0F);
+    }
 
-
-     public void onAboutToUseCard(AbstractCard c,AbstractCreature target){}
+    public void onAboutToUseCard(AbstractCard c, AbstractCreature target) {}
 }

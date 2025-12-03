@@ -14,21 +14,37 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGTalkToTheHand extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGTalkToTheHand");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGTalkToTheHand"
+    );
     public static final String ID = "BGTalkToTheHand";
 
     public BGTalkToTheHand() {
-        super("BGTalkToTheHand", cardStrings.NAME, "purple/attack/talk_to_the_hand", 1, cardStrings.DESCRIPTION, CardType.ATTACK, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.ENEMY);
-
-        this.baseDamage=2;
-        this.baseBlock=1;
+        super(
+            "BGTalkToTheHand",
+            cardStrings.NAME,
+            "purple/attack/talk_to_the_hand",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.ENEMY
+        );
+        this.baseDamage = 2;
+        this.baseBlock = 1;
     }
 
-
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        addToBot((AbstractGameAction)new BGTalkToTheHandAction(p,block));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.BLUNT_HEAVY
+            )
+        );
+        addToBot((AbstractGameAction) new BGTalkToTheHandAction(p, block));
     }
 
     public void upgrade() {
@@ -42,6 +58,3 @@ public class BGTalkToTheHand extends AbstractBGCard {
         return new BGTalkToTheHand();
     }
 }
-
-
-

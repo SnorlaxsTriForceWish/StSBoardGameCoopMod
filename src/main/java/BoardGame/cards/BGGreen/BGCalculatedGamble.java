@@ -11,17 +11,30 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGCalculatedGamble extends AbstractBGCard {
+
     public static final String ID = "BGCalculatedGamble";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("Calculated Gamble");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "Calculated Gamble"
+    );
 
     public BGCalculatedGamble() {
-        super("BGCalculatedGamble", cardStrings.NAME, "green/skill/calculated_gamble", 0, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGSilent.Enums.BG_GREEN, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.NONE);
+        super(
+            "BGCalculatedGamble",
+            cardStrings.NAME,
+            "green/skill/calculated_gamble",
+            0,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.NONE
+        );
         this.exhaust = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new CalculatedGambleAction(false));
+        addToBot((AbstractGameAction) new CalculatedGambleAction(false));
     }
 
     public void upgrade() {

@@ -14,20 +14,38 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGEscapePlan extends AbstractBGCard {
+
     public static final String ID = "BGEscapePlan";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGEscapePlan");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGEscapePlan"
+    );
 
     public BGEscapePlan() {
-        super("BGEscapePlan", cardStrings.NAME, "green/skill/escape_plan", 0, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGSilent.Enums.BG_GREEN, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
+        super(
+            "BGEscapePlan",
+            cardStrings.NAME,
+            "green/skill/escape_plan",
+            0,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseBlock = 1;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if(!this.upgraded) {
-            addToBot((AbstractGameAction) new DrawCardAction(1, (AbstractGameAction) new EscapePlanAction(this.block)));
-        }else{
-            addToBot((AbstractGameAction) new GainBlockAction(AbstractDungeon.player,this.block));
+        if (!this.upgraded) {
+            addToBot(
+                (AbstractGameAction) new DrawCardAction(
+                    1,
+                    (AbstractGameAction) new EscapePlanAction(this.block)
+                )
+            );
+        } else {
+            addToBot((AbstractGameAction) new GainBlockAction(AbstractDungeon.player, this.block));
             addToBot((AbstractGameAction) new DrawCardAction(1));
         }
     }
@@ -44,4 +62,3 @@ public class BGEscapePlan extends AbstractBGCard {
         return new BGEscapePlan();
     }
 }
-

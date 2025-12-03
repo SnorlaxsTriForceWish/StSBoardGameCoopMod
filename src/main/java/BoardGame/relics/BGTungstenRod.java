@@ -9,52 +9,68 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class BGTungstenRod
-        extends AbstractBGRelic implements DieControlledRelic {
+public class BGTungstenRod extends AbstractBGRelic implements DieControlledRelic {
+
     public static final String ID = "BGTungstenRod";
 
     public BGTungstenRod() {
-        super("BGTungstenRod", "tungsten.png", AbstractRelic.RelicTier.COMMON, AbstractRelic.LandingSound.SOLID);
+        super(
+            "BGTungstenRod",
+            "tungsten.png",
+            AbstractRelic.RelicTier.COMMON,
+            AbstractRelic.LandingSound.SOLID
+        );
     }
-    public int getPrice() {return 8;}
+
+    public int getPrice() {
+        return 8;
+    }
+
     //TODO: 3 Block solo, 1 AOE Block in a group
-    public String getQuickSummary(){if(TheDie.monsterRoll==5)return "3 #yBlock";
-    else return "";}
+    public String getQuickSummary() {
+        if (TheDie.monsterRoll == 5) return "3 #yBlock";
+        else return "";
+    }
+
     private static final int AMT = 3;
 
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0];
     }
 
-
-
-
     public AbstractRelic makeCopy() {
         return new BGTungstenRod();
     }
 
-
-    public void checkDieAbility(){
-        if(TheDie.finalRelicRoll==5){
+    public void checkDieAbility() {
+        if (TheDie.finalRelicRoll == 5) {
             activateDieAbility();
         }
     }
 
-    public void activateDieAbility(){
+    public void activateDieAbility() {
         flash();
-        addToBot((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature) AbstractDungeon.player, AMT));
+        addToBot(
+            (AbstractGameAction) new RelicAboveCreatureAction(
+                (AbstractCreature) AbstractDungeon.player,
+                this
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new GainBlockAction((AbstractCreature) AbstractDungeon.player, AMT)
+        );
         stopPulse();
     }
 
     private boolean isPlayerTurn = false; // We should make sure the relic is only activateable during our turn, not the enemies'.
 
     @Override
-    public void onRightClick() {// On right click
-        if (!isObtained || !isPlayerTurn ) {
+    public void onRightClick() {
+        // On right click
+        if (!isObtained || !isPlayerTurn) {
             return;
         }
-        addToBot((AbstractGameAction)new BGActivateDieAbilityAction(this));
+        addToBot((AbstractGameAction) new BGActivateDieAbilityAction(this));
     }
 
     public void atTurnStart() {
@@ -72,5 +88,3 @@ public class BGTungstenRod
         stopPulse(); // Don't keep pulsing past the victory screen/outside of combat.
     }
 }
-
-

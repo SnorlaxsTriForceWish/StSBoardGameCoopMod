@@ -16,21 +16,36 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 
 public class BGColdSnap extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGColdSnap");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGColdSnap"
+    );
     public static final String ID = "BGColdSnap";
 
-
     public BGColdSnap() {
-        super("BGColdSnap", cardStrings.NAME, "blue/attack/cold_snap", 2, cardStrings.DESCRIPTION, CardType.ATTACK, BGDefect.Enums.BG_BLUE, CardRarity.COMMON, CardTarget.ENEMY);
+        super(
+            "BGColdSnap",
+            cardStrings.NAME,
+            "blue/attack/cold_snap",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.COMMON,
+            CardTarget.ENEMY
+        );
         this.baseDamage = 2;
     }
 
-
-
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HEAVY));
-        addToBot((AbstractGameAction)new BGChannelAction((AbstractOrb)new BGFrost()));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.SLASH_HEAVY
+            )
+        );
+        addToBot((AbstractGameAction) new BGChannelAction((AbstractOrb) new BGFrost()));
     }
 
     public void upgrade() {
@@ -44,4 +59,3 @@ public class BGColdSnap extends AbstractBGCard {
         return new BGColdSnap();
     }
 }
-

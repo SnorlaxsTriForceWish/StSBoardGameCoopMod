@@ -19,29 +19,62 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BGNoxiousFumes extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGNoxiousFumes");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGNoxiousFumes"
+    );
     public static final String ID = "BGNoxiousFumes";
 
     private AbstractMonster target;
 
     static Logger logger = LogManager.getLogger(BGNoxiousFumes.class.getName());
-    public BGNoxiousFumes() {
-        super("BGNoxiousFumes", cardStrings.NAME, "green/power/noxious_fumes", 1, cardStrings.DESCRIPTION, CardType.POWER, BGSilent.Enums.BG_GREEN, CardRarity.UNCOMMON, CardTarget.SELF);
 
+    public BGNoxiousFumes() {
+        super(
+            "BGNoxiousFumes",
+            cardStrings.NAME,
+            "green/power/noxious_fumes",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
         this.baseMagicNumber = 1;
-        this.magicNumber=this.baseMagicNumber;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if(!this.upgraded)
-            addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGNoxiousFumesPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
-        else
-            if (!(AbstractDungeon.getCurrRoom() instanceof MonsterRoom && AbstractDungeon.lastCombatMetricKey.equals("BoardGame:Shield and Spear")))
-                addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGNoxiousFumesAOEPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
-            else
-                //if this is Shield and Spear, they're in different rows, so just apply regular non-AOE power
-                //TODO: eventually we will need to prompt AOE power for which row to hit, at which point we can remove this check
-                addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGNoxiousFumesPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        if (!this.upgraded) addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGNoxiousFumesPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
+        else if (
+            !(AbstractDungeon.getCurrRoom() instanceof MonsterRoom &&
+                AbstractDungeon.lastCombatMetricKey.equals("BoardGame:Shield and Spear"))
+        ) addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGNoxiousFumesAOEPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
+        //if this is Shield and Spear, they're in different rows, so just apply regular non-AOE power
+        //TODO: eventually we will need to prompt AOE power for which row to hit, at which point we can remove this check
+        else addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGNoxiousFumesPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {
@@ -57,5 +90,3 @@ public class BGNoxiousFumes extends AbstractBGCard {
         return new BGNoxiousFumes();
     }
 }
-
-

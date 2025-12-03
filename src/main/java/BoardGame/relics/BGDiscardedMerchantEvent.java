@@ -5,32 +5,28 @@ package BoardGame.relics;
 
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class BGDiscardedMerchantEvent
-        extends AbstractBGRelic
-{
+public class BGDiscardedMerchantEvent extends AbstractBGRelic {
+
     public static final String ID = "BGDiscardedMerchantEvent";
-    public boolean usableAsPayment(){return false;}
-    public BGDiscardedMerchantEvent() {
-        super("BGDiscardedMerchantEvent", "merchantMask.png", RelicTier.SPECIAL, LandingSound.FLAT);
-        this.grayscale=true;
+
+    public boolean usableAsPayment() {
+        return false;
     }
 
+    public BGDiscardedMerchantEvent() {
+        super("BGDiscardedMerchantEvent", "merchantMask.png", RelicTier.SPECIAL, LandingSound.FLAT);
+        this.grayscale = true;
+    }
 
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0];
     }
 
-
-
-
     public boolean canSpawn() {
         return false;
-     }
-
+    }
 
     public AbstractRelic makeCopy() {
         return new BGDiscardedMerchantEvent();
     }
 }
-
-

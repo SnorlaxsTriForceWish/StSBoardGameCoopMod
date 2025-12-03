@@ -1,6 +1,5 @@
 package BoardGame.neow;
 
-
 import BoardGame.dungeons.AbstractBGDungeon;
 import BoardGame.multicharacter.MultiCharacter;
 import BoardGame.patches.DefaultInsertPatch;
@@ -16,22 +15,28 @@ import com.megacrit.cardcrawl.screens.DungeonTransitionScreen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 public class BGNeowRoom {
 
-    @SpirePatch(clz = NeowRoom.class, method = SpirePatch.CONSTRUCTOR,
-            paramtypez = {boolean.class})
+    @SpirePatch(
+        clz = NeowRoom.class,
+        method = SpirePatch.CONSTRUCTOR,
+        paramtypez = { boolean.class }
+    )
     public static class BGNeowRoomPatch {
-        public BGNeowRoomPatch(){}
+
+        public BGNeowRoomPatch() {}
+
         @SpirePrefixPatch
         public static SpireReturn<Void> Prefix(NeowRoom room, boolean isDone) {
-            if (CardCrawlGame.dungeon != null && CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+            if (
+                CardCrawlGame.dungeon != null && CardCrawlGame.dungeon instanceof AbstractBGDungeon
+            ) {
                 final Logger logger = LogManager.getLogger(DefaultInsertPatch.class.getName());
                 room.phase = AbstractRoom.RoomPhase.EVENT;
                 //if(BGSetupPortal.neowRoomBecomesSetupRoom){
-                    //room.event = new BGSetupPortal();
+                //room.event = new BGSetupPortal();
                 //}else {
-                    room.event = new BGNeowEvent(isDone);
+                room.event = new BGNeowEvent(isDone);
                 //}
                 room.event.onEnterRoom();
                 return SpireReturn.Return();
@@ -40,21 +45,20 @@ public class BGNeowRoom {
         }
     }
 
+    @SpirePatch2(
+        clz = DungeonTransitionScreen.class,
+        method = "setAreaName",
+        paramtypez = { String.class }
+    )
+    public static class NeverSkipNeowInBG {
 
-
-    @SpirePatch2(clz= DungeonTransitionScreen.class, method="setAreaName",
-            paramtypez={String.class})
-    public static class NeverSkipNeowInBG{
         @SpirePrefixPatch
         public static void Foo(String key) {
-            if(CardCrawlGame.chosenCharacter == MultiCharacter.Enums.BG_MULTICHARACTER){
-                TipTracker.pref.putBoolean("NEOW_SKIP",true);
+            if (CardCrawlGame.chosenCharacter == MultiCharacter.Enums.BG_MULTICHARACTER) {
+                TipTracker.pref.putBoolean("NEOW_SKIP", true);
                 TipTracker.pref.flush();
                 TipTracker.refresh();
             }
-
         }
     }
-
-
 }

@@ -19,23 +19,54 @@ import com.megacrit.cardcrawl.vfx.BorderLongFlashEffect;
 import com.megacrit.cardcrawl.vfx.combat.DieDieDieEffect;
 
 public class BGDieDieDie extends AbstractBGCard {
+
     public static final String ID = "BGDieDieDie";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGDieDieDie");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGDieDieDie"
+    );
 
     public BGDieDieDie() {
-        super("BGDieDieDie", cardStrings.NAME, "green/attack/die_die_die", 1, cardStrings.DESCRIPTION, CardType.ATTACK, BGSilent.Enums.BG_GREEN, CardRarity.RARE, CardTarget.ALL_ENEMY);
+        super(
+            "BGDieDieDie",
+            cardStrings.NAME,
+            "green/attack/die_die_die",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.RARE,
+            CardTarget.ALL_ENEMY
+        );
         this.exhaust = true;
         this.baseDamage = 3;
         this.isMultiDamage = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new BorderLongFlashEffect(Color.LIGHT_GRAY)));
-        addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new DieDieDieEffect(), 0.7F));
-        addToBot((AbstractGameAction)new ShakeScreenAction(0.0F, ScreenShake.ShakeDur.MED, ScreenShake.ShakeIntensity.HIGH));
-        addToBot((AbstractGameAction)new DamageAllEnemiesAction((AbstractCreature)p,
-                this.multiDamage, this.damageTypeForTurn, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+        addToBot(
+            (AbstractGameAction) new VFXAction(
+                (AbstractGameEffect) new BorderLongFlashEffect(Color.LIGHT_GRAY)
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new VFXAction((AbstractGameEffect) new DieDieDieEffect(), 0.7F)
+        );
+        addToBot(
+            (AbstractGameAction) new ShakeScreenAction(
+                0.0F,
+                ScreenShake.ShakeDur.MED,
+                ScreenShake.ShakeIntensity.HIGH
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new DamageAllEnemiesAction(
+                (AbstractCreature) p,
+                this.multiDamage,
+                this.damageTypeForTurn,
+                AbstractGameAction.AttackEffect.SLASH_HORIZONTAL
+            )
+        );
     }
 
     public void upgrade() {
@@ -49,5 +80,3 @@ public class BGDieDieDie extends AbstractBGCard {
         return new BGDieDieDie();
     }
 }
-
-

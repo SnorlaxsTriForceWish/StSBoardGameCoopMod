@@ -11,35 +11,62 @@ import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class BGMutagenicStrength extends AbstractBGRelic {
+
     public static final String ID = "BGMutagenicStrength";
 
     public BGMutagenicStrength() {
-        super("BGMutagenicStrength", "mutagen.png", AbstractRelic.RelicTier.UNCOMMON, AbstractRelic.LandingSound.CLINK);
+        super(
+            "BGMutagenicStrength",
+            "mutagen.png",
+            AbstractRelic.RelicTier.UNCOMMON,
+            AbstractRelic.LandingSound.CLINK
+        );
     }
-    public int getPrice() {return 6;}
+
+    public int getPrice() {
+        return 6;
+    }
+
     private static final int STR_AMT = 1;
 
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0];
     }
 
-
     public void atBattleStart() {
         flash();
-        addToTop((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, (AbstractPower)new StrengthPower((AbstractCreature)AbstractDungeon.player, STR_AMT), STR_AMT));
-        addToTop((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, (AbstractPower)new LoseStrengthPower((AbstractCreature)AbstractDungeon.player, STR_AMT), STR_AMT));
+        addToTop(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) AbstractDungeon.player,
+                (AbstractCreature) AbstractDungeon.player,
+                (AbstractPower) new StrengthPower(
+                    (AbstractCreature) AbstractDungeon.player,
+                    STR_AMT
+                ),
+                STR_AMT
+            )
+        );
+        addToTop(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) AbstractDungeon.player,
+                (AbstractCreature) AbstractDungeon.player,
+                (AbstractPower) new LoseStrengthPower(
+                    (AbstractCreature) AbstractDungeon.player,
+                    STR_AMT
+                ),
+                STR_AMT
+            )
+        );
 
-
-
-
-
-        addToTop((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
+        addToTop(
+            (AbstractGameAction) new RelicAboveCreatureAction(
+                (AbstractCreature) AbstractDungeon.player,
+                this
+            )
+        );
     }
-
 
     public AbstractRelic makeCopy() {
         return new BGMutagenicStrength();
     }
 }
-
-

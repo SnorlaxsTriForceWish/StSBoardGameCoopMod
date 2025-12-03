@@ -12,20 +12,22 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.screens.VictoryScreen;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.scene.*;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class VictoryVFXPatches {
 
-
-
-    @SpirePatch2(clz = VictoryScreen.class, method = "updateVfx",
-            paramtypez={})
+    @SpirePatch2(clz = VictoryScreen.class, method = "updateVfx", paramtypez = {})
     public static class Foo {
+
         @SpirePostfixPatch
-        public static void Bar(VictoryScreen __instance, @ByRef ArrayList<AbstractGameEffect>[] ___effect, @ByRef float[] ___effectTimer, @ByRef float[] ___effectTimer2) {
-            if(AbstractDungeon.player.chosenClass == BGIronclad.Enums.BG_IRONCLAD) {
+        public static void Bar(
+            VictoryScreen __instance,
+            @ByRef ArrayList<AbstractGameEffect>[] ___effect,
+            @ByRef float[] ___effectTimer,
+            @ByRef float[] ___effectTimer2
+        ) {
+            if (AbstractDungeon.player.chosenClass == BGIronclad.Enums.BG_IRONCLAD) {
                 ___effectTimer[0] -= Gdx.graphics.getDeltaTime();
                 if (___effectTimer[0] < 0.0F) {
                     ___effect[0].add(new SlowFireParticleEffect());
@@ -35,7 +37,7 @@ public class VictoryVFXPatches {
                     ___effect[0].add(new IroncladVictoryFlameEffect());
                     ___effectTimer[0] = 0.1F;
                 }
-            }                else if(AbstractDungeon.player.chosenClass == BGSilent.Enums.BG_SILENT) {
+            } else if (AbstractDungeon.player.chosenClass == BGSilent.Enums.BG_SILENT) {
                 ___effectTimer[0] -= Gdx.graphics.getDeltaTime();
                 if (___effectTimer[0] < 0.0F) {
                     if (___effect[0].size() < 100) {
@@ -52,7 +54,7 @@ public class VictoryVFXPatches {
                 if (___effectTimer2[0] > 1.0F) {
                     ___effectTimer2[0] = 1.0F;
                 }
-            }                else if(AbstractDungeon.player.chosenClass == BGDefect.Enums.BG_DEFECT) {
+            } else if (AbstractDungeon.player.chosenClass == BGDefect.Enums.BG_DEFECT) {
                 boolean foundEyeVfx = false;
                 Iterator var5 = ___effect[0].iterator();
 
@@ -71,7 +73,7 @@ public class VictoryVFXPatches {
                 if (___effect[0].size() < 15) {
                     ___effect[0].add(new DefectVictoryNumberEffect());
                 }
-            }           else if(AbstractDungeon.player.chosenClass == BGWatcher.Enums.BG_WATCHER) {
+            } else if (AbstractDungeon.player.chosenClass == BGWatcher.Enums.BG_WATCHER) {
                 boolean createdEffect = false;
                 Iterator var3 = ___effect[0].iterator();
 
@@ -87,8 +89,6 @@ public class VictoryVFXPatches {
                     ___effect[0].add(new WatcherVictoryEffect());
                 }
             }
-
         }
     }
-
 }

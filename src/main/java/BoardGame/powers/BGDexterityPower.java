@@ -1,4 +1,5 @@
 package BoardGame.powers;
+
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -7,10 +8,13 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGDexterityPower extends AbstractPower {
+
     //TODO: BoardGame dexterity affects outgoing block, not incoming block!
 
     public static final String POWER_ID = "BGDexterity";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGDexterity");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGDexterity"
+    );
 
     public static final String NAME = powerStrings.NAME;
 
@@ -21,10 +25,8 @@ public class BGDexterityPower extends AbstractPower {
         this.ID = "BGDexterity";
         this.owner = owner;
         this.amount = amount;
-        if (this.amount >= 999)
-            this.amount = 999;
-        if (this.amount <= -999)
-            this.amount = -999;
+        if (this.amount >= 999) this.amount = 999;
+        if (this.amount <= -999) this.amount = -999;
         updateDescription();
         loadRegion("dexterity");
         this.canGoNegative = true;
@@ -37,23 +39,29 @@ public class BGDexterityPower extends AbstractPower {
     public void stackPower(int stackAmount) {
         this.fontScale = 8.0F;
         this.amount += stackAmount;
-        if (this.amount == 0)
-            addToTop((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, "BGDexterity"));
-        if (this.amount >= 999)
-            this.amount = 999;
-        if (this.amount <= -999)
-            this.amount = -999;
+        if (this.amount == 0) addToTop(
+            (AbstractGameAction) new RemoveSpecificPowerAction(
+                this.owner,
+                this.owner,
+                "BGDexterity"
+            )
+        );
+        if (this.amount >= 999) this.amount = 999;
+        if (this.amount <= -999) this.amount = -999;
     }
 
     public void reducePower(int reduceAmount) {
         this.fontScale = 8.0F;
         this.amount -= reduceAmount;
-        if (this.amount == 0)
-            addToTop((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, "BGDexterity"));
-        if (this.amount >= 999)
-            this.amount = 999;
-        if (this.amount <= -999)
-            this.amount = -999;
+        if (this.amount == 0) addToTop(
+            (AbstractGameAction) new RemoveSpecificPowerAction(
+                this.owner,
+                this.owner,
+                "BGDexterity"
+            )
+        );
+        if (this.amount >= 999) this.amount = 999;
+        if (this.amount <= -999) this.amount = -999;
     }
 
     public void updateDescription() {
@@ -68,8 +76,7 @@ public class BGDexterityPower extends AbstractPower {
     }
 
     public float modifyBlock(float blockAmount) {
-        if ((blockAmount += this.amount) < 0.0F)
-            return 0.0F;
+        if ((blockAmount += this.amount) < 0.0F) return 0.0F;
         return blockAmount;
     }
 }

@@ -22,7 +22,9 @@ import com.megacrit.cardcrawl.powers.FadingPower;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 public class BGTransient extends AbstractBGMonster implements BGDamageIcons {
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("Transient");
+
+    private static final MonsterStrings monsterStrings =
+        CardCrawlGame.languagePack.getMonsterStrings("Transient");
     public static final String ID = "BGTransient";
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
@@ -38,10 +40,11 @@ public class BGTransient extends AbstractBGMonster implements BGDamageIcons {
 
     public BGTransient() {
         super(NAME, "BGTransient", 999, 0.0F, -15.0F, 370.0F, 340.0F, null, 0.0F, 20.0F);
-        loadAnimation("images/monsters/theForest/transient/skeleton.atlas", "images/monsters/theForest/transient/skeleton.json", 1.0F);
-
-
-
+        loadAnimation(
+            "images/monsters/theForest/transient/skeleton.atlas",
+            "images/monsters/theForest/transient/skeleton.json",
+            1.0F
+        );
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
@@ -50,45 +53,63 @@ public class BGTransient extends AbstractBGMonster implements BGDamageIcons {
         this.dialogX = -100.0F * Settings.scale;
         this.dialogY -= 20.0F * Settings.scale;
 
-//        if (AbstractDungeon.ascensionLevel >= 2) {
-//            this.startingDeathDmg = 40;
-//        } else {
-//            this.startingDeathDmg = 30;
-//        }
+        //        if (AbstractDungeon.ascensionLevel >= 2) {
+        //            this.startingDeathDmg = 40;
+        //        } else {
+        //            this.startingDeathDmg = 30;
+        //        }
 
         setHp(99);
 
-        this.damage.add(new DamageInfo((AbstractCreature)this, 6));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 9));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 12));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 15));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 18));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 21));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 24));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 27));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 30));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 6));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 9));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 12));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 15));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 18));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 21));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 24));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 27));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 30));
     }
-
 
     public void usePreBattleAction() {
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new FadingPower((AbstractCreature)this, 4)));
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new BGShiftingPower((AbstractCreature)this)));
+        AbstractDungeon.actionManager.addToBottom(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) this,
+                (AbstractCreature) this,
+                (AbstractPower) new FadingPower((AbstractCreature) this, 4)
+            )
+        );
+        AbstractDungeon.actionManager.addToBottom(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) this,
+                (AbstractCreature) this,
+                (AbstractPower) new BGShiftingPower((AbstractCreature) this)
+            )
+        );
     }
-
 
     public void takeTurn() {
         switch (this.nextMove) {
             case 1:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ChangeStateAction(this, "ATTACK"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new WaitAction(0.4F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(this.count), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ChangeStateAction(this, "ATTACK")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new WaitAction(0.4F)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(this.count),
+                        AbstractGameAction.AttackEffect.BLUNT_HEAVY
+                    )
+                );
                 this.count++;
-                setMove((byte)1, AbstractMonster.Intent.ATTACK, this.damage.get(this.count).base);
+                setMove((byte) 1, AbstractMonster.Intent.ATTACK, this.damage.get(this.count).base);
                 break;
         }
     }
-
 
     public void damage(DamageInfo info) {
         super.damage(info);
@@ -97,7 +118,6 @@ public class BGTransient extends AbstractBGMonster implements BGDamageIcons {
             this.state.addAnimation(0, "Idle", true, 0.0F);
         }
     }
-
 
     public void changeState(String key) {
         switch (key) {
@@ -108,18 +128,12 @@ public class BGTransient extends AbstractBGMonster implements BGDamageIcons {
         }
     }
 
-
-
-
     public void die() {
         super.die();
         UnlockTracker.unlockAchievement("TRANSIENT");
     }
 
-
     protected void getMove(int num) {
-        setMove((byte)1, AbstractMonster.Intent.ATTACK, this.damage.get(0).base);
+        setMove((byte) 1, AbstractMonster.Intent.ATTACK, this.damage.get(0).base);
     }
 }
-
-

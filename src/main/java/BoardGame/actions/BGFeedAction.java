@@ -12,7 +12,8 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 
-public class BGFeedAction extends AbstractGameAction{
+public class BGFeedAction extends AbstractGameAction {
+
     private int magicNumber;
     private DamageInfo info;
 
@@ -26,28 +27,45 @@ public class BGFeedAction extends AbstractGameAction{
 
     public void update() {
         if (this.duration == 0.1F && this.target != null) {
-            AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, AbstractGameAction.AttackEffect.NONE));
+            AbstractDungeon.effectList.add(
+                new FlashAtkImgEffect(
+                    this.target.hb.cX,
+                    this.target.hb.cY,
+                    AbstractGameAction.AttackEffect.NONE
+                )
+            );
             this.target.damage(this.info);
 
             //TODO: SlimeBoss should use halfdead state instead of disappearing until the next turn
-            boolean halfDeadCheckPassed=(!this.target.halfDead || this.target instanceof BGDarkling || this.target instanceof BGAwakenedOne);
-            if ((((AbstractMonster)this.target).isDying || this.target.currentHealth <= 0) && halfDeadCheckPassed &&
-                    !this.target.hasPower("Minion")) {
-
+            boolean halfDeadCheckPassed = (!this.target.halfDead ||
+                this.target instanceof BGDarkling ||
+                this.target instanceof BGAwakenedOne);
+            if (
+                (((AbstractMonster) this.target).isDying || this.target.currentHealth <= 0) &&
+                halfDeadCheckPassed &&
+                !this.target.hasPower("Minion")
+            ) {
                 // TODO degraffa: Use BG StrengthPower
-                addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, (AbstractPower)new StrengthPower((AbstractCreature)AbstractDungeon.player, this.magicNumber), this.magicNumber));
+                addToBot(
+                    (AbstractGameAction) new ApplyPowerAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        (AbstractCreature) AbstractDungeon.player,
+                        (AbstractPower) new StrengthPower(
+                            (AbstractCreature) AbstractDungeon.player,
+                            this.magicNumber
+                        ),
+                        this.magicNumber
+                    )
+                );
             }
 
             if ((AbstractDungeon.getCurrRoom()).monsters.areMonstersBasicallyDead()) {
                 AbstractDungeon.actionManager.clearPostCombatActions();
             }
 
-            this.isDone=true;
+            this.isDone = true;
         }
-
 
         tickDuration();
     }
 }
-
-

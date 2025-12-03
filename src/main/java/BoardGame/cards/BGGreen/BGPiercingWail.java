@@ -21,30 +21,72 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.ShockWaveEffect;
 
 public class BGPiercingWail extends AbstractBGCard {
+
     public static final String ID = "BGPiercingWail";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGPiercingWail");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGPiercingWail"
+    );
 
     public BGPiercingWail() {
-        super("BGPiercingWail", cardStrings.NAME, "green/skill/piercing_wail", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.UNCOMMON, CardTarget.ALL_ENEMY);
-        this.baseBlock=1;
+        super(
+            "BGPiercingWail",
+            cardStrings.NAME,
+            "green/skill/piercing_wail",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.UNCOMMON,
+            CardTarget.ALL_ENEMY
+        );
+        this.baseBlock = 1;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
         this.exhaust = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new SFXAction("ATTACK_PIERCING_WAIL"));
+        addToBot((AbstractGameAction) new SFXAction("ATTACK_PIERCING_WAIL"));
         if (Settings.FAST_MODE) {
-            addToBot((AbstractGameAction)new VFXAction((AbstractCreature)p, (AbstractGameEffect)new ShockWaveEffect(p.hb.cX, p.hb.cY, Settings.GREEN_TEXT_COLOR, ShockWaveEffect.ShockWaveType.CHAOTIC), 0.3F));
+            addToBot(
+                (AbstractGameAction) new VFXAction(
+                    (AbstractCreature) p,
+                    (AbstractGameEffect) new ShockWaveEffect(
+                        p.hb.cX,
+                        p.hb.cY,
+                        Settings.GREEN_TEXT_COLOR,
+                        ShockWaveEffect.ShockWaveType.CHAOTIC
+                    ),
+                    0.3F
+                )
+            );
         } else {
-            addToBot((AbstractGameAction)new VFXAction((AbstractCreature)p, (AbstractGameEffect)new ShockWaveEffect(p.hb.cX, p.hb.cY, Settings.GREEN_TEXT_COLOR, ShockWaveEffect.ShockWaveType.CHAOTIC), 1.5F));
+            addToBot(
+                (AbstractGameAction) new VFXAction(
+                    (AbstractCreature) p,
+                    (AbstractGameEffect) new ShockWaveEffect(
+                        p.hb.cX,
+                        p.hb.cY,
+                        Settings.GREEN_TEXT_COLOR,
+                        ShockWaveEffect.ShockWaveType.CHAOTIC
+                    ),
+                    1.5F
+                )
+            );
         }
-        addToBot(new GainBlockAction(AbstractDungeon.player,this.block));
+        addToBot(new GainBlockAction(AbstractDungeon.player, this.block));
         if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
             for (AbstractMonster monster : (AbstractDungeon.getMonsters()).monsters) {
                 if (!monster.isDead && !monster.isDying) {
-                    addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)monster, (AbstractCreature)p, (AbstractPower)new BGWeakPower((AbstractCreature)monster, 1, false), this.magicNumber));
+                    addToBot(
+                        (AbstractGameAction) new ApplyPowerAction(
+                            (AbstractCreature) monster,
+                            (AbstractCreature) p,
+                            (AbstractPower) new BGWeakPower((AbstractCreature) monster, 1, false),
+                            this.magicNumber
+                        )
+                    );
                 }
             }
         }
@@ -61,4 +103,3 @@ public class BGPiercingWail extends AbstractBGCard {
         return new BGPiercingWail();
     }
 }
-

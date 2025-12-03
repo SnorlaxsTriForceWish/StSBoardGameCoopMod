@@ -5,9 +5,12 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class BGStaticDischargePower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGStaticDischargePower";
 
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGStaticDischargePower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGStaticDischargePower"
+    );
 
     public static final String NAME = powerStrings.NAME;
 
@@ -27,4 +30,3 @@ public class BGStaticDischargePower extends AbstractBGPower {
         this.type = PowerType.BUFF;
     }
 }
-

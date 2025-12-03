@@ -17,24 +17,46 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.EmptyStanceEffect;
 
 public class BGEmptyBody extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGEmptyBody");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGEmptyBody"
+    );
     public static final String ID = "BGEmptyBody";
 
     public BGEmptyBody() {
-        super("BGEmptyBody", cardStrings.NAME, "purple/skill/empty_body", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGWatcher.Enums.BG_PURPLE, CardRarity.COMMON, CardTarget.SELF);
-
-        this.baseBlock=2;
-
+        super(
+            "BGEmptyBody",
+            cardStrings.NAME,
+            "purple/skill/empty_body",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.COMMON,
+            CardTarget.SELF
+        );
+        this.baseBlock = 2;
     }
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
-        addToBot((AbstractGameAction)new NotStanceCheckAction("Neutral", (AbstractGameAction)new VFXAction((AbstractGameEffect)new EmptyStanceEffect(p.hb.cX, p.hb.cY), 0.1F)));
-        addToBot((AbstractGameAction)new ChangeStanceAction("Neutral"));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new NotStanceCheckAction(
+                "Neutral",
+                (AbstractGameAction) new VFXAction(
+                    (AbstractGameEffect) new EmptyStanceEffect(p.hb.cX, p.hb.cY),
+                    0.1F
+                )
+            )
+        );
+        addToBot((AbstractGameAction) new ChangeStanceAction("Neutral"));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -47,6 +69,3 @@ public class BGEmptyBody extends AbstractBGCard {
         return new BGEmptyBody();
     }
 }
-
-
-

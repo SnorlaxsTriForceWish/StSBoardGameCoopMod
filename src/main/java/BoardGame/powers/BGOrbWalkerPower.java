@@ -8,7 +8,10 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 
 public class BGOrbWalkerPower extends AbstractBGPower {
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGOrbWalkerPower");
+
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGOrbWalkerPower"
+    );
     public static final String POWER_ID = "BGOrbWalkerPower";
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
@@ -22,16 +25,19 @@ public class BGOrbWalkerPower extends AbstractBGPower {
         loadRegion("stasis");
     }
 
-
     public void updateDescription() {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
-
     public void atEndOfRound() {
         flash();
-        addToBot((AbstractGameAction)new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, this.amount), this.amount));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                this.owner,
+                this.owner,
+                new StrengthPower(this.owner, this.amount),
+                this.amount
+            )
+        );
     }
 }
-
-

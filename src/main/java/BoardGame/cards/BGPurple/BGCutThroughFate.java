@@ -15,21 +15,39 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGCutThroughFate extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGCutThroughFate");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGCutThroughFate"
+    );
     public static final String ID = "BGCutThroughFate";
 
     public BGCutThroughFate() {
-        super("BGCutThroughFate", cardStrings.NAME, "purple/attack/cut_through_fate", 1, cardStrings.DESCRIPTION, CardType.ATTACK, BGWatcher.Enums.BG_PURPLE, CardRarity.COMMON, CardTarget.ENEMY);
-
+        super(
+            "BGCutThroughFate",
+            cardStrings.NAME,
+            "purple/attack/cut_through_fate",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.COMMON,
+            CardTarget.ENEMY
+        );
         this.baseDamage = 1;
         this.baseMagicNumber = 2;
         this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-        addToBot((AbstractGameAction)new ScryAction(this.magicNumber));
-        addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)p, 1));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.SLASH_DIAGONAL
+            )
+        );
+        addToBot((AbstractGameAction) new ScryAction(this.magicNumber));
+        addToBot((AbstractGameAction) new DrawCardAction((AbstractCreature) p, 1));
     }
 
     public void upgrade() {
@@ -44,5 +62,3 @@ public class BGCutThroughFate extends AbstractBGCard {
         return new BGCutThroughFate();
     }
 }
-
-

@@ -10,31 +10,32 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGFlex extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGFlex");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGFlex"
+    );
     public static final String ID = "BGFlex";
 
     public BGFlex() {
-        super("BGFlex", cardStrings.NAME, "red/skill/flex", 0, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.COMMON, AbstractCard.CardTarget.SELF);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGFlex",
+            cardStrings.NAME,
+            "red/skill/flex",
+            0,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.COMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
         this.exhaust = true;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new GainTemporaryStrengthIfNotCappedAction(p,magicNumber));
+        addToBot(new GainTemporaryStrengthIfNotCappedAction(p, magicNumber));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -45,10 +46,7 @@ public class BGFlex extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGFlex();
     }
 }
-
-

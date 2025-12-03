@@ -13,28 +13,42 @@ import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
 
 public class UpdateActionPatch {
-    public static void before(AbstractGameAction a){
-        if(!(CardCrawlGame.dungeon instanceof AbstractBGDungeon))return;
-        ContextPatches.pushTargetContext(ActionPatches.Field.rowTarget.get(a));
-        if(CardCrawlGame.chosenCharacter != MultiCharacter.Enums.BG_MULTICHARACTER)return;
-        if(ContextPatches.originalBGMultiCharacter==null)ContextPatches.originalBGMultiCharacter=AbstractDungeon.player;
-        ContextPatches.pushPlayerContext(ActionPatches.Field.owner.get(a));
 
+    public static void before(AbstractGameAction a) {
+        if (!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) return;
+        ContextPatches.pushTargetContext(ActionPatches.Field.rowTarget.get(a));
+        if (CardCrawlGame.chosenCharacter != MultiCharacter.Enums.BG_MULTICHARACTER) return;
+        if (
+            ContextPatches.originalBGMultiCharacter == null
+        ) ContextPatches.originalBGMultiCharacter = AbstractDungeon.player;
+        ContextPatches.pushPlayerContext(ActionPatches.Field.owner.get(a));
     }
-    public static void after(AbstractGameAction a){
-        if(!(CardCrawlGame.dungeon instanceof AbstractBGDungeon))return;
+
+    public static void after(AbstractGameAction a) {
+        if (!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) return;
         ContextPatches.popTargetContext();
-        if(CardCrawlGame.chosenCharacter != MultiCharacter.Enums.BG_MULTICHARACTER)return;
+        if (CardCrawlGame.chosenCharacter != MultiCharacter.Enums.BG_MULTICHARACTER) return;
         ContextPatches.popPlayerContext();
     }
+
     @SpirePatch2(clz = GameActionManager.class, method = "update")
     public static class Foo {
+
         @SpireInstrumentPatch
         public static ExprEditor Bar() {
             return new ExprEditor() {
                 public void edit(MethodCall m) throws CannotCompileException {
-                    if (m.getClassName().equals(AbstractGameAction.class.getName()) && m.getMethodName().equals("update")) {
-                        m.replace("{ "+UpdateActionPatch.class.getName()+".before(this.currentAction); $_ = $proceed($$); "+UpdateActionPatch.class.getName()+".after(this.currentAction); }");
+                    if (
+                        m.getClassName().equals(AbstractGameAction.class.getName()) &&
+                        m.getMethodName().equals("update")
+                    ) {
+                        m.replace(
+                            "{ " +
+                                UpdateActionPatch.class.getName() +
+                                ".before(this.currentAction); $_ = $proceed($$); " +
+                                UpdateActionPatch.class.getName() +
+                                ".after(this.currentAction); }"
+                        );
                     }
                 }
             };

@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 
 public class BGChannelAction extends AbstractGameAction {
 
-    public static int MAX_DARK=3;
+    public static int MAX_DARK = 3;
     private AbstractOrb orbType;
     private boolean autoEvoke;
 
@@ -26,19 +26,19 @@ public class BGChannelAction extends AbstractGameAction {
         this.autoEvoke = autoEvoke;
     }
 
-    public static boolean playerIsDarkOrbCapped(){
-        int darkCount=0;
-        boolean anyEmptySlots=false;
-        for(AbstractOrb o : AbstractDungeon.player.orbs){
-            if(o instanceof BGDark){
-                darkCount+=1;
+    public static boolean playerIsDarkOrbCapped() {
+        int darkCount = 0;
+        boolean anyEmptySlots = false;
+        for (AbstractOrb o : AbstractDungeon.player.orbs) {
+            if (o instanceof BGDark) {
+                darkCount += 1;
             }
-
         }
-        return(darkCount>=MAX_DARK);
+        return (darkCount >= MAX_DARK);
     }
-    public static boolean playerHasEmptyOrbSlots(){
-        for(AbstractOrb o : AbstractDungeon.player.orbs) {
+
+    public static boolean playerHasEmptyOrbSlots() {
+        for (AbstractOrb o : AbstractDungeon.player.orbs) {
             if (o instanceof EmptyOrbSlot) {
                 return true;
             }
@@ -48,17 +48,25 @@ public class BGChannelAction extends AbstractGameAction {
 
     @Override
     public void update() {
-        if(!(orbType instanceof BGDark)){
-            addToTop(new ChannelAction(orbType,autoEvoke));
-        }else{
-            if(playerIsDarkOrbCapped() && playerHasEmptyOrbSlots()){
+        if (!(orbType instanceof BGDark)) {
+            addToTop(new ChannelAction(orbType, autoEvoke));
+        } else {
+            if (playerIsDarkOrbCapped() && playerHasEmptyOrbSlots()) {
                 //TODO: localization
                 //TODO: only display message once per game, maybe
-                AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, "I can't have more than 3 Dark Orbs.", true));
-            }else{
-                addToTop(new ChannelAction(orbType,autoEvoke));
+                AbstractDungeon.effectList.add(
+                    new ThoughtBubble(
+                        AbstractDungeon.player.dialogX,
+                        AbstractDungeon.player.dialogY,
+                        3.0F,
+                        "I can't have more than 3 Dark Orbs.",
+                        true
+                    )
+                );
+            } else {
+                addToTop(new ChannelAction(orbType, autoEvoke));
             }
         }
-        this.isDone=true;
+        this.isDone = true;
     }
 }

@@ -12,10 +12,12 @@ import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 
-public class BGCleric
-        extends AbstractImageEvent {
+public class BGCleric extends AbstractImageEvent {
+
     public static final String ID = "BGThe Cleric";
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGThe Cleric");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGThe Cleric"
+    );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
@@ -33,12 +35,11 @@ public class BGCleric
     private static final String DIALOG_LEAVE = DESCRIPTIONS[4];
 
     private int healAmt;
-private boolean pickCard;
+    private boolean pickCard;
     private int buttonchoice;
 
     public BGCleric() {
         super(NAME, DIALOG_INTRO, "images/events/cleric.jpg");
-
         if (AbstractDungeon.ascensionLevel >= 15) {
             this.purifyCost = 75;
         } else {
@@ -68,22 +69,28 @@ private boolean pickCard;
         this.imageEventText.setDialogOption(OPTIONS[6]);
     }
 
-
     public void update() {
         super.update();
 
-
-        if (this.pickCard &&
-                !AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
+        if (
+            this.pickCard &&
+            !AbstractDungeon.isScreenUp &&
+            !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()
+        ) {
             AbstractCard c = AbstractDungeon.gridSelectScreen.selectedCards.get(0);
-            if(buttonchoice==1) {
+            if (buttonchoice == 1) {
                 c.upgrade();
-                AbstractDungeon.effectsQueue.add(new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
-                AbstractDungeon.topLevelEffectsQueue.add(new ShowCardBrieflyEffect(c.makeStatEquivalentCopy()));
+                AbstractDungeon.effectsQueue.add(
+                    new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F)
+                );
+                AbstractDungeon.topLevelEffectsQueue.add(
+                    new ShowCardBrieflyEffect(c.makeStatEquivalentCopy())
+                );
                 AbstractEvent.logMetricCardUpgradeAtCost("The Cleric", "Upgrade", c, 2);
-
-            }else if(buttonchoice==2){
-                AbstractDungeon.topLevelEffects.add(new PurgeCardEffect(c, (Settings.WIDTH / 2), (Settings.HEIGHT / 2)));
+            } else if (buttonchoice == 2) {
+                AbstractDungeon.topLevelEffects.add(
+                    new PurgeCardEffect(c, (Settings.WIDTH / 2), (Settings.HEIGHT / 2))
+                );
                 AbstractEvent.logMetricCardRemovalAtCost("The Cleric", "Card Removal", c, 3);
                 AbstractDungeon.player.masterDeck.removeCard(c);
                 AbstractDungeon.gridSelectScreen.selectedCards.remove(c);
@@ -93,10 +100,8 @@ private boolean pickCard;
         }
     }
 
-
     protected void buttonEffect(int buttonPressed) {
         switch (this.screenNum) {
-
             case 0:
                 switch (buttonPressed) {
                     case 0:
@@ -106,20 +111,39 @@ private boolean pickCard;
                         AbstractEvent.logMetricHealAtCost("The Cleric", "Healed", 1, 3);
                         return;
                     case 1:
-                        buttonchoice=1;
-                        AbstractDungeon.gridSelectScreen.open(AbstractDungeon.player.masterDeck
-                                .getUpgradableCards(), 1, OPTIONS[8], true, false, false, false);
+                        buttonchoice = 1;
+                        AbstractDungeon.gridSelectScreen.open(
+                            AbstractDungeon.player.masterDeck.getUpgradableCards(),
+                            1,
+                            OPTIONS[8],
+                            true,
+                            false,
+                            false,
+                            false
+                        );
                         this.pickCard = true;
                         showProceedScreen(DIALOG_UPGRADE);
                         return;
                     case 2:
-                        buttonchoice=2;
-                        if (CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck.getPurgeableCards())
-                                .size() > 0) {
+                        buttonchoice = 2;
+                        if (
+                            CardGroup.getGroupWithoutBottledCards(
+                                AbstractDungeon.player.masterDeck.getPurgeableCards()
+                            ).size() >
+                            0
+                        ) {
                             AbstractDungeon.player.loseGold(3);
                             AbstractDungeon.gridSelectScreen.open(
-                                    CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck
-                                            .getPurgeableCards()), 1, OPTIONS[7], false, false, false, true);
+                                CardGroup.getGroupWithoutBottledCards(
+                                    AbstractDungeon.player.masterDeck.getPurgeableCards()
+                                ),
+                                1,
+                                OPTIONS[7],
+                                false,
+                                false,
+                                false,
+                                true
+                            );
                         }
                         this.pickCard = true;
                         showProceedScreen(DIALOG_REMOVE);
@@ -130,10 +154,6 @@ private boolean pickCard;
                 return;
         }
 
-
-
         openMap();
     }
 }
-
-

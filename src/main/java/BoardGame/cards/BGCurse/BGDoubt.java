@@ -17,45 +17,55 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGDoubt extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGDoubt");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGDoubt"
+    );
     public static final String ID = "BGDoubt";
 
     public BGDoubt() {
-        super("BGDoubt", cardStrings.NAME, "curse/doubt", -2, cardStrings.DESCRIPTION, AbstractCard.CardType.CURSE, BGCurse.Enums.BG_CURSE, AbstractCard.CardRarity.CURSE, AbstractCard.CardTarget.NONE);
-
+        super(
+            "BGDoubt",
+            cardStrings.NAME,
+            "curse/doubt",
+            -2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.CURSE,
+            BGCurse.Enums.BG_CURSE,
+            AbstractCard.CardRarity.CURSE,
+            AbstractCard.CardTarget.NONE
+        );
     }
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (this.dontTriggerOnUseCard) {
-            addToTop((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, (AbstractPower)new BGWeakPower((AbstractCreature)AbstractDungeon.player, 1, true), 1));
+            addToTop(
+                (AbstractGameAction) new ApplyPowerAction(
+                    (AbstractCreature) AbstractDungeon.player,
+                    (AbstractCreature) AbstractDungeon.player,
+                    (AbstractPower) new BGWeakPower(
+                        (AbstractCreature) AbstractDungeon.player,
+                        1,
+                        true
+                    ),
+                    1
+                )
+            );
         }
     }
 
-
-
     public void triggerWhenDrawn() {
-        addToBot((AbstractGameAction)new SetDontTriggerAction(this, false));
+        addToBot((AbstractGameAction) new SetDontTriggerAction(this, false));
     }
-
 
     public void triggerOnEndOfTurnForPlayingCard() {
         this.dontTriggerOnUseCard = true;
         AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this, true));
     }
 
-
-
-
-
     public void upgrade() {}
-
-
 
     public AbstractCard makeCopy() {
         return new BGDoubt();
     }
 }
-
-

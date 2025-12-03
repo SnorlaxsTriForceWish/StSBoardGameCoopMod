@@ -30,10 +30,9 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
 
 //TODO: oops we forgot Watcher's add-miracle-to-hand-at-start-of-combat relic
 
@@ -42,10 +41,12 @@ import java.util.ArrayList;
 //REMINDER: players act from bottom lane to top lane, but monsters act from top lane to bottom lane
 
 public class MultiCharacter extends AbstractBGPlayer {
-//public class MultiCharacter extends CustomPlayer {
+
+    //public class MultiCharacter extends CustomPlayer {
     public static final Logger logger = LogManager.getLogger(MultiCharacter.class.getName());
 
     public static class Enums {
+
         @SpireEnum
         public static AbstractPlayer.PlayerClass BG_MULTICHARACTER;
 
@@ -60,13 +61,14 @@ public class MultiCharacter extends AbstractBGPlayer {
     public static HandLayoutHelper handLayoutHelper = new HandLayoutHelper();
 
     public static ArrayList<AbstractPlayer> getSubcharacters() {
-        if (ContextPatches.originalBGMultiCharacter == null){
-            if(AbstractDungeon.player instanceof MultiCharacter){
-                ContextPatches.originalBGMultiCharacter=AbstractDungeon.player;
+        if (ContextPatches.originalBGMultiCharacter == null) {
+            if (AbstractDungeon.player instanceof MultiCharacter) {
+                ContextPatches.originalBGMultiCharacter = AbstractDungeon.player;
             }
         }
-        if (ContextPatches.originalBGMultiCharacter != null)
-            return ((MultiCharacter) ContextPatches.originalBGMultiCharacter).subcharacters;
+        if (ContextPatches.originalBGMultiCharacter != null) return (
+            (MultiCharacter) ContextPatches.originalBGMultiCharacter
+        ).subcharacters;
         if (AbstractDungeon.currMapNode != null) {
             if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
                 //logger.warn("tried to BGMultiCharacter.getSubcharacters, but ContextPatches.originalBGMultiCharacter==null, time to panic!");
@@ -89,53 +91,96 @@ public class MultiCharacter extends AbstractBGPlayer {
 
     private static final String ID = BoardGame.makeID("BGMultiCharacter");
 
-    private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
+    private static final CharacterStrings characterStrings =
+        CardCrawlGame.languagePack.getCharacterString(ID);
 
     private static final String[] NAMES = characterStrings.NAMES;
 
     private static final String[] TEXT = characterStrings.TEXT;
 
-    public static final String[] orbTextures = new String[]{
-            "BoardGameResources/images/char/defaultCharacter/orb/layer1.png", "BoardGameResources/images/char/defaultCharacter/orb/layer2.png", "BoardGameResources/images/char/defaultCharacter/orb/layer3.png", "BoardGameResources/images/char/defaultCharacter/orb/layer4.png", "BoardGameResources/images/char/defaultCharacter/orb/layer5.png", "BoardGameResources/images/char/defaultCharacter/orb/layer6.png", "BoardGameResources/images/char/defaultCharacter/orb/layer1d.png", "BoardGameResources/images/char/defaultCharacter/orb/layer2d.png", "BoardGameResources/images/char/defaultCharacter/orb/layer3d.png", "BoardGameResources/images/char/defaultCharacter/orb/layer4d.png",
-            "BoardGameResources/images/char/defaultCharacter/orb/layer5d.png"};
+    public static final String[] orbTextures = new String[] {
+        "BoardGameResources/images/char/defaultCharacter/orb/layer1.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer2.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer3.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer4.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer5.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer6.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer1d.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer2d.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer3d.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer4d.png",
+        "BoardGameResources/images/char/defaultCharacter/orb/layer5d.png",
+    };
 
     protected Color blockTextColor;
 
     protected float blockScale;
 
     public MultiCharacter(String name, AbstractPlayer.PlayerClass setClass) {
-        super(name, setClass, orbTextures, "BoardGameResources/images/char/defaultCharacter/orb/vfx.png", null, "");
-        if(BoardGame.ENABLE_TEST_FEATURES)TEXT[0]=TEXT[3];
+        super(
+            name,
+            setClass,
+            orbTextures,
+            "BoardGameResources/images/char/defaultCharacter/orb/vfx.png",
+            null,
+            ""
+        );
+        if (BoardGame.ENABLE_TEST_FEATURES) TEXT[0] = TEXT[3];
         this.blockTextColor = new Color(0.9F, 0.9F, 0.9F, 0.0F);
         this.blockScale = 1.0F;
-        initializeClass((String) null, "images/characters/ironclad/shoulder2.png", "images/characters/ironclad/shoulder.png", "images/characters/ironclad/corpse.png",
-                getLoadout(), 20.0F, -10.0F, 220.0F, 290.0F, new EnergyManager(ENERGY_PER_TURN));
-        loadAnimation("images/characters/ironclad/idle/skeleton.atlas", "images/characters/ironclad/idle/skeleton.json", 1.0F);
+        initializeClass(
+            (String) null,
+            "images/characters/ironclad/shoulder2.png",
+            "images/characters/ironclad/shoulder.png",
+            "images/characters/ironclad/corpse.png",
+            getLoadout(),
+            20.0F,
+            -10.0F,
+            220.0F,
+            290.0F,
+            new EnergyManager(ENERGY_PER_TURN)
+        );
+        loadAnimation(
+            "images/characters/ironclad/idle/skeleton.atlas",
+            "images/characters/ironclad/idle/skeleton.json",
+            1.0F
+        );
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
         e.setTimeScale(0.6F);
         this.dialogX = this.drawX + 0.0F * Settings.scale;
         this.dialogY = this.drawY + 220.0F * Settings.scale;
         //BaseMod.MAX_HAND_SIZE = 999; //TODO: move to a starting relic
-
     }
 
     public CharSelectInfo getLoadout() {
-        return new CharSelectInfo(NAMES[0], TEXT[0], 9, 9, 0, 3, 0, (AbstractPlayer) this, getStartingRelics(), getStartingDeck(), false);
+        return new CharSelectInfo(
+            NAMES[0],
+            TEXT[0],
+            9,
+            9,
+            0,
+            3,
+            0,
+            (AbstractPlayer) this,
+            getStartingRelics(),
+            getStartingDeck(),
+            false
+        );
     }
 
     public ArrayList<String> getStartingDeck() {
         ArrayList<String> retVal = new ArrayList<>();
         logger.info("Begin loading starter Deck Strings");
-//        retVal.add("BGDesync");
-//        retVal.add("BGDesync");
-//        retVal.add("BGDesync");
-//        retVal.add("BGDesync");
-//        retVal.add("BGDesync");
-//        retVal.add("BGDesync");
-//        retVal.add("BGDesync");
-//        retVal.add("BGDesync");
-//        retVal.add("BGDesync");
-//        retVal.add("BGDesync");
+        //        retVal.add("BGDesync");
+        //        retVal.add("BGDesync");
+        //        retVal.add("BGDesync");
+        //        retVal.add("BGDesync");
+        //        retVal.add("BGDesync");
+        //        retVal.add("BGDesync");
+        //        retVal.add("BGDesync");
+        //        retVal.add("BGDesync");
+        //        retVal.add("BGDesync");
+        //        retVal.add("BGDesync");
         retVal.add("BGStrike_R");
         retVal.add("BGStrike_R");
         retVal.add("BGStrike_R");
@@ -174,14 +219,15 @@ public class MultiCharacter extends AbstractBGPlayer {
             relics.add("Darkstone Periapt");
             relics.add("Du-Vu Doll");
         }
-        if (ModHelper.isModEnabled("ControlledChaos"))
-            relics.add("Frozen Eye");
+        if (ModHelper.isModEnabled("ControlledChaos")) relics.add("Frozen Eye");
         int index = 0;
 
         //TODO: "if(BoardGame.USE_BoardGame_RULES)" or inverse
         for (String s : relics) {
             if (s.equals(BGTheDieRelic.ID)) {
-                RelicLibrary.getRelic(s).makeCopy().instantObtain((AbstractPlayer) this, index, false);
+                RelicLibrary.getRelic(s)
+                    .makeCopy()
+                    .instantObtain((AbstractPlayer) this, index, false);
                 index++;
             }
         }
@@ -190,7 +236,11 @@ public class MultiCharacter extends AbstractBGPlayer {
 
     public void doCharSelectScreenSelectEffect() {
         CardCrawlGame.sound.playA("BLUNT_HEAVY", MathUtils.random(-0.2F, 0.2F));
-        CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.MED, ScreenShake.ShakeDur.SHORT, true);
+        CardCrawlGame.screenShake.shake(
+            ScreenShake.ShakeIntensity.MED,
+            ScreenShake.ShakeDur.SHORT,
+            true
+        );
     }
 
     public String getCustomModeCharacterButtonSoundKey() {
@@ -238,10 +288,29 @@ public class MultiCharacter extends AbstractBGPlayer {
     }
 
     public AbstractGameAction.AttackEffect[] getSpireHeartSlashEffect() {
-        return new AbstractGameAction.AttackEffect[]{
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY, AbstractGameAction.AttackEffect.BLUNT_HEAVY, AbstractGameAction.AttackEffect.BLUNT_HEAVY, AbstractGameAction.AttackEffect.SLASH_HEAVY, AbstractGameAction.AttackEffect.POISON, AbstractGameAction.AttackEffect.SLASH_DIAGONAL, AbstractGameAction.AttackEffect.SLASH_HEAVY, AbstractGameAction.AttackEffect.POISON, AbstractGameAction.AttackEffect.SLASH_DIAGONAL, AbstractGameAction.AttackEffect.SLASH_HEAVY,
-                AbstractGameAction.AttackEffect.FIRE, AbstractGameAction.AttackEffect.SLASH_DIAGONAL, AbstractGameAction.AttackEffect.SLASH_HEAVY, AbstractGameAction.AttackEffect.FIRE, AbstractGameAction.AttackEffect.SLASH_DIAGONAL, AbstractGameAction.AttackEffect.BLUNT_LIGHT, AbstractGameAction.AttackEffect.BLUNT_HEAVY, AbstractGameAction.AttackEffect.BLUNT_LIGHT, AbstractGameAction.AttackEffect.BLUNT_HEAVY, AbstractGameAction.AttackEffect.BLUNT_HEAVY,
-                AbstractGameAction.AttackEffect.BLUNT_LIGHT};
+        return new AbstractGameAction.AttackEffect[] {
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY,
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY,
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY,
+            AbstractGameAction.AttackEffect.SLASH_HEAVY,
+            AbstractGameAction.AttackEffect.POISON,
+            AbstractGameAction.AttackEffect.SLASH_DIAGONAL,
+            AbstractGameAction.AttackEffect.SLASH_HEAVY,
+            AbstractGameAction.AttackEffect.POISON,
+            AbstractGameAction.AttackEffect.SLASH_DIAGONAL,
+            AbstractGameAction.AttackEffect.SLASH_HEAVY,
+            AbstractGameAction.AttackEffect.FIRE,
+            AbstractGameAction.AttackEffect.SLASH_DIAGONAL,
+            AbstractGameAction.AttackEffect.SLASH_HEAVY,
+            AbstractGameAction.AttackEffect.FIRE,
+            AbstractGameAction.AttackEffect.SLASH_DIAGONAL,
+            AbstractGameAction.AttackEffect.BLUNT_LIGHT,
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY,
+            AbstractGameAction.AttackEffect.BLUNT_LIGHT,
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY,
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY,
+            AbstractGameAction.AttackEffect.BLUNT_LIGHT,
+        };
     }
 
     public String getSpireHeartText() {
@@ -252,7 +321,6 @@ public class MultiCharacter extends AbstractBGPlayer {
         return TEXT[2];
     }
 
-
     public void preBattlePrep() {
         super.preBattlePrep();
         if (handLayoutHelper.currentHand < 0) handLayoutHelper.changeHand(0);
@@ -262,7 +330,9 @@ public class MultiCharacter extends AbstractBGPlayer {
             c.preBattlePrep();
             ContextPatches.popPlayerContext();
         }
-        AbstractScenePatches.AbstractSceneExtraInterface.gridBackground.get(AbstractDungeon.scene).resetGridAtStartOfCombat();
+        AbstractScenePatches.AbstractSceneExtraInterface.gridBackground
+            .get(AbstractDungeon.scene)
+            .resetGridAtStartOfCombat();
     }
 
     public void applyPreCombatLogic() {
@@ -273,7 +343,6 @@ public class MultiCharacter extends AbstractBGPlayer {
             ContextPatches.popPlayerContext();
         }
     }
-
 
     public void applyStartOfCombatLogic() {
         super.applyStartOfCombatLogic();
@@ -293,7 +362,6 @@ public class MultiCharacter extends AbstractBGPlayer {
         }
     }
 
-
     public void applyStartOfTurnRelics() {
         super.applyStartOfTurnRelics();
         this.shivsPlayedThisTurn = 0;
@@ -305,19 +373,14 @@ public class MultiCharacter extends AbstractBGPlayer {
         }
     }
 
-
-    public void updateInput(){
+    public void updateInput() {
         super.updateInput();
         for (AbstractPlayer c : this.subcharacters) {
-            if(MultiCreature.Field.currentRow.get(c)==handLayoutHelper.currentHand){
+            if (MultiCreature.Field.currentRow.get(c) == handLayoutHelper.currentHand) {
                 c.updateInput();
-            }else{
-
-            }
+            } else {}
         }
     }
-
-
 
     public void combatUpdate() {
         //super.combatUpdate();
@@ -338,7 +401,7 @@ public class MultiCharacter extends AbstractBGPlayer {
         }
     }
 
-    public void showHealthBar(){
+    public void showHealthBar() {
         //super.showHealthBar();
         for (AbstractPlayer c : this.subcharacters) {
             ContextPatches.pushPlayerContext(c);
@@ -346,7 +409,8 @@ public class MultiCharacter extends AbstractBGPlayer {
             ContextPatches.popPlayerContext();
         }
     }
-    public void hideHealthBar(){
+
+    public void hideHealthBar() {
         //super.hideHealthBar();
         for (AbstractPlayer c : this.subcharacters) {
             ContextPatches.pushPlayerContext(c);
@@ -364,10 +428,13 @@ public class MultiCharacter extends AbstractBGPlayer {
         }
     }
 
-
     public void renderHand(SpriteBatch sb) {
         if (handLayoutHelper.currentHand >= 0) {
-            for (int i = handLayoutHelper.currentHand + subcharacters.size() - 1; i >= handLayoutHelper.currentHand; i -= 1) {
+            for (
+                int i = handLayoutHelper.currentHand + subcharacters.size() - 1;
+                i >= handLayoutHelper.currentHand;
+                i -= 1
+            ) {
                 //BoardGame.logger.info("???   " + i + "   " + i % subcharacters.size());
                 AbstractPlayer c = subcharacters.get(i % subcharacters.size());
                 ContextPatches.pushPlayerContext(c);
@@ -378,11 +445,12 @@ public class MultiCharacter extends AbstractBGPlayer {
     }
 
     @Override
-    public void updateOrb(int orbCount){
-        for(AbstractPlayer c : MultiCharacter.getSubcharacters()){
+    public void updateOrb(int orbCount) {
+        for (AbstractPlayer c : MultiCharacter.getSubcharacters()) {
             c.updateOrb(orbCount);
         }
     }
+
     @Override
     public void renderOrb(SpriteBatch sb, boolean enabled, float current_x, float current_y) {
         //do nothing
@@ -390,22 +458,28 @@ public class MultiCharacter extends AbstractBGPlayer {
     }
 
     @Override
-    public void loseBlock(){
-        for(AbstractPlayer c : MultiCharacter.getSubcharacters()) {
+    public void loseBlock() {
+        for (AbstractPlayer c : MultiCharacter.getSubcharacters()) {
             ContextPatches.pushPlayerContext(c);
-            if (!AbstractDungeon.player.hasPower("Barricade") && !AbstractDungeon.player.hasPower("Blur"))
-                if (!AbstractDungeon.player.hasRelic("Calipers")) {
-                    AbstractDungeon.player.loseBlock();
-                } else {
-                    AbstractDungeon.player.loseBlock(15);
-                }
+            if (
+                !AbstractDungeon.player.hasPower("Barricade") &&
+                !AbstractDungeon.player.hasPower("Blur")
+            ) if (!AbstractDungeon.player.hasRelic("Calipers")) {
+                AbstractDungeon.player.loseBlock();
+            } else {
+                AbstractDungeon.player.loseBlock(15);
+            }
             ContextPatches.popPlayerContext();
         }
     }
 
-
-    @SpirePatch2(clz = AbstractPlayer.class, method = "renderCardHotKeyText", paramtypez = {SpriteBatch.class})
+    @SpirePatch2(
+        clz = AbstractPlayer.class,
+        method = "renderCardHotKeyText",
+        paramtypez = { SpriteBatch.class }
+    )
     public static class RenderCardHotKeyTextPatch {
+
         @SpirePrefixPatch
         public static SpireReturn<Void> Prefix(AbstractPlayer __instance) {
             if (CardCrawlGame.chosenCharacter == Enums.BG_MULTICHARACTER) {
@@ -417,8 +491,6 @@ public class MultiCharacter extends AbstractBGPlayer {
         }
     }
 
-
-
     public void onVictory() {
         //don't super
         for (AbstractPlayer c : this.subcharacters) {
@@ -427,8 +499,4 @@ public class MultiCharacter extends AbstractBGPlayer {
             ContextPatches.popPlayerContext();
         }
     }
-
-
-
-
 }

@@ -10,12 +10,20 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.AngryPower;
 
 public class ApplyAngerToGremlinsAction extends AbstractGameAction {
+
     @Override
     public void update() {
         for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
-            if(m instanceof BGGremlinAngry){
-                if(!m.hasPower("Angry")){
-                    addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)m, (AbstractPower)new AngryPower((AbstractCreature)m, 1), 1));
+            if (m instanceof BGGremlinAngry) {
+                if (!m.hasPower("Angry")) {
+                    addToBot(
+                        (AbstractGameAction) new ApplyPowerAction(
+                            (AbstractCreature) m,
+                            (AbstractCreature) m,
+                            (AbstractPower) new AngryPower((AbstractCreature) m, 1),
+                            1
+                        )
+                    );
                 }
             }
         }

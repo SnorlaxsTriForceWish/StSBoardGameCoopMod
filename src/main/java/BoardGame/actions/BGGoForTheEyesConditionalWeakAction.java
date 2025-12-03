@@ -11,17 +11,22 @@ public class BGGoForTheEyesConditionalWeakAction extends AbstractGameAction {
 
     private AbstractCreature p;
     private AbstractCreature m;
+
     public BGGoForTheEyesConditionalWeakAction(AbstractCreature p, AbstractCreature m) {
-        this.p=p;
-        this.m=m;
+        this.p = p;
+        this.m = m;
         this.actionType = ActionType.SPECIAL;
     }
 
-
-
     public void update() {
-        if(TheDie.monsterRoll==4 || TheDie.monsterRoll==5 || TheDie.monsterRoll==6)
-            addToTop((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)p, (AbstractPower)new BGWeakPower((AbstractCreature)m, 1, false), 1));
+        if (TheDie.monsterRoll == 4 || TheDie.monsterRoll == 5 || TheDie.monsterRoll == 6) addToTop(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) m,
+                (AbstractCreature) p,
+                (AbstractPower) new BGWeakPower((AbstractCreature) m, 1, false),
+                1
+            )
+        );
 
         this.isDone = true;
     }

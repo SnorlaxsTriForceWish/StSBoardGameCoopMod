@@ -20,20 +20,27 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 //TODO: don't stop flashing if we click Ashes while another wildcard power is active
-public class BGCharonsAshes extends AbstractBGRelic implements DieControlledRelic, ClickableRelic, NilrysCodexCompatible {
+public class BGCharonsAshes
+    extends AbstractBGRelic
+    implements DieControlledRelic, ClickableRelic, NilrysCodexCompatible {
+
     public BGCharonsAshes() {
         super("BGCharonsAshes", "ashes.png", RelicTier.RARE, LandingSound.MAGICAL);
     }
-    public int getPrice() {return 7;}
 
-    public String getQuickSummary(){
-        if(TheDie.monsterRoll==1||TheDie.monsterRoll==2)return "Exhaust / 2 Damage";
-    else return "";}
+    public int getPrice() {
+        return 7;
+    }
+
+    public String getQuickSummary() {
+        if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) return "Exhaust / 2 Damage";
+        else return "";
+    }
 
     public String getUpdatedDescription() {
         BoardGame.BoardGame.logger.info("BGCalipers.getUpdatedDescription...");
         String desc = this.DESCRIPTIONS[0];
-        desc+=DieControlledRelic.RIGHT_CLICK_TO_ACTIVATE;   //TODO LATER: "on cooldown" message, if possible
+        desc += DieControlledRelic.RIGHT_CLICK_TO_ACTIVATE; //TODO LATER: "on cooldown" message, if possible
         return desc;
     }
 
@@ -41,34 +48,49 @@ public class BGCharonsAshes extends AbstractBGRelic implements DieControlledReli
         return new BGCharonsAshes();
     }
 
-    public boolean isAvailable=false;
+    public boolean isAvailable = false;
 
-
-    public void checkDieAbility(){
-        if(TheDie.finalRelicRoll==1 || TheDie.finalRelicRoll==2){
+    public void checkDieAbility() {
+        if (TheDie.finalRelicRoll == 1 || TheDie.finalRelicRoll == 2) {
             //flash();
             //addToBot((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
-            addToTop((AbstractGameAction) new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, (AbstractPower)new BGTriggerCharonsAshesPower((AbstractCreature)AbstractDungeon.player)));
+            addToTop(
+                (AbstractGameAction) new ApplyPowerAction(
+                    (AbstractCreature) AbstractDungeon.player,
+                    (AbstractCreature) AbstractDungeon.player,
+                    (AbstractPower) new BGTriggerCharonsAshesPower(
+                        (AbstractCreature) AbstractDungeon.player
+                    )
+                )
+            );
         }
-
     }
 
-    public void activateDieAbility(){
-        if(!AbstractDungeon.player.hand.isEmpty()) {
+    public void activateDieAbility() {
+        if (!AbstractDungeon.player.hand.isEmpty()) {
             flash(); // Flash
             stopPulse();
-            isAvailable=false;
+            isAvailable = false;
 
             addToBot((AbstractGameAction) new ExhaustAction(1, false));
-            TargetSelectScreen.TargetSelectAction tssAction = (target) -> {
-                if(target==null)return;
-                addToBot((AbstractGameAction) new DamageAction(target,
+            TargetSelectScreen.TargetSelectAction tssAction = target -> {
+                if (target == null) return;
+                addToBot(
+                    (AbstractGameAction) new DamageAction(
+                        target,
                         new DamageInfo(AbstractDungeon.player, 2, DamageInfo.DamageType.THORNS),
-                        AbstractGameAction.AttackEffect.FIRE));
+                        AbstractGameAction.AttackEffect.FIRE
+                    )
+                );
             };
             //TODO: localization
-            addToBot((AbstractGameAction) new TargetSelectScreenAction(tssAction, "Choose a target for Charon's Ashes (2 damage)."));
-        }else{
+            addToBot(
+                (AbstractGameAction) new TargetSelectScreenAction(
+                    tssAction,
+                    "Choose a target for Charon's Ashes (2 damage)."
+                )
+            );
+        } else {
             //AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, "I don't have any cards to Exhaust.", true));
         }
     }
@@ -76,17 +98,26 @@ public class BGCharonsAshes extends AbstractBGRelic implements DieControlledReli
     public void Trigger2Ability() {
         activateDieAbility();
     }
+
     private boolean isPlayerTurn = false; // We should make sure the relic is only activateable during our turn, not the enemies'.
 
     @Override
-    public void onRightClick() {// On right click
+    public void onRightClick() {
+        // On right click
         if (!isObtained || !isPlayerTurn) {
             return;
         }
-        if(AbstractDungeon.player.hasPower("BGTriggerCharonsAshesPower")) {
-            addToTop(new RemoveSpecificPowerAction(AbstractDungeon.player, AbstractDungeon.player, "BGTriggerCharonsAshesPower"));
+        if (AbstractDungeon.player.hasPower("BGTriggerCharonsAshesPower")) {
+            addToTop(
+                new RemoveSpecificPowerAction(
+                    AbstractDungeon.player,
+                    AbstractDungeon.player,
+                    "BGTriggerCharonsAshesPower"
+                )
+            );
             activateDieAbility();
-        }else {   //TODO: if player rolls 1 with Dolly's Mirror, ashes can be activated twice. which activation do we do first? (changing this will require a major logic rework)
+        } else {
+            //TODO: if player rolls 1 with Dolly's Mirror, ashes can be activated twice. which activation do we do first? (changing this will require a major logic rework)
             addToBot((AbstractGameAction) new BGActivateDieAbilityAction(this));
         }
     }
@@ -98,21 +129,29 @@ public class BGCharonsAshes extends AbstractBGRelic implements DieControlledReli
     @Override
     public void onPlayerEndTurn() {
         isPlayerTurn = false; // Not our turn now.
-        isAvailable=false;
-        /* Unused Up */ { this.grayscale = false; this.usedUp=false; getUpdatedDescription();this.tips.clear();this.tips.add(new PowerTip(this.name, this.description));initializeTips();}
+        isAvailable = false;
+        /* Unused Up */ {
+            this.grayscale = false;
+            this.usedUp = false;
+            getUpdatedDescription();
+            this.tips.clear();
+            this.tips.add(new PowerTip(this.name, this.description));
+            initializeTips();
+        }
         stopPulse();
     }
 
     @Override
     public void onVictory() {
-        isAvailable=false;
+        isAvailable = false;
         stopPulse(); // Don't keep pulsing past the victory screen/outside of combat.
-        /* Unused Up */ { this.grayscale = false; this.usedUp=false; this.description = getUpdatedDescription();this.tips.clear();this.tips.add(new PowerTip(this.name, this.description));initializeTips();}
+        /* Unused Up */ {
+            this.grayscale = false;
+            this.usedUp = false;
+            this.description = getUpdatedDescription();
+            this.tips.clear();
+            this.tips.add(new PowerTip(this.name, this.description));
+            initializeTips();
+        }
     }
-
-
-
-
 }
-
-

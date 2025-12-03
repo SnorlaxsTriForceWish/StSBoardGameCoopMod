@@ -10,12 +10,20 @@ import com.megacrit.cardcrawl.powers.MetallicizePower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class BGFrozenCore extends AbstractBGRelic {
+
     public static final String ID = "BGFrozenCore";
 
     public BGFrozenCore() {
-        super("BGFrozenCore", "frozenOrb.png", AbstractRelic.RelicTier.BOSS, AbstractRelic.LandingSound.CLINK);
+        super(
+            "BGFrozenCore",
+            "frozenOrb.png",
+            AbstractRelic.RelicTier.BOSS,
+            AbstractRelic.LandingSound.CLINK
+        );
     }
-    private static final int BLOCK_AMT = 1; public boolean trigger = false;
+
+    private static final int BLOCK_AMT = 1;
+    public boolean trigger = false;
 
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0];
@@ -23,49 +31,61 @@ public class BGFrozenCore extends AbstractBGRelic {
 
     public void atBattleStart() {
         flash();
-        addToTop((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, (AbstractPower)new MetallicizePower((AbstractCreature)AbstractDungeon.player, BLOCK_AMT), BLOCK_AMT));
-        addToTop((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
+        addToTop(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) AbstractDungeon.player,
+                (AbstractCreature) AbstractDungeon.player,
+                (AbstractPower) new MetallicizePower(
+                    (AbstractCreature) AbstractDungeon.player,
+                    BLOCK_AMT
+                ),
+                BLOCK_AMT
+            )
+        );
+        addToTop(
+            (AbstractGameAction) new RelicAboveCreatureAction(
+                (AbstractCreature) AbstractDungeon.player,
+                this
+            )
+        );
     }
 
-//
-//
-//
-//    public void onPlayerEndTurn() {
-//        if (AbstractDungeon.player.currentBlock == 0 || this.trigger) {
-//            this.trigger = false;
-//            flash();
-//            stopPulse();
-//            addToTop((AbstractGameAction)new GainBlockAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, BLOCK_AMT));
-//            addToTop((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
-//        }
-//    }
-//
-//
-//    public void atTurnStart() {
-//        this.trigger = false;
-//        if (AbstractDungeon.player.currentBlock == 0) {
-//            beginLongPulse();
-//        }
-//    }
-//
-//
-//    public int onPlayerGainedBlock(float blockAmount) {
-//        if (blockAmount > 0.0F) {
-//            stopPulse();
-//        }
-//
-//        return MathUtils.floor(blockAmount);
-//    }
-//
-//
-//    public void onVictory() {
-//        stopPulse();
-//    }
-
+    //
+    //
+    //
+    //    public void onPlayerEndTurn() {
+    //        if (AbstractDungeon.player.currentBlock == 0 || this.trigger) {
+    //            this.trigger = false;
+    //            flash();
+    //            stopPulse();
+    //            addToTop((AbstractGameAction)new GainBlockAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, BLOCK_AMT));
+    //            addToTop((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
+    //        }
+    //    }
+    //
+    //
+    //    public void atTurnStart() {
+    //        this.trigger = false;
+    //        if (AbstractDungeon.player.currentBlock == 0) {
+    //            beginLongPulse();
+    //        }
+    //    }
+    //
+    //
+    //    public int onPlayerGainedBlock(float blockAmount) {
+    //        if (blockAmount > 0.0F) {
+    //            stopPulse();
+    //        }
+    //
+    //        return MathUtils.floor(blockAmount);
+    //    }
+    //
+    //
+    //    public void onVictory() {
+    //        stopPulse();
+    //    }
 
     public AbstractRelic makeCopy() {
         return new BGFrozenCore();
     }
 }
-
-

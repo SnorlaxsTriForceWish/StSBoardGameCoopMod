@@ -11,10 +11,9 @@ import com.megacrit.cardcrawl.cards.SoulGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
 
 public class DrawCardMultiAction_PostShuffleFollowUp extends AbstractGameAction {
 
@@ -24,7 +23,7 @@ public class DrawCardMultiAction_PostShuffleFollowUp extends AbstractGameAction 
     private boolean clearDrawHistory;
     private AbstractGameAction followUpAction;
 
-    public DrawCardMultiAction_PostShuffleFollowUp(ArrayList<Integer>amountLeftToDraw) {
+    public DrawCardMultiAction_PostShuffleFollowUp(ArrayList<Integer> amountLeftToDraw) {
         this.clearDrawHistory = true;
         this.followUpAction = null;
 
@@ -36,22 +35,25 @@ public class DrawCardMultiAction_PostShuffleFollowUp extends AbstractGameAction 
             this.duration = Settings.ACTION_DUR_FASTER;
         }
 
-        this.amountLeftToDraw=amountLeftToDraw;
+        this.amountLeftToDraw = amountLeftToDraw;
     }
+
     public void update() {
         int endActionCounter = 0;
-        if (ContextPatches.originalBGMultiCharacter==null) {
-            BoardGame.logger.info("WARNING: DrawCardMultiAction_PostShuffleFollowUp was updated while ContextPatches.originalBGMultiCharacter==null, time to panic!");
+        if (ContextPatches.originalBGMultiCharacter == null) {
+            BoardGame.logger.info(
+                "WARNING: DrawCardMultiAction_PostShuffleFollowUp was updated while ContextPatches.originalBGMultiCharacter==null, time to panic!"
+            );
             this.endActionWithFollowUp();
-        }else if (false && AbstractDungeon.player.hasPower("No Draw")) {
+        } else if (false && AbstractDungeon.player.hasPower("No Draw")) {
             AbstractDungeon.player.getPower("No Draw").flash();
             this.endActionWithFollowUp();
         } else if (false && this.amount <= 0) {
             this.endActionWithFollowUp();
-        }else {
+        } else {
             this.duration -= Gdx.graphics.getDeltaTime();
-            if(this.duration<0.0F) {
-                for (int i = 0; i< MultiCharacter.getSubcharacters().size(); i+=1) {
+            if (this.duration < 0.0F) {
+                for (int i = 0; i < MultiCharacter.getSubcharacters().size(); i += 1) {
                     AbstractPlayer p = MultiCharacter.getSubcharacters().get(i);
                     int deckSize = p.drawPile.size();
                     int discardSize = p.discardPile.size();
@@ -63,20 +65,23 @@ public class DrawCardMultiAction_PostShuffleFollowUp extends AbstractGameAction 
                             endActionCounter += 1;
                         } else if (deckSize == 0) {
                             endActionCounter += 1;
-                        }else{
+                        } else {
                             //if (this.amount != 0 && this.duration < 0.0F) {
                             if (this.amountLeftToDraw.get(i) > 0) {
                                 if (!p.drawPile.isEmpty()) {
                                     drawnCards.add(p.drawPile.getTopCard());
                                     p.draw();
                                     p.hand.refreshHandLayout();
-                                    this.amountLeftToDraw.set(i,this.amountLeftToDraw.get(i)-1);
+                                    this.amountLeftToDraw.set(i, this.amountLeftToDraw.get(i) - 1);
                                 } else {
-                                    logger.warn("Player attempted to draw from an empty drawpile mid-DrawAction?MASTER DECK: " + p.masterDeck.getCardNames());
+                                    logger.warn(
+                                        "Player attempted to draw from an empty drawpile mid-DrawAction?MASTER DECK: " +
+                                            p.masterDeck.getCardNames()
+                                    );
                                     this.endActionWithFollowUp();
                                 }
                             }
-                            if(this.amountLeftToDraw.get(i)<=0){
+                            if (this.amountLeftToDraw.get(i) <= 0) {
                                 endActionCounter += 1;
                             }
                         }
@@ -89,8 +94,7 @@ public class DrawCardMultiAction_PostShuffleFollowUp extends AbstractGameAction 
                 }
             }
 
-
-            if(endActionCounter>= MultiCharacter.getSubcharacters().size()){
+            if (endActionCounter >= MultiCharacter.getSubcharacters().size()) {
                 this.endActionWithFollowUp();
             }
         }

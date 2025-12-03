@@ -16,49 +16,64 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGSteamBarrier extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGSteamBarrier");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGSteamBarrier"
+    );
     public static final String ID = "BGSteamBarrier";
 
     public BGSteamBarrier() {
-        super("BGSteamBarrier", cardStrings.NAME, "blue/skill/steam_barrier", 0, cardStrings.DESCRIPTION, CardType.SKILL, BGDefect.Enums.BG_BLUE, CardRarity.COMMON, CardTarget.SELF);
+        super(
+            "BGSteamBarrier",
+            cardStrings.NAME,
+            "blue/skill/steam_barrier",
+            0,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.COMMON,
+            CardTarget.SELF
+        );
         this.baseBlock = 1;
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     protected void applyPowersToBlock() {
         super.applyPowersToBlock();
-        float tmp=this.baseMagicNumber;
-        for (AbstractPower p : AbstractDungeon.player.powers)
-            tmp = p.modifyBlock(tmp, this);
-        for (AbstractPower p : AbstractDungeon.player.powers)
-            tmp = p.modifyBlockLast(tmp);
-        if (this.baseMagicNumber != MathUtils.floor(tmp))
-            this.isMagicNumberModified = true;
-        if (tmp < 0.0F)
-            tmp = 0.0F;
+        float tmp = this.baseMagicNumber;
+        for (AbstractPower p : AbstractDungeon.player.powers) tmp = p.modifyBlock(tmp, this);
+        for (AbstractPower p : AbstractDungeon.player.powers) tmp = p.modifyBlockLast(tmp);
+        if (this.baseMagicNumber != MathUtils.floor(tmp)) this.isMagicNumberModified = true;
+        if (tmp < 0.0F) tmp = 0.0F;
         this.magicNumber = MathUtils.floor(tmp);
     }
 
     public void triggerOnGlowCheck() {
-        this
-                .glowColor = shouldGlow() ? AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy() : AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+        this.glowColor = shouldGlow()
+            ? AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy()
+            : AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
     }
 
     private boolean shouldGlow() {
-        if(!AbstractDungeon.player.discardPile.group.isEmpty()) {
-            AbstractCard c = AbstractDungeon.player.discardPile.group.get(AbstractDungeon.player.discardPile.group.size() - 1);
-            if (c.cost == 0)
-                return true;
+        if (!AbstractDungeon.player.discardPile.group.isEmpty()) {
+            AbstractCard c = AbstractDungeon.player.discardPile.group.get(
+                AbstractDungeon.player.discardPile.group.size() - 1
+            );
+            if (c.cost == 0) return true;
         }
         return false;
     }
 
-
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
-        addToBot((AbstractGameAction)new BGGainBlockIfDiscardCostsZeroAction(this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
+        addToBot((AbstractGameAction) new BGGainBlockIfDiscardCostsZeroAction(this.magicNumber));
     }
 
     public void upgrade() {
@@ -72,4 +87,3 @@ public class BGSteamBarrier extends AbstractBGCard {
         return new BGSteamBarrier();
     }
 }
-

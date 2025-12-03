@@ -14,31 +14,47 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGSashWhip extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGSashWhip");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGSashWhip"
+    );
     public static final String ID = "BGSashWhip";
 
     public BGSashWhip() {
-        super("BGSashWhip", cardStrings.NAME, "purple/attack/sash_whip", 1, cardStrings.DESCRIPTION, CardType.ATTACK, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.ENEMY);
-
-        this.baseDamage=2;
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGSashWhip",
+            cardStrings.NAME,
+            "purple/attack/sash_whip",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.ENEMY
+        );
+        this.baseDamage = 2;
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        addToBot((AbstractGameAction)new BGSashWhipAction(m, this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.BLUNT_HEAVY
+            )
+        );
+        addToBot((AbstractGameAction) new BGSashWhipAction(m, this.magicNumber));
     }
 
-//    public void triggerOnGlowCheck() {
-//        if (AbstractDungeon.player.stance.ID.equals("BGCalm")) {
-//            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-//        } else {
-//            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-//        }
-//    }
+    //    public void triggerOnGlowCheck() {
+    //        if (AbstractDungeon.player.stance.ID.equals("BGCalm")) {
+    //            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+    //        } else {
+    //            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+    //        }
+    //    }
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -53,6 +69,3 @@ public class BGSashWhip extends AbstractBGCard {
         return new BGSashWhip();
     }
 }
-
-
-

@@ -12,20 +12,33 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGSeek extends AbstractBGCard {
+
     public static final String ID = "BGSeek";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGSeek");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGSeek"
+    );
 
     public BGSeek() {
-        super("BGSeek", cardStrings.NAME, "blue/skill/seek", 0, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGDefect.Enums.BG_BLUE, AbstractCard.CardRarity.RARE, AbstractCard.CardTarget.NONE);
+        super(
+            "BGSeek",
+            cardStrings.NAME,
+            "blue/skill/seek",
+            0,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGDefect.Enums.BG_BLUE,
+            AbstractCard.CardRarity.RARE,
+            AbstractCard.CardTarget.NONE
+        );
         this.exhaust = true;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new BetterDrawPileToHandAction(this.magicNumber));
-        addToBot(new ShuffleAction(p.drawPile,true));
+        addToBot((AbstractGameAction) new BetterDrawPileToHandAction(this.magicNumber));
+        addToBot(new ShuffleAction(p.drawPile, true));
     }
 
     public void upgrade() {
@@ -41,4 +54,3 @@ public class BGSeek extends AbstractBGCard {
         return new BGSeek();
     }
 }
-

@@ -11,40 +11,47 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+
 //TODO: "to any player"
 public class BGSentinel extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGSentinel");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGSentinel"
+    );
     public static final String ID = "BGSentinel";
 
     public BGSentinel() {
-        super("BGSentinel", cardStrings.NAME, "red/skill/sentinel", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGSentinel",
+            cardStrings.NAME,
+            "red/skill/sentinel",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseBlock = 2;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
     }
-
 
     public void triggerOnExhaust() {
         if (this.upgraded) {
-            addToTop((AbstractGameAction)new GainEnergyAction(3));
+            addToTop((AbstractGameAction) new GainEnergyAction(3));
         } else {
-            addToTop((AbstractGameAction)new GainEnergyAction(2));
+            addToTop((AbstractGameAction) new GainEnergyAction(2));
         }
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -55,10 +62,7 @@ public class BGSentinel extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGSentinel();
     }
 }
-
-

@@ -12,11 +12,13 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class BGScrapOoze
-        extends AbstractImageEvent {
+public class BGScrapOoze extends AbstractImageEvent {
+
     private static final Logger logger = LogManager.getLogger(BGScrapOoze.class.getName());
     public static final String ID = "BGScrap Ooze";
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGScrap Ooze");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGScrap Ooze"
+    );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
@@ -31,30 +33,29 @@ public class BGScrapOoze
     private static final String SUCCESS_MSG = DESCRIPTIONS[3];
     private static final String ESCAPE_MSG = DESCRIPTIONS[4];
 
-
-    private int pendingReward=-1;
+    private int pendingReward = -1;
 
     public BGScrapOoze() {
         super(NAME, DIALOG_1, "images/events/scrapOoze.jpg");
-
-        this.imageEventText.setDialogOption(OPTIONS[0] + this.dmg + OPTIONS[1] + this.relicObtainChance + OPTIONS[2]);
+        this.imageEventText.setDialogOption(
+            OPTIONS[0] + this.dmg + OPTIONS[1] + this.relicObtainChance + OPTIONS[2]
+        );
         this.imageEventText.setDialogOption(OPTIONS[3]);
     }
 
-    public boolean alreadyUsedGamblingChip,alreadyUsedTheAbacus,alreadyUsedToolbox;
-    private int leaveIndex,takePrizeIndex,gamblingChipIndex, theAbacusIndex,toolboxIndex,potionIndex;
+    public boolean alreadyUsedGamblingChip, alreadyUsedTheAbacus, alreadyUsedToolbox;
+    private int leaveIndex, takePrizeIndex, gamblingChipIndex, theAbacusIndex, toolboxIndex, potionIndex;
+
     public void onEnterRoom() {
-        pendingReward=0;
-        alreadyUsedToolbox=alreadyUsedGamblingChip=alreadyUsedTheAbacus=false;
-        potionIndex=theAbacusIndex=toolboxIndex=gamblingChipIndex=-1;
-        takePrizeIndex=0;
-        leaveIndex=1;
+        pendingReward = 0;
+        alreadyUsedToolbox = alreadyUsedGamblingChip = alreadyUsedTheAbacus = false;
+        potionIndex = theAbacusIndex = toolboxIndex = gamblingChipIndex = -1;
+        takePrizeIndex = 0;
+        leaveIndex = 1;
         if (Settings.AMBIANCE_ON) {
             CardCrawlGame.sound.play("EVENT_OOZE");
         }
     }
-
-
 
     protected void buttonEffect(int buttonPressed) {
         //TODO: need to create buttons AFTER we roll for prize
@@ -62,23 +63,23 @@ public class BGScrapOoze
         // ...i think button indexes persist? so move setup to after prize check
         switch (this.screenNum) {
             case 0:
-                takePrizeIndex=0;
+                takePrizeIndex = 0;
 
                 this.imageEventText.clearAllDialogs();
 
-
-
                 AbstractRelic r;
-                if(buttonPressed==gamblingChipIndex){
+                if (buttonPressed == gamblingChipIndex) {
                     //logger.info("reroll?");
-                    alreadyUsedGamblingChip=true;
+                    alreadyUsedGamblingChip = true;
                     r = AbstractDungeon.player.getRelic("BGGambling Chip");
-                    if(r!=null) r.flash();
+                    if (r != null) r.flash();
                     buttonEffect(999);
                     return;
-                }else if(buttonPressed==takePrizeIndex || buttonPressed == 999) {   //999 if we clicked Gambling Chip to reroll
-                    if (pendingReward <= 2 || buttonPressed == 999) {               // ...so reroll, but don't take damage
-                        if(buttonPressed!=999) {
+                } else if (buttonPressed == takePrizeIndex || buttonPressed == 999) {
+                    //999 if we clicked Gambling Chip to reroll
+                    if (pendingReward <= 2 || buttonPressed == 999) {
+                        // ...so reroll, but don't take damage
+                        if (buttonPressed != 999) {
                             AbstractDungeon.player.damage(new DamageInfo(null, this.dmg));
                             CardCrawlGame.sound.play("ATTACK_POISON");
                             this.totalDamageDealt += this.dmg;
@@ -89,7 +90,7 @@ public class BGScrapOoze
                     } else {
                         takeReward();
                     }
-                }else if(buttonPressed==leaveIndex){
+                } else if (buttonPressed == leaveIndex) {
                     //logger.info("leave?");
                     //leave
                     AbstractEvent.logMetricTakeDamage("Scrap Ooze", "Fled", this.totalDamageDealt);
@@ -97,25 +98,27 @@ public class BGScrapOoze
                     this.imageEventText.clearAllDialogs();
                     this.imageEventText.setDialogOption(OPTIONS[3]);
                     this.screenNum = 1;
-                }else if(buttonPressed == theAbacusIndex){
-                    alreadyUsedTheAbacus=true;
+                } else if (buttonPressed == theAbacusIndex) {
+                    alreadyUsedTheAbacus = true;
                     r = AbstractDungeon.player.getRelic("BGTheAbacus");
                     if (r != null) {
                         r.flash();
-                        pendingReward+=1;if(pendingReward>6)pendingReward=1;
+                        pendingReward += 1;
+                        if (pendingReward > 6) pendingReward = 1;
                         takeReward();
                     }
-                }else if(buttonPressed == toolboxIndex){
-                    alreadyUsedToolbox=true;
+                } else if (buttonPressed == toolboxIndex) {
+                    alreadyUsedToolbox = true;
                     r = AbstractDungeon.player.getRelic("BGToolbox");
                     if (r != null) {
                         r.flash();
-                        pendingReward-=1;if(pendingReward<1)pendingReward=6;
+                        pendingReward -= 1;
+                        if (pendingReward < 1) pendingReward = 6;
                         takeReward();
                     }
-                }else if(buttonPressed == potionIndex) {
+                } else if (buttonPressed == potionIndex) {
                     int slot = BGGamblersBrew.doesPlayerHaveGamblersBrew();
-                    if (slot>-1) {
+                    if (slot > -1) {
                         AbstractDungeon.topPanel.destroyPotion(slot);
                         this.imageEventText.clearAllDialogs();
                         this.imageEventText.setDialogOption(OPTIONS[12]);
@@ -129,25 +132,26 @@ public class BGScrapOoze
             case 1:
                 openMap();
                 break;
-            case 200:   //gamblers brew
-                if(buttonPressed==0){
-                    pendingReward=3;takeReward();
-                }else{
-                    pendingReward=5;takeReward();
+            case 200: //gamblers brew
+                if (buttonPressed == 0) {
+                    pendingReward = 3;
+                    takeReward();
+                } else {
+                    pendingReward = 5;
+                    takeReward();
                 }
         }
-
     }
 
-    protected void setupButtons(){
-        leaveIndex=potionIndex=theAbacusIndex=toolboxIndex=gamblingChipIndex=-1;
+    protected void setupButtons() {
+        leaveIndex = potionIndex = theAbacusIndex = toolboxIndex = gamblingChipIndex = -1;
         int i = 1;
-        if(pendingReward<=2){
-            leaveIndex=i;
+        if (pendingReward <= 2) {
+            leaveIndex = i;
             i += 1;
         }
-        if(pendingReward>0) {
-            int pendingRewardTextIndex=(pendingReward+1)/2;
+        if (pendingReward > 0) {
+            int pendingRewardTextIndex = (pendingReward + 1) / 2;
             if (AbstractDungeon.player.hasRelic("BGGambling Chip")) {
                 if (!alreadyUsedGamblingChip) {
                     this.imageEventText.setDialogOption("[Gambling Chip] Reroll.");
@@ -156,22 +160,27 @@ public class BGScrapOoze
                 }
             }
             if (AbstractDungeon.player.hasRelic("BGTheAbacus")) {
-                if(!alreadyUsedTheAbacus) {
+                if (!alreadyUsedTheAbacus) {
                     int r2 = pendingReward + 1;
                     if (r2 > 6) r2 = 1;
-                    if (r2 == 1 || r2 == 3 || r2 == 5) {  //only show option if new reward is different
-                        this.imageEventText.setDialogOption("[The Abacus] " + OPTIONS[(r2 + 1) / 2 + 10]);
+                    if (r2 == 1 || r2 == 3 || r2 == 5) {
+                        //only show option if new reward is different
+                        this.imageEventText.setDialogOption(
+                            "[The Abacus] " + OPTIONS[(r2 + 1) / 2 + 10]
+                        );
                         theAbacusIndex = i;
                         i += 1;
                     }
                 }
             }
             if (AbstractDungeon.player.hasRelic("BGToolbox")) {
-                if(!alreadyUsedToolbox) {
+                if (!alreadyUsedToolbox) {
                     int r2 = pendingReward - 1;
                     if (r2 < 1) r2 = 6;
                     if (r2 == 2 || r2 == 4 || r2 == 6) {
-                        this.imageEventText.setDialogOption("[Toolbox] " + OPTIONS[(r2 + 1) / 2 + 10]);
+                        this.imageEventText.setDialogOption(
+                            "[Toolbox] " + OPTIONS[(r2 + 1) / 2 + 10]
+                        );
                         toolboxIndex = i;
                         i += 1;
                     }
@@ -183,36 +192,37 @@ public class BGScrapOoze
                 i += 1;
             }
         }
-        int x=0;
-        x+=1;
+        int x = 0;
+        x += 1;
     }
 
-    protected String getRewardDescription(){
+    protected String getRewardDescription() {
         //TODO: localization
-        if(pendingReward==1 || pendingReward==2){
+        if (pendingReward == 1 || pendingReward == 2) {
             return "[Result] Unsuccessful.";
-        }else if(pendingReward==3 || pendingReward==4) {
+        } else if (pendingReward == 3 || pendingReward == 4) {
             return "[Result] #gObtain #g2 #gGold.";
-        }   else if(pendingReward==5 || pendingReward==6) {
+        } else if (pendingReward == 5 || pendingReward == 6) {
             return "[Result] #gObtain #ga #gRelic.";
         }
         return "Error: Didn't roll 1-6.";
     }
 
-    protected void showReward(){
+    protected void showReward() {
         if (pendingReward == 3 || pendingReward == 4) {
             this.imageEventText.updateBodyText(SUCCESS_GOLD_MSG);
-            this.imageEventText.updateDialogOption(0,OPTIONS[5]);
+            this.imageEventText.updateDialogOption(0, OPTIONS[5]);
             return;
-        }else if (pendingReward == 5 || pendingReward == 6) {
+        } else if (pendingReward == 5 || pendingReward == 6) {
             this.imageEventText.updateBodyText(SUCCESS_MSG);
-            this.imageEventText.updateDialogOption(0,OPTIONS[6]);
+            this.imageEventText.updateDialogOption(0, OPTIONS[6]);
             return;
         }
         this.imageEventText.updateBodyText(FAIL_MSG);
-        this.imageEventText.updateDialogOption(0,OPTIONS[4]);
+        this.imageEventText.updateDialogOption(0, OPTIONS[4]);
         this.imageEventText.setDialogOption(OPTIONS[3]);
     }
+
     protected void takeReward() {
         if (pendingReward == 1 || pendingReward == 2) {
             AbstractDungeon.player.damage(new DamageInfo(null, this.dmg));
@@ -222,30 +232,40 @@ public class BGScrapOoze
             showReward();
             setupButtons();
             return;
-        }else if (pendingReward == 3 || pendingReward == 4) {
-            AbstractEvent.logMetricGainGoldAndDamage("Scrap Ooze", "Success", 2, this.totalDamageDealt);
+        } else if (pendingReward == 3 || pendingReward == 4) {
+            AbstractEvent.logMetricGainGoldAndDamage(
+                "Scrap Ooze",
+                "Success",
+                2,
+                this.totalDamageDealt
+            );
             AbstractDungeon.player.gainGold(2);
             this.screenNum = 1;
             this.imageEventText.clearAllDialogs();
             this.imageEventText.setDialogOption(OPTIONS[3]);
             openMap();
             return;
-        }else if (pendingReward == 5 || pendingReward == 6) {
+        } else if (pendingReward == 5 || pendingReward == 6) {
             this.imageEventText.updateBodyText(SUCCESS_MSG);
             AbstractRelic r = AbstractDungeon.returnRandomScreenlessRelic(
-                    AbstractDungeon.returnRandomRelicTier());
-            AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F, r);
-            AbstractEvent.logMetricObtainRelicAndDamage("Scrap Ooze", "Success", r, this.totalDamageDealt);
-            this.screenNum=1;
+                AbstractDungeon.returnRandomRelicTier()
+            );
+            AbstractDungeon.getCurrRoom().spawnRelicAndObtain(
+                Settings.WIDTH / 2.0F,
+                Settings.HEIGHT / 2.0F,
+                r
+            );
+            AbstractEvent.logMetricObtainRelicAndDamage(
+                "Scrap Ooze",
+                "Success",
+                r,
+                this.totalDamageDealt
+            );
+            this.screenNum = 1;
             this.imageEventText.clearAllDialogs();
             this.imageEventText.setDialogOption(OPTIONS[3]);
             openMap();
             return;
         }
     }
-
-
-
 }
-
-

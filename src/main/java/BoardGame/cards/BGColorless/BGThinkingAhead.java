@@ -14,38 +14,46 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGThinkingAhead extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGThinking Ahead");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGThinking Ahead"
+    );
     public static final String ID = "BGThinking Ahead";
 
     public BGThinkingAhead() {
-        super("BGThinking Ahead", cardStrings.NAME, "colorless/skill/thinking_ahead", 0, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.NONE);
-
-
-
-
-
-
-
-
-
-        this.baseMagicNumber=2;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGThinking Ahead",
+            cardStrings.NAME,
+            "colorless/skill/thinking_ahead",
+            0,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.NONE
+        );
+        this.baseMagicNumber = 2;
+        this.magicNumber = this.baseMagicNumber;
         this.exhaust = true;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)p, this.magicNumber));
+        addToBot((AbstractGameAction) new DrawCardAction((AbstractCreature) p, this.magicNumber));
         if (AbstractDungeon.player.hand.size() > 0) {
-            addToBot((AbstractGameAction)new PutOnDeckAction((AbstractCreature)p, (AbstractCreature)p, 1, false));
+            addToBot(
+                (AbstractGameAction) new PutOnDeckAction(
+                    (AbstractCreature) p,
+                    (AbstractCreature) p,
+                    1,
+                    false
+                )
+            );
         }
     }
-
 
     public AbstractCard makeCopy() {
         return new BGThinkingAhead();
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -54,5 +62,3 @@ public class BGThinkingAhead extends AbstractBGCard {
         }
     }
 }
-
-

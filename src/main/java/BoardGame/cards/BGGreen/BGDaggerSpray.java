@@ -16,27 +16,52 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.DaggerSprayEffect;
 
 public class BGDaggerSpray extends AbstractBGCard {
+
     public static final String ID = "BGDaggerSpray";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGDaggerSpray");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGDaggerSpray"
+    );
 
     public BGDaggerSpray() {
-        super("BGDaggerSpray", cardStrings.NAME, "green/attack/dagger_spray", 1, cardStrings.DESCRIPTION, CardType.ATTACK, BGSilent.Enums.BG_GREEN, CardRarity.COMMON, CardTarget.ALL_ENEMY);
-        this.baseDamage=1;
-        this.baseMagicNumber=2;
-        this.magicNumber=this.baseMagicNumber;
-        this.isMultiDamage=true;
+        super(
+            "BGDaggerSpray",
+            cardStrings.NAME,
+            "green/attack/dagger_spray",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.COMMON,
+            CardTarget.ALL_ENEMY
+        );
+        this.baseDamage = 1;
+        this.baseMagicNumber = 2;
+        this.magicNumber = this.baseMagicNumber;
+        this.isMultiDamage = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         //TODO: is this loop safe to use here?
-        for(int i=0;i<this.magicNumber;i+=1) {
-            addToBot((AbstractGameAction) new VFXAction((AbstractGameEffect) new DaggerSprayEffect(AbstractDungeon.getMonsters().shouldFlipVfx()), 0.0F));
-            addToBot((AbstractGameAction) new DamageAllEnemiesAction( (AbstractCreature) p,
-                    this.multiDamage, this.damageTypeForTurn, AbstractGameAction.AttackEffect.NONE));
+        for (int i = 0; i < this.magicNumber; i += 1) {
+            addToBot(
+                (AbstractGameAction) new VFXAction(
+                    (AbstractGameEffect) new DaggerSprayEffect(
+                        AbstractDungeon.getMonsters().shouldFlipVfx()
+                    ),
+                    0.0F
+                )
+            );
+            addToBot(
+                (AbstractGameAction) new DamageAllEnemiesAction(
+                    (AbstractCreature) p,
+                    this.multiDamage,
+                    this.damageTypeForTurn,
+                    AbstractGameAction.AttackEffect.NONE
+                )
+            );
         }
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -51,6 +76,3 @@ public class BGDaggerSpray extends AbstractBGCard {
         return new BGDaggerSpray();
     }
 }
-
-
-

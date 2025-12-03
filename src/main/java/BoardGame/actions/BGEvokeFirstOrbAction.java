@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 public class BGEvokeFirstOrbAction extends AbstractGameAction {
+
     private int orbCount;
 
     public BGEvokeFirstOrbAction(int amount) {
@@ -26,7 +27,7 @@ public class BGEvokeFirstOrbAction extends AbstractGameAction {
 
     public void update() {
         if (this.duration == this.startDuration) {
-            for(int i = 0; i < this.orbCount; ++i) {
+            for (int i = 0; i < this.orbCount; ++i) {
                 AbstractDungeon.player.evokeOrb();
             }
         }

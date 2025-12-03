@@ -5,7 +5,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class BGMarkOfPain extends AbstractBGRelic  {
+public class BGMarkOfPain extends AbstractBGRelic {
+
     public static final String ID = "BGMarkOfPain";
 
     public BGMarkOfPain() {
@@ -16,14 +17,12 @@ public class BGMarkOfPain extends AbstractBGRelic  {
         if (AbstractDungeon.player != null) {
             return setDescription(AbstractDungeon.player.chosenClass);
         }
-        return setDescription((AbstractPlayer.PlayerClass)null);
+        return setDescription((AbstractPlayer.PlayerClass) null);
     }
-
 
     private String setDescription(AbstractPlayer.PlayerClass c) {
         return this.DESCRIPTIONS[1] + this.DESCRIPTIONS[0];
     }
-
 
     public void updateDescription(AbstractPlayer.PlayerClass c) {
         this.description = setDescription(c);
@@ -32,14 +31,13 @@ public class BGMarkOfPain extends AbstractBGRelic  {
         initializeTips();
     }
 
-
     public void onEquip() {
         AbstractDungeon.player.energy.energyMaster++;
-        AbstractDungeon.player.maxHealth=6;
-        if (AbstractDungeon.player.currentHealth > AbstractDungeon.player.maxHealth)
-            AbstractDungeon.player.currentHealth = AbstractDungeon.player.maxHealth;
+        AbstractDungeon.player.maxHealth = 6;
+        if (
+            AbstractDungeon.player.currentHealth > AbstractDungeon.player.maxHealth
+        ) AbstractDungeon.player.currentHealth = AbstractDungeon.player.maxHealth;
     }
-
 
     public void onUnequip() {
         AbstractDungeon.player.energy.energyMaster--;
@@ -50,5 +48,3 @@ public class BGMarkOfPain extends AbstractBGRelic  {
         return new BGMarkOfPain();
     }
 }
-
-

@@ -11,29 +11,30 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGSecondWind extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGSecondWind");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGSecondWind"
+    );
     public static final String ID = "BGSecond Wind";
 
     public BGSecondWind() {
-        super("BGSecond Wind", cardStrings.NAME, "red/skill/second_wind", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGSecond Wind",
+            cardStrings.NAME,
+            "red/skill/second_wind",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseBlock = 1;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new BlockPerNonAttackAction(this.block));
+        addToBot((AbstractGameAction) new BlockPerNonAttackAction(this.block));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -42,10 +43,7 @@ public class BGSecondWind extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGSecondWind();
     }
 }
-
-

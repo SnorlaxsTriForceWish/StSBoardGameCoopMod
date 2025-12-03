@@ -16,20 +16,29 @@ public class LockInRollButton extends Button {
 
     //public boolean visible=false;
 
-    public static String relicList="";
+    public static String relicList = "";
 
-    public boolean visible=false;
-    public boolean isDisabled=true;
+    public boolean visible = false;
+    public boolean isDisabled = true;
+
     public LockInRollButton() {
-        super((Settings.WIDTH / 2)-350*Settings.scale, (Settings.HEIGHT / 2),TextureLoader.getTexture("BoardGameResources/images/ui/dice/LockIn.png"));
+        super(
+            (Settings.WIDTH / 2) - 350 * Settings.scale,
+            (Settings.HEIGHT / 2),
+            TextureLoader.getTexture("BoardGameResources/images/ui/dice/LockIn.png")
+        );
     }
 
     public void update() {
         super.update();
         if (this.visible) {
-            if(LockInRollButton.playerHasAnyDieChangingAbilities()) {
+            if (LockInRollButton.playerHasAnyDieChangingAbilities()) {
                 this.isDisabled = false;
-                if (AbstractDungeon.isScreenUp || AbstractDungeon.player.isDraggingCard || AbstractDungeon.player.inSingleTargetMode) {
+                if (
+                    AbstractDungeon.isScreenUp ||
+                    AbstractDungeon.player.isDraggingCard ||
+                    AbstractDungeon.player.inSingleTargetMode
+                ) {
                     this.isDisabled = true;
                 }
                 if (TheDie.finalRelicRoll > 0) {
@@ -48,41 +57,48 @@ public class LockInRollButton extends Button {
                 }
                 if (this.pressed && !this.isDisabled) {
                     if (AbstractDungeon.player.hasRelic("BoardGame:BGTheDieRelic")) {
-                        AbstractRelic thedie = AbstractDungeon.player.getRelic("BoardGame:BGTheDieRelic");
+                        AbstractRelic thedie = AbstractDungeon.player.getRelic(
+                            "BoardGame:BGTheDieRelic"
+                        );
                         ((BGTheDieRelic) thedie).lockRollAndActivateDieRelics();
                     }
                 }
-            }else{
-                this.visible=false;
+            } else {
+                this.visible = false;
             }
         }
-        if(this.pressed){this.pressed=false;}
+        if (this.pressed) {
+            this.pressed = false;
+        }
     }
 
-
-    public void render(SpriteBatch sb){
-        if(!visible)return;
+    public void render(SpriteBatch sb) {
+        if (!visible) return;
         super.render(sb);
 
-        String relicListText=relicList;
-        if(relicListText.equals("")){
-            relicListText=" NL (No relics activate on a "+TheDie.monsterRoll+".)";
+        String relicListText = relicList;
+        if (relicListText.equals("")) {
+            relicListText = " NL (No relics activate on a " + TheDie.monsterRoll + ".)";
         }
         if (this.hb.hovered && !AbstractDungeon.isScreenUp && !Settings.isTouchScreen) {
-            TipHelper.renderGenericTip(this.x - 90.0F * Settings.scale, this.y + 300.0F * Settings.scale,
-                    "Lock In",
-                    "Accept the current die roll #b("+TheDie.monsterRoll+") and activate relics."
-                    +relicListText
-                    );
+            TipHelper.renderGenericTip(
+                this.x - 90.0F * Settings.scale,
+                this.y + 300.0F * Settings.scale,
+                "Lock In",
+                "Accept the current die roll #b(" +
+                    TheDie.monsterRoll +
+                    ") and activate relics." +
+                    relicListText
+            );
         }
-
     }
 
-    public static boolean playerHasAnyDieChangingAbilities(){
-        return AbstractDungeon.player.hasRelic("BGGambling Chip") || AbstractDungeon.player.hasRelic("BGTheAbacus") || AbstractDungeon.player.hasRelic("BGToolbox") || BGGamblersBrew.doesPlayerHaveGamblersBrew()>-1;
+    public static boolean playerHasAnyDieChangingAbilities() {
+        return (
+            AbstractDungeon.player.hasRelic("BGGambling Chip") ||
+            AbstractDungeon.player.hasRelic("BGTheAbacus") ||
+            AbstractDungeon.player.hasRelic("BGToolbox") ||
+            BGGamblersBrew.doesPlayerHaveGamblersBrew() > -1
+        );
     }
-
-
-
-
 }

@@ -16,31 +16,34 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BGRampage extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGRampage");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGRampage"
+    );
     public static final String ID = "BGRampage";
 
     public BGRampage() {
-        super("BGRampage", cardStrings.NAME, "red/attack/rampage", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.ENEMY);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGRampage",
+            cardStrings.NAME,
+            "red/attack/rampage",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseDamage = 0;
     }
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (this.upgraded) {
             addToBot((AbstractGameAction) new ExhaustAction(1, false, true, false));
         }
-        addToBot((AbstractGameAction)new BGRampageAction((AbstractMonster)m, (AbstractPlayer)p,this));
-
+        addToBot(
+            (AbstractGameAction) new BGRampageAction((AbstractMonster) m, (AbstractPlayer) p, this)
+        );
     }
 
     public void applyPowers() {
@@ -50,8 +53,9 @@ public class BGRampage extends AbstractBGCard {
         //logger.info("BGRampage applyPowers:"+this.damage);
         if (!this.upgraded) {
             this.rawDescription = cardStrings.DESCRIPTION + cardStrings.EXTENDED_DESCRIPTION[0];
-        }else{
-            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION + cardStrings.EXTENDED_DESCRIPTION[1];
+        } else {
+            this.rawDescription =
+                cardStrings.UPGRADE_DESCRIPTION + cardStrings.EXTENDED_DESCRIPTION[1];
         }
         initializeDescription();
     }
@@ -61,15 +65,12 @@ public class BGRampage extends AbstractBGCard {
         super.calculateCardDamage(mo);
         if (!this.upgraded) {
             this.rawDescription = cardStrings.DESCRIPTION + cardStrings.EXTENDED_DESCRIPTION[0];
-        }else{
-            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION + cardStrings.EXTENDED_DESCRIPTION[1];
+        } else {
+            this.rawDescription =
+                cardStrings.UPGRADE_DESCRIPTION + cardStrings.EXTENDED_DESCRIPTION[1];
         }
         initializeDescription();
     }
-
-
-
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -79,10 +80,7 @@ public class BGRampage extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGRampage();
     }
 }
-
-

@@ -14,19 +14,31 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 
-
 public class BGCoolheaded extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGCoolheaded");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGCoolheaded"
+    );
     public static final String ID = "BGCoolheaded";
 
     public BGCoolheaded() {
-        super("BGCoolheaded", cardStrings.NAME, "blue/skill/coolheaded", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGDefect.Enums.BG_BLUE, CardRarity.COMMON, CardTarget.SELF);
+        super(
+            "BGCoolheaded",
+            cardStrings.NAME,
+            "blue/skill/coolheaded",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.COMMON,
+            CardTarget.SELF
+        );
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new BGChannelAction((AbstractOrb)new BGFrost()));
-        if(upgraded){
-            addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)p, 1));
+        addToBot((AbstractGameAction) new BGChannelAction((AbstractOrb) new BGFrost()));
+        if (upgraded) {
+            addToBot((AbstractGameAction) new DrawCardAction((AbstractCreature) p, 1));
         }
     }
 

@@ -18,36 +18,51 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.BiteEffect;
 
 public class BGFeed extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGFeed");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGFeed"
+    );
     public static final String ID = "BGFeed";
 
     public BGFeed() {
-        super("BGFeed", cardStrings.NAME, "red/attack/feed", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.RARE, AbstractCard.CardTarget.ENEMY);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGFeed",
+            cardStrings.NAME,
+            "red/attack/feed",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.RARE,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseDamage = 3;
         this.exhaust = true;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
-
     }
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (m != null) {
-            addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new BiteEffect(m.hb.cX, m.hb.cY - 40.0F * Settings.scale, Color.SCARLET.cpy()), 0.3F));
+            addToBot(
+                (AbstractGameAction) new VFXAction(
+                    (AbstractGameEffect) new BiteEffect(
+                        m.hb.cX,
+                        m.hb.cY - 40.0F * Settings.scale,
+                        Color.SCARLET.cpy()
+                    ),
+                    0.3F
+                )
+            );
         }
-        addToBot((AbstractGameAction)new BGFeedAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new BGFeedAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                this.magicNumber
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -58,10 +73,7 @@ public class BGFeed extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGFeed();
     }
 }
-
-

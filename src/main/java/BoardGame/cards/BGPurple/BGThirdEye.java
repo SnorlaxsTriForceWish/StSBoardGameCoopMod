@@ -12,25 +12,33 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGThirdEye extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGThirdEye");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGThirdEye"
+    );
     public static final String ID = "BGThirdEye";
 
     public BGThirdEye() {
-        super("BGThirdEye", cardStrings.NAME, "purple/skill/third_eye", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGWatcher.Enums.BG_PURPLE, CardRarity.COMMON, CardTarget.SELF);
-
-        this.baseBlock=2;
-        this.baseMagicNumber=3;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGThirdEye",
+            cardStrings.NAME,
+            "purple/skill/third_eye",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.COMMON,
+            CardTarget.SELF
+        );
+        this.baseBlock = 2;
+        this.baseMagicNumber = 3;
+        this.magicNumber = this.baseMagicNumber;
     }
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction(p,block));
-        addToBot((AbstractGameAction)new ScryAction(this.magicNumber));
+        addToBot((AbstractGameAction) new GainBlockAction(p, block));
+        addToBot((AbstractGameAction) new ScryAction(this.magicNumber));
     }
-
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -44,6 +52,3 @@ public class BGThirdEye extends AbstractBGCard {
         return new BGThirdEye();
     }
 }
-
-
-

@@ -11,15 +11,28 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGRecycle extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGRecycle");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGRecycle"
+    );
     public static final String ID = "BGRecycle";
 
     public BGRecycle() {
-        super("BGRecycle", cardStrings.NAME, "blue/skill/recycle", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGDefect.Enums.BG_BLUE, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(
+            "BGRecycle",
+            cardStrings.NAME,
+            "blue/skill/recycle",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new RecycleAction());
+        addToBot((AbstractGameAction) new RecycleAction());
     }
 
     public void upgrade() {

@@ -17,36 +17,63 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.GrandFinalEffect;
 
 public class BGGrandFinale extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGGrandFinale");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGGrandFinale"
+    );
     public static final String ID = "BGGrandFinale";
 
     public BGGrandFinale() {
-        super("BGGrandFinale", cardStrings.NAME, "green/attack/grand_finale", 0, cardStrings.DESCRIPTION, CardType.ATTACK, BGSilent.Enums.BG_GREEN, CardRarity.RARE, CardTarget.ALL_ENEMY);
-
+        super(
+            "BGGrandFinale",
+            cardStrings.NAME,
+            "green/attack/grand_finale",
+            0,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.RARE,
+            CardTarget.ALL_ENEMY
+        );
         this.baseDamage = 10;
         this.isMultiDamage = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (Settings.FAST_MODE) {
-            addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new GrandFinalEffect(), 0.7F));
+            addToBot(
+                (AbstractGameAction) new VFXAction(
+                    (AbstractGameEffect) new GrandFinalEffect(),
+                    0.7F
+                )
+            );
         } else {
-            addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new GrandFinalEffect(), 1.0F));
+            addToBot(
+                (AbstractGameAction) new VFXAction(
+                    (AbstractGameEffect) new GrandFinalEffect(),
+                    1.0F
+                )
+            );
         }
-        addToBot((AbstractGameAction)new DamageAllEnemiesAction((AbstractCreature)p,
-                this.multiDamage, this.damageTypeForTurn, AbstractGameAction.AttackEffect.SLASH_HEAVY));
+        addToBot(
+            (AbstractGameAction) new DamageAllEnemiesAction(
+                (AbstractCreature) p,
+                this.multiDamage,
+                this.damageTypeForTurn,
+                AbstractGameAction.AttackEffect.SLASH_HEAVY
+            )
+        );
     }
 
     public void triggerOnGlowCheck() {
         this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        if (AbstractDungeon.player.drawPile.isEmpty())
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+        if (AbstractDungeon.player.drawPile.isEmpty()) this.glowColor =
+            AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
     }
 
     public boolean canUse(AbstractPlayer p, AbstractMonster m) {
         boolean canUse = super.canUse(p, m);
-        if (!canUse)
-            return false;
+        if (!canUse) return false;
         if (p.drawPile.size() > 0) {
             this.cantUseMessage = cardStrings.UPGRADE_DESCRIPTION;
             return false;
@@ -65,5 +92,3 @@ public class BGGrandFinale extends AbstractBGCard {
         return new BGGrandFinale();
     }
 }
-
-

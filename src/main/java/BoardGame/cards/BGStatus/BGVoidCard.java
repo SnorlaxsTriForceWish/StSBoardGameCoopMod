@@ -15,33 +15,37 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 //TODO: it has been ruled that this card is not actually Played when exhausted
 public class BGVoidCard extends AbstractBGCard implements CardDisappearsOnExhaust {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGVoidCard");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGVoidCard"
+    );
     static final String ID = "BGVoidCard";
 
     public BGVoidCard() {
-        super("BGVoidCard", cardStrings.NAME, "status/void", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.STATUS, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.COMMON, AbstractCard.CardTarget.NONE);
-
+        super(
+            "BGVoidCard",
+            cardStrings.NAME,
+            "status/void",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.STATUS,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.COMMON,
+            AbstractCard.CardTarget.NONE
+        );
         //this.isEthereal = true;
-        this.exhaust=true;
+        this.exhaust = true;
     }
-
 
     public void triggerWhenDrawn() {
         addToBot((AbstractGameAction) new AttemptAutoplayCardAction(this));
     }
 
-
-
     public void use(AbstractPlayer p, AbstractMonster m) {}
 
-
-
     public void upgrade() {}
-
 
     public AbstractCard makeCopy() {
         return new BGVoidCard();
     }
 }
-
-

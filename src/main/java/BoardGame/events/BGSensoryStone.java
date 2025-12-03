@@ -9,15 +9,16 @@ import com.megacrit.cardcrawl.events.AbstractImageEvent;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class BGSensoryStone
-        extends AbstractImageEvent {
+public class BGSensoryStone extends AbstractImageEvent {
+
     public static final String ID = "BGSensoryStone";
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGSensoryStone");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGSensoryStone"
+    );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
@@ -33,7 +34,10 @@ public class BGSensoryStone
     private int choice;
 
     private enum CurScreen {
-        INTRO, INTRO_2, ACCEPT, LEAVE;
+        INTRO,
+        INTRO_2,
+        ACCEPT,
+        LEAVE,
     }
 
     public BGSensoryStone() {
@@ -42,13 +46,11 @@ public class BGSensoryStone
         this.imageEventText.setDialogOption(OPTIONS[5]);
     }
 
-
     public void onEnterRoom() {
         if (Settings.AMBIANCE_ON) {
             CardCrawlGame.sound.play("EVENT_SENSORY");
         }
     }
-
 
     protected void buttonEffect(int buttonPressed) {
         switch (this.screen) {
@@ -73,24 +75,21 @@ public class BGSensoryStone
                         logMetricTakeDamage("SensoryStone", "Memory 2", 5);
                         this.choice = 2;
                         reward(this.choice);
-                        AbstractDungeon.player.damage(new DamageInfo(null, 2, DamageInfo.DamageType.HP_LOSS));
+                        AbstractDungeon.player.damage(
+                            new DamageInfo(null, 2, DamageInfo.DamageType.HP_LOSS)
+                        );
                         this.imageEventText.updateDialogOption(0, OPTIONS[4]);
                         break;
-
                 }
 
                 this.imageEventText.clearRemainingOptions();
                 return;
             case ACCEPT:
-                reward(this.choice); break;
+                reward(this.choice);
+                break;
         }
         openMap();
     }
-
-
-
-
-
 
     private void getRandomMemory() {
         ArrayList<String> memories = new ArrayList<>();
@@ -105,12 +104,12 @@ public class BGSensoryStone
     private void reward(int num) {
         (AbstractDungeon.getCurrRoom()).rewards.clear();
         for (int i = 0; i < num; i++) {
-            AbstractDungeon.getCurrRoom().addCardReward(new RewardItem(AbstractCard.CardColor.COLORLESS));
+            AbstractDungeon.getCurrRoom().addCardReward(
+                new RewardItem(AbstractCard.CardColor.COLORLESS)
+            );
         }
         (AbstractDungeon.getCurrRoom()).phase = AbstractRoom.RoomPhase.COMPLETE;
         AbstractDungeon.combatRewardScreen.open();
         this.screen = CurScreen.LEAVE;
     }
 }
-
-

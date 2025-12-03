@@ -8,8 +8,11 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class BGReactivePower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGReactivePower";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGReactivePower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGReactivePower"
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
@@ -22,21 +25,22 @@ public class BGReactivePower extends AbstractBGPower {
         this.priority = 50;
     }
 
-
     public void updateDescription() {
         this.description = DESCRIPTIONS[0];
     }
 
-
     public int onAttacked(DamageInfo info, int damageAmount) {
-        if (info.owner != null && info.type != DamageInfo.DamageType.HP_LOSS && info.type != DamageInfo.DamageType.THORNS && damageAmount > 0 && damageAmount < this.owner.currentHealth) {
-
+        if (
+            info.owner != null &&
+            info.type != DamageInfo.DamageType.HP_LOSS &&
+            info.type != DamageInfo.DamageType.THORNS &&
+            damageAmount > 0 &&
+            damageAmount < this.owner.currentHealth
+        ) {
             flash();
             //addToBot((AbstractGameAction)new RollMoveAction((AbstractMonster)this.owner));
-            addToBot((AbstractGameAction)new SpaghettiRerollDieAction());
+            addToBot((AbstractGameAction) new SpaghettiRerollDieAction());
         }
         return damageAmount;
     }
 }
-
-

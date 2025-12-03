@@ -16,12 +16,15 @@ import com.megacrit.cardcrawl.vfx.RainingGoldEffect;
 //TODO: player should be able to see cost of relics *before* deciding to exchange one
 //Point of interest: Leftover Block at the end of combat will persist into an event cheated in with console commands.
 
-public class BGTheMoaiHead
-        extends AbstractImageEvent implements LockRelicsEvent {
+public class BGTheMoaiHead extends AbstractImageEvent implements LockRelicsEvent {
+
     public static final String ID = "BGTheMoaiHead";
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGTheMoaiHead");
-    public boolean reliclock=false;
-    public boolean relicsLocked(){
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGTheMoaiHead"
+    );
+    public boolean reliclock = false;
+
+    public boolean relicsLocked() {
         return reliclock;
     }
 
@@ -45,7 +48,7 @@ public class BGTheMoaiHead
 
     public BGTheMoaiHead() {
         super(NAME, INTRO_BODY, "images/events/moaiHead.jpg");
-        reliclock=true;
+        reliclock = true;
         if (!AbstractBGRelic.getAllPayableRelics().isEmpty()) {
             this.imageEventText.setDialogOption(OPTIONS[2]);
         } else {
@@ -60,23 +63,38 @@ public class BGTheMoaiHead
                 switch (buttonPressed) {
                     case 1: //heal+dmg
                         this.imageEventText.updateBodyText(DESCRIPTIONS[1]);
-                        CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.HIGH, ScreenShake.ShakeDur.MED, true);
+                        CardCrawlGame.screenShake.shake(
+                            ScreenShake.ShakeIntensity.HIGH,
+                            ScreenShake.ShakeDur.MED,
+                            true
+                        );
                         CardCrawlGame.sound.play("BLUNT_HEAVY");
-                        if (AbstractDungeon.player.currentHealth > AbstractDungeon.player.maxHealth)
-                            AbstractDungeon.player.currentHealth = AbstractDungeon.player.maxHealth;
+                        if (
+                            AbstractDungeon.player.currentHealth > AbstractDungeon.player.maxHealth
+                        ) AbstractDungeon.player.currentHealth = AbstractDungeon.player.maxHealth;
                         AbstractDungeon.player.heal(AbstractDungeon.player.maxHealth);
                         AbstractDungeon.player.damage(new DamageInfo(null, 2));
                         //TODO: logMetric
-                        logMetricHealAndLoseMaxHP("The Moai Head", "Heal", AbstractDungeon.player.maxHealth, 2);
+                        logMetricHealAndLoseMaxHP(
+                            "The Moai Head",
+                            "Heal",
+                            AbstractDungeon.player.maxHealth,
+                            2
+                        );
                         this.screenNum = 1;
                         this.imageEventText.updateDialogOption(0, OPTIONS[4]);
                         this.imageEventText.clearRemainingOptions();
-                        reliclock=false;
+                        reliclock = false;
                         return;
                     case 0: //offer relic
                         //TODO: logMetric
-                        RelicTradingScreen.RelicTradingAction action = (relic) -> {
-                            logMetricGainGoldAndLoseRelic("The Moai Head", "Gave Relic", (AbstractRelic) new GoldenIdol(), 333);
+                        RelicTradingScreen.RelicTradingAction action = relic -> {
+                            logMetricGainGoldAndLoseRelic(
+                                "The Moai Head",
+                                "Gave Relic",
+                                (AbstractRelic) new GoldenIdol(),
+                                333
+                            );
                             this.imageEventText.updateBodyText(DESCRIPTIONS[2]);
                             this.screenNum = 1;
                             AbstractDungeon.player.loseRelic(relic.relicId);
@@ -84,13 +102,18 @@ public class BGTheMoaiHead
                             AbstractDungeon.player.gainGold(relic.getPrice());
                             this.imageEventText.updateDialogOption(0, OPTIONS[4]);
                             this.imageEventText.clearRemainingOptions();
-                            reliclock=false;
+                            reliclock = false;
                         };
                         //TODO: localization
-                        BaseMod.openCustomScreen(RelicTradingScreen.Enum.RELIC_TRADING, action, "Choose a Relic to sacrifice.", false);
+                        BaseMod.openCustomScreen(
+                            RelicTradingScreen.Enum.RELIC_TRADING,
+                            action,
+                            "Choose a Relic to sacrifice.",
+                            false
+                        );
                         return;
                 }
-                reliclock=false;
+                reliclock = false;
                 logMetricIgnored("The Moai Head");
                 this.imageEventText.updateBodyText(DESCRIPTIONS[3]);
                 this.screenNum = 1;

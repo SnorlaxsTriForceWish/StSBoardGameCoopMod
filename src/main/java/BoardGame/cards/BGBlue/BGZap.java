@@ -1,4 +1,5 @@
 package BoardGame.cards.BGBlue;
+
 import BoardGame.actions.BGChannelAction;
 import BoardGame.cards.AbstractBGCard;
 import BoardGame.characters.BGDefect;
@@ -12,12 +13,24 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 
 public class BGZap extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGZap");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGZap"
+    );
     public static final String ID = "BGZap";
 
     public BGZap() {
-        super("BGZap", cardStrings.NAME, "blue/skill/zap", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGDefect.Enums.BG_BLUE, CardRarity.BASIC, CardTarget.SELF);
-
+        super(
+            "BGZap",
+            cardStrings.NAME,
+            "blue/skill/zap",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.BASIC,
+            CardTarget.SELF
+        );
         this.showEvokeValue = true;
         this.showEvokeOrbCount = 1;
         this.baseMagicNumber = 1;
@@ -25,8 +38,9 @@ public class BGZap extends AbstractBGCard {
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        for (int i = 0; i < this.magicNumber; i++)
-            addToBot((AbstractGameAction)new BGChannelAction((AbstractOrb)new BGLightning()));
+        for (int i = 0; i < this.magicNumber; i++) addToBot(
+            (AbstractGameAction) new BGChannelAction((AbstractOrb) new BGLightning())
+        );
     }
 
     public void upgrade() {

@@ -19,11 +19,16 @@ public class BGCopyAndPlayCardAction extends AbstractGameAction {
     AbstractCard card;
     int energySpent;
     boolean dontExpendResources;
-    public BGCopyAndPlayCardAction(AbstractCard card, int energySpent, boolean dontExpendResources) {
+
+    public BGCopyAndPlayCardAction(
+        AbstractCard card,
+        int energySpent,
+        boolean dontExpendResources
+    ) {
         super();
-        this.card=card;
-        this.energySpent=energySpent;
-        this.dontExpendResources=dontExpendResources;
+        this.card = card;
+        this.energySpent = energySpent;
+        this.dontExpendResources = dontExpendResources;
     }
 
     public void update() {
@@ -38,19 +43,27 @@ public class BGCopyAndPlayCardAction extends AbstractGameAction {
         tmp.purgeOnUse = true;
 
         Logger logger = LogManager.getLogger(BGDoubleTapPower_DEPRECATED.class.getName());
-        if(card instanceof AbstractBGCard){
-            ((AbstractBGCard)card).copiedCard=(AbstractBGCard)tmp;
+        if (card instanceof AbstractBGCard) {
+            ((AbstractBGCard) card).copiedCard = (AbstractBGCard) tmp;
         }
 
-        if(card.target== AbstractCard.CardTarget.ENEMY || card.target== AbstractCard.CardTarget.SELF_AND_ENEMY) {
-            TargetSelectScreen.TargetSelectAction tssAction = (target) -> {
+        if (
+            card.target == AbstractCard.CardTarget.ENEMY ||
+            card.target == AbstractCard.CardTarget.SELF_AND_ENEMY
+        ) {
+            TargetSelectScreen.TargetSelectAction tssAction = target -> {
                 if (target != null) {
                     tmp.calculateCardDamage(target);
                 }
                 addToBot((AbstractGameAction) new NewQueueCardAction(tmp, target, true, true));
             };
-            addToBot((AbstractGameAction)new TargetSelectScreenAction(tssAction,"Choose a target for the copy of "+card.name+"."));
-        }else{
+            addToBot(
+                (AbstractGameAction) new TargetSelectScreenAction(
+                    tssAction,
+                    "Choose a target for the copy of " + card.name + "."
+                )
+            );
+        } else {
             addToBot((AbstractGameAction) new NewQueueCardAction(tmp, null, true, true));
         }
         if (!this.dontExpendResources) {
@@ -58,10 +71,6 @@ public class BGCopyAndPlayCardAction extends AbstractGameAction {
         }
 
         tickDuration();
-        this.isDone=true;
-
-
+        this.isDone = true;
     }
-
-
 }

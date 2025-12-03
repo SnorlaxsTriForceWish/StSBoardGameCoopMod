@@ -1,4 +1,3 @@
-
 package BoardGame.actions;
 
 import BoardGame.cards.BGRed.BGWhirlwind;
@@ -21,16 +20,13 @@ import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class BGThunderStrikeAction
-        extends AbstractGameAction {
+public class BGThunderStrikeAction extends AbstractGameAction {
 
     private static final Logger logger = LogManager.getLogger(BGWhirlwind.class.getName());
 
     private int[] multiDamage;
 
-
     private AbstractPlayer p;
-
 
     public BGThunderStrikeAction(AbstractPlayer p, int[] multiDamage) {
         this.multiDamage = multiDamage;
@@ -41,13 +37,12 @@ public class BGThunderStrikeAction
         this.damageType = DamageInfo.DamageType.NORMAL;
     }
 
-
     public void update() {
         int effect = 0;
-        for(AbstractOrb o : AbstractDungeon.player.orbs) {
+        for (AbstractOrb o : AbstractDungeon.player.orbs) {
             //TODO: do we want to include, or exclude, vanilla orbs?
-            if(o instanceof BGLightning || o instanceof Lightning){
-                effect+=1;
+            if (o instanceof BGLightning || o instanceof Lightning) {
+                effect += 1;
             }
         }
 
@@ -55,24 +50,59 @@ public class BGThunderStrikeAction
             for (int i = effect - 1; i >= 0; i--) {
                 //TODO LATER: this burns RNGs, decide if we want to keep it that way
                 //TODO LATER: dead enemies can be targeted by visual effects, do we want to do change that? vanilla solves this by calling ThunderStrikeAction recursively (effort)
-                AbstractCreature target = (AbstractCreature)AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
+                AbstractCreature target =
+                    (AbstractCreature) AbstractDungeon.getMonsters().getRandomMonster(
+                        null,
+                        true,
+                        AbstractDungeon.cardRandomRng
+                    );
 
                 //damage needs to be addToTop instead of addToBot, otherwise weakvuln checks will fail
                 //as a consequence, actions are added in reverse order from the original card
                 if (Settings.FAST_MODE) {
-                    addToTop((AbstractGameAction)new VFXAction((AbstractGameEffect)new LightningEffect(target.drawX, target.drawY),.25F));
+                    addToTop(
+                        (AbstractGameAction) new VFXAction(
+                            (AbstractGameEffect) new LightningEffect(target.drawX, target.drawY),
+                            .25F
+                        )
+                    );
                 } else {
-                    addToTop((AbstractGameAction)new VFXAction((AbstractGameEffect)new LightningEffect(target.drawX, target.drawY),1.0F));
+                    addToTop(
+                        (AbstractGameAction) new VFXAction(
+                            (AbstractGameEffect) new LightningEffect(target.drawX, target.drawY),
+                            1.0F
+                        )
+                    );
                 }
-                addToTop((AbstractGameAction) new DamageAllEnemiesAction(p,
-                        this.multiDamage, this.damageType, AttackEffect.BLUNT_HEAVY, true));
-                addToTop((AbstractGameAction)new SFXAction("ORB_LIGHTNING_EVOKE",0.1F));
-                addToTop((AbstractGameAction)new VFXAction((AbstractGameEffect)new FlashAtkImgEffect(target.hb.cX, target.hb.cY, this.attackEffect)));
-
+                addToTop(
+                    (AbstractGameAction) new DamageAllEnemiesAction(
+                        p,
+                        this.multiDamage,
+                        this.damageType,
+                        AttackEffect.BLUNT_HEAVY,
+                        true
+                    )
+                );
+                addToTop((AbstractGameAction) new SFXAction("ORB_LIGHTNING_EVOKE", 0.1F));
+                addToTop(
+                    (AbstractGameAction) new VFXAction(
+                        (AbstractGameEffect) new FlashAtkImgEffect(
+                            target.hb.cX,
+                            target.hb.cY,
+                            this.attackEffect
+                        )
+                    )
+                );
             }
-        }else{
-            addToTop((AbstractGameAction)new DamageAllEnemiesAction(p,
-                    0, WeakVulnCancel.WEAKVULN_ZEROHITS, AttackEffect.NONE));
+        } else {
+            addToTop(
+                (AbstractGameAction) new DamageAllEnemiesAction(
+                    p,
+                    0,
+                    WeakVulnCancel.WEAKVULN_ZEROHITS,
+                    AttackEffect.NONE
+                )
+            );
         }
         this.isDone = true;
     }

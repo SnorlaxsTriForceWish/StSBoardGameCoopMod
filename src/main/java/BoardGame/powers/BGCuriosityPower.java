@@ -10,8 +10,11 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGCuriosityPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGCuriosityPower";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGCuriosityPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGCuriosityPower"
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
@@ -25,21 +28,24 @@ public class BGCuriosityPower extends AbstractBGPower {
         this.type = AbstractPower.PowerType.BUFF;
     }
 
-
     public void updateDescription() {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
-
     public void onUseCard(AbstractCard card, UseCardAction action) {
         if (card.type == AbstractCard.CardType.POWER) {
             flash();
-            addToBot((AbstractGameAction)new ApplyPowerAction(this.owner, this.owner, new BGUncappedStrengthPower(this.owner, this.amount), this.amount));
+            addToBot(
+                (AbstractGameAction) new ApplyPowerAction(
+                    this.owner,
+                    this.owner,
+                    new BGUncappedStrengthPower(this.owner, this.amount),
+                    this.amount
+                )
+            );
             //TODO: Curiosity won't work in multiplayer as currently implemented
             //Curiosity DOES decrease when a power card is moved to the exhaust pile (must be reimplemented for each new class)
             //TODO: are we even remembering to clear strength stacks when phase 2 starts?
         }
     }
 }
-
-

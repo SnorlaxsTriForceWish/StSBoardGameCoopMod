@@ -1,4 +1,3 @@
-
 package BoardGame.actions;
 
 import BoardGame.cards.BGRed.BGWhirlwind;
@@ -11,19 +10,21 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class BGConjureBladeAction
-        extends AbstractGameAction {
+public class BGConjureBladeAction extends AbstractGameAction {
 
     private static final Logger logger = LogManager.getLogger(BGWhirlwind.class.getName());
     private boolean dontExpendResources = false;
     private int energyOnUse = -1;
     private int extrahits;
 
-
     private AbstractPlayer p;
 
-
-    public BGConjureBladeAction(AbstractPlayer p, boolean dontExpendResources, int energyOnUse, int extrahits) {
+    public BGConjureBladeAction(
+        AbstractPlayer p,
+        boolean dontExpendResources,
+        int energyOnUse,
+        int extrahits
+    ) {
         this.p = p;
         this.dontExpendResources = dontExpendResources;
         this.duration = Settings.ACTION_DUR_XFAST;
@@ -31,7 +32,6 @@ public class BGConjureBladeAction
         this.energyOnUse = energyOnUse;
         this.extrahits = extrahits;
     }
-
 
     public void update() {
         int effect = EnergyPanel.totalCount;
@@ -46,7 +46,7 @@ public class BGConjureBladeAction
         }
 
         if (effect > 0) {
-            addToTop(new ApplyPowerAction(p,p,new BGConjureBladePower(p,effect)));
+            addToTop(new ApplyPowerAction(p, p, new BGConjureBladePower(p, effect)));
             //logger.info("BGWhirlwindAction: subtract energy "+this.energyOnUse);
             if (!this.dontExpendResources) {
                 this.p.energy.use(this.energyOnUse);
@@ -56,5 +56,3 @@ public class BGConjureBladeAction
         this.isDone = true;
     }
 }
-
-

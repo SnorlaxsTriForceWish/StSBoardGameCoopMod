@@ -10,15 +10,16 @@ import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BGUpgradeShrine
-        extends AbstractImageEvent {
+public class BGUpgradeShrine extends AbstractImageEvent {
+
     public static final String ID = "BGUpgrade Shrine";
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGUpgrade Shrine");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGUpgrade Shrine"
+    );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
@@ -31,7 +32,8 @@ public class BGUpgradeShrine
     private CUR_SCREEN screen = CUR_SCREEN.INTRO;
 
     private enum CUR_SCREEN {
-        INTRO, COMPLETE;
+        INTRO,
+        COMPLETE,
     }
 
     public BGUpgradeShrine() {
@@ -44,36 +46,44 @@ public class BGUpgradeShrine
         this.imageEventText.setDialogOption(OPTIONS[1]);
     }
 
-
     public void onEnterRoom() {
         CardCrawlGame.music.playTempBGM("SHRINE");
     }
 
     public void update() {
         super.update();
-        if (!AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
+        if (
+            !AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()
+        ) {
             AbstractCard c = AbstractDungeon.gridSelectScreen.selectedCards.get(0);
             c.upgrade();
             logMetricCardUpgrade("Upgrade Shrine", "Upgraded", c);
             AbstractDungeon.player.bottledCardUpgradeCheck(c);
             AbstractDungeon.effectsQueue.add(new ShowCardBrieflyEffect(c.makeStatEquivalentCopy()));
-            AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+            AbstractDungeon.topLevelEffects.add(
+                new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F)
+            );
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
         }
     }
 
-
     protected void buttonEffect(int buttonPressed) {
         switch (this.screen) {
-
             case INTRO:
                 switch (buttonPressed) {
                     case 0:
                         this.screen = CUR_SCREEN.COMPLETE;
                         (AbstractDungeon.getCurrRoom()).phase = AbstractRoom.RoomPhase.COMPLETE;
                         this.imageEventText.updateBodyText(DIALOG_2);
-                        AbstractDungeon.gridSelectScreen.open(AbstractDungeon.player.masterDeck
-                                .getUpgradableCards(), 1, OPTIONS[2], true, false, false, false);
+                        AbstractDungeon.gridSelectScreen.open(
+                            AbstractDungeon.player.masterDeck.getUpgradableCards(),
+                            1,
+                            OPTIONS[2],
+                            true,
+                            false,
+                            false,
+                            false
+                        );
                         this.imageEventText.updateDialogOption(0, OPTIONS[4]);
                         this.imageEventText.clearRemainingOptions();
                         break;
@@ -82,7 +92,9 @@ public class BGUpgradeShrine
                         (AbstractDungeon.getCurrRoom()).phase = AbstractRoom.RoomPhase.COMPLETE;
 
                         CardCrawlGame.sound.play("ATTACK_POISON");
-                        AbstractDungeon.player.damage(new DamageInfo(null,2, DamageInfo.DamageType.HP_LOSS));
+                        AbstractDungeon.player.damage(
+                            new DamageInfo(null, 2, DamageInfo.DamageType.HP_LOSS)
+                        );
 
                         upgradeTwoCards();
 
@@ -102,12 +114,11 @@ public class BGUpgradeShrine
         }
     }
 
-
-
-
     //from ShiningLight event
     private void upgradeTwoCards() {
-        AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+        AbstractDungeon.topLevelEffects.add(
+            new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F)
+        );
         ArrayList<AbstractCard> upgradableCards = new ArrayList<>();
         for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
             if (c.canUpgrade()) {
@@ -117,34 +128,44 @@ public class BGUpgradeShrine
 
         List<String> cardMetrics = new ArrayList<>();
 
-        Collections.shuffle(upgradableCards, new java.util.Random(AbstractDungeon.miscRng.randomLong()));
+        Collections.shuffle(
+            upgradableCards,
+            new java.util.Random(AbstractDungeon.miscRng.randomLong())
+        );
 
-        if (!upgradableCards.isEmpty())
-        {
+        if (!upgradableCards.isEmpty()) {
             if (upgradableCards.size() == 1) {
-                ((AbstractCard)upgradableCards.get(0)).upgrade();
-                cardMetrics.add(((AbstractCard)upgradableCards.get(0)).cardID);
+                ((AbstractCard) upgradableCards.get(0)).upgrade();
+                cardMetrics.add(((AbstractCard) upgradableCards.get(0)).cardID);
                 AbstractDungeon.player.bottledCardUpgradeCheck(upgradableCards.get(0));
-                AbstractDungeon.effectList.add(new ShowCardBrieflyEffect(((AbstractCard)upgradableCards.get(0)).makeStatEquivalentCopy()));
+                AbstractDungeon.effectList.add(
+                    new ShowCardBrieflyEffect(
+                        ((AbstractCard) upgradableCards.get(0)).makeStatEquivalentCopy()
+                    )
+                );
             } else {
-                ((AbstractCard)upgradableCards.get(0)).upgrade();
-                ((AbstractCard)upgradableCards.get(1)).upgrade();
-                cardMetrics.add(((AbstractCard)upgradableCards.get(0)).cardID);
-                cardMetrics.add(((AbstractCard)upgradableCards.get(1)).cardID);
+                ((AbstractCard) upgradableCards.get(0)).upgrade();
+                ((AbstractCard) upgradableCards.get(1)).upgrade();
+                cardMetrics.add(((AbstractCard) upgradableCards.get(0)).cardID);
+                cardMetrics.add(((AbstractCard) upgradableCards.get(1)).cardID);
                 AbstractDungeon.player.bottledCardUpgradeCheck(upgradableCards.get(0));
                 AbstractDungeon.player.bottledCardUpgradeCheck(upgradableCards.get(1));
-                AbstractDungeon.effectList.add(new ShowCardBrieflyEffect(((AbstractCard)upgradableCards
+                AbstractDungeon.effectList.add(
+                    new ShowCardBrieflyEffect(
+                        ((AbstractCard) upgradableCards.get(0)).makeStatEquivalentCopy(),
+                        Settings.WIDTH / 2.0F - 190.0F * Settings.scale,
+                        Settings.HEIGHT / 2.0F
+                    )
+                );
 
-                        .get(0)).makeStatEquivalentCopy(), Settings.WIDTH / 2.0F - 190.0F * Settings.scale, Settings.HEIGHT / 2.0F));
-
-
-                AbstractDungeon.effectList.add(new ShowCardBrieflyEffect(((AbstractCard)upgradableCards
-
-                        .get(1)).makeStatEquivalentCopy(), Settings.WIDTH / 2.0F + 190.0F * Settings.scale, Settings.HEIGHT / 2.0F));
+                AbstractDungeon.effectList.add(
+                    new ShowCardBrieflyEffect(
+                        ((AbstractCard) upgradableCards.get(1)).makeStatEquivalentCopy(),
+                        Settings.WIDTH / 2.0F + 190.0F * Settings.scale,
+                        Settings.HEIGHT / 2.0F
+                    )
+                );
             }
         }
-
     }
 }
-
-

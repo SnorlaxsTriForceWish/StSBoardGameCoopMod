@@ -17,22 +17,33 @@ public class RerollButton extends Button {
 
     //public boolean visible=false;
 
-    public static String relicList="";
+    public static String relicList = "";
 
-    public boolean visible=false;
-    public boolean isDisabled=true;
+    public boolean visible = false;
+    public boolean isDisabled = true;
+
     public RerollButton() {
-        super((Settings.WIDTH / 2)-150*Settings.scale, (Settings.HEIGHT / 2),TextureLoader.getTexture("BoardGameResources/images/ui/dice/Reroll.png"));
+        super(
+            (Settings.WIDTH / 2) - 150 * Settings.scale,
+            (Settings.HEIGHT / 2),
+            TextureLoader.getTexture("BoardGameResources/images/ui/dice/Reroll.png")
+        );
     }
+
     private static Logger logger = LogManager.getLogger(AbstractBGRelic.class.getName());
+
     public void update() {
         super.update();
-        if(this.visible) {
+        if (this.visible) {
             if (AbstractDungeon.player.hasRelic("BGGambling Chip")) {
                 AbstractRelic r = AbstractDungeon.player.getRelic("BGGambling Chip");
                 if (this.visible) {
                     this.isDisabled = false;
-                    if (AbstractDungeon.isScreenUp || AbstractDungeon.player.isDraggingCard || AbstractDungeon.player.inSingleTargetMode) {
+                    if (
+                        AbstractDungeon.isScreenUp ||
+                        AbstractDungeon.player.isDraggingCard ||
+                        AbstractDungeon.player.inSingleTargetMode
+                    ) {
                         //TODO: what is "inSingleTargetMode"?
                         this.isDisabled = true;
                     }
@@ -53,7 +64,6 @@ public class RerollButton extends Button {
                     if (this.pressed && !this.isDisabled) {
                         if (AbstractDungeon.player.hasRelic("BoardGame:BGTheDieRelic")) {
                             if (AbstractDungeon.player.hasRelic("BGGambling Chip")) {
-
                                 ((BGGamblingChip) r).activate();
                             }
                         }
@@ -63,29 +73,28 @@ public class RerollButton extends Button {
                 this.visible = false;
             }
         }
-        if(this.pressed){this.pressed=false;}
-    }
-
-
-    public void render(SpriteBatch sb){
-        AbstractRelic r;
-        if (AbstractDungeon.player.hasRelic("BGGambling Chip")) {
-           r = AbstractDungeon.player.getRelic("BGGambling Chip");
-        }else return;
-
-        if(!visible || !((BGGamblingChip) r).isUsable())return;
-        super.render(sb);
-        String desc="Use #yGambling #yChip to reroll the die. NL No takebacks.";
-
-        if (this.hb.hovered && !AbstractDungeon.isScreenUp && !Settings.isTouchScreen) {
-            TipHelper.renderGenericTip(this.x - 90.0F * Settings.scale, this.y + 300.0F * Settings.scale,
-                    "Reroll",
-                    desc
-            );
+        if (this.pressed) {
+            this.pressed = false;
         }
     }
 
+    public void render(SpriteBatch sb) {
+        AbstractRelic r;
+        if (AbstractDungeon.player.hasRelic("BGGambling Chip")) {
+            r = AbstractDungeon.player.getRelic("BGGambling Chip");
+        } else return;
 
+        if (!visible || !((BGGamblingChip) r).isUsable()) return;
+        super.render(sb);
+        String desc = "Use #yGambling #yChip to reroll the die. NL No takebacks.";
 
-
+        if (this.hb.hovered && !AbstractDungeon.isScreenUp && !Settings.isTouchScreen) {
+            TipHelper.renderGenericTip(
+                this.x - 90.0F * Settings.scale,
+                this.y + 300.0F * Settings.scale,
+                "Reroll",
+                desc
+            );
+        }
+    }
 }

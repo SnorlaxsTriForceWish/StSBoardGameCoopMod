@@ -14,30 +14,38 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.DemonFormPower;
 
 public class BGDemonForm extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGDemonForm");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGDemonForm"
+    );
     public static final String ID = "BGDemon Form";
 
     public BGDemonForm() {
-        super("BGDemon Form", cardStrings.NAME, "red/power/demon_form", 3, cardStrings.DESCRIPTION, AbstractCard.CardType.POWER, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.RARE, AbstractCard.CardTarget.NONE);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGDemon Form",
+            cardStrings.NAME,
+            "red/power/demon_form",
+            3,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.POWER,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.RARE,
+            AbstractCard.CardTarget.NONE
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new DemonFormPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new DemonFormPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -46,10 +54,7 @@ public class BGDemonForm extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGDemonForm();
     }
 }
-
-

@@ -1,6 +1,5 @@
 package BoardGame.powers;
 
-
 //import BoardGame.actions.BGCopyCardAction;
 import BoardGame.cards.AbstractBGCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -11,15 +10,17 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
 //TODO: can we use whatever vanilla Entropic Brew uses to play three copies at once?  or did that not work and we have to use CopyCardAction
 
 public class BGTripleAttackPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGTripleAttackPower";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGTripleAttackPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGTripleAttackPower"
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
@@ -39,26 +40,31 @@ public class BGTripleAttackPower extends AbstractBGPower {
 
     public void updateDescription() {
         if (this.amount == 1) {
-            this.description = DESCRIPTIONS[0]+DESCRIPTIONS[3];
+            this.description = DESCRIPTIONS[0] + DESCRIPTIONS[3];
         } else {
-            this.description = DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2]+DESCRIPTIONS[3];
+            this.description = DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2] + DESCRIPTIONS[3];
         }
     }
 
     public void onAboutToUseCard(AbstractCard originalCard, AbstractCreature originalTarget) {
-        boolean copyOK=true;
-        if(originalCard instanceof AbstractBGCard){
-            if(((AbstractBGCard)originalCard).cannotBeCopied) copyOK=false;
-            if(((AbstractBGCard)originalCard).ignoreFurtherCopies) copyOK=false;
+        boolean copyOK = true;
+        if (originalCard instanceof AbstractBGCard) {
+            if (((AbstractBGCard) originalCard).cannotBeCopied) copyOK = false;
+            if (((AbstractBGCard) originalCard).ignoreFurtherCopies) copyOK = false;
         }
 
-        if (!originalCard.purgeOnUse && originalCard.type == AbstractCard.CardType.ATTACK && this.amount > 0 && copyOK) {
+        if (
+            !originalCard.purgeOnUse &&
+            originalCard.type == AbstractCard.CardType.ATTACK &&
+            this.amount > 0 &&
+            copyOK
+        ) {
             flash();
 
             AbstractCard copiedCard = originalCard.makeSameInstanceOf();
-            if(copiedCard instanceof AbstractBGCard){
-                ((AbstractBGCard)originalCard).ignoreFurtherCopies=true;
-                ((AbstractBGCard)copiedCard).ignoreFurtherCopies=true;
+            if (copiedCard instanceof AbstractBGCard) {
+                ((AbstractBGCard) originalCard).ignoreFurtherCopies = true;
+                ((AbstractBGCard) copiedCard).ignoreFurtherCopies = true;
             }
             BGDoubleAttackPower.swapOutQueueCard(copiedCard);
             AbstractDungeon.player.limbo.addToTop(copiedCard);
@@ -68,10 +74,9 @@ public class BGTripleAttackPower extends AbstractBGPower {
             copiedCard.target_y = Settings.HEIGHT / 2.0F;
             copiedCard.purgeOnUse = true;
 
-
             AbstractCard copiedCard2 = originalCard.makeSameInstanceOf();
-            if(copiedCard2 instanceof AbstractBGCard){
-                ((AbstractBGCard)copiedCard2).ignoreFurtherCopies=true;
+            if (copiedCard2 instanceof AbstractBGCard) {
+                ((AbstractBGCard) copiedCard2).ignoreFurtherCopies = true;
             }
 
             AbstractDungeon.player.limbo.addToTop(copiedCard2);
@@ -83,29 +88,33 @@ public class BGTripleAttackPower extends AbstractBGPower {
             if (originalCard instanceof AbstractBGCard) {
                 ((AbstractBGCard) originalCard).copiedCard = (AbstractBGCard) copiedCard2;
             }
-            if(originalCard instanceof AbstractBGCard){
-                ((AbstractBGCard)copiedCard2).copiedCard=(AbstractBGCard)copiedCard;
+            if (originalCard instanceof AbstractBGCard) {
+                ((AbstractBGCard) copiedCard2).copiedCard = (AbstractBGCard) copiedCard;
             }
-            ((AbstractBGCard) copiedCard).followUpCardChain = new ArrayList<>(Arrays.asList(copiedCard2,originalCard));;
-
+            ((AbstractBGCard) copiedCard).followUpCardChain = new ArrayList<>(
+                Arrays.asList(copiedCard2, originalCard)
+            );
 
             this.amount--;
             if (this.amount == 0) {
-                addToBot((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, "BGTripleAttackPower"));
+                addToBot(
+                    (AbstractGameAction) new RemoveSpecificPowerAction(
+                        this.owner,
+                        this.owner,
+                        "BGTripleAttackPower"
+                    )
+                );
             }
         }
     }
 
-
     public void atEndOfTurn(boolean isPlayer) {
-        if (isPlayer)
-            addToBot((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, "BGTripleAttackPower"));
+        if (isPlayer) addToBot(
+            (AbstractGameAction) new RemoveSpecificPowerAction(
+                this.owner,
+                this.owner,
+                "BGTripleAttackPower"
+            )
+        );
     }
-
-
-
-
 }
-
-
-

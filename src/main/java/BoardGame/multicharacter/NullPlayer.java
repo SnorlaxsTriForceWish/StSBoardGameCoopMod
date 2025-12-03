@@ -8,7 +8,6 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbRed;
-
 import java.util.ArrayList;
 
 //TODO: is this actually used?  we don't have to push null into the player context queue, unlike monster target
@@ -69,9 +68,7 @@ public class NullPlayer extends AbstractBGPlayer {
     }
 
     @Override
-    public void doCharSelectScreenSelectEffect() {
-
-    }
+    public void doCharSelectScreenSelectEffect() {}
 
     @Override
     public String getCustomModeCharacterButtonSoundKey() {

@@ -8,7 +8,10 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class BGIntangiblePower extends AbstractBGPower {
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGIntangiblePower");
+
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGIntangiblePower"
+    );
     public static final String POWER_ID = "BGIntangiblePower";
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
@@ -19,18 +22,16 @@ public class BGIntangiblePower extends AbstractBGPower {
         this.ID = "BGIntangible";
         this.owner = owner;
         //this.amount = turns;
-        this.amount=0;
+        this.amount = 0;
         updateDescription();
         loadRegion("intangible");
         this.priority = 75;
         this.justApplied = true;
     }
 
-
     public void playApplyPowerSfx() {
         CardCrawlGame.sound.play("POWER_INTANGIBLE", 0.05F);
     }
-
 
     public float atDamageFinalReceive(float damage, DamageInfo.DamageType type) {
         if (damage > 0.0F) {
@@ -39,11 +40,9 @@ public class BGIntangiblePower extends AbstractBGPower {
         return damage;
     }
 
-
     public void updateDescription() {
         this.description = DESCRIPTIONS[0];
     }
-
 
     public void atEndOfTurn(boolean isPlayer) {
         if (this.justApplied) {
@@ -52,8 +51,12 @@ public class BGIntangiblePower extends AbstractBGPower {
         }
         flash();
 
-        addToBot((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, "BGIntangible"));
+        addToBot(
+            (AbstractGameAction) new RemoveSpecificPowerAction(
+                this.owner,
+                this.owner,
+                "BGIntangible"
+            )
+        );
     }
 }
-
-

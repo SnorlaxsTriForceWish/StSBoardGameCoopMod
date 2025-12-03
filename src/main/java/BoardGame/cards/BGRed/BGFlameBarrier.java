@@ -17,39 +17,60 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.FlameBarrierEffect;
 
 public class BGFlameBarrier extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGFlame Barrier");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGFlame Barrier"
+    );
     public static final String ID = "BGFlame Barrier";
 
     public BGFlameBarrier() {
-        super("BGFlame Barrier", cardStrings.NAME, "red/skill/flame_barrier", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGFlame Barrier",
+            cardStrings.NAME,
+            "red/skill/flame_barrier",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseBlock = 3;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (Settings.FAST_MODE) {
-            addToBot((AbstractGameAction)new VFXAction((AbstractCreature)p, (AbstractGameEffect)new FlameBarrierEffect(p.hb.cX, p.hb.cY), 0.1F));
+            addToBot(
+                (AbstractGameAction) new VFXAction(
+                    (AbstractCreature) p,
+                    (AbstractGameEffect) new FlameBarrierEffect(p.hb.cX, p.hb.cY),
+                    0.1F
+                )
+            );
         } else {
-            addToBot((AbstractGameAction)new VFXAction((AbstractCreature)p, (AbstractGameEffect)new FlameBarrierEffect(p.hb.cX, p.hb.cY), 0.5F));
+            addToBot(
+                (AbstractGameAction) new VFXAction(
+                    (AbstractCreature) p,
+                    (AbstractGameEffect) new FlameBarrierEffect(p.hb.cX, p.hb.cY),
+                    0.5F
+                )
+            );
         }
 
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
-        addToBot((AbstractGameAction)new BGFlameBarrierAction(this.magicNumber, (AbstractPlayer)p));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new BGFlameBarrierAction(this.magicNumber, (AbstractPlayer) p)
+        );
         //addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new FlameBarrierPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -59,10 +80,7 @@ public class BGFlameBarrier extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGFlameBarrier();
     }
 }
-
-

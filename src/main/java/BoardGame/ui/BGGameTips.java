@@ -6,19 +6,25 @@ import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.GameTips;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class BGGameTips extends GameTips {
 
-    public static final CharacterStrings bgtutorialStrings = CardCrawlGame.languagePack.getCharacterString("BoardGame:Random Tips");
-    @SpirePatch(clz= GameTips.class, method=SpirePatch.CLASS)
-    public static class ExtraGameTipsPatch{
-        public static SpireField<ArrayList<String>> bgtips = new SpireField<>(() -> new ArrayList<>());
+    public static final CharacterStrings bgtutorialStrings =
+        CardCrawlGame.languagePack.getCharacterString("BoardGame:Random Tips");
+
+    @SpirePatch(clz = GameTips.class, method = SpirePatch.CLASS)
+    public static class ExtraGameTipsPatch {
+
+        public static SpireField<ArrayList<String>> bgtips = new SpireField<>(() ->
+            new ArrayList<>()
+        );
     }
-    @SpirePatch2(clz=GameTips.class,method="initialize",paramtypez={})
+
+    @SpirePatch2(clz = GameTips.class, method = "initialize", paramtypez = {})
     public static class initializePatch {
+
         @SpirePostfixPatch
         public static void Postfix(GameTips __instance) {
             //final Logger logger = LogManager.getLogger(BGGameTips.class.getName());
@@ -28,12 +34,15 @@ public class BGGameTips extends GameTips {
         }
     }
 
-    @SpirePatch2(clz=GameTips.class,method="getTip",paramtypez={})
+    @SpirePatch2(clz = GameTips.class, method = "getTip", paramtypez = {})
     public static class getTipPatch {
+
         @SpirePrefixPatch
         public static SpireReturn<String> Postfix(GameTips __instance) {
-            if(CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
-                String retVal = ExtraGameTipsPatch.bgtips.get(__instance).remove(MathUtils.random(ExtraGameTipsPatch.bgtips.get(__instance).size() - 1));
+            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
+                String retVal = ExtraGameTipsPatch.bgtips
+                    .get(__instance)
+                    .remove(MathUtils.random(ExtraGameTipsPatch.bgtips.get(__instance).size() - 1));
                 if (ExtraGameTipsPatch.bgtips.get(__instance).isEmpty()) {
                     __instance.initialize();
                 }
@@ -43,5 +52,4 @@ public class BGGameTips extends GameTips {
             return SpireReturn.Continue();
         }
     }
-
 }

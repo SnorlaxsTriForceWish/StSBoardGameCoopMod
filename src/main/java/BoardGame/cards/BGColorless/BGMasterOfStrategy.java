@@ -12,36 +12,36 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGMasterOfStrategy extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("Master of Strategy");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "Master of Strategy"
+    );
     public static final String ID = "BGMaster of Strategy";
 
     public BGMasterOfStrategy() {
-        super("BGMaster of Strategy", cardStrings.NAME, "colorless/skill/master_of_strategy", 0, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.RARE, AbstractCard.CardTarget.NONE);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGMaster of Strategy",
+            cardStrings.NAME,
+            "colorless/skill/master_of_strategy",
+            0,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.RARE,
+            AbstractCard.CardTarget.NONE
+        );
         this.baseMagicNumber = 3;
         this.magicNumber = this.baseMagicNumber;
         this.exhaust = true;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)p, this.magicNumber));
+        addToBot((AbstractGameAction) new DrawCardAction((AbstractCreature) p, this.magicNumber));
     }
-
 
     public AbstractCard makeCopy() {
         return new BGMasterOfStrategy();
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -50,5 +50,3 @@ public class BGMasterOfStrategy extends AbstractBGCard {
         }
     }
 }
-
-

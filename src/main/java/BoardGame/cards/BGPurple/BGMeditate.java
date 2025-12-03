@@ -14,20 +14,33 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGMeditate extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGMeditate");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGMeditate"
+    );
     public static final String ID = "BGMeditate";
 
     public BGMeditate() {
-        super("BGMeditate", cardStrings.NAME, "purple/skill/meditate", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(
+            "BGMeditate",
+            cardStrings.NAME,
+            "purple/skill/meditate",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new MeditateAction(this.magicNumber));
-        addToBot((AbstractGameAction)new ChangeStanceAction("BGCalm"));
+        addToBot((AbstractGameAction) new MeditateAction(this.magicNumber));
+        addToBot((AbstractGameAction) new ChangeStanceAction("BGCalm"));
         //addToBot((AbstractGameAction)new PressEndTurnButtonAction());
-        addToBot((AbstractGameAction)new ApplyPowerAction(p, p, new BGConclusionPower(p, 0), 0));
+        addToBot((AbstractGameAction) new ApplyPowerAction(p, p, new BGConclusionPower(p, 0), 0));
     }
 
     public void upgrade() {

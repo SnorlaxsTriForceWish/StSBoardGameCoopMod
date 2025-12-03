@@ -16,24 +16,27 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BGBufferPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGBufferPower";
 
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("Buffer");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "Buffer"
+    );
 
     public static final String NAME = powerStrings.NAME;
 
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-
     private static int bufferIdOffset;
     private AbstractCard originalcard;
+
     public BGBufferPower(AbstractCreature owner, int amount, AbstractCard originalcard) {
         this.name = NAME;
         this.ID = "BoardGame:BGBufferPower" + bufferIdOffset;
         bufferIdOffset++;
         this.owner = owner;
         this.amount = amount;
-        this.originalcard=originalcard;
+        this.originalcard = originalcard;
 
         updateDescription();
         loadRegion("buffer");
@@ -51,11 +54,11 @@ public class BGBufferPower extends AbstractBGPower {
         }
     }
 
-
-
     public int onAttackedToChangeDamage(DamageInfo info, int damageAmount) {
         if (damageAmount > 0) {
-            addToTop((AbstractGameAction) new ReducePowerAction(this.owner, this.owner, this.ID, 1));
+            addToTop(
+                (AbstractGameAction) new ReducePowerAction(this.owner, this.owner, this.ID, 1)
+            );
 
             if (this.amount <= 1) {
                 //if amount is currently 1 (before ReducePowerAction is resolved), then it's going to 0 this turn
@@ -63,13 +66,22 @@ public class BGBufferPower extends AbstractBGPower {
                 logger.info("Buffer: attempt to exhaust...");
                 AbstractCard card = originalcard.makeStatEquivalentCopy();
                 AbstractDungeon.player.discardPile.addToBottom(card);
-                addToBot(new ExhaustSpecificCardAction(card, AbstractDungeon.player.discardPile,true));
+                addToBot(
+                    new ExhaustSpecificCardAction(card, AbstractDungeon.player.discardPile, true)
+                );
 
                 //this counts as losing a power card, so Awakened One loses 1 str
                 for (AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
                     AbstractPower p = m.getPower("BGCuriosityPower");
                     if (p != null) {
-                        addToBot(new ReducePowerAction((AbstractCreature) m, (AbstractCreature) m, "BGUncappedStrengthPower", 1));
+                        addToBot(
+                            new ReducePowerAction(
+                                (AbstractCreature) m,
+                                (AbstractCreature) m,
+                                "BGUncappedStrengthPower",
+                                1
+                            )
+                        );
                     }
                 }
                 BGTheDieRelic.powersPlayedThisCombat -= 1;
@@ -78,7 +90,4 @@ public class BGBufferPower extends AbstractBGPower {
 
         return 0;
     }
-
 }
-
-

@@ -18,34 +18,48 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.VerticalImpactEffect;
 
 public class BGHeavyBlade extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGHeavy Blade");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGHeavy Blade"
+    );
     public static final String ID = "BGHeavy Blade";
 
     public BGHeavyBlade() {
-        super("BGHeavy Blade", cardStrings.NAME, "red/attack/heavy_blade", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.COMMON, AbstractCard.CardTarget.ENEMY);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGHeavy Blade",
+            cardStrings.NAME,
+            "red/attack/heavy_blade",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.COMMON,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseDamage = 3;
         this.baseMagicNumber = 3;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (m != null) {
-            addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new VerticalImpactEffect(m.hb.cX + m.hb.width / 4.0F, m.hb.cY - m.hb.height / 4.0F)));
+            addToBot(
+                (AbstractGameAction) new VFXAction(
+                    (AbstractGameEffect) new VerticalImpactEffect(
+                        m.hb.cX + m.hb.width / 4.0F,
+                        m.hb.cY - m.hb.height / 4.0F
+                    )
+                )
+            );
         }
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.BLUNT_HEAVY
+            )
+        );
     }
-
 
     public void applyPowers() {
         AbstractPower strength = AbstractDungeon.player.getPower("Strength");
@@ -60,7 +74,6 @@ public class BGHeavyBlade extends AbstractBGCard {
         }
     }
 
-
     public void calculateCardDamage(AbstractMonster mo) {
         AbstractPower strength = AbstractDungeon.player.getPower("Strength");
         if (strength != null) {
@@ -74,7 +87,6 @@ public class BGHeavyBlade extends AbstractBGCard {
         }
     }
 
-
     public void upgrade() {
         if (!this.upgraded) {
             upgradeName();
@@ -84,10 +96,7 @@ public class BGHeavyBlade extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGHeavyBlade();
     }
 }
-
-

@@ -15,19 +15,45 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGWraithForm extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGWraithForm");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGWraithForm"
+    );
     public static final String ID = "BGWraithForm";
 
     public BGWraithForm() {
-        super("BGWraithForm", cardStrings.NAME, "green/power/wraith_form", 3, cardStrings.DESCRIPTION, CardType.POWER, BGSilent.Enums.BG_GREEN, CardRarity.RARE, CardTarget.SELF);
-        this.baseMagicNumber=2;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGWraithForm",
+            cardStrings.NAME,
+            "green/power/wraith_form",
+            3,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
+        this.baseMagicNumber = 2;
+        this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGInvinciblePlayerPower((AbstractCreature)p, 1), 1));
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGWraithFormPower((AbstractCreature)p, this.magicNumber, this), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGInvinciblePlayerPower((AbstractCreature) p, 1),
+                1
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGWraithFormPower((AbstractCreature) p, this.magicNumber, this),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {
@@ -37,15 +63,7 @@ public class BGWraithForm extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGWraithForm();
     }
-
-
-
-
-
 }
-
-

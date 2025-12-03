@@ -20,16 +20,27 @@ import com.megacrit.cardcrawl.vfx.BorderLongFlashEffect;
 import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
 
 public class BGBecomeAlmighty extends AbstractBGAttackCardChoice {
+
     public static final String ID = "BGBecomeAlmighty";
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBecomeAlmighty");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBecomeAlmighty"
+    );
 
     public BGBecomeAlmighty() {
-        super("BGBecomeAlmighty", cardStrings.NAME, "colorless/power/become_almighty", -2, cardStrings.DESCRIPTION, CardType.STATUS, BGColorless.Enums.CARD_COLOR, CardRarity.SPECIAL, CardTarget.NONE);
+        super(
+            "BGBecomeAlmighty",
+            cardStrings.NAME,
+            "colorless/power/become_almighty",
+            -2,
+            cardStrings.DESCRIPTION,
+            CardType.STATUS,
+            BGColorless.Enums.CARD_COLOR,
+            CardRarity.SPECIAL,
+            CardTarget.NONE
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
     }
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         onChoseThisOption();
@@ -37,11 +48,27 @@ public class BGBecomeAlmighty extends AbstractBGAttackCardChoice {
 
     public void onChoseThisOption() {
         AbstractPlayer p = AbstractDungeon.player;
-        addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new BorderLongFlashEffect(Color.FIREBRICK, true)));
-        addToBot((AbstractGameAction)new VFXAction((AbstractCreature)p, (AbstractGameEffect)new InflameEffect((AbstractCreature)p), 1.0F));
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new StrengthPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new VFXAction(
+                (AbstractGameEffect) new BorderLongFlashEffect(Color.FIREBRICK, true)
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new VFXAction(
+                (AbstractCreature) p,
+                (AbstractGameEffect) new InflameEffect((AbstractCreature) p),
+                1.0F
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new StrengthPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -56,4 +83,3 @@ public class BGBecomeAlmighty extends AbstractBGAttackCardChoice {
         return new BGBecomeAlmighty();
     }
 }
-

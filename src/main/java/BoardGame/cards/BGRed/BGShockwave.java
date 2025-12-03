@@ -1,6 +1,5 @@
 package BoardGame.cards.BGRed;
 
-
 import BoardGame.cards.AbstractBGCard;
 import BoardGame.characters.BGIronclad;
 import BoardGame.powers.BGVulnerablePower;
@@ -17,49 +16,53 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGShockwave extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGShockwave");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGShockwave"
+    );
     public static final String ID = "BGShockwave";
 
     public BGShockwave() {
-        super("BGShockwave", cardStrings.NAME, "red/skill/shockwave", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.ALL_ENEMY);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGShockwave",
+            cardStrings.NAME,
+            "red/skill/shockwave",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.ALL_ENEMY
+        );
         this.exhaust = true;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
         for (AbstractMonster mo : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
-            addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)mo, (AbstractCreature)p, (AbstractPower)new BGVulnerablePower((AbstractCreature)mo, 1, false), 1, true, AbstractGameAction.AttackEffect.NONE));
-            addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)mo, (AbstractCreature)p, (AbstractPower)new BGWeakPower((AbstractCreature)mo, this.magicNumber, false), this.magicNumber, true, AbstractGameAction.AttackEffect.NONE));
-
-
-
-
-
-
-
-
+            addToBot(
+                (AbstractGameAction) new ApplyPowerAction(
+                    (AbstractCreature) mo,
+                    (AbstractCreature) p,
+                    (AbstractPower) new BGVulnerablePower((AbstractCreature) mo, 1, false),
+                    1,
+                    true,
+                    AbstractGameAction.AttackEffect.NONE
+                )
+            );
+            addToBot(
+                (AbstractGameAction) new ApplyPowerAction(
+                    (AbstractCreature) mo,
+                    (AbstractCreature) p,
+                    (AbstractPower) new BGWeakPower((AbstractCreature) mo, this.magicNumber, false),
+                    this.magicNumber,
+                    true,
+                    AbstractGameAction.AttackEffect.NONE
+                )
+            );
         }
     }
-
-
-
-
-
-
-
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -70,10 +73,7 @@ public class BGShockwave extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGShockwave();
     }
 }
-
-

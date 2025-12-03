@@ -12,9 +12,12 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGCorpseExplosionPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BoardGame:BGCorpseExplosionPower";
 
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGCorpseExplosionPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGCorpseExplosionPower"
+    );
 
     public static final String NAME = powerStrings.NAME;
 
@@ -22,25 +25,36 @@ public class BGCorpseExplosionPower extends AbstractBGPower {
 
     private AbstractCard originalcard;
 
-    public BGCorpseExplosionPower(AbstractCreature owner, AbstractCreature player, int amount, AbstractCard originalcard) {
+    public BGCorpseExplosionPower(
+        AbstractCreature owner,
+        AbstractCreature player,
+        int amount,
+        AbstractCard originalcard
+    ) {
         this.name = NAME;
         this.ID = "BoardGame:BGCorpseExplosionPower";
         this.owner = owner;
         this.amount = amount;
         this.type = AbstractPower.PowerType.DEBUFF;
-        this.originalcard=originalcard;
+        this.originalcard = originalcard;
         updateDescription();
         loadRegion("cExplosion");
     }
 
     public void onDeath() {
-        if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead() &&
-                this.owner.currentHealth <= 0) {
-            addToBot(new DamageAllEnemiesAction(
+        if (
+            !AbstractDungeon.getMonsters().areMonstersBasicallyDead() &&
+            this.owner.currentHealth <= 0
+        ) {
+            addToBot(
+                new DamageAllEnemiesAction(
                     AbstractDungeon.player,
-                    DamageInfo.createDamageMatrix(this.amount, true), DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.FIRE
-                    ));
-            AbstractCard card=originalcard.makeStatEquivalentCopy();
+                    DamageInfo.createDamageMatrix(this.amount, true),
+                    DamageInfo.DamageType.THORNS,
+                    AbstractGameAction.AttackEffect.FIRE
+                )
+            );
+            AbstractCard card = originalcard.makeStatEquivalentCopy();
             addToBot(new BGDiscardCorpseExplosionAction(card));
         }
     }
@@ -49,6 +63,3 @@ public class BGCorpseExplosionPower extends AbstractBGPower {
         this.description = DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2];
     }
 }
-
-
-

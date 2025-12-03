@@ -1,5 +1,8 @@
 package BoardGame.relics;
 
+import static BoardGame.BoardGame.makeRelicOutlinePath;
+import static BoardGame.BoardGame.makeRelicPath;
+
 import BoardGame.BoardGame;
 import BoardGame.util.TextureLoader;
 import basemod.BaseMod;
@@ -11,26 +14,24 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-import static BoardGame.BoardGame.makeRelicOutlinePath;
-import static BoardGame.BoardGame.makeRelicPath;
-
 public class BGBurningBlood extends AbstractBGRelic {
-
-
 
     // ID, images, text.
     public static final String ID = BoardGame.makeID("BurningBlood");
 
     //private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic.png"));
-    private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("BGburningBlood.png"));
+    private static final Texture IMG = TextureLoader.getTexture(
+        makeRelicPath("BGburningBlood.png")
+    );
     //private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic.png"));
-    private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("BGburningBlood.png"));
+    private static final Texture OUTLINE = TextureLoader.getTexture(
+        makeRelicOutlinePath("BGburningBlood.png")
+    );
 
     public BGBurningBlood() {
-        super(ID,
-                "burningBlood.png",
-                RelicTier.STARTER, LandingSound.MAGICAL);
+        super(ID, "burningBlood.png", RelicTier.STARTER, LandingSound.MAGICAL);
     }
+
     private static final int HEALTH_AMT = 1;
 
     public AbstractRelic makeCopy() {
@@ -38,13 +39,18 @@ public class BGBurningBlood extends AbstractBGRelic {
     }
 
     public void onEquip() {
-        BaseMod.MAX_HAND_SIZE=999;
+        BaseMod.MAX_HAND_SIZE = 999;
     }
 
     @Override
     public void onVictory() {
         flash();
-        addToTop((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
+        addToTop(
+            (AbstractGameAction) new RelicAboveCreatureAction(
+                (AbstractCreature) AbstractDungeon.player,
+                this
+            )
+        );
         AbstractPlayer p = AbstractDungeon.player;
         if (p.currentHealth > 0) {
             p.heal(HEALTH_AMT);
@@ -56,5 +62,4 @@ public class BGBurningBlood extends AbstractBGRelic {
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0];
     }
-
 }

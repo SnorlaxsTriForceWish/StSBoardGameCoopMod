@@ -3,19 +3,26 @@ package BoardGame.relics;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class BGStrikeDummy extends AbstractBGRelic  {
+public class BGStrikeDummy extends AbstractBGRelic {
+
     public static final String ID = "BGStrikeDummy";
 
     public BGStrikeDummy() {
-        super("BGStrikeDummy", "dummy.png", AbstractRelic.RelicTier.UNCOMMON, AbstractRelic.LandingSound.HEAVY);
+        super(
+            "BGStrikeDummy",
+            "dummy.png",
+            AbstractRelic.RelicTier.UNCOMMON,
+            AbstractRelic.LandingSound.HEAVY
+        );
     }
 
-    public int getPrice() {return 8;}
+    public int getPrice() {
+        return 8;
+    }
 
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0] + 1 + this.DESCRIPTIONS[1];
     }
-
 
     public float atDamageModify(float damage, AbstractCard c) {
         // if (c.hasTag(AbstractCard.CardTags.STRIKE)) {
@@ -25,11 +32,7 @@ public class BGStrikeDummy extends AbstractBGRelic  {
         return damage;
     }
 
-
-
     public AbstractRelic makeCopy() {
         return new BGStrikeDummy();
     }
 }
-
-

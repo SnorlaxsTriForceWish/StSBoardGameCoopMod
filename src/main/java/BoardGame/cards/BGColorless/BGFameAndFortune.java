@@ -14,31 +14,43 @@ import com.megacrit.cardcrawl.vfx.RainingGoldEffect;
 import com.megacrit.cardcrawl.vfx.SpotlightPlayerEffect;
 
 public class BGFameAndFortune extends AbstractBGAttackCardChoice {
+
     public static final String ID = "BGFameAndFortune";
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGFameAndFortune");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGFameAndFortune"
+    );
     private AbstractCard wishCard;
 
     public BGFameAndFortune() {
         this(null);
     }
+
     public BGFameAndFortune(AbstractCard wishCard) {
-        super("BGFameAndFortune", cardStrings.NAME, "colorless/skill/fame_and_fortune", -2, cardStrings.DESCRIPTION, CardType.STATUS, BGColorless.Enums.CARD_COLOR, CardRarity.SPECIAL, CardTarget.NONE);
-        this.baseMagicNumber=4;
-        magicNumber=baseMagicNumber;
-        this.wishCard=wishCard;
+        super(
+            "BGFameAndFortune",
+            cardStrings.NAME,
+            "colorless/skill/fame_and_fortune",
+            -2,
+            cardStrings.DESCRIPTION,
+            CardType.STATUS,
+            BGColorless.Enums.CARD_COLOR,
+            CardRarity.SPECIAL,
+            CardTarget.NONE
+        );
+        this.baseMagicNumber = 4;
+        magicNumber = baseMagicNumber;
+        this.wishCard = wishCard;
     }
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         onChoseThisOption();
     }
+
     public void onChoseThisOption() {
         AbstractDungeon.effectList.add(new RainingGoldEffect(this.magicNumber * 20, true));
         AbstractDungeon.effectsQueue.add(new SpotlightPlayerEffect());
-        addToBot((AbstractGameAction)new BGGainMiracleAction(this.magicNumber,wishCard));
+        addToBot((AbstractGameAction) new BGGainMiracleAction(this.magicNumber, wishCard));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -53,4 +65,3 @@ public class BGFameAndFortune extends AbstractBGAttackCardChoice {
         return new BGFameAndFortune(null);
     }
 }
-

@@ -15,17 +15,36 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGFinisher extends AbstractBGCard {
+
     public static final String ID = "BGFinisher";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGFinisher");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGFinisher"
+    );
 
     public BGFinisher() {
-        super("BGFinisher", cardStrings.NAME, "green/attack/finisher", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGSilent.Enums.BG_GREEN, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.ENEMY);
+        super(
+            "BGFinisher",
+            cardStrings.NAME,
+            "green/attack/finisher",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGSilent.Enums.BG_GREEN,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseDamage = 1;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new BGDamagePerAttackPlayedAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+        addToBot(
+            (AbstractGameAction) new BGDamagePerAttackPlayedAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.SLASH_DIAGONAL
+            )
+        );
         this.rawDescription = cardStrings.DESCRIPTION;
         initializeDescription();
     }
@@ -34,11 +53,10 @@ public class BGFinisher extends AbstractBGCard {
         super.applyPowers();
         int count = 0;
         for (AbstractCard c : AbstractDungeon.actionManager.cardsPlayedThisTurn) {
-            if (c.type == AbstractCard.CardType.ATTACK)
-                count++;
+            if (c.type == AbstractCard.CardType.ATTACK) count++;
         }
-        if(AbstractDungeon.player instanceof AbstractBGPlayer)
-            count+=((AbstractBGPlayer)AbstractDungeon.player).shivsPlayedThisTurn;
+        if (AbstractDungeon.player instanceof AbstractBGPlayer) count +=
+            ((AbstractBGPlayer) AbstractDungeon.player).shivsPlayedThisTurn;
 
         this.rawDescription = cardStrings.DESCRIPTION;
         this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0] + count;
@@ -66,7 +84,6 @@ public class BGFinisher extends AbstractBGCard {
         return new BGFinisher();
     }
 }
-
 
 /* Location:              C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\desktop-1.0.jar!\com\megacrit\cardcrawl\cards\green\Finisher.class
  * Java compiler version: 8 (52.0)

@@ -19,8 +19,10 @@ import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGSpireSpear extends AbstractBGMonster implements BGDamageIcons {
+
     public static final String ID = "BGSpireSpear";
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("SpireSpear");
+    private static final MonsterStrings monsterStrings =
+        CardCrawlGame.languagePack.getMonsterStrings("SpireSpear");
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
@@ -36,72 +38,104 @@ public class BGSpireSpear extends AbstractBGMonster implements BGDamageIcons {
 
     private int skewerCount;
 
-    public BGSpireSpear(float offsetx,float offsety) {
-        super(NAME, "BGSpireSpear", 160, 0.0F, -15.0F, 380.0F, 290.0F, null, 70.0F+offsetx, 10.0F+offsety);
+    public BGSpireSpear(float offsetx, float offsety) {
+        super(
+            NAME,
+            "BGSpireSpear",
+            160,
+            0.0F,
+            -15.0F,
+            380.0F,
+            290.0F,
+            null,
+            70.0F + offsetx,
+            10.0F + offsety
+        );
         this.type = AbstractMonster.EnemyType.ELITE;
-        loadAnimation("images/monsters/theEnding/spear/skeleton.atlas", "images/monsters/theEnding/spear/skeleton.json", 1.0F);
+        loadAnimation(
+            "images/monsters/theEnding/spear/skeleton.atlas",
+            "images/monsters/theEnding/spear/skeleton.json",
+            1.0F
+        );
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
         this.stateData.setMix("Hit", "Idle", 0.1F);
         e.setTimeScale(0.7F);
 
-        MultiCreature.Field.currentRow.set(this,1);
+        MultiCreature.Field.currentRow.set(this, 1);
 
         setHp(42);
 
         this.skewerCount = 2;
         this.damage.add(new DamageInfo(this, 2));
         this.damage.add(new DamageInfo(this, 9));
-
     }
 
     public void usePreBattleAction() {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction( this,  this,
-                new BGDifferentRowsPower( this)));
+        AbstractDungeon.actionManager.addToBottom(
+            new ApplyPowerAction(this, this, new BGDifferentRowsPower(this))
+        );
     }
 
-    public void takeTurn(){
+    public void takeTurn() {
         int i;
         switch (this.nextMove) {
             case 0:
                 for (i = 0; i < 2; ++i) {
-                    AbstractDungeon.actionManager.addToBottom(new ChangeStateAction(this, "ATTACK"));
+                    AbstractDungeon.actionManager.addToBottom(
+                        new ChangeStateAction(this, "ATTACK")
+                    );
                     AbstractDungeon.actionManager.addToBottom(new WaitAction(0.15F));
-                    AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player,  this.damage.get(0), AbstractGameAction.AttackEffect.FIRE));
+                    AbstractDungeon.actionManager.addToBottom(
+                        new DamageAction(
+                            AbstractDungeon.player,
+                            this.damage.get(0),
+                            AbstractGameAction.AttackEffect.FIRE
+                        )
+                    );
                 }
 
-                AbstractDungeon.actionManager.addToBottom(new SetMoveAction(
-                        this,  (byte)1, AbstractMonster.Intent.DEBUFF));
+                AbstractDungeon.actionManager.addToBottom(
+                    new SetMoveAction(this, (byte) 1, AbstractMonster.Intent.DEBUFF)
+                );
                 break;
             case 1:
                 addToBot(new MakeTempCardInDrawPileAction(new BGDazed(), 2, false, true));
-                AbstractDungeon.actionManager.addToBottom(new SetMoveAction(
-                        this,  (byte)2, AbstractMonster.Intent.ATTACK,9));
+                AbstractDungeon.actionManager.addToBottom(
+                    new SetMoveAction(this, (byte) 2, AbstractMonster.Intent.ATTACK, 9)
+                );
                 break;
             case 2:
                 AbstractDungeon.actionManager.addToBottom(new ChangeStateAction(this, "ATTACK"));
                 AbstractDungeon.actionManager.addToBottom(new WaitAction(0.05F));
-                AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player, (DamageInfo)this.damage.get(1), AbstractGameAction.AttackEffect.SLASH_DIAGONAL, true));
+                AbstractDungeon.actionManager.addToBottom(
+                    new DamageAction(
+                        AbstractDungeon.player,
+                        (DamageInfo) this.damage.get(1),
+                        AbstractGameAction.AttackEffect.SLASH_DIAGONAL,
+                        true
+                    )
+                );
 
-                AbstractDungeon.actionManager.addToBottom(new SetMoveAction(
-                        this,  (byte)0, AbstractMonster.Intent.ATTACK,2,2,true));
+                AbstractDungeon.actionManager.addToBottom(
+                    new SetMoveAction(this, (byte) 0, AbstractMonster.Intent.ATTACK, 2, 2, true)
+                );
 
                 break;
         }
-
-
     }
 
-    public void getMove(int i){
-        setMove( (byte)0, AbstractMonster.Intent.ATTACK,2,2,true);
+    public void getMove(int i) {
+        setMove((byte) 0, AbstractMonster.Intent.ATTACK, 2, 2, true);
     }
 
-    public void facingAttack(){
-        if(isDying || isDead || halfDead)return;
+    public void facingAttack() {
+        if (isDying || isDead || halfDead) return;
         AbstractCard c = new BGBurn();
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new MakeTempCardInDiscardAction((AbstractCard)c, 2));
+        AbstractDungeon.actionManager.addToBottom(
+            (AbstractGameAction) new MakeTempCardInDiscardAction((AbstractCard) c, 2)
+        );
     }
-
 
     public void changeState(String key) {
         AnimationState.TrackEntry e = null;
@@ -118,13 +152,12 @@ public class BGSpireSpear extends AbstractBGMonster implements BGDamageIcons {
         }
     }
 
-//    public void damage(DamageInfo info) {
-//        super.damage(info);
-//        if (info.owner != null && info.type != DamageInfo.DamageType.THORNS && info.output > 0) {
-//            this.state.setAnimation(0, "Hit", false);
-//            AnimationState.TrackEntry e = this.state.addAnimation(0, "Idle", true, 0.0F);
-//            e.setTimeScale(0.7F);
-//        }
-//    }
-
+    //    public void damage(DamageInfo info) {
+    //        super.damage(info);
+    //        if (info.owner != null && info.type != DamageInfo.DamageType.THORNS && info.output > 0) {
+    //            this.state.setAnimation(0, "Hit", false);
+    //            AnimationState.TrackEntry e = this.state.addAnimation(0, "Idle", true, 0.0F);
+    //            e.setTimeScale(0.7F);
+    //        }
+    //    }
 }

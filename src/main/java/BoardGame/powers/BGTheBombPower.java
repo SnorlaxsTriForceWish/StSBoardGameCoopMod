@@ -17,68 +17,88 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGTheBombPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGTheBomb";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("TheBomb");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "TheBomb"
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
     private int damage;
     private static int bombIdOffset;
     private AbstractCard originalcard;
-    public BGTheBombPower(AbstractCreature owner, int turns, int damage, AbstractCard originalcard) {
+
+    public BGTheBombPower(
+        AbstractCreature owner,
+        int turns,
+        int damage,
+        AbstractCard originalcard
+    ) {
         this.name = NAME;
         this.ID = "BGTheBomb" + bombIdOffset;
         bombIdOffset++;
         this.owner = owner;
         this.amount = turns;
         this.damage = damage;
-        this.originalcard=originalcard;
+        this.originalcard = originalcard;
         updateDescription();
         loadRegion("the_bomb");
         //TODO: should this be isTimeBased?
     }
 
-
-
     public void atEndOfTurnPreEndTurnCards(boolean isPlayer) {
         if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
-            addToBot((AbstractGameAction)new ReducePowerAction(this.owner, this.owner, this, 1));
+            addToBot((AbstractGameAction) new ReducePowerAction(this.owner, this.owner, this, 1));
             if (this.amount == 1) {
-                AbstractGameAction action=new DamageAllEnemiesAction(AbstractDungeon.player,
-                        DamageInfo.createDamageMatrix(this.damage, true), DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.FIRE);
-                ActionPatches.Field.rowTarget.set(action,new ALLEnemiesMonster());
+                AbstractGameAction action = new DamageAllEnemiesAction(
+                    AbstractDungeon.player,
+                    DamageInfo.createDamageMatrix(this.damage, true),
+                    DamageInfo.DamageType.THORNS,
+                    AbstractGameAction.AttackEffect.FIRE
+                );
+                ActionPatches.Field.rowTarget.set(action, new ALLEnemiesMonster());
                 addToBot(action);
 
-                AbstractCard card=originalcard.makeStatEquivalentCopy();
+                AbstractCard card = originalcard.makeStatEquivalentCopy();
                 AbstractDungeon.player.discardPile.addToBottom(card);
-                addToBot(new ExhaustSpecificCardAction(card, AbstractDungeon.player.discardPile,true));
-
+                addToBot(
+                    new ExhaustSpecificCardAction(card, AbstractDungeon.player.discardPile, true)
+                );
 
                 //Logger logger = LogManager.getLogger(BGTheBombPower.class.getName());
                 //logger.info("Awakened One check...");
                 //this counts as losing a power card, so Awakened One loses 1 str
-                for(AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters){
-                    AbstractPower p=m.getPower("BGCuriosityPower");
+                for (AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
+                    AbstractPower p = m.getPower("BGCuriosityPower");
                     //logger.info("check "+m+" "+p);
-                    if(p!=null){
-                        addToBot(new ReducePowerAction((AbstractCreature)m,(AbstractCreature)m,"BGUncappedStrengthPower",1));
+                    if (p != null) {
+                        addToBot(
+                            new ReducePowerAction(
+                                (AbstractCreature) m,
+                                (AbstractCreature) m,
+                                "BGUncappedStrengthPower",
+                                1
+                            )
+                        );
                     }
                 }
-                BGTheDieRelic.powersPlayedThisCombat-=1;
+                BGTheDieRelic.powersPlayedThisCombat -= 1;
             }
         }
     }
 
-
-
-
     public void updateDescription() {
         if (this.amount == 1) {
-            this.description = String.format(DESCRIPTIONS[1], new Object[] { Integer.valueOf(this.damage) });
+            this.description = String.format(
+                DESCRIPTIONS[1],
+                new Object[] { Integer.valueOf(this.damage) }
+            );
         } else {
-            this.description = String.format(DESCRIPTIONS[0], new Object[] { Integer.valueOf(this.amount), Integer.valueOf(this.damage) });
+            this.description = String.format(
+                DESCRIPTIONS[0],
+                new Object[] { Integer.valueOf(this.amount), Integer.valueOf(this.damage) }
+            );
         }
     }
 }
-
-

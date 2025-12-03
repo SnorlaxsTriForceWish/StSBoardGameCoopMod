@@ -11,11 +11,18 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 public class BGHolyWater extends AbstractBGRelic implements ClickableRelic {
+
     public BGHolyWater() {
-        super("BGHolyWater", "holy_water.png", AbstractRelic.RelicTier.BOSS, AbstractRelic.LandingSound.MAGICAL);
-//        this.counter=2;
-//        setCounter(this.counter);
+        super(
+            "BGHolyWater",
+            "holy_water.png",
+            AbstractRelic.RelicTier.BOSS,
+            AbstractRelic.LandingSound.MAGICAL
+        );
+        //        this.counter=2;
+        //        setCounter(this.counter);
     }
+
     public static final String ID = "BGHolyWater";
 
     public String getUpdatedDescription() {
@@ -43,34 +50,45 @@ public class BGHolyWater extends AbstractBGRelic implements ClickableRelic {
     }
 
     private boolean isPlayerTurn = false; // We should make sure the relic is only activateable during our turn, not the enemies'.
+
     public void atBattleStartPreDraw() {
         //TODO: probably should call UnusedUp here too (weird things happen if game is reloaded while relic is "used").  other relics too?
-        this.counter=2;
+        this.counter = 2;
         setCounter(this.counter);
     }
 
     @Override
-    public void onRightClick() {// On right click
-        if (!isObtained || !isPlayerTurn || this.counter<=0) {
+    public void onRightClick() {
+        // On right click
+        if (!isObtained || !isPlayerTurn || this.counter <= 0) {
             // If it has been used this turn, or the player doesn't actually have the relic (i.e. it's on display in the shop room), or it's the enemy's turn
             return; // Don't do anything.
         }
 
-        if (AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) { // Only if you're in combat
+        if (
+            AbstractDungeon.getCurrRoom() != null &&
+            AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT
+        ) {
+            // Only if you're in combat
             //usedThisTurn = true; // Set relic as "Used this turn"
             flash(); // Flash
 
-            addToBot((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
-            addToBot((AbstractGameAction)new GainEnergyAction(1));
+            addToBot(
+                (AbstractGameAction) new RelicAboveCreatureAction(
+                    (AbstractCreature) AbstractDungeon.player,
+                    this
+                )
+            );
+            addToBot((AbstractGameAction) new GainEnergyAction(1));
 
-            this.counter-=1;
+            this.counter -= 1;
             setCounter(this.counter);
         }
     }
 
     public void atTurnStart() {
         isPlayerTurn = true; // It's our turn!
-        if (this.counter>0) beginLongPulse();     // Pulse while the player can click on it.
+        if (this.counter > 0) beginLongPulse(); // Pulse while the player can click on it.
     }
 
     @Override
@@ -78,7 +96,6 @@ public class BGHolyWater extends AbstractBGRelic implements ClickableRelic {
         isPlayerTurn = false; // Not our turn now.
         stopPulse();
     }
-
 
     public AbstractRelic makeCopy() {
         return new BGHolyWater();
@@ -97,7 +114,4 @@ public class BGHolyWater extends AbstractBGRelic implements ClickableRelic {
             initializeTips();
         }
     }
-
 }
-
-

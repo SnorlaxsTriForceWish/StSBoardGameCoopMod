@@ -11,29 +11,30 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGSeeingRed extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("Seeing Red");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "Seeing Red"
+    );
     public static final String ID = "BGSeeing Red";
 
     public BGSeeingRed() {
-        super("BGSeeing Red", cardStrings.NAME, "red/skill/seeing_red", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.COMMON, AbstractCard.CardTarget.NONE);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGSeeing Red",
+            cardStrings.NAME,
+            "red/skill/seeing_red",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.COMMON,
+            AbstractCard.CardTarget.NONE
+        );
         this.exhaust = true;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainEnergyAction(2));
+        addToBot((AbstractGameAction) new GainEnergyAction(2));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -42,10 +43,7 @@ public class BGSeeingRed extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGSeeingRed();
     }
 }
-
-

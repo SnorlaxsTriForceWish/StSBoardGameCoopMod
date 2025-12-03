@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 public class BGFissionAction extends AbstractGameAction {
+
     private boolean upgraded = false;
 
     public BGFissionAction(boolean upgraded) {
@@ -25,8 +26,13 @@ public class BGFissionAction extends AbstractGameAction {
     public void update() {
         if (this.duration == Settings.ACTION_DUR_XFAST) {
             int orbCount = AbstractDungeon.player.filledOrbCount();
-            addToTop((AbstractGameAction)new DrawCardAction((AbstractCreature)AbstractDungeon.player, orbCount));
-            addToTop((AbstractGameAction)new GainEnergyAction(orbCount));
+            addToTop(
+                (AbstractGameAction) new DrawCardAction(
+                    (AbstractCreature) AbstractDungeon.player,
+                    orbCount
+                )
+            );
+            addToTop((AbstractGameAction) new GainEnergyAction(orbCount));
             if (this.upgraded) {
                 addToTop(new BGEvokeAllOrbsAction());
             } else {
@@ -36,4 +42,3 @@ public class BGFissionAction extends AbstractGameAction {
         tickDuration();
     }
 }
-

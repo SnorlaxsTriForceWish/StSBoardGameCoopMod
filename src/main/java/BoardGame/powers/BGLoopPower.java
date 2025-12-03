@@ -13,7 +13,10 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 
 public class BGLoopPower extends AbstractBGPower {
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGLoopPower");
+
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGLoopPower"
+    );
     public static final String POWER_ID = "BoardGame:BGLoopPower";
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
@@ -43,18 +46,17 @@ public class BGLoopPower extends AbstractBGPower {
         }
     }
 
-
     public void atEndOfTurnPreEndTurnCards(boolean isPlayer) {
-        boolean isEmpty=true;
-        for(AbstractOrb o : AbstractDungeon.player.orbs){
-            if(!(o instanceof EmptyOrbSlot) && !(o instanceof BGDark)) {
+        boolean isEmpty = true;
+        for (AbstractOrb o : AbstractDungeon.player.orbs) {
+            if (!(o instanceof EmptyOrbSlot) && !(o instanceof BGDark)) {
                 isEmpty = false;
             }
         }
         if (!isEmpty) {
             flash();
             BoardGame.BoardGame.logger.info("BGLoopPower.atEndOfTurn");
-            OrbSelectScreen.OrbSelectAction ossAction = (target) -> {
+            OrbSelectScreen.OrbSelectAction ossAction = target -> {
                 //TODO LATER: this code currently runs even if we pick EmptyOrbSlot or BGDark, so don't add any side effects
                 //TODO LATER: onEndOfTurn currently uses addToBot, so some events will be out of order
                 AbstractPlayer player = AbstractDungeon.player;
@@ -63,13 +65,13 @@ public class BGLoopPower extends AbstractBGPower {
                     ((AbstractOrb) AbstractDungeon.player.orbs.get(target)).onEndOfTurn();
                 }
             };
-            addToTop((AbstractGameAction) new OrbSelectScreenAction(ossAction, "Choose an Orb to Loop.", true));
+            addToTop(
+                (AbstractGameAction) new OrbSelectScreenAction(
+                    ossAction,
+                    "Choose an Orb to Loop.",
+                    true
+                )
+            );
         }
     }
-
-
-
-
 }
-
-

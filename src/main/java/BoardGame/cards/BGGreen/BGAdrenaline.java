@@ -19,23 +19,37 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.AdrenalineEffect;
 
 public class BGAdrenaline extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("Adrenaline");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "Adrenaline"
+    );
     public static final String ID = "BGAdrenaline";
 
     public BGAdrenaline() {
-        super("BGAdrenaline", cardStrings.NAME, "green/skill/adrenaline", 0, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.RARE, CardTarget.SELF);
-
-        this.exhaust=true;
+        super(
+            "BGAdrenaline",
+            cardStrings.NAME,
+            "green/skill/adrenaline",
+            0,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
+        this.exhaust = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new AdrenalineEffect(), 0.15F));
+        addToBot(
+            (AbstractGameAction) new VFXAction((AbstractGameEffect) new AdrenalineEffect(), 0.15F)
+        );
         if (this.upgraded) {
-            addToBot((AbstractGameAction)new GainEnergyAction(2));
+            addToBot((AbstractGameAction) new GainEnergyAction(2));
         } else {
-            addToBot((AbstractGameAction)new GainEnergyAction(1));
+            addToBot((AbstractGameAction) new GainEnergyAction(1));
         }
-        addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)p, 2));
+        addToBot((AbstractGameAction) new DrawCardAction((AbstractCreature) p, 2));
     }
 
     public void upgrade() {
@@ -45,9 +59,8 @@ public class BGAdrenaline extends AbstractBGCard {
             initializeDescription();
         }
     }
+
     public AbstractCard makeCopy() {
         return new BGAdrenaline();
     }
 }
-
-

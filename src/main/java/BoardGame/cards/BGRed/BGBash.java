@@ -21,42 +21,68 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGBash extends AbstractBGCard {
 
     public static final String ID = "BGBash";
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:Bash");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:Bash"
+    );
 
     public BGBash() {
-        super("BGBash", cardStrings.NAME, "red/attack/bash", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.BASIC, AbstractCard.CardTarget.ENEMY);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGBash",
+            cardStrings.NAME,
+            "red/attack/bash",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.BASIC,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseDamage = 2;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        BoardGame.BoardGame.logger.info("Current act number is "+AbstractDungeon.actNum+"    !!!!!!!!!!!!!!!");
+        BoardGame.BoardGame.logger.info(
+            "Current act number is " + AbstractDungeon.actNum + "    !!!!!!!!!!!!!!!"
+        );
         if (Settings.isDebug) {
             this.multiDamage = new int[(AbstractDungeon.getCurrRoom()).monsters.monsters.size()];
             for (int i = 0; i < (AbstractDungeon.getCurrRoom()).monsters.monsters.size(); i++) {
                 this.multiDamage[i] = 100;
             }
-            addToBot((AbstractGameAction)new DamageAllEnemiesAction((AbstractCreature)p, this.multiDamage, this.damageTypeForTurn, AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+            addToBot(
+                (AbstractGameAction) new DamageAllEnemiesAction(
+                    (AbstractCreature) p,
+                    this.multiDamage,
+                    this.damageTypeForTurn,
+                    AbstractGameAction.AttackEffect.BLUNT_HEAVY
+                )
+            );
         } else {
-            addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+            addToBot(
+                (AbstractGameAction) new DamageAction(
+                    (AbstractCreature) m,
+                    new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                    AbstractGameAction.AttackEffect.BLUNT_HEAVY
+                )
+            );
         }
 
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)p, (AbstractPower)new BGVulnerablePower((AbstractCreature)m, this.magicNumber, false), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) m,
+                (AbstractCreature) p,
+                (AbstractPower) new BGVulnerablePower(
+                    (AbstractCreature) m,
+                    this.magicNumber,
+                    false
+                ),
+                this.magicNumber
+            )
+        );
         //addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)p, (AbstractPower)new BGWeakPower((AbstractCreature)m, this.magicNumber, false), this.magicNumber));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -66,10 +92,7 @@ public class BGBash extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGBash();
     }
 }
-
-

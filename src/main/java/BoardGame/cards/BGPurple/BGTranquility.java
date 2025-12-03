@@ -11,18 +11,30 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGTranquility extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGTranquility");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGTranquility"
+    );
     public static final String ID = "BGTranquility";
 
     public BGTranquility() {
-        super("BGTranquility", cardStrings.NAME, "purple/skill/tranquility", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGWatcher.Enums.BG_PURPLE, CardRarity.COMMON, CardTarget.SELF);
-
+        super(
+            "BGTranquility",
+            cardStrings.NAME,
+            "purple/skill/tranquility",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.COMMON,
+            CardTarget.SELF
+        );
         this.exhaust = true;
         this.selfRetain = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ChangeStanceAction("BGCalm"));
+        addToBot((AbstractGameAction) new ChangeStanceAction("BGCalm"));
     }
 
     public void upgrade() {

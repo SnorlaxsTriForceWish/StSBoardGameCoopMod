@@ -15,28 +15,38 @@ import com.megacrit.cardcrawl.vfx.combat.DamageNumberEffect;
 import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 
 public class BGBlasphemy extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBlasphemy");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBlasphemy"
+    );
     public static final String ID = "BGBlasphemy";
 
     public BGBlasphemy() {
-        super("BGBlasphemy", cardStrings.NAME, "purple/skill/blasphemy", 2, cardStrings.DESCRIPTION, CardType.SKILL, BGWatcher.Enums.BG_PURPLE, CardRarity.RARE, CardTarget.SELF);
+        super(
+            "BGBlasphemy",
+            cardStrings.NAME,
+            "purple/skill/blasphemy",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
         this.exhaust = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-
         addToBot(new VFXAction(new LightningEffect(p.hb.cX, p.hb.cY)));
-        addToBot(new VFXAction (new DamageNumberEffect(p, p.hb.cX, p.hb.cY, 99999)));
+        addToBot(new VFXAction(new DamageNumberEffect(p, p.hb.cX, p.hb.cY, 99999)));
         addToBot(new BGExhaustDrawPileAction(p));
-        addToBot(new ApplyPowerAction(p, p, new BGTripleAttackPower(p,1),1));
-
+        addToBot(new ApplyPowerAction(p, p, new BGTripleAttackPower(p, 1), 1));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
             upgradeName();
-            this.selfRetain=true;
+            this.selfRetain = true;
             this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
         }

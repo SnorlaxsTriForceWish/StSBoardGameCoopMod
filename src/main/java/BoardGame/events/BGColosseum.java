@@ -9,23 +9,30 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 //TODO: Colosseum encounters need to draw from the physical decks
 // additionally, since vanilla Colosseum isn't random, this event doesn't even cycle through the monster list
-public class BGColosseum extends Colosseum {    //game is hardcoded to check for instanceof Colosseum when clicking Proceed button
+public class BGColosseum extends Colosseum {
+
+    //game is hardcoded to check for instanceof Colosseum when clicking Proceed button
     public static final String ID = "BGColosseum";
 
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGColosseum");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGColosseum"
+    );
 
     public static final String NAME = eventStrings.NAME;
 
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
 
     public static final String[] OPTIONS = eventStrings.OPTIONS;
-    public boolean isElite=false;
-    public String encounterID="";
+    public boolean isElite = false;
+    public String encounterID = "";
 
     private CurScreen screen = CurScreen.INTRO;
 
     private enum CurScreen {
-        INTRO, FIGHT, LEAVE, POST_COMBAT;
+        INTRO,
+        FIGHT,
+        LEAVE,
+        POST_COMBAT,
     }
 
     public BGColosseum() {
@@ -48,8 +55,9 @@ public class BGColosseum extends Colosseum {    //game is hardcoded to check for
                 this.screen = CurScreen.LEAVE;
                 switch (buttonPressed) {
                     case 0:
-                        (AbstractDungeon.getCurrRoom()).monsters = CardCrawlGame.dungeon.getMonsterForRoomCreation();
-                        encounterID=AbstractDungeon.monsterList.get(0);
+                        (AbstractDungeon.getCurrRoom()).monsters =
+                            CardCrawlGame.dungeon.getMonsterForRoomCreation();
+                        encounterID = AbstractDungeon.monsterList.get(0);
                         AbstractDungeon.monsterList.remove(0);
                         (AbstractDungeon.getCurrRoom()).rewards.clear();
                         //TODO: for reasons that are still unclear, addPotionToRewards is called automatically by AbstractRoom under certain conditions at intellij line 369
@@ -58,15 +66,18 @@ public class BGColosseum extends Colosseum {    //game is hardcoded to check for
                         AbstractDungeon.lastCombatMetricKey = "Standard Encounter";
                         break;
                     case 1:
-                        isElite=true;
-                        (AbstractDungeon.getCurrRoom()).monsters = CardCrawlGame.dungeon.getEliteMonsterForRoomCreation();
-                        encounterID=AbstractDungeon.eliteMonsterList.get(0);
+                        isElite = true;
+                        (AbstractDungeon.getCurrRoom()).monsters =
+                            CardCrawlGame.dungeon.getEliteMonsterForRoomCreation();
+                        encounterID = AbstractDungeon.eliteMonsterList.get(0);
                         AbstractDungeon.eliteMonsterList.remove(0);
                         (AbstractDungeon.getCurrRoom()).rewards.clear();
 
                         (AbstractDungeon.getCurrRoom()).eliteTrigger = true;
                         AbstractDungeon.getCurrRoom().addGoldToRewards(0);
-                        AbstractDungeon.getCurrRoom().addRelicToRewards(AbstractRelic.RelicTier.RARE);
+                        AbstractDungeon.getCurrRoom().addRelicToRewards(
+                            AbstractRelic.RelicTier.RARE
+                        );
 
                         enterCombatFromImage();
                         AbstractDungeon.lastCombatMetricKey = "Elite Encounter";
@@ -87,15 +98,14 @@ public class BGColosseum extends Colosseum {    //game is hardcoded to check for
     public void reopen() {
         //do nothing; override Colosseum
     }
-//        if (this.screen != CurScreen.LEAVE) {
-//            AbstractDungeon.resetPlayer();
-//            AbstractDungeon.player.drawX = Settings.WIDTH * 0.25F;
-//            AbstractDungeon.player.preBattlePrep();
-//            enterImageFromCombat();
-//            this.imageEventText.updateBodyText(DESCRIPTIONS[4]);
-//            this.imageEventText.updateDialogOption(0, OPTIONS[2]);
-//            this.imageEventText.setDialogOption(OPTIONS[3]);
-//        }
-//    }
+    //        if (this.screen != CurScreen.LEAVE) {
+    //            AbstractDungeon.resetPlayer();
+    //            AbstractDungeon.player.drawX = Settings.WIDTH * 0.25F;
+    //            AbstractDungeon.player.preBattlePrep();
+    //            enterImageFromCombat();
+    //            this.imageEventText.updateBodyText(DESCRIPTIONS[4]);
+    //            this.imageEventText.updateDialogOption(0, OPTIONS[2]);
+    //            this.imageEventText.setDialogOption(OPTIONS[3]);
+    //        }
+    //    }
 }
-

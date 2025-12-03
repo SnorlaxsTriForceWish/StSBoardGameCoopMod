@@ -12,43 +12,57 @@ import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 
 public class BGBlockPotion extends AbstractPotion {
-    private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString("BoardGame:BGBlock Potion");
+
+    private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
+        "BoardGame:BGBlock Potion"
+    );
 
     public static final String POTION_ID = "BGBlock Potion";
 
-
     public BGBlockPotion() {
-        super(potionStrings.NAME, "BGBlock Potion", AbstractPotion.PotionRarity.COMMON, AbstractPotion.PotionSize.S, AbstractPotion.PotionColor.BLUE);
+        super(
+            potionStrings.NAME,
+            "BGBlock Potion",
+            AbstractPotion.PotionRarity.COMMON,
+            AbstractPotion.PotionSize.S,
+            AbstractPotion.PotionColor.BLUE
+        );
         this.isThrown = false;
     }
 
-    public int getPrice() {return 2;}
+    public int getPrice() {
+        return 2;
+    }
 
     public void initializeData() {
         this.potency = getPotency();
-        this.description = potionStrings.DESCRIPTIONS[0] + this.potency + potionStrings.DESCRIPTIONS[1];
+        this.description =
+            potionStrings.DESCRIPTIONS[0] + this.potency + potionStrings.DESCRIPTIONS[1];
         this.tips.clear();
         this.tips.add(new PowerTip(this.name, this.description));
-        this.tips.add(new PowerTip(
-
-                TipHelper.capitalize(GameDictionary.BLOCK.NAMES[0]), (String)GameDictionary.keywords
-                .get(GameDictionary.BLOCK.NAMES[0])));
+        this.tips.add(
+            new PowerTip(
+                TipHelper.capitalize(GameDictionary.BLOCK.NAMES[0]),
+                (String) GameDictionary.keywords.get(GameDictionary.BLOCK.NAMES[0])
+            )
+        );
     }
-
 
     public void use(AbstractCreature target) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, this.potency));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) AbstractDungeon.player,
+                (AbstractCreature) AbstractDungeon.player,
+                this.potency
+            )
+        );
     }
-
 
     public int getPotency(int ascensionLevel) {
         return 2;
     }
 
-
     public AbstractPotion makeCopy() {
         return new BGBlockPotion();
     }
 }
-
-

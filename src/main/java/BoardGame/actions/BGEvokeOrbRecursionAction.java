@@ -7,12 +7,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 
 public class BGEvokeOrbRecursionAction extends AbstractGameAction {
-    public String description;
 
+    public String description;
 
     public void update() {
         if (this.duration == this.startDuration) {
-            OrbSelectScreen.OrbSelectAction ossAction = (target) -> {
+            OrbSelectScreen.OrbSelectAction ossAction = target -> {
                 AbstractPlayer player = AbstractDungeon.player;
                 AbstractOrb orb = player.orbs.get(target);
                 if (orb instanceof com.megacrit.cardcrawl.orbs.EmptyOrbSlot) {
@@ -24,7 +24,13 @@ public class BGEvokeOrbRecursionAction extends AbstractGameAction {
                     addToTop((AbstractGameAction) new BGEvokeSpecificOrbAction(target));
                 }
             };
-            addToTop((AbstractGameAction) new OrbSelectScreenAction(ossAction, "Choose an Orb to Evoke.",false));
+            addToTop(
+                (AbstractGameAction) new OrbSelectScreenAction(
+                    ossAction,
+                    "Choose an Orb to Evoke.",
+                    false
+                )
+            );
         }
         this.tickDuration();
     }

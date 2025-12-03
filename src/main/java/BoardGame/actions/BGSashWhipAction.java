@@ -8,12 +8,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-
 public class BGSashWhipAction extends AbstractGameAction {
+
     private AbstractMonster m;
 
     private int magicNumber;
-
 
     public BGSashWhipAction(AbstractMonster monster, int weakAmount) {
         this.m = monster;
@@ -22,9 +21,19 @@ public class BGSashWhipAction extends AbstractGameAction {
 
     public void update() {
         if (AbstractDungeon.player.stance.ID.equals("BGCalm")) {
-            addToTop((AbstractGameAction) new ApplyPowerAction((AbstractCreature) this.m, (AbstractCreature) AbstractDungeon.player, (AbstractPower) new BGWeakPower((AbstractCreature) this.m, this.magicNumber, false), this.magicNumber));
+            addToTop(
+                (AbstractGameAction) new ApplyPowerAction(
+                    (AbstractCreature) this.m,
+                    (AbstractCreature) AbstractDungeon.player,
+                    (AbstractPower) new BGWeakPower(
+                        (AbstractCreature) this.m,
+                        this.magicNumber,
+                        false
+                    ),
+                    this.magicNumber
+                )
+            );
         }
         this.isDone = true;
     }
 }
-

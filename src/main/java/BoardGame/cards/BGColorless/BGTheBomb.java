@@ -14,27 +14,42 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGTheBomb extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGThe Bomb");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGThe Bomb"
+    );
     public static final String ID = "BGThe Bomb";
 
     public BGTheBomb() {
-        super("BGThe Bomb", cardStrings.NAME, "colorless/skill/the_bomb", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.POWER, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.RARE, AbstractCard.CardTarget.SELF);
-
-
+        super(
+            "BGThe Bomb",
+            cardStrings.NAME,
+            "colorless/skill/the_bomb",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.POWER,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.RARE,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseMagicNumber = 10;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGTheBombPower((AbstractCreature)p, 3, this.magicNumber, this), 3));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGTheBombPower((AbstractCreature) p, 3, this.magicNumber, this),
+                3
+            )
+        );
     }
-
 
     public AbstractCard makeCopy() {
         return new BGTheBomb();
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -43,5 +58,3 @@ public class BGTheBomb extends AbstractBGCard {
         }
     }
 }
-
-

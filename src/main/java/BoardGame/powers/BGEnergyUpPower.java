@@ -6,9 +6,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class BGEnergyUpPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGEnergyUpPower";
 
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGEnergyUpPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGEnergyUpPower"
+    );
 
     public static final String NAME = powerStrings.NAME;
 
@@ -19,16 +22,14 @@ public class BGEnergyUpPower extends AbstractBGPower {
         this.ID = "BGEnergyUpPower";
         this.owner = owner;
         this.amount = energyAmt;
-        if (this.amount >= 999)
-            this.amount = 999;
+        if (this.amount >= 999) this.amount = 999;
         updateDescription();
         loadRegion("energized_blue");
     }
 
     public void stackPower(int stackAmount) {
         super.stackPower(stackAmount);
-        if (this.amount >= 999)
-            this.amount = 999;
+        if (this.amount >= 999) this.amount = 999;
     }
 
     public void updateDescription() {

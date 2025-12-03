@@ -1,5 +1,8 @@
 package BoardGame.cards;
 
+import static BoardGame.BoardGame.makeCardPath;
+import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
+
 import BoardGame.BoardGame;
 import BoardGame.characters.BGColorless;
 import basemod.AutoAdd;
@@ -9,16 +12,12 @@ import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import javassist.CannotCompileException;
-import javassist.CtBehavior;
-import org.clapper.util.classutil.ClassInfo;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-
-import static BoardGame.BoardGame.makeCardPath;
-import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
+import javassist.CannotCompileException;
+import javassist.CtBehavior;
+import org.clapper.util.classutil.ClassInfo;
 
 //TODO: exact wording of Golden Ticket card seems to have changed just before printing -- check physical copies when available
 //TODO: Golden Ticket is actually a TICKET card, not a POWER card
@@ -37,7 +36,6 @@ public class BGGoldenTicket extends AbstractBGCard {
 
     // /TEXT DECLARATION/
 
-
     // STAT DECLARATION
 
     private static final CardRarity RARITY = CardRarity.RARE;
@@ -52,9 +50,18 @@ public class BGGoldenTicket extends AbstractBGCard {
 
     // /STAT DECLARATION/
 
-
     public BGGoldenTicket(String ID, CardColor color) {
-        super(ID, languagePack.getCardStrings(BASE_ID).NAME, IMG, COST, languagePack.getCardStrings(BASE_ID).DESCRIPTION, TYPE, color, RARITY, TARGET);
+        super(
+            ID,
+            languagePack.getCardStrings(BASE_ID).NAME,
+            IMG,
+            COST,
+            languagePack.getCardStrings(BASE_ID).DESCRIPTION,
+            TYPE,
+            color,
+            RARITY,
+            TARGET
+        );
     }
 
     public BGGoldenTicket() {
@@ -64,10 +71,10 @@ public class BGGoldenTicket extends AbstractBGCard {
     public void loadCardImage(String img) {
         passthroughLoadCardImage(img);
     }
+
     protected Texture getPortraitImage() {
         return passthroughGetPortraitImage();
     }
-
 
     // Actions the card should do.
     @Override
@@ -86,34 +93,37 @@ public class BGGoldenTicket extends AbstractBGCard {
         return new BGGoldenTicket();
     }
 
-    @SpirePatch2(clz= AutoAdd.class, method="findClasses",
-            paramtypez={Class.class})
+    @SpirePatch2(clz = AutoAdd.class, method = "findClasses", paramtypez = { Class.class })
     public static class HideCardFromCompendiumPatch {
+
         @SpireInsertPatch(
-                locator = BGGoldenTicket.HideCardFromCompendiumPatch.Locator.class,
-                localvars = {"foundClasses"}
+            locator = BGGoldenTicket.HideCardFromCompendiumPatch.Locator.class,
+            localvars = { "foundClasses" }
         )
         //public static <T> Collection<CtClass> Insert(AbstractCard _____instance, @ByRef Texture[] ___texture) {
         public static void Insert(@ByRef Collection<ClassInfo>[] ___foundClasses) {
             for (Iterator<ClassInfo> itr = ___foundClasses[0].iterator(); itr.hasNext(); ) {
                 ClassInfo c = itr.next();
-                if(c.getClassName().equals(BGGoldenTicket.class.getName())){
+                if (c.getClassName().equals(BGGoldenTicket.class.getName())) {
                     itr.remove();
                 }
-//                if(c.getClassName().equals(BGDesync.class.getName())){
-//                    itr.remove();
-//                }
+                //                if(c.getClassName().equals(BGDesync.class.getName())){
+                //                    itr.remove();
+                //                }
             }
         }
+
         private static class Locator extends SpireInsertLocator {
-            public int[] Locate(CtBehavior ctMethodToPatch) throws CannotCompileException, PatchingException {
+
+            public int[] Locate(CtBehavior ctMethodToPatch)
+                throws CannotCompileException, PatchingException {
                 Matcher finalMatcher = new Matcher.MethodCallMatcher(Collection.class, "iterator");
-                return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<Matcher>(), finalMatcher);
+                return LineFinder.findInOrder(
+                    ctMethodToPatch,
+                    new ArrayList<Matcher>(),
+                    finalMatcher
+                );
             }
         }
     }
-
-
-
 }
-

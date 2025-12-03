@@ -16,21 +16,41 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BGDistraction extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGDistraction");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGDistraction"
+    );
     public static final String ID = "BGDistraction";
 
     private AbstractMonster target;
 
     static Logger logger = LogManager.getLogger(BGDistraction.class.getName());
-    public BGDistraction() {
-        super("BGDistraction", cardStrings.NAME, "green/skill/distraction", 2, cardStrings.DESCRIPTION, CardType.POWER, BGSilent.Enums.BG_GREEN, CardRarity.UNCOMMON, CardTarget.SELF);
 
+    public BGDistraction() {
+        super(
+            "BGDistraction",
+            cardStrings.NAME,
+            "green/skill/distraction",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
         this.baseMagicNumber = 2;
-        this.magicNumber=this.baseMagicNumber;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGDistractionPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGDistractionPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {
@@ -44,5 +64,3 @@ public class BGDistraction extends AbstractBGCard {
         return new BGDistraction();
     }
 }
-
-

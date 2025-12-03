@@ -13,8 +13,8 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class CheckAfterUseCardAction
-            extends AbstractGameAction {
+public class CheckAfterUseCardAction extends AbstractGameAction {
+
     private DamageInfo info;
     private DieControlledRelic relic = null;
     private AbstractBGCard fakeCard = null;
@@ -30,20 +30,14 @@ public class CheckAfterUseCardAction
         logger.info("CheckAfterUseCardAction activates");
 
         for (AbstractPower p : AbstractDungeon.player.powers) {
-            if (!fakeCard.dontTriggerOnUseCard)
-                p.onAfterUseCard(fakeCard, fakeCardAction);
+            if (!fakeCard.dontTriggerOnUseCard) p.onAfterUseCard(fakeCard, fakeCardAction);
         }
         for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
             for (AbstractPower p : m.powers) {
-                if (!fakeCard.dontTriggerOnUseCard)
-                    p.onAfterUseCard(fakeCard, fakeCardAction);
+                if (!fakeCard.dontTriggerOnUseCard) p.onAfterUseCard(fakeCard, fakeCardAction);
             }
         }
         addToBot(new HandCheckAction());
         this.isDone = true;
     }
-
-
 }
-
-

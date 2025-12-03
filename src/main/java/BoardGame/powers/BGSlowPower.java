@@ -10,12 +10,15 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGSlowPower extends AbstractBGPower {
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGSlowPower");
+
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGSlowPower"
+    );
     public static final String POWER_ID = "BGSlowPower";
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    public BGSlowPower(AbstractCreature owner,int amount) {
+    public BGSlowPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = "BGSlowPower";
         this.owner = owner;
@@ -33,7 +36,7 @@ public class BGSlowPower extends AbstractBGPower {
 
     public float atDamageReceive(float damage, DamageInfo.DamageType type) {
         if (type == DamageInfo.DamageType.NORMAL) {
-            if(this.amount>0){
+            if (this.amount > 0) {
                 return damage + this.amount;
             }
         }
@@ -41,47 +44,44 @@ public class BGSlowPower extends AbstractBGPower {
         return damage;
     }
 
-//    public void atEndOfRound() {
-//        this.amount = 4;
-//        updateDescription();
-//    }
-//
-//    public void stackPower(int stackAmount) {
-//        this.fontScale = 8.0F;
-//        this.amount += stackAmount;
-//        if (this.amount <= 0) {
-//            this.amount=-2;
-//        }
-//    }
-//
-//    public void updateDescription() {
-//        this.description = FontHelper.colorString(this.owner.name, "y");
-//
-//        if (this.amount > 1 ) {
-//            this.description += DESCRIPTIONS[0] + (this.amount) + DESCRIPTIONS[1];
-//        }else if(this.amount==1){
-//            this.description += DESCRIPTIONS[0] + (this.amount) + DESCRIPTIONS[2];
-//        }else{
-//            this.description += DESCRIPTIONS[3];
-//        }
-//    }
-//
-//
-//    public void onAfterUseCard(AbstractCard card, UseCardAction action) {
-//        boolean applyVulnerable=(this.amount==1);
-//        addToBot((AbstractGameAction)new ApplyPowerAction(this.owner, this.owner, new BGSlowPower(this.owner,-1), -1));
-//        if(applyVulnerable){
-//            addToBot((AbstractGameAction)new ApplyPowerAction(this.owner, AbstractDungeon.player, new BGVulnerablePower(this.owner,1,false), 1));
-//        }
-//    }
+    //    public void atEndOfRound() {
+    //        this.amount = 4;
+    //        updateDescription();
+    //    }
+    //
+    //    public void stackPower(int stackAmount) {
+    //        this.fontScale = 8.0F;
+    //        this.amount += stackAmount;
+    //        if (this.amount <= 0) {
+    //            this.amount=-2;
+    //        }
+    //    }
+    //
+    //    public void updateDescription() {
+    //        this.description = FontHelper.colorString(this.owner.name, "y");
+    //
+    //        if (this.amount > 1 ) {
+    //            this.description += DESCRIPTIONS[0] + (this.amount) + DESCRIPTIONS[1];
+    //        }else if(this.amount==1){
+    //            this.description += DESCRIPTIONS[0] + (this.amount) + DESCRIPTIONS[2];
+    //        }else{
+    //            this.description += DESCRIPTIONS[3];
+    //        }
+    //    }
+    //
+    //
+    //    public void onAfterUseCard(AbstractCard card, UseCardAction action) {
+    //        boolean applyVulnerable=(this.amount==1);
+    //        addToBot((AbstractGameAction)new ApplyPowerAction(this.owner, this.owner, new BGSlowPower(this.owner,-1), -1));
+    //        if(applyVulnerable){
+    //            addToBot((AbstractGameAction)new ApplyPowerAction(this.owner, AbstractDungeon.player, new BGVulnerablePower(this.owner,1,false), 1));
+    //        }
+    //    }
 
-
-//    public float atDamageReceive(float damage, DamageInfo.DamageType type) {
-//        if (type == DamageInfo.DamageType.NORMAL) {
-//            return damage * (1.0F + this.amount * 0.1F);
-//        }
-//        return damage;
-//    }
+    //    public float atDamageReceive(float damage, DamageInfo.DamageType type) {
+    //        if (type == DamageInfo.DamageType.NORMAL) {
+    //            return damage * (1.0F + this.amount * 0.1F);
+    //        }
+    //        return damage;
+    //    }
 }
-
-

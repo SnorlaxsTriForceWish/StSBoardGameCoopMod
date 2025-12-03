@@ -12,16 +12,21 @@ public class AscensionPatches {
 
     @SpirePatch2(clz = CharStat.class, method = "incrementAscension")
     public static class UnlockNextAscensionPatch {
+
         @SpirePostfixPatch
-        public static void Postfix(){
-            if(AbstractDungeon.player instanceof AbstractBGPlayer &&
-                !(AbstractDungeon.player instanceof MultiCharacter)) {
+        public static void Postfix() {
+            if (
+                AbstractDungeon.player instanceof AbstractBGPlayer &&
+                !(AbstractDungeon.player instanceof MultiCharacter)
+            ) {
                 AbstractPlayer temp = AbstractDungeon.player;
-                AbstractDungeon.player=new MultiCharacter("Temp BGMultiCharacter", MultiCharacter.Enums.BG_MULTICHARACTER);
+                AbstractDungeon.player = new MultiCharacter(
+                    "Temp BGMultiCharacter",
+                    MultiCharacter.Enums.BG_MULTICHARACTER
+                );
                 AbstractDungeon.player.getCharStat().incrementAscension();
-                AbstractDungeon.player=temp;
+                AbstractDungeon.player = temp;
             }
         }
     }
-
 }

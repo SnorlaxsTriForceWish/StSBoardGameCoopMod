@@ -8,9 +8,12 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class BGAccuracyPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGAccuracy";
 
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGAccuracyPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGAccuracyPower"
+    );
 
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
@@ -35,21 +38,20 @@ public class BGAccuracyPower extends AbstractBGPower {
     }
 
     private void updateExistingShivs() {
-        if(AbstractDungeon.player!=null) {
+        if (AbstractDungeon.player != null) {
             AbstractRelic shivs = AbstractDungeon.player.getRelic("BoardGame:BGShivs");
             if (shivs != null) {
-                ((BGShivs)shivs).updateDescription(this.amount);
+                ((BGShivs) shivs).updateDescription(this.amount);
             }
         }
     }
 
     public void onVictory() {
-        if(AbstractDungeon.player!=null) {
+        if (AbstractDungeon.player != null) {
             AbstractRelic shivs = AbstractDungeon.player.getRelic("BoardGame:BGShivs");
             if (shivs != null) {
-                ((BGShivs)shivs).updateDescription(0);
+                ((BGShivs) shivs).updateDescription(0);
             }
         }
     }
-
 }

@@ -11,24 +11,27 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
-
 import java.util.ArrayList;
 
-public class BGEnchiridion extends AbstractBGRelic  {
+public class BGEnchiridion extends AbstractBGRelic {
+
     public static final String ID = "BGEnchiridion";
 
     private boolean cardsSelected = true;
-    private boolean gaveCard=false;
+    private boolean gaveCard = false;
 
     public BGEnchiridion() {
-        super("BGEnchiridion", "enchiridion.png", AbstractRelic.RelicTier.BOSS, AbstractRelic.LandingSound.FLAT);
+        super(
+            "BGEnchiridion",
+            "enchiridion.png",
+            AbstractRelic.RelicTier.BOSS,
+            AbstractRelic.LandingSound.FLAT
+        );
     }
-
 
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0];
     }
-
 
     public void onEquip() {
         this.cardsSelected = false;
@@ -36,7 +39,6 @@ public class BGEnchiridion extends AbstractBGRelic  {
         CardGroup group;
 
         group = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-
 
         for (int i = 0; i < 5; i++) {
             //AbstractCard card = AbstractDungeon.getCard(AbstractCard.CardRarity.RARE).makeCopy();
@@ -55,8 +57,7 @@ public class BGEnchiridion extends AbstractBGRelic  {
 
         if (!AbstractDungeon.isScreenUp) {
             AbstractDungeon.gridSelectScreen.open(group, 1, this.DESCRIPTIONS[1], false);
-        }
-        else {
+        } else {
             AbstractDungeon.dynamicBanner.hide();
             AbstractDungeon.previousScreen = AbstractDungeon.screen;
             AbstractDungeon.gridSelectScreen.open(group, 1, this.DESCRIPTIONS[1], false);
@@ -66,7 +67,7 @@ public class BGEnchiridion extends AbstractBGRelic  {
     public void update() {
         super.update();
         if (!this.cardsSelected && AbstractDungeon.gridSelectScreen.selectedCards.size() == 1) {
-            if(!this.gaveCard) {
+            if (!this.gaveCard) {
                 giveCards(AbstractDungeon.gridSelectScreen.selectedCards);
             }
         }
@@ -81,23 +82,23 @@ public class BGEnchiridion extends AbstractBGRelic  {
             //AbstractCard c = ((AbstractCard) AbstractDungeon.gridSelectScreen.selectedCards.get(0)).makeCopy();
             AbstractCard c = ((AbstractCard) AbstractDungeon.gridSelectScreen.selectedCards.get(0));
             //logMetricObtainCard("The Library", "Read", c);
-            AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(c, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+            AbstractDungeon.effectList.add(
+                new ShowCardAndObtainEffect(c, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F)
+            );
 
-            AbstractBGDungeon.removeCardFromRewardDeck(AbstractDungeon.gridSelectScreen.selectedCards.get(0));
+            AbstractBGDungeon.removeCardFromRewardDeck(
+                AbstractDungeon.gridSelectScreen.selectedCards.get(0)
+            );
 
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
 
-            gaveCard=true;
+            gaveCard = true;
         }
         AbstractDungeon.gridSelectScreen.selectedCards.clear();
         (AbstractDungeon.getCurrRoom()).rewardPopOutTimer = 0.25F;
     }
 
-
-
     public AbstractRelic makeCopy() {
         return new BGEnchiridion();
     }
 }
-
-

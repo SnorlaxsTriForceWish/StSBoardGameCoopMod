@@ -14,20 +14,44 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGDeadlyPoison extends AbstractBGCard {
+
     public static final String ID = "BGDeadlyPoison";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGDeadlyPoison");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGDeadlyPoison"
+    );
 
     public BGDeadlyPoison() {
-        super("BGDeadlyPoison", cardStrings.NAME, "green/skill/deadly_poison", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.COMMON, CardTarget.ENEMY);
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGDeadlyPoison",
+            cardStrings.NAME,
+            "green/skill/deadly_poison",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.COMMON,
+            CardTarget.ENEMY
+        );
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)p, (AbstractPower)new BGPoisonPower((AbstractCreature)m, (AbstractCreature)p, this.magicNumber), this.magicNumber, AbstractGameAction.AttackEffect.POISON));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) m,
+                (AbstractCreature) p,
+                (AbstractPower) new BGPoisonPower(
+                    (AbstractCreature) m,
+                    (AbstractCreature) p,
+                    this.magicNumber
+                ),
+                this.magicNumber,
+                AbstractGameAction.AttackEffect.POISON
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -40,6 +64,3 @@ public class BGDeadlyPoison extends AbstractBGCard {
         return new BGDeadlyPoison();
     }
 }
-
-
-

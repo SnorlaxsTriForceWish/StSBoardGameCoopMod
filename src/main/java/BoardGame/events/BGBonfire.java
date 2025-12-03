@@ -1,5 +1,7 @@
 package BoardGame.events;
 
+import static com.megacrit.cardcrawl.cards.AbstractCard.CardRarity.CURSE;
+
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -11,12 +13,12 @@ import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
 
-import static com.megacrit.cardcrawl.cards.AbstractCard.CardRarity.CURSE;
+public class BGBonfire extends AbstractImageEvent {
 
-public class BGBonfire
-        extends AbstractImageEvent {
     public static final String ID = "BGBonfire Elementals";
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGBonfire Elementals");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGBonfire Elementals"
+    );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
@@ -30,7 +32,10 @@ public class BGBonfire
     private boolean cardSelect = false;
 
     private enum CUR_SCREEN {
-        INTRO, CHOOSE, BOOM, COMPLETE;
+        INTRO,
+        CHOOSE,
+        BOOM,
+        COMPLETE,
     }
 
     public BGBonfire() {
@@ -38,25 +43,27 @@ public class BGBonfire
         this.imageEventText.setDialogOption(OPTIONS[0]);
     }
 
-
-
     public void onEnterRoom() {
         if (Settings.AMBIANCE_ON) {
             CardCrawlGame.sound.play("EVENT_GOOP");
         }
     }
 
-
     public void update() {
         super.update();
 
-        if (this.cardSelect &&
-                !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
-            int heal, heal2; this.offeredCard = AbstractDungeon.gridSelectScreen.selectedCards.remove(0);
+        if (this.cardSelect && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
+            int heal, heal2;
+            this.offeredCard = AbstractDungeon.gridSelectScreen.selectedCards.remove(0);
 
             switch (this.offeredCard.rarity) {
                 case CURSE:
-                    logMetricCardRemovalAndDamage("Bonfire Elementals", "Offered Curse", this.offeredCard, 2);
+                    logMetricCardRemovalAndDamage(
+                        "Bonfire Elementals",
+                        "Offered Curse",
+                        this.offeredCard,
+                        2
+                    );
                     break;
                 case BASIC:
                     logMetricCardRemoval("Bonfire Elementals", "Offered Basic", this.offeredCard);
@@ -68,47 +75,66 @@ public class BGBonfire
                     break;
                 case UNCOMMON:
                     heal = AbstractDungeon.player.maxHealth - AbstractDungeon.player.currentHealth;
-                    logMetricCardRemovalAndHeal("Bonfire Elementals", "Offered Uncommon", this.offeredCard, 3);
+                    logMetricCardRemovalAndHeal(
+                        "Bonfire Elementals",
+                        "Offered Uncommon",
+                        this.offeredCard,
+                        3
+                    );
                     break;
                 case RARE:
                     heal2 = AbstractDungeon.player.maxHealth - AbstractDungeon.player.currentHealth;
-                    logMetricCardRemovalAndHeal("Bonfire Elementals", "Offered Rare", this.offeredCard, heal2);
+                    logMetricCardRemovalAndHeal(
+                        "Bonfire Elementals",
+                        "Offered Rare",
+                        this.offeredCard,
+                        heal2
+                    );
                     break;
             }
 
-
-
             setReward(this.offeredCard.rarity);
-            AbstractDungeon.topLevelEffects.add(new PurgeCardEffect(this.offeredCard, (Settings.WIDTH / 2), (Settings.HEIGHT / 2)));
+            AbstractDungeon.topLevelEffects.add(
+                new PurgeCardEffect(this.offeredCard, (Settings.WIDTH / 2), (Settings.HEIGHT / 2))
+            );
 
             AbstractDungeon.player.masterDeck.removeCard(this.offeredCard);
             this.imageEventText.updateDialogOption(0, OPTIONS[1]);
-            if(this.offeredCard.rarity!=CURSE) {
+            if (this.offeredCard.rarity != CURSE) {
                 this.screen = CUR_SCREEN.COMPLETE;
                 this.cardSelect = false;
-            }else{
+            } else {
                 this.screen = CUR_SCREEN.BOOM;
                 this.imageEventText.updateDialogOption(0, OPTIONS[4]);
             }
         }
     }
 
-
-
     protected void buttonEffect(int buttonPressed) {
         switch (this.screen) {
-
             case INTRO:
                 this.imageEventText.updateBodyText(DIALOG_2);
                 this.imageEventText.updateDialogOption(0, OPTIONS[2]);
                 this.screen = CUR_SCREEN.CHOOSE;
                 break;
-
             case CHOOSE:
-                if (CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck.getPurgeableCards())
-                        .size() > 0) {
+                if (
+                    CardGroup.getGroupWithoutBottledCards(
+                        AbstractDungeon.player.masterDeck.getPurgeableCards()
+                    ).size() >
+                    0
+                ) {
                     AbstractDungeon.gridSelectScreen.open(
-                            CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck.getPurgeableCards()), 1, OPTIONS[3], false, false, false, true);
+                        CardGroup.getGroupWithoutBottledCards(
+                            AbstractDungeon.player.masterDeck.getPurgeableCards()
+                        ),
+                        1,
+                        OPTIONS[3],
+                        false,
+                        false,
+                        false,
+                        true
+                    );
                     this.cardSelect = true;
                     break;
                 }
@@ -116,21 +142,24 @@ public class BGBonfire
                 this.imageEventText.updateDialogOption(0, OPTIONS[1]);
                 this.screen = CUR_SCREEN.COMPLETE;
                 break;
-
             case BOOM:
-                if(this.offeredCard!=null && this.offeredCard.rarity==CURSE){
+                if (this.offeredCard != null && this.offeredCard.rarity == CURSE) {
                     //CardCrawlGame.sound.play("ATTACK_POISON");
                     CardCrawlGame.sound.play("BLUNT_FAST");
-                    CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.MED, ScreenShake.ShakeDur.MED, false);
-                    AbstractDungeon.player.damage(new DamageInfo(null,1, DamageInfo.DamageType.HP_LOSS));
+                    CardCrawlGame.screenShake.shake(
+                        ScreenShake.ShakeIntensity.MED,
+                        ScreenShake.ShakeDur.MED,
+                        false
+                    );
+                    AbstractDungeon.player.damage(
+                        new DamageInfo(null, 1, DamageInfo.DamageType.HP_LOSS)
+                    );
                 }
                 this.imageEventText.updateBodyText(DESCRIPTIONS[8]);
                 this.imageEventText.updateDialogOption(0, OPTIONS[1]);
                 this.screen = CUR_SCREEN.COMPLETE;
                 break;
-
             case COMPLETE:
-
                 openMap();
                 break;
         }
@@ -162,10 +191,6 @@ public class BGBonfire
                 break;
         }
 
-
-
         this.imageEventText.updateBodyText(dialog);
     }
 }
-
-

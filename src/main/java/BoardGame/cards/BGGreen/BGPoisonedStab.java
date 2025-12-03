@@ -16,24 +16,52 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGPoisonedStab extends AbstractBGCard {
+
     public static final String ID = "BGPoisonedStab";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGPoisonedStab");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGPoisonedStab"
+    );
 
     public BGPoisonedStab() {
-        super("BGPoisonedStab", cardStrings.NAME, "green/attack/poisoned_stab", 1, cardStrings.DESCRIPTION, CardType.ATTACK, BGSilent.Enums.BG_GREEN, CardRarity.COMMON, CardTarget.ENEMY);
-        this.baseDamage=1;
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
-        this.exhaust=true;
+        super(
+            "BGPoisonedStab",
+            cardStrings.NAME,
+            "green/attack/poisoned_stab",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.COMMON,
+            CardTarget.ENEMY
+        );
+        this.baseDamage = 1;
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
+        this.exhaust = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_VERTICAL));
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)p, (AbstractPower)new BGPoisonPower((AbstractCreature)m, (AbstractCreature)p, this.magicNumber), this.magicNumber));
-
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.SLASH_VERTICAL
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) m,
+                (AbstractCreature) p,
+                (AbstractPower) new BGPoisonPower(
+                    (AbstractCreature) m,
+                    (AbstractCreature) p,
+                    this.magicNumber
+                ),
+                this.magicNumber
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -48,6 +76,3 @@ public class BGPoisonedStab extends AbstractBGCard {
         return new BGPoisonedStab();
     }
 }
-
-
-

@@ -11,16 +11,29 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGDoubleEnergy extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGDoubleEnergy");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGDoubleEnergy"
+    );
     public static final String ID = "BGDoubleEnergy";
 
     public BGDoubleEnergy() {
-        super("BGDoubleEnergy", cardStrings.NAME, "blue/skill/double_energy", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGDefect.Enums.BG_BLUE, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(
+            "BGDoubleEnergy",
+            cardStrings.NAME,
+            "blue/skill/double_energy",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
         this.exhaust = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DoubleEnergyAction());
+        addToBot((AbstractGameAction) new DoubleEnergyAction());
     }
 
     public void upgrade() {

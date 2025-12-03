@@ -32,17 +32,18 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
 import com.megacrit.cardcrawl.vfx.GlowyFireEyesEffect;
 import com.megacrit.cardcrawl.vfx.StaffFireEffect;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class BGTheCollector extends AbstractBGMonster implements BGDamageIcons {
+
     private static final Logger logger = LogManager.getLogger(BGTheCollector.class.getName());
     public static final String ID = "TheCollector";
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("TheCollector");
+    private static final MonsterStrings monsterStrings =
+        CardCrawlGame.languagePack.getMonsterStrings("TheCollector");
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
@@ -55,45 +56,53 @@ public class BGTheCollector extends AbstractBGMonster implements BGDamageIcons {
     private static final int STR_AMT = 3;
     private static final int BLOCK_AMT = 15;
     private static final int A_2_FIREBALL_DMG = 21;
-    private int turnsTaken = 0; private static final int A_2_STR_AMT = 4; private static final int A_2_BLOCK_AMT = 18; private int rakeDmg; private int strAmt; private int blockAmt;
-    private int megaDebuffAmt; private int megaDebuffBurns;
+    private int turnsTaken = 0;
+    private static final int A_2_STR_AMT = 4;
+    private static final int A_2_BLOCK_AMT = 18;
+    private int rakeDmg;
+    private int strAmt;
+    private int blockAmt;
+    private int megaDebuffAmt;
+    private int megaDebuffBurns;
     private float spawnX = -100.0F;
     private float fireTimer = 0.0F;
 
     private static final float FIRE_TIME = 0.07F;
     private boolean ultUsed = false;
     private boolean initialSpawn = true;
-    private HashMap<Integer, AbstractMonster> enemySlots = new HashMap<>(); private static final byte SPAWN = 1; private static final byte FIREBALL = 2; private static final byte BUFF = 3;
+    private HashMap<Integer, AbstractMonster> enemySlots = new HashMap<>();
+    private static final byte SPAWN = 1;
+    private static final byte FIREBALL = 2;
+    private static final byte BUFF = 3;
     private static final byte MEGA_DEBUFF = 4;
     private static final byte REVIVE = 5;
 
     public BGTheCollector() {
         super(NAME, "BGTheCollector", 282, 15.0F, -40.0F, 300.0F, 390.0F, null, 60.0F, 135.0F);
-
         this.dialogX = -90.0F * Settings.scale;
         this.dialogY = 10.0F * Settings.scale;
         this.type = AbstractMonster.EnemyType.BOSS;
 
-
-        setHp((AbstractDungeon.ascensionLevel<10) ? 57 : 60);
+        setHp((AbstractDungeon.ascensionLevel < 10) ? 57 : 60);
 
         this.strAmt = 1;
         this.megaDebuffAmt = 2;
-        this.megaDebuffBurns = (AbstractDungeon.ascensionLevel<10) ? 2 : 3;
+        this.megaDebuffBurns = (AbstractDungeon.ascensionLevel < 10) ? 2 : 3;
 
+        this.damage.add(new DamageInfo((AbstractCreature) this, 3));
+        this.damage.add(
+            new DamageInfo((AbstractCreature) this, (AbstractDungeon.ascensionLevel < 10) ? 5 : 6)
+        );
 
-        this.damage.add(new DamageInfo((AbstractCreature)this, 3));
-        this.damage.add(new DamageInfo((AbstractCreature)this, (AbstractDungeon.ascensionLevel<10) ? 5 : 6));
-
-
-        loadAnimation("images/monsters/theCity/collector/skeleton.atlas", "images/monsters/theCity/collector/skeleton.json", 1.0F);
-
-
+        loadAnimation(
+            "images/monsters/theCity/collector/skeleton.atlas",
+            "images/monsters/theCity/collector/skeleton.json",
+            1.0F
+        );
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
     }
-
 
     public void usePreBattleAction() {
         CardCrawlGame.music.unsilenceBGM();
@@ -103,85 +112,143 @@ public class BGTheCollector extends AbstractBGMonster implements BGDamageIcons {
 
         ArrayList<AbstractMonster> monsters = AbstractDungeon.getMonsters().monsters;
         //logger.info("checking gremlin slot "+slot);
-
-
     }
 
     public void takeTurn() {
         int i;
         switch (this.nextMove) {
             case 1:
-                if(this.initialSpawn) {
+                if (this.initialSpawn) {
                     for (i = 1; i < 3; i++) {
-                        AbstractMonster m = new BGTorchHead(this.spawnX + -185.0F * i, MathUtils.random(-5.0F, 25.0F));
-                        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("MONSTER_COLLECTOR_SUMMON"));
-                        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SpawnMonsterAction(m, false));
+                        AbstractMonster m = new BGTorchHead(
+                            this.spawnX + -185.0F * i,
+                            MathUtils.random(-5.0F, 25.0F)
+                        );
+                        AbstractDungeon.actionManager.addToBottom(
+                            (AbstractGameAction) new SFXAction("MONSTER_COLLECTOR_SUMMON")
+                        );
+                        AbstractDungeon.actionManager.addToBottom(
+                            (AbstractGameAction) new SpawnMonsterAction(m, false)
+                        );
                         this.enemySlots.put(Integer.valueOf(i), m);
                     }
                     this.initialSpawn = false;
-                }else{
+                } else {
                     for (Map.Entry<Integer, AbstractMonster> m : this.enemySlots.entrySet()) {
                         if (((AbstractMonster) m.getValue()).isDying) {
-                            AbstractMonster newMonster = new BGTorchHead(this.spawnX + -185.0F * ((Integer) m.getKey()).intValue(), MathUtils.random(-5.0F, 25.0F));
+                            AbstractMonster newMonster = new BGTorchHead(
+                                this.spawnX + -185.0F * ((Integer) m.getKey()).intValue(),
+                                MathUtils.random(-5.0F, 25.0F)
+                            );
                             int key = ((Integer) m.getKey()).intValue();
                             this.enemySlots.put(Integer.valueOf(key), newMonster);
-                            AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new SpawnMonsterAction(newMonster, false));
+                            AbstractDungeon.actionManager.addToBottom(
+                                (AbstractGameAction) new SpawnMonsterAction(newMonster, false)
+                            );
                         }
                     }
                 }
                 setMove((byte) 2, AbstractMonster.Intent.ATTACK_BUFF, damage.get(0).base);
                 break;
-
-
             case 2:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new DamageAction((AbstractCreature) AbstractDungeon.player, this.damage
-                        .get(0), AbstractGameAction.AttackEffect.FIRE));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(0),
+                        AbstractGameAction.AttackEffect.FIRE
+                    )
+                );
                 for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
                     if (!m.isDying) {
-                        AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new ApplyPowerAction((AbstractCreature) m, (AbstractCreature) this, (AbstractPower) new StrengthPower((AbstractCreature) m, this.strAmt), this.strAmt));
+                        AbstractDungeon.actionManager.addToBottom(
+                            (AbstractGameAction) new ApplyPowerAction(
+                                (AbstractCreature) m,
+                                (AbstractCreature) this,
+                                (AbstractPower) new StrengthPower(
+                                    (AbstractCreature) m,
+                                    this.strAmt
+                                ),
+                                this.strAmt
+                            )
+                        );
                     }
                 }
                 setMove((byte) 3, AbstractMonster.Intent.ATTACK, damage.get(1).base);
                 break;
             case 3:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new DamageAction((AbstractCreature) AbstractDungeon.player, this.damage
-                        .get(1), AbstractGameAction.AttackEffect.FIRE));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(1),
+                        AbstractGameAction.AttackEffect.FIRE
+                    )
+                );
                 if (!ultUsed) {
                     setMove((byte) 4, AbstractMonster.Intent.STRONG_DEBUFF);
                 } else {
                     setMove((byte) 1, AbstractMonster.Intent.UNKNOWN);
                 }
                 break;
-
             case 4:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new TalkAction((AbstractCreature)this, DIALOG[0]));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("MONSTER_COLLECTOR_DEBUFF"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new VFXAction((AbstractGameEffect)new CollectorCurseEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY), 2.0F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)this, (AbstractPower)new BGWeakPower((AbstractCreature)AbstractDungeon.player, this.megaDebuffAmt, true), this.megaDebuffAmt));
-                addToBot((AbstractGameAction)new MakeTempCardInDrawPileAction((AbstractCard)new BGDazed(), this.megaDebuffAmt, false, true));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new MakeTempCardInDiscardAction((AbstractCard)new BGBurn(), this.megaDebuffBurns));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new TalkAction((AbstractCreature) this, DIALOG[0])
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new SFXAction("MONSTER_COLLECTOR_DEBUFF")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new VFXAction(
+                        (AbstractGameEffect) new CollectorCurseEffect(
+                            AbstractDungeon.player.hb.cX,
+                            AbstractDungeon.player.hb.cY
+                        ),
+                        2.0F
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ApplyPowerAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        (AbstractCreature) this,
+                        (AbstractPower) new BGWeakPower(
+                            (AbstractCreature) AbstractDungeon.player,
+                            this.megaDebuffAmt,
+                            true
+                        ),
+                        this.megaDebuffAmt
+                    )
+                );
+                addToBot(
+                    (AbstractGameAction) new MakeTempCardInDrawPileAction(
+                        (AbstractCard) new BGDazed(),
+                        this.megaDebuffAmt,
+                        false,
+                        true
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new MakeTempCardInDiscardAction(
+                        (AbstractCard) new BGBurn(),
+                        this.megaDebuffBurns
+                    )
+                );
                 this.ultUsed = true;
                 setMove((byte) 1, AbstractMonster.Intent.UNKNOWN);
 
                 break;
-
-
             default:
                 logger.info("ERROR: Default Take Turn was called on " + this.name);
                 break;
         }
         this.turnsTaken++;
-
     }
 
-
     protected void getMove(int num) {
-            setMove((byte)1, AbstractMonster.Intent.UNKNOWN);
+        setMove((byte) 1, AbstractMonster.Intent.UNKNOWN);
     }
 
     private boolean isMinionDead() {
         for (Map.Entry<Integer, AbstractMonster> m : this.enemySlots.entrySet()) {
-            if (((AbstractMonster)m.getValue()).isDying) {
+            if (((AbstractMonster) m.getValue()).isDying) {
                 return true;
             }
         }
@@ -189,42 +256,54 @@ public class BGTheCollector extends AbstractBGMonster implements BGDamageIcons {
         return false;
     }
 
-
     public void update() {
         super.update();
         if (!this.isDying) {
             this.fireTimer -= Gdx.graphics.getDeltaTime();
             if (this.fireTimer < 0.0F) {
                 this.fireTimer = 0.07F;
-                AbstractDungeon.effectList.add(new GlowyFireEyesEffect(this.skeleton
+                AbstractDungeon.effectList.add(
+                    new GlowyFireEyesEffect(
+                        this.skeleton.getX() + this.skeleton.findBone("lefteyefireslot").getX(),
+                        this.skeleton.getY() +
+                            this.skeleton.findBone("lefteyefireslot").getY() +
+                            140.0F * Settings.scale
+                    )
+                );
 
-                        .getX() + this.skeleton.findBone("lefteyefireslot").getX(), this.skeleton
-                        .getY() + this.skeleton.findBone("lefteyefireslot").getY() + 140.0F * Settings.scale));
+                AbstractDungeon.effectList.add(
+                    new GlowyFireEyesEffect(
+                        this.skeleton.getX() + this.skeleton.findBone("righteyefireslot").getX(),
+                        this.skeleton.getY() +
+                            this.skeleton.findBone("righteyefireslot").getY() +
+                            140.0F * Settings.scale
+                    )
+                );
 
-                AbstractDungeon.effectList.add(new GlowyFireEyesEffect(this.skeleton
-
-                        .getX() + this.skeleton.findBone("righteyefireslot").getX(), this.skeleton
-                        .getY() + this.skeleton.findBone("righteyefireslot").getY() + 140.0F * Settings.scale));
-
-                AbstractDungeon.effectList.add(new StaffFireEffect(this.skeleton
-
-                        .getX() + this.skeleton.findBone("fireslot").getX() - 120.0F * Settings.scale, this.skeleton
-                        .getY() + this.skeleton.findBone("fireslot").getY() + 390.0F * Settings.scale));
+                AbstractDungeon.effectList.add(
+                    new StaffFireEffect(
+                        this.skeleton.getX() +
+                            this.skeleton.findBone("fireslot").getX() -
+                            120.0F * Settings.scale,
+                        this.skeleton.getY() +
+                            this.skeleton.findBone("fireslot").getY() +
+                            390.0F * Settings.scale
+                    )
+                );
             }
         }
     }
 
-
     public void die() {
         super.die();
 
-        boolean done=true;
+        boolean done = true;
         for (AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
             if (!m.isDead && !m.isDying) {
-                done=false;
+                done = false;
             }
         }
-        if(done) {
+        if (done) {
             useFastShakeAnimation(5.0F);
             CardCrawlGame.screenShake.rumble(4.0F);
             onBossVictoryLogic();
@@ -233,20 +312,18 @@ public class BGTheCollector extends AbstractBGMonster implements BGDamageIcons {
         UnlockTracker.unlockAchievement("COLLECTOR");
     }
 
+    @SpirePatch2(clz = TheCityScene.class, method = "randomizeScene", paramtypez = {})
+    public static class CityScenePatch {
 
-
-    @SpirePatch2(clz= TheCityScene.class, method="randomizeScene",
-        paramtypez={})
-    public static class CityScenePatch{
         @SpirePostfixPatch
-        public static void randomizeScene(@ByRef boolean[] ___renderThrone){
-            if (AbstractDungeon.getCurrRoom() instanceof com.megacrit.cardcrawl.rooms.MonsterRoomBoss && (AbstractDungeon.getCurrRoom()).monsters
-                    .getMonster("BGTheCollector") != null) {
-                ___renderThrone[0]=true;
+        public static void randomizeScene(@ByRef boolean[] ___renderThrone) {
+            if (
+                AbstractDungeon.getCurrRoom() instanceof
+                    com.megacrit.cardcrawl.rooms.MonsterRoomBoss &&
+                (AbstractDungeon.getCurrRoom()).monsters.getMonster("BGTheCollector") != null
+            ) {
+                ___renderThrone[0] = true;
             }
         }
     }
-
 }
-
-

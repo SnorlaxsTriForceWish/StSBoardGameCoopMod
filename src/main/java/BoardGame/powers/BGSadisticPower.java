@@ -8,10 +8,12 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class BGSadisticPower
-        extends AbstractBGPower {
+public class BGSadisticPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGSadisticPower";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("Sadistic");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "Sadistic"
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
@@ -24,18 +26,23 @@ public class BGSadisticPower
         loadRegion("sadistic");
     }
 
-
     public void updateDescription() {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
-
-    public void onApplyPower(AbstractPower power, AbstractCreature target, AbstractCreature source) {
+    public void onApplyPower(
+        AbstractPower power,
+        AbstractCreature target,
+        AbstractCreature source
+    ) {
         //TODO: make sure all debuffs are correctly labeled as source==player
-        if (source == this.owner && target != this.owner &&
-                !target.hasPower("Artifact")) {
+        if (source == this.owner && target != this.owner && !target.hasPower("Artifact")) {
             //TODO: Corrupted Heart needs to check for Invincible buff too
-            if(power.ID.equals("BGWeakened") || power.ID.equals("BGVulnerable") || power.ID.equals("BGPoison")) {
+            if (
+                power.ID.equals("BGWeakened") ||
+                power.ID.equals("BGVulnerable") ||
+                power.ID.equals("BGPoison")
+            ) {
                 flash();
                 //Logger logger = LogManager.getLogger(BoardGame.class.getName());
                 //logger.info("power.amount: "+power.amount);
@@ -43,10 +50,18 @@ public class BGSadisticPower
                 //TODO: if it's ruled that this doesn't count if we're at the stack limit, must check weak/vuln <= 3, poison <= 30
                 //TODO: weak cap appears to be ignored, but capped poison will deal 0 damage despite not checking for it.  why?
                 //TODO: does Corpse Explosion count?
-                addToBot((AbstractGameAction) new DamageAction(target, new DamageInfo(this.owner, this.amount*power.amount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.FIRE));
+                addToBot(
+                    (AbstractGameAction) new DamageAction(
+                        target,
+                        new DamageInfo(
+                            this.owner,
+                            this.amount * power.amount,
+                            DamageInfo.DamageType.THORNS
+                        ),
+                        AbstractGameAction.AttackEffect.FIRE
+                    )
+                );
             }
         }
     }
 }
-
-

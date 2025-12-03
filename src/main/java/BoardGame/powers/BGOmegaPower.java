@@ -14,8 +14,11 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.OmegaFlashEffect;
 
 public class BGOmegaPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BoardGame:BGOmegaPower";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGOmegaPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGOmegaPower"
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
@@ -29,7 +32,8 @@ public class BGOmegaPower extends AbstractBGPower {
     }
 
     public void updateDescription() {
-        this.description = powerStrings.DESCRIPTIONS[0] + this.amount + powerStrings.DESCRIPTIONS[1];
+        this.description =
+            powerStrings.DESCRIPTIONS[0] + this.amount + powerStrings.DESCRIPTIONS[1];
     }
 
     public void atEndOfTurnPreEndTurnCards(boolean isPlayer) {
@@ -38,15 +42,30 @@ public class BGOmegaPower extends AbstractBGPower {
             for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
                 if (m != null && !m.isDeadOrEscaped()) {
                     if (Settings.FAST_MODE) {
-                        addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new OmegaFlashEffect(m.hb.cX, m.hb.cY)));
+                        addToBot(
+                            (AbstractGameAction) new VFXAction(
+                                (AbstractGameEffect) new OmegaFlashEffect(m.hb.cX, m.hb.cY)
+                            )
+                        );
                         continue;
                     }
-                    addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new OmegaFlashEffect(m.hb.cX, m.hb.cY), 0.2F));
+                    addToBot(
+                        (AbstractGameAction) new VFXAction(
+                            (AbstractGameEffect) new OmegaFlashEffect(m.hb.cX, m.hb.cY),
+                            0.2F
+                        )
+                    );
                 }
             }
-            addToBot((AbstractGameAction)new DamageAllEnemiesAction(AbstractDungeon.player,
-
-                    DamageInfo.createDamageMatrix(this.amount, true), DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.FIRE, true));
+            addToBot(
+                (AbstractGameAction) new DamageAllEnemiesAction(
+                    AbstractDungeon.player,
+                    DamageInfo.createDamageMatrix(this.amount, true),
+                    DamageInfo.DamageType.THORNS,
+                    AbstractGameAction.AttackEffect.FIRE,
+                    true
+                )
+            );
         }
     }
 }

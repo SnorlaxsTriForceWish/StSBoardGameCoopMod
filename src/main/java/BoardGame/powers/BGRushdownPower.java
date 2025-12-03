@@ -8,25 +8,28 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.stances.AbstractStance;
 
 public class BGRushdownPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGRushdownPower";
 
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGRushdownPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGRushdownPower"
+    );
 
-    int baseAmount=0;
+    int baseAmount = 0;
 
     public BGRushdownPower(AbstractCreature owner, int amount) {
         this.name = powerStrings.NAME;
         this.ID = "BGRushdownPower";
         this.owner = owner;
         this.baseAmount = amount;
-        this.amount=this.baseAmount;
+        this.amount = this.baseAmount;
         updateDescription();
         loadRegion("rushdown");
     }
 
     public void stackPower(int stackAmount) {
-        this.baseAmount+=stackAmount;
-        if(this.amount>0) {
+        this.baseAmount += stackAmount;
+        if (this.amount > 0) {
             this.fontScale = 8.0F;
             this.amount += stackAmount;
         }
@@ -34,14 +37,16 @@ public class BGRushdownPower extends AbstractBGPower {
 
     public void updateDescription() {
         if (this.amount == 1) {
-            this.description = powerStrings.DESCRIPTIONS[0] + this.baseAmount + powerStrings.DESCRIPTIONS[1];
+            this.description =
+                powerStrings.DESCRIPTIONS[0] + this.baseAmount + powerStrings.DESCRIPTIONS[1];
         } else {
-            this.description = powerStrings.DESCRIPTIONS[0] + this.baseAmount + powerStrings.DESCRIPTIONS[2];
+            this.description =
+                powerStrings.DESCRIPTIONS[0] + this.baseAmount + powerStrings.DESCRIPTIONS[2];
         }
     }
 
     public void atStartOfTurn() {
-        if(this.amount==0) {
+        if (this.amount == 0) {
             this.fontScale = 8.0F;
             this.amount = this.baseAmount;
         }
@@ -49,10 +54,10 @@ public class BGRushdownPower extends AbstractBGPower {
 
     public void onChangeStance(AbstractStance oldStance, AbstractStance newStance) {
         if (!oldStance.ID.equals(newStance.ID) && newStance.ID.equals("BGWrath")) {
-            if(this.amount>0) {
+            if (this.amount > 0) {
                 flash();
                 addToTop((AbstractGameAction) new DrawCardAction(this.owner, this.amount));
-                this.amount=0;
+                this.amount = 0;
             }
         }
     }

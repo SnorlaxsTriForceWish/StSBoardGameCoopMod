@@ -14,17 +14,36 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGMelter extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGMelter");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGMelter"
+    );
     public static final String ID = "BGMelter";
 
     public BGMelter() {
-        super("BGMelter", cardStrings.NAME, "blue/attack/melter", 1, cardStrings.DESCRIPTION, CardType.ATTACK, BGDefect.Enums.BG_BLUE, CardRarity.UNCOMMON, CardTarget.ENEMY);
+        super(
+            "BGMelter",
+            cardStrings.NAME,
+            "blue/attack/melter",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.UNCOMMON,
+            CardTarget.ENEMY
+        );
         this.baseDamage = 2;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new BGMelterAction(m,p));
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.FIRE));
+        addToBot(new BGMelterAction(m, p));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.FIRE
+            )
+        );
     }
 
     public void upgrade() {

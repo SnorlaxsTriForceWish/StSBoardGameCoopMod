@@ -1,5 +1,7 @@
 package BoardGame.powers;
 
+import static BoardGame.powers.WeakVulnCancel.WEAKVULN_ZEROHITS;
+
 import BoardGame.BoardGame;
 import BoardGame.actions.SpikerReflectAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -12,11 +14,12 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static BoardGame.powers.WeakVulnCancel.WEAKVULN_ZEROHITS;
-
 public class BGSpikerPower extends AbstractBGPower {
+
     public static final String POWER_ID = BoardGame.makeID("BGSpiker");
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        POWER_ID
+    );
 
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
@@ -37,7 +40,6 @@ public class BGSpikerPower extends AbstractBGPower {
         this.isTurnBased = false;
     }
 
-
     public void updateDescription() {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
@@ -49,24 +51,25 @@ public class BGSpikerPower extends AbstractBGPower {
         }
         this.fontScale = 8.0F;
         this.amount += stackAmount;
-        if(this.amount>5)this.amount=5;
+        if (this.amount > 5) this.amount = 5;
     }
-
 
     public int onAttacked(DamageInfo info, int damageAmount) {
         final Logger logger = LogManager.getLogger(BoardGame.class.getName());
-        logger.info("BGSpikerPower: onAttacked "+info.type+" "+this.owner);
-        if(info.type == DamageInfo.DamageType.NORMAL || info.type == WEAKVULN_ZEROHITS) {
+        logger.info("BGSpikerPower: onAttacked " + info.type + " " + this.owner);
+        if (info.type == DamageInfo.DamageType.NORMAL || info.type == WEAKVULN_ZEROHITS) {
             if (this.owner != AbstractDungeon.player) {
                 //monster was attacked
                 //this must be addToTop.  addToBot doesn't work -- the proc remains on the monster until next card
                 //addToTop((AbstractGameAction) new ApplyPowerAction((AbstractCreature) this.owner, (AbstractCreature) this.owner, (AbstractPower) new BGSpikerProccedPower((AbstractCreature) this.owner, this.amount, false), this.amount));
-                addToTop((AbstractGameAction) new SpikerReflectAction((AbstractCreature) this.owner, this.amount));
+                addToTop(
+                    (AbstractGameAction) new SpikerReflectAction(
+                        (AbstractCreature) this.owner,
+                        this.amount
+                    )
+                );
             }
         }
         return damageAmount;
     }
-
 }
-
-

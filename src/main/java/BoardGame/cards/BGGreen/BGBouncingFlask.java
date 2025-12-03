@@ -17,27 +17,59 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.PotionBounceEffect;
 
 public class BGBouncingFlask extends AbstractBGCard {
+
     public static final String ID = "BGBouncingFlask";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBouncingFlask");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBouncingFlask"
+    );
 
     public BGBouncingFlask() {
-        super("BGBouncingFlask", cardStrings.NAME, "green/skill/bouncing_flask", 2, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.UNCOMMON, CardTarget.NONE);
+        super(
+            "BGBouncingFlask",
+            cardStrings.NAME,
+            "green/skill/bouncing_flask",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.UNCOMMON,
+            CardTarget.NONE
+        );
         this.baseMagicNumber = 2;
         this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        TargetSelectScreen.TargetSelectAction tssAction = (target) -> {
-            if(target!=null) {
-                addToBot((AbstractGameAction) new VFXAction((AbstractGameEffect) new PotionBounceEffect(p.hb.cX, p.hb.cY, target.hb.cX, this.hb.cY), 0.4F));
-                addToBot((AbstractGameAction) new BGBouncingFlaskAction((AbstractCreature) target, 1, this.magicNumber));
+        TargetSelectScreen.TargetSelectAction tssAction = target -> {
+            if (target != null) {
+                addToBot(
+                    (AbstractGameAction) new VFXAction(
+                        (AbstractGameEffect) new PotionBounceEffect(
+                            p.hb.cX,
+                            p.hb.cY,
+                            target.hb.cX,
+                            this.hb.cY
+                        ),
+                        0.4F
+                    )
+                );
+                addToBot(
+                    (AbstractGameAction) new BGBouncingFlaskAction(
+                        (AbstractCreature) target,
+                        1,
+                        this.magicNumber
+                    )
+                );
             }
         };
-        addToTop((AbstractGameAction) new TargetSelectScreenAction(tssAction, cardStrings.EXTENDED_DESCRIPTION[0]));
-
+        addToTop(
+            (AbstractGameAction) new TargetSelectScreenAction(
+                tssAction,
+                cardStrings.EXTENDED_DESCRIPTION[0]
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -45,7 +77,6 @@ public class BGBouncingFlask extends AbstractBGCard {
             upgradeMagicNumber(1);
             this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
-
         }
     }
 
@@ -53,7 +84,3 @@ public class BGBouncingFlask extends AbstractBGCard {
         return new BGBouncingFlask();
     }
 }
-
-
-
-

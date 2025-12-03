@@ -14,16 +14,35 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.ToolsOfTheTradePower;
 
 public class BGToolsOfTheTrade extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGToolsOfTheTrade");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGToolsOfTheTrade"
+    );
     public static final String ID = "BGToolsOfTheTrade";
 
     public BGToolsOfTheTrade() {
-        super("BGToolsOfTheTrade", cardStrings.NAME, "green/power/tools_of_the_trade", 1, cardStrings.DESCRIPTION, CardType.POWER, BGSilent.Enums.BG_GREEN, CardRarity.RARE, CardTarget.SELF);
+        super(
+            "BGToolsOfTheTrade",
+            cardStrings.NAME,
+            "green/power/tools_of_the_trade",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new ToolsOfTheTradePower((AbstractCreature)p, 1), 1));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new ToolsOfTheTradePower((AbstractCreature) p, 1),
+                1
+            )
+        );
     }
 
     public void upgrade() {
@@ -33,15 +52,7 @@ public class BGToolsOfTheTrade extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGToolsOfTheTrade();
     }
-
-
-
-
-
 }
-
-

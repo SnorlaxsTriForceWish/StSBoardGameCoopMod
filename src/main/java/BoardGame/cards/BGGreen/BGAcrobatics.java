@@ -1,4 +1,5 @@
 package BoardGame.cards.BGGreen;
+
 import BoardGame.cards.AbstractBGCard;
 import BoardGame.characters.BGSilent;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -12,31 +13,39 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGAcrobatics extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("Acrobatics");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "Acrobatics"
+    );
     public static final String ID = "BGAcrobatics";
 
     public BGAcrobatics() {
-        super("BGAcrobatics", cardStrings.NAME, "green/skill/acrobatics", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGSilent.Enums.BG_GREEN, AbstractCard.CardRarity.COMMON, AbstractCard.CardTarget.NONE);
-
-
-
-
-
-
-
-
-
-
+        super(
+            "BGAcrobatics",
+            cardStrings.NAME,
+            "green/skill/acrobatics",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            AbstractCard.CardRarity.COMMON,
+            AbstractCard.CardTarget.NONE
+        );
         this.baseMagicNumber = 3;
         this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)p, this.magicNumber));
-        addToBot((AbstractGameAction)new DiscardAction((AbstractCreature)p, (AbstractCreature)p, 1, false));
+        addToBot((AbstractGameAction) new DrawCardAction((AbstractCreature) p, this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new DiscardAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                1,
+                false
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -45,10 +54,7 @@ public class BGAcrobatics extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGAcrobatics();
     }
 }
-
-

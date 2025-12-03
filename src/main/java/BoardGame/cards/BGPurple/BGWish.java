@@ -12,30 +12,40 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import java.util.ArrayList;
 
 public class BGWish extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGWish");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGWish"
+    );
     public static final String ID = "BGWish";
 
     public BGWish() {
-        super("BGWish", cardStrings.NAME, "purple/skill/wish", 3, cardStrings.DESCRIPTION, CardType.SKILL, BGWatcher.Enums.BG_PURPLE, CardRarity.RARE, CardTarget.SELF);
+        super(
+            "BGWish",
+            cardStrings.NAME,
+            "purple/skill/wish",
+            3,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
         this.exhaust = true;
-        this.baseBlock=10;
+        this.baseBlock = 10;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         ArrayList<AbstractCard> stanceChoices = new ArrayList<>();
         stanceChoices.add(new BGBecomeAlmighty());
-        AbstractCard lf=new BGLiveForever();
+        AbstractCard lf = new BGLiveForever();
         stanceChoices.add(lf);
         stanceChoices.add(new BGFameAndFortune(this));
-        if (this.upgraded)
-            for (AbstractCard c : stanceChoices)
-                c.upgrade();
+        if (this.upgraded) for (AbstractCard c : stanceChoices) c.upgrade();
         lf.applyPowers();
-        addToBot((AbstractGameAction)new ChooseOneAction(stanceChoices));
+        addToBot((AbstractGameAction) new ChooseOneAction(stanceChoices));
     }
 
     public void upgrade() {

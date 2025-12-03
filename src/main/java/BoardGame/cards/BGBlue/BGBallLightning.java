@@ -16,12 +16,24 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 
 public class BGBallLightning extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBallLightning");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBallLightning"
+    );
     public static final String ID = "BGBallLightning";
 
-
     public BGBallLightning() {
-        super("BGBallLightning", cardStrings.NAME, "blue/attack/ball_lightning", 1, cardStrings.DESCRIPTION, CardType.ATTACK, BGDefect.Enums.BG_BLUE, CardRarity.COMMON, CardTarget.ENEMY);
+        super(
+            "BGBallLightning",
+            cardStrings.NAME,
+            "blue/attack/ball_lightning",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.COMMON,
+            CardTarget.ENEMY
+        );
         this.showEvokeValue = true;
         this.showEvokeOrbCount = 1;
         this.baseMagicNumber = 1;
@@ -30,9 +42,16 @@ public class BGBallLightning extends AbstractBGCard {
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HEAVY));
-        for (int i = 0; i < this.magicNumber; i++)
-            addToBot((AbstractGameAction)new BGChannelAction((AbstractOrb)new BGLightning()));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.SLASH_HEAVY
+            )
+        );
+        for (int i = 0; i < this.magicNumber; i++) addToBot(
+            (AbstractGameAction) new BGChannelAction((AbstractOrb) new BGLightning())
+        );
     }
 
     public void upgrade() {

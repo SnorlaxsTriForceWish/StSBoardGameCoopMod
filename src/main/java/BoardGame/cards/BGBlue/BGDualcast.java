@@ -11,12 +11,24 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGDualcast extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGDualcast");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGDualcast"
+    );
     public static final String ID = "BGDualcast";
 
     public BGDualcast() {
-        super("BGDualcast", cardStrings.NAME, "blue/skill/dualcast", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGDefect.Enums.BG_BLUE, CardRarity.BASIC, CardTarget.NONE);
-
+        super(
+            "BGDualcast",
+            cardStrings.NAME,
+            "blue/skill/dualcast",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.BASIC,
+            CardTarget.NONE
+        );
         this.showEvokeValue = true;
         //TODO: set this.showEvokeOrbCount to max (for this card, and pretty much every other card too)
     }

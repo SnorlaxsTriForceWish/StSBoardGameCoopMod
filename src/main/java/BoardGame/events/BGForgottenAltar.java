@@ -13,20 +13,23 @@ import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class BGForgottenAltar extends AbstractImageEvent
-                        implements LockRelicsEvent {
+public class BGForgottenAltar extends AbstractImageEvent implements LockRelicsEvent {
+
     public static final String ID = "BGForgottenAltar";
 
-    public boolean reliclock=false;
-    public boolean relicsLocked(){
+    public boolean reliclock = false;
+
+    public boolean relicsLocked() {
         return reliclock;
     }
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGForgottenAltar");
+
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGForgottenAltar"
+    );
 
     public static final String NAME = eventStrings.NAME;
 
@@ -42,40 +45,37 @@ public class BGForgottenAltar extends AbstractImageEvent
 
     private static final String DIALOG_4 = DESCRIPTIONS[3];
 
-
-    private int hpLoss=2;
+    private int hpLoss = 2;
     private AbstractRelic randomRelic;
-
 
     public BGForgottenAltar() {
         super(NAME, DIALOG_1, "images/events/forgottenAltar.jpg");
-        reliclock=true;
+        reliclock = true;
         ArrayList<AbstractRelic> relics = new ArrayList<>();
         relics.addAll(AbstractDungeon.player.relics);
         Collections.shuffle(relics, new Random(AbstractDungeon.miscRng.randomLong()));
-        randomRelic=null;
-        for(AbstractRelic r : relics) {
-            if(!(r instanceof AbstractBGRelic)){
-                randomRelic=r;
+        randomRelic = null;
+        for (AbstractRelic r : relics) {
+            if (!(r instanceof AbstractBGRelic)) {
+                randomRelic = r;
                 break;
             }
-            AbstractBGRelic bgr=(AbstractBGRelic)r;
-            if(bgr.usableAsPayment()){
-                randomRelic=bgr;
+            AbstractBGRelic bgr = (AbstractBGRelic) r;
+            if (bgr.usableAsPayment()) {
+                randomRelic = bgr;
                 break;
             }
         }
-        if(randomRelic!=null)
-            this.imageEventText.setDialogOption(OPTIONS[0] + randomRelic.name + OPTIONS[1]);
-        else
-            this.imageEventText.setDialogOption(OPTIONS[2], true);
+        if (randomRelic != null) this.imageEventText.setDialogOption(
+            OPTIONS[0] + randomRelic.name + OPTIONS[1]
+        );
+        else this.imageEventText.setDialogOption(OPTIONS[2], true);
         this.imageEventText.setDialogOption(OPTIONS[3]);
         this.imageEventText.setDialogOption(OPTIONS[5]);
     }
 
     public void onEnterRoom() {
-        if (Settings.AMBIANCE_ON)
-            CardCrawlGame.sound.play("EVENT_FORGOTTEN");
+        if (Settings.AMBIANCE_ON) CardCrawlGame.sound.play("EVENT_FORGOTTEN");
     }
 
     protected void buttonEffect(int buttonPressed) {
@@ -92,14 +92,29 @@ public class BGForgottenAltar extends AbstractImageEvent
                         AbstractDungeon.player.damage(new DamageInfo(null, this.hpLoss));
                         CardCrawlGame.sound.play("ORB_LIGHTNING_PASSIVE");
                         showProceedScreen(DIALOG_3);
-                        logMetricDamageAndMaxHPGain("Forgotten Altar", "Shed Blood", this.hpLoss, 5);
+                        logMetricDamageAndMaxHPGain(
+                            "Forgotten Altar",
+                            "Shed Blood",
+                            this.hpLoss,
+                            5
+                        );
                         break;
                     case 2:
                         CardCrawlGame.sound.play("ATTACK_PIERCING_WAIL");
-                        CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.HIGH, ScreenShake.ShakeDur.MED, true);
+                        CardCrawlGame.screenShake.shake(
+                            ScreenShake.ShakeIntensity.HIGH,
+                            ScreenShake.ShakeDur.MED,
+                            true
+                        );
 
                         AbstractCard curse = AbstractBGDungeon.DrawFromCursesRewardDeck();
-                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(curse, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+                        AbstractDungeon.effectList.add(
+                            new ShowCardAndObtainEffect(
+                                curse,
+                                Settings.WIDTH / 2.0F,
+                                Settings.HEIGHT / 2.0F
+                            )
+                        );
 
                         showProceedScreen(DIALOG_4);
                         logMetricObtainCard("Forgotten Altar", "Smashed Altar", curse);
@@ -115,12 +130,14 @@ public class BGForgottenAltar extends AbstractImageEvent
         randomRelic.onUnequip();
         AbstractDungeon.player.loseRelic(randomRelic.relicId);
         AbstractRelic r = AbstractDungeon.returnRandomScreenlessRelic(
-                AbstractDungeon.returnRandomRelicTier());
-        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F, r);
+            AbstractDungeon.returnRandomRelicTier()
+        );
+        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(
+            Settings.WIDTH / 2.0F,
+            Settings.HEIGHT / 2.0F,
+            r
+        );
 
         logMetricRelicSwap("Forgotten Altar", "Gave Relic", r.makeCopy(), randomRelic.makeCopy());
-
     }
 }
-
-

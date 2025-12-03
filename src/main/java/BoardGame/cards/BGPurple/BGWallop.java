@@ -13,19 +13,34 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGWallop extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGWallop");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGWallop"
+    );
     public static final String ID = "BGWallop";
 
     public BGWallop() {
-        super("BGWallop", cardStrings.NAME, "purple/attack/wallop", 2, cardStrings.DESCRIPTION, CardType.ATTACK, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.ENEMY);
-
-        this.baseDamage=2;
+        super(
+            "BGWallop",
+            cardStrings.NAME,
+            "purple/attack/wallop",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.ENEMY
+        );
+        this.baseDamage = 2;
     }
 
-
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new WallopAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn)));
+        addToBot(
+            (AbstractGameAction) new WallopAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn)
+            )
+        );
     }
 
     public void upgrade() {
@@ -39,6 +54,3 @@ public class BGWallop extends AbstractBGCard {
         return new BGWallop();
     }
 }
-
-
-

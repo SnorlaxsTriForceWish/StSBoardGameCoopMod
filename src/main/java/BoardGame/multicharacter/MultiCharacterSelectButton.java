@@ -19,146 +19,187 @@ import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
-
 import java.util.Iterator;
 
 public class MultiCharacterSelectButton {
-  public boolean selected = false;
-  public boolean locked = false;
 
-  private Color glowColor = new Color(1.0F, 0.8F, 0.2F, 0.0F);
+    public boolean selected = false;
+    public boolean locked = false;
 
-  public MultiCharacterSelectButton(String optionName, AbstractPlayer c, String buttonUrl) {
-    this.name = optionName;
-    this.hb = new Hitbox(HB_W, HB_W);
-    this.buttonImg = ImageMaster.loadImage(buttonUrl);
-    this.c = c;
-    this.charInfo = null;
-    this.charInfo = c.getLoadout();
-    this.flavorText = this.charInfo.flavorText;
-    this.unlocksRemaining = 5 - UnlockTracker.getUnlockLevel(c.chosenClass);
-  }
+    private Color glowColor = new Color(1.0F, 0.8F, 0.2F, 0.0F);
 
-  public void saveChosenAscensionLevel(int level) {
-    Prefs pref = this.c.getPrefs();
-    pref.putInteger("LAST_ASCENSION_LEVEL", level);
-    pref.flush();
-  }
-
-  public void update() {
-    updateHitbox();
-  }
-
-  private void updateHitbox() {
-    this.hb.update();
-    this.hb.cX = this.hb.x + this.hb.width / 2.0F;
-    this.hb.cY = this.hb.y + this.hb.height / 2.0F;
-    if (this.hb.justHovered)
-      CardCrawlGame.sound.playA("UI_HOVER", -0.3F);
-    if (!this.hb.hovered || this.locked);
-    if (InputHelper.justClickedLeft && !this.locked && this.hb.hovered) {
-      CardCrawlGame.sound.playA("UI_CLICK_1", -0.4F);
-      this.hb.clickStarted = true;
+    public MultiCharacterSelectButton(String optionName, AbstractPlayer c, String buttonUrl) {
+        this.name = optionName;
+        this.hb = new Hitbox(HB_W, HB_W);
+        this.buttonImg = ImageMaster.loadImage(buttonUrl);
+        this.c = c;
+        this.charInfo = null;
+        this.charInfo = c.getLoadout();
+        this.flavorText = this.charInfo.flavorText;
+        this.unlocksRemaining = 5 - UnlockTracker.getUnlockLevel(c.chosenClass);
     }
-    if (this.hb.clicked) {
-      this.hb.clicked = false;
-      if (!this.selected) {
-        boolean SOLO_MODE_ONLY=!BoardGame.ENABLE_TEST_FEATURES;
-        if(SOLO_MODE_ONLY) {
-          MultiCharacterSelectScreen screen = (MultiCharacterSelectScreen) BaseMod.getCustomScreen(MultiCharacterSelectScreen.Enum.MULTI_CHARACTER_SELECT);
-          for (MultiCharacterSelectButton b : screen.buttons) {
-            b.selected = false;
-          }
-        }
 
-        this.selected = true;
-
-        MultiCharacter p = (MultiCharacter)AbstractDungeon.player;
-        if(SOLO_MODE_ONLY) {
-          p.subcharacters.clear();
-        }
-
-        this.c.doCharSelectScreenSelectEffect();
-
-        AbstractPlayer newChar = (AbstractPlayer)this.c.newInstance();
-        if(newChar instanceof Defect){
-          newChar.maxOrbs=newChar.masterMaxOrbs=3;
-        }
-        p.subcharacters.add(newChar);
-        newChar.initializeStarterDeck();
-      } else {
-        this.selected = false;
-        MultiCharacter p = (MultiCharacter)AbstractDungeon.player;
-        for (Iterator<AbstractPlayer> i = p.subcharacters.iterator(); i.hasNext(); ) {
-          AbstractPlayer s = i.next();
-          if (s.getClass() == this.c.getClass())
-            i.remove();
-        }
-      }
-      ((MultiCharacterRowBoxes) OverlayMenuPatches.OverlayMenuExtraInterface.multiCharacterRowBoxes.get(AbstractDungeon.overlayMenu)).remakeSwapButtonsAndPositionCharacters();
+    public void saveChosenAscensionLevel(int level) {
+        Prefs pref = this.c.getPrefs();
+        pref.putInteger("LAST_ASCENSION_LEVEL", level);
+        pref.flush();
     }
-  }
 
-  public void render(SpriteBatch sb) {
-    renderOptionButton(sb);
-    this.hb.render(sb);
-  }
-
-  private void renderOptionButton(SpriteBatch sb) {
-    if (this.selected) {
-      this.glowColor.a = 0.25F + (MathUtils.cosDeg((float)(System.currentTimeMillis() / 4L % 360L)) + 1.25F) / 3.5F;
-      sb.setColor(this.glowColor);
-    } else {
-      sb.setColor(BLACK_OUTLINE_COLOR);
+    public void update() {
+        updateHitbox();
     }
-    sb.draw(ImageMaster.CHAR_OPT_HIGHLIGHT, this.hb.cX - 110.0F, this.hb.cY - 110.0F, 110.0F, 110.0F, 220.0F, 220.0F, Settings.scale, Settings.scale, 0.0F, 0, 0, 220, 220, false, false);
-    if (!this.selected && !this.hb.hovered) {
-      sb.setColor(Color.LIGHT_GRAY);
-    } else {
-      sb.setColor(Color.WHITE);
+
+    private void updateHitbox() {
+        this.hb.update();
+        this.hb.cX = this.hb.x + this.hb.width / 2.0F;
+        this.hb.cY = this.hb.y + this.hb.height / 2.0F;
+        if (this.hb.justHovered) CardCrawlGame.sound.playA("UI_HOVER", -0.3F);
+        if (!this.hb.hovered || this.locked);
+        if (InputHelper.justClickedLeft && !this.locked && this.hb.hovered) {
+            CardCrawlGame.sound.playA("UI_CLICK_1", -0.4F);
+            this.hb.clickStarted = true;
+        }
+        if (this.hb.clicked) {
+            this.hb.clicked = false;
+            if (!this.selected) {
+                boolean SOLO_MODE_ONLY = !BoardGame.ENABLE_TEST_FEATURES;
+                if (SOLO_MODE_ONLY) {
+                    MultiCharacterSelectScreen screen =
+                        (MultiCharacterSelectScreen) BaseMod.getCustomScreen(
+                            MultiCharacterSelectScreen.Enum.MULTI_CHARACTER_SELECT
+                        );
+                    for (MultiCharacterSelectButton b : screen.buttons) {
+                        b.selected = false;
+                    }
+                }
+
+                this.selected = true;
+
+                MultiCharacter p = (MultiCharacter) AbstractDungeon.player;
+                if (SOLO_MODE_ONLY) {
+                    p.subcharacters.clear();
+                }
+
+                this.c.doCharSelectScreenSelectEffect();
+
+                AbstractPlayer newChar = (AbstractPlayer) this.c.newInstance();
+                if (newChar instanceof Defect) {
+                    newChar.maxOrbs = newChar.masterMaxOrbs = 3;
+                }
+                p.subcharacters.add(newChar);
+                newChar.initializeStarterDeck();
+            } else {
+                this.selected = false;
+                MultiCharacter p = (MultiCharacter) AbstractDungeon.player;
+                for (Iterator<AbstractPlayer> i = p.subcharacters.iterator(); i.hasNext(); ) {
+                    AbstractPlayer s = i.next();
+                    if (s.getClass() == this.c.getClass()) i.remove();
+                }
+            }
+            ((MultiCharacterRowBoxes) OverlayMenuPatches.OverlayMenuExtraInterface.multiCharacterRowBoxes.get(
+                    AbstractDungeon.overlayMenu
+                )).remakeSwapButtonsAndPositionCharacters();
+        }
     }
-    sb.draw(this.buttonImg, this.hb.cX - 110.0F, this.hb.cY - 110.0F, 110.0F, 110.0F, 220.0F, 220.0F, Settings.scale, Settings.scale, 0.0F, 0, 0, 220, 220, false, false);
-  }
 
-  private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("CharacterOption");
+    public void render(SpriteBatch sb) {
+        renderOptionButton(sb);
+        this.hb.render(sb);
+    }
 
-  public static final String[] TEXT = uiStrings.TEXT;
+    private void renderOptionButton(SpriteBatch sb) {
+        if (this.selected) {
+            this.glowColor.a =
+                0.25F +
+                (MathUtils.cosDeg((float) ((System.currentTimeMillis() / 4L) % 360L)) + 1.25F) /
+                3.5F;
+            sb.setColor(this.glowColor);
+        } else {
+            sb.setColor(BLACK_OUTLINE_COLOR);
+        }
+        sb.draw(
+            ImageMaster.CHAR_OPT_HIGHLIGHT,
+            this.hb.cX - 110.0F,
+            this.hb.cY - 110.0F,
+            110.0F,
+            110.0F,
+            220.0F,
+            220.0F,
+            Settings.scale,
+            Settings.scale,
+            0.0F,
+            0,
+            0,
+            220,
+            220,
+            false,
+            false
+        );
+        if (!this.selected && !this.hb.hovered) {
+            sb.setColor(Color.LIGHT_GRAY);
+        } else {
+            sb.setColor(Color.WHITE);
+        }
+        sb.draw(
+            this.buttonImg,
+            this.hb.cX - 110.0F,
+            this.hb.cY - 110.0F,
+            110.0F,
+            110.0F,
+            220.0F,
+            220.0F,
+            Settings.scale,
+            Settings.scale,
+            0.0F,
+            0,
+            0,
+            220,
+            220,
+            false,
+            false
+        );
+    }
 
-  public static final float HB_W = 150.0F * Settings.scale;
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(
+        "CharacterOption"
+    );
 
-  private static final Color BLACK_OUTLINE_COLOR = new Color(0.0F, 0.0F, 0.0F, 0.5F);
+    public static final String[] TEXT = uiStrings.TEXT;
 
-  private static final float NAME_OFFSET_Y = 200.0F * Settings.scale;
+    public static final float HB_W = 150.0F * Settings.scale;
 
-  private Texture buttonImg;
+    private static final Color BLACK_OUTLINE_COLOR = new Color(0.0F, 0.0F, 0.0F, 0.5F);
 
-  public AbstractPlayer c;
+    private static final float NAME_OFFSET_Y = 200.0F * Settings.scale;
 
-  public Hitbox hb;
+    private Texture buttonImg;
 
-  private static final int BUTTON_W = 220;
+    public AbstractPlayer c;
 
-  public static final String ASSETS_DIR = "images/ui/charSelect/";
+    public Hitbox hb;
 
-  private static final int ICON_W = 64;
+    private static final int BUTTON_W = 220;
 
-  private float infoX;
+    public static final String ASSETS_DIR = "images/ui/charSelect/";
 
-  private float infoY;
+    private static final int ICON_W = 64;
 
-  public String name;
+    private float infoX;
 
-  private String hp;
+    private float infoY;
 
-  private int gold;
+    public String name;
 
-  private String flavorText;
+    private String hp;
 
-  private CharSelectInfo charInfo;
+    private int gold;
 
-  private int unlocksRemaining;
+    private String flavorText;
+
+    private CharSelectInfo charInfo;
+
+    private int unlocksRemaining;
 }
-
 
 /* Location:              C:\Spire dev\BoardGame.jar!\BoardGame\multicharacter\MultiCharacterSelectButton.class
  * Java compiler version: 8 (52.0)

@@ -18,22 +18,35 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.RainbowCardEffect;
 
 public class BGRainbow extends AbstractBGCard {
+
     public static final String ID = "BGRainbow";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGRainbow");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGRainbow"
+    );
 
     public BGRainbow() {
-        super("BGRainbow", cardStrings.NAME, "blue/skill/rainbow", 2, cardStrings.DESCRIPTION, CardType.SKILL, BGDefect.Enums.BG_BLUE, CardRarity.RARE, CardTarget.SELF);
+        super(
+            "BGRainbow",
+            cardStrings.NAME,
+            "blue/skill/rainbow",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
         this.showEvokeValue = true;
         this.showEvokeOrbCount = 3;
         this.exhaust = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new RainbowCardEffect()));
-        addToBot((AbstractGameAction)new BGChannelAction((AbstractOrb)new BGLightning()));
-        addToBot((AbstractGameAction)new BGChannelAction((AbstractOrb)new BGFrost()));
-        addToBot((AbstractGameAction)new BGChannelAction((AbstractOrb)new BGDark()));
+        addToBot((AbstractGameAction) new VFXAction((AbstractGameEffect) new RainbowCardEffect()));
+        addToBot((AbstractGameAction) new BGChannelAction((AbstractOrb) new BGLightning()));
+        addToBot((AbstractGameAction) new BGChannelAction((AbstractOrb) new BGFrost()));
+        addToBot((AbstractGameAction) new BGChannelAction((AbstractOrb) new BGDark()));
     }
 
     public AbstractCard makeCopy() {

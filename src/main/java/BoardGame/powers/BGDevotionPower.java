@@ -16,9 +16,12 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGDevotionPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGDevotionPower";
 
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGDevotionPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGDevotionPower"
+    );
 
     public static final String NAME = powerStrings.NAME;
 
@@ -31,49 +34,54 @@ public class BGDevotionPower extends AbstractBGPower {
         this.name = NAME;
         this.ID = "BGDevotionPower" + devotionIdOffset;
         devotionIdOffset++;
-        this.originalcard=originalcard;
+        this.originalcard = originalcard;
         this.owner = owner;
         this.amount = amount;
         updateDescription();
         loadRegion("devotion");
         this.isTurnBased = true;
     }
+
     public void atStartOfTurnPostDraw() {
         flash();
         addToBot(new BGGainMiracleAction(1));
         addToBot(new DrawCardAction(1));
 
         if (this.amount > 1) {
-            addToBot((AbstractGameAction)new ReducePowerAction(this.owner, this.owner, this, 1));
+            addToBot((AbstractGameAction) new ReducePowerAction(this.owner, this.owner, this, 1));
         } else {
-            addToBot((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, this));
+            addToBot(
+                (AbstractGameAction) new RemoveSpecificPowerAction(this.owner, this.owner, this)
+            );
 
-            AbstractCard card=originalcard.makeStatEquivalentCopy();
+            AbstractCard card = originalcard.makeStatEquivalentCopy();
             AbstractDungeon.player.discardPile.addToBottom(card);
             //for BGDevotionPower only, we have to addToTop, otherwise there's a chance the player's draw-1 will cause the discard pile to shuffle back into draw pile before the card is exhausted
-            addToTop(new ExhaustSpecificCardAction(card, AbstractDungeon.player.discardPile,true));
+            addToTop(new ExhaustSpecificCardAction(card, AbstractDungeon.player.discardPile, true));
             //this counts as losing a power card, so Awakened One loses 1 str
-            for(AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters){
-                AbstractPower p=m.getPower("BGCuriosityPower");
+            for (AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
+                AbstractPower p = m.getPower("BGCuriosityPower");
                 //logger.info("check "+m+" "+p);
-                if(p!=null){
-                    addToBot(new ReducePowerAction((AbstractCreature)m,(AbstractCreature)m,"BGUncappedStrengthPower",1));
+                if (p != null) {
+                    addToBot(
+                        new ReducePowerAction(
+                            (AbstractCreature) m,
+                            (AbstractCreature) m,
+                            "BGUncappedStrengthPower",
+                            1
+                        )
+                    );
                 }
             }
-            BGTheDieRelic.powersPlayedThisCombat-=1;
+            BGTheDieRelic.powersPlayedThisCombat -= 1;
         }
     }
-
 
     public void updateDescription() {
         if (this.amount == 1) {
             this.description = DESCRIPTIONS[0];
-        }else{
+        } else {
             this.description = DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2];
         }
     }
-
 }
-
-
-

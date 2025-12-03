@@ -11,19 +11,32 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGConcentrate extends AbstractBGCard {
+
     public static final String ID = "BGConcentrate";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGConcentrate");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGConcentrate"
+    );
 
     public BGConcentrate() {
-        super("BGConcentrate", cardStrings.NAME, "green/skill/concentrate", 0, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.UNCOMMON, CardTarget.SELF);
-        this.baseMagicNumber=0;
-        this.magicNumber=this.baseMagicNumber;
-        this.exhaust=true;
+        super(
+            "BGConcentrate",
+            cardStrings.NAME,
+            "green/skill/concentrate",
+            0,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
+        this.baseMagicNumber = 0;
+        this.magicNumber = this.baseMagicNumber;
+        this.exhaust = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new BGConcentrateAction(p,this.magicNumber));
+        addToBot((AbstractGameAction) new BGConcentrateAction(p, this.magicNumber));
     }
 
     public void upgrade() {
@@ -32,7 +45,6 @@ public class BGConcentrate extends AbstractBGCard {
             upgradeMagicNumber(1);
             this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
-
         }
     }
 
@@ -40,4 +52,3 @@ public class BGConcentrate extends AbstractBGCard {
         return new BGConcentrate();
     }
 }
-

@@ -13,30 +13,41 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class BGSundial
-        extends AbstractBGRelic implements DieControlledRelic, NilrysCodexCompatible {
+    extends AbstractBGRelic
+    implements DieControlledRelic, NilrysCodexCompatible {
+
     public static final String ID = "BGSundial";
 
     public BGSundial() {
-        super("BGSundial", "sundial.png", AbstractRelic.RelicTier.COMMON, AbstractRelic.LandingSound.SOLID);
+        super(
+            "BGSundial",
+            "sundial.png",
+            AbstractRelic.RelicTier.COMMON,
+            AbstractRelic.LandingSound.SOLID
+        );
     }
-    public int getPrice() {return 8;}
 
-    public String getQuickSummary(){if(TheDie.monsterRoll==2)return "[E] [E]";
-    else return "";}
+    public int getPrice() {
+        return 8;
+    }
+
+    public String getQuickSummary() {
+        if (TheDie.monsterRoll == 2) return "[E] [E]";
+        else return "";
+    }
+
     private static final int ENERGY_AMT = 2;
 
     public String getUpdatedDescription() {
         if (AbstractDungeon.player != null) {
             return setDescription(AbstractDungeon.player.chosenClass);
         }
-        return setDescription((AbstractPlayer.PlayerClass)null);
+        return setDescription((AbstractPlayer.PlayerClass) null);
     }
-
 
     private String setDescription(AbstractPlayer.PlayerClass c) {
         return this.DESCRIPTIONS[0];
     }
-
 
     public void updateDescription(AbstractPlayer.PlayerClass c) {
         this.description = setDescription(c);
@@ -45,47 +56,49 @@ public class BGSundial
         initializeTips();
     }
 
-
-
-//    public void atTurnStart() {
-//
-//            flash();
-//            addToBot((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
-//            addToBot((AbstractGameAction)new GainEnergyAction(ENERGY_AMT));
-//
-//    }
-
+    //    public void atTurnStart() {
+    //
+    //            flash();
+    //            addToBot((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
+    //            addToBot((AbstractGameAction)new GainEnergyAction(ENERGY_AMT));
+    //
+    //    }
 
     public AbstractRelic makeCopy() {
         return new BGSundial();
     }
 
-
-    public void checkDieAbility(){
-        if(TheDie.finalRelicRoll==2){
+    public void checkDieAbility() {
+        if (TheDie.finalRelicRoll == 2) {
             activateDieAbility();
         }
     }
 
-    public void activateDieAbility(){
+    public void activateDieAbility() {
         flash();
-        addToBot((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
-        addToBot((AbstractGameAction)new GainEnergyAction(ENERGY_AMT));
+        addToBot(
+            (AbstractGameAction) new RelicAboveCreatureAction(
+                (AbstractCreature) AbstractDungeon.player,
+                this
+            )
+        );
+        addToBot((AbstractGameAction) new GainEnergyAction(ENERGY_AMT));
         stopPulse();
     }
 
-    public void Trigger2Ability(){
+    public void Trigger2Ability() {
         activateDieAbility();
     }
 
     private boolean isPlayerTurn = false; // We should make sure the relic is only activateable during our turn, not the enemies'.
 
     @Override
-    public void onRightClick() {// On right click
-        if (!isObtained || !isPlayerTurn ) {
+    public void onRightClick() {
+        // On right click
+        if (!isObtained || !isPlayerTurn) {
             return;
         }
-        addToBot((AbstractGameAction)new BGActivateDieAbilityAction(this));
+        addToBot((AbstractGameAction) new BGActivateDieAbilityAction(this));
     }
 
     public void atTurnStart() {
@@ -103,5 +116,3 @@ public class BGSundial
         stopPulse(); // Don't keep pulsing past the victory screen/outside of combat.
     }
 }
-
-

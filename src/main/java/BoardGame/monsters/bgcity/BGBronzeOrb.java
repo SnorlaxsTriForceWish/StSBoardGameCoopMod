@@ -31,8 +31,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BGBronzeOrb extends AbstractBGMonster implements DieControlledMoves, BGDamageIcons {
+
     public static final String ID = "BGBronzeOrb";
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("BronzeOrb");
+    private static final MonsterStrings monsterStrings =
+        CardCrawlGame.languagePack.getMonsterStrings("BronzeOrb");
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
@@ -44,70 +46,137 @@ public class BGBronzeOrb extends AbstractBGMonster implements DieControlledMoves
     private static final int A_2_HP_MAX = 60;
     private static final int BEAM_DMG = 8;
 
-
     public BGBronzeOrb(float x, float y, int count) {
-        super(monsterStrings.NAME, "BGBronzeOrb", AbstractDungeon.monsterHpRng
-
-
-                .random(52, 58), 0.0F, 0.0F, 160.0F, 160.0F, "images/monsters/theCity/automaton/orb.png", x, y);
-
+        super(
+            monsterStrings.NAME,
+            "BGBronzeOrb",
+            AbstractDungeon.monsterHpRng.random(52, 58),
+            0.0F,
+            0.0F,
+            160.0F,
+            160.0F,
+            "images/monsters/theCity/automaton/orb.png",
+            x,
+            y
+        );
         setHp(19);
-        behavior= BGTheCity.getSummonBronzeOrb();
+        behavior = BGTheCity.getSummonBronzeOrb();
 
-        this.damage.add(new DamageInfo((AbstractCreature)this, 2));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 3));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 2));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 3));
         this.count = count;
     }
-    private static final int BLOCK_AMT = 3;private int count;
+
+    private static final int BLOCK_AMT = 3;
+    private int count;
 
     public void takeTurn() {
         switch (this.nextMove) {
             case 1:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("ATTACK_MAGIC_BEAM_SHORT", 0.5F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new VFXAction((AbstractGameEffect)new BorderFlashEffect(Color.SKY)));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new VFXAction((AbstractGameEffect)new SmallLaserEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, this.hb.cX, this.hb.cY), 0.3F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(1), AbstractGameAction.AttackEffect.NONE));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new SFXAction("ATTACK_MAGIC_BEAM_SHORT", 0.5F)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new VFXAction(
+                        (AbstractGameEffect) new BorderFlashEffect(Color.SKY)
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new VFXAction(
+                        (AbstractGameEffect) new SmallLaserEffect(
+                            AbstractDungeon.player.hb.cX,
+                            AbstractDungeon.player.hb.cY,
+                            this.hb.cX,
+                            this.hb.cY
+                        ),
+                        0.3F
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(1),
+                        AbstractGameAction.AttackEffect.NONE
+                    )
+                );
                 break;
             case 2:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("ATTACK_MAGIC_BEAM_SHORT", 0.5F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new VFXAction((AbstractGameEffect)new BorderFlashEffect(Color.SKY)));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new VFXAction((AbstractGameEffect)new SmallLaserEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, this.hb.cX, this.hb.cY), 0.3F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(0), AbstractGameAction.AttackEffect.NONE));
-                addToBot((AbstractGameAction)new MakeTempCardInDrawPileAction((AbstractCard)new BGDazed(), 1, false, true));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new SFXAction("ATTACK_MAGIC_BEAM_SHORT", 0.5F)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new VFXAction(
+                        (AbstractGameEffect) new BorderFlashEffect(Color.SKY)
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new VFXAction(
+                        (AbstractGameEffect) new SmallLaserEffect(
+                            AbstractDungeon.player.hb.cX,
+                            AbstractDungeon.player.hb.cY,
+                            this.hb.cX,
+                            this.hb.cY
+                        ),
+                        0.3F
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(0),
+                        AbstractGameAction.AttackEffect.NONE
+                    )
+                );
+                addToBot(
+                    (AbstractGameAction) new MakeTempCardInDrawPileAction(
+                        (AbstractCard) new BGDazed(),
+                        1,
+                        false,
+                        true
+                    )
+                );
                 break;
             case 3:
                 //TODO: if Automaton is dead, should Orb gain block instead?
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new GainBlockAction(
-                        (AbstractCreature)AbstractDungeon.getMonsters().getMonster("BGBronzeAutomaton"), (AbstractCreature)this, BLOCK_AMT));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new GainBlockAction(
+                        (AbstractCreature) AbstractDungeon.getMonsters().getMonster(
+                            "BGBronzeAutomaton"
+                        ),
+                        (AbstractCreature) this,
+                        BLOCK_AMT
+                    )
+                );
                 break;
         }
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new RollMoveAction(this));
+        AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new RollMoveAction(this));
     }
-
 
     public void update() {
         super.update();
         if (this.count % 2 == 0) {
-            this.animY = MathUtils.cosDeg((float)(System.currentTimeMillis() / 6L % 360L)) * 6.0F * Settings.scale;
+            this.animY =
+                MathUtils.cosDeg((float) ((System.currentTimeMillis() / 6L) % 360L)) *
+                6.0F *
+                Settings.scale;
         } else {
-            this.animY = -MathUtils.cosDeg((float)(System.currentTimeMillis() / 6L % 360L)) * 6.0F * Settings.scale;
+            this.animY =
+                -MathUtils.cosDeg((float) ((System.currentTimeMillis() / 6L) % 360L)) *
+                6.0F *
+                Settings.scale;
         }
     }
 
     protected void getMove(int num) {
         setMove((byte) 0, AbstractMonster.Intent.NONE);
     }
-    public void dieMove(int roll){
+
+    public void dieMove(int roll) {
         final Logger logger = LogManager.getLogger(DieControlledMoves.class.getName());
         char move = '-';
-        if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2)
-            move = this.behavior.charAt(0);
-        else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4)
-            move = this.behavior.charAt(1);
-        else if (TheDie.monsterRoll == 5 || TheDie.monsterRoll == 6)
-            move = this.behavior.charAt(2);
+        if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);
+        else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4) move = this.behavior.charAt(1);
+        else if (TheDie.monsterRoll == 5 || TheDie.monsterRoll == 6) move = this.behavior.charAt(2);
 
         if (move == '3') {
             setMove((byte) 1, AbstractMonster.Intent.ATTACK, 3);
@@ -118,17 +187,16 @@ public class BGBronzeOrb extends AbstractBGMonster implements DieControlledMoves
         }
     }
 
-
     public void die() {
         super.die();
 
-        boolean done=true;
+        boolean done = true;
         for (AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
             if (!m.isDead && !m.isDying) {
-                done=false;
+                done = false;
             }
         }
-        if(done) {
+        if (done) {
             useFastShakeAnimation(5.0F);
             CardCrawlGame.screenShake.rumble(4.0F);
             onBossVictoryLogic();
@@ -137,5 +205,3 @@ public class BGBronzeOrb extends AbstractBGMonster implements DieControlledMoves
         }
     }
 }
-
-

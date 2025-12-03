@@ -12,17 +12,37 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGRushdown extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGRushdown");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGRushdown"
+    );
     public static final String ID = "BGRushdown";
 
     public BGRushdown() {
-        super("BGRushdown", cardStrings.NAME, "purple/power/rushdown", 1, cardStrings.DESCRIPTION, CardType.POWER, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.SELF);
-        this.baseMagicNumber=2;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGRushdown",
+            cardStrings.NAME,
+            "purple/power/rushdown",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
+        this.baseMagicNumber = 2;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction(p, p, new BGRushdownPower(p, magicNumber), magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                p,
+                p,
+                new BGRushdownPower(p, magicNumber),
+                magicNumber
+            )
+        );
     }
 
     public void upgrade() {

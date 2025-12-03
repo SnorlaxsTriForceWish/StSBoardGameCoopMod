@@ -40,25 +40,22 @@ import com.megacrit.cardcrawl.vfx.AwakenedWingParticle;
 import com.megacrit.cardcrawl.vfx.SpeechBubble;
 import com.megacrit.cardcrawl.vfx.combat.IntenseZoomEffect;
 import com.megacrit.cardcrawl.vfx.combat.ShockWaveEffect;
+import java.util.ArrayList;
+import java.util.Iterator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+public class BGAwakenedOne extends AbstractBGMonster {
 
-
-
-
-
-public class BGAwakenedOne
-        extends AbstractBGMonster
-{
     private static final Logger logger = LogManager.getLogger(BGAwakenedOne.class.getName());
     public static final String ID = "BGAwakenedOne";
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("AwakenedOne");
+    private static final MonsterStrings monsterStrings =
+        CardCrawlGame.languagePack.getMonsterStrings("AwakenedOne");
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
-    public static final String[] DIALOG = monsterStrings.DIALOG; private boolean form1 = true; private boolean firstTurn = true;
+    public static final String[] DIALOG = monsterStrings.DIALOG;
+    private boolean form1 = true;
+    private boolean firstTurn = true;
     private boolean saidPower = false;
     public static final int STAGE_1_HP = 300;
     public static final int STAGE_2_HP = 300;
@@ -73,30 +70,36 @@ public class BGAwakenedOne
     private static final int SS_DMG = 6;
     private static final int SS_AMT = 4;
     private static final int REGEN_AMT = 10;
-    private static final String DARK_ECHO_NAME = MOVES[1]; private static final int STR_AMT = 1; private static final byte DARK_ECHO = 5; private static final byte SLUDGE = 6; private static final byte TACKLE = 8; private static final String SLUDGE_NAME = MOVES[3]; private static final int ECHO_DMG = 40;
+    private static final String DARK_ECHO_NAME = MOVES[1];
+    private static final int STR_AMT = 1;
+    private static final byte DARK_ECHO = 5;
+    private static final byte SLUDGE = 6;
+    private static final byte TACKLE = 8;
+    private static final String SLUDGE_NAME = MOVES[3];
+    private static final int ECHO_DMG = 40;
     private static final int SLUDGE_DMG = 18;
     private static final int TACKLE_DMG = 10;
     private static final int TACKLE_AMT = 3;
-    private float fireTimer = 0.0F; private static final float FIRE_TIME = 0.1F;
+    private float fireTimer = 0.0F;
+    private static final float FIRE_TIME = 0.1F;
     private Bone eye;
     private Bone back;
     private boolean animateParticles = false;
     private ArrayList<AwakenedWingParticle> wParticles = new ArrayList<>();
 
-
-
     public BGAwakenedOne(float x, float y) {
         super(NAME, ID, 300, 40.0F, -30.0F, 460.0F, 250.0F, null, x, y);
+        //        if (AbstractDungeon.ascensionLevel >= 9) {
+        //            setHp(320);
+        //        } else {
+        //            setHp(300);
+        //        }
 
-//        if (AbstractDungeon.ascensionLevel >= 9) {
-//            setHp(320);
-//        } else {
-//            setHp(300);
-//        }
-
-        loadAnimation("images/monsters/theForest/awakenedOne/skeleton.atlas", "images/monsters/theForest/awakenedOne/skeleton.json", 1.0F);
-
-
+        loadAnimation(
+            "images/monsters/theForest/awakenedOne/skeleton.atlas",
+            "images/monsters/theForest/awakenedOne/skeleton.json",
+            1.0F
+        );
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle_1", true);
         e.setTime(e.getEndTime() * MathUtils.random());
@@ -117,25 +120,27 @@ public class BGAwakenedOne
         this.dialogX = -200.0F * Settings.scale;
         this.dialogY = 10.0F * Settings.scale;
 
-//        this.damage.add(new DamageInfo((AbstractCreature)this, 20));
-//        this.damage.add(new DamageInfo((AbstractCreature)this, 6));
-//        this.damage.add(new DamageInfo((AbstractCreature)this, 40));
-//        this.damage.add(new DamageInfo((AbstractCreature)this, 18));
-//        this.damage.add(new DamageInfo((AbstractCreature)this, 10));
+        //        this.damage.add(new DamageInfo((AbstractCreature)this, 20));
+        //        this.damage.add(new DamageInfo((AbstractCreature)this, 6));
+        //        this.damage.add(new DamageInfo((AbstractCreature)this, 40));
+        //        this.damage.add(new DamageInfo((AbstractCreature)this, 18));
+        //        this.damage.add(new DamageInfo((AbstractCreature)this, 10));
 
         setHp(50);
-        this.damage.add(new DamageInfo((AbstractCreature)this, 3));
-        this.damage.add(new DamageInfo((AbstractCreature)this, (AbstractDungeon.ascensionLevel<10) ? 5 : 6));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 2));
-        this.damage.add(new DamageInfo((AbstractCreature)this, (AbstractDungeon.ascensionLevel<10) ? 7 : 6));   //decreases 7->6 in A10+
-        this.damage.add(new DamageInfo((AbstractCreature)this, 4));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 3));
-
+        this.damage.add(new DamageInfo((AbstractCreature) this, 3));
+        this.damage.add(
+            new DamageInfo((AbstractCreature) this, (AbstractDungeon.ascensionLevel < 10) ? 5 : 6)
+        );
+        this.damage.add(new DamageInfo((AbstractCreature) this, 2));
+        this.damage.add(
+            new DamageInfo((AbstractCreature) this, (AbstractDungeon.ascensionLevel < 10) ? 7 : 6)
+        ); //decreases 7->6 in A10+
+        this.damage.add(new DamageInfo((AbstractCreature) this, 4));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 3));
     }
 
-
     public void usePreBattleAction() {
-        if(!AbstractDungeon.player.hasRelic("BGWhite Beast Statue")) {
+        if (!AbstractDungeon.player.hasRelic("BGWhite Beast Statue")) {
             (AbstractDungeon.getCurrRoom()).rewardAllowed = false; //game is hardcoded to check for TheBeyond / TheEnding dungeons.  here's a workaround -- but mind this also interferes with White Beast Statue
         }
         CardCrawlGame.music.unsilenceBGM();
@@ -143,24 +148,35 @@ public class BGAwakenedOne
         AbstractDungeon.getCurrRoom().playBgmInstantly("BOSS_BEYOND");
         (AbstractDungeon.getCurrRoom()).cannotLose = true;
 
-//        if (AbstractDungeon.ascensionLevel >= 19) {
-//            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new RegenerateMonsterPower(this, 15)));
-//
-//            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new CuriosityPower((AbstractCreature)this, 2)));
-//        } else {
-//
-//            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new RegenerateMonsterPower(this, 10)));
-//
-//            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new CuriosityPower((AbstractCreature)this, 1)));
-//        }
+        //        if (AbstractDungeon.ascensionLevel >= 19) {
+        //            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new RegenerateMonsterPower(this, 15)));
+        //
+        //            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new CuriosityPower((AbstractCreature)this, 2)));
+        //        } else {
+        //
+        //            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new RegenerateMonsterPower(this, 10)));
+        //
+        //            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new CuriosityPower((AbstractCreature)this, 1)));
+        //        }
 
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new BGCuriosityPower((AbstractCreature)this, 1)));
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new UnawakenedPower((AbstractCreature)this)));
+        AbstractDungeon.actionManager.addToBottom(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) this,
+                (AbstractCreature) this,
+                (AbstractPower) new BGCuriosityPower((AbstractCreature) this, 1)
+            )
+        );
+        AbstractDungeon.actionManager.addToBottom(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) this,
+                (AbstractCreature) this,
+                (AbstractPower) new UnawakenedPower((AbstractCreature) this)
+            )
+        );
 
-//        if (AbstractDungeon.ascensionLevel >= 4) {
-//            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new StrengthPower((AbstractCreature)this, 2), 2));
-//        }
-
+        //        if (AbstractDungeon.ascensionLevel >= 4) {
+        //            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new StrengthPower((AbstractCreature)this, 2), 2));
+        //        }
 
         UnlockTracker.markBossAsSeen("CROW");
     }
@@ -169,102 +185,214 @@ public class BGAwakenedOne
         int i;
         switch (this.nextMove) {
             case 0:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("MONSTER_AWAKENED_POUNCE"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ChangeStateAction(this, "ATTACK_1"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new WaitAction(0.3F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(0), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-                setMove((byte)1, AbstractMonster.Intent.ATTACK, damage.get(1).base);
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new SFXAction("MONSTER_AWAKENED_POUNCE")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ChangeStateAction(this, "ATTACK_1")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new WaitAction(0.3F)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(0),
+                        AbstractGameAction.AttackEffect.SLASH_DIAGONAL
+                    )
+                );
+                setMove((byte) 1, AbstractMonster.Intent.ATTACK, damage.get(1).base);
                 break;
             case 1:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("MONSTER_AWAKENED_POUNCE"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ChangeStateAction(this, "ATTACK_1"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new WaitAction(0.3F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(1), AbstractGameAction.AttackEffect.SLASH_HEAVY));
-                setMove((byte)2, AbstractMonster.Intent.ATTACK, damage.get(2).base,2,true);
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new SFXAction("MONSTER_AWAKENED_POUNCE")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ChangeStateAction(this, "ATTACK_1")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new WaitAction(0.3F)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(1),
+                        AbstractGameAction.AttackEffect.SLASH_HEAVY
+                    )
+                );
+                setMove((byte) 2, AbstractMonster.Intent.ATTACK, damage.get(2).base, 2, true);
                 break;
             case 2:
                 for (i = 0; i < 2; i++) {
-                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                            .get(2), AbstractGameAction.AttackEffect.FIRE));
+                    AbstractDungeon.actionManager.addToBottom(
+                        (AbstractGameAction) new DamageAction(
+                            (AbstractCreature) AbstractDungeon.player,
+                            this.damage.get(2),
+                            AbstractGameAction.AttackEffect.FIRE
+                        )
+                    );
                 }
-                setMove((byte)0, AbstractMonster.Intent.ATTACK, damage.get(0).base);
+                setMove((byte) 0, AbstractMonster.Intent.ATTACK, damage.get(0).base);
                 break;
-
             case 3:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("VO_AWAKENEDONE_1"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new VFXAction((AbstractCreature)this, (AbstractGameEffect)new IntenseZoomEffect(this.hb.cX, this.hb.cY, true), 0.05F, true));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ChangeStateAction(this, "REBIRTH"));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new SFXAction("VO_AWAKENEDONE_1")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new VFXAction(
+                        (AbstractCreature) this,
+                        (AbstractGameEffect) new IntenseZoomEffect(this.hb.cX, this.hb.cY, true),
+                        0.05F,
+                        true
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ChangeStateAction(this, "REBIRTH")
+                );
                 if (AbstractDungeon.ascensionLevel >= 10) {
-                    if(BGTheDieRelic.powersPlayedThisCombat>0){
-                        addToBot((AbstractGameAction)new ApplyPowerAction(this, this,
-                                new StrengthPower(this, BGTheDieRelic.powersPlayedThisCombat), BGTheDieRelic.powersPlayedThisCombat));
+                    if (BGTheDieRelic.powersPlayedThisCombat > 0) {
+                        addToBot(
+                            (AbstractGameAction) new ApplyPowerAction(
+                                this,
+                                this,
+                                new StrengthPower(this, BGTheDieRelic.powersPlayedThisCombat),
+                                BGTheDieRelic.powersPlayedThisCombat
+                            )
+                        );
                     }
                 }
-                setMove((byte)4, AbstractMonster.Intent.ATTACK, damage.get(3).base);
+                setMove((byte) 4, AbstractMonster.Intent.ATTACK, damage.get(3).base);
                 break;
-
             case 4:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ChangeStateAction(this, "ATTACK_2"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new WaitAction(0.1F));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ChangeStateAction(this, "ATTACK_2")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new WaitAction(0.1F)
+                );
                 this.firstTurn = false;
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("VO_AWAKENEDONE_3"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new VFXAction((AbstractCreature)this, (AbstractGameEffect)new ShockWaveEffect(this.hb.cX, this.hb.cY, new Color(0.1F, 0.0F, 0.2F, 1.0F), ShockWaveEffect.ShockWaveType.CHAOTIC), 0.3F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new VFXAction((AbstractCreature)this, (AbstractGameEffect)new ShockWaveEffect(this.hb.cX, this.hb.cY, new Color(0.3F, 0.2F, 0.4F, 1.0F), ShockWaveEffect.ShockWaveType.CHAOTIC), 1.0F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(3), AbstractGameAction.AttackEffect.SMASH));
-                setMove((byte)5, AbstractMonster.Intent.ATTACK_DEBUFF, damage.get(4).base);
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new SFXAction("VO_AWAKENEDONE_3")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new VFXAction(
+                        (AbstractCreature) this,
+                        (AbstractGameEffect) new ShockWaveEffect(
+                            this.hb.cX,
+                            this.hb.cY,
+                            new Color(0.1F, 0.0F, 0.2F, 1.0F),
+                            ShockWaveEffect.ShockWaveType.CHAOTIC
+                        ),
+                        0.3F
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new VFXAction(
+                        (AbstractCreature) this,
+                        (AbstractGameEffect) new ShockWaveEffect(
+                            this.hb.cX,
+                            this.hb.cY,
+                            new Color(0.3F, 0.2F, 0.4F, 1.0F),
+                            ShockWaveEffect.ShockWaveType.CHAOTIC
+                        ),
+                        1.0F
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(3),
+                        AbstractGameAction.AttackEffect.SMASH
+                    )
+                );
+                setMove((byte) 5, AbstractMonster.Intent.ATTACK_DEBUFF, damage.get(4).base);
                 break;
             case 5:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ChangeStateAction(this, "ATTACK_2"));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new WaitAction(0.3F));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(4), AbstractGameAction.AttackEffect.POISON));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new MakeTempCardInDiscardAction((AbstractCard)new BGVoidCard(), 2));
-                setMove((byte)6, AbstractMonster.Intent.ATTACK_BUFF, damage.get(5).base,2,true);
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ChangeStateAction(this, "ATTACK_2")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new WaitAction(0.3F)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(4),
+                        AbstractGameAction.AttackEffect.POISON
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new MakeTempCardInDiscardAction(
+                        (AbstractCard) new BGVoidCard(),
+                        2
+                    )
+                );
+                setMove((byte) 6, AbstractMonster.Intent.ATTACK_BUFF, damage.get(5).base, 2, true);
                 break;
-
             case 6:
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("MONSTER_AWAKENED_ATTACK"));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new SFXAction("MONSTER_AWAKENED_ATTACK")
+                );
                 for (i = 0; i < 2; i++) {
-                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateFastAttackAction((AbstractCreature)this));
-                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new WaitAction(0.06F));
-                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                            .get(5), AbstractGameAction.AttackEffect.FIRE, true));
+                    AbstractDungeon.actionManager.addToBottom(
+                        (AbstractGameAction) new AnimateFastAttackAction((AbstractCreature) this)
+                    );
+                    AbstractDungeon.actionManager.addToBottom(
+                        (AbstractGameAction) new WaitAction(0.06F)
+                    );
+                    AbstractDungeon.actionManager.addToBottom(
+                        (AbstractGameAction) new DamageAction(
+                            (AbstractCreature) AbstractDungeon.player,
+                            this.damage.get(5),
+                            AbstractGameAction.AttackEffect.FIRE,
+                            true
+                        )
+                    );
                 }
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, (AbstractPower)new StrengthPower((AbstractCreature)this, 1), 1));
-                setMove((byte)4, AbstractMonster.Intent.ATTACK, damage.get(3).base);
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ApplyPowerAction(
+                        (AbstractCreature) this,
+                        (AbstractCreature) this,
+                        (AbstractPower) new StrengthPower((AbstractCreature) this, 1),
+                        1
+                    )
+                );
+                setMove((byte) 4, AbstractMonster.Intent.ATTACK, damage.get(3).base);
                 break;
         }
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new RollMoveAction(this));
+        AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new RollMoveAction(this));
     }
-
 
     public void changeState(String key) {
         switch (key) {
             case "REBIRTH":
-//                if (AbstractDungeon.ascensionLevel >= 9) {
-//                    this.maxHealth = 320;
-//                } else {
-//                    this.maxHealth = 300;
-//                }
-                this.maxHealth=50;
+                //                if (AbstractDungeon.ascensionLevel >= 9) {
+                //                    this.maxHealth = 320;
+                //                } else {
+                //                    this.maxHealth = 300;
+                //                }
+                this.maxHealth = 50;
                 if (Settings.isEndless && AbstractDungeon.player.hasBlight("ToughEnemies")) {
                     float mod = AbstractDungeon.player.getBlight("ToughEnemies").effectFloat();
-                    this.maxHealth = (int)(this.maxHealth * mod);
+                    this.maxHealth = (int) (this.maxHealth * mod);
                 }
 
                 if (ModHelper.isModEnabled("MonsterHunter")) {
-                    this.currentHealth = (int)(this.currentHealth * 1.5F);
+                    this.currentHealth = (int) (this.currentHealth * 1.5F);
                 }
 
                 this.state.setAnimation(0, "Idle_2", true);
                 this.halfDead = false;
                 this.animateParticles = true;
 
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new HealAction((AbstractCreature)this, (AbstractCreature)this, this.maxHealth));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new CanLoseAction());
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new HealAction(
+                        (AbstractCreature) this,
+                        (AbstractCreature) this,
+                        this.maxHealth
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new CanLoseAction());
                 break;
             case "ATTACK_1":
                 this.state.setAnimation(0, "Attack_1", false);
@@ -277,35 +405,32 @@ public class BGAwakenedOne
         }
     }
 
-
-
-
-
-
     protected void getMove(int num) {
         if (this.form1) {
             if (this.firstTurn) {
-                setMove((byte)0, AbstractMonster.Intent.ATTACK, damage.get(0).base);
+                setMove((byte) 0, AbstractMonster.Intent.ATTACK, damage.get(0).base);
                 this.firstTurn = false;
 
                 return;
             }
             //setMove((byte)1, AbstractMonster.Intent.ATTACK, 5);
-                    //setMove(SS_NAME, (byte)2, AbstractMonster.Intent.ATTACK, 6, 4, true);
-        }
-        else {
+            //setMove(SS_NAME, (byte)2, AbstractMonster.Intent.ATTACK, 6, 4, true);
+        } else {
             if (this.firstTurn) {
-                setMove(DARK_ECHO_NAME, (byte)4, AbstractMonster.Intent.ATTACK, damage.get(3).base);
+                setMove(
+                    DARK_ECHO_NAME,
+                    (byte) 4,
+                    AbstractMonster.Intent.ATTACK,
+                    damage.get(3).base
+                );
 
                 return;
             }
 
-                    //setMove(SLUDGE_NAME, (byte)5, AbstractMonster.Intent.ATTACK_DEBUFF, 18);
-                    //setMove((byte)6, AbstractMonster.Intent.ATTACK, 10, 3, true);
+            //setMove(SLUDGE_NAME, (byte)5, AbstractMonster.Intent.ATTACK_DEBUFF, 18);
+            //setMove((byte)6, AbstractMonster.Intent.ATTACK, 10, 3, true);
         }
     }
-
-
 
     public void damage(DamageInfo info) {
         super.damage(info);
@@ -329,25 +454,32 @@ public class BGAwakenedOne
             for (AbstractRelic r : AbstractDungeon.player.relics) {
                 r.onMonsterDeath(this);
             }
-            addToTop((AbstractGameAction)new ClearCardQueueAction());
+            addToTop((AbstractGameAction) new ClearCardQueueAction());
 
-//            for (Iterator<AbstractPower> s = this.powers.iterator(); s.hasNext(); ) {
-//                AbstractPower p = s.next();
-//                if (p.type == AbstractPower.PowerType.DEBUFF || p.ID.equals("Curiosity") || p.ID.equals("Unawakened") || p.ID
-//                        .equals("Shackled")) {
-//                    s.remove();
-//                }
-//            }
+            //            for (Iterator<AbstractPower> s = this.powers.iterator(); s.hasNext(); ) {
+            //                AbstractPower p = s.next();
+            //                if (p.type == AbstractPower.PowerType.DEBUFF || p.ID.equals("Curiosity") || p.ID.equals("Unawakened") || p.ID
+            //                        .equals("Shackled")) {
+            //                    s.remove();
+            //                }
+            //            }
             this.powers.clear();
 
-            setMove((byte)3, AbstractMonster.Intent.UNKNOWN);
+            setMove((byte) 3, AbstractMonster.Intent.UNKNOWN);
             createIntent();
-            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ShoutAction((AbstractCreature)this, DIALOG[0]));
-            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SetMoveAction(this, (byte)3, AbstractMonster.Intent.UNKNOWN));
+            AbstractDungeon.actionManager.addToBottom(
+                (AbstractGameAction) new ShoutAction((AbstractCreature) this, DIALOG[0])
+            );
+            AbstractDungeon.actionManager.addToBottom(
+                (AbstractGameAction) new SetMoveAction(
+                    this,
+                    (byte) 3,
+                    AbstractMonster.Intent.UNKNOWN
+                )
+            );
             applyPowers();
             this.firstTurn = true;
             this.form1 = false;
-
 
             if (GameActionManager.turn <= 1) {
                 UnlockTracker.unlockAchievement("YOU_ARE_NOTHING");
@@ -355,19 +487,21 @@ public class BGAwakenedOne
         }
     }
 
-
     public void update() {
         super.update();
         if (!this.isDying && this.animateParticles) {
             this.fireTimer -= Gdx.graphics.getDeltaTime();
             if (this.fireTimer < 0.0F) {
                 this.fireTimer = 0.1F;
-                AbstractDungeon.effectList.add(new AwakenedEyeParticle(this.skeleton
-                        .getX() + this.eye.getWorldX(), this.skeleton.getY() + this.eye.getWorldY()));
+                AbstractDungeon.effectList.add(
+                    new AwakenedEyeParticle(
+                        this.skeleton.getX() + this.eye.getWorldX(),
+                        this.skeleton.getY() + this.eye.getWorldY()
+                    )
+                );
                 this.wParticles.add(new AwakenedWingParticle());
             }
         }
-
 
         for (Iterator<AwakenedWingParticle> p = this.wParticles.iterator(); p.hasNext(); ) {
             AwakenedWingParticle e = p.next();
@@ -378,11 +512,14 @@ public class BGAwakenedOne
         }
     }
 
-
     public void render(SpriteBatch sb) {
         for (AwakenedWingParticle p : this.wParticles) {
             if (p.renderBehind) {
-                p.render(sb, this.skeleton.getX() + this.back.getWorldX(), this.skeleton.getY() + this.back.getWorldY());
+                p.render(
+                    sb,
+                    this.skeleton.getX() + this.back.getWorldX(),
+                    this.skeleton.getY() + this.back.getWorldY()
+                );
             }
         }
 
@@ -390,28 +527,39 @@ public class BGAwakenedOne
 
         for (AwakenedWingParticle p : this.wParticles) {
             if (!p.renderBehind) {
-                p.render(sb, this.skeleton.getX() + this.back.getWorldX(), this.skeleton.getY() + this.back.getWorldY());
+                p.render(
+                    sb,
+                    this.skeleton.getX() + this.back.getWorldX(),
+                    this.skeleton.getY() + this.back.getWorldY()
+                );
             }
         }
     }
 
-
     public void die() {
         if (!(AbstractDungeon.getCurrRoom()).cannotLose) {
             super.die();
-            boolean enemiesStillAlive=false;
+            boolean enemiesStillAlive = false;
             for (AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
                 if (!m.isDying) {
-                    enemiesStillAlive=true;
+                    enemiesStillAlive = true;
                 }
             }
 
-            if(!enemiesStillAlive) {
+            if (!enemiesStillAlive) {
                 useFastShakeAnimation(5.0F);
                 CardCrawlGame.screenShake.rumble(4.0F);
                 if (this.saidPower) {
                     CardCrawlGame.sound.play("VO_AWAKENEDONE_2");
-                    AbstractDungeon.effectList.add(new SpeechBubble(this.hb.cX + this.dialogX, this.hb.cY + this.dialogY, 2.5F, DIALOG[1], false));
+                    AbstractDungeon.effectList.add(
+                        new SpeechBubble(
+                            this.hb.cX + this.dialogX,
+                            this.hb.cY + this.dialogY,
+                            2.5F,
+                            DIALOG[1],
+                            false
+                        )
+                    );
 
                     this.saidPower = true;
                 }
@@ -424,5 +572,3 @@ public class BGAwakenedOne
         }
     }
 }
-
-

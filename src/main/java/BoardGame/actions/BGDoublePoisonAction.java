@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGDoublePoisonAction extends AbstractGameAction {
+
     public BGDoublePoisonAction(AbstractCreature target, AbstractCreature source) {
         this.target = target;
         this.source = source;
@@ -15,11 +16,18 @@ public class BGDoublePoisonAction extends AbstractGameAction {
     }
 
     public void update() {
-        if (this.target != null && this.target.hasPower("BGPoison"))
-            addToTop((AbstractGameAction) new ApplyPowerAction(this.target, this.source, (AbstractPower) new BGPoisonPower(this.target, this.source,
-
-                    (this.target.getPower("BGPoison")).amount),
-                    (this.target.getPower("BGPoison")).amount));
+        if (this.target != null && this.target.hasPower("BGPoison")) addToTop(
+            (AbstractGameAction) new ApplyPowerAction(
+                this.target,
+                this.source,
+                (AbstractPower) new BGPoisonPower(
+                    this.target,
+                    this.source,
+                    (this.target.getPower("BGPoison")).amount
+                ),
+                (this.target.getPower("BGPoison")).amount
+            )
+        );
         this.isDone = true;
     }
 }

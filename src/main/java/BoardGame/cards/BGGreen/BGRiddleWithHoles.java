@@ -11,13 +11,27 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGRiddleWithHoles extends AbstractBGCard {
+
     public static final String ID = "BGRiddleWithHoles";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGRiddleWithHoles");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGRiddleWithHoles"
+    );
+
     public BGRiddleWithHoles() {
-        super("BGRiddleWithHoles", cardStrings.NAME, "green/attack/riddle_with_holes", 2, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGSilent.Enums.BG_GREEN, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
+        super(
+            "BGRiddleWithHoles",
+            cardStrings.NAME,
+            "green/attack/riddle_with_holes",
+            2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.baseMagicNumber = 4;
-        this.magicNumber=this.baseMagicNumber;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -37,4 +51,3 @@ public class BGRiddleWithHoles extends AbstractBGCard {
         return new BGRiddleWithHoles();
     }
 }
-

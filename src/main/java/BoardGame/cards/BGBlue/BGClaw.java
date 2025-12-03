@@ -18,31 +18,53 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.ClawEffect;
 
 public class BGClaw extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGClaw");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGClaw"
+    );
     public static final String ID = "BGClaw";
 
-
     public BGClaw() {
-        super("BGClaw", cardStrings.NAME, "blue/attack/claw", 0, cardStrings.DESCRIPTION, CardType.ATTACK, BGDefect.Enums.BG_BLUE, CardRarity.COMMON, CardTarget.ENEMY);
+        super(
+            "BGClaw",
+            cardStrings.NAME,
+            "blue/attack/claw",
+            0,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.COMMON,
+            CardTarget.ENEMY
+        );
         this.baseDamage = 1;
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
-
 
     private boolean shouldGlow() {
-        return IsTopDiscardZeroCost()>0;
-    }
-    public void triggerOnGlowCheck() {
-        this
-                .glowColor = shouldGlow() ? AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy() : AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+        return IsTopDiscardZeroCost() > 0;
     }
 
+    public void triggerOnGlowCheck() {
+        this.glowColor = shouldGlow()
+            ? AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy()
+            : AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+    }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new VFXAction((AbstractGameEffect)new ClawEffect(m.hb.cX, m.hb.cY, Color.CYAN, Color.WHITE), 0.1F));
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.NONE));
-
+        addToBot(
+            (AbstractGameAction) new VFXAction(
+                (AbstractGameEffect) new ClawEffect(m.hb.cX, m.hb.cY, Color.CYAN, Color.WHITE),
+                0.1F
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, DamageInfo.DamageType.NORMAL),
+                AbstractGameAction.AttackEffect.NONE
+            )
+        );
     }
 
     public void upgrade() {
@@ -52,7 +74,6 @@ public class BGClaw extends AbstractBGCard {
         }
     }
 
-
     public void applyPowers() {
         int realBaseDamage = this.baseDamage;
         this.baseDamage += this.magicNumber * IsTopDiscardZeroCost();
@@ -61,11 +82,12 @@ public class BGClaw extends AbstractBGCard {
         this.isDamageModified = (this.damage != this.baseDamage);
     }
 
-    public int IsTopDiscardZeroCost(){
-        if(!AbstractDungeon.player.discardPile.group.isEmpty()) {
-            AbstractCard c = AbstractDungeon.player.discardPile.group.get(AbstractDungeon.player.discardPile.group.size() - 1);
-            if (c.cost == 0)
-                return 1;
+    public int IsTopDiscardZeroCost() {
+        if (!AbstractDungeon.player.discardPile.group.isEmpty()) {
+            AbstractCard c = AbstractDungeon.player.discardPile.group.get(
+                AbstractDungeon.player.discardPile.group.size() - 1
+            );
+            if (c.cost == 0) return 1;
         }
         return 0;
     }
@@ -82,4 +104,3 @@ public class BGClaw extends AbstractBGCard {
         return new BGClaw();
     }
 }
-

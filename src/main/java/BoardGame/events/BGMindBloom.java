@@ -15,17 +15,18 @@ import com.megacrit.cardcrawl.vfx.RainingGoldEffect;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public class BGMindBloom
-        extends MindBloom //game is hardcoded to check for MindBloom when completing event
-{
+    extends MindBloom { //game is hardcoded to check for MindBloom when completing event
+
     public static final String ID = "BGMindBloom";
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGMindBloom");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGMindBloom"
+    );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
@@ -36,35 +37,39 @@ public class BGMindBloom
 
     private CurScreen screen = CurScreen.INTRO;
 
-    private boolean awake=false;
+    private boolean awake = false;
+
     private enum CurScreen {
-        INTRO, FIGHT, LEAVE;
+        INTRO,
+        FIGHT,
+        LEAVE,
     }
 
     public BGMindBloom() {
         super();
-
         this.imageEventText.clearAllDialogs();
-        this.imageEventText.setDialogOption(OPTIONS[0]);    //war
-        this.imageEventText.setDialogOption(OPTIONS[3]);    //awake
-        this.imageEventText.setDialogOption(OPTIONS[1]);    //rich
-        this.imageEventText.setDialogOption(OPTIONS[2]);    //healthy
-
-
+        this.imageEventText.setDialogOption(OPTIONS[0]); //war
+        this.imageEventText.setDialogOption(OPTIONS[3]); //awake
+        this.imageEventText.setDialogOption(OPTIONS[1]); //rich
+        this.imageEventText.setDialogOption(OPTIONS[2]); //healthy
     }
 
     public void update() {
         super.update();
-        if(awake) {
+        if (awake) {
             if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
                 for (int i = 0; i < AbstractDungeon.gridSelectScreen.selectedCards.size(); i += 1) {
                     AbstractCard c = AbstractDungeon.gridSelectScreen.selectedCards.get(i);
                     c.upgrade();
                     //TODO: if there's more than one card, spread them out
-                    AbstractDungeon.topLevelEffects.add(new ShowCardBrieflyEffect(c.makeStatEquivalentCopy()));
+                    AbstractDungeon.topLevelEffects.add(
+                        new ShowCardBrieflyEffect(c.makeStatEquivalentCopy())
+                    );
                 }
                 //TODO: log it
-                AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+                AbstractDungeon.topLevelEffects.add(
+                    new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F)
+                );
                 awake = false;
                 AbstractDungeon.gridSelectScreen.selectedCards.clear();
             }
@@ -72,76 +77,110 @@ public class BGMindBloom
     }
 
     protected void buttonEffect(int buttonPressed) {
-    ArrayList<String> list;
-    int effectCount;
-    List<String> upgradedCards, obtainedRelic;
-    Doubt doubt;
-    switch (this.screen) {
-        case INTRO:
-            switch (buttonPressed) {
-                case 0: //war
-                    this.imageEventText.updateBodyText(DIALOG_2);
-                    this.screen = CurScreen.FIGHT;
-                    logMetric("MindBloom", "Fight");
-                    CardCrawlGame.music.playTempBgmInstantly("MINDBLOOM", true);
-                    list = new ArrayList<>();
-                    list.add("The Guardian");
-                    list.add("Hexaghost");
-                    list.add("Slime Boss");
-                    Collections.shuffle(list, new Random(AbstractDungeon.miscRng.randomLong()));
-                    (AbstractDungeon.getCurrRoom()).monsters = MonsterHelper.getEncounter(list.get(0));
-                    (AbstractDungeon.getCurrRoom()).rewards.clear();
-                    AbstractDungeon.getCurrRoom().addRelicToRewards(AbstractRelic.RelicTier.RARE);
-                    enterCombatFromImage();
-                    AbstractDungeon.lastCombatMetricKey = "Mind Bloom Boss Battle";
-                    break;
-                case 1: //awake
-                    awake=true;
-                    this.imageEventText.updateBodyText(DIALOG_3);
-                    this.screen = CurScreen.LEAVE;
-                    effectCount = 0;
+        ArrayList<String> list;
+        int effectCount;
+        List<String> upgradedCards, obtainedRelic;
+        Doubt doubt;
+        switch (this.screen) {
+            case INTRO:
+                switch (buttonPressed) {
+                    case 0: //war
+                        this.imageEventText.updateBodyText(DIALOG_2);
+                        this.screen = CurScreen.FIGHT;
+                        logMetric("MindBloom", "Fight");
+                        CardCrawlGame.music.playTempBgmInstantly("MINDBLOOM", true);
+                        list = new ArrayList<>();
+                        list.add("The Guardian");
+                        list.add("Hexaghost");
+                        list.add("Slime Boss");
+                        Collections.shuffle(list, new Random(AbstractDungeon.miscRng.randomLong()));
+                        (AbstractDungeon.getCurrRoom()).monsters = MonsterHelper.getEncounter(
+                            list.get(0)
+                        );
+                        (AbstractDungeon.getCurrRoom()).rewards.clear();
+                        AbstractDungeon.getCurrRoom().addRelicToRewards(
+                            AbstractRelic.RelicTier.RARE
+                        );
+                        enterCombatFromImage();
+                        AbstractDungeon.lastCombatMetricKey = "Mind Bloom Boss Battle";
+                        break;
+                    case 1: //awake
+                        awake = true;
+                        this.imageEventText.updateBodyText(DIALOG_3);
+                        this.screen = CurScreen.LEAVE;
+                        effectCount = 0;
 
-                    AbstractDungeon.gridSelectScreen.open(AbstractDungeon.player.masterDeck
-                            .getUpgradableCards(), 2, "Choose 2 cards to upgrade.", false, false, false, false);
+                        AbstractDungeon.gridSelectScreen.open(
+                            AbstractDungeon.player.masterDeck.getUpgradableCards(),
+                            2,
+                            "Choose 2 cards to upgrade.",
+                            false,
+                            false,
+                            false,
+                            false
+                        );
 
-                    AbstractDungeon.player.damage(new DamageInfo(null, 3, DamageInfo.DamageType.HP_LOSS));
+                        AbstractDungeon.player.damage(
+                            new DamageInfo(null, 3, DamageInfo.DamageType.HP_LOSS)
+                        );
 
+                        this.imageEventText.updateDialogOption(0, OPTIONS[4]);
+                        break;
+                    case 2: //rich
+                        this.imageEventText.updateBodyText(DIALOG_2);
+                        this.screen = CurScreen.LEAVE;
+                        logMetric(
+                            "MindBloom",
+                            "Gold",
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            0,
+                            0,
+                            0,
+                            0,
+                            5,
+                            0
+                        );
+                        AbstractDungeon.effectList.add(new RainingGoldEffect(5 * 20));
+                        AbstractDungeon.player.gainGold(5);
 
-                    this.imageEventText.updateDialogOption(0, OPTIONS[4]);
-                    break;
-                case 2: //rich
-                    this.imageEventText.updateBodyText(DIALOG_2);
-                    this.screen = CurScreen.LEAVE;
-                    logMetric("MindBloom", "Gold", null, null, null, null, null, null, null, 0, 0, 0, 0, 5, 0);
-                    AbstractDungeon.effectList.add(new RainingGoldEffect(5*20));
-                    AbstractDungeon.player.gainGold(5);
+                        this.imageEventText.updateDialogOption(0, OPTIONS[4]);
+                        break;
+                    case 3: //healthy
+                        this.imageEventText.updateBodyText(DIALOG_2);
+                        this.screen = CurScreen.LEAVE;
+                        AbstractCard curse = AbstractBGDungeon.DrawFromCursesRewardDeck();
+                        logMetricObtainCardAndHeal(
+                            "MindBloom",
+                            "Heal",
+                            (AbstractCard) curse,
+                            AbstractDungeon.player.maxHealth - AbstractDungeon.player.currentHealth
+                        );
 
-                    this.imageEventText.updateDialogOption(0, OPTIONS[4]);
-                    break;
+                        AbstractDungeon.player.heal(AbstractDungeon.player.maxHealth);
+                        AbstractDungeon.effectList.add(
+                            new ShowCardAndObtainEffect(
+                                (AbstractCard) curse,
+                                Settings.WIDTH / 2.0F,
+                                Settings.HEIGHT / 2.0F
+                            )
+                        );
 
-                case 3: //healthy
-                    this.imageEventText.updateBodyText(DIALOG_2);
-                    this.screen = CurScreen.LEAVE;
-                    AbstractCard curse = AbstractBGDungeon.DrawFromCursesRewardDeck();
-                    logMetricObtainCardAndHeal("MindBloom", "Heal", (AbstractCard) curse, AbstractDungeon.player.maxHealth - AbstractDungeon.player.currentHealth);
+                        this.imageEventText.updateDialogOption(0, OPTIONS[4]);
+                        break;
+                }
 
-
-                    AbstractDungeon.player.heal(AbstractDungeon.player.maxHealth);
-                    AbstractDungeon.effectList.add(new ShowCardAndObtainEffect((AbstractCard) curse, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
-
-                    this.imageEventText.updateDialogOption(0, OPTIONS[4]);
-                    break;
-            }
-
-
-            this.imageEventText.clearRemainingOptions();
-            return;
-        case LEAVE:
-            openMap();
-            return;
+                this.imageEventText.clearRemainingOptions();
+                return;
+            case LEAVE:
+                openMap();
+                return;
+        }
+        openMap();
     }
-    openMap();
 }
-}
-
-

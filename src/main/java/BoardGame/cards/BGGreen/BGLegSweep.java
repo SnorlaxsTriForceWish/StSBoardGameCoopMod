@@ -15,20 +15,46 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGLegSweep extends AbstractBGCard {
+
     public static final String ID = "BGLegSweep";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGLeg Sweep");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGLeg Sweep"
+    );
 
     public BGLegSweep() {
-        super("BGLegSweep", cardStrings.NAME, "green/skill/leg_sweep", 2, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.UNCOMMON, CardTarget.ENEMY);
+        super(
+            "BGLegSweep",
+            cardStrings.NAME,
+            "green/skill/leg_sweep",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.UNCOMMON,
+            CardTarget.ENEMY
+        );
         this.baseBlock = 3;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)p, (AbstractPower)new BGWeakPower((AbstractCreature)m, this.magicNumber, false), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) m,
+                (AbstractCreature) p,
+                (AbstractPower) new BGWeakPower((AbstractCreature) m, this.magicNumber, false),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {
@@ -41,9 +67,4 @@ public class BGLegSweep extends AbstractBGCard {
     public AbstractCard makeCopy() {
         return new BGLegSweep();
     }
-
-
-
 }
-
-

@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.vfx.stance.CalmParticleEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceAuraEffect;
 
 public class BGCalmStance extends AbstractStance {
+
     public static final String STANCE_ID = "BGCalm";
 
     private static long sfxId = -1L;
@@ -46,15 +47,14 @@ public class BGCalmStance extends AbstractStance {
     }
 
     public void onEnterStance() {
-        if (sfxId != -1L)
-            stopIdleSfx();
+        if (sfxId != -1L) stopIdleSfx();
         CardCrawlGame.sound.play("STANCE_ENTER_CALM");
         sfxId = CardCrawlGame.sound.playAndLoop("STANCE_LOOP_CALM");
         AbstractDungeon.effectsQueue.add(new BorderFlashEffect(Color.SKY, true));
     }
 
     public void onExitStance() {
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new GainEnergyAction(2));
+        AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new GainEnergyAction(2));
         stopIdleSfx();
     }
 

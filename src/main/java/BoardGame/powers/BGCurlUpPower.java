@@ -14,8 +14,11 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 //TODO: Lightning Orbs end-of-turn all proc at once against BGLouse
 
 public class BGCurlUpPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGCurl Up";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:Curl Up");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:Curl Up"
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
@@ -31,17 +34,26 @@ public class BGCurlUpPower extends AbstractBGPower {
     }
 
     public int onAttacked(DamageInfo info, int damageAmount) {
-        if (!this.triggered && damageAmount < this.owner.currentHealth && damageAmount > 0 &&
-                (info.type == DamageInfo.DamageType.NORMAL || info.type==DamageInfo.DamageType.THORNS)) {
-
+        if (
+            !this.triggered &&
+            damageAmount < this.owner.currentHealth &&
+            damageAmount > 0 &&
+            (info.type == DamageInfo.DamageType.NORMAL || info.type == DamageInfo.DamageType.THORNS)
+        ) {
             flash();
             this.triggered = true;
-            addToBot((AbstractGameAction)new ChangeStateAction((AbstractMonster)this.owner, "CLOSED"));
-            addToBot((AbstractGameAction)new GainBlockAction(this.owner, this.owner, this.amount));
-            addToBot((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, "BGCurl Up"));
+            addToBot(
+                (AbstractGameAction) new ChangeStateAction((AbstractMonster) this.owner, "CLOSED")
+            );
+            addToBot((AbstractGameAction) new GainBlockAction(this.owner, this.owner, this.amount));
+            addToBot(
+                (AbstractGameAction) new RemoveSpecificPowerAction(
+                    this.owner,
+                    this.owner,
+                    "BGCurl Up"
+                )
+            );
         }
         return damageAmount;
     }
 }
-
-

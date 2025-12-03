@@ -11,15 +11,28 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGRecursion extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGRecursion");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGRecursion"
+    );
     public static final String ID = "BGRecursion";
 
     public BGRecursion() {
-        super("BGRecursion", cardStrings.NAME, "blue/skill/recursion", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGDefect.Enums.BG_BLUE, CardRarity.COMMON, CardTarget.SELF);
+        super(
+            "BGRecursion",
+            cardStrings.NAME,
+            "blue/skill/recursion",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.COMMON,
+            CardTarget.SELF
+        );
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new BGEvokeOrbRecursionAction());
+        addToBot((AbstractGameAction) new BGEvokeOrbRecursionAction());
     }
 
     public void upgrade() {

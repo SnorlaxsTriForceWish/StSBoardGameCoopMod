@@ -9,10 +9,12 @@ import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
-public class BGSecretPortal
-        extends AbstractImageEvent {
+public class BGSecretPortal extends AbstractImageEvent {
+
     public static final String ID = "BGSecretPortal";
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGSecretPortal");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGSecretPortal"
+    );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
@@ -25,7 +27,9 @@ public class BGSecretPortal
     private CurScreen screen = CurScreen.INTRO;
 
     private enum CurScreen {
-        INTRO, ACCEPT, LEAVE;
+        INTRO,
+        ACCEPT,
+        LEAVE,
     }
 
     public BGSecretPortal() {
@@ -33,7 +37,6 @@ public class BGSecretPortal
         this.imageEventText.setDialogOption(OPTIONS[0]);
         //this.imageEventText.setDialogOption(OPTIONS[1]);
     }
-
 
     public void onEnterRoom() {
         if (Settings.AMBIANCE_ON) {
@@ -54,30 +57,31 @@ public class BGSecretPortal
                         CardCrawlGame.screenShake.mildRumble(5.0F);
                         CardCrawlGame.sound.play("ATTACK_MAGIC_SLOW_2");
                         break;
-//                    case 1:
-//                        this.imageEventText.updateBodyText(DIALOG_3);
-//                        this.screen = CurScreen.LEAVE;
-//                        logMetricIgnored("SecretPortal");
-//                        this.imageEventText.updateDialogOption(0, OPTIONS[1]);
-//                        break;
+                    //                    case 1:
+                    //                        this.imageEventText.updateBodyText(DIALOG_3);
+                    //                        this.screen = CurScreen.LEAVE;
+                    //                        logMetricIgnored("SecretPortal");
+                    //                        this.imageEventText.updateDialogOption(0, OPTIONS[1]);
+                    //                        break;
                 }
 
-                AbstractDungeon.getCurrRoom().spawnRelicAndObtain((Settings.WIDTH / 2), (Settings.HEIGHT / 2),
-                        new BGSecretPortalRelic());
+                AbstractDungeon.getCurrRoom().spawnRelicAndObtain(
+                    (Settings.WIDTH / 2),
+                    (Settings.HEIGHT / 2),
+                    new BGSecretPortalRelic()
+                );
                 (AbstractDungeon.getCurrRoom()).phase = AbstractRoom.RoomPhase.COMPLETE;
                 this.imageEventText.clearRemainingOptions();
                 return;
-
             case ACCEPT:
-
-//                node = new MapRoomNode(-1, 15);
-//                node.room = (AbstractRoom)new MonsterRoomBoss();
-//                AbstractDungeon.nextRoom = node;
-//                CardCrawlGame.music.fadeOutTempBGM();
-//                AbstractDungeon.pathX.add(Integer.valueOf(1));
-//                AbstractDungeon.pathY.add(Integer.valueOf(15));
-//                AbstractDungeon.topLevelEffects.add(new FadeWipeParticle());
-//                AbstractDungeon.nextRoomTransitionStart();
+                //                node = new MapRoomNode(-1, 15);
+                //                node.room = (AbstractRoom)new MonsterRoomBoss();
+                //                AbstractDungeon.nextRoom = node;
+                //                CardCrawlGame.music.fadeOutTempBGM();
+                //                AbstractDungeon.pathX.add(Integer.valueOf(1));
+                //                AbstractDungeon.pathY.add(Integer.valueOf(15));
+                //                AbstractDungeon.topLevelEffects.add(new FadeWipeParticle());
+                //                AbstractDungeon.nextRoomTransitionStart();
                 //AbstractDungeon.player.getRelic("BGSecretPortalRelic");
                 openMap();
                 return;
@@ -85,5 +89,3 @@ public class BGSecretPortal
         openMap();
     }
 }
-
-

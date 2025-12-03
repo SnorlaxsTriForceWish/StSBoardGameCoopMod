@@ -1,4 +1,3 @@
-
 //TODO: don't show screen if there are less than 2 valid targets
 //TODO: close screen if combat ends (otherwise cursor becomes invisible until map)
 //TODO: extra safeguard for Juggernaut: once screen fades out, start autoclicking (otherwise screen stays black until player clicks several more times)
@@ -28,59 +27,64 @@ import com.megacrit.cardcrawl.helpers.input.InputActionSet;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import java.util.ArrayList;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-
-
 public class TargetSelectScreen extends CustomScreen {
 
-    public boolean isDone=false;
-    public interface TargetSelectAction{
+    public boolean isDone = false;
+
+    public interface TargetSelectAction {
         void execute(AbstractMonster target);
     }
+
     final Logger logger = LogManager.getLogger(TargetSelectScreen.class.getName());
-    public static class Enum
-    {
+
+    public static class Enum {
+
         @SpireEnum
         public static AbstractDungeon.CurrentScreen TARGET_SELECT;
     }
+
     @Override
-    public AbstractDungeon.CurrentScreen curScreen()
-    {
+    public AbstractDungeon.CurrentScreen curScreen() {
         return Enum.TARGET_SELECT;
     }
+
     public TargetSelectAction action;
-    public String description="(DNT) Target Select Screen.  Choose a target.";
-    public boolean allowCancel=false;
-    public TargetSelectAction cancelAction=null;    //dummied out
-    public AbstractMonster finaltarget=null;
+    public String description = "(DNT) Target Select Screen.  Choose a target.";
+    public boolean allowCancel = false;
+    public TargetSelectAction cancelAction = null; //dummied out
+    public AbstractMonster finaltarget = null;
+
     private void open(TargetSelectAction action, String description, boolean allowCancel) {
-        this.description=description;
-        this.action=action;
-        this.allowCancel=allowCancel;
-        this.isDone=false;
-        if (AbstractDungeon.screen != AbstractDungeon.CurrentScreen.NONE)
-            AbstractDungeon.previousScreen = AbstractDungeon.screen;
+        this.description = description;
+        this.action = action;
+        this.allowCancel = allowCancel;
+        this.isDone = false;
+        if (
+            AbstractDungeon.screen != AbstractDungeon.CurrentScreen.NONE
+        ) AbstractDungeon.previousScreen = AbstractDungeon.screen;
         reopen();
     }
+
     @Override
-    public void reopen()
-    {
+    public void reopen() {
         AbstractDungeon.screen = curScreen();
         AbstractDungeon.isScreenUp = true;
     }
+
     @Override
-    public void openingSettings()
-    {
+    public void openingSettings() {
         // Required if you want to reopen your screen when the settings screen closes
         AbstractDungeon.previousScreen = curScreen();
     }
-    @Override public void close()
-    {
+
+    @Override
+    public void close() {
         //logger.info("CLOSE TARGETSELECTSCREEN "+AbstractDungeon.screen+" "+AbstractDungeon.previousScreen);
         genericScreenOverlayReset();
         //AbstractDungeon.player.isUsingClickDragControl = false;
@@ -88,108 +92,152 @@ public class TargetSelectScreen extends CustomScreen {
         GameCursor.hidden = false;
         //___hoveredMonster[0] = null;
     }
+
     @Override
     public void update() {
         //logger.info("TSS: update");
-        if(!((AbstractDungeon.getCurrRoom()).phase == AbstractRoom.RoomPhase.COMBAT)) {
-            isDone=true;
+        if (!((AbstractDungeon.getCurrRoom()).phase == AbstractRoom.RoomPhase.COMBAT)) {
+            isDone = true;
             AbstractDungeon.closeCurrentScreen();
             return;
         }
-        AbstractMonster firstmonster=null;
-        int monstercount=0;
-        for(AbstractMonster m : AbstractDungeon.getMonsters().monsters){
-            if(!m.isDeadOrEscaped()){
-                monstercount+=1;
-                if(monstercount==1) firstmonster=m;
+        AbstractMonster firstmonster = null;
+        int monstercount = 0;
+        for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+            if (!m.isDeadOrEscaped()) {
+                monstercount += 1;
+                if (monstercount == 1) firstmonster = m;
             }
         }
-        if(monstercount==1){
-           // logger.info("TSS: just one monster left: "+firstmonster);
-            if(!isDone) {
+        if (monstercount == 1) {
+            // logger.info("TSS: just one monster left: "+firstmonster);
+            if (!isDone) {
                 //logger.info("aaaaaand go");
                 isDone = true;
-                ((TargetSelectScreen) BaseMod.getCustomScreen(Enum.TARGET_SELECT)).action.execute(firstmonster);
+                ((TargetSelectScreen) BaseMod.getCustomScreen(Enum.TARGET_SELECT)).action.execute(
+                    firstmonster
+                );
             }
             AbstractDungeon.closeCurrentScreen();
             return;
-        }else if(monstercount==0){
-            isDone=true;
+        } else if (monstercount == 0) {
+            isDone = true;
             ((TargetSelectScreen) BaseMod.getCustomScreen(Enum.TARGET_SELECT)).action.execute(null);
             AbstractDungeon.closeCurrentScreen();
             return;
-        }else{
+        } else {
             //releaseCard sets iSTM to false, so change it right back afterward
             boolean temp = AbstractDungeon.player.inSingleTargetMode;
             AbstractDungeon.player.releaseCard();
-            AbstractDungeon.player.inSingleTargetMode=temp;
+            AbstractDungeon.player.inSingleTargetMode = temp;
         }
     }
 
     @Override
-    public void render(SpriteBatch sb){
+    public void render(SpriteBatch sb) {
         //FontHelper.renderDeckViewTip(sb, this.description, 96.0F * Settings.scale, Settings.CREAM_COLOR);
-        FontHelper.renderFontCentered(sb, FontHelper.buttonLabelFont, this.description, (Settings.WIDTH / 2), Settings.HEIGHT - 180.0F * Settings.scale, Settings.CREAM_COLOR);
+        FontHelper.renderFontCentered(
+            sb,
+            FontHelper.buttonLabelFont,
+            this.description,
+            (Settings.WIDTH / 2),
+            Settings.HEIGHT - 180.0F * Settings.scale,
+            Settings.CREAM_COLOR
+        );
     }
 
-    @SpirePatch2(clz= AbstractDungeon.class,method="update",paramtypez={})
+    @SpirePatch2(clz = AbstractDungeon.class, method = "update", paramtypez = {})
     public static class DungeonUpdatePatch {
-        @SpireInsertPatch(
-                locator = Locator.class,
-                localvars = {}
-        )
+
+        @SpireInsertPatch(locator = Locator.class, localvars = {})
         public static void Insert(AbstractDungeon __instance) {
             Logger logger = LogManager.getLogger(TargetSelectScreen.class.getName());
             //logger.info("Dungeon Update: " + AbstractDungeon.isScreenUp);
             if (__instance.screen.equals(Enum.TARGET_SELECT)) {
                 //TODO: maybe move some of these to update?
                 __instance.overlayMenu.hideBlackScreen();
-                AbstractDungeon.player.inSingleTargetMode=true;
+                AbstractDungeon.player.inSingleTargetMode = true;
                 //GameCursor.hidden = true;     //TODO: hide cursor once we're sure we can unhide it consistently
                 __instance.currMapNode.room.update();
             }
         }
+
         private static class Locator extends SpireInsertLocator {
-            public int[] Locate(CtBehavior ctMethodToPatch) throws CannotCompileException, PatchingException {
-                Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractDungeon.class,"isScreenUp");
-                return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<Matcher>(), finalMatcher);
+
+            public int[] Locate(CtBehavior ctMethodToPatch)
+                throws CannotCompileException, PatchingException {
+                Matcher finalMatcher = new Matcher.FieldAccessMatcher(
+                    AbstractDungeon.class,
+                    "isScreenUp"
+                );
+                return LineFinder.findInOrder(
+                    ctMethodToPatch,
+                    new ArrayList<Matcher>(),
+                    finalMatcher
+                );
             }
         }
     }
-    @SpirePatch2(clz= AbstractRoom.class,method="update",paramtypez={})
-    public static class RoomInputPatch{
-        @SpireInsertPatch(
-                locator= Locator.class,
-                localvars={}
-        )
+
+    @SpirePatch2(clz = AbstractRoom.class, method = "update", paramtypez = {})
+    public static class RoomInputPatch {
+
+        @SpireInsertPatch(locator = Locator.class, localvars = {})
         public static void Insert(AbstractRoom __instance) {
             Logger logger = LogManager.getLogger(TargetSelectScreen.class.getName());
             //logger.info("Insert: "+AbstractDungeon.isScreenUp);
             if (AbstractDungeon.isScreenUp) {
-                if(AbstractDungeon.screen.equals(Enum.TARGET_SELECT)){
-                    if (!__instance.monsters.areMonstersBasicallyDead() && AbstractDungeon.player.currentHealth > 0) {
+                if (AbstractDungeon.screen.equals(Enum.TARGET_SELECT)) {
+                    if (
+                        !__instance.monsters.areMonstersBasicallyDead() &&
+                        AbstractDungeon.player.currentHealth > 0
+                    ) {
                         AbstractDungeon.player.updateInput();
                     }
                 }
             }
-
         }
+
         private static class Locator extends SpireInsertLocator {
-            public int[] Locate(CtBehavior ctMethodToPatch) throws CannotCompileException, PatchingException {
-                Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractDungeon.CurrentScreen.class,"equals");
-                return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<Matcher>(), finalMatcher);
+
+            public int[] Locate(CtBehavior ctMethodToPatch)
+                throws CannotCompileException, PatchingException {
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(
+                    AbstractDungeon.CurrentScreen.class,
+                    "equals"
+                );
+                return LineFinder.findInOrder(
+                    ctMethodToPatch,
+                    new ArrayList<Matcher>(),
+                    finalMatcher
+                );
             }
         }
     }
 
-    @SpirePatch2(clz= AbstractPlayer.class,method="renderTargetingUi",paramtypez={SpriteBatch.class})
-    public static class CardlessTargetingArrowPatch{
-        @SpirePrefixPatch public static SpireReturn<Void> Insert(AbstractPlayer __instance, SpriteBatch sb,
-                                                                 @ByRef float[] ___arrowX, @ByRef float[] ___arrowY, Vector2 ___controlPoint, AbstractMonster ___hoveredMonster,
-                                                                 @ByRef float[] ___arrowScale, @ByRef float[] ___arrowScaleTimer, Color ___ARROW_COLOR, Vector2 ___arrowTmp,
-                                                                 Vector2 ___startArrowVector, Vector2 ___endArrowVector){
+    @SpirePatch2(
+        clz = AbstractPlayer.class,
+        method = "renderTargetingUi",
+        paramtypez = { SpriteBatch.class }
+    )
+    public static class CardlessTargetingArrowPatch {
 
-            if(__instance.hoveredCard==null){
+        @SpirePrefixPatch
+        public static SpireReturn<Void> Insert(
+            AbstractPlayer __instance,
+            SpriteBatch sb,
+            @ByRef float[] ___arrowX,
+            @ByRef float[] ___arrowY,
+            Vector2 ___controlPoint,
+            AbstractMonster ___hoveredMonster,
+            @ByRef float[] ___arrowScale,
+            @ByRef float[] ___arrowScaleTimer,
+            Color ___ARROW_COLOR,
+            Vector2 ___arrowTmp,
+            Vector2 ___startArrowVector,
+            Vector2 ___endArrowVector
+        ) {
+            if (__instance.hoveredCard == null) {
                 //TODO: implement support for orb arrows and relic arrows, maybe
                 ___arrowX[0] = MathHelper.mouseLerpSnap(___arrowX[0], InputHelper.mX);
                 ___arrowY[0] = MathHelper.mouseLerpSnap(___arrowY[0], InputHelper.mY);
@@ -207,13 +255,16 @@ public class TargetSelectScreen extends CustomScreen {
                         ___arrowScaleTimer[0] = 1.0F;
                     }
 
-                    ___arrowScale[0] = Interpolation.elasticOut.apply(Settings.scale, Settings.scale * 1.2F, ___arrowScaleTimer[0]);
+                    ___arrowScale[0] = Interpolation.elasticOut.apply(
+                        Settings.scale,
+                        Settings.scale * 1.2F,
+                        ___arrowScaleTimer[0]
+                    );
                     sb.setColor(___ARROW_COLOR);
                 }
 
-
-                ___controlPoint.x=(__instance.hb.cX+___arrowX[0])/2;
-                ___controlPoint.y=Settings.HEIGHT;
+                ___controlPoint.x = (__instance.hb.cX + ___arrowX[0]) / 2;
+                ___controlPoint.y = Settings.HEIGHT;
                 ___arrowTmp.nor();
 
                 ___startArrowVector.x = __instance.hb.cX;
@@ -221,13 +272,40 @@ public class TargetSelectScreen extends CustomScreen {
                 ___endArrowVector.x = ___arrowX[0];
                 ___endArrowVector.y = ___arrowY[0];
 
+                ReflectionHacks.RMethod drawcurvedline = ReflectionHacks.privateMethod(
+                    AbstractPlayer.class,
+                    "drawCurvedLine",
+                    SpriteBatch.class,
+                    Vector2.class,
+                    Vector2.class,
+                    Vector2.class
+                );
+                drawcurvedline.invoke(
+                    __instance,
+                    sb,
+                    ___startArrowVector,
+                    ___endArrowVector,
+                    ___controlPoint
+                );
 
-                ReflectionHacks.RMethod drawcurvedline=ReflectionHacks.privateMethod(AbstractPlayer.class,"drawCurvedLine",
-                    SpriteBatch.class,Vector2.class,Vector2.class,Vector2.class);
-                drawcurvedline.invoke(__instance, sb, ___startArrowVector, ___endArrowVector, ___controlPoint);
-
-                sb.draw(ImageMaster.TARGET_UI_ARROW, ___arrowX[0] - 128.0F, ___arrowY[0] - 128.0F, 128.0F, 128.0F, 256.0F, 256.0F, ___arrowScale[0], ___arrowScale[0], ___arrowTmp
-                        .angle() + 90.0F, 0, 0, 256, 256, false, false);
+                sb.draw(
+                    ImageMaster.TARGET_UI_ARROW,
+                    ___arrowX[0] - 128.0F,
+                    ___arrowY[0] - 128.0F,
+                    128.0F,
+                    128.0F,
+                    256.0F,
+                    256.0F,
+                    ___arrowScale[0],
+                    ___arrowScale[0],
+                    ___arrowTmp.angle() + 90.0F,
+                    0,
+                    0,
+                    256,
+                    256,
+                    false,
+                    false
+                );
 
                 return SpireReturn.Return();
             }
@@ -235,36 +313,42 @@ public class TargetSelectScreen extends CustomScreen {
         }
     }
 
+    //    @SpirePatch2(clz= AbstractPlayer.class,method="updateSingleTargetInput",paramtypez={})
+    //    public static class temp{
+    //        @SpirePostfixPatch public static SpireReturn<Void> Prefix(AbstractMonster ___hoveredMonster){
+    //            Logger logger = LogManager.getLogger(TargetSelectScreen.class.getName());
+    //            //logger.info("updateinput: "+___hoveredMonster);
+    //            return SpireReturn.Continue();
+    //        }
+    //    }
 
-//    @SpirePatch2(clz= AbstractPlayer.class,method="updateSingleTargetInput",paramtypez={})
-//    public static class temp{
-//        @SpirePostfixPatch public static SpireReturn<Void> Prefix(AbstractMonster ___hoveredMonster){
-//            Logger logger = LogManager.getLogger(TargetSelectScreen.class.getName());
-//            //logger.info("updateinput: "+___hoveredMonster);
-//            return SpireReturn.Continue();
-//        }
-//    }
-
-    @SpirePatch2(clz= AbstractPlayer.class,method="updateSingleTargetInput",paramtypez={})
+    @SpirePatch2(clz = AbstractPlayer.class, method = "updateSingleTargetInput", paramtypez = {})
     public static class UpdateSingleTargetInputPatch {
-        @SpireInsertPatch(
-                locator= Locator.class,
-                localvars={}
-        )
-        public static SpireReturn<Void> Insert(AbstractPlayer __instance, @ByRef AbstractMonster[] ___hoveredMonster,
-                                               float ___hoverStartLine, @ByRef boolean[] ___isUsingClickDragControl){
-            if(AbstractDungeon.screen.equals(Enum.TARGET_SELECT)) {
-                __instance.isInKeyboardMode=false;
+
+        @SpireInsertPatch(locator = Locator.class, localvars = {})
+        public static SpireReturn<Void> Insert(
+            AbstractPlayer __instance,
+            @ByRef AbstractMonster[] ___hoveredMonster,
+            float ___hoverStartLine,
+            @ByRef boolean[] ___isUsingClickDragControl
+        ) {
+            if (AbstractDungeon.screen.equals(Enum.TARGET_SELECT)) {
+                __instance.isInKeyboardMode = false;
                 if (false && __instance.isInKeyboardMode) {
                     //THIS BLOCK INEVITABLY CRASHES OR SOFTLOCKS. DON'T USE IT
                     //if (InputActionSet.releaseCard.isJustPressed() || CInputActionSet.cancel.isJustPressed()) {
-                    if (false) { //TODO: check getCustomScreen(TargetSelectScreen).allowCancel
+                    if (false) {
+                        //TODO: check getCustomScreen(TargetSelectScreen).allowCancel
                         __instance.inSingleTargetMode = false;
                         ___hoveredMonster[0] = null;
                         AbstractDungeon.closeCurrentScreen();
                     } else {
-                        ReflectionHacks.RMethod updateTargetArrowWithKeyboard = ReflectionHacks.privateMethod(AbstractPlayer.class, "updateTargetArrowWithKeyboard",
-                                boolean.class);
+                        ReflectionHacks.RMethod updateTargetArrowWithKeyboard =
+                            ReflectionHacks.privateMethod(
+                                AbstractPlayer.class,
+                                "updateTargetArrowWithKeyboard",
+                                boolean.class
+                            );
                         updateTargetArrowWithKeyboard.invoke(__instance, true);
                     }
                 } else {
@@ -274,7 +358,9 @@ public class TargetSelectScreen extends CustomScreen {
                         //currently, the only card that allowsCancel is Carve Reality, which targets "one or two" enemies
                         //so we're allowing the cancel by clicking the same monster twice -- even if the first hit kills it
                         //TODO: maybe pass a 4th arg along with AllowCancel being the originally-targeted enemy?
-                        TargetSelectScreen screen = (TargetSelectScreen) BaseMod.getCustomScreen(Enum.TARGET_SELECT);
+                        TargetSelectScreen screen = (TargetSelectScreen) BaseMod.getCustomScreen(
+                            Enum.TARGET_SELECT
+                        );
                         if (m.hb.hovered && !m.isDying && !m.isEscaping && m.currentHealth > 0) {
                             ___hoveredMonster[0] = m;
                             break;
@@ -288,8 +374,11 @@ public class TargetSelectScreen extends CustomScreen {
                     if (Settings.isTouchScreen) {
                         InputHelper.moveCursorToNeutralPosition();
                     }
-                    ReflectionHacks.RMethod releaseCard = ReflectionHacks.privateMethod(AbstractPlayer.class, "updateTargetArrowWithKeyboard",
-                            boolean.class);
+                    ReflectionHacks.RMethod releaseCard = ReflectionHacks.privateMethod(
+                        AbstractPlayer.class,
+                        "updateTargetArrowWithKeyboard",
+                        boolean.class
+                    );
                     releaseCard.invoke(__instance);
                     CardCrawlGame.sound.play("UI_CLICK_2");
                     ___isUsingClickDragControl[0] = false;
@@ -302,10 +391,12 @@ public class TargetSelectScreen extends CustomScreen {
 
                 //skip over "cardFromHotkey" entirely...
                 {
-                    TargetSelectScreen screen = (TargetSelectScreen) BaseMod.getCustomScreen(Enum.TARGET_SELECT);
+                    TargetSelectScreen screen = (TargetSelectScreen) BaseMod.getCustomScreen(
+                        Enum.TARGET_SELECT
+                    );
                     if (InputHelper.justClickedRight && screen.allowCancel) {
                         InputHelper.justClickedRight = false;
-                        screen.isDone=true;
+                        screen.isDone = true;
                         ___isUsingClickDragControl[0] = false;
                         __instance.inSingleTargetMode = false;
                         GameCursor.hidden = false;
@@ -315,8 +406,11 @@ public class TargetSelectScreen extends CustomScreen {
                     }
                 }
 
-                if (InputHelper.justClickedLeft || InputActionSet.confirm.isJustPressed() || CInputActionSet.select
-                        .isJustPressed()) {
+                if (
+                    InputHelper.justClickedLeft ||
+                    InputActionSet.confirm.isJustPressed() ||
+                    CInputActionSet.select.isJustPressed()
+                ) {
                     InputHelper.justClickedLeft = false;
 
                     if (___hoveredMonster[0] == null) {
@@ -325,12 +419,13 @@ public class TargetSelectScreen extends CustomScreen {
                     }
 
                     //execute effect here
-                    TargetSelectScreen screen=(TargetSelectScreen)BaseMod.getCustomScreen(Enum.TARGET_SELECT);
+                    TargetSelectScreen screen = (TargetSelectScreen) BaseMod.getCustomScreen(
+                        Enum.TARGET_SELECT
+                    );
                     if (!screen.isDone) {
-                        screen.isDone=true;
+                        screen.isDone = true;
                         screen.action.execute(___hoveredMonster[0]);
                     }
-
 
                     ___isUsingClickDragControl[0] = false;
                     __instance.inSingleTargetMode = false;
@@ -341,23 +436,23 @@ public class TargetSelectScreen extends CustomScreen {
                     return SpireReturn.Return();
                 }
 
-//                TargetSelectScreen screen=(TargetSelectScreen)BaseMod.getCustomScreen(Enum.TARGET_SELECT);
-//                if(screen.allowCancel) {
-//                    if (InputHelper.justClickedRight || InputActionSet.cancel.isJustPressed()) {
-//                        CardCrawlGame.sound.play("UI_CLICK_1");
-//                        if (!screen.isDone) {
-//                            screen.isDone = true;
-////                            if (screen.cancelAction != null) {
-////                                screen.cancelAction.execute(___hoveredMonster[0]);
-////                            }
-//                        }
-//                        ___isUsingClickDragControl[0] = false;
-//                        __instance.inSingleTargetMode = false;
-//                        GameCursor.hidden = false;
-//                        ___hoveredMonster[0] = null;
-//                        AbstractDungeon.closeCurrentScreen();
-//                    }
-//                }
+                //                TargetSelectScreen screen=(TargetSelectScreen)BaseMod.getCustomScreen(Enum.TARGET_SELECT);
+                //                if(screen.allowCancel) {
+                //                    if (InputHelper.justClickedRight || InputActionSet.cancel.isJustPressed()) {
+                //                        CardCrawlGame.sound.play("UI_CLICK_1");
+                //                        if (!screen.isDone) {
+                //                            screen.isDone = true;
+                ////                            if (screen.cancelAction != null) {
+                ////                                screen.cancelAction.execute(___hoveredMonster[0]);
+                ////                            }
+                //                        }
+                //                        ___isUsingClickDragControl[0] = false;
+                //                        __instance.inSingleTargetMode = false;
+                //                        GameCursor.hidden = false;
+                //                        ___hoveredMonster[0] = null;
+                //                        AbstractDungeon.closeCurrentScreen();
+                //                    }
+                //                }
 
                 return SpireReturn.Return();
             }
@@ -365,12 +460,19 @@ public class TargetSelectScreen extends CustomScreen {
         }
 
         private static class Locator extends SpireInsertLocator {
-            public int[] Locate(CtBehavior ctMethodToPatch) throws CannotCompileException, PatchingException {
-                Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractPlayer.class,"isInKeyboardMode");
-                return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<Matcher>(), finalMatcher);
+
+            public int[] Locate(CtBehavior ctMethodToPatch)
+                throws CannotCompileException, PatchingException {
+                Matcher finalMatcher = new Matcher.FieldAccessMatcher(
+                    AbstractPlayer.class,
+                    "isInKeyboardMode"
+                );
+                return LineFinder.findInOrder(
+                    ctMethodToPatch,
+                    new ArrayList<Matcher>(),
+                    finalMatcher
+                );
             }
         }
     }
-
-
 }

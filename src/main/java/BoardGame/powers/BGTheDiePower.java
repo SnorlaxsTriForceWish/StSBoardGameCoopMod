@@ -9,14 +9,20 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGTheDiePower extends AbstractBGPower {
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:TheDiePower");
+
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:TheDiePower"
+    );
     public static final String POWER_ID = "BGTheDiePower";
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    private static final Texture tex84 = TextureLoader.getTexture("BoardGameResources/images/powers/loadeddie_power84.png");
-    private static final Texture tex32 = TextureLoader.getTexture("BoardGameResources/images/powers/loadeddie_power32.png");
-
+    private static final Texture tex84 = TextureLoader.getTexture(
+        "BoardGameResources/images/powers/loadeddie_power84.png"
+    );
+    private static final Texture tex32 = TextureLoader.getTexture(
+        "BoardGameResources/images/powers/loadeddie_power32.png"
+    );
 
     public BGTheDiePower(AbstractCreature owner, int amount) {
         this.name = NAME;
@@ -30,32 +36,26 @@ public class BGTheDiePower extends AbstractBGPower {
         this.type = AbstractPower.PowerType.BUFF;
 
         this.isTurnBased = false;
-
     }
-
-
 
     public void stackPower(int stackAmount) {
-        this.amount=stackAmount;
+        this.amount = stackAmount;
         this.fontScale = 8.0F;
     }
-
 
     public void reducePower(int reduceAmount) {
         this.amount = reduceAmount;
         this.fontScale = 8.0F;
     }
 
-
     public void updateDescription() {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
-
-//    @Override
-//    public void renderAmount(SpriteBatch sb, float x, float y, Color c) {
-//        //Logger logger = LogManager.getLogger(BoardGame.class.getName());
-//        //logger.info("TheDie render: "+x+" "+y+" "+c+" "+fontScale+" "+this.amount);
-//        super.renderAmount(sb,x,y,c);
-//    }
+    //    @Override
+    //    public void renderAmount(SpriteBatch sb, float x, float y, Color c) {
+    //        //Logger logger = LogManager.getLogger(BoardGame.class.getName());
+    //        //logger.info("TheDie render: "+x+" "+y+" "+c+" "+fontScale+" "+this.amount);
+    //        super.renderAmount(sb,x,y,c);
+    //    }
 }

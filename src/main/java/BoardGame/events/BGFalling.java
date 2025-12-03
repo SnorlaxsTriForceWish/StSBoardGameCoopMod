@@ -11,15 +11,19 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
 
-public class BGFalling
-        extends AbstractImageEvent {
+public class BGFalling extends AbstractImageEvent {
+
     public static final String ID = "BGFalling";
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGFalling");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGFalling"
+    );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
 
-    private static final String DIALOG_1 = DESCRIPTIONS[0]; private boolean attack; private boolean skill;
+    private static final String DIALOG_1 = DESCRIPTIONS[0];
+    private boolean attack;
+    private boolean skill;
     private static final String DIALOG_2 = DESCRIPTIONS[1];
     private boolean power;
     private CurScreen screen = CurScreen.INTRO;
@@ -27,15 +31,17 @@ public class BGFalling
     private AbstractCard skillCard;
     private AbstractCard powerCard;
 
-    private enum CurScreen { INTRO, CHOICE, RESULT; }
-
+    private enum CurScreen {
+        INTRO,
+        CHOICE,
+        RESULT,
+    }
 
     public BGFalling() {
         super(NAME, DIALOG_1, "images/events/falling.jpg");
         setCards();
         this.imageEventText.setDialogOption(OPTIONS[0]);
     }
-
 
     public void onEnterRoom() {
         if (Settings.AMBIANCE_ON) {
@@ -44,15 +50,15 @@ public class BGFalling
     }
 
     private void setCards() {
-        CardGroup cards=new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        for(AbstractCard card : AbstractDungeon.player.masterDeck.group){
+        CardGroup cards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        for (AbstractCard card : AbstractDungeon.player.masterDeck.group) {
             cards.addToTop(card);
         }
         cards.shuffle(AbstractDungeon.miscRng);
 
-        this.skill = (cards.size()>=3);
-        this.power = (cards.size()>=2);
-        this.attack = (cards.size()>=1);
+        this.skill = (cards.size() >= 3);
+        this.power = (cards.size() >= 2);
+        this.attack = (cards.size() >= 1);
 
         if (this.skill) {
             this.skillCard = cards.getNCardFromTop(2);
@@ -63,43 +69,44 @@ public class BGFalling
         if (this.attack) {
             this.attackCard = cards.getNCardFromTop(0);
         }
-
     }
 
-    private void makeDialogOption(AbstractCard card){
+    private void makeDialogOption(AbstractCard card) {
         //TODO: more verbs for duplicate card types!
         String verb;
-        if(card.type==AbstractCard.CardType.SKILL){
-            verb=OPTIONS[1];
-        }else if(card.type== AbstractCard.CardType.POWER){
-            verb=OPTIONS[3];
-        }else if(card.type== AbstractCard.CardType.ATTACK) {
+        if (card.type == AbstractCard.CardType.SKILL) {
+            verb = OPTIONS[1];
+        } else if (card.type == AbstractCard.CardType.POWER) {
+            verb = OPTIONS[3];
+        } else if (card.type == AbstractCard.CardType.ATTACK) {
             verb = OPTIONS[5];
-        }else if(card instanceof BGAscendersBane){
+        } else if (card instanceof BGAscendersBane) {
             verb = OPTIONS[11];
-        }else{
-            verb=OPTIONS[9];
+        } else {
+            verb = OPTIONS[9];
         }
 
-        if(card instanceof BGAscendersBane) {
-            this.imageEventText.setDialogOption(verb + OPTIONS[10] +
-                    FontHelper.colorString(card.name, "r"),true);
-
-        }else{
-            this.imageEventText.setDialogOption(verb + OPTIONS[10] +
-                    FontHelper.colorString(card.name, "r"), card
-                    .makeStatEquivalentCopy());
+        if (card instanceof BGAscendersBane) {
+            this.imageEventText.setDialogOption(
+                verb + OPTIONS[10] + FontHelper.colorString(card.name, "r"),
+                true
+            );
+        } else {
+            this.imageEventText.setDialogOption(
+                verb + OPTIONS[10] + FontHelper.colorString(card.name, "r"),
+                card.makeStatEquivalentCopy()
+            );
         }
     }
 
-    private void setBodyText(AbstractCard card){
-        if(card.type==AbstractCard.CardType.SKILL) {
+    private void setBodyText(AbstractCard card) {
+        if (card.type == AbstractCard.CardType.SKILL) {
             this.imageEventText.updateBodyText(DESCRIPTIONS[2]);
-        }else if(card.type== AbstractCard.CardType.POWER){
+        } else if (card.type == AbstractCard.CardType.POWER) {
             this.imageEventText.updateBodyText(DESCRIPTIONS[3]);
-        }else if(card.type== AbstractCard.CardType.ATTACK){
+        } else if (card.type == AbstractCard.CardType.ATTACK) {
             this.imageEventText.updateBodyText(DESCRIPTIONS[4]);
-        }else{
+        } else {
             this.imageEventText.updateBodyText(DESCRIPTIONS[5]);
         }
     }
@@ -131,10 +138,9 @@ public class BGFalling
                         this.imageEventText.setDialogOption(OPTIONS[6], true);
                     }
                 }
-                if(!this.skill && !this.power && this.attackCard instanceof BGAscendersBane) {
+                if (!this.skill && !this.power && this.attackCard instanceof BGAscendersBane) {
                     this.imageEventText.setDialogOption(OPTIONS[8]);
                 }
-
 
                 return;
             case CHOICE:
@@ -145,14 +151,14 @@ public class BGFalling
                     case 0:
                         if (!this.skill && !this.power && !this.attack) {
                             this.imageEventText.updateBodyText(DESCRIPTIONS[5]);
-                            logMetricIgnored("Falling"); break;
+                            logMetricIgnored("Falling");
+                            break;
                         }
                         setBodyText(this.skillCard);
                         AbstractDungeon.effectList.add(new PurgeCardEffect(this.skillCard));
                         AbstractDungeon.player.masterDeck.removeCard(this.skillCard);
                         logMetricCardRemoval("Falling", "Removed Card", this.skillCard);
                         break;
-
                     case 1:
                         setBodyText(this.powerCard);
                         AbstractDungeon.effectList.add(new PurgeCardEffect(this.powerCard));
@@ -166,9 +172,12 @@ public class BGFalling
                         AbstractDungeon.player.masterDeck.removeCard(this.attackCard);
                         break;
                     case 3:
-                        if(!this.skill && !this.power && this.attackCard instanceof BGAscendersBane) {
+                        if (
+                            !this.skill && !this.power && this.attackCard instanceof BGAscendersBane
+                        ) {
                             this.imageEventText.updateBodyText(DESCRIPTIONS[5]);
-                            logMetricIgnored("Falling"); break;
+                            logMetricIgnored("Falling");
+                            break;
                         }
                 }
 
@@ -177,5 +186,3 @@ public class BGFalling
         openMap();
     }
 }
-
-

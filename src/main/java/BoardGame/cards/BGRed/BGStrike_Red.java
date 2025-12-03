@@ -16,36 +16,64 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGStrike_Red extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:Strike_R");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:Strike_R"
+    );
     public static final String ID = "BGStrike_R";
 
     public BGStrike_Red() {
-        super("BGStrike_R", cardStrings.NAME, "red/attack/strike", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.BASIC, AbstractCard.CardTarget.ENEMY);
-
-
-
+        super(
+            "BGStrike_R",
+            cardStrings.NAME,
+            "red/attack/strike",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.BASIC,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseDamage = 1;
         this.tags.add(AbstractCard.CardTags.STRIKE);
         this.tags.add(AbstractCard.CardTags.STARTER_STRIKE);
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (Settings.isDebug) {
             if (Settings.isInfo) {
-                this.multiDamage = new int[(AbstractDungeon.getCurrRoom()).monsters.monsters.size()];
+                this.multiDamage =
+                    new int[(AbstractDungeon.getCurrRoom()).monsters.monsters.size()];
                 for (int i = 0; i < (AbstractDungeon.getCurrRoom()).monsters.monsters.size(); i++) {
                     this.multiDamage[i] = 150;
                 }
-                addToBot((AbstractGameAction)new DamageAllEnemiesAction((AbstractCreature)p, this.multiDamage, this.damageTypeForTurn, AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+                addToBot(
+                    (AbstractGameAction) new DamageAllEnemiesAction(
+                        (AbstractCreature) p,
+                        this.multiDamage,
+                        this.damageTypeForTurn,
+                        AbstractGameAction.AttackEffect.SLASH_DIAGONAL
+                    )
+                );
             } else {
-                addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, 150, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+                addToBot(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) m,
+                        new DamageInfo((AbstractCreature) p, 150, this.damageTypeForTurn),
+                        AbstractGameAction.AttackEffect.BLUNT_HEAVY
+                    )
+                );
             }
         } else {
-            addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+            addToBot(
+                (AbstractGameAction) new DamageAction(
+                    (AbstractCreature) m,
+                    new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                    AbstractGameAction.AttackEffect.SLASH_DIAGONAL
+                )
+            );
         }
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -54,10 +82,7 @@ public class BGStrike_Red extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGStrike_Red();
     }
 }
-
-

@@ -5,11 +5,15 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class BGEstablishmentPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGEstablishmentPower";
 
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGEstablishmentPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGEstablishmentPower"
+    );
 
     private int applyNextTurn;
+
     public BGEstablishmentPower(AbstractCreature owner, int strengthAmount) {
         this.name = powerStrings.NAME;
         this.ID = "BGEstablishmentPower";
@@ -18,29 +22,28 @@ public class BGEstablishmentPower extends AbstractBGPower {
         updateDescription();
         loadRegion("establishment");
         this.priority = 25;
-        applyNextTurn=strengthAmount;
+        applyNextTurn = strengthAmount;
     }
 
     public void stackPower(int stackAmount) {
         this.fontScale = 8.0F;
-        applyNextTurn+=stackAmount;
+        applyNextTurn += stackAmount;
     }
 
     public void updateDescription() {
-        if(amount<=0) {
+        if (amount <= 0) {
             this.description = powerStrings.DESCRIPTIONS[2];
-        }else{
-            this.description = powerStrings.DESCRIPTIONS[0] + this.amount + powerStrings.DESCRIPTIONS[1];
+        } else {
+            this.description =
+                powerStrings.DESCRIPTIONS[0] + this.amount + powerStrings.DESCRIPTIONS[1];
         }
-
     }
 
     public void atEndOfTurn(boolean isPlayer) {
         flash();
-        if(applyNextTurn>0){
-            amount+=applyNextTurn;
-            applyNextTurn=0;
+        if (applyNextTurn > 0) {
+            amount += applyNextTurn;
+            applyNextTurn = 0;
         }
     }
 }
-

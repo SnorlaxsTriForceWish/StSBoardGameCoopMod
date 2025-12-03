@@ -14,26 +14,30 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGWraithFormPower extends AbstractBGPower {
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGWraithFormPower");
+
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGWraithFormPower"
+    );
     public static final String POWER_ID = "BGWraithFormPower";
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
     private static int wraithIdOffset;
     private AbstractCard originalcard;
+
     public BGWraithFormPower(AbstractCreature owner, int amount, AbstractCard originalcard) {
         this.name = NAME;
         this.ID = "BGWraithFormPower" + wraithIdOffset;
         wraithIdOffset++;
         this.owner = owner;
         this.amount = amount;
-        this.originalcard=originalcard;
+        this.originalcard = originalcard;
 
         updateDescription();
         //loadRegion("intangible");
         //this.priority = 75;
         loadRegion("wraithForm");
-        this.priority = 100;    //must be higher than Invincible or the existing Invincible buff will stack and vanish after we try to apply it
+        this.priority = 100; //must be higher than Invincible or the existing Invincible buff will stack and vanish after we try to apply it
     }
 
     public void playApplyPowerSfx() {
@@ -48,34 +52,39 @@ public class BGWraithFormPower extends AbstractBGPower {
         }
     }
 
-
     public void atStartOfTurn() {
         addToBot((AbstractGameAction) new ReducePowerAction(this.owner, this.owner, this, 1));
         if (this.amount > 1) {
             //if amount is currently 1 (before ReducePowerAction is resolved), then it's going to 0 this turn and we don't reapply Invincible
-            addToBot((AbstractGameAction) new ApplyPowerAction((AbstractCreature) this.owner, (AbstractCreature) this.owner, (AbstractPower) new BGInvinciblePlayerPower((AbstractCreature) this.owner, 1), 0));
-        }else{
-            AbstractCard card=originalcard.makeStatEquivalentCopy();
+            addToBot(
+                (AbstractGameAction) new ApplyPowerAction(
+                    (AbstractCreature) this.owner,
+                    (AbstractCreature) this.owner,
+                    (AbstractPower) new BGInvinciblePlayerPower((AbstractCreature) this.owner, 1),
+                    0
+                )
+            );
+        } else {
+            AbstractCard card = originalcard.makeStatEquivalentCopy();
             AbstractDungeon.player.discardPile.addToBottom(card);
-            addToBot(new ExhaustSpecificCardAction(card, AbstractDungeon.player.discardPile,true));
+            addToBot(new ExhaustSpecificCardAction(card, AbstractDungeon.player.discardPile, true));
             //Logger logger = LogManager.getLogger(BGTheBombPower.class.getName());
             //logger.info("Awakened One check...");
             //this counts as losing a power card, so Awakened One loses 1 str
-            for(AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters){
-                AbstractPower p=m.getPower("BGCuriosityPower");
-                if(p!=null){
-                    addToBot(new ReducePowerAction((AbstractCreature)m,(AbstractCreature)m,"BGUncappedStrengthPower",1));
+            for (AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
+                AbstractPower p = m.getPower("BGCuriosityPower");
+                if (p != null) {
+                    addToBot(
+                        new ReducePowerAction(
+                            (AbstractCreature) m,
+                            (AbstractCreature) m,
+                            "BGUncappedStrengthPower",
+                            1
+                        )
+                    );
                 }
             }
-            BGTheDieRelic.powersPlayedThisCombat-=1;
+            BGTheDieRelic.powersPlayedThisCombat -= 1;
         }
-
-
     }
-
-
-
-
 }
-
-

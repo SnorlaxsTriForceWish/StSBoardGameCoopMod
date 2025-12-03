@@ -17,15 +17,27 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGBurst extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBurst");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBurst"
+    );
     public static final String ID = "BGBurst";
 
     public BGBurst() {
-        super("BGBurst", cardStrings.NAME, "green/skill/burst", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.RARE, CardTarget.SELF);
-
+        super(
+            "BGBurst",
+            cardStrings.NAME,
+            "green/skill/burst",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
-        this.cannotBeCopied=true;
+        this.cannotBeCopied = true;
     }
 
     public boolean canUse(AbstractPlayer p, AbstractMonster m) {
@@ -42,9 +54,15 @@ public class BGBurst extends AbstractBGCard {
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGBurstPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGBurstPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -53,10 +71,7 @@ public class BGBurst extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGBurst();
     }
 }
-
-

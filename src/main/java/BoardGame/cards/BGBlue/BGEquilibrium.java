@@ -15,19 +15,48 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGEquilibrium extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGEquilibrium");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGEquilibrium"
+    );
     public static final String ID = "BGEquilibrium";
 
     public BGEquilibrium() {
-        super("BGEquilibrium", cardStrings.NAME, "blue/skill/equilibrium", 2, cardStrings.DESCRIPTION, CardType.SKILL, BGDefect.Enums.BG_BLUE, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(
+            "BGEquilibrium",
+            cardStrings.NAME,
+            "blue/skill/equilibrium",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.UNCOMMON,
+            CardTarget.SELF
+        );
         this.baseBlock = 3;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new GainBlockAction((AbstractCreature)p, (AbstractCreature)p, this.block));
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGTemporaryRetainCardsPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                this.block
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGTemporaryRetainCardsPower(
+                    (AbstractCreature) p,
+                    this.magicNumber
+                ),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {
@@ -44,5 +73,3 @@ public class BGEquilibrium extends AbstractBGCard {
         return new BGEquilibrium();
     }
 }
-
-

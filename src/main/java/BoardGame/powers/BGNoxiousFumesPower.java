@@ -10,9 +10,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class BGNoxiousFumesPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGNoxiousFumes";
 
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGNoxiousFumes");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGNoxiousFumes"
+    );
 
     public static final String NAME = powerStrings.NAME;
 
@@ -31,12 +34,24 @@ public class BGNoxiousFumesPower extends AbstractBGPower {
         //TODO: player should be able to delay poison application until other relics activate
         if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
             flash();
-            TargetSelectScreen.TargetSelectAction tssAction = (target) -> {
-                if(target==null)return;
-                addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)target, this.owner, new BGPoisonPower((AbstractCreature)target, this.owner, this.amount), this.amount));
+            TargetSelectScreen.TargetSelectAction tssAction = target -> {
+                if (target == null) return;
+                addToBot(
+                    (AbstractGameAction) new ApplyPowerAction(
+                        (AbstractCreature) target,
+                        this.owner,
+                        new BGPoisonPower((AbstractCreature) target, this.owner, this.amount),
+                        this.amount
+                    )
+                );
             };
             //logger.info("DoubleTap addToTop");
-            addToBot((AbstractGameAction)new TargetSelectScreenAction(tssAction,"Choose a target for Noxious Fumes."));
+            addToBot(
+                (AbstractGameAction) new TargetSelectScreenAction(
+                    tssAction,
+                    "Choose a target for Noxious Fumes."
+                )
+            );
         }
     }
 
@@ -49,5 +64,3 @@ public class BGNoxiousFumesPower extends AbstractBGPower {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 }
-
-

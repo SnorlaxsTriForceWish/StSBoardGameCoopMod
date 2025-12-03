@@ -9,9 +9,12 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGNoxiousFumesAOEPower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGNoxiousFumesAOE";
 
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGNoxiousFumes");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGNoxiousFumes"
+    );
 
     public static final String NAME = powerStrings.NAME;
 
@@ -31,8 +34,14 @@ public class BGNoxiousFumesAOEPower extends AbstractBGPower {
             flash();
             //TODO: "to any row"
             for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
-                if (!m.isDead && !m.isDying)
-                    addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, this.owner, new BGPoisonPower((AbstractCreature)m, this.owner, this.amount), this.amount));
+                if (!m.isDead && !m.isDying) addToBot(
+                    (AbstractGameAction) new ApplyPowerAction(
+                        (AbstractCreature) m,
+                        this.owner,
+                        new BGPoisonPower((AbstractCreature) m, this.owner, this.amount),
+                        this.amount
+                    )
+                );
             }
         }
     }
@@ -46,5 +55,3 @@ public class BGNoxiousFumesAOEPower extends AbstractBGPower {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[2];
     }
 }
-
-

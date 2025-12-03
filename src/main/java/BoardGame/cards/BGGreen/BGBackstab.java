@@ -17,7 +17,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BGBackstab extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBackstab");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBackstab"
+    );
     public static final String ID = "BGBackstab";
 
     private AbstractMonster target;
@@ -25,16 +28,32 @@ public class BGBackstab extends AbstractBGCard {
     static Logger logger = LogManager.getLogger(BGBackstab.class.getName());
 
     public BGBackstab() {
-        super("BGBackstab", cardStrings.NAME, "green/attack/backstab", 0, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGSilent.Enums.BG_GREEN, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.ENEMY);
+        super(
+            "BGBackstab",
+            cardStrings.NAME,
+            "green/attack/backstab",
+            0,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGSilent.Enums.BG_GREEN,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseDamage = 2;
-        this.baseMagicNumber=2;
-        this.magicNumber=this.baseMagicNumber;
+        this.baseMagicNumber = 2;
+        this.magicNumber = this.baseMagicNumber;
         this.exhaust = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.target=m;
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HEAVY));
+        this.target = m;
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.SLASH_HEAVY
+            )
+        );
     }
 
     public void upgrade() {
@@ -48,7 +67,6 @@ public class BGBackstab extends AbstractBGCard {
         return new BGBackstab();
     }
 
-
     public void applyPowers() {
         int realBaseDamage = this.baseDamage;
         super.applyPowers();
@@ -56,8 +74,8 @@ public class BGBackstab extends AbstractBGCard {
         this.isDamageModified = (this.damage != this.baseDamage);
     }
 
-    public int IsTargetAtFullHP(AbstractMonster mo){
-        return (mo.currentHealth>=mo.maxHealth) ? 1 : 0;
+    public int IsTargetAtFullHP(AbstractMonster mo) {
+        return (mo.currentHealth >= mo.maxHealth) ? 1 : 0;
     }
 
     public void calculateCardDamage(AbstractMonster mo) {
@@ -71,13 +89,16 @@ public class BGBackstab extends AbstractBGCard {
     @Override
     public void update() {
         super.update();
-        if(AbstractDungeon.player!=null) {
-            AbstractMonster mo = ReflectionHacks.getPrivate(AbstractDungeon.player, AbstractPlayer.class, "hoveredMonster");
-            if(mo==null){
-                this.target=null;
+        if (AbstractDungeon.player != null) {
+            AbstractMonster mo = ReflectionHacks.getPrivate(
+                AbstractDungeon.player,
+                AbstractPlayer.class,
+                "hoveredMonster"
+            );
+            if (mo == null) {
+                this.target = null;
                 this.applyPowers();
             }
         }
     }
 }
-

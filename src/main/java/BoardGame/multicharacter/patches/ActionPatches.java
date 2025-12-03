@@ -7,19 +7,22 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 
 public class ActionPatches {
-    @SpirePatch(
-            clz= AbstractGameAction.class,
-            method=SpirePatch.CLASS
-    )
-    public static class Field
-    {
+
+    @SpirePatch(clz = AbstractGameAction.class, method = SpirePatch.CLASS)
+    public static class Field {
+
         public static SpireField<AbstractPlayer> owner = new SpireField<>(() -> null);
         public static SpireField<AbstractCreature> rowTarget = new SpireField<>(() -> null);
-        public static SpireField<Boolean> alreadyCalledTargetSelectScreen = new SpireField<>(() -> false);
+        public static SpireField<Boolean> alreadyCalledTargetSelectScreen = new SpireField<>(() ->
+            false
+        );
     }
 
-    public static AbstractGameAction setOwnerFromConstructor(AbstractGameAction action,AbstractPlayer owner){
-        Field.owner.set(action,owner);
+    public static AbstractGameAction setOwnerFromConstructor(
+        AbstractGameAction action,
+        AbstractPlayer owner
+    ) {
+        Field.owner.set(action, owner);
         return action;
     }
 }

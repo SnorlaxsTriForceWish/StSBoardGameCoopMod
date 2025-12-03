@@ -7,7 +7,9 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 public class BGEvokeOrbTwiceAction extends AbstractGameAction {
+
     public String description;
+
     public BGEvokeOrbTwiceAction(String description) {
         if (Settings.FAST_MODE) {
             this.duration = Settings.ACTION_DUR_XFAST;
@@ -15,20 +17,20 @@ public class BGEvokeOrbTwiceAction extends AbstractGameAction {
             this.duration = Settings.ACTION_DUR_FAST;
         }
         this.duration = this.startDuration;
-        this.description=description;
+        this.description = description;
         this.actionType = AbstractGameAction.ActionType.DAMAGE;
     }
 
     public void update() {
         if (this.duration == this.startDuration) {
-            OrbSelectScreen.OrbSelectAction ossAction = (target) -> {
+            OrbSelectScreen.OrbSelectAction ossAction = target -> {
                 AbstractPlayer player = AbstractDungeon.player;
                 //addToTop -- reverse order
-                BoardGame.BoardGame.logger.info("BGEvokeOrbTwiceAction: slot "+target);
-                addToTop((AbstractGameAction)new BGEvokeSpecificOrbAction(target));
-                addToTop((AbstractGameAction)new BGEvokeWithoutRemovingSpecificOrbAction(target));
+                BoardGame.BoardGame.logger.info("BGEvokeOrbTwiceAction: slot " + target);
+                addToTop((AbstractGameAction) new BGEvokeSpecificOrbAction(target));
+                addToTop((AbstractGameAction) new BGEvokeWithoutRemovingSpecificOrbAction(target));
             };
-            addToTop((AbstractGameAction)new OrbSelectScreenAction(ossAction,description,false));
+            addToTop((AbstractGameAction) new OrbSelectScreenAction(ossAction, description, false));
         }
         this.tickDuration();
     }

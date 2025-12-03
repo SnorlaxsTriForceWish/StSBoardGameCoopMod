@@ -12,8 +12,11 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 //TODO: End Turn can also be used to sneak in The Bomb damage
 
 public class BGZeroDamagePower extends AbstractBGPower {
+
     public static final String POWER_ID = BoardGame.makeID("BGZeroDamagePower");
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        POWER_ID
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
     private boolean justApplied = false;
@@ -27,24 +30,19 @@ public class BGZeroDamagePower extends AbstractBGPower {
         loadRegion("noattack");
 
         this.type = PowerType.DEBUFF;
-        this.amount=-2;
+        this.amount = -2;
         this.isTurnBased = true;
-
     }
-
-
 
     public void updateDescription() {
-            this.description = DESCRIPTIONS[0];
+        this.description = DESCRIPTIONS[0];
     }
-
-
 
     @Override
     public int onAttackToChangeDamage(DamageInfo info, int damageAmount) {
         //TODO: if info.source==null, this won't get called (game doesn't know whose power list to check)
         // so somewhere in AbstractCreature.damage and/or its overrides, complain loudly if info.source==null
-        if(true){
+        if (true) {
             if (info.type != DamageInfo.DamageType.HP_LOSS) {
                 return 0;
             }
@@ -54,7 +52,7 @@ public class BGZeroDamagePower extends AbstractBGPower {
 
     @Override
     public float atDamageFinalGive(float damage, DamageInfo.DamageType type) {
-        if(true){
+        if (true) {
             if (type != DamageInfo.DamageType.HP_LOSS) {
                 return 0;
             }
@@ -62,12 +60,8 @@ public class BGZeroDamagePower extends AbstractBGPower {
         return damage;
     }
 
-
     @Override
     public void atEndOfRound() {
-        addToBot(new RemoveSpecificPowerAction(owner,owner,this));
+        addToBot(new RemoveSpecificPowerAction(owner, owner, this));
     }
-
 }
-
-

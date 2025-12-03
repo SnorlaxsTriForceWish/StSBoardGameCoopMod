@@ -20,9 +20,12 @@ import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
 import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
 
 public class BGFrost extends CustomOrb {
+
     public static final String ORB_ID = "BoardGame:BGFrost";
 
-    private static final OrbStrings orbString = CardCrawlGame.languagePack.getOrbString("BoardGame:BGFrost");
+    private static final OrbStrings orbString = CardCrawlGame.languagePack.getOrbString(
+        "BoardGame:BGFrost"
+    );
     public static final String[] DESCRIPTIONS = orbString.DESCRIPTION;
 
     private static final int PASSIVE_AMOUNT = 1;
@@ -31,12 +34,20 @@ public class BGFrost extends CustomOrb {
     private boolean hFlip1;
 
     private boolean hFlip2;
-    private float vfxTimer = 1.0F, vfxIntervalMin = 0.15F, vfxIntervalMax = 0.8F;
-
+    private float vfxTimer = 1.0F,
+        vfxIntervalMin = 0.15F,
+        vfxIntervalMax = 0.8F;
 
     public BGFrost() {
-        super(ORB_ID, orbString.NAME, PASSIVE_AMOUNT, EVOKE_AMOUNT, DESCRIPTIONS[0], DESCRIPTIONS[1], "images/orbs/frost.png");
-
+        super(
+            ORB_ID,
+            orbString.NAME,
+            PASSIVE_AMOUNT,
+            EVOKE_AMOUNT,
+            DESCRIPTIONS[0],
+            DESCRIPTIONS[1],
+            "images/orbs/frost.png"
+        );
         updateDescription();
         angle = MathUtils.random(360.0f); // More Animation-related Numbers
         channelAnimTimer = 0.5f;
@@ -61,14 +72,24 @@ public class BGFrost extends CustomOrb {
         }
     }
 
-
     public void updateDescription() {
         applyFocus();
-        this.description = orbString.DESCRIPTION[0] + this.passiveAmount + orbString.DESCRIPTION[1] + this.evokeAmount + orbString.DESCRIPTION[2];
+        this.description =
+            orbString.DESCRIPTION[0] +
+            this.passiveAmount +
+            orbString.DESCRIPTION[1] +
+            this.evokeAmount +
+            orbString.DESCRIPTION[2];
     }
 
     public void onEvoke() {
-        AbstractDungeon.actionManager.addToTop((AbstractGameAction)new GainBlockAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, this.evokeAmount));
+        AbstractDungeon.actionManager.addToTop(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) AbstractDungeon.player,
+                (AbstractCreature) AbstractDungeon.player,
+                this.evokeAmount
+            )
+        );
     }
 
     public void updateAnimation() {
@@ -77,18 +98,30 @@ public class BGFrost extends CustomOrb {
         this.vfxTimer -= Gdx.graphics.getDeltaTime();
         if (this.vfxTimer < 0.0F) {
             AbstractDungeon.effectList.add(new FrostOrbPassiveEffect(this.cX, this.cY));
-            if (MathUtils.randomBoolean())
-                AbstractDungeon.effectList.add(new FrostOrbPassiveEffect(this.cX, this.cY));
+            if (MathUtils.randomBoolean()) AbstractDungeon.effectList.add(
+                new FrostOrbPassiveEffect(this.cX, this.cY)
+            );
             this.vfxTimer = MathUtils.random(this.vfxIntervalMin, this.vfxIntervalMax);
         }
     }
 
     public void onEndOfTurn() {
         float speedTime = 0.6F / AbstractDungeon.player.orbs.size();
-        if (Settings.FAST_MODE)
-            speedTime = 0.0F;
-        AbstractDungeon.actionManager.addToTop((AbstractGameAction)new GainBlockAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, this.passiveAmount, true));
-        AbstractDungeon.actionManager.addToTop((AbstractGameAction)new VFXAction((AbstractGameEffect)new OrbFlareEffect(this, OrbFlareEffect.OrbFlareColor.FROST), speedTime));
+        if (Settings.FAST_MODE) speedTime = 0.0F;
+        AbstractDungeon.actionManager.addToTop(
+            (AbstractGameAction) new GainBlockAction(
+                (AbstractCreature) AbstractDungeon.player,
+                (AbstractCreature) AbstractDungeon.player,
+                this.passiveAmount,
+                true
+            )
+        );
+        AbstractDungeon.actionManager.addToTop(
+            (AbstractGameAction) new VFXAction(
+                (AbstractGameEffect) new OrbFlareEffect(this, OrbFlareEffect.OrbFlareColor.FROST),
+                speedTime
+            )
+        );
     }
 
     public void triggerEvokeAnimation() {
@@ -98,9 +131,60 @@ public class BGFrost extends CustomOrb {
 
     public void render(SpriteBatch sb) {
         sb.setColor(this.c);
-        sb.draw(ImageMaster.FROST_ORB_RIGHT, this.cX - 48.0F + this.bobEffect.y / 4.0F, this.cY - 48.0F + this.bobEffect.y / 4.0F, 48.0F, 48.0F, 96.0F, 96.0F, this.scale, this.scale, 0.0F, 0, 0, 96, 96, this.hFlip1, false);
-        sb.draw(ImageMaster.FROST_ORB_LEFT, this.cX - 48.0F + this.bobEffect.y / 4.0F, this.cY - 48.0F - this.bobEffect.y / 4.0F, 48.0F, 48.0F, 96.0F, 96.0F, this.scale, this.scale, 0.0F, 0, 0, 96, 96, this.hFlip1, false);
-        sb.draw(ImageMaster.FROST_ORB_MIDDLE, this.cX - 48.0F - this.bobEffect.y / 4.0F, this.cY - 48.0F + this.bobEffect.y / 2.0F, 48.0F, 48.0F, 96.0F, 96.0F, this.scale, this.scale, 0.0F, 0, 0, 96, 96, this.hFlip2, false);
+        sb.draw(
+            ImageMaster.FROST_ORB_RIGHT,
+            this.cX - 48.0F + this.bobEffect.y / 4.0F,
+            this.cY - 48.0F + this.bobEffect.y / 4.0F,
+            48.0F,
+            48.0F,
+            96.0F,
+            96.0F,
+            this.scale,
+            this.scale,
+            0.0F,
+            0,
+            0,
+            96,
+            96,
+            this.hFlip1,
+            false
+        );
+        sb.draw(
+            ImageMaster.FROST_ORB_LEFT,
+            this.cX - 48.0F + this.bobEffect.y / 4.0F,
+            this.cY - 48.0F - this.bobEffect.y / 4.0F,
+            48.0F,
+            48.0F,
+            96.0F,
+            96.0F,
+            this.scale,
+            this.scale,
+            0.0F,
+            0,
+            0,
+            96,
+            96,
+            this.hFlip1,
+            false
+        );
+        sb.draw(
+            ImageMaster.FROST_ORB_MIDDLE,
+            this.cX - 48.0F - this.bobEffect.y / 4.0F,
+            this.cY - 48.0F + this.bobEffect.y / 2.0F,
+            48.0F,
+            48.0F,
+            96.0F,
+            96.0F,
+            this.scale,
+            this.scale,
+            0.0F,
+            0,
+            0,
+            96,
+            96,
+            this.hFlip2,
+            false
+        );
         renderText(sb);
         this.hb.render(sb);
     }
@@ -109,9 +193,7 @@ public class BGFrost extends CustomOrb {
         CardCrawlGame.sound.play("ORB_FROST_CHANNEL", 0.1F);
     }
 
-
     public CustomOrb makeCopy() {
         return new BGFrost();
     }
 }
-

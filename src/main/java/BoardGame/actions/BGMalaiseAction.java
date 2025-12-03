@@ -1,4 +1,3 @@
-
 package BoardGame.actions;
 
 import BoardGame.cards.BGRed.BGWhirlwind;
@@ -15,30 +14,34 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class BGMalaiseAction
-        extends AbstractGameAction {
+public class BGMalaiseAction extends AbstractGameAction {
 
     private static final Logger logger = LogManager.getLogger(BGWhirlwind.class.getName());
     public int[] multiDamage;
     private boolean dontExpendResources = false;
     private int energyOnUse = -1;
-    private int extrahits=0;
+    private int extrahits = 0;
 
     private DamageInfo.DamageType damageType;
 
     private AbstractPlayer p;
     private AbstractCreature m;
 
-    public BGMalaiseAction(AbstractPlayer p, AbstractCreature m, boolean dontExpendResources, int energyOnUse, int extrahits) {
+    public BGMalaiseAction(
+        AbstractPlayer p,
+        AbstractCreature m,
+        boolean dontExpendResources,
+        int energyOnUse,
+        int extrahits
+    ) {
         this.p = p;
-        this.m=m;
+        this.m = m;
         this.dontExpendResources = dontExpendResources;
         this.duration = Settings.ACTION_DUR_XFAST;
         this.actionType = ActionType.SPECIAL;
         this.energyOnUse = energyOnUse;
-        this.extrahits=extrahits;
+        this.extrahits = extrahits;
     }
-
 
     public void update() {
         int effect = EnergyPanel.totalCount;
@@ -52,9 +55,23 @@ public class BGMalaiseAction
             this.p.getRelic("Chemical X").flash();
         }
 
-        if(effect>0) {
-            addToTop((AbstractGameAction) new ApplyPowerAction((AbstractCreature) this.m, (AbstractCreature) this.p, (AbstractPower) new BGPoisonPower((AbstractCreature) this.m, this.p, effect), effect));
-            addToTop((AbstractGameAction) new ApplyPowerAction((AbstractCreature) this.m, (AbstractCreature) this.p, (AbstractPower) new BGWeakPower((AbstractCreature) this.m, effect, false), effect));
+        if (effect > 0) {
+            addToTop(
+                (AbstractGameAction) new ApplyPowerAction(
+                    (AbstractCreature) this.m,
+                    (AbstractCreature) this.p,
+                    (AbstractPower) new BGPoisonPower((AbstractCreature) this.m, this.p, effect),
+                    effect
+                )
+            );
+            addToTop(
+                (AbstractGameAction) new ApplyPowerAction(
+                    (AbstractCreature) this.m,
+                    (AbstractCreature) this.p,
+                    (AbstractPower) new BGWeakPower((AbstractCreature) this.m, effect, false),
+                    effect
+                )
+            );
 
             if (!this.dontExpendResources) {
                 this.p.energy.use(this.energyOnUse);
@@ -64,5 +81,3 @@ public class BGMalaiseAction
         this.isDone = true;
     }
 }
-
-

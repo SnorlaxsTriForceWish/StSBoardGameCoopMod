@@ -15,34 +15,34 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 //TODO LATER: change font size, hide 2nd "block" keyword
 
 public class BGEntrench extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGEntrench");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGEntrench"
+    );
     public static final String ID = "BGEntrench";
 
     public BGEntrench() {
-        super("BGEntrench", cardStrings.NAME, "red/skill/entrench", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.SKILL, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
-
+        super(
+            "BGEntrench",
+            cardStrings.NAME,
+            "red/skill/entrench",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.SKILL,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.SELF
+        );
         this.exhaust = true;
     }
 
-
-
-
-
-
-
-
-
-
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DoubleYourBlockAction((AbstractCreature)p));
+        addToBot((AbstractGameAction) new DoubleYourBlockAction((AbstractCreature) p));
     }
-
 
     public void triggerOnEndOfPlayerTurn() {
-        addToTop((AbstractGameAction)new ExhaustAllEtherealAction());
+        addToTop((AbstractGameAction) new ExhaustAllEtherealAction());
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -54,10 +54,7 @@ public class BGEntrench extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGEntrench();
     }
 }
-
-

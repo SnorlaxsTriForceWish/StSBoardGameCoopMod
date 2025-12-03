@@ -21,26 +21,41 @@ import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 
 //TODO: does Ragnarok decrease its damage correctly if it was initially targeted on a Vulnerable enemy before switching targets?
 public class BGRagnarok extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGRagnarok");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGRagnarok"
+    );
     public static final String ID = "BGRagnarok";
 
     public BGRagnarok() {
-        super("BGRagnarok", cardStrings.NAME, "purple/attack/ragnarok", 3, cardStrings.DESCRIPTION, CardType.ATTACK, BGWatcher.Enums.BG_PURPLE, CardRarity.RARE, CardTarget.ENEMY);
-
-        this.baseDamage=1;
-        baseMagicNumber=4;  //5 hits total; 1st hit from playing the targeted card
-        magicNumber=baseMagicNumber;
+        super(
+            "BGRagnarok",
+            cardStrings.NAME,
+            "purple/attack/ragnarok",
+            3,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.RARE,
+            CardTarget.ENEMY
+        );
+        this.baseDamage = 1;
+        baseMagicNumber = 4; //5 hits total; 1st hit from playing the targeted card
+        magicNumber = baseMagicNumber;
     }
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         followupAttack(m);
-        for(int i=0;i<magicNumber;i+=1) {
-            TargetSelectScreen.TargetSelectAction tssAction = (target) -> {
+        for (int i = 0; i < magicNumber; i += 1) {
+            TargetSelectScreen.TargetSelectAction tssAction = target -> {
                 followupAttack(target);
             };
-            addToBot((AbstractGameAction) new TargetSelectScreenAction(tssAction, "Choose the next target for Ragnarok."));
+            addToBot(
+                (AbstractGameAction) new TargetSelectScreenAction(
+                    tssAction,
+                    "Choose the next target for Ragnarok."
+                )
+            );
         }
     }
 
@@ -48,10 +63,23 @@ public class BGRagnarok extends AbstractBGCard {
         if (t != null) {
             this.calculateCardDamage((AbstractMonster) t);
 
-            addToTop(new DamageAction(t, new DamageInfo((AbstractCreature) AbstractDungeon.player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.NONE));
+            addToTop(
+                new DamageAction(
+                    t,
+                    new DamageInfo(
+                        (AbstractCreature) AbstractDungeon.player,
+                        damage,
+                        damageTypeForTurn
+                    ),
+                    AbstractGameAction.AttackEffect.NONE
+                )
+            );
             addToTop((AbstractGameAction) new SFXAction("ORB_LIGHTNING_EVOKE", 0.1F));
-            addToTop((AbstractGameAction) new VFXAction((AbstractGameEffect) new LightningEffect(t.hb.cX, t.hb.cY)));
-
+            addToTop(
+                (AbstractGameAction) new VFXAction(
+                    (AbstractGameEffect) new LightningEffect(t.hb.cX, t.hb.cY)
+                )
+            );
         }
     }
 
@@ -68,6 +96,3 @@ public class BGRagnarok extends AbstractBGCard {
         return new BGRagnarok();
     }
 }
-
-
-

@@ -15,38 +15,48 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGHalt extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGHalt");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGHalt"
+    );
     public static final String ID = "BGHalt";
 
     public BGHalt() {
-        super("BGHalt", cardStrings.NAME, "purple/skill/halt", 0, cardStrings.DESCRIPTION, CardType.SKILL, BGWatcher.Enums.BG_PURPLE, CardRarity.COMMON, CardTarget.SELF);
-
-        this.baseBlock=1;
-        this.baseMagicNumber=1;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGHalt",
+            cardStrings.NAME,
+            "purple/skill/halt",
+            0,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.COMMON,
+            CardTarget.SELF
+        );
+        this.baseBlock = 1;
+        this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber;
     }
 
-
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new BGHaltAction((AbstractCreature)p, this.block, this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new BGHaltAction(
+                (AbstractCreature) p,
+                this.block,
+                this.magicNumber
+            )
+        );
     }
 
     protected void applyPowersToBlock() {
         super.applyPowersToBlock();
-        float tmp=this.baseMagicNumber;
-        for (AbstractPower p : AbstractDungeon.player.powers)
-            tmp = p.modifyBlock(tmp, this);
-        for (AbstractPower p : AbstractDungeon.player.powers)
-            tmp = p.modifyBlockLast(tmp);
-        if (this.baseMagicNumber != MathUtils.floor(tmp))
-            this.isMagicNumberModified = true;
-        if (tmp < 0.0F)
-            tmp = 0.0F;
+        float tmp = this.baseMagicNumber;
+        for (AbstractPower p : AbstractDungeon.player.powers) tmp = p.modifyBlock(tmp, this);
+        for (AbstractPower p : AbstractDungeon.player.powers) tmp = p.modifyBlockLast(tmp);
+        if (this.baseMagicNumber != MathUtils.floor(tmp)) this.isMagicNumberModified = true;
+        if (tmp < 0.0F) tmp = 0.0F;
         this.magicNumber = MathUtils.floor(tmp);
     }
-
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -59,6 +69,3 @@ public class BGHalt extends AbstractBGCard {
         return new BGHalt();
     }
 }
-
-
-

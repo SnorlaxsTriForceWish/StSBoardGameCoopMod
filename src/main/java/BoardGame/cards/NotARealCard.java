@@ -1,4 +1,3 @@
 package BoardGame.cards;
 
-public interface NotARealCard {
-}
+public interface NotARealCard {}

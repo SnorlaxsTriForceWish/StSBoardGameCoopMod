@@ -9,9 +9,12 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 public class BGOrbEvokePower extends AbstractBGPower {
+
     public static final String POWER_ID = "BGOrbEvokePower";
 
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGOrbEvokePower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGOrbEvokePower"
+    );
 
     public static final String NAME = powerStrings.NAME;
 
@@ -34,25 +37,26 @@ public class BGOrbEvokePower extends AbstractBGPower {
     public void stackPower(int stackAmount) {
         this.fontScale = 8.0F;
         this.amount += stackAmount;
-        if (this.amount == 0)
-            addToTop((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, "BGOrbEvokePower"));
-        if (this.amount >= 25)
-            UnlockTracker.unlockAchievement("FOCUSED");
-        if (this.amount >= 999)
-            this.amount = 999;
-        if (this.amount <= -999)
-            this.amount = -999;
+        if (this.amount == 0) addToTop(
+            (AbstractGameAction) new RemoveSpecificPowerAction(
+                this.owner,
+                this.owner,
+                "BGOrbEvokePower"
+            )
+        );
+        if (this.amount >= 25) UnlockTracker.unlockAchievement("FOCUSED");
+        if (this.amount >= 999) this.amount = 999;
+        if (this.amount <= -999) this.amount = -999;
     }
 
     public void reducePower(int reduceAmount) {
         this.fontScale = 8.0F;
         this.amount -= reduceAmount;
-        if (this.amount == 0)
-            addToTop((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, NAME));
-        if (this.amount >= 999)
-            this.amount = 999;
-        if (this.amount <= -999)
-            this.amount = -999;
+        if (this.amount == 0) addToTop(
+            (AbstractGameAction) new RemoveSpecificPowerAction(this.owner, this.owner, NAME)
+        );
+        if (this.amount >= 999) this.amount = 999;
+        if (this.amount <= -999) this.amount = -999;
     }
 
     public void updateDescription() {
@@ -66,4 +70,3 @@ public class BGOrbEvokePower extends AbstractBGPower {
         }
     }
 }
-

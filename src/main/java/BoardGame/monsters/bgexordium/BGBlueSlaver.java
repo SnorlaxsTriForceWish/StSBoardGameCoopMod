@@ -28,7 +28,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BGBlueSlaver extends AbstractBGMonster implements BGDamageIcons, DieControlledMoves {
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("SlaverBlue");
+
+    private static final MonsterStrings monsterStrings =
+        CardCrawlGame.languagePack.getMonsterStrings("SlaverBlue");
     public static final String ID = "BGBlueSlaver";
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
@@ -43,92 +45,142 @@ public class BGBlueSlaver extends AbstractBGMonster implements BGDamageIcons, Di
     private static final int A_2_STAB_DMG = 13;
     private static final int RAKE_DMG = 7;
     private static final int A_2_RAKE_DMG = 8;
-    private int stabDmg = 12; private int rakeDmg = 7;
-    private int weakAmt = 1; private static final byte STAB = 1;
+    private int stabDmg = 12;
+    private int rakeDmg = 7;
+    private int weakAmt = 1;
+    private static final byte STAB = 1;
     private static final byte RAKE = 4;
-
-
 
     //Summoned Act2 Slavers are thankfully identical to Act1 Slavers with the exception of behavior arrangement
     public BGBlueSlaver(float x, float y) {
-        this(x,y,"W2d");
+        this(x, y, "W2d");
     }
+
     public BGBlueSlaver(float x, float y, String behavior) {
         super(NAME, "BGBlueSlaver", 50, 0.0F, 0.0F, 170.0F, 230.0F, null, x, y);
-
         setHp(10);
-        this.behavior=behavior;
+        this.behavior = behavior;
 
+        this.damage.add(new DamageInfo((AbstractCreature) this, 2));
+        this.damage.add(new DamageInfo((AbstractCreature) this, 3));
 
-
-        this.damage.add(new DamageInfo((AbstractCreature)this, 2));
-        this.damage.add(new DamageInfo((AbstractCreature)this, 3));
-
-        loadAnimation("images/monsters/theBottom/blueSlaver/skeleton.atlas", "images/monsters/theBottom/blueSlaver/skeleton.json", 1.0F);
-
-
+        loadAnimation(
+            "images/monsters/theBottom/blueSlaver/skeleton.atlas",
+            "images/monsters/theBottom/blueSlaver/skeleton.json",
+            1.0F
+        );
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
     }
 
-
     public void takeTurn() {
         switch (this.nextMove) {
             case 1: //stab (d)
                 playSfx();
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateSlowAttackAction((AbstractCreature)this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(0), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
-                addToBot((AbstractGameAction)new MakeTempCardInDrawPileAction((AbstractCard)new BGDazed(), 1, false, true));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new AnimateSlowAttackAction((AbstractCreature) this)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(0),
+                        AbstractGameAction.AttackEffect.SLASH_HORIZONTAL
+                    )
+                );
+                addToBot(
+                    (AbstractGameAction) new MakeTempCardInDrawPileAction(
+                        (AbstractCard) new BGDazed(),
+                        1,
+                        false,
+                        true
+                    )
+                );
                 break;
             case 2: //stab (D)
                 playSfx();
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateSlowAttackAction((AbstractCreature)this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(1), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
-                addToBot((AbstractGameAction)new MakeTempCardInDrawPileAction((AbstractCard)new BGDazed(), 1, false, true));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new AnimateSlowAttackAction((AbstractCreature) this)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(1),
+                        AbstractGameAction.AttackEffect.SLASH_HORIZONTAL
+                    )
+                );
+                addToBot(
+                    (AbstractGameAction) new MakeTempCardInDrawPileAction(
+                        (AbstractCard) new BGDazed(),
+                        1,
+                        false,
+                        true
+                    )
+                );
                 break;
-
             case 3: //rake (W)
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateSlowAttackAction((AbstractCreature)this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(0), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)this, (AbstractPower)new BGWeakPower((AbstractCreature)AbstractDungeon.player, this.weakAmt, true), this.weakAmt));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new AnimateSlowAttackAction((AbstractCreature) this)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(0),
+                        AbstractGameAction.AttackEffect.SLASH_DIAGONAL
+                    )
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ApplyPowerAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        (AbstractCreature) this,
+                        (AbstractPower) new BGWeakPower(
+                            (AbstractCreature) AbstractDungeon.player,
+                            this.weakAmt,
+                            true
+                        ),
+                        this.weakAmt
+                    )
+                );
                 break;
-
             case 4: //sweep (2)
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateSlowAttackAction((AbstractCreature)this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(0), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new AnimateSlowAttackAction((AbstractCreature) this)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(0),
+                        AbstractGameAction.AttackEffect.SLASH_HORIZONTAL
+                    )
+                );
                 break;
             case 5: //sweep (3)
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateSlowAttackAction((AbstractCreature)this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-                        .get(1), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new AnimateSlowAttackAction((AbstractCreature) this)
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new DamageAction(
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.damage.get(1),
+                        AbstractGameAction.AttackEffect.SLASH_HORIZONTAL
+                    )
+                );
                 break;
-
-
-
-
         }
 
-
-
-
-
-
-
-
-        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new RollMoveAction(this));
+        AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new RollMoveAction(this));
     }
 
     private void playSfx() {
         int roll = MathUtils.random(1);
         if (roll == 0) {
-            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("VO_SLAVERBLUE_1A"));
+            AbstractDungeon.actionManager.addToBottom(
+                (AbstractGameAction) new SFXAction("VO_SLAVERBLUE_1A")
+            );
         } else {
-            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("VO_SLAVERBLUE_1B"));
+            AbstractDungeon.actionManager.addToBottom(
+                (AbstractGameAction) new SFXAction("VO_SLAVERBLUE_1B")
+            );
         }
     }
 
@@ -141,7 +193,6 @@ public class BGBlueSlaver extends AbstractBGMonster implements BGDamageIcons, Di
         }
     }
 
-
     protected void getMove(int num) {
         setMove((byte) 0, AbstractMonster.Intent.NONE);
     }
@@ -150,37 +201,25 @@ public class BGBlueSlaver extends AbstractBGMonster implements BGDamageIcons, Di
         final Logger logger = LogManager.getLogger(BoardGame.class.getName());
         //logger.info("Monster: TheDie "+ TheDie.monsterRoll);
         char move = '-';
-        if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2)
-            move = this.behavior.charAt(0);
-        else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4)
-            move = this.behavior.charAt(1);
-        else if (TheDie.monsterRoll == 5 || TheDie.monsterRoll == 6)
-            move = this.behavior.charAt(2);
-
+        if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);
+        else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4) move = this.behavior.charAt(1);
+        else if (TheDie.monsterRoll == 5 || TheDie.monsterRoll == 6) move = this.behavior.charAt(2);
 
         if (move == 'd') {
             setMove("Stab", (byte) 1, AbstractMonster.Intent.ATTACK_DEBUFF, 2);
-        }else if (move == 'D') {
+        } else if (move == 'D') {
             setMove("Stab", (byte) 2, AbstractMonster.Intent.ATTACK_DEBUFF, 3);
-        } else if (move=='W'){
-            setMove(MOVES[0], (byte)3, AbstractMonster.Intent.ATTACK_DEBUFF, 2);
-        } else if (move=='2'){
+        } else if (move == 'W') {
+            setMove(MOVES[0], (byte) 3, AbstractMonster.Intent.ATTACK_DEBUFF, 2);
+        } else if (move == '2') {
             setMove((byte) 4, AbstractMonster.Intent.ATTACK, 2);
-        } else if (move=='3'){
+        } else if (move == '3') {
             setMove((byte) 5, AbstractMonster.Intent.ATTACK, 3);
         }
-
     }
-
-
-
-
 
     public void die() {
         super.die();
         playDeathSfx();
     }
 }
-
-
-

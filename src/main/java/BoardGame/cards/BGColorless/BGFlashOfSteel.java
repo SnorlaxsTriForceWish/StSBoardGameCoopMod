@@ -14,44 +14,49 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGFlashOfSteel extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGFlash of Steel");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGFlash of Steel"
+    );
     public static final String ID = "BGFlash of Steel";
 
     public BGFlashOfSteel() {
-        super("BGFlash of Steel", cardStrings.NAME, "colorless/attack/flash_of_steel", 0, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGColorless.Enums.CARD_COLOR, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.ENEMY);
-
-
-
-
-
-
-
-
-
-        this.exhaust=true;
+        super(
+            "BGFlash of Steel",
+            cardStrings.NAME,
+            "colorless/attack/flash_of_steel",
+            0,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGColorless.Enums.CARD_COLOR,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.ENEMY
+        );
+        this.exhaust = true;
         this.baseDamage = 1;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
-        addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)p, 1));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.SLASH_HORIZONTAL
+            )
+        );
+        addToBot((AbstractGameAction) new DrawCardAction((AbstractCreature) p, 1));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
             upgradeName();
-            this.exhaust=false;
+            this.exhaust = false;
             this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGFlashOfSteel();
     }
 }
-
-

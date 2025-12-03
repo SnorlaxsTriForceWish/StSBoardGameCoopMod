@@ -9,7 +9,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class BGShiftingPower extends AbstractBGPower {
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGShiftingPower");
+
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGShiftingPower"
+    );
     public static final String POWER_ID = "BGShiftingPower";
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
@@ -23,10 +26,11 @@ public class BGShiftingPower extends AbstractBGPower {
         loadRegion("shift");
     }
 
-
     public int onAttacked(DamageInfo info, int damageAmount) {
         if (damageAmount > 0) {
-            addToTop((AbstractGameAction)new GainBlockAction(AbstractDungeon.player,damageAmount));
+            addToTop(
+                (AbstractGameAction) new GainBlockAction(AbstractDungeon.player, damageAmount)
+            );
 
             flash();
         }
@@ -34,10 +38,7 @@ public class BGShiftingPower extends AbstractBGPower {
         return damageAmount;
     }
 
-
     public void updateDescription() {
         this.description = DESCRIPTIONS[1];
     }
 }
-
-

@@ -12,21 +12,32 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGStormOfSteel extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGStormOfSteel");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGStormOfSteel"
+    );
     public static final String ID = "BGStormOfSteel";
 
     public BGStormOfSteel() {
-        super("BGStormOfSteel", cardStrings.NAME, "green/skill/storm_of_steel", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.RARE, CardTarget.SELF);
-
-        this.baseMagicNumber=0;
-        this.magicNumber=this.baseMagicNumber;
-
+        super(
+            "BGStormOfSteel",
+            cardStrings.NAME,
+            "green/skill/storm_of_steel",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
+        this.baseMagicNumber = 0;
+        this.magicNumber = this.baseMagicNumber;
     }
 
-
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new BGStormOfSteelAction(AbstractDungeon.player,this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new BGStormOfSteelAction(AbstractDungeon.player, this.magicNumber)
+        );
     }
 
     public void upgrade() {
@@ -38,15 +49,7 @@ public class BGStormOfSteel extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGStormOfSteel();
     }
-
-
-
-
-
 }
-
-

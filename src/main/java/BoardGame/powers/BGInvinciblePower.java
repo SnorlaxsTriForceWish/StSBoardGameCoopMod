@@ -9,7 +9,10 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGInvinciblePower extends AbstractBGPower {
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGInvinciblePower");
+
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGInvinciblePower"
+    );
     public static final String POWER_ID = "BGInvinciblePower";
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
@@ -28,7 +31,7 @@ public class BGInvinciblePower extends AbstractBGPower {
     public void stackPower(int stackAmount) {
         //do nothing
         this.fontScale = 8.0F;
-        this.amount=1;
+        this.amount = 1;
     }
 
     public void playApplyPowerSfx() {
@@ -43,20 +46,26 @@ public class BGInvinciblePower extends AbstractBGPower {
         }
     }
 
-
-
-
-    @SpirePatch2(clz = AbstractCreature.class, method = "decrementBlock",
-            paramtypez={DamageInfo.class, int.class})
+    @SpirePatch2(
+        clz = AbstractCreature.class,
+        method = "decrementBlock",
+        paramtypez = { DamageInfo.class, int.class }
+    )
     public static class InvincibleDecrementBlockPatch {
+
         @SpirePostfixPatch
-        public static int decrementBlock(int __result,AbstractCreature __instance, DamageInfo info, int damageAmount) {
-            if(__instance.hasPower("BGInvinciblePower")){
-                AbstractPower p=__instance.getPower("BGInvinciblePower");
-                if(__result>p.amount){
-                    __result=p.amount;
+        public static int decrementBlock(
+            int __result,
+            AbstractCreature __instance,
+            DamageInfo info,
+            int damageAmount
+        ) {
+            if (__instance.hasPower("BGInvinciblePower")) {
+                AbstractPower p = __instance.getPower("BGInvinciblePower");
+                if (__result > p.amount) {
+                    __result = p.amount;
                 }
-                p.amount-=__result;
+                p.amount -= __result;
                 p.updateDescription();
             }
             return __result;
@@ -64,7 +73,4 @@ public class BGInvinciblePower extends AbstractBGPower {
     }
 
     //Weak immunity is handled in BGWeakPower
-
 }
-
-

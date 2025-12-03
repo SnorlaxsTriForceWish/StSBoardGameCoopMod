@@ -10,65 +10,78 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class BGVajra
-        extends AbstractBGRelic implements DieControlledRelic , NilrysCodexCompatible {
+public class BGVajra extends AbstractBGRelic implements DieControlledRelic, NilrysCodexCompatible {
+
     public static final String ID = "BGVajra";
 
     public BGVajra() {
-        super("BGVajra", "vajra.png", AbstractRelic.RelicTier.COMMON, AbstractRelic.LandingSound.SOLID);
+        super(
+            "BGVajra",
+            "vajra.png",
+            AbstractRelic.RelicTier.COMMON,
+            AbstractRelic.LandingSound.SOLID
+        );
     }
-    public int getPrice() {return 7;}
+
+    public int getPrice() {
+        return 7;
+    }
+
     private static final int STR_AMT = 1;
-
-
 
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0];
     }
 
-
-
-//    public void atTurnStart() {
-//
-//            flash();
-//            addToBot((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
-//            addToBot((AbstractGameAction)new GainEnergyAction(ENERGY_AMT));
-//
-//    }
-
+    //    public void atTurnStart() {
+    //
+    //            flash();
+    //            addToBot((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
+    //            addToBot((AbstractGameAction)new GainEnergyAction(ENERGY_AMT));
+    //
+    //    }
 
     public AbstractRelic makeCopy() {
         return new BGVajra();
     }
 
-    public String getQuickSummary(){if(TheDie.monsterRoll==2)return "1 #yStrength";
-    else return "";}
-    public void checkDieAbility(){
-        if(TheDie.finalRelicRoll==2){
+    public String getQuickSummary() {
+        if (TheDie.monsterRoll == 2) return "1 #yStrength";
+        else return "";
+    }
+
+    public void checkDieAbility() {
+        if (TheDie.finalRelicRoll == 2) {
             activateDieAbility();
         }
     }
 
-    public void activateDieAbility(){
+    public void activateDieAbility() {
         flash();
-        addToBot((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
-        addToBot(new GainTemporaryStrengthIfNotCappedAction(AbstractDungeon.player,STR_AMT));
+        addToBot(
+            (AbstractGameAction) new RelicAboveCreatureAction(
+                (AbstractCreature) AbstractDungeon.player,
+                this
+            )
+        );
+        addToBot(new GainTemporaryStrengthIfNotCappedAction(AbstractDungeon.player, STR_AMT));
 
         stopPulse();
     }
 
-    public void Trigger2Ability(){
+    public void Trigger2Ability() {
         activateDieAbility();
     }
 
     private boolean isPlayerTurn = false; // We should make sure the relic is only activateable during our turn, not the enemies'.
 
     @Override
-    public void onRightClick() {// On right click
-        if (!isObtained || !isPlayerTurn ) {
+    public void onRightClick() {
+        // On right click
+        if (!isObtained || !isPlayerTurn) {
             return;
         }
-        addToBot((AbstractGameAction)new BGActivateDieAbilityAction(this));
+        addToBot((AbstractGameAction) new BGActivateDieAbilityAction(this));
     }
 
     public void atTurnStart() {
@@ -86,5 +99,3 @@ public class BGVajra
         stopPulse(); // Don't keep pulsing past the victory screen/outside of combat.
     }
 }
-
-

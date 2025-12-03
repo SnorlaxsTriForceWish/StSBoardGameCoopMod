@@ -8,11 +8,14 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 //TODO: Golden Ticket is actually a TICKET card, not a POWER card
 
 public class BGGoldenTicket_W extends BGGoldenTicket {
+
     public static final String ID = BoardGame.makeID("GoldenTicket_W");
     public static final CardColor COLOR = BGWatcher.Enums.BG_PURPLE;
-    public BGGoldenTicket_W()  {
+
+    public BGGoldenTicket_W() {
         super(ID, COLOR);
     }
+
     public AbstractCard makeCopy() {
         return new BGGoldenTicket_W();
     }

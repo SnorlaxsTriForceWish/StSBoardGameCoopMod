@@ -1,6 +1,5 @@
 package BoardGame.powers;
 
-
 import BoardGame.actions.TargetSelectScreenAction;
 import BoardGame.cards.AbstractBGCard;
 import BoardGame.screen.TargetSelectScreen;
@@ -18,8 +17,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BGDoubleTapPower_DEPRECATED extends AbstractBGPower {
+
     public static final String POWER_ID = "BGDouble Tap";
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("Double Tap");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "Double Tap"
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
@@ -34,14 +36,12 @@ public class BGDoubleTapPower_DEPRECATED extends AbstractBGPower {
         logger.info("BGDOUBLETAPPOWER.CONSTRUCTOR");
     }
 
-
     public void updateDescription() {
         this.description = DESCRIPTIONS[0];
-
     }
 
     public void stackPower(int stackAmount) {
-        if(stackAmount>0) this.amount=1;
+        if (stackAmount > 0) this.amount = 1;
         //this.fontScale = 8.0F;
     }
 
@@ -54,8 +54,6 @@ public class BGDoubleTapPower_DEPRECATED extends AbstractBGPower {
             flash();
             //AbstractMonster m = null;
 
-
-
             AbstractCard tmp = card.makeSameInstanceOf();
             AbstractDungeon.player.limbo.addToBottom(tmp);
             tmp.current_x = card.current_x;
@@ -66,16 +64,19 @@ public class BGDoubleTapPower_DEPRECATED extends AbstractBGPower {
             tmp.purgeOnUse = true;
 
             logger.info("DoubleTapPower instanceof check");
-            if(card instanceof AbstractBGCard){
-                logger.info("set old card's copy reference: "+tmp);
-                ((AbstractBGCard)card).copiedCard=(AbstractBGCard)tmp;
+            if (card instanceof AbstractBGCard) {
+                logger.info("set old card's copy reference: " + tmp);
+                ((AbstractBGCard) card).copiedCard = (AbstractBGCard) tmp;
             }
 
             //AbstractDungeon.actionManager.addCardQueueItem(new CardQueueItem(tmp, m, card.energyOnUse, true, true), true);
 
             //logger.info("DoubleTap card target type: "+card.target);
-            if(card.target== AbstractCard.CardTarget.ENEMY || card.target== AbstractCard.CardTarget.SELF_AND_ENEMY) {
-                TargetSelectScreen.TargetSelectAction tssAction = (target) -> {
+            if (
+                card.target == AbstractCard.CardTarget.ENEMY ||
+                card.target == AbstractCard.CardTarget.SELF_AND_ENEMY
+            ) {
+                TargetSelectScreen.TargetSelectAction tssAction = target -> {
                     //logger.info("DoubleTap tssAction.execute");
                     if (target != null) {
                         tmp.calculateCardDamage(target);
@@ -84,25 +85,36 @@ public class BGDoubleTapPower_DEPRECATED extends AbstractBGPower {
                     addToBot((AbstractGameAction) new NewQueueCardAction(tmp, target, true, true));
                 };
                 //logger.info("DoubleTap addToTop");
-                addToBot((AbstractGameAction)new TargetSelectScreenAction(tssAction,"Choose a target for the copy of "+card.name+"."));
-            }else{
+                addToBot(
+                    (AbstractGameAction) new TargetSelectScreenAction(
+                        tssAction,
+                        "Choose a target for the copy of " + card.name + "."
+                    )
+                );
+            } else {
                 addToBot((AbstractGameAction) new NewQueueCardAction(tmp, null, true, true));
             }
 
-
             this.amount--;
             if (this.amount == 0) {
-                addToBot((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, "BGDouble Tap"));
+                addToBot(
+                    (AbstractGameAction) new RemoveSpecificPowerAction(
+                        this.owner,
+                        this.owner,
+                        "BGDouble Tap"
+                    )
+                );
             }
         }
     }
 
-
     public void atEndOfTurn(boolean isPlayer) {
-        if (isPlayer)
-            addToBot((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, "BGDouble Tap"));
+        if (isPlayer) addToBot(
+            (AbstractGameAction) new RemoveSpecificPowerAction(
+                this.owner,
+                this.owner,
+                "BGDouble Tap"
+            )
+        );
     }
 }
-
-
-

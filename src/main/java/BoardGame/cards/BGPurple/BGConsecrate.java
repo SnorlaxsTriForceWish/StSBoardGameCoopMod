@@ -16,20 +16,45 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.CleaveEffect;
 
 public class BGConsecrate extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGConsecrate");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGConsecrate"
+    );
     public static final String ID = "BGConsecrate";
 
     public BGConsecrate() {
-        super("BGConsecrate", cardStrings.NAME, "purple/attack/consecrate", 0, cardStrings.DESCRIPTION, CardType.ATTACK, BGWatcher.Enums.BG_PURPLE, CardRarity.COMMON, CardTarget.ALL_ENEMY);
+        super(
+            "BGConsecrate",
+            cardStrings.NAME,
+            "purple/attack/consecrate",
+            0,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.COMMON,
+            CardTarget.ALL_ENEMY
+        );
         this.baseDamage = 1;
         this.isMultiDamage = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new SFXAction("ATTACK_HEAVY"));
-        addToBot((AbstractGameAction)new VFXAction((AbstractCreature)p, (AbstractGameEffect)new CleaveEffect(), 0.1F));
-        addToBot((AbstractGameAction)new DamageAllEnemiesAction((AbstractCreature)p,
-                this.multiDamage, this.damageTypeForTurn, AbstractGameAction.AttackEffect.NONE));
+        addToBot((AbstractGameAction) new SFXAction("ATTACK_HEAVY"));
+        addToBot(
+            (AbstractGameAction) new VFXAction(
+                (AbstractCreature) p,
+                (AbstractGameEffect) new CleaveEffect(),
+                0.1F
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new DamageAllEnemiesAction(
+                (AbstractCreature) p,
+                this.multiDamage,
+                this.damageTypeForTurn,
+                AbstractGameAction.AttackEffect.NONE
+            )
+        );
     }
 
     public void upgrade() {
@@ -43,4 +68,3 @@ public class BGConsecrate extends AbstractBGCard {
         return new BGConsecrate();
     }
 }
-

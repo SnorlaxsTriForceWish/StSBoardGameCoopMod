@@ -7,26 +7,28 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import java.util.ArrayList;
 
-public class BGChooseOneAttackAction
-        extends AbstractGameAction {
+public class BGChooseOneAttackAction extends AbstractGameAction {
+
     private ArrayList<AbstractCard> choices;
     private AbstractPlayer p;
     private AbstractMonster m;
 
-    public BGChooseOneAttackAction(ArrayList<AbstractBGAttackCardChoice> choices, AbstractPlayer p, AbstractMonster m) {
+    public BGChooseOneAttackAction(
+        ArrayList<AbstractBGAttackCardChoice> choices,
+        AbstractPlayer p,
+        AbstractMonster m
+    ) {
         this.duration = Settings.ACTION_DUR_FAST;
         this.choices = new ArrayList<>();
-        for(AbstractBGAttackCardChoice card : choices){
-            card.setTargets(p,m);
+        for (AbstractBGAttackCardChoice card : choices) {
+            card.setTargets(p, m);
             this.choices.add(card);
         }
-        this.p=p;
-        this.m=m;
+        this.p = p;
+        this.m = m;
     }
-
 
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
@@ -38,5 +40,3 @@ public class BGChooseOneAttackAction
         tickDuration();
     }
 }
-
-

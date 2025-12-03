@@ -13,21 +13,47 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGMultiCast extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGMultiCast");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGMultiCast"
+    );
     public static final String ID = "BGMultiCast";
 
     public BGMultiCast() {
-        super("BGMultiCast", cardStrings.NAME, "blue/skill/multicast", -1, cardStrings.DESCRIPTION, CardType.SKILL, BGDefect.Enums.BG_BLUE, CardRarity.RARE, CardTarget.NONE);
+        super(
+            "BGMultiCast",
+            cardStrings.NAME,
+            "blue/skill/multicast",
+            -1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.RARE,
+            CardTarget.NONE
+        );
         this.showEvokeValue = true;
-        this.baseMagicNumber=0;
-        this.magicNumber=this.baseMagicNumber;
+        this.baseMagicNumber = 0;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         BGXCostCardAction.XCostInfo info = BGXCostCardAction.preProcessCard(this);
 
-        addToBot((AbstractGameAction)new BGXCostCardAction(this, info,
-                (e,d)->addToTop((AbstractGameAction)new BGMulticastAction(AbstractDungeon.player, m, this.damage, this.damageTypeForTurn, d, e, this.magicNumber))));
+        addToBot(
+            (AbstractGameAction) new BGXCostCardAction(this, info, (e, d) ->
+                addToTop(
+                    (AbstractGameAction) new BGMulticastAction(
+                        AbstractDungeon.player,
+                        m,
+                        this.damage,
+                        this.damageTypeForTurn,
+                        d,
+                        e,
+                        this.magicNumber
+                    )
+                )
+            )
+        );
     }
 
     public void upgrade() {

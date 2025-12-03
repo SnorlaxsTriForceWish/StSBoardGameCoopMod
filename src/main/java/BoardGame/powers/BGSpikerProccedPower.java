@@ -18,8 +18,11 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 //BGSpikerProccedPower has been rewritten to apply to the PLAYER instead of the MONSTER
 //  in order to fix an inconsistency with the end-of-combat referee whistle.
 public class BGSpikerProccedPower extends AbstractBGPower implements InvisiblePower {
+
     public static final String POWER_ID = BoardGame.makeID("BGSpikerProcced");
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        POWER_ID
+    );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
     private boolean justApplied = false;
@@ -33,9 +36,9 @@ public class BGSpikerProccedPower extends AbstractBGPower implements InvisiblePo
         updateDescription();
         loadRegion("thorns");
 
-//        if (isSourceMonster) {
-//            this.justApplied = true;
-//        }
+        //        if (isSourceMonster) {
+        //            this.justApplied = true;
+        //        }
 
         this.type = AbstractPower.PowerType.BUFF;
         this.isTurnBased = false;
@@ -44,25 +47,30 @@ public class BGSpikerProccedPower extends AbstractBGPower implements InvisiblePo
     }
 
     public void stackPower(int stackAmount) {
-        this.amount=stackAmount;
+        this.amount = stackAmount;
     }
 
     public void onAfterUseCard(AbstractCard card, UseCardAction action) {
         //if monster, wears off after card resolves
         addToBot(new BGForcedWaitAction(1.0f));
-        addToBot((AbstractGameAction) new DamageAction((AbstractCreature) AbstractDungeon.player, new DamageInfo(this.owner, this.amount,
-                DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL, true));
-        addToBot((AbstractGameAction) new RemoveSpecificPowerAction(this.owner, this.owner, "BGSpikerProcced"));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) AbstractDungeon.player,
+                new DamageInfo(this.owner, this.amount, DamageInfo.DamageType.THORNS),
+                AbstractGameAction.AttackEffect.SLASH_HORIZONTAL,
+                true
+            )
+        );
+        addToBot(
+            (AbstractGameAction) new RemoveSpecificPowerAction(
+                this.owner,
+                this.owner,
+                "BGSpikerProcced"
+            )
+        );
     }
 
     public void updateDescription() {
-        this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];;
+        this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
-
-
-
-
-
 }
-
-

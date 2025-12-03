@@ -7,15 +7,22 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
+public class BGGoldenIdol extends AbstractBGRelic {
 
-public class BGGoldenIdol
-        extends AbstractBGRelic {
     public static final String ID = "BGGolden Idol";
 
     public BGGoldenIdol() {
-        super("BGGolden Idol", "goldenIdolRelic.png", AbstractRelic.RelicTier.UNCOMMON, AbstractRelic.LandingSound.HEAVY);
+        super(
+            "BGGolden Idol",
+            "goldenIdolRelic.png",
+            AbstractRelic.RelicTier.UNCOMMON,
+            AbstractRelic.LandingSound.HEAVY
+        );
     }
-    public int getPrice() {return 4;}
+
+    public int getPrice() {
+        return 4;
+    }
 
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0];
@@ -25,16 +32,11 @@ public class BGGoldenIdol
     public void onVictory() {
         flash();
         AbstractPlayer p = AbstractDungeon.player;
-        addToTop((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)p, this));
-        if(AbstractDungeon.getCurrRoom()!=null)
-        AbstractDungeon.player.gainGold(1);
+        addToTop((AbstractGameAction) new RelicAboveCreatureAction((AbstractCreature) p, this));
+        if (AbstractDungeon.getCurrRoom() != null) AbstractDungeon.player.gainGold(1);
     }
-
-
 
     public AbstractRelic makeCopy() {
         return new BGGoldenIdol();
     }
 }
-
-

@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 public class BGClawAction extends AbstractGameAction {
+
     private AbstractCard card;
 
     public BGClawAction(AbstractCard card, int amount) {
@@ -43,7 +44,6 @@ public class BGClawAction extends AbstractGameAction {
         this.isDone = true;
     }
 }
-
 
 /* Location:              C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\desktop-1.0.jar!\com\megacrit\cardcrawl\actions\defect\GashAction.class
  * Java compiler version: 8 (52.0)

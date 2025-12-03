@@ -1,5 +1,6 @@
 package BoardGame.events;
 
+import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.getRewardCards;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -11,21 +12,18 @@ import com.megacrit.cardcrawl.helpers.PotionHelper;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.vfx.RainingGoldEffect;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
+public class BGKnowingSkull extends AbstractImageEvent {
 
-import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.getRewardCards;
-
-
-public class BGKnowingSkull
-        extends AbstractImageEvent
-{
     private static final Logger logger = LogManager.getLogger(BGKnowingSkull.class.getName());
     public static final String ID = "BGKnowing Skull";
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGKnowing Skull");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGKnowing Skull"
+    );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
@@ -40,7 +38,10 @@ public class BGKnowingSkull
 
     private int potionCost;
     private int cardCost;
-    private CurScreen screen = CurScreen.INTRO_1; private int goldCost; private int leaveCost; private static final int GOLD_REWARD = 90;
+    private CurScreen screen = CurScreen.INTRO_1;
+    private int goldCost;
+    private int leaveCost;
+    private static final int GOLD_REWARD = 90;
     private String optionsChosen = "";
 
     private int damageTaken;
@@ -50,21 +51,23 @@ public class BGKnowingSkull
     private ArrayList<Reward> options = new ArrayList<>();
 
     private enum CurScreen {
-        INTRO_1, ASK, COMPLETE;
+        INTRO_1,
+        ASK,
+        COMPLETE,
     }
 
     private enum Reward {
-        POTION, LEAVE, GOLD, CARD;
+        POTION,
+        LEAVE,
+        GOLD,
+        CARD,
     }
 
-    private boolean pickedPotion=false;
-    private boolean pickedGold=false;
-    private boolean pickedCard=false;
+    private boolean pickedPotion = false;
+    private boolean pickedGold = false;
+    private boolean pickedCard = false;
     //private boolean waitingForCardChoice=false;
-    private int rewardsPicked=0;
-
-
-
+    private int rewardsPicked = 0;
 
     public BGKnowingSkull() {
         super(NAME, INTRO_MSG, "images/events/knowingSkull.jpg");
@@ -85,13 +88,11 @@ public class BGKnowingSkull
         this.potions = new ArrayList<>();
     }
 
-
     public void onEnterRoom() {
         if (Settings.AMBIANCE_ON) {
             CardCrawlGame.sound.play("EVENT_SKULL");
         }
     }
-
 
     protected void buttonEffect(int buttonPressed) {
         switch (this.screen) {
@@ -99,17 +100,19 @@ public class BGKnowingSkull
                 this.imageEventText.updateBodyText(INTRO_2_MSG);
                 this.imageEventText.clearAllDialogs();
                 this.imageEventText.setDialogOption(OPTIONS[4] + this.potionCost + OPTIONS[1]);
-                this.imageEventText.setDialogOption(OPTIONS[5] + 3 + OPTIONS[6] + this.goldCost + OPTIONS[1]);
+                this.imageEventText.setDialogOption(
+                    OPTIONS[5] + 3 + OPTIONS[6] + this.goldCost + OPTIONS[1]
+                );
                 this.imageEventText.setDialogOption(OPTIONS[3] + this.cardCost + OPTIONS[1]);
                 //this.imageEventText.setDialogOption(OPTIONS[7]);
                 this.screen = CurScreen.ASK;
                 break;
             case ASK:
                 CardCrawlGame.sound.play("DEBUFF_2");
-                int cost=0;
-                if(rewardsPicked>=2){
+                int cost = 0;
+                if (rewardsPicked >= 2) {
                     setLeave();
-                }else {
+                } else {
                     switch (buttonPressed) {
                         case 0:
                             if (!pickedPotion) {
@@ -142,14 +145,27 @@ public class BGKnowingSkull
                             }
                             break;
                     }
-
                 }
                 //setLeave();
                 break;
-
-
             case COMPLETE:
-                logMetric("Knowing Skull", this.optionsChosen, this.cards, null, null, null, null, this.potions, null, this.damageTaken, 0, 0, 0, this.goldEarned, 0);
+                logMetric(
+                    "Knowing Skull",
+                    this.optionsChosen,
+                    this.cards,
+                    null,
+                    null,
+                    null,
+                    null,
+                    this.potions,
+                    null,
+                    this.damageTaken,
+                    0,
+                    0,
+                    0,
+                    this.goldEarned,
+                    0
+                );
 
                 openMap();
                 break;
@@ -163,7 +179,9 @@ public class BGKnowingSkull
         if (rewardsPicked >= 2) nextmsg = DESCRIPTIONS[8];
         switch (slot) {
             case 0:
-                AbstractDungeon.player.damage(new DamageInfo(null, this.potionCost, DamageInfo.DamageType.HP_LOSS));
+                AbstractDungeon.player.damage(
+                    new DamageInfo(null, this.potionCost, DamageInfo.DamageType.HP_LOSS)
+                );
                 this.damageTaken += this.potionCost;
                 this.potionCost++;
                 this.optionsChosen += "POTION ";
@@ -181,9 +199,10 @@ public class BGKnowingSkull
                 this.potions.add(p.ID);
                 AbstractDungeon.player.obtainPotion(p);
                 break;
-
             case 1:
-                AbstractDungeon.player.damage(new DamageInfo(null, this.goldCost, DamageInfo.DamageType.HP_LOSS));
+                AbstractDungeon.player.damage(
+                    new DamageInfo(null, this.goldCost, DamageInfo.DamageType.HP_LOSS)
+                );
                 this.damageTaken += this.goldCost;
                 this.goldCost++;
                 this.optionsChosen += "GOLD ";
@@ -193,33 +212,39 @@ public class BGKnowingSkull
                 this.goldEarned += 3;
                 break;
             case 2:
-                AbstractDungeon.player.damage(new DamageInfo(null, this.cardCost, DamageInfo.DamageType.HP_LOSS));
+                AbstractDungeon.player.damage(
+                    new DamageInfo(null, this.cardCost, DamageInfo.DamageType.HP_LOSS)
+                );
                 this.damageTaken += this.cardCost;
                 this.cardCost++;
                 this.optionsChosen += "CARD ";
                 this.imageEventText.updateBodyText(CARD_MSG + nextmsg);
                 //this.waitingForCardChoice = true;
-                AbstractDungeon.cardRewardScreen.open(getRewardCards(), null, "Choose a Card");  //TODO: localization
-//            c = AbstractDungeon.getCard(AbstractCard.CardRarity.COMMON);
-//            this.cards.add(c.cardID);
-//            AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(c, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
-//                AbstractBGDungeon.removeCardFromRewardDeck(c);
+                AbstractDungeon.cardRewardScreen.open(getRewardCards(), null, "Choose a Card"); //TODO: localization
+                //            c = AbstractDungeon.getCard(AbstractCard.CardRarity.COMMON);
+                //            this.cards.add(c.cardID);
+                //            AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(c, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+                //                AbstractBGDungeon.removeCardFromRewardDeck(c);
                 break;
-
             default:
                 logger.info("This should never happen.");
                 break;
         }
         this.imageEventText.clearAllDialogs();
         if (rewardsPicked < 2) {
-            this.imageEventText.setDialogOption(!pickedPotion ? OPTIONS[4] + this.potionCost + OPTIONS[1] : OPTIONS[7]);
-            this.imageEventText.setDialogOption(!pickedGold ? OPTIONS[5] + 2 + OPTIONS[6] + this.goldCost + OPTIONS[1] : OPTIONS[7]);
-            this.imageEventText.setDialogOption(!pickedCard ? OPTIONS[3] + this.cardCost + OPTIONS[1] : OPTIONS[7]);
+            this.imageEventText.setDialogOption(
+                !pickedPotion ? OPTIONS[4] + this.potionCost + OPTIONS[1] : OPTIONS[7]
+            );
+            this.imageEventText.setDialogOption(
+                !pickedGold ? OPTIONS[5] + 2 + OPTIONS[6] + this.goldCost + OPTIONS[1] : OPTIONS[7]
+            );
+            this.imageEventText.setDialogOption(
+                !pickedCard ? OPTIONS[3] + this.cardCost + OPTIONS[1] : OPTIONS[7]
+            );
         } else {
             this.imageEventText.clearRemainingOptions();
             this.imageEventText.setDialogOption(OPTIONS[7]);
         }
-
     }
 
     private void setLeave() {
@@ -231,8 +256,5 @@ public class BGKnowingSkull
 
     public void update() {
         super.update();
-
     }
 }
-
-

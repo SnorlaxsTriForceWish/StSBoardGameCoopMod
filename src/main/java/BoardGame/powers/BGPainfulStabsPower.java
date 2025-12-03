@@ -12,7 +12,10 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class BGPainfulStabsPower extends AbstractBGPower {
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:BGPainful Stabs");
+
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
+        "BoardGame:BGPainful Stabs"
+    );
     public static final String POWER_ID = "BGPainful Stabs";
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
@@ -26,15 +29,18 @@ public class BGPainfulStabsPower extends AbstractBGPower {
         loadRegion("painfulStabs");
     }
 
-
     public void updateDescription() {
         this.description = DESCRIPTIONS[0];
     }
 
     public void onInflictDamage(DamageInfo info, int damageAmount, AbstractCreature target) {
-        if (damageAmount > 0 && info.type != DamageInfo.DamageType.THORNS)
-            addToBot((AbstractGameAction)new MakeTempCardInDrawPileAction((AbstractCard)new BGDazed(), 1, false, true));
+        if (damageAmount > 0 && info.type != DamageInfo.DamageType.THORNS) addToBot(
+            (AbstractGameAction) new MakeTempCardInDrawPileAction(
+                (AbstractCard) new BGDazed(),
+                1,
+                false,
+                true
+            )
+        );
     }
 }
-
-

@@ -18,37 +18,58 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGGoForTheEyes extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGGoForTheEyes");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGGoForTheEyes"
+    );
     public static final String ID = "BGGoForTheEyes";
 
-
     public BGGoForTheEyes() {
-        super("BGGoForTheEyes", cardStrings.NAME, "blue/attack/go_for_the_eyes", 0, cardStrings.DESCRIPTION, CardType.ATTACK, BGDefect.Enums.BG_BLUE, CardRarity.COMMON, CardTarget.ENEMY);
+        super(
+            "BGGoForTheEyes",
+            cardStrings.NAME,
+            "blue/attack/go_for_the_eyes",
+            0,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGDefect.Enums.BG_BLUE,
+            CardRarity.COMMON,
+            CardTarget.ENEMY
+        );
         this.baseDamage = 1;
     }
 
-
     public void triggerOnGlowCheck() {
-        this
-                .glowColor = shouldGlow() ? AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy() : AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+        this.glowColor = shouldGlow()
+            ? AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy()
+            : AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
     }
 
     private boolean shouldGlow() {
-        if(!upgraded)
-            if(TheDie.monsterRoll==4 || TheDie.monsterRoll==5 || TheDie.monsterRoll==6)
-                return true;
+        if (!upgraded) if (
+            TheDie.monsterRoll == 4 || TheDie.monsterRoll == 5 || TheDie.monsterRoll == 6
+        ) return true;
 
         return false;
     }
 
-
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-        if(this.upgraded)
-            addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)p, (AbstractPower)new BGWeakPower((AbstractCreature)m, 1, false), 1));
-        else
-            addToBot((AbstractGameAction)new BGGoForTheEyesConditionalWeakAction(p,m));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.SLASH_DIAGONAL
+            )
+        );
+        if (this.upgraded) addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) m,
+                (AbstractCreature) p,
+                (AbstractPower) new BGWeakPower((AbstractCreature) m, 1, false),
+                1
+            )
+        );
+        else addToBot((AbstractGameAction) new BGGoForTheEyesConditionalWeakAction(p, m));
     }
 
     public void upgrade() {
@@ -63,4 +84,3 @@ public class BGGoForTheEyes extends AbstractBGCard {
         return new BGGoForTheEyes();
     }
 }
-

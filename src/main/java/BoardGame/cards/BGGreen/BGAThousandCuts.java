@@ -14,18 +14,37 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGAThousandCuts extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGAThousandCuts");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGAThousandCuts"
+    );
     public static final String ID = "BGAThousandCuts";
 
     public BGAThousandCuts() {
-        super("BGAThousandCuts", cardStrings.NAME, "green/power/a_thousand_cuts", 2, cardStrings.DESCRIPTION, CardType.POWER, BGSilent.Enums.BG_GREEN, CardRarity.RARE, CardTarget.SELF);
-        this.baseMagicNumber=5;
-        this.magicNumber=this.baseMagicNumber;
+        super(
+            "BGAThousandCuts",
+            cardStrings.NAME,
+            "green/power/a_thousand_cuts",
+            2,
+            cardStrings.DESCRIPTION,
+            CardType.POWER,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.RARE,
+            CardTarget.SELF
+        );
+        this.baseMagicNumber = 5;
+        this.magicNumber = this.baseMagicNumber;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGAThousandCutsPower((AbstractCreature)p, this.magicNumber), this.magicNumber));
+        addToBot(
+            (AbstractGameAction) new ApplyPowerAction(
+                (AbstractCreature) p,
+                (AbstractCreature) p,
+                (AbstractPower) new BGAThousandCutsPower((AbstractCreature) p, this.magicNumber),
+                this.magicNumber
+            )
+        );
     }
 
     public void upgrade() {
@@ -35,12 +54,7 @@ public class BGAThousandCuts extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGAThousandCuts();
     }
-
-
 }
-
-

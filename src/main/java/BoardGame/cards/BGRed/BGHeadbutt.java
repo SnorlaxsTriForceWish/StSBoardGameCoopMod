@@ -16,21 +16,37 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGHeadbutt extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGHeadbutt");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGHeadbutt"
+    );
     public static final String ID = "BGHeadbutt";
 
     public BGHeadbutt() {
-        super("BGHeadbutt", cardStrings.NAME, "red/attack/headbutt", 1, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, BGIronclad.Enums.BG_RED, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.ENEMY);
-
+        super(
+            "BGHeadbutt",
+            cardStrings.NAME,
+            "red/attack/headbutt",
+            1,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.ATTACK,
+            BGIronclad.Enums.BG_RED,
+            AbstractCard.CardRarity.UNCOMMON,
+            AbstractCard.CardTarget.ENEMY
+        );
         this.baseDamage = 2;
     }
 
-
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        addToBot((AbstractGameAction)new DiscardPileToTopOfDeckAction((AbstractCreature)p));
+        addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.BLUNT_HEAVY
+            )
+        );
+        addToBot((AbstractGameAction) new DiscardPileToTopOfDeckAction((AbstractCreature) p));
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -39,10 +55,7 @@ public class BGHeadbutt extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGHeadbutt();
     }
 }
-
-

@@ -19,36 +19,49 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 // theoretically, BGAnger should have similar issues
 
 public class BGTantrum extends AbstractBGCard {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGTantrum");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGTantrum"
+    );
     public static final String ID = "BGTantrum";
 
     public BGTantrum() {
-        super("BGTantrum", cardStrings.NAME, "purple/attack/tantrum", 1, cardStrings.DESCRIPTION, CardType.ATTACK, BGWatcher.Enums.BG_PURPLE, CardRarity.UNCOMMON, CardTarget.ENEMY);
+        super(
+            "BGTantrum",
+            cardStrings.NAME,
+            "purple/attack/tantrum",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.ATTACK,
+            BGWatcher.Enums.BG_PURPLE,
+            CardRarity.UNCOMMON,
+            CardTarget.ENEMY
+        );
         baseDamage = 2;
-        baseMagicNumber=1;
-        magicNumber=baseMagicNumber;
+        baseMagicNumber = 1;
+        magicNumber = baseMagicNumber;
     }
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         //addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new BGInstantReboundPower((AbstractCreature)p), 1));
-        for (int i = 0; i < this.magicNumber; i++)
-            addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
-
+        for (int i = 0; i < this.magicNumber; i++) addToBot(
+            (AbstractGameAction) new DamageAction(
+                (AbstractCreature) m,
+                new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.BLUNT_LIGHT
+            )
+        );
 
         //TODO: proper "isThisACopy" check
-        if(!this.purgeOnUse) {
+        if (!this.purgeOnUse) {
             this.purgeOnUse = true;
             AbstractCard copy = this.makeStatEquivalentCopy();
-            copy.freeToPlayOnce=false;
+            copy.freeToPlayOnce = false;
             addToBot(new MakeTempCardInDrawPileAction(copy, 1, false, true));
         }
 
         addToBot((AbstractGameAction) new ChangeStanceAction("BGWrath"));
-
-
     }
-
 
     public void upgrade() {
         if (!this.upgraded) {
@@ -60,10 +73,7 @@ public class BGTantrum extends AbstractBGCard {
         }
     }
 
-
     public AbstractCard makeCopy() {
         return new BGTantrum();
     }
 }
-
-

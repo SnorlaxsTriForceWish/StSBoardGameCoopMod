@@ -15,48 +15,50 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGDecay extends AbstractBGCard {
+
     public static final String ID = "BGDecay";
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGDecay");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGDecay"
+    );
 
     public BGDecay() {
-        super("BGDecay", cardStrings.NAME, "curse/decay", -2, cardStrings.DESCRIPTION, AbstractCard.CardType.CURSE, BGCurse.Enums.BG_CURSE, AbstractCard.CardRarity.CURSE, AbstractCard.CardTarget.NONE);
+        super(
+            "BGDecay",
+            cardStrings.NAME,
+            "curse/decay",
+            -2,
+            cardStrings.DESCRIPTION,
+            AbstractCard.CardType.CURSE,
+            BGCurse.Enums.BG_CURSE,
+            AbstractCard.CardRarity.CURSE,
+            AbstractCard.CardTarget.NONE
+        );
     }
-
-
-
-
-
-
-
-
-
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (this.dontTriggerOnUseCard) {
-            addToTop((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, new DamageInfo((AbstractCreature)AbstractDungeon.player, 1, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.FIRE));
+            addToTop(
+                (AbstractGameAction) new DamageAction(
+                    (AbstractCreature) AbstractDungeon.player,
+                    new DamageInfo(
+                        (AbstractCreature) AbstractDungeon.player,
+                        1,
+                        DamageInfo.DamageType.THORNS
+                    ),
+                    AbstractGameAction.AttackEffect.FIRE
+                )
+            );
         }
     }
-
-
-
-
-
 
     public void triggerOnEndOfTurnForPlayingCard() {
         this.dontTriggerOnUseCard = true;
         AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this, true));
     }
 
-
-
     public void upgrade() {}
-
-
 
     public AbstractCard makeCopy() {
         return new BGDecay();
     }
 }
-
-

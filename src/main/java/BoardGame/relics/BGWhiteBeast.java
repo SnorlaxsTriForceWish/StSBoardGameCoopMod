@@ -10,16 +10,22 @@ public class BGWhiteBeast extends AbstractBGRelic {
     public static final String ID = "BGWhite Beast Statue";
 
     public BGWhiteBeast() {
-        super("BGWhite Beast Statue", "whiteBeast.png", AbstractRelic.RelicTier.BOSS, AbstractRelic.LandingSound.SOLID);
+        super(
+            "BGWhite Beast Statue",
+            "whiteBeast.png",
+            AbstractRelic.RelicTier.BOSS,
+            AbstractRelic.LandingSound.SOLID
+        );
     }
 
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0];
     }
 
-    public void setupObtainedDuringCombat(){
-        AbstractDungeon.getCurrRoom().rewardAllowed=true;
+    public void setupObtainedDuringCombat() {
+        AbstractDungeon.getCurrRoom().rewardAllowed = true;
     }
+
     public AbstractRelic makeCopy() {
         return new BGWhiteBeast();
     }

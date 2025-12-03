@@ -16,10 +16,13 @@ import org.apache.logging.log4j.Logger;
 //TODO: die relics currently work automatically; maybe give player option to take curse instead
 
 public class BGTheMausoleum extends AbstractImageEvent {
+
     public static final String ID = "BGTheMausoleum";
 
     private static final Logger logger = LogManager.getLogger(BGTheMausoleum.class.getName());
-    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGTheMausoleum");
+    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
+        "BoardGame:BGTheMausoleum"
+    );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
@@ -31,36 +34,31 @@ public class BGTheMausoleum extends AbstractImageEvent {
 
     private int screenNum = 0;
     private boolean pickCard = false;
-    private int pendingReward=0;
-    private boolean usedGamblingChip=false;
-    private boolean gamblingChipButtonWasActive=false;
+    private int pendingReward = 0;
+    private boolean usedGamblingChip = false;
+    private boolean gamblingChipButtonWasActive = false;
 
-    private AbstractRelic reward=null;
+    private AbstractRelic reward = null;
 
     public BGTheMausoleum() {
         super(NAME, DIALOG_1, "images/events/mausoleum.jpg");
-
-
-
-        pendingReward=0;
-        usedGamblingChip=false;
-        gamblingChipButtonWasActive=false;
+        pendingReward = 0;
+        usedGamblingChip = false;
+        gamblingChipButtonWasActive = false;
 
         this.imageEventText.setDialogOption(OPTIONS[0]);
         this.imageEventText.setDialogOption(OPTIONS[2]);
     }
 
-
     public void onEnterRoom() {
-        pendingReward=0;
-        usedGamblingChip=false;
-        gamblingChipButtonWasActive=false;
+        pendingReward = 0;
+        usedGamblingChip = false;
+        gamblingChipButtonWasActive = false;
 
         if (Settings.AMBIANCE_ON) {
             CardCrawlGame.sound.play("EVENT_FORGE");
         }
     }
-
 
     protected void buttonEffect(int buttonPressed) {
         AbstractCard pain;
@@ -70,62 +68,65 @@ public class BGTheMausoleum extends AbstractImageEvent {
                 int random;
                 boolean gamblingChipButtonActive = false;
 
-                int rerollbutton=-1;
-                int relicbutton=0;
-                int leavebutton=1;
+                int rerollbutton = -1;
+                int relicbutton = 0;
+                int leavebutton = 1;
 
-                if(buttonPressed==relicbutton) {
-                        getReward();
-
-                }else if(buttonPressed==leavebutton){
-
+                if (buttonPressed == relicbutton) {
+                    getReward();
+                } else if (buttonPressed == leavebutton) {
                     this.screenNum = 2;
                     logMetricIgnored("The Mausoleum");
                     this.imageEventText.clearAllDialogs();
                     this.imageEventText.updateBodyText(LEAVE_RESULT);
                     this.imageEventText.setDialogOption(OPTIONS[2]);
-
                 }
 
                 return;
             case 999:
-                screenNum=2;
-                int slot=BGGamblersBrew.doesPlayerHaveGamblersBrew();
-                if(slot>-1 && buttonPressed==1) {
+                screenNum = 2;
+                int slot = BGGamblersBrew.doesPlayerHaveGamblersBrew();
+                if (slot > -1 && buttonPressed == 1) {
                     AbstractDungeon.topPanel.destroyPotion(slot);
                     getReward(false, true);
-                }else{
-                    getReward(false,false);
+                } else {
+                    getReward(false, false);
                 }
                 break;
         }
         openMap();
     }
 
-    protected String getRewardDescription(){
+    protected String getRewardDescription() {
         //TODO: localization
-        if(pendingReward<=3){
+        if (pendingReward <= 3) {
             return "[Result] #pUnlucky! Relic and Curse.";
-        }else if(pendingReward>=4) {
+        } else if (pendingReward >= 4) {
             return "[Result] #gLucky! Relic. No Curse.";
         }
         return "Error: Didn't roll 1-6.";
     }
 
     public void getReward() {
-        getReward(true,false);
+        getReward(true, false);
     }
-    public void getReward(boolean doWeRoll,boolean didPlayerForceWin){
+
+    public void getReward(boolean doWeRoll, boolean didPlayerForceWin) {
         if (reward == null) {
             reward = AbstractDungeon.returnRandomScreenlessRelic(
-                    AbstractDungeon.returnRandomRelicTier());
-            AbstractDungeon.getCurrRoom().spawnRelicAndObtain((Settings.WIDTH / 2), (Settings.HEIGHT / 2), reward);
+                AbstractDungeon.returnRandomRelicTier()
+            );
+            AbstractDungeon.getCurrRoom().spawnRelicAndObtain(
+                (Settings.WIDTH / 2),
+                (Settings.HEIGHT / 2),
+                reward
+            );
         }
 
-        boolean playerWins=false;
-        if(doWeRoll) {
+        boolean playerWins = false;
+        if (doWeRoll) {
             int random = AbstractDungeon.miscRng.random(1, 6);
-            logger.info("Rolled a "+random);
+            logger.info("Rolled a " + random);
             if (random >= 4) {
                 playerWins = true;
             } else if (random == 3 && AbstractDungeon.player.hasRelic("BGTheAbacus")) {
@@ -151,32 +152,41 @@ public class BGTheMausoleum extends AbstractImageEvent {
                     }
                 }
             }
-        }else{
-            playerWins=didPlayerForceWin;
+        } else {
+            playerWins = didPlayerForceWin;
         }
         if (!playerWins) {
-            if(doWeRoll && BGGamblersBrew.doesPlayerHaveGamblersBrew()>-1) {
+            if (doWeRoll && BGGamblersBrew.doesPlayerHaveGamblersBrew() > -1) {
                 screenNum = 999;
                 this.imageEventText.clearAllDialogs();
                 this.imageEventText.setDialogOption(OPTIONS[2]);
                 this.imageEventText.setDialogOption(OPTIONS[3]);
                 this.imageEventText.updateBodyText(UNLUCKY_RESULT);
                 return;
-            }else {
+            } else {
                 AbstractCard pain = AbstractDungeon.getCard(AbstractCard.CardRarity.CURSE);
-                AbstractDungeon.effectList.add(new ShowCardAndObtainEffect((AbstractCard) pain, (Settings.WIDTH / 2), (Settings.HEIGHT / 2)));
+                AbstractDungeon.effectList.add(
+                    new ShowCardAndObtainEffect(
+                        (AbstractCard) pain,
+                        (Settings.WIDTH / 2),
+                        (Settings.HEIGHT / 2)
+                    )
+                );
                 AbstractBGDungeon.removeCardFromRewardDeck(pain);
-                logMetricObtainCardAndRelic("The Mausoleum", "Rummage", (AbstractCard) pain, reward);
-                if(doWeRoll)this.imageEventText.updateBodyText(UNLUCKY_RESULT);
+                logMetricObtainCardAndRelic(
+                    "The Mausoleum",
+                    "Rummage",
+                    (AbstractCard) pain,
+                    reward
+                );
+                if (doWeRoll) this.imageEventText.updateBodyText(UNLUCKY_RESULT);
             }
         } else {
             logMetricObtainRelic("The Mausoleum", "Rummage", reward);
-            if(doWeRoll)this.imageEventText.updateBodyText(SUCCESS_RESULT);
+            if (doWeRoll) this.imageEventText.updateBodyText(SUCCESS_RESULT);
         }
         this.screenNum = 2;
         this.imageEventText.clearAllDialogs();
         this.imageEventText.setDialogOption(OPTIONS[2]);
     }
 }
-
-

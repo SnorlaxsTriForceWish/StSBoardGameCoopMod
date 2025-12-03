@@ -15,7 +15,10 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.PotionBounceEffect;
 
 public class BGBouncingFlaskAction extends AbstractGameAction {
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBouncingFlask");
+
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBouncingFlask"
+    );
     private static final float DURATION = 0.01F;
 
     private static final float POST_ATTACK_WAIT_DUR = 0.1F;
@@ -44,20 +47,52 @@ public class BGBouncingFlaskAction extends AbstractGameAction {
         }
         if (this.numTimes > 1 && !AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
             this.numTimes--;
-            TargetSelectScreen.TargetSelectAction tssAction = (target) -> {
-                if(target!=null) {
-                    addToTop(new BGBouncingFlaskAction((AbstractCreature)target, this.amount, this.numTimes));
-                    addToTop((AbstractGameAction)new VFXAction((AbstractGameEffect)new PotionBounceEffect(this.target.hb.cX, this.target.hb.cY, target.hb.cX, target.hb.cY), 0.4F));
+            TargetSelectScreen.TargetSelectAction tssAction = target -> {
+                if (target != null) {
+                    addToTop(
+                        new BGBouncingFlaskAction(
+                            (AbstractCreature) target,
+                            this.amount,
+                            this.numTimes
+                        )
+                    );
+                    addToTop(
+                        (AbstractGameAction) new VFXAction(
+                            (AbstractGameEffect) new PotionBounceEffect(
+                                this.target.hb.cX,
+                                this.target.hb.cY,
+                                target.hb.cX,
+                                target.hb.cY
+                            ),
+                            0.4F
+                        )
+                    );
                 }
             };
-            addToTop((AbstractGameAction) new TargetSelectScreenAction(tssAction, cardStrings.EXTENDED_DESCRIPTION[1]));
+            addToTop(
+                (AbstractGameAction) new TargetSelectScreenAction(
+                    tssAction,
+                    cardStrings.EXTENDED_DESCRIPTION[1]
+                )
+            );
         }
         if (this.target.currentHealth > 0) {
-            addToTop((AbstractGameAction)new ApplyPowerAction(this.target, (AbstractCreature)AbstractDungeon.player, (AbstractPower)new BGPoisonPower(this.target, (AbstractCreature)AbstractDungeon.player, this.amount), this.amount, true, AbstractGameAction.AttackEffect.POISON));
-            addToTop((AbstractGameAction)new WaitAction(0.1F));
+            addToTop(
+                (AbstractGameAction) new ApplyPowerAction(
+                    this.target,
+                    (AbstractCreature) AbstractDungeon.player,
+                    (AbstractPower) new BGPoisonPower(
+                        this.target,
+                        (AbstractCreature) AbstractDungeon.player,
+                        this.amount
+                    ),
+                    this.amount,
+                    true,
+                    AbstractGameAction.AttackEffect.POISON
+                )
+            );
+            addToTop((AbstractGameAction) new WaitAction(0.1F));
         }
         this.isDone = true;
     }
 }
-
-

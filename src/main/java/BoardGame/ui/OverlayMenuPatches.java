@@ -14,23 +14,35 @@ import org.apache.logging.log4j.Logger;
 public class OverlayMenuPatches {
 
     private static Logger logger = LogManager.getLogger(AbstractBGRelic.class.getName());
-    @SpirePatch(clz= OverlayMenu.class, method=SpirePatch.CLASS)
-    public static class OverlayMenuExtraInterface
-    {
-        public static SpireField<LockInRollButton> lockinrollbutton = new SpireField<>(() -> new LockInRollButton());
-        public static SpireField<RerollButton> rerollbutton = new SpireField<>(() -> new RerollButton());
-        public static SpireField<TheAbacusButton> theabacusbutton = new SpireField<>(() -> new TheAbacusButton());
-        public static SpireField<ToolboxButton> toolboxbutton = new SpireField<>(() -> new ToolboxButton());
-        public static SpireField<PotionButton> potionbutton = new SpireField<>(() -> new PotionButton());
-        public static SpireField<MultiCharacterRowBoxes> multiCharacterRowBoxes = new SpireField<>(() -> new MultiCharacterRowBoxes());
+
+    @SpirePatch(clz = OverlayMenu.class, method = SpirePatch.CLASS)
+    public static class OverlayMenuExtraInterface {
+
+        public static SpireField<LockInRollButton> lockinrollbutton = new SpireField<>(() ->
+            new LockInRollButton()
+        );
+        public static SpireField<RerollButton> rerollbutton = new SpireField<>(() ->
+            new RerollButton()
+        );
+        public static SpireField<TheAbacusButton> theabacusbutton = new SpireField<>(() ->
+            new TheAbacusButton()
+        );
+        public static SpireField<ToolboxButton> toolboxbutton = new SpireField<>(() ->
+            new ToolboxButton()
+        );
+        public static SpireField<PotionButton> potionbutton = new SpireField<>(() ->
+            new PotionButton()
+        );
+        public static SpireField<MultiCharacterRowBoxes> multiCharacterRowBoxes = new SpireField<>(
+            () -> new MultiCharacterRowBoxes()
+        );
     }
 
-    @SpirePatch2(clz= OverlayMenu.class, method="update",
-            paramtypez={})
-    public static class OverlayMenuDiceInterfaceUpdatePatch
-    {
+    @SpirePatch2(clz = OverlayMenu.class, method = "update", paramtypez = {})
+    public static class OverlayMenuDiceInterfaceUpdatePatch {
+
         @SpirePostfixPatch
-        public static void Postfix(OverlayMenu __instance){
+        public static void Postfix(OverlayMenu __instance) {
             //logger.info("OverlayMenuDiceInterfaceUpdatePatch postfix");
             OverlayMenuExtraInterface.lockinrollbutton.get(__instance).update();
             OverlayMenuExtraInterface.rerollbutton.get(__instance).update();
@@ -38,16 +50,14 @@ public class OverlayMenuPatches {
             OverlayMenuExtraInterface.toolboxbutton.get(__instance).update();
             OverlayMenuExtraInterface.potionbutton.get(__instance).update();
             OverlayMenuExtraInterface.multiCharacterRowBoxes.get(__instance).update();
-
         }
     }
 
-    @SpirePatch2(clz= OverlayMenu.class, method="render",
-            paramtypez={SpriteBatch.class})
-    public static class OverlayMenuDiceInterfaceRenderPatch
-    {
+    @SpirePatch2(clz = OverlayMenu.class, method = "render", paramtypez = { SpriteBatch.class })
+    public static class OverlayMenuDiceInterfaceRenderPatch {
+
         @SpirePostfixPatch
-        public static void Postfix(OverlayMenu __instance, SpriteBatch sb){
+        public static void Postfix(OverlayMenu __instance, SpriteBatch sb) {
             OverlayMenuExtraInterface.lockinrollbutton.get(__instance).render(sb);
             OverlayMenuExtraInterface.rerollbutton.get(__instance).render(sb);
             OverlayMenuExtraInterface.theabacusbutton.get(__instance).render(sb);
@@ -57,31 +67,29 @@ public class OverlayMenuPatches {
         }
     }
 
-    @SpirePatch2(clz= OverlayMenu.class, method="showCombatPanels",
-            paramtypez={})
-    public static class showCombatPanelsPatch
-    {
+    @SpirePatch2(clz = OverlayMenu.class, method = "showCombatPanels", paramtypez = {})
+    public static class showCombatPanelsPatch {
+
         @SpirePostfixPatch
-        public static void Postfix(OverlayMenu __instance){
-            OverlayMenuExtraInterface.lockinrollbutton.get(__instance).visible=true;
-            OverlayMenuExtraInterface.rerollbutton.get(__instance).visible=true;
-            OverlayMenuExtraInterface.theabacusbutton.get(__instance).visible=true;
-            OverlayMenuExtraInterface.toolboxbutton.get(__instance).visible=true;
-            OverlayMenuExtraInterface.potionbutton.get(__instance).visible=true;
+        public static void Postfix(OverlayMenu __instance) {
+            OverlayMenuExtraInterface.lockinrollbutton.get(__instance).visible = true;
+            OverlayMenuExtraInterface.rerollbutton.get(__instance).visible = true;
+            OverlayMenuExtraInterface.theabacusbutton.get(__instance).visible = true;
+            OverlayMenuExtraInterface.toolboxbutton.get(__instance).visible = true;
+            OverlayMenuExtraInterface.potionbutton.get(__instance).visible = true;
         }
     }
 
-    @SpirePatch2(clz= OverlayMenu.class, method="hideCombatPanels",
-            paramtypez={})
-    public static class hideCombatPanelsPatch
-    {
+    @SpirePatch2(clz = OverlayMenu.class, method = "hideCombatPanels", paramtypez = {})
+    public static class hideCombatPanelsPatch {
+
         @SpirePostfixPatch
-        public static void Postfix(OverlayMenu __instance){
-            OverlayMenuExtraInterface.lockinrollbutton.get(__instance).visible=false;
-            OverlayMenuExtraInterface.rerollbutton.get(__instance).visible=false;
-            OverlayMenuExtraInterface.theabacusbutton.get(__instance).visible=false;
-            OverlayMenuExtraInterface.toolboxbutton.get(__instance).visible=false;
-            OverlayMenuExtraInterface.potionbutton.get(__instance).visible=false;
+        public static void Postfix(OverlayMenu __instance) {
+            OverlayMenuExtraInterface.lockinrollbutton.get(__instance).visible = false;
+            OverlayMenuExtraInterface.rerollbutton.get(__instance).visible = false;
+            OverlayMenuExtraInterface.theabacusbutton.get(__instance).visible = false;
+            OverlayMenuExtraInterface.toolboxbutton.get(__instance).visible = false;
+            OverlayMenuExtraInterface.potionbutton.get(__instance).visible = false;
         }
     }
 }

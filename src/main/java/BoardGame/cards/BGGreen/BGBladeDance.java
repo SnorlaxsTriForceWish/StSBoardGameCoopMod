@@ -11,13 +11,27 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGBladeDance extends AbstractBGCard {
+
     public static final String ID = "BGBladeDance";
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("BoardGame:BGBladeDance");
+    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
+        "BoardGame:BGBladeDance"
+    );
+
     public BGBladeDance() {
-        super("BGBladeDance", cardStrings.NAME, "green/skill/blade_dance", 1, cardStrings.DESCRIPTION, CardType.SKILL, BGSilent.Enums.BG_GREEN, CardRarity.COMMON, CardTarget.NONE);
+        super(
+            "BGBladeDance",
+            cardStrings.NAME,
+            "green/skill/blade_dance",
+            1,
+            cardStrings.DESCRIPTION,
+            CardType.SKILL,
+            BGSilent.Enums.BG_GREEN,
+            CardRarity.COMMON,
+            CardTarget.NONE
+        );
         this.baseMagicNumber = 2;
-        this.magicNumber=this.baseMagicNumber;
+        this.magicNumber = this.baseMagicNumber;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -37,4 +51,3 @@ public class BGBladeDance extends AbstractBGCard {
         return new BGBladeDance();
     }
 }
-
