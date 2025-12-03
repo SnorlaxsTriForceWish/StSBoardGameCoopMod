@@ -13,19 +13,25 @@ import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 
 public class BGFeedAction extends AbstractGameAction {
 
+    private static final float DURATION = 0.1F;
+
     private final int strengthGain;
     private final DamageInfo damageInfo;
+    private boolean hasExecuted;
 
     public BGFeedAction(AbstractCreature target, DamageInfo damageInfo, int strengthGain) {
         this.damageInfo = damageInfo;
         this.strengthGain = strengthGain;
+        this.hasExecuted = false;
         setValues(target, damageInfo);
         this.actionType = ActionType.DAMAGE;
-        this.duration = 0.1F;
+        this.duration = DURATION;
     }
 
     public void update() {
-        if (this.duration == 0.1F && this.target != null) {
+        if (!hasExecuted && this.target != null) {
+            hasExecuted = true;
+
             showAttackEffect();
             this.target.damage(this.damageInfo);
 
@@ -36,11 +42,12 @@ public class BGFeedAction extends AbstractGameAction {
             if (AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
                 AbstractDungeon.actionManager.clearPostCombatActions();
             }
-
-            this.isDone = true;
         }
 
         tickDuration();
+        if (this.duration <= 0) {
+            this.isDone = true;
+        }
     }
 
     private void showAttackEffect() {
