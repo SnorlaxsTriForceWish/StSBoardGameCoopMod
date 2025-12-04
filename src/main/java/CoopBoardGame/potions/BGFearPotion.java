@@ -45,8 +45,8 @@ public class BGFearPotion extends AbstractPotion {
         //        //TODO: fix missing icon on keyword title
         this.tips.add(
             new PowerTip(
-                BaseMod.getKeywordTitle("CoopBoardGame:vulnerable"),
-                BaseMod.getKeywordDescription("CoopBoardGame:vulnerable")
+                BaseMod.getKeywordTitle("coopboardgame:vulnerable"),
+                BaseMod.getKeywordDescription("coopboardgame:vulnerable")
             )
         );
     }

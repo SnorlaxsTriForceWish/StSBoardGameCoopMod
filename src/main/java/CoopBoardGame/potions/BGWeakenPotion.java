@@ -43,8 +43,8 @@ public class BGWeakenPotion extends AbstractPotion {
         this.tips.add(new PowerTip(this.name, this.description));
         this.tips.add(
             new PowerTip(
-                BaseMod.getKeywordTitle("CoopBoardGame:weak"),
-                BaseMod.getKeywordDescription("CoopBoardGame:weak")
+                BaseMod.getKeywordTitle("coopboardgame:weak"),
+                BaseMod.getKeywordDescription("coopboardgame:weak")
             )
         );
     }
