@@ -1,0 +1,10 @@
+{
+    "permissions": {
+        "allow": [
+            "Bash(copy \"C:\\Users\\Alex\\.claude\\plans\\validated-snuggling-platypus.md\" \"d:\\STS_BG_Mod\\StSCoopBoardGameCoopMod\\TEST_PLAN.md\")",
+            "Bash(powershell -Command \"cd ''d:\\STS_BG_Mod\\StSCoopBoardGameCoopMod''; .\\mvnw.cmd test\")"
+        ],
+        "deny": [],
+        "ask": []
+    }
+}
