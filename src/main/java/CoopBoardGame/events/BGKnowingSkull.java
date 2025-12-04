@@ -2,7 +2,6 @@ package CoopBoardGame.events;
 
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.getRewardCards;
 
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -40,8 +39,6 @@ public class BGKnowingSkull extends AbstractImageEvent {
     private int cardCost;
     private CurScreen screen = CurScreen.INTRO_1;
     private int goldCost;
-    private int leaveCost;
-    private static final int GOLD_REWARD = 90;
     private String optionsChosen = "";
 
     private int damageTaken;
@@ -77,7 +74,6 @@ public class BGKnowingSkull extends AbstractImageEvent {
         this.options.add(Reward.POTION);
         this.options.add(Reward.LEAVE);
 
-        this.leaveCost = 0;
         this.cardCost = 1;
         this.potionCost = 1;
         this.goldCost = 1;
@@ -109,7 +105,6 @@ public class BGKnowingSkull extends AbstractImageEvent {
                 break;
             case ASK:
                 CardCrawlGame.sound.play("DEBUFF_2");
-                int cost = 0;
                 if (rewardsPicked >= 2) {
                     setLeave();
                 } else {
@@ -119,7 +114,6 @@ public class BGKnowingSkull extends AbstractImageEvent {
                                 pickedPotion = true;
                                 rewardsPicked += 1;
                                 obtainReward(0);
-                                cost = potionCost;
                             } else {
                                 setLeave();
                             }
@@ -129,7 +123,6 @@ public class BGKnowingSkull extends AbstractImageEvent {
                                 pickedGold = true;
                                 rewardsPicked += 1;
                                 obtainReward(1);
-                                cost = goldCost;
                             } else {
                                 setLeave();
                             }
@@ -139,7 +132,6 @@ public class BGKnowingSkull extends AbstractImageEvent {
                                 pickedCard = true;
                                 rewardsPicked += 1;
                                 obtainReward(2);
-                                cost = cardCost;
                             } else {
                                 setLeave();
                             }
@@ -174,7 +166,6 @@ public class BGKnowingSkull extends AbstractImageEvent {
 
     private void obtainReward(int slot) {
         AbstractPotion p;
-        AbstractCard c;
         String nextmsg = ASK_AGAIN_MSG;
         if (rewardsPicked >= 2) nextmsg = DESCRIPTIONS[8];
         switch (slot) {

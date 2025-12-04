@@ -34,8 +34,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.BiteEffect;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGSnakePlant extends AbstractBGMonster implements DieControlledMoves, MixedAttacks {
 
@@ -45,16 +43,6 @@ public class BGSnakePlant extends AbstractBGMonster implements DieControlledMove
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final int HP_MIN = 75;
-    private static final int HP_MAX = 79;
-    private static final int A_2_HP_MIN = 78;
-    private static final int A_2_HP_MAX = 82;
-    private static final byte CHOMPY_CHOMPS = 1;
-    private static final byte SPORES = 2;
-    private static final int CHOMPY_AMT = 3;
-    private static final int CHOMPY_DMG = 7;
-    private static final int A_2_CHOMPY_DMG = 8;
-    private int rainBlowsDmg;
 
     public BGSnakePlant(float x, float y) {
         super(NAME, "BGSnakePlant", 79, 0.0F, -44.0F, 350.0F, 360.0F, null, x, y + 50.0F);
@@ -95,7 +83,6 @@ public class BGSnakePlant extends AbstractBGMonster implements DieControlledMove
     }
 
     public void takeTurn() {
-        int numBlows, i;
         AbstractPlayer abstractPlayer = AbstractDungeon.player;
         switch (this.nextMove) {
             case 1:
@@ -158,7 +145,6 @@ public class BGSnakePlant extends AbstractBGMonster implements DieControlledMove
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(DieControlledMoves.class.getName());
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);
         else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4) move = this.behavior.charAt(1);

@@ -17,14 +17,11 @@ import com.megacrit.cardcrawl.rooms.ShopRoom;
 import com.megacrit.cardcrawl.shop.Merchant;
 import com.megacrit.cardcrawl.shop.ShopScreen;
 import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGMerchantEncounter extends AbstractEvent {
 
     public static final String ID = "BGMerchantEncounter";
 
-    private static final Logger logger = LogManager.getLogger(BGHallwayEncounter.class.getName());
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
         "CoopBoardGame:BGMerchant"
     );

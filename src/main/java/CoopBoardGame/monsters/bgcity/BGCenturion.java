@@ -30,27 +30,12 @@ public class BGCenturion extends AbstractBGMonster implements DieControlledMoves
         CardCrawlGame.languagePack.getMonsterStrings("Centurion");
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
-    private static final float IDLE_TIMESCALE = 0.8F;
-    private static final int HP_MIN = 76;
-    private static final int HP_MAX = 80;
-    private static final int A_2_HP_MIN = 78;
-    private static final int A_2_HP_MAX = 83;
-    private static final int SLASH_DMG = 12;
-    private static final int FURY_DMG = 6;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
-    private static final int FURY_HITS = 3;
-    private static final int A_2_SLASH_DMG = 14;
-    private static final int A_2_FURY_DMG = 7;
     private int slashDmg;
     private boolean furymode = false;
     private int furyStr;
     private int blockAmount;
-    private int BLOCK_AMOUNT = 15;
-    private int A_17_BLOCK_AMOUNT = 20;
-    private static final byte SLASH = 1;
-    private static final byte PROTECT = 2;
-    private static final byte FURY = 3;
 
     public BGCenturion(float x, float y, String behavior) {
         super(NAME, "BGCenturion", 80, -14.0F, -20.0F, 250.0F, 330.0F, null, x, y);
@@ -78,7 +63,6 @@ public class BGCenturion extends AbstractBGMonster implements DieControlledMoves
     }
 
     public void takeTurn() {
-        int i;
         switch (this.nextMove) {
             case 1:
                 playSfx();

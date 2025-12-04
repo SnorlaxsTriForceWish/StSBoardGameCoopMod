@@ -1,6 +1,5 @@
 package CoopBoardGame.monsters.bgexordium;
 
-import CoopBoardGame.CoopBoardGame;
 import CoopBoardGame.cards.BGStatus.BGDazed;
 import CoopBoardGame.dungeons.BGExordium;
 import CoopBoardGame.monsters.AbstractBGMonster;
@@ -26,9 +25,6 @@ import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.PoisonPower;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 public class BGAcidSlime_M extends AbstractBGMonster implements BGDamageIcons, DieControlledMoves {
 
     public static final String ID = "BGAcidSlime_M";
@@ -58,9 +54,6 @@ public class BGAcidSlime_M extends AbstractBGMonster implements BGDamageIcons, D
     public static final int A_2_W_TACKLE_DMG = 8;
     public static final int A_2_N_TACKLE_DMG = 12;
     public static final int WEAK_TURNS = 1;
-    private static final byte WOUND_TACKLE = 1;
-    private static final byte NORMAL_TACKLE = 2;
-    private static final byte WEAK_LICK = 4;
 
     public BGAcidSlime_M(float x, float y, int poisonAmount, int newHealth) {
         super(NAME, "BGAcidSlime_M", newHealth, 0.0F, 0.0F, 170.0F, 130.0F, null, x, y, true);
@@ -153,8 +146,6 @@ public class BGAcidSlime_M extends AbstractBGMonster implements BGDamageIcons, D
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
-        //logger.info("BGAcidSlime_M: TheDie "+ TheDie.monsterRoll);
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);
         else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4) move = this.behavior.charAt(1);

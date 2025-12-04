@@ -181,6 +181,10 @@ public class BGLivingWall extends AbstractImageEvent {
                 this.imageEventText.setDialogOption(OPTIONS[6]);
                 this.screen = CurScreen.RESULT;
                 return;
+            case RESULT:
+                break;
+            default:
+                break;
         }
         openMap();
     }

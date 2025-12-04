@@ -31,33 +31,13 @@ public class BGGremlinNob extends AbstractBGMonster implements BGDamageIcons {
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
-    private static final int HP_MIN = 82;
-
-    private static final int HP_MAX = 86;
-
-    private static final int A_2_HP_MIN = 85;
-
-    private static final int A_2_HP_MAX = 90;
-
-    private static final int BASH_DMG = 6;
-
-    private static final int RUSH_DMG = 14;
-    private static final int A_2_BASH_DMG = 8;
-    private static final int A_2_RUSH_DMG = 16;
-
     public BGGremlinNob(float x, float y) {
         this(x, y, false);
     }
 
-    private static final int DEBUFF_AMT = 2;
     private int bashDmg;
     private int rushDmg;
-    private static final byte BULL_RUSH = 1;
-    private static final byte SKULL_BASH = 2;
-    private static final byte BELLOW = 3;
-    private static final int ANGRY_LEVEL = 2;
     private boolean usedBellow = false;
-    private boolean canVuln;
 
     public BGGremlinNob(float x, float y, boolean setVuln) {
         super(NAME, "BGGremlinNob", 86, -70.0F, -10.0F, 270.0F, 380.0F, null, x, y);
@@ -65,7 +45,6 @@ public class BGGremlinNob extends AbstractBGMonster implements BGDamageIcons {
         this.type = AbstractMonster.EnemyType.ELITE;
         this.dialogX = -60.0F * Settings.scale;
         this.dialogY = 50.0F * Settings.scale;
-        this.canVuln = setVuln;
 
         if (AbstractDungeon.ascensionLevel == 0) setHp(14);
         else if (AbstractDungeon.ascensionLevel < 12) setHp(17);

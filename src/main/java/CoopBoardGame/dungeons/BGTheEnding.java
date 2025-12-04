@@ -271,7 +271,6 @@ public class BGTheEnding extends AbstractBGDungeon {
 
         @SpirePostfixPatch
         public static float calculateMapSize(float __result) {
-            final Logger logger = LogManager.getLogger(BGTheBeyond.class.getName());
             if (CardCrawlGame.dungeon != null && CardCrawlGame.dungeon instanceof BGTheEnding) {
                 return Settings.MAP_DST_Y * 4.0F - 1380.0F * Settings.scale;
             }

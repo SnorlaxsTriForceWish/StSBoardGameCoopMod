@@ -21,8 +21,6 @@ import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGHealer extends AbstractBGMonster implements DieControlledMoves, BGDamageIcons {
 
@@ -33,16 +31,7 @@ public class BGHealer extends AbstractBGMonster implements DieControlledMoves, B
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
-    private static final float IDLE_TIMESCALE = 0.8F;
-
     public static final String ENC_NAME = "HealerTank";
-
-    private static final int HP_MIN = 48;
-    private static final int HP_MAX = 56;
-    private static final int A_2_HP_MIN = 50;
-    private static final int A_2_HP_MAX = 58;
-    private static final int MAGIC_DMG = 8;
-    private static final int HEAL_AMT = 16;
 
     public BGHealer(float x, float y) {
         super(NAME, "BGHealer", 56, 0.0F, -20.0F, 230.0F, 250.0F, null, x, y);
@@ -67,15 +56,9 @@ public class BGHealer extends AbstractBGMonster implements DieControlledMoves, B
         this.state.setTimeScale(0.8F);
     }
 
-    private static final int STR_AMOUNT = 2;
-    private static final int A_2_MAGIC_DMG = 9;
-    private static final int A_2_STR_AMOUNT = 3;
     private int magicDmg;
     private int strAmt;
     private int healAmt;
-    private static final byte ATTACK = 1;
-    private static final byte HEAL = 2;
-    private static final byte BUFF = 3;
 
     public void takeTurn() {
         switch (this.nextMove) {
@@ -192,7 +175,6 @@ public class BGHealer extends AbstractBGMonster implements DieControlledMoves, B
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(DieControlledMoves.class.getName());
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);
         else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4) move = this.behavior.charAt(1);
@@ -221,7 +203,6 @@ public class BGHealer extends AbstractBGMonster implements DieControlledMoves, B
     }
 
     public void die() {
-        int aliveCount = 0;
         for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
             if (!m.isDying && !m.isEscaping && m instanceof BGCenturion) {
                 ((BGCenturion) m).furyBuff();

@@ -3,7 +3,6 @@ package CoopBoardGame.events;
 import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.curses.Doubt;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -17,7 +16,6 @@ import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 public class BGMindBloom extends MindBloom {
@@ -32,7 +30,6 @@ public class BGMindBloom extends MindBloom {
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
 
-    private static final String DIALOG_1 = DESCRIPTIONS[0];
     private static final String DIALOG_2 = DESCRIPTIONS[1];
     private static final String DIALOG_3 = DESCRIPTIONS[2];
 
@@ -79,9 +76,6 @@ public class BGMindBloom extends MindBloom {
 
     protected void buttonEffect(int buttonPressed) {
         ArrayList<String> list;
-        int effectCount;
-        List<String> upgradedCards, obtainedRelic;
-        Doubt doubt;
         switch (this.screen) {
             case INTRO:
                 switch (buttonPressed) {
@@ -109,7 +103,6 @@ public class BGMindBloom extends MindBloom {
                         awake = true;
                         this.imageEventText.updateBodyText(DIALOG_3);
                         this.screen = CurScreen.LEAVE;
-                        effectCount = 0;
 
                         AbstractDungeon.gridSelectScreen.open(
                             AbstractDungeon.player.masterDeck.getUpgradableCards(),
@@ -181,6 +174,10 @@ public class BGMindBloom extends MindBloom {
             case LEAVE:
                 openMap();
                 return;
+            case FIGHT:
+                break;
+            default:
+                break;
         }
         openMap();
     }

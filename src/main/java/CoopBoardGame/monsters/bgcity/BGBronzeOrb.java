@@ -27,8 +27,6 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.combat.SmallLaserEffect;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGBronzeOrb extends AbstractBGMonster implements DieControlledMoves, BGDamageIcons {
 
@@ -37,14 +35,6 @@ public class BGBronzeOrb extends AbstractBGMonster implements DieControlledMoves
         CardCrawlGame.languagePack.getMonsterStrings("BronzeOrb");
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-
-    private static final int HP_MIN = 52;
-
-    private static final int HP_MAX = 58;
-
-    private static final int A_2_HP_MIN = 54;
-    private static final int A_2_HP_MAX = 60;
-    private static final int BEAM_DMG = 8;
 
     public BGBronzeOrb(float x, float y, int count) {
         super(
@@ -172,7 +162,6 @@ public class BGBronzeOrb extends AbstractBGMonster implements DieControlledMoves
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(DieControlledMoves.class.getName());
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);
         else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4) move = this.behavior.charAt(1);

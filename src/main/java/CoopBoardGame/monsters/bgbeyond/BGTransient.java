@@ -30,13 +30,7 @@ public class BGTransient extends AbstractBGMonster implements BGDamageIcons {
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
-    private static final int HP = 999;
     private int count = 0;
-    private static final int DEATH_DMG = 30;
-    private static final int INCREMENT_DMG = 10;
-    private static final int A_2_DEATH_DMG = 40;
-    private int startingDeathDmg;
-    private static final byte ATTACK = 1;
 
     public BGTransient() {
         super(NAME, "BGTransient", 999, 0.0F, -15.0F, 370.0F, 340.0F, null, 0.0F, 20.0F);

@@ -6,7 +6,6 @@ import CoopBoardGame.characters.BGIronclad;
 import CoopBoardGame.characters.BGSilent;
 import CoopBoardGame.characters.BGWatcher;
 import CoopBoardGame.ui.OverlayMenuPatches;
-import basemod.BaseMod;
 import basemod.ReflectionHacks;
 import basemod.abstracts.CustomScreen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -47,67 +46,35 @@ public class MultiCharacterSelectScreen extends CustomScreen {
     public ArrayList<MultiCharacterSelectButton> buttons = new ArrayList<>();
 
     public MultiCharacterSelectScreen() {
-        if (true) {
-            //Board Game
-            this.buttons.add(
-                new MultiCharacterSelectButton(
-                    "The Ironclad",
-                    new BGIronclad("The Ironclad", BGIronclad.Enums.BG_IRONCLAD),
-                    "images/ui/charSelect/ironcladButton.png"
-                )
-            );
-            this.buttons.add(
-                new MultiCharacterSelectButton(
-                    "The Silent",
-                    new BGSilent("The Silent", BGSilent.Enums.BG_SILENT),
-                    "images/ui/charSelect/silentButton.png"
-                )
-            );
-            this.buttons.add(
-                new MultiCharacterSelectButton(
-                    "The Defect",
-                    new BGDefect("The Defect", BGDefect.Enums.BG_DEFECT),
-                    "images/ui/charSelect/defectButton.png"
-                )
-            );
-            this.buttons.add(
-                new MultiCharacterSelectButton(
-                    "The Watcher",
-                    new BGWatcher("The Watcher", BGWatcher.Enums.BG_WATCHER),
-                    "images/ui/charSelect/watcherButton.png"
-                )
-            );
-        } else {
-            //Vanilla
-            this.buttons.add(
-                new MultiCharacterSelectButton(
-                    "The Ironclad",
-                    BaseMod.findCharacter(AbstractPlayer.PlayerClass.IRONCLAD),
-                    "images/ui/charSelect/ironcladButton.png"
-                )
-            );
-            this.buttons.add(
-                new MultiCharacterSelectButton(
-                    "The Silent",
-                    BaseMod.findCharacter(AbstractPlayer.PlayerClass.THE_SILENT),
-                    "images/ui/charSelect/silentButton.png"
-                )
-            );
-            this.buttons.add(
-                new MultiCharacterSelectButton(
-                    "The Defect",
-                    BaseMod.findCharacter(AbstractPlayer.PlayerClass.DEFECT),
-                    "images/ui/charSelect/defectButton.png"
-                )
-            );
-            this.buttons.add(
-                new MultiCharacterSelectButton(
-                    "The Watcher",
-                    BaseMod.findCharacter(AbstractPlayer.PlayerClass.WATCHER),
-                    "images/ui/charSelect/watcherButton.png"
-                )
-            );
-        }
+        //Board Game
+        this.buttons.add(
+            new MultiCharacterSelectButton(
+                "The Ironclad",
+                new BGIronclad("The Ironclad", BGIronclad.Enums.BG_IRONCLAD),
+                "images/ui/charSelect/ironcladButton.png"
+            )
+        );
+        this.buttons.add(
+            new MultiCharacterSelectButton(
+                "The Silent",
+                new BGSilent("The Silent", BGSilent.Enums.BG_SILENT),
+                "images/ui/charSelect/silentButton.png"
+            )
+        );
+        this.buttons.add(
+            new MultiCharacterSelectButton(
+                "The Defect",
+                new BGDefect("The Defect", BGDefect.Enums.BG_DEFECT),
+                "images/ui/charSelect/defectButton.png"
+            )
+        );
+        this.buttons.add(
+            new MultiCharacterSelectButton(
+                "The Watcher",
+                new BGWatcher("The Watcher", BGWatcher.Enums.BG_WATCHER),
+                "images/ui/charSelect/watcherButton.png"
+            )
+        );
 
         for (int i = 0; i < this.buttons.size(); i++) {
             Hitbox hb = ((MultiCharacterSelectButton) this.buttons.get(i)).hb;
@@ -116,14 +83,6 @@ public class MultiCharacterSelectScreen extends CustomScreen {
             hb.x -= MultiCharacterSelectButton.HB_W / 2.0F;
             hb.y -= MultiCharacterSelectButton.HB_W / 2.0F;
         }
-    }
-
-    private void open() {
-        this.isDone = false;
-        if (
-            AbstractDungeon.screen != AbstractDungeon.CurrentScreen.NONE
-        ) AbstractDungeon.previousScreen = AbstractDungeon.screen;
-        reopen();
     }
 
     public void reopen() {

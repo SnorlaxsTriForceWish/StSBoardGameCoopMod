@@ -48,8 +48,6 @@ public class BGNloth extends AbstractImageEvent implements LockRelicsEvent {
 
     private AbstractRelic randomRelic;
 
-    private AbstractRelic gift;
-
     public BGNloth() {
         super(NAME, DIALOG_1, "images/events/nloth.jpg");
         reliclock = true;
@@ -75,7 +73,7 @@ public class BGNloth extends AbstractImageEvent implements LockRelicsEvent {
             );
         }
 
-        this.gift = (AbstractRelic) new NlothsGift();
+        new NlothsGift();
         if (randomRelic != null) this.imageEventText.setDialogOption(OPTIONS[0]);
         else this.imageEventText.setDialogOption(OPTIONS[3], true);
         if (AbstractDungeon.player.hasAnyPotions()) this.imageEventText.setDialogOption(OPTIONS[1]);

@@ -33,20 +33,8 @@ public class BGReptomancer extends AbstractBGMonster implements BGDamageIcons {
         CardCrawlGame.languagePack.getMonsterStrings("Reptomancer");
     public static final String NAME = monsterStrings.NAME;
 
-    private static final int HP_MIN = 180;
-    private static final int HP_MAX = 190;
-    private static final int A_2_HP_MIN = 190;
-    private static final int A_2_HP_MAX = 200;
-    private static final int BITE_DMG = 30;
-    private static final int A_2_BITE_DMG = 34;
     public static final float[] POSX = new float[] { 210.0F, -220.0F, 180.0F, -250.0F };
-    private static final int SNAKE_STRIKE_DMG = 13;
-    private static final int A_2_SNAKE_STRIKE_DMG = 16;
-    private static final int DAGGERS_PER_SPAWN = 1;
-    private static final int ASC_2_DAGGERS_PER_SPAWN = 2;
-    private static final byte SNAKE_STRIKE = 1;
-    private static final byte SPAWN_DAGGER = 2;
-    private static final byte BIG_BITE = 3;
+
     public static final float[] POSY = new float[] { 75.0F, 115.0F, 345.0F, 335.0F };
     private int daggersPerSpawn;
     private AbstractMonster[] daggers = new AbstractMonster[2];
@@ -396,20 +384,6 @@ public class BGReptomancer extends AbstractBGMonster implements BGDamageIcons {
 
                 break;
         }
-        //AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new RollMoveAction(this));
-    }
-
-    private boolean canSpawn() {
-        int aliveCount = 0;
-        for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
-            if (m != this && !m.isDying) {
-                aliveCount++;
-            }
-        }
-        if (aliveCount > 3) {
-            return false;
-        }
-        return true;
     }
 
     public void damage(DamageInfo info) {
@@ -419,16 +393,6 @@ public class BGReptomancer extends AbstractBGMonster implements BGDamageIcons {
             this.state.addAnimation(0, "Idle", true, 0.0F);
         }
     }
-
-    //    public void die() {
-    //        super.die();
-    //        for (AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
-    //            if (!m.isDead && !m.isDying) {
-    //                AbstractDungeon.actionManager.addToTop((AbstractGameAction)new HideHealthBarAction((AbstractCreature)m));
-    //                AbstractDungeon.actionManager.addToTop((AbstractGameAction)new SuicideAction(m));
-    //            }
-    //        }
-    //    }
 
     protected void getMove(int num) {
         if (this.firstMove) {

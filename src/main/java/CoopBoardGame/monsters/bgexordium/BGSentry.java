@@ -1,6 +1,5 @@
 package CoopBoardGame.monsters.bgexordium;
 
-import CoopBoardGame.CoopBoardGame;
 import CoopBoardGame.cards.BGStatus.BGDazed;
 import CoopBoardGame.monsters.AbstractBGMonster;
 import CoopBoardGame.monsters.BGDamageIcons;
@@ -26,8 +25,6 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.combat.ShockWaveEffect;
 import com.megacrit.cardcrawl.vfx.combat.SmallLaserEffect;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGSentry extends AbstractBGMonster implements BGDamageIcons, DieControlledMoves {
 
@@ -38,17 +35,6 @@ public class BGSentry extends AbstractBGMonster implements BGDamageIcons, DieCon
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
     public static final String ENC_NAME = "Sentries";
-    private static final int HP_MIN = 38;
-    private static final int HP_MAX = 42;
-    private static final int A_2_HP_MIN = 39;
-    private static final int A_2_HP_MAX = 45;
-    private static final byte BOLT = 3;
-    private static final byte BEAM = 4;
-    private int beamDmg;
-    private int dazedAmt;
-    private static final int DAZED_AMT = 2;
-    private static final int A_18_DAZED_AMT = 3;
-    private boolean firstMove = true;
 
     public BGSentry(float x, float y, String behavior) {
         super(NAME, "BGSentry", 42, 0.0F, -5.0F, 180.0F, 310.0F, null, x, y);
@@ -62,8 +48,6 @@ public class BGSentry extends AbstractBGMonster implements BGDamageIcons, DieCon
         else if (behavior.equals("2D") && AbstractDungeon.ascensionLevel >= 12) setHp(9);
         else setHp(8);
         //note -- on A1+, sentry C's behavior is changed to "--" later
-
-        this.dazedAmt = 1;
 
         this.damage.add(new DamageInfo((AbstractCreature) this, 2));
         this.damage.add(new DamageInfo((AbstractCreature) this, 3));
@@ -443,8 +427,6 @@ public class BGSentry extends AbstractBGMonster implements BGDamageIcons, DieCon
 
     public void dieMove(int roll) {
         if (behavior.equals("2D") && AbstractDungeon.ascensionLevel >= 1) return;
-        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
-        //logger.info("BGJawWorm: TheDie "+TheDie.monsterRoll);
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2 || TheDie.monsterRoll == 3) move =
             this.behavior.charAt(0);

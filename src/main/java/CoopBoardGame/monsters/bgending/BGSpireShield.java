@@ -36,13 +36,7 @@ public class BGSpireShield extends AbstractBGMonster implements BGDamageIcons {
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private int moveCount = 0;
     private int strAmt = 2;
-    private static final byte BASH = 1;
-    private static final byte FORTIFY = 2;
-    private static final byte SMASH = 3;
-    private static final int BASH_DEBUFF = -1;
-    private static final int FORTIFY_BLOCK = 30;
 
     public BGSpireShield(float offsetx, float offsety) {
         super(

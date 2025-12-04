@@ -25,8 +25,6 @@ public class BGSnakeDagger extends AbstractBGMonster implements BGDamageIcons {
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final int HP_MIN = 20;
-    private static final int HP_MAX = 25;
 
     public boolean firstMove = true;
 

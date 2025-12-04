@@ -1,7 +1,6 @@
 package CoopBoardGame.multicharacter.patches;
 
 import CoopBoardGame.multicharacter.grid.GridBackground;
-import CoopBoardGame.relics.AbstractBGRelic;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
@@ -10,12 +9,8 @@ import com.megacrit.cardcrawl.scenes.AbstractScene;
 import java.util.ArrayList;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class AbstractScenePatches {
-
-    private static Logger logger = LogManager.getLogger(AbstractBGRelic.class.getName());
 
     @SpirePatch(clz = AbstractScene.class, method = SpirePatch.CLASS)
     public static class AbstractSceneExtraInterface {
@@ -30,7 +25,6 @@ public class AbstractScenePatches {
 
         @SpirePostfixPatch
         public static void Foo(AbstractScene __instance) {
-            //logger.info("AbstractSceneDiceInterfaceUpdatePatch postfix");
             AbstractSceneExtraInterface.gridBackground.get(__instance).update();
         }
     }
@@ -59,27 +53,4 @@ public class AbstractScenePatches {
             }
         }
     }
-
-    //AbstractScene does not have a show/hide combat panels method!
-    //    @SpirePatch2(clz= AbstractScene.class, method="showCombatPanels",
-    //            paramtypez={})
-    //    public static class showCombatPanelsPatch
-    //    {
-    //        @SpirePostfixPatch
-    //        public static void Postfix(AbstractScene __instance){
-    //            AbstractSceneExtraInterface.gridBackground.get(__instance).visible=true;
-    //
-    //        }
-    //    }
-    //
-    //    @SpirePatch2(clz= AbstractScene.class, method="hideCombatPanels",
-    //            paramtypez={})
-    //    public static class hideCombatPanelsPatch
-    //    {
-    //        @SpirePostfixPatch
-    //        public static void Postfix(AbstractScene __instance){
-    //            AbstractSceneExtraInterface.gridBackground.get(__instance).visible=false;
-    //
-    //        }
-    //    }
 }

@@ -4,16 +4,12 @@ import CoopBoardGame.dungeons.BGExordium;
 import CoopBoardGame.multicharacter.MultiCharacter;
 import CoopBoardGame.multicharacter.MultiCreature;
 import com.evacipated.cardcrawl.modthespire.lib.*;
-import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.rooms.MonsterRoom;
-import java.util.ArrayList;
 import java.util.Collections;
-import javassist.CannotCompileException;
-import javassist.CtBehavior;
 
 public class MultiCombatEncounterPatches {
 
@@ -59,20 +55,5 @@ public class MultiCombatEncounterPatches {
             }
         }
 
-        private static class Locator extends SpireInsertLocator {
-
-            public int[] Locate(CtBehavior ctMethodToPatch)
-                throws CannotCompileException, PatchingException {
-                Matcher finalMatcher = new Matcher.MethodCallMatcher(
-                    AbstractDungeon.class,
-                    "setCurrMapNode"
-                );
-                return LineFinder.findInOrder(
-                    ctMethodToPatch,
-                    new ArrayList<Matcher>(),
-                    finalMatcher
-                );
-            }
-        }
     }
 }

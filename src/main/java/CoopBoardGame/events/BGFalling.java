@@ -182,6 +182,8 @@ public class BGFalling extends AbstractImageEvent {
                 }
 
                 return;
+            default:
+                break;
         }
         openMap();
     }

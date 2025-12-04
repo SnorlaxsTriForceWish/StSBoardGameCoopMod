@@ -28,8 +28,6 @@ public class MultiCharacterRowBoxes {
 
     private float posY;
 
-    private final float SCALE = 2.0F;
-
     public ArrayList<MultiCharacterSwapButton> swapButtons = new ArrayList<>();
 
     public MultiCharacterRowBoxes() {

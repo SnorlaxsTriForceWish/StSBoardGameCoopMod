@@ -38,32 +38,14 @@ public class BGChamp extends AbstractBGMonster implements BGDamageIcons {
     public static final String[] DIALOG = monsterStrings.DIALOG;
     public static final int HP = 420;
     public static final int A_9_HP = 440;
-    private static final byte HEAVY_SLASH = 1;
-    private static final byte DEFENSIVE_STANCE = 2;
-    private static final byte EXECUTE = 3;
-    private static final byte FACE_SLAP = 4;
-    private static final byte GLOAT = 5;
-    private static final byte TAUNT = 6;
-    private static final byte ANGER = 7;
     private static final String STANCE_NAME = MOVES[0];
     private static final String EXECUTE_NAME = MOVES[1];
     private static final String SLAP_NAME = MOVES[2];
 
-    private int slashDmg;
-    private int executeDmg;
-    private int slapDmg;
     private int blockAmt;
-    private static final int DEBUFF_AMT = 1;
-    private static final int EXEC_COUNT = 2;
-    private int numTurns = 0;
-    private static final int BLOCK_AMT = 3;
     private int strAmt = 1;
-    private int forgeAmt = 3;
     private int executeStrAmt = 1;
-    private int forgeTimes = 0;
-    private int forgeThreshold = 2;
-    private boolean thresholdReached = false,
-        firstTurn = true;
+    private boolean firstTurn = true;
 
     private boolean phase2 = false;
 
@@ -402,60 +384,7 @@ public class BGChamp extends AbstractBGMonster implements BGDamageIcons {
     }
 
     protected void getMove(int num) {
-        this.numTurns++;
         setMove((byte) 1, AbstractMonster.Intent.ATTACK, ((DamageInfo) this.damage.get(0)).base);
-        //
-        //        if (this.currentHealth < this.maxHealth / 2 && !this.thresholdReached) {
-        //            this.thresholdReached = true;
-        //            setMove((byte)7, AbstractMonster.Intent.BUFF);
-        //
-        //            return;
-        //        }
-        //        if (!lastMove((byte)3) && !lastMoveBefore((byte)3) && this.thresholdReached) {
-        //            AbstractDungeon.actionManager.addToTop((AbstractGameAction)new TalkAction((AbstractCreature)this, getDeathQuote(), 2.0F, 2.0F));
-        //            setMove(EXECUTE_NAME, (byte)3, AbstractMonster.Intent.ATTACK, ((DamageInfo)this.damage.get(1)).base, 2, true);
-        //
-        //            return;
-        //        }
-        //        if (this.numTurns == 4 && !this.thresholdReached) {
-        //            setMove((byte)6, AbstractMonster.Intent.DEBUFF);
-        //            this.numTurns = 0;
-        //
-        //            return;
-        //        }
-        //        if (AbstractDungeon.ascensionLevel >= 19) {
-        //
-        //            if (!lastMove((byte)2) && this.forgeTimes < this.forgeThreshold && num <= 30) {
-        //                this.forgeTimes++;
-        //                setMove(STANCE_NAME, (byte)2, AbstractMonster.Intent.DEFEND_BUFF);
-        //
-        //
-        //                return;
-        //            }
-        //        } else if (!lastMove((byte)2) && this.forgeTimes < this.forgeThreshold && num <= 15) {
-        //            this.forgeTimes++;
-        //            setMove(STANCE_NAME, (byte)2, AbstractMonster.Intent.DEFEND_BUFF);
-        //
-        //
-        //            return;
-        //        }
-        //
-        //        if (!lastMove((byte)5) && !lastMove((byte)2) && num <= 30) {
-        //            setMove((byte)5, AbstractMonster.Intent.BUFF);
-        //
-        //            return;
-        //        }
-        //
-        //        if (!lastMove((byte)4) && num <= 55) {
-        //            setMove(SLAP_NAME, (byte)4, AbstractMonster.Intent.ATTACK_DEBUFF, ((DamageInfo)this.damage.get(2)).base);
-        //
-        //            return;
-        //        }
-        //        if (!lastMove((byte)1)) {
-        //            setMove((byte)1, AbstractMonster.Intent.ATTACK, ((DamageInfo)this.damage.get(0)).base);
-        //        } else {
-        //            setMove(SLAP_NAME, (byte)4, AbstractMonster.Intent.ATTACK_DEBUFF, ((DamageInfo)this.damage.get(2)).base);
-        //        }
     }
 
     public void die() {

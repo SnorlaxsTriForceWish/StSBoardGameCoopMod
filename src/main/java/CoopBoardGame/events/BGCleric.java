@@ -22,11 +22,6 @@ public class BGCleric extends AbstractImageEvent {
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
     public static final int HEAL_COST = 35;
-    private static final int PURIFY_COST = 50;
-    private static final int A_2_PURIFY_COST = 75;
-    private int purifyCost = 0;
-
-    private static final float HEAL_AMT = 0.25F;
 
     private static final String DIALOG_INTRO = DESCRIPTIONS[0];
     private static final String DIALOG_HEAL = DESCRIPTIONS[1];
@@ -34,21 +29,14 @@ public class BGCleric extends AbstractImageEvent {
     private static final String DIALOG_REMOVE = DESCRIPTIONS[3];
     private static final String DIALOG_LEAVE = DESCRIPTIONS[4];
 
-    private int healAmt;
     private boolean pickCard;
     private int buttonchoice;
 
     public BGCleric() {
         super(NAME, DIALOG_INTRO, "images/events/cleric.jpg");
-        if (AbstractDungeon.ascensionLevel >= 15) {
-            this.purifyCost = 75;
-        } else {
-            this.purifyCost = 50;
-        }
 
         int gold = AbstractDungeon.player.gold;
         if (gold >= 1) {
-            this.healAmt = 1;
             this.imageEventText.setDialogOption(OPTIONS[0], (gold < 1));
         } else {
             this.imageEventText.setDialogOption(OPTIONS[1], (gold < 1));

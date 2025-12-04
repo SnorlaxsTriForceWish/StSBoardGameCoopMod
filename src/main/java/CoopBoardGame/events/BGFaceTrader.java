@@ -59,7 +59,6 @@ public class BGFaceTrader extends AbstractImageEvent implements LockRelicsEvent 
     }
 
     protected void buttonEffect(int buttonPressed) {
-        AbstractRelic r;
         switch (this.screen) {
             case INTRO:
                 switch (buttonPressed) {
@@ -124,6 +123,8 @@ public class BGFaceTrader extends AbstractImageEvent implements LockRelicsEvent 
                 this.imageEventText.setDialogOption(OPTIONS[3]);
                 this.screen = CurScreen.RESULT;
                 return;
+            default:
+                break;
         }
         openMap();
     }

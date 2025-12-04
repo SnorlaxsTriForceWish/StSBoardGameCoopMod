@@ -29,15 +29,6 @@ public class BGGremlinFat extends AbstractBGMonster implements BGDamageIcons {
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
-    private static final int HP_MIN = 13;
-    private static final int HP_MAX = 17;
-    private static final int A_2_HP_MIN = 14;
-    private static final int A_2_HP_MAX = 18;
-    private static final int BLUNT_DAMAGE = 4;
-    private static final int A_2_BLUNT_DAMAGE = 5;
-    private static final int WEAK_AMT = 1;
-    private static final byte BLUNT = 2;
-
     public BGGremlinFat(float x, float y) {
         super(NAME, "BGGremlinFat", 17, 0.0F, 0.0F, 110.0F, 220.0F, null, x, y);
         this.dialogY = 30.0F * Settings.scale;

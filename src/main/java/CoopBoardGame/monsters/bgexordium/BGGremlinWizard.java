@@ -29,15 +29,6 @@ public class BGGremlinWizard extends AbstractBGMonster implements BGDamageIcons 
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final int HP_MIN = 21;
-    private static final int HP_MAX = 25;
-    private static final int A_2_HP_MIN = 22;
-    private static final int A_2_HP_MAX = 26;
-    private static final int MAGIC_DAMAGE = 25;
-    private static final int A_2_MAGIC_DAMAGE = 30;
-    private static final int CHARGE_LIMIT = 3;
-    private int currentCharge = 1;
-    private static final byte DOPE_MAGIC = 1;
     private boolean spoken_charging = false;
     private boolean spoken_hereitcomes = false;
 
@@ -60,20 +51,11 @@ public class BGGremlinWizard extends AbstractBGMonster implements BGDamageIcons 
         e.setTime(e.getEndTime() * MathUtils.random());
     }
 
-    private static final byte CHARGE = 2;
-
     public void takeTurn() {
         switch (this.nextMove) {
             case 2:
-                this.currentCharge++;
-
-                //                if (this.escapeNext) {
-                //                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SetMoveAction(this, (byte)99, AbstractMonster.Intent.ESCAPE)); break;
-                //                }
-                //if (this.currentCharge == 3) {
                 if (true) {
                     playSfx();
-                    //AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new TalkAction((AbstractCreature)this, DIALOG[2], 1.5F, 3.0F));
                     if (!spoken_hereitcomes) {
                         AbstractDungeon.actionManager.addToBottom(
                             (AbstractGameAction) new TalkAction(
@@ -96,10 +78,7 @@ public class BGGremlinWizard extends AbstractBGMonster implements BGDamageIcons 
                     );
                     break;
                 }
-                //setMove(MOVES[0], (byte)2, AbstractMonster.Intent.UNKNOWN);
-                break;
             case 1:
-                this.currentCharge = 0;
                 AbstractDungeon.actionManager.addToBottom(
                     (AbstractGameAction) new DamageAction(
                         (AbstractCreature) AbstractDungeon.player,
@@ -107,11 +86,7 @@ public class BGGremlinWizard extends AbstractBGMonster implements BGDamageIcons 
                         AbstractGameAction.AttackEffect.FIRE
                     )
                 );
-                //                if (this.escapeNext) {
-                //                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SetMoveAction(this, (byte)99, AbstractMonster.Intent.ESCAPE)); break;
-                //                }
-                //if (AbstractDungeon.ascensionLevel >= 17) {
-                if (true) {
+                {
                     setMove(
                         MOVES[1],
                         (byte) 1,
@@ -120,8 +95,6 @@ public class BGGremlinWizard extends AbstractBGMonster implements BGDamageIcons 
                     );
                     break;
                 }
-                //setMove(MOVES[0], (byte)2, AbstractMonster.Intent.UNKNOWN);
-                break;
             case 99:
                 AbstractDungeon.effectList.add(
                     new SpeechBubble(

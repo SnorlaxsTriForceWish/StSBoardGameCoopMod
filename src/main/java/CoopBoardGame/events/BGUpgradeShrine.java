@@ -26,7 +26,6 @@ public class BGUpgradeShrine extends AbstractImageEvent {
 
     private static final String DIALOG_1 = DESCRIPTIONS[0];
     private static final String DIALOG_2 = DESCRIPTIONS[1];
-    private static final String IGNORE = DESCRIPTIONS[2];
     private static final String GAMBLE = DESCRIPTIONS[3];
 
     private CUR_SCREEN screen = CUR_SCREEN.INTRO;

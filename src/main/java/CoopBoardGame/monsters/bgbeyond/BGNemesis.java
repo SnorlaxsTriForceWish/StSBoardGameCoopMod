@@ -34,23 +34,7 @@ public class BGNemesis extends AbstractBGMonster implements BGDamageIcons {
         CardCrawlGame.languagePack.getMonsterStrings("Nemesis");
     public static final String ID = "BGNemesis";
     public static final String NAME = monsterStrings.NAME;
-    private static final int HP = 185;
-    private static final int A_2_HP = 200;
-    private static final int SCYTHE_COOLDOWN_TURNS = 2;
-    private static final float HB_X = 5.0F;
-    private static final float HB_Y = -10.0F;
-    private static final int SCYTHE_DMG = 45;
-    private static final int FIRE_DMG = 6;
-    private static final int FIRE_TIMES = 3;
-    private static final int A_2_FIRE_DMG = 7;
-    private static final int BURN_AMT = 3;
-    private int fireDmg;
-    private int scytheCooldown = 0;
-    private static final byte TRI_ATTACK = 2;
-    private static final byte SCYTHE = 3;
-    private static final byte TRI_BURN = 4;
     private float fireTimer = 0.0F;
-    private static final float FIRE_TIME = 0.05F;
     private Bone eye1;
     private Bone eye2;
     private Bone eye3;
@@ -266,7 +250,6 @@ public class BGNemesis extends AbstractBGMonster implements BGDamageIcons {
     }
 
     protected void getMove(int num) {
-        this.scytheCooldown--;
         if (this.firstMove) {
             this.firstMove = false;
 

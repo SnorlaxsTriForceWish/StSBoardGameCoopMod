@@ -33,16 +33,9 @@ public class BGDonu extends AbstractBGMonster implements BGDamageIcons {
 
     public static final int HP = 250;
     public static final int A_2_HP = 265;
-    private static final byte BEAM = 0;
-    private static final byte CIRCLE_OF_PROTECTION = 2;
-    private static final int ARTIFACT_AMT = 2;
-    private static final int BEAM_DMG = 10;
-    private static final int BEAM_AMT = 2;
-    private static final int A_2_BEAM_DMG = 12;
     private int beamDmg;
     private static final String CIRCLE_NAME = MOVES[0];
 
-    private static final int CIRCLE_STR_AMT = 3;
     private boolean isAttacking;
 
     public BGDonu() {

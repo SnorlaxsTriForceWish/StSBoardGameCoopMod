@@ -19,8 +19,6 @@ public class BGTombRedMask extends AbstractImageEvent {
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
 
-    private static final int GOLD_AMT = 222;
-
     private static final String DIALOG_1 = DESCRIPTIONS[0];
     private static final String MASK_RESULT = DESCRIPTIONS[1];
     private static final String RELIC_RESULT = DESCRIPTIONS[2];
@@ -77,6 +75,10 @@ public class BGTombRedMask extends AbstractImageEvent {
                 this.imageEventText.setDialogOption(OPTIONS[4]);
                 this.screen = CurScreen.RESULT;
                 return;
+            case RESULT:
+                break;
+            default:
+                break;
         }
         openMap();
     }

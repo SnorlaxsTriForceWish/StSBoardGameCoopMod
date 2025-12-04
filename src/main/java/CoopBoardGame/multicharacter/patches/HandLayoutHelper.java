@@ -45,24 +45,17 @@ public class HandLayoutHelper {
                             hand_target_y[i]
                         );
                     }
-                    //can't scroll hands while dragging a card (inc. InputHelper.getCardSelectedByHotkey?)
-                    AbstractPlayer currentCharacter = MultiCharacter.getSubcharacters().get(
-                        currentHand
-                    );
-                    if (true || !currentCharacter.isDraggingCard) {
-                        //&& InputHelper.getCardSelectedByHotkey(currentCharacter.hand)==null) {
-                        if (InputHelper.scrolledDown) {
-                            int i = currentHand;
-                            i += 1;
-                            if (i >= MultiCharacter.getSubcharacters().size()) i = 0;
-                            changeHand(i, 1);
-                        }
-                        if (InputHelper.scrolledUp) {
-                            int i = currentHand;
-                            i -= 1;
-                            if (i < 0) i = MultiCharacter.getSubcharacters().size() - 1;
-                            changeHand(i, -1);
-                        }
+                    if (InputHelper.scrolledDown) {
+                        int i = currentHand;
+                        i += 1;
+                        if (i >= MultiCharacter.getSubcharacters().size()) i = 0;
+                        changeHand(i, 1);
+                    }
+                    if (InputHelper.scrolledUp) {
+                        int i = currentHand;
+                        i -= 1;
+                        if (i < 0) i = MultiCharacter.getSubcharacters().size() - 1;
+                        changeHand(i, -1);
                     }
                 }
             }
@@ -173,7 +166,6 @@ public class HandLayoutHelper {
             );
             for (Soul s : souls) {
                 if (s.card != null && !s.isDone) {
-                    boolean breakpoint = true;
                     if (s.card == __instance) {
                         return true;
                     }

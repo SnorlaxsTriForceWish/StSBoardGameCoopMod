@@ -39,8 +39,6 @@ public class BGAccursedBlacksmith extends AbstractImageEvent {
     private int screenNum = 0;
     private boolean pickCard = false;
     private int pendingReward = 0;
-    private boolean usedGamblingChip = false;
-    private boolean gamblingChipButtonWasActive = false;
 
     private AbstractRelic reward = null;
 
@@ -53,8 +51,6 @@ public class BGAccursedBlacksmith extends AbstractImageEvent {
         }
 
         pendingReward = 0;
-        usedGamblingChip = false;
-        gamblingChipButtonWasActive = false;
 
         this.imageEventText.setDialogOption(OPTIONS[1]);
         //this.imageEventText.setDialogOption(OPTIONS[2]);
@@ -62,8 +58,6 @@ public class BGAccursedBlacksmith extends AbstractImageEvent {
 
     public void onEnterRoom() {
         pendingReward = 0;
-        usedGamblingChip = false;
-        gamblingChipButtonWasActive = false;
 
         if (Settings.AMBIANCE_ON) {
             CardCrawlGame.sound.play("EVENT_FORGE");
@@ -94,30 +88,12 @@ public class BGAccursedBlacksmith extends AbstractImageEvent {
     }
 
     protected void buttonEffect(int buttonPressed) {
-        AbstractCard pain;
         switch (this.screenNum) {
             case 0:
-                boolean mustTakeResult = true;
-                int random;
-                boolean gamblingChipButtonActive = false;
-                //                AbstractRelic r = AbstractDungeon.player.getRelic("BGGambling Chip");
-                //                if (r != null) {
-                //                    if (!usedGamblingChip) {
-                //                        mustTakeResult = false;
-                //                        gamblingChipButtonActive = true;
-                //                    }
-                //                }
-                int rerollbutton = -1;
                 int upgradebutton = 0;
                 int relicbutton = 1;
                 int leavebutton = 2;
-                //                if(gamblingChipButtonWasActive){
-                //                    gamblingChipButtonWasActive = false;
-                //                    rerollbutton++;
-                //                    upgradebutton++;relicbutton++;leavebutton++;
-                //                }
                 if (buttonPressed == upgradebutton) {
-                    //logger.info("upgrade?");
                     int damageAmount = (int) (2);
                     CardCrawlGame.sound.play("ATTACK_POISON");
                     AbstractDungeon.player.damage(
@@ -140,25 +116,7 @@ public class BGAccursedBlacksmith extends AbstractImageEvent {
                     this.imageEventText.clearAllDialogs();
                     this.imageEventText.setDialogOption(OPTIONS[2]);
                 } else if (buttonPressed == relicbutton) {
-                    //logger.info("relic?");
-                    //                    if(pendingReward==0){
-                    //                        pendingReward=AbstractDungeon.miscRng.random(1, 6);
-                    //                        if(mustTakeResult){
-                    //                            getReward();
-                    //                        }else{
-                    //                            this.imageEventText.clearAllDialogs();
-                    //                            if(gamblingChipButtonActive) {
-                    //                                gamblingChipButtonWasActive = true;
-                    //                                this.imageEventText.setDialogOption("[Gambling Chip] Reroll.");
-                    //                            }
-                    //                            if (AbstractDungeon.player.masterDeck.hasUpgradableCards().booleanValue()) { this.imageEventText.setDialogOption(OPTIONS[0],true);    } else {   this.imageEventText.setDialogOption(OPTIONS[4], true);     }
-                    //                            this.imageEventText.setDialogOption(getRewardDescription());
-                    //                            this.imageEventText.setDialogOption(OPTIONS[2], true);
-                    //
-                    //                        }
-                    //                    }else {
                     getReward();
-                    //                    }
                 } else if (buttonPressed == leavebutton) {
                     this.screenNum = 2;
                     logMetricIgnored("Accursed Blacksmith");

@@ -41,17 +41,7 @@ public class BGGreenLouse extends AbstractBGMonster implements BGDamageIcons, Di
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final int HP_MIN = 11;
-    private static final int HP_MAX = 17;
-    private static final int A_2_HP_MIN = 12;
-    private static final int A_2_HP_MAX = 18;
-    private static final byte BITE = 3;
-    private static final byte WEAKEN = 4;
     private boolean isOpen = true;
-    private static final String CLOSED_STATE = "CLOSED";
-    private static final String OPEN_STATE = "OPEN";
-    private static final String REAR_IDLE = "REAR_IDLE";
-    private static final int WEAK_AMT = 2;
 
     public BGGreenLouse(float x, float y) {
         super(NAME, "BGGreenLouse", 17, 0.0F, -5.0F, 180.0F, 140.0F, null, x, y);

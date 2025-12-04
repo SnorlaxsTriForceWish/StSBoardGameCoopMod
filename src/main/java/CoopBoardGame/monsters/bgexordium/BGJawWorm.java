@@ -1,6 +1,5 @@
 package CoopBoardGame.monsters.bgexordium;
 
-import CoopBoardGame.CoopBoardGame;
 import CoopBoardGame.monsters.AbstractBGMonster;
 import CoopBoardGame.monsters.BGDamageIcons;
 import CoopBoardGame.monsters.DieControlledMoves;
@@ -29,8 +28,6 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.BiteEffect;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGJawWorm extends AbstractBGMonster implements BGDamageIcons, DieControlledMoves {
 
@@ -41,40 +38,11 @@ public class BGJawWorm extends AbstractBGMonster implements BGDamageIcons, DieCo
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
-    private static final int HP_MIN = 8;
-
-    private static final int HP_MAX = 8;
-
-    private static final int A_2_HP_MIN = 10;
-
-    private static final int A_2_HP_MAX = 10;
-
-    private static final float HB_X = 0.0F;
-
-    private static final float HB_Y = -25.0F;
-
-    private static final float HB_W = 260.0F;
-
-    private static final float HB_H = 170.0F;
-    private static final int CHOMP_DMG = 3;
-    private static final int A_2_CHOMP_DMG = 4;
-    private static final int THRASH_DMG = 2;
-    private static final int THRASH_BLOCK = 1;
-    private static final int A_2_THRASH_DMG = 3;
-    private static final int A_2_THRASH_BLOCK = 1;
-    private static final int BELLOW_STR = 1;
-    private static final int BELLOW_BLOCK = 2;
-    private static final int A_2_BELLOW_BLOCK = 3;
-
     private int bellowBlock;
     private int chompDmg;
     private int thrashDmg;
     private int thrashBlock;
     private int bellowStr;
-    private static final byte CHOMP = 1;
-    private static final byte BELLOW = 2;
-    private static final byte THRASH = 3;
-    private boolean firstMove = true;
     private int difficulty;
 
     public BGJawWorm(float x, float y, int difficulty, String behavior) {
@@ -220,8 +188,6 @@ public class BGJawWorm extends AbstractBGMonster implements BGDamageIcons, DieCo
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
-        //logger.info("BGJawWorm: TheDie "+TheDie.monsterRoll);
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);
         else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4) move = this.behavior.charAt(1);

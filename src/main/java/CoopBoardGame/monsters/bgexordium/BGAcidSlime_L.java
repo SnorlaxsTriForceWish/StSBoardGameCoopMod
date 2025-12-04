@@ -1,6 +1,5 @@
 package CoopBoardGame.monsters.bgexordium;
 
-import CoopBoardGame.CoopBoardGame;
 import CoopBoardGame.cards.BGStatus.BGDazed;
 import CoopBoardGame.cards.BGStatus.BGSlimed;
 import CoopBoardGame.dungeons.BGExordium;
@@ -29,8 +28,6 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 //TODO: Summon doesn't work during multicharacter combat
 public class BGAcidSlime_L extends AbstractBGMonster implements BGDamageIcons, DieControlledMoves {
@@ -42,7 +39,6 @@ public class BGAcidSlime_L extends AbstractBGMonster implements BGDamageIcons, D
     public static final String[] MOVES = monsterStrings.MOVES;
 
     private static final String WOUND_NAME = MOVES[0];
-    private static final String SPLIT_NAME = MOVES[1];
     private static final String WEAK_NAME = MOVES[2];
 
     public static final int HP_MIN = 65;
@@ -64,20 +60,10 @@ public class BGAcidSlime_L extends AbstractBGMonster implements BGDamageIcons, D
 
     public static final int WEAK_TURNS = 2;
     public static final int WOUND_COUNT = 2;
-    private static final byte SLIME_TACKLE = 1;
-    private static final byte NORMAL_TACKLE = 2;
-    private static final byte SPLIT = 3;
-    private static final byte WEAK_LICK = 4;
-    private float saveX;
-    private float saveY;
-    private boolean splitTriggered;
 
     public BGAcidSlime_L(float x, float y, boolean hard) {
         super(NAME, "BGAcidSlime_L", 12, 0.0F, 0.0F, 300.0F, 180.0F, null, x, y, true);
         this.hard = hard;
-        this.saveX = x;
-        this.saveY = y;
-        this.splitTriggered = false;
 
         if (hard) {
             this.behavior = BGExordium.getSummonLargeSlime();
@@ -367,8 +353,6 @@ public class BGAcidSlime_L extends AbstractBGMonster implements BGDamageIcons, D
             return;
         }
 
-        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
-        //logger.info("BGAcidSlime_M: TheDie "+ TheDie.monsterRoll);
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);
         else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4) move = this.behavior.charAt(1);

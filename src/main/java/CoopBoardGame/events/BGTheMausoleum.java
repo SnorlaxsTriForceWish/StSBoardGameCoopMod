@@ -33,18 +33,13 @@ public class BGTheMausoleum extends AbstractImageEvent {
     private static final String LEAVE_RESULT = DESCRIPTIONS[3];
 
     private int screenNum = 0;
-    private boolean pickCard = false;
     private int pendingReward = 0;
-    private boolean usedGamblingChip = false;
-    private boolean gamblingChipButtonWasActive = false;
 
     private AbstractRelic reward = null;
 
     public BGTheMausoleum() {
         super(NAME, DIALOG_1, "images/events/mausoleum.jpg");
         pendingReward = 0;
-        usedGamblingChip = false;
-        gamblingChipButtonWasActive = false;
 
         this.imageEventText.setDialogOption(OPTIONS[0]);
         this.imageEventText.setDialogOption(OPTIONS[2]);
@@ -52,8 +47,6 @@ public class BGTheMausoleum extends AbstractImageEvent {
 
     public void onEnterRoom() {
         pendingReward = 0;
-        usedGamblingChip = false;
-        gamblingChipButtonWasActive = false;
 
         if (Settings.AMBIANCE_ON) {
             CardCrawlGame.sound.play("EVENT_FORGE");
@@ -61,14 +54,8 @@ public class BGTheMausoleum extends AbstractImageEvent {
     }
 
     protected void buttonEffect(int buttonPressed) {
-        AbstractCard pain;
         switch (this.screenNum) {
             case 0:
-                boolean mustTakeResult = true;
-                int random;
-                boolean gamblingChipButtonActive = false;
-
-                int rerollbutton = -1;
                 int relicbutton = 0;
                 int leavebutton = 1;
 

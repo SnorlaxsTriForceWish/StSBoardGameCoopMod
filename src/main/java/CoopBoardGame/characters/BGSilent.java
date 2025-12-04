@@ -359,7 +359,7 @@ public class BGSilent extends AbstractBGPlayer implements UnselectablePlayer {
     }
 
     public List<CutscenePanel> getCutscenePanels() {
-        List<CutscenePanel> panels = new ArrayList();
+        List<CutscenePanel> panels = new ArrayList<>();
         panels.add(new CutscenePanel("images/scenes/silent1.png", "ATTACK_POISON2"));
         panels.add(new CutscenePanel("images/scenes/silent2.png"));
         panels.add(new CutscenePanel("images/scenes/silent3.png"));

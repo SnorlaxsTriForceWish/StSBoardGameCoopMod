@@ -192,8 +192,6 @@ public class PerspectiveSkewPatches {
                     AbstractCreature.class,
                     "skeleton"
                 )).findBone("root");
-            float sx = root.getScaleX();
-            float sy = root.getScaleY();
             //TODO: store original scale during constructor(?) or during animation setup
             float originalscale = 1.0f;
             float gridscale = 0.75f;

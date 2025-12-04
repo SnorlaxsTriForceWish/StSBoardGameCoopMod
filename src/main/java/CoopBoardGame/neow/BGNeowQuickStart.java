@@ -31,15 +31,12 @@ import com.megacrit.cardcrawl.ui.buttons.ProceedButton;
 import java.util.ArrayList;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 //TODO: Molten/Toxic Egg do not wear off correctly if we are in the middle of a set of card rewards
 //TODO: maybe set act number to 2/3/4 as appropriate so next ascension can be unlocked properly
 
 public class BGNeowQuickStart {
 
-    private static final Logger logger = LogManager.getLogger(BGNeowQuickStart.class.getName());
     public static int actNumber = 2;
     public static int rewardIndex = 1;
     public static int rewardCounter = 0;
@@ -238,24 +235,6 @@ public class BGNeowQuickStart {
         }
     }
 
-    //
-    //
-    //
-    //    @SpirePatch(clz = ProceedButton.class, method = "update",
-    //            paramtypez = {})
-    //    public static class ProceedButtonUpdatePatch3 {
-    //        @SpirePrefixPatch
-    //        public static SpireReturn<Void> update(ProceedButton __instance ) {
-    //            if (CardCrawlGame.dungeon != null && CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
-    //                if(AbstractDungeon.getCurrRoom() instanceof com.megacrit.cardcrawl.rooms.ShopRoom) {
-    //                    if(rewardIndex==12){
-    //                        AbstractDungeon.overlayMenu.proceedButton.show();
-    //                    }
-    //                }
-    //            }
-    //            return SpireReturn.Continue();
-    //        }
-    //    }
 
     @SpirePatch(clz = ProceedButton.class, method = "update", paramtypez = {})
     public static class ProceedButtonUpdatePatch4 {

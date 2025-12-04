@@ -43,15 +43,10 @@ public class BGCorruptHeart extends AbstractBGMonster implements BGDamageIcons {
 
     public static final String VULN_WARNING = "@tu-thump@ @...@ @tu-thump@ @...@ @tu-thump@ @...@";
     private HeartAnimListener animListener = new HeartAnimListener();
-    private static final byte BLOOD_SHOTS = 1;
-    private static final byte ECHO_ATTACK = 2;
-    private static final byte DEBILITATE = 3;
-    private static final byte GAIN_ONE_STRENGTH = 4;
     public static final int DEBUFF_AMT = -1;
     private int bloodHitCount;
     private boolean isFirstMove = true;
-    private int moveCount = 0,
-        buffCount = 0;
+    private int moveCount = 0;
 
     public BGCorruptHeart() {
         super(NAME, "BGCorruptHeart", 750, 30.0F, -30.0F, 476.0F, 410.0F, null, -50.0F, 30.0F);
@@ -101,7 +96,7 @@ public class BGCorruptHeart extends AbstractBGMonster implements BGDamageIcons {
     }
 
     public void takeTurn() {
-        int additionalAmount, i;
+        int i;
         switch (this.nextMove) {
             case 0:
                 AbstractDungeon.actionManager.addToBottom(
@@ -216,8 +211,6 @@ public class BGCorruptHeart extends AbstractBGMonster implements BGDamageIcons {
                 }
                 break;
             case 3:
-                additionalAmount = 0;
-
                 AbstractDungeon.actionManager.addToBottom(
                     (AbstractGameAction) new VFXAction(
                         (AbstractGameEffect) new BorderFlashEffect(
@@ -259,7 +252,6 @@ public class BGCorruptHeart extends AbstractBGMonster implements BGDamageIcons {
                         )
                     );
                 }
-                this.buffCount++;
                 break;
         }
 

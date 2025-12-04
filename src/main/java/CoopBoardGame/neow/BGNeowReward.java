@@ -66,9 +66,7 @@ public class BGNeowReward {
         this.drawback = drawbackDef.type;
 
         this.activated = false;
-        this.hp_bonus = 0;
         this.cursed = false;
-        this.hp_bonus = (int) (AbstractDungeon.player.maxHealth * 0.1F);
 
         if (this.drawback != NeowRewardDrawback.NONE && this.drawbackDef != null) {
             this.optionLabel += this.drawbackDef.desc;
@@ -319,7 +317,6 @@ public class BGNeowReward {
             }
         }
         if (this.type != null) {
-            AbstractCard.CardRarity rarity;
             AbstractCard card1, card2;
             switch (this.type) {
                 case FOUR_GOLD:
@@ -585,11 +582,8 @@ public class BGNeowReward {
     public NeowRewardType type;
     public NeowRewardDrawback drawback;
     private boolean activated;
-    private int hp_bonus;
     public static final String[] UNIQUE_REWARDS = characterStrings.UNIQUE_REWARDS;
     private boolean cursed;
-    private static final int GOLD_BONUS = 4;
-    private static final int LARGE_GOLD_BONUS = 10;
     private NeowRewardDrawbackDef drawbackDef;
 
     public enum NeowRewardType {

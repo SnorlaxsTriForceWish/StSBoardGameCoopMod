@@ -7,13 +7,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractImageEvent;
-import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.neow.NeowEvent;
-import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
-import java.util.ArrayList;
 
 public class BGCursedTome extends AbstractImageEvent {
 
@@ -26,31 +22,10 @@ public class BGCursedTome extends AbstractImageEvent {
     public static final String[] OPTIONS = eventStrings.OPTIONS;
 
     private static final String INTRO_MSG = DESCRIPTIONS[0];
-    private static final String READ_1 = DESCRIPTIONS[1];
-    private static final String READ_2 = DESCRIPTIONS[2];
-    private static final String READ_3 = DESCRIPTIONS[3];
-    private static final String READ_4 = DESCRIPTIONS[4];
-    private static final String OBTAIN_MSG = DESCRIPTIONS[5];
     private static final String IGNORE_MSG = DESCRIPTIONS[6];
-    private static final String STOP_MSG = DESCRIPTIONS[7];
 
-    private static final String OPT_READ = OPTIONS[0];
-    private static final String OPT_CONTINUE_1 = OPTIONS[1];
-    private static final String OPT_CONTINUE_2 = OPTIONS[2];
-    private static final String OPT_CONTINUE_3 = OPTIONS[3];
-    private static final String OPT_STOP = OPTIONS[4];
     private static final String OPT_LEAVE = OPTIONS[7];
 
-    private static final int DMG_BOOK_OPEN = 1;
-
-    private static final int DMG_SECOND_PAGE = 2;
-
-    private static final int DMG_THIRD_PAGE = 3;
-    private static final int DMG_STOP_READING = 3;
-    private static final int DMG_OBTAIN_BOOK = 10;
-    private static final int A_2_DMG_OBTAIN_BOOK = 15;
-    private int finalDmg;
-    private int damageTaken;
     private CurScreen screen = CurScreen.INTRO;
 
     private enum CurScreen {
@@ -65,12 +40,6 @@ public class BGCursedTome extends AbstractImageEvent {
     public BGCursedTome() {
         super(NAME, INTRO_MSG, "images/events/cursedTome.jpg");
         this.noCardsInRewards = true;
-        this.damageTaken = 0;
-        if (AbstractDungeon.ascensionLevel >= 15) {
-            this.finalDmg = 15;
-        } else {
-            this.finalDmg = 10;
-        }
 
         this.imageEventText.setDialogOption(OPTIONS[0]);
         this.imageEventText.setDialogOption(OPTIONS[1]);
@@ -174,37 +143,8 @@ public class BGCursedTome extends AbstractImageEvent {
                 this.imageEventText.clearRemainingOptions();
                 openMap();
                 break;
+            default:
+                break;
         }
-    }
-
-    private void randomBook() {
-        ArrayList<AbstractRelic> possibleBooks = new ArrayList<>();
-
-        if (!AbstractDungeon.player.hasRelic("Necronomicon")) {
-            possibleBooks.add(RelicLibrary.getRelic("Necronomicon").makeCopy());
-        }
-
-        if (!AbstractDungeon.player.hasRelic("Enchiridion")) {
-            possibleBooks.add(RelicLibrary.getRelic("Enchiridion").makeCopy());
-        }
-
-        if (!AbstractDungeon.player.hasRelic("Nilry's Codex")) {
-            possibleBooks.add(RelicLibrary.getRelic("Nilry's Codex").makeCopy());
-        }
-
-        if (possibleBooks.size() == 0) {
-            possibleBooks.add(RelicLibrary.getRelic("Circlet").makeCopy());
-        }
-
-        AbstractRelic r = possibleBooks.get(
-            AbstractDungeon.miscRng.random(possibleBooks.size() - 1)
-        );
-        logMetricTakeDamage("Cursed Tome", "Obtained Book", this.damageTaken);
-
-        (AbstractDungeon.getCurrRoom()).rewards.clear();
-        AbstractDungeon.getCurrRoom().addRelicToRewards(r);
-        (AbstractDungeon.getCurrRoom()).phase = AbstractRoom.RoomPhase.COMPLETE;
-        AbstractDungeon.combatRewardScreen.open();
-        this.screen = CurScreen.END;
     }
 }

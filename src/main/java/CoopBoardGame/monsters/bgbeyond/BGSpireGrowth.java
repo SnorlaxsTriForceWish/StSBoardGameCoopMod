@@ -19,8 +19,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGSpireGrowth extends AbstractBGMonster implements MixedAttacks, DieControlledMoves {
 
@@ -30,16 +28,6 @@ public class BGSpireGrowth extends AbstractBGMonster implements MixedAttacks, Di
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-
-    private static final int START_HP = 170;
-    private static final int A_2_START_HP = 190;
-    private int tackleDmg = 16,
-        smashDmg = 22,
-        constrictDmg = 10;
-    private int A_2_tackleDmg = 18;
-    private int A_2_smashDmg = 25;
-    private int tackleDmgActual;
-    private int smashDmgActual;
 
     private boolean firstMove = true;
 
@@ -53,21 +41,7 @@ public class BGSpireGrowth extends AbstractBGMonster implements MixedAttacks, Di
 
         behavior = "24"; //only checked by bestiary mod
 
-        //        if (AbstractDungeon.ascensionLevel >= 7) {
-        //            setHp(190);
-        //        } else {
-        //            setHp(170);
-        //        }
-
         setHp(28);
-
-        //        if (AbstractDungeon.ascensionLevel >= 2) {
-        //            this.tackleDmgActual = this.A_2_tackleDmg;
-        //            this.smashDmgActual = this.A_2_smashDmg;
-        //        } else {
-        //            this.tackleDmgActual = this.tackleDmg;
-        //            this.smashDmgActual = this.smashDmg;
-        //        }
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
@@ -79,11 +53,7 @@ public class BGSpireGrowth extends AbstractBGMonster implements MixedAttacks, Di
         this.damage.add(new DamageInfo((AbstractCreature) this, 3));
         this.damage.add(new DamageInfo((AbstractCreature) this, 4));
         this.damage.add(new DamageInfo((AbstractCreature) this, 2));
-    }
-
-    private static final byte QUICK_TACKLE = 1;
-    private static final byte CONSTRICT = 2;
-    private static final byte SMASH = 3;
+    };
 
     public void takeTurn() {
         switch (this.nextMove) {
@@ -147,8 +117,6 @@ public class BGSpireGrowth extends AbstractBGMonster implements MixedAttacks, Di
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(DieControlledMoves.class.getName());
-        char move = '-';
         if (this.firstMove) {
             setMove((byte) 0, AbstractMonster.Intent.STUN);
             return;

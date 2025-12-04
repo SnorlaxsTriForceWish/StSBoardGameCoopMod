@@ -3,7 +3,6 @@ package CoopBoardGame.multicharacter;
 import CoopBoardGame.CoopBoardGame;
 import CoopBoardGame.multicharacter.patches.ActionPatches;
 import CoopBoardGame.multicharacter.patches.ContextPatches;
-import basemod.BaseMod;
 import com.badlogic.gdx.Gdx;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -24,7 +23,7 @@ public class DrawCardMultiAction extends AbstractGameAction {
     private ArrayList<Integer> amountLeftToDraw = new ArrayList<>();
     private ArrayList<Boolean> shuffleChecks = new ArrayList<>();
     private static final Logger logger = LogManager.getLogger(DrawCardAction.class.getName());
-    public static ArrayList<AbstractCard> drawnCards = new ArrayList();
+    public static ArrayList<AbstractCard> drawnCards = new ArrayList<>();
     private boolean clearDrawHistory;
     private AbstractGameAction followUpAction;
 
@@ -58,11 +57,6 @@ public class DrawCardMultiAction extends AbstractGameAction {
                 "WARNING: DrawCardMultiAction was updated while ContextPatches.originalBGMultiCharacter==null, time to panic!"
             );
             this.endActionWithFollowUp();
-        } else if (false && AbstractDungeon.player.hasPower("No Draw")) {
-            AbstractDungeon.player.getPower("No Draw").flash();
-            this.endActionWithFollowUp();
-        } else if (false && this.amount <= 0) {
-            this.endActionWithFollowUp();
         } else {
             this.duration -= Gdx.graphics.getDeltaTime();
             if (this.duration < 0.0F) {
@@ -72,9 +66,6 @@ public class DrawCardMultiAction extends AbstractGameAction {
                     int discardSize = p.discardPile.size();
                     if (!SoulGroup.isActive()) {
                         if (deckSize + discardSize == 0) {
-                            endActionCounter += 1;
-                        } else if (false && p.hand.size() == BaseMod.MAX_HAND_SIZE) {
-                            p.createHandIsFullDialog();
                             endActionCounter += 1;
                         } else if (deckSize == 0) {
                             endActionCounter += 1;

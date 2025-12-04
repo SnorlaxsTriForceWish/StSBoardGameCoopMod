@@ -1,6 +1,5 @@
 package CoopBoardGame.monsters.bgexordium;
 
-import CoopBoardGame.CoopBoardGame;
 import CoopBoardGame.cards.BGStatus.BGDazed;
 import CoopBoardGame.monsters.AbstractBGMonster;
 import CoopBoardGame.monsters.BGDamageIcons;
@@ -24,8 +23,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGBlueSlaver extends AbstractBGMonster implements BGDamageIcons, DieControlledMoves {
 
@@ -36,20 +33,7 @@ public class BGBlueSlaver extends AbstractBGMonster implements BGDamageIcons, Di
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
-    private static final int HP_MIN = 46;
-
-    private static final int HP_MAX = 50;
-    private static final int A_2_HP_MIN = 48;
-    private static final int A_2_HP_MAX = 52;
-    private static final int STAB_DMG = 12;
-    private static final int A_2_STAB_DMG = 13;
-    private static final int RAKE_DMG = 7;
-    private static final int A_2_RAKE_DMG = 8;
-    private int stabDmg = 12;
-    private int rakeDmg = 7;
     private int weakAmt = 1;
-    private static final byte STAB = 1;
-    private static final byte RAKE = 4;
 
     //Summoned Act2 Slavers are thankfully identical to Act1 Slavers with the exception of behavior arrangement
     public BGBlueSlaver(float x, float y) {
@@ -198,8 +182,6 @@ public class BGBlueSlaver extends AbstractBGMonster implements BGDamageIcons, Di
     }
 
     public void dieMove(int num) {
-        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
-        //logger.info("Monster: TheDie "+ TheDie.monsterRoll);
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);
         else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4) move = this.behavior.charAt(1);

@@ -19,8 +19,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGRepulsor extends AbstractBGMonster implements DieControlledMoves, BGDamageIcons {
 
@@ -32,13 +30,6 @@ public class BGRepulsor extends AbstractBGMonster implements DieControlledMoves,
     public static final String[] DIALOG = monsterStrings.DIALOG;
     public static final String ENCOUNTER_NAME_W = "Ancient Shapes Weak";
     public static final String ENCOUNTER_NAME = "Ancient Shapes";
-    private static final float HB_X = -8.0F;
-    private static final float HB_Y = -10.0F;
-    private static final float HB_W = 150.0F;
-    private static final float HB_H = 150.0F;
-    private static final byte DAZE = 1;
-    private static final byte ATTACK = 2;
-    private int attackDmg;
     private int dazeAmt;
 
     public BGRepulsor(float x, float y, String behavior) {
@@ -115,7 +106,6 @@ public class BGRepulsor extends AbstractBGMonster implements DieControlledMoves,
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(DieControlledMoves.class.getName());
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2 || TheDie.monsterRoll == 3) move =
             this.behavior.charAt(0);

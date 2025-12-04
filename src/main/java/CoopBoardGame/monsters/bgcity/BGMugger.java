@@ -34,25 +34,13 @@ public class BGMugger extends AbstractBGMonster implements BGDamageIcons {
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final int HP_MIN = 48;
-    private static final int HP_MAX = 52;
-    private static final int A_2_HP_MIN = 50;
-    private static final int A_2_HP_MAX = 54;
     public static final String ENCOUNTER_NAME = "City Looters";
-    private int swipeDmg;
-    private int bigSwipeDmg;
     private int goldAmt;
 
     private int fakeGoldAmt = 15;
     private int escapeDef = 2;
-    private static final byte MUG = 1;
-    private static final byte SMOKE_BOMB = 2;
-    private static final byte ESCAPE = 3;
-    private static final byte BIGSWIPE = 4;
     private static final String SLASH_MSG1 = DIALOG[0];
     private static final String RUN_MSG = DIALOG[1];
-    private int slashCount = 0;
-    private int stolenGold = 0;
 
     public BGMugger(float x, float y) {
         super(NAME, "BGMugger", 52, 0.0F, 0.0F, 200.0F, 220.0F, null, x, y);
@@ -90,7 +78,6 @@ public class BGMugger extends AbstractBGMonster implements BGDamageIcons {
         switch (this.nextMove) {
             case 1:
                 playSfx();
-                this.slashCount++;
                 AbstractDungeon.actionManager.addToBottom(
                     (AbstractGameAction) new AnimateSlowAttackAction((AbstractCreature) this)
                 );
@@ -156,7 +143,6 @@ public class BGMugger extends AbstractBGMonster implements BGDamageIcons {
                 break;
             case 3:
                 playSfx();
-                this.slashCount++;
                 AbstractDungeon.actionManager.addToBottom(
                     (AbstractGameAction) new AnimateSlowAttackAction((AbstractCreature) this)
                 );

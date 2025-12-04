@@ -53,7 +53,7 @@ public class BGBonfire extends AbstractImageEvent {
         super.update();
 
         if (this.cardSelect && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
-            int heal, heal2;
+            int heal;
             this.offeredCard = AbstractDungeon.gridSelectScreen.selectedCards.remove(0);
 
             switch (this.offeredCard.rarity) {
@@ -83,12 +83,12 @@ public class BGBonfire extends AbstractImageEvent {
                     );
                     break;
                 case RARE:
-                    heal2 = AbstractDungeon.player.maxHealth - AbstractDungeon.player.currentHealth;
+                    heal = AbstractDungeon.player.maxHealth - AbstractDungeon.player.currentHealth;
                     logMetricCardRemovalAndHeal(
                         "Bonfire Elementals",
                         "Offered Rare",
                         this.offeredCard,
-                        heal2
+                        heal
                     );
                     break;
             }

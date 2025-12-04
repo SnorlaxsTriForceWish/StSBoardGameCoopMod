@@ -36,7 +36,7 @@ public class OverlayMenuPatches {
     public static void renderSubcharacterEnergyInstead(OverlayMenu __instance, SpriteBatch sb) {
         if (AbstractDungeon.player instanceof MultiCharacter) {
             //energyPanel.render four times, drawn top to bottom
-            for (AbstractPlayer c : MultiCharacter.getSubcharacters()) {
+            for (int i = 0; i < MultiCharacter.getSubcharacters().size(); i += 1) {
                 __instance.energyPanel.current_y += ENERGY_ORB_SPACING * Settings.scale;
             }
             for (int i = MultiCharacter.getSubcharacters().size() - 1; i >= 0; i -= 1) {

@@ -34,47 +34,9 @@ public class BGChosen extends AbstractBGMonster implements BGDamageIcons {
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
-    private static final float IDLE_TIMESCALE = 0.8F;
-
-    private static final int HP_MIN = 95;
-
-    private static final int HP_MAX = 99;
-
-    private static final int A_2_HP_MIN = 98;
-
-    private static final int A_2_HP_MAX = 103;
-
-    private static final float HB_X = 5.0F;
-
-    private static final float HB_Y = -10.0F;
-
-    private static final float HB_W = 200.0F;
-    private static final float HB_H = 280.0F;
-    private static final int ZAP_DMG = 18;
-    private static final int A_2_ZAP_DMG = 21;
-    private static final int DEBILITATE_DMG = 10;
-    private static final int A_2_DEBILITATE_DMG = 12;
-    private static final int POKE_DMG = 5;
-
     public BGChosen() {
         this(0.0F, 0.0F, 14);
     }
-
-    private static final int A_2_POKE_DMG = 6;
-    private int zapDmg;
-    private int debilitateDmg;
-    private int pokeDmg;
-    private static final int DEBILITATE_VULN = 2;
-    private static final int DRAIN_STR = 3;
-    private static final int DRAIN_WEAK = 3;
-    private static final byte ZAP = 1;
-    private static final byte DRAIN = 2;
-    private static final byte DEBILITATE = 3;
-    private static final byte HEX = 4;
-    private static final byte POKE = 5;
-    private static final int HEX_AMT = 1;
-    private boolean firstTurn = true,
-        usedHex = false;
 
     public BGChosen(float x, float y, int hp) {
         super(NAME, "BGChosen", 99, 5.0F, -10.0F, 200.0F, 280.0F, null, x, -20.0F + y);

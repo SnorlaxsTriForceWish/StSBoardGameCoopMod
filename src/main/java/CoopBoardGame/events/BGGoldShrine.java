@@ -21,10 +21,6 @@ public class BGGoldShrine extends AbstractImageEvent {
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
 
-    private static final int GOLD_AMT = 2;
-
-    private static final int CURSE_GOLD_AMT = 7;
-    private static final int A_2_GOLD_AMT = 50;
     private int goldAmt;
     private static final String DIALOG_1 = DESCRIPTIONS[0];
     private static final String DIALOG_2 = DESCRIPTIONS[1];

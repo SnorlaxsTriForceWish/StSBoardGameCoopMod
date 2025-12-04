@@ -11,10 +11,6 @@ import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 
 public class BGDesigner extends AbstractImageEvent {
 
@@ -29,8 +25,6 @@ public class BGDesigner extends AbstractImageEvent {
     public static final int GOLD_REQ = 75;
     public static final int UPG_AMT = 2;
     public static final int REMOVE_AMT = 2;
-    private boolean adjustmentUpgradesOne;
-    private boolean cleanUpRemovesCards;
     private OptionChosen option = null;
     private int adjustCost;
     private int cleanUpCost;
@@ -56,9 +50,6 @@ public class BGDesigner extends AbstractImageEvent {
         super(NAME, DESC[0], "images/events/designer2.jpg");
         this.imageEventText.setDialogOption(OPTIONS[0]);
         this.option = OptionChosen.NONE;
-
-        this.adjustmentUpgradesOne = true;
-        this.cleanUpRemovesCards = true;
 
         this.adjustCost = 2;
         this.cleanUpCost = 3;
@@ -192,6 +183,8 @@ public class BGDesigner extends AbstractImageEvent {
                         this.option = OptionChosen.NONE;
                     }
                     break;
+                default:
+                    break;
             }
         }
     }
@@ -296,68 +289,10 @@ public class BGDesigner extends AbstractImageEvent {
                 this.imageEventText.clearRemainingOptions();
                 this.curScreen = CurrentScreen.DONE;
                 return;
+            default:
+                break;
         }
 
         openMap();
-    }
-
-    private void upgradeTwoRandomCards() {
-        ArrayList<AbstractCard> upgradableCards = new ArrayList<>();
-        for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-            if (c.canUpgrade()) {
-                upgradableCards.add(c);
-            }
-        }
-
-        Collections.shuffle(upgradableCards, new Random(AbstractDungeon.miscRng.randomLong()));
-
-        if (upgradableCards.isEmpty()) {
-            logMetricLoseGold("Designer", "Tried to Upgrade", this.adjustCost);
-        } else if (upgradableCards.size() == 1) {
-            ((AbstractCard) upgradableCards.get(0)).upgrade();
-            AbstractDungeon.player.bottledCardUpgradeCheck(upgradableCards.get(0));
-            AbstractDungeon.topLevelEffects.add(
-                new ShowCardBrieflyEffect(
-                    ((AbstractCard) upgradableCards.get(0)).makeStatEquivalentCopy()
-                )
-            );
-            AbstractDungeon.topLevelEffects.add(
-                new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F)
-            );
-            logMetricCardUpgradeAtCost(
-                "Designer",
-                "Tried to Upgrade",
-                upgradableCards.get(0),
-                this.adjustCost
-            );
-        } else {
-            List<String> cards = new ArrayList<>();
-            cards.add(((AbstractCard) upgradableCards.get(0)).cardID);
-            cards.add(((AbstractCard) upgradableCards.get(1)).cardID);
-            logMetricUpgradeCardsAtCost("Designer", "Upgraded Two", cards, this.adjustCost);
-            ((AbstractCard) upgradableCards.get(0)).upgrade();
-            ((AbstractCard) upgradableCards.get(1)).upgrade();
-            AbstractDungeon.player.bottledCardUpgradeCheck(upgradableCards.get(0));
-            AbstractDungeon.player.bottledCardUpgradeCheck(upgradableCards.get(1));
-            AbstractDungeon.topLevelEffects.add(
-                new ShowCardBrieflyEffect(
-                    ((AbstractCard) upgradableCards.get(0)).makeStatEquivalentCopy(),
-                    Settings.WIDTH / 2.0F - AbstractCard.IMG_WIDTH / 2.0F - 20.0F * Settings.scale,
-                    Settings.HEIGHT / 2.0F
-                )
-            );
-
-            AbstractDungeon.topLevelEffects.add(
-                new ShowCardBrieflyEffect(
-                    ((AbstractCard) upgradableCards.get(1)).makeStatEquivalentCopy(),
-                    Settings.WIDTH / 2.0F + AbstractCard.IMG_WIDTH / 2.0F + 20.0F * Settings.scale,
-                    Settings.HEIGHT / 2.0F
-                )
-            );
-
-            AbstractDungeon.topLevelEffects.add(
-                new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F)
-            );
-        }
     }
 }

@@ -42,20 +42,6 @@ public class BGByrd extends AbstractBGMonster implements DieControlledMoves, BGD
     public static final String FOUR_BYRDS = "4_Byrds";
 
     public static final String IMAGE = "images/monsters/theCity/byrdFlying.png";
-    private static final int HP_MIN = 25;
-    private static final int HP_MAX = 31;
-    private static final int A_2_HP_MIN = 26;
-    private static final int A_2_HP_MAX = 33;
-    private static final float HB_X_F = 0.0F;
-    private static final float HB_X_G = 10.0F;
-    private static final float HB_Y_F = 50.0F;
-    private static final float HB_Y_G = -50.0F;
-    private static final float HB_W = 240.0F;
-    private static final float HB_H = 180.0F;
-    private static final int PECK_DMG = 1;
-    private static final int PECK_COUNT = 5;
-    private static final int SWOOP_DMG = 12;
-    private static final int A_2_PECK_COUNT = 6;
 
     public BGByrd(float x, float y) {
         this(x, y, BGTheCity.getSummonByrd(), 4);
@@ -82,21 +68,9 @@ public class BGByrd extends AbstractBGMonster implements DieControlledMoves, BGD
         e.setTime(e.getEndTime() * MathUtils.random());
     }
 
-    private static final int A_2_SWOOP_DMG = 14;
     private int peckDmg;
     private int peckCount;
     private int swoopDmg;
-    private int flightAmt;
-    private static final int HEADBUTT_DMG = 3;
-    private static final int CAW_STR = 1;
-    private static final byte PECK = 1;
-    private static final byte GO_AIRBORNE = 2;
-    private static final byte SWOOP = 3;
-    private static final byte STUNNED = 4;
-    private static final byte HEADBUTT = 5;
-    private static final byte CAW = 6;
-    private boolean firstMove = true;
-    private boolean isFlying = true;
     public static final String FLY_STATE = "FLYING";
     public static final String GROUND_STATE = "GROUNDED";
 
@@ -189,7 +163,6 @@ public class BGByrd extends AbstractBGMonster implements DieControlledMoves, BGD
             case "GROUNDED":
                 setMove((byte) 4, AbstractMonster.Intent.STUN);
                 createIntent();
-                this.isFlying = false;
                 loadAnimation(
                     "images/monsters/theCity/byrd/grounded.atlas",
                     "images/monsters/theCity/byrd/grounded.json",

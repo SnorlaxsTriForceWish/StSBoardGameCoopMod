@@ -23,8 +23,6 @@ import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGOrbWalker extends AbstractBGMonster implements DieControlledMoves, BGDamageIcons {
 
@@ -35,18 +33,10 @@ public class BGOrbWalker extends AbstractBGMonster implements DieControlledMoves
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final int HP_MIN = 90;
-    private static final int HP_MAX = 96;
-    private static final int A_2_HP_MIN = 92;
-    private static final int A_2_HP_MAX = 102;
     public static final int LASER_DMG = 10;
     public static final int CLAW_DMG = 15;
     public static final int A_2_LASER_DMG = 11;
     public static final int A_2_CLAW_DMG = 16;
-    private int clawDmg;
-    private int laserDmg;
-    private static final byte LASER = 1;
-    private static final byte CLAW = 2;
 
     public BGOrbWalker(float x, float y, String behavior) {
         super(
@@ -156,7 +146,6 @@ public class BGOrbWalker extends AbstractBGMonster implements DieControlledMoves
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(DieControlledMoves.class.getName());
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2 || TheDie.monsterRoll == 3) move =
             this.behavior.charAt(0);

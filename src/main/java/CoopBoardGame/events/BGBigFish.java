@@ -1,7 +1,6 @@
 package CoopBoardGame.events;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.curses.Regret;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -32,7 +31,6 @@ public class BGBigFish extends AbstractImageEvent {
     private static final String BOX_BAD = DESCRIPTIONS[5];
 
     private int healAmt = 2;
-    private static final int MAX_HP_AMT = 5;
     private CurScreen screen = CurScreen.INTRO;
 
     private enum CurScreen {
@@ -50,7 +48,6 @@ public class BGBigFish extends AbstractImageEvent {
     }
 
     protected void buttonEffect(int buttonPressed) {
-        Regret regret;
         AbstractRelic r;
         switch (this.screen) {
             case INTRO:
@@ -118,6 +115,8 @@ public class BGBigFish extends AbstractImageEvent {
                 this.imageEventText.setDialogOption(OPTIONS[5]);
                 this.screen = CurScreen.RESULT;
                 return;
+            default:
+                break;
         }
         openMap();
     }

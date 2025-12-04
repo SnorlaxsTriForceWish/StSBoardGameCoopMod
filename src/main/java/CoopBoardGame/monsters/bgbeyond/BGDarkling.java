@@ -45,12 +45,6 @@ public class BGDarkling extends AbstractBGMonster implements DieControlledMoves,
     public static final int HP_MAX = 56;
     public static final int A_2_HP_MIN = 50;
     public static final int A_2_HP_MAX = 59;
-    private static final float HB_X = 0.0F;
-    private static final float HB_Y = -20.0F;
-    private static final float HB_W = 260.0F;
-    private static final float HB_H = 200.0F;
-    private static final int BITE_DMG = 8;
-    private static final int A_2_BITE_DMG = 9;
 
     public int turnCount = 0;
 
@@ -68,37 +62,12 @@ public class BGDarkling extends AbstractBGMonster implements DieControlledMoves,
         e.setTime(e.getEndTime() * MathUtils.random());
         e.setTimeScale(MathUtils.random(0.75F, 1.0F));
 
-        //        if (AbstractDungeon.ascensionLevel >= 7) {
-        //            setHp(50, 59);
-        //        } else {
-        //            setHp(48, 56);
-        //        }
-        //
-        //        if (AbstractDungeon.ascensionLevel >= 2) {
-        //            this.chompDmg = 9;
-        //            this.nipDmg = AbstractDungeon.monsterHpRng.random(9, 13);
-        //        } else {
-        //            this.chompDmg = 8;
-        //            this.nipDmg = AbstractDungeon.monsterHpRng.random(7, 11);
-        //        }
-
         setHp(8);
 
         this.dialogX = -50.0F * Settings.scale;
         this.damage.add(new DamageInfo((AbstractCreature) this, 2));
         this.damage.add(new DamageInfo((AbstractCreature) this, 3));
     }
-
-    private int chompDmg;
-    private int nipDmg;
-    private static final int BLOCK_AMT = 12;
-    private static final int CHOMP_AMT = 2;
-    private static final byte CHOMP = 1;
-    private static final byte HARDEN = 2;
-    private static final byte NIP = 3;
-    private static final byte COUNT = 4;
-    private static final byte REINCARNATE = 5;
-    private boolean firstMove = true;
 
     public void usePreBattleAction() {
         (AbstractDungeon.getCurrRoom()).cannotLose = true;
@@ -109,9 +78,6 @@ public class BGDarkling extends AbstractBGMonster implements DieControlledMoves,
                 (AbstractPower) new BGRegrowPower((AbstractCreature) this)
             )
         );
-        //        if(this.behavior.equals("----")) {
-        //            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SetMoveAction(this,  (byte)1, AbstractMonster.Intent.DEFEND_BUFF));
-        //        }
     }
 
     public void takeTurn() {
@@ -243,13 +209,7 @@ public class BGDarkling extends AbstractBGMonster implements DieControlledMoves,
     }
 
     public void dieMove(int roll) {
-        //        if (this.halfDead) {
-        //            //this shouldn't happen
-        //            setMove((byte)6, AbstractMonster.Intent.BUFF);
-        //            return;
-        //        }
         if (this.behavior.equals("----")) return;
-        final Logger logger = LogManager.getLogger(DieControlledMoves.class.getName());
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);
         else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4) move = this.behavior.charAt(1);

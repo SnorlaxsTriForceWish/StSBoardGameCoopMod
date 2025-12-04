@@ -140,6 +140,10 @@ public class BGWorldOfGoop extends AbstractImageEvent {
                         break;
                 }
                 return;
+            case RESULT:
+                break;
+            default:
+                break;
         }
         openMap();
     }

@@ -31,8 +31,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGExordium extends AbstractBGDungeon {
 
@@ -638,7 +636,6 @@ public class BGExordium extends AbstractBGDungeon {
 
         @SpirePostfixPatch
         public static void update(DungeonMap __instance) {
-            final Logger logger = LogManager.getLogger(BGExordium.class.getName());
 
             if (
                 (AbstractDungeon.getCurrRoom()).phase == AbstractRoom.RoomPhase.COMPLETE &&
@@ -694,7 +691,6 @@ public class BGExordium extends AbstractBGDungeon {
 
         @SpirePostfixPatch
         public static float calculateMapSize(float __result) {
-            final Logger logger = LogManager.getLogger(BGExordium.class.getName());
             if (CardCrawlGame.dungeon != null && CardCrawlGame.dungeon instanceof BGExordium) {
                 return Settings.MAP_DST_Y * 12.75F - 1380.0F * Settings.scale;
             }

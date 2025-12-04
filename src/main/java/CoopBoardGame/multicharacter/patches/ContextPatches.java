@@ -5,7 +5,6 @@ import CoopBoardGame.multicharacter.NullMonster;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -58,6 +57,5 @@ public class ContextPatches {
             oldContext
         );
         currentTargetContext = oldContext;
-        MonsterGroup debug = AbstractDungeon.getCurrRoom().monsters;
     }
 }

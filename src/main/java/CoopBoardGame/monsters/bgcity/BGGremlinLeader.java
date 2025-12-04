@@ -35,31 +35,15 @@ public class BGGremlinLeader extends AbstractBGMonster implements BGDamageIcons 
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final int HP_MIN = 140;
-    private static final int HP_MAX = 148;
-    private static final int A_2_HP_MIN = 145;
-    private static final int A_2_HP_MAX = 155;
     public static final String ENC_NAME = "Gremlin Leader Combat";
     public AbstractMonster[] gremlins = new AbstractMonster[3];
     public static final float[] POSX = new float[] { -366.0F, -170.0F, -532.0F };
     public static final float[] POSY = new float[] { -4.0F, 6.0F, 0.0F };
 
-    private static final byte RALLY = 2;
-
     private static final String RALLY_NAME = MOVES[0];
 
-    private static final byte ENCOURAGE = 3;
-    private static final int STR_AMT = 3;
-    private static final int BLOCK_AMT = 6;
-    private static final int A_2_STR_AMT = 4;
-    private static final int A_18_STR_AMT = 5;
-    private static final int A_18_BLOCK_AMT = 10;
     private int strAmt;
     private int blockAmt;
-    private static final byte STAB = 4;
-    private int STAB_DMG = 6,
-        STAB_AMT = 3;
-
     public String[] gremlintypes;
 
     public BGGremlinLeader() {
@@ -207,16 +191,6 @@ public class BGGremlinLeader extends AbstractBGMonster implements BGDamageIcons 
             AbstractMonster.Intent.ATTACK_BUFF,
             ((DamageInfo) this.damage.get(0)).base
         );
-    }
-
-    private int numAliveGremlins() {
-        int count = 0;
-        for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
-            if (m != null && m != this && !m.isDying) {
-                count++;
-            }
-        }
-        return count;
     }
 
     public void changeState(String stateName) {

@@ -31,23 +31,9 @@ public class BGExploder extends AbstractBGMonster implements BGDamageIcons {
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
     public static final String ENCOUNTER_NAME = "Ancient Shapes";
-    private static final int HP_MIN = 30;
-    private static final int HP_MAX = 30;
-    private static final int A_2_HP_MIN = 30;
-    private static final int A_2_HP_MAX = 35;
     private int turnCount = 0;
 
-    private static final float HB_X = -8.0F;
-
-    private static final float HB_Y = -10.0F;
-    private static final float HB_W = 150.0F;
-    private static final float HB_H = 150.0F;
-    private static final byte ATTACK = 1;
-    private static final int ATTACK_DMG = 9;
-    private static final int A_2_ATTACK_DMG = 11;
     private int attackDmg;
-    private static final byte BLOCK = 2;
-    private static final int EXPLODE_BASE = 3;
 
     public BGExploder(float x, float y) {
         super(NAME, "BGExploder", 30, -8.0F, -10.0F, 150.0F, 150.0F, null, x, y + 10.0F);

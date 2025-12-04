@@ -1,7 +1,5 @@
 package CoopBoardGame.multicharacter;
 
-import static imgui.extension.texteditor.flag.TextEditorPaletteIndex.String;
-
 import CoopBoardGame.CoopBoardGame;
 import CoopBoardGame.cards.BGRed.BGStrike_Red;
 import CoopBoardGame.characters.AbstractBGPlayer;

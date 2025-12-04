@@ -90,27 +90,25 @@ public class CardTargetingPatches {
         @SpirePrefixPatch
         public static SpireReturn<Void> Foo(AbstractPlayer __instance, SpriteBatch sb) {
             if (__instance.hoveredCard.target == AbstractCard.CardTarget.ALL_ENEMY) {
-                if (true || isUsingTargeting(__instance.hoveredCard)) {
-                    //TODO: verify whether this check is redundant
-                    AbstractMonster hoveredMonster = ReflectionHacks.getPrivate(
-                        __instance,
-                        AbstractPlayer.class,
-                        "hoveredMonster"
-                    );
-                    if (__instance.inSingleTargetMode && hoveredMonster != null) {
-                        for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
-                            if (
-                                Objects.equals(
-                                    MultiCreature.Field.currentRow.get(m),
-                                    MultiCreature.Field.currentRow.get(hoveredMonster)
-                                )
-                            ) {
-                                m.renderReticle(sb);
-                            }
+                //TODO: verify whether this check is redundant
+                AbstractMonster hoveredMonster = ReflectionHacks.getPrivate(
+                    __instance,
+                    AbstractPlayer.class,
+                    "hoveredMonster"
+                );
+                if (__instance.inSingleTargetMode && hoveredMonster != null) {
+                    for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+                        if (
+                            Objects.equals(
+                                MultiCreature.Field.currentRow.get(m),
+                                MultiCreature.Field.currentRow.get(hoveredMonster)
+                            )
+                        ) {
+                            m.renderReticle(sb);
                         }
                     }
-                    return SpireReturn.Return();
                 }
+                return SpireReturn.Return();
             }
             return SpireReturn.Continue();
         }

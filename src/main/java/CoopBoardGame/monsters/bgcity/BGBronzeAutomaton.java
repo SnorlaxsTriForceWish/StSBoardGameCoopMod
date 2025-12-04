@@ -32,31 +32,11 @@ public class BGBronzeAutomaton extends AbstractBGMonster implements BGDamageIcon
         CardCrawlGame.languagePack.getMonsterStrings("BronzeAutomaton");
     public static final String NAME = monsterStrings.NAME;
     private static final String[] MOVES = monsterStrings.MOVES;
-    private static final int HP = 300;
-    private static final int A_2_HP = 320;
-    private static final byte FLAIL = 1;
-    private static final byte HYPER_BEAM = 2;
-    private static final byte STUNNED = 3;
-    private static final byte SPAWN_ORBS = 4;
-    private static final byte BOOST = 5;
     private static final String BEAM_NAME = MOVES[0];
 
-    private static final int FLAIL_DMG = 7;
-
-    private static final int BEAM_DMG = 45;
-
-    private static final int A_2_FLAIL_DMG = 8;
-    private static final int A_2_BEAM_DMG = 50;
     private int flailDmg;
     private int beamDmg;
-    private int numTurns = 0;
-    private static final int BLOCK_AMT = 9;
-    private static final int STR_AMT = 3;
-    private static final int A_2_BLOCK_AMT = 12;
-    private static final int A_2_STR_AMT = 4;
     private int strAmt;
-    private int blockAmt;
-    private boolean firstTurn = true;
 
     public BGBronzeAutomaton() {
         super(NAME, "BGBronzeAutomaton", 300, 0.0F, -30.0F, 270.0F, 400.0F, null, -50.0F, 20.0F);
@@ -74,7 +54,6 @@ public class BGBronzeAutomaton extends AbstractBGMonster implements BGDamageIcon
         this.dialogY = 10.0F * Settings.scale;
 
         setHp((AbstractDungeon.ascensionLevel < 10) ? 55 : 60);
-        this.blockAmt = 0;
         this.flailDmg = 1;
         this.beamDmg = (AbstractDungeon.ascensionLevel < 10) ? 7 : 9;
         this.strAmt = 1;

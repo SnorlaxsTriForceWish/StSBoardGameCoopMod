@@ -35,10 +35,7 @@ public class BGGoldenWing extends AbstractImageEvent {
     private boolean canAttack;
 
     private boolean purgeResult = false;
-    private static final int MIN_GOLD = 2;
     private CUR_SCREEN screen = CUR_SCREEN.INTRO;
-    private static final int MAX_GOLD = 2;
-    private static final int REQUIRED_DAMAGE = 0;
     private int goldAmount;
 
     private enum CUR_SCREEN {

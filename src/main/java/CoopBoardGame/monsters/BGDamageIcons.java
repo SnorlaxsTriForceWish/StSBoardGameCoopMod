@@ -1,14 +1,10 @@
 package CoopBoardGame.monsters;
 
-import CoopBoardGame.patches.DefaultInsertPatch;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import java.util.ArrayList;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public interface BGDamageIcons {
     @SpirePatch2(clz = AbstractMonster.class, method = "getAttackIntentTip", paramtypez = {})
@@ -21,20 +17,16 @@ public interface BGDamageIcons {
             boolean ___isMultiDmg,
             int ___intentMultiAmt
         ) {
-            final Logger logger = LogManager.getLogger(DefaultInsertPatch.class.getName());
-            //logger.info("getAttackIntentTip postfix");
             if (!(__instance instanceof BGDamageIcons)) {
                 return __result;
             }
 
-            ArrayList<String> emptyList;
             int tmp;
             if (___isMultiDmg) {
                 tmp = __instance.getIntentDmg() * ___intentMultiAmt;
             } else {
                 tmp = __instance.getIntentDmg();
             }
-            //logger.info("tmp: "+tmp);
             if (tmp < 1) {
                 return ImageMaster.INTENT_ATK_TIP_1;
             }
@@ -45,8 +37,6 @@ public interface BGDamageIcons {
                 return ImageMaster.INTENT_ATK_TIP_3;
             }
             if (tmp < 4) {
-                //logger.info("RETURN TIP_4 (3dmg): "+tmp);
-                //__result=ImageMaster.INTENT_ATK_TIP_4;
                 return ImageMaster.INTENT_ATK_TIP_4;
             }
             if (tmp < 5) {
@@ -69,11 +59,9 @@ public interface BGDamageIcons {
     public static class getAttackIntentPatch {
 
         public static Texture Postfix(AbstractMonster __instance, Texture __result, int dmg) {
-            final Logger logger = LogManager.getLogger(DefaultInsertPatch.class.getName());
             if (!(__instance instanceof BGDamageIcons)) {
                 return __result;
             }
-            //logger.info("getAttackIntent(dmg) postfix");
             if (dmg < 1) return ImageMaster.INTENT_ATK_1;
             if (dmg < 2) return ImageMaster.INTENT_ATK_2;
             if (dmg < 3) return ImageMaster.INTENT_ATK_3;
@@ -95,8 +83,6 @@ public interface BGDamageIcons {
             boolean ___isMultiDmg,
             int ___intentMultiAmt
         ) {
-            final Logger logger = LogManager.getLogger(DefaultInsertPatch.class.getName());
-
             if (!(__instance instanceof BGDamageIcons)) {
                 return __result;
             }

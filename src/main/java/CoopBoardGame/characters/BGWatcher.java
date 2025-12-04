@@ -331,7 +331,7 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
     }
 
     public List<CutscenePanel> getCutscenePanels() {
-        List<CutscenePanel> panels = new ArrayList();
+        List<CutscenePanel> panels = new ArrayList<>();
         panels.add(new CutscenePanel("images/scenes/watcher1.png", "WATCHER_HEART_PUNCH"));
         panels.add(new CutscenePanel("images/scenes/watcher2.png"));
         panels.add(new CutscenePanel("images/scenes/watcher3.png"));

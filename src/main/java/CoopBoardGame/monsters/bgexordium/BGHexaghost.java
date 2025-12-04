@@ -41,40 +41,22 @@ public class BGHexaghost extends AbstractBGMonster implements BGDamageIcons {
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
     public static final String IMAGE = "images/monsters/theBottom/boss/ghost/core.png";
-    private static final int HP = 250;
-    private static final int A_2_HP = 264;
-    private static final int SEAR_DMG = 6;
-    private static final int INFERNO_DMG = 2;
-    private static final int FIRE_TACKLE_DMG = 5;
-    private static final int STR_AMT = 2;
     private ArrayList<HexaghostOrb> orbs = new ArrayList<>();
-    private static final int A_4_INFERNO_DMG = 3;
-    private static final int A_4_FIRE_TACKLE_DMG = 6;
-    private static final int A_19_BURN_COUNT = 2;
-    private static final int A_19_STR_AMT = 3;
-    private int searDmg;
+
     private int strAmount;
     private int searBurnCount;
     private int turn5BurnCount;
     private int strengthenBlockAmt = 5;
-    private int fireTackleDmg;
-    private int fireTackleCount = 2;
-    private int infernoDmg;
+
     private int infernoHits = 2;
-    private static final byte DIVIDER = 1;
-    private static final byte TACKLE = 2;
-    private static final byte INFLAME = 3;
+
     private static final String STRENGTHEN_NAME = MOVES[0];
-    private static final byte SEAR = 4;
-    private static final byte ACTIVATE = 5;
-    private static final byte INFERNO = 6;
+
     private static final String SEAR_NAME = MOVES[1];
     private static final String BURN_NAME = MOVES[2];
-    private static final String ACTIVATE_STATE = "Activate";
-    private static final String ACTIVATE_ORB = "Activate Orb";
-    private static final String DEACTIVATE_ALL_ORBS = "Deactivate";
+
     private boolean activated = false;
-    private boolean burnUpgraded = false;
+   
     private int orbActiveCount = 0;
     private HexaghostBody body;
 
@@ -120,23 +102,7 @@ public class BGHexaghost extends AbstractBGMonster implements BGDamageIcons {
             AbstractDungeon.getCurrRoom().playBgmInstantly("BOSS_BOTTOM");
         }
         UnlockTracker.markBossAsSeen("GHOST");
-        //CardCrawlGame.music.precacheTempBgm("BOSS_BOTTOM");
-        int i;
-        //        for (i = 0; i < 6; i++) {
-        //            AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new VFXAction((AbstractCreature)this, (AbstractGameEffect)new GhostIgniteEffect(AbstractDungeon.player.hb.cX +
-        //                    MathUtils.random(-120.0F, 120.0F) * Settings.scale, AbstractDungeon.player.hb.cY +
-        //                    MathUtils.random(-120.0F, 120.0F) * Settings.scale), 0.05F));
-        //
-        //            if (MathUtils.randomBoolean()) {
-        //                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("GHOST_ORB_IGNITE_1", 0.3F));
-        //            } else {
-        //                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("GHOST_ORB_IGNITE_2", 0.3F));
-        //            }
-        //
-        //            //not clear why the VG hits the player for -1 here...?
-        ////                    AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
-        ////                            .get(2), AbstractGameAction.AttackEffect.BLUNT_HEAVY, true));
-        //        }
+        
         AbstractDungeon.actionManager.addToBottom(
             (AbstractGameAction) new ChangeStateAction(this, "Deactivate")
         );
@@ -159,7 +125,7 @@ public class BGHexaghost extends AbstractBGMonster implements BGDamageIcons {
     }
 
     public void takeTurn() {
-        int d, i;
+        int d;
         BGBurn c;
         int j;
         switch (this.nextMove) {

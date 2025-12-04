@@ -25,8 +25,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 //TODO: when hit with Skewer, Writhing Mass *repeatedly* switched to vulnerable and made several overlapping Ominous Noises
 public class BGWrithingMass extends AbstractBGMonster implements DieControlledMoves, BGDamageIcons {
@@ -35,13 +33,6 @@ public class BGWrithingMass extends AbstractBGMonster implements DieControlledMo
     private static final MonsterStrings monsterStrings =
         CardCrawlGame.languagePack.getMonsterStrings("WrithingMass");
     public static final String NAME = monsterStrings.NAME;
-
-    private static final int HP = 160;
-
-    private static final int A_2_HP = 175;
-    private boolean firstMove = true;
-    private boolean usedMegaDebuff = false;
-    private static final int HIT_COUNT = 3;
 
     public BGWrithingMass() {
         super(NAME, "BGWrithingMass", 160, 5.0F, -26.0F, 450.0F, 310.0F, null, 0.0F, 15.0F);
@@ -54,26 +45,6 @@ public class BGWrithingMass extends AbstractBGMonster implements DieControlledMo
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
         this.stateData.setMix("Hit", "Idle", 0.1F);
-        //
-        //        if (AbstractDungeon.ascensionLevel >= 7) {
-        //            setHp(175);
-        //        } else {
-        //            setHp(160);
-        //        }
-        //
-        //        if (AbstractDungeon.ascensionLevel >= 2) {
-        //            this.damage.add(new DamageInfo((AbstractCreature)this, 38));
-        //            this.damage.add(new DamageInfo((AbstractCreature)this, 9));
-        //            this.damage.add(new DamageInfo((AbstractCreature)this, 16));
-        //            this.damage.add(new DamageInfo((AbstractCreature)this, 12));
-        //            this.normalDebuffAmt = 2;
-        //        } else {
-        //            this.damage.add(new DamageInfo((AbstractCreature)this, 32));
-        //            this.damage.add(new DamageInfo((AbstractCreature)this, 7));
-        //            this.damage.add(new DamageInfo((AbstractCreature)this, 15));
-        //            this.damage.add(new DamageInfo((AbstractCreature)this, 10));
-        //            this.normalDebuffAmt = 2;
-        //        }
 
         setHp(27);
         this.damage.add(new DamageInfo((AbstractCreature) this, 5));
@@ -84,12 +55,6 @@ public class BGWrithingMass extends AbstractBGMonster implements DieControlledMo
         this.damage.add(new DamageInfo((AbstractCreature) this, 4));
     }
 
-    private int normalDebuffAmt;
-    private static final byte BIG_HIT = 0;
-    private static final byte MULTI_HIT = 1;
-    private static final byte ATTACK_BLOCK = 2;
-    private static final byte ATTACK_DEBUFF = 3;
-    private static final byte MEGA_DEBUFF = 4;
 
     public void usePreBattleAction() {
         AbstractDungeon.actionManager.addToBottom(
@@ -234,7 +199,6 @@ public class BGWrithingMass extends AbstractBGMonster implements DieControlledMo
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(DieControlledMoves.class.getName());
         //TODO: reorder if-else from 1 to 6 after checking physical card
         if (TheDie.monsterRoll == 4) {
             setMove(

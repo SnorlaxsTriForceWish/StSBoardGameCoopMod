@@ -61,27 +61,8 @@ public class BGAwakenedOne extends AbstractBGMonster {
     public static final int STAGE_2_HP = 300;
     public static final int A_9_STAGE_1_HP = 320;
     public static final int A_9_STAGE_2_HP = 320;
-    private static final int A_4_STR = 2;
-    private static final byte SLASH = 1;
-    private static final byte SOUL_STRIKE = 2;
-    private static final byte REBIRTH = 3;
-    private static final String SS_NAME = MOVES[0];
-    private static final int SLASH_DMG = 20;
-    private static final int SS_DMG = 6;
-    private static final int SS_AMT = 4;
-    private static final int REGEN_AMT = 10;
     private static final String DARK_ECHO_NAME = MOVES[1];
-    private static final int STR_AMT = 1;
-    private static final byte DARK_ECHO = 5;
-    private static final byte SLUDGE = 6;
-    private static final byte TACKLE = 8;
-    private static final String SLUDGE_NAME = MOVES[3];
-    private static final int ECHO_DMG = 40;
-    private static final int SLUDGE_DMG = 18;
-    private static final int TACKLE_DMG = 10;
-    private static final int TACKLE_AMT = 3;
     private float fireTimer = 0.0F;
-    private static final float FIRE_TIME = 0.1F;
     private Bone eye;
     private Bone back;
     private boolean animateParticles = false;
@@ -89,12 +70,7 @@ public class BGAwakenedOne extends AbstractBGMonster {
 
     public BGAwakenedOne(float x, float y) {
         super(NAME, ID, 300, 40.0F, -30.0F, 460.0F, 250.0F, null, x, y);
-        //        if (AbstractDungeon.ascensionLevel >= 9) {
-        //            setHp(320);
-        //        } else {
-        //            setHp(300);
-        //        }
-
+    
         loadAnimation(
             "images/monsters/theForest/awakenedOne/skeleton.atlas",
             "images/monsters/theForest/awakenedOne/skeleton.json",

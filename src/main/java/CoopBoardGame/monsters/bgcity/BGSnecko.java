@@ -28,8 +28,6 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.BiteEffect;
 import com.megacrit.cardcrawl.vfx.combat.IntimidateEffect;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGSnecko extends AbstractBGMonster implements DieControlledMoves, BGDamageIcons {
 
@@ -39,21 +37,6 @@ public class BGSnecko extends AbstractBGMonster implements DieControlledMoves, B
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final byte GLARE = 1;
-    private static final byte BITE = 2;
-    private static final byte TAIL = 3;
-    private static final int BITE_DAMAGE = 15;
-    private static final int TAIL_DAMAGE = 8;
-    private static final int A_2_BITE_DAMAGE = 18;
-    private static final int A_2_TAIL_DAMAGE = 10;
-    private int biteDmg;
-    private int tailDmg;
-    private static final int VULNERABLE_AMT = 2;
-    private static final int HP_MIN = 114;
-    private static final int HP_MAX = 120;
-    private static final int A_2_HP_MIN = 120;
-    private static final int A_2_HP_MAX = 125;
-    private boolean firstTurn = true;
 
     public BGSnecko() {
         this(0.0F, 0.0F);
@@ -229,7 +212,6 @@ public class BGSnecko extends AbstractBGMonster implements DieControlledMoves, B
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(DieControlledMoves.class.getName());
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = '3';
         else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4) move = '4';

@@ -345,7 +345,7 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
     }
 
     public List<CutscenePanel> getCutscenePanels() {
-        List<CutscenePanel> panels = new ArrayList();
+        ArrayList<CutscenePanel> panels = new ArrayList<>();
         panels.add(new CutscenePanel("images/scenes/defect1.png", "ATTACK_MAGIC_BEAM_SHORT"));
         panels.add(new CutscenePanel("images/scenes/defect2.png"));
         panels.add(new CutscenePanel("images/scenes/defect3.png"));

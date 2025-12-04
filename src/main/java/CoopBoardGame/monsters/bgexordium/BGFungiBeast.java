@@ -1,6 +1,5 @@
 package CoopBoardGame.monsters.bgexordium;
 
-import CoopBoardGame.CoopBoardGame;
 import CoopBoardGame.monsters.AbstractBGMonster;
 import CoopBoardGame.monsters.BGDamageIcons;
 import CoopBoardGame.monsters.DieControlledMoves;
@@ -22,8 +21,6 @@ import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGFungiBeast extends AbstractBGMonster implements BGDamageIcons, DieControlledMoves {
 
@@ -34,22 +31,6 @@ public class BGFungiBeast extends AbstractBGMonster implements BGDamageIcons, Di
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final int HP_MIN = 22;
-    private static final int HP_MAX = 28;
-    private static final int A_2_HP_MIN = 24;
-    private static final int A_2_HP_MAX = 28;
-    private static final float HB_X = 0.0F;
-    private static final float HB_Y = -16.0F;
-    private static final float HB_W = 260.0F;
-    private static final float HB_H = 170.0F;
-    private int biteDamage;
-    private int strAmt;
-    private static final int BITE_DMG = 6;
-    private static final int GROW_STR = 3;
-    private static final int A_2_GROW_STR = 4;
-    private static final byte BITE = 1;
-    private static final byte GROW = 2;
-    private static final int VULN_AMT = 2;
     private int strAmount;
 
     public BGFungiBeast(float x, float y, String behavior, boolean a7summon) {
@@ -147,8 +128,6 @@ public class BGFungiBeast extends AbstractBGMonster implements BGDamageIcons, Di
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
-        //logger.info("Monster: TheDie "+ TheDie.monsterRoll);
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);
         else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4) move = this.behavior.charAt(1);

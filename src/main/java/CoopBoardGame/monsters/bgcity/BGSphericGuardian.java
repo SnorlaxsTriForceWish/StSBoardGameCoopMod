@@ -28,31 +28,10 @@ public class BGSphericGuardian extends AbstractBGMonster implements BGDamageIcon
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final float IDLE_TIMESCALE = 0.8F;
-    private static final float HB_X = 0.0F;
-    private static final float HB_Y = 10.0F;
-    private static final float HB_W = 280.0F;
-    private static final float HB_H = 280.0F;
-    private static final int DMG = 10;
-    private static final int A_2_DMG = 11;
-    private int dmg;
-    private static final int SLAM_AMT = 2;
 
     public BGSphericGuardian() {
         this(0.0F, 0.0F);
     }
-
-    private static final int HARDEN_BLOCK = 15;
-    private static final int FRAIL_AMT = 5;
-    private static final int ACTIVATE_BLOCK = 25;
-    private static final int ARTIFACT_AMT = 3;
-    private static final int STARTING_BLOCK_AMT = 40;
-    private static final byte BIG_ATTACK = 1;
-    private static final byte INITIAL_BLOCK_GAIN = 2;
-    private static final byte BLOCK_ATTACK = 3;
-    private static final byte FRAIL_ATTACK = 4;
-    private boolean firstMove = true,
-        secondMove = true;
 
     public BGSphericGuardian(float x, float y) {
         super(NAME, "BGSphericGuardian", 20, 0.0F, 10.0F, 280.0F, 280.0F, null, x, y);

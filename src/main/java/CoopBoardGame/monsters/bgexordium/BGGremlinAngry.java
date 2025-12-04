@@ -31,13 +31,6 @@ public class BGGremlinAngry extends AbstractBGMonster implements BGDamageIcons {
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final int SCRATCH_DAMAGE = 4;
-    private static final int A_2_SCRATCH_DAMAGE = 5;
-    private static final byte SCRATCH = 1;
-    private static final int HP_MIN = 20;
-    private static final int HP_MAX = 24;
-    private static final int A_2_HP_MIN = 21;
-    private static final int A_2_HP_MAX = 25;
     private boolean leader;
 
     public BGGremlinAngry(float x, float y, boolean leader) {

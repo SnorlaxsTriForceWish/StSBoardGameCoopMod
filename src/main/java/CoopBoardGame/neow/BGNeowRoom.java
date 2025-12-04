@@ -2,7 +2,6 @@ package CoopBoardGame.neow;
 
 import CoopBoardGame.dungeons.AbstractBGDungeon;
 import CoopBoardGame.multicharacter.MultiCharacter;
-import CoopBoardGame.patches.DefaultInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
@@ -12,9 +11,6 @@ import com.megacrit.cardcrawl.helpers.TipTracker;
 import com.megacrit.cardcrawl.neow.NeowRoom;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.DungeonTransitionScreen;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 public class BGNeowRoom {
 
     @SpirePatch(
@@ -31,13 +27,8 @@ public class BGNeowRoom {
             if (
                 CardCrawlGame.dungeon != null && CardCrawlGame.dungeon instanceof AbstractBGDungeon
             ) {
-                final Logger logger = LogManager.getLogger(DefaultInsertPatch.class.getName());
                 room.phase = AbstractRoom.RoomPhase.EVENT;
-                //if(BGSetupPortal.neowRoomBecomesSetupRoom){
-                //room.event = new BGSetupPortal();
-                //}else {
                 room.event = new BGNeowEvent(isDone);
-                //}
                 room.event.onEnterRoom();
                 return SpireReturn.Return();
             }

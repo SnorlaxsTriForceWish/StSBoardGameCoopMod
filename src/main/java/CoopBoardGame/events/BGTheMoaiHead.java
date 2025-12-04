@@ -34,14 +34,6 @@ public class BGTheMoaiHead extends AbstractImageEvent implements LockRelicsEvent
 
     public static final String[] OPTIONS = eventStrings.OPTIONS;
 
-    private static final float HP_LOSS_PERCENT = 0.125F;
-
-    private static final float A_2_HP_LOSS_PERCENT = 0.18F;
-
-    private int hpAmt = 0;
-
-    private static final int goldAmount = 333;
-
     private static final String INTRO_BODY = DESCRIPTIONS[0];
 
     private int screenNum = 0;

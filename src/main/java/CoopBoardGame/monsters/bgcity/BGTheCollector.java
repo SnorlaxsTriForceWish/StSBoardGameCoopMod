@@ -32,7 +32,6 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
 import com.megacrit.cardcrawl.vfx.GlowyFireEyesEffect;
 import com.megacrit.cardcrawl.vfx.StaffFireEffect;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
@@ -52,30 +51,15 @@ public class BGTheCollector extends AbstractBGMonster implements BGDamageIcons {
 
     public static final int A_2_HP = 300;
 
-    private static final int FIREBALL_DMG = 18;
-    private static final int STR_AMT = 3;
-    private static final int BLOCK_AMT = 15;
-    private static final int A_2_FIREBALL_DMG = 21;
-    private int turnsTaken = 0;
-    private static final int A_2_STR_AMT = 4;
-    private static final int A_2_BLOCK_AMT = 18;
-    private int rakeDmg;
     private int strAmt;
-    private int blockAmt;
     private int megaDebuffAmt;
     private int megaDebuffBurns;
     private float spawnX = -100.0F;
     private float fireTimer = 0.0F;
 
-    private static final float FIRE_TIME = 0.07F;
     private boolean ultUsed = false;
     private boolean initialSpawn = true;
     private HashMap<Integer, AbstractMonster> enemySlots = new HashMap<>();
-    private static final byte SPAWN = 1;
-    private static final byte FIREBALL = 2;
-    private static final byte BUFF = 3;
-    private static final byte MEGA_DEBUFF = 4;
-    private static final byte REVIVE = 5;
 
     public BGTheCollector() {
         super(NAME, "BGTheCollector", 282, 15.0F, -40.0F, 300.0F, 390.0F, null, 60.0F, 135.0F);
@@ -109,9 +93,6 @@ public class BGTheCollector extends AbstractBGMonster implements BGDamageIcons {
         AbstractDungeon.scene.fadeOutAmbiance();
         AbstractDungeon.getCurrRoom().playBgmInstantly("BOSS_CITY");
         UnlockTracker.markBossAsSeen("COLLECTOR");
-
-        ArrayList<AbstractMonster> monsters = AbstractDungeon.getMonsters().monsters;
-        //logger.info("checking gremlin slot "+slot);
     }
 
     public void takeTurn() {
@@ -239,21 +220,10 @@ public class BGTheCollector extends AbstractBGMonster implements BGDamageIcons {
                 logger.info("ERROR: Default Take Turn was called on " + this.name);
                 break;
         }
-        this.turnsTaken++;
     }
 
     protected void getMove(int num) {
         setMove((byte) 1, AbstractMonster.Intent.UNKNOWN);
-    }
-
-    private boolean isMinionDead() {
-        for (Map.Entry<Integer, AbstractMonster> m : this.enemySlots.entrySet()) {
-            if (((AbstractMonster) m.getValue()).isDying) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public void update() {

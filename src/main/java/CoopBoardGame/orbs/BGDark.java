@@ -31,11 +31,8 @@ public class BGDark extends CustomOrb {
     private static final int PASSIVE_AMOUNT = 3;
     private static final int EVOKE_AMOUNT = 3;
 
-    private static final float ORB_BORDER_SCALE = 1.2F;
 
     private float vfxTimer = 0.5F;
-
-    private static final float VFX_INTERVAL_TIME = 0.25F;
 
     public BGDark() {
         super(

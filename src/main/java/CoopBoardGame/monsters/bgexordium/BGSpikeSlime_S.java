@@ -31,7 +31,6 @@ public class BGSpikeSlime_S extends AbstractBGMonster implements BGDamageIcons {
     public static final int A_2_HP_MAX = 15;
     public static final int TACKLE_DAMAGE = 5;
     public static final int A_2_TACKLE_DAMAGE = 6;
-    private static final byte TACKLE = 1;
 
     public BGSpikeSlime_S(float x, float y) {
         super(NAME, "BGSpikeSlime_S", 14, 0.0F, -24.0F, 130.0F, 100.0F, null, x, y);

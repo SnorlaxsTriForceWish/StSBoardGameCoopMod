@@ -1,6 +1,5 @@
 package CoopBoardGame.multicharacter.patches;
 
-import CoopBoardGame.dungeons.BGExordium;
 import CoopBoardGame.multicharacter.grid.GridBackground;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
@@ -8,8 +7,6 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class PlayerHealthBarPatches {
 
@@ -19,8 +16,6 @@ public class PlayerHealthBarPatches {
 
         @SpirePostfixPatch
         public static void Foo(AbstractPlayer __instance, SpriteBatch sb) {
-            final Logger logger = LogManager.getLogger(BGExordium.class.getName());
-
             if (GridBackground.isGridViewActive()) {
                 if (
                     ((AbstractDungeon.getCurrRoom()).phase == AbstractRoom.RoomPhase.COMBAT ||

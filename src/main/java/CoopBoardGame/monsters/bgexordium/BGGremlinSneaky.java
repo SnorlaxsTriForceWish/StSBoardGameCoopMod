@@ -8,8 +8,6 @@ import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.AnimateSlowAttackAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.SetMoveAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -27,13 +25,6 @@ public class BGGremlinSneaky extends AbstractBGMonster implements BGDamageIcons 
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-
-    private static final int THIEF_DAMAGE = 9;
-
-    private static final int A_2_THIEF_DAMAGE = 10;
-
-    private static final byte PUNCTURE = 1;
-    private static final int HP_MIN = 10;
 
     private boolean leader;
 
@@ -56,11 +47,6 @@ public class BGGremlinSneaky extends AbstractBGMonster implements BGDamageIcons 
         e.setTime(e.getEndTime() * MathUtils.random());
     }
 
-    private static final int HP_MAX = 14;
-    private static final int A_2_HP_MIN = 11;
-    private static final int A_2_HP_MAX = 15;
-    private int thiefDamage;
-
     public void usePreBattleAction() {
         if (this.leader) {
             AbstractDungeon.actionManager.addToBottom(
@@ -82,47 +68,7 @@ public class BGGremlinSneaky extends AbstractBGMonster implements BGDamageIcons 
                         AbstractGameAction.AttackEffect.SLASH_HORIZONTAL
                     )
                 );
-
-                if (true) {
-                    AbstractDungeon.actionManager.addToBottom(
-                        (AbstractGameAction) new SetMoveAction(
-                            this,
-                            (byte) 1,
-                            AbstractMonster.Intent.ATTACK,
-                            2
-                        )
-                    );
-                    break;
-                }
-                AbstractDungeon.actionManager.addToBottom(
-                    (AbstractGameAction) new SetMoveAction(
-                        this,
-                        (byte) 99,
-                        AbstractMonster.Intent.ESCAPE
-                    )
-                );
                 break;
-
-            //            case 99:
-            //                playSfx();
-            //                AbstractDungeon.effectList.add(new SpeechBubble(this.hb.cX + this.dialogX, this.hb.cY + this.dialogY, 2.5F, DIALOG[1], false));
-            //
-            //                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new EscapeAction(this));
-            //                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SetMoveAction(this, (byte)99, AbstractMonster.Intent.ESCAPE));
-            //                break;
-        }
-    }
-
-    private void playSfx() {
-        int roll = MathUtils.random(1);
-        if (roll == 0) {
-            AbstractDungeon.actionManager.addToBottom(
-                (AbstractGameAction) new SFXAction("VO_GREMLINSPAZZY_1A")
-            );
-        } else {
-            AbstractDungeon.actionManager.addToBottom(
-                (AbstractGameAction) new SFXAction("VO_GREMLINSPAZZY_1B")
-            );
         }
     }
 

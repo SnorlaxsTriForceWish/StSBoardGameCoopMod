@@ -21,8 +21,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGSpiker extends AbstractBGMonster implements DieControlledMoves, BGDamageIcons {
 
@@ -35,24 +33,8 @@ public class BGSpiker extends AbstractBGMonster implements DieControlledMoves, B
 
     public static final String ENCOUNTER_NAME = "Ancient Shapes";
 
-    private static final int HP_MIN = 42;
-    private static final int HP_MAX = 56;
-    private static final int A_2_HP_MIN = 44;
-    private static final int A_2_HP_MAX = 60;
-    private static final float HB_X = -8.0F;
-    private static final float HB_Y = -10.0F;
-    private static final float HB_W = 150.0F;
-    private static final float HB_H = 150.0F;
-    private static final int STARTING_THORNS = 3;
-    private static final int A_2_STARTING_THORNS = 4;
     private int startingThorns;
-    private static final byte ATTACK = 1;
-    private static final int ATTACK_DMG = 7;
-    private static final int A_2_ATTACK_DMG = 9;
     private int attackDmg;
-    private static final byte BUFF_THORNS = 2;
-    private static final int BUFF_AMT = 2;
-    private int thornsCount = 0;
 
     //TODO NEXT NEXT: final attack against GREMLIN NOB is bugged too.
     //              occurs with any multi-hit attack that Spiker survives the first hit of.
@@ -121,7 +103,6 @@ public class BGSpiker extends AbstractBGMonster implements DieControlledMoves, B
                 );
                 break;
             case 2:
-                this.thornsCount++;
                 //if(this.thornsCount<5) {
                 AbstractDungeon.actionManager.addToBottom(
                     (AbstractGameAction) new ApplyPowerAction(
@@ -143,7 +124,6 @@ public class BGSpiker extends AbstractBGMonster implements DieControlledMoves, B
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(DieControlledMoves.class.getName());
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2 || TheDie.monsterRoll == 3) move =
             this.behavior.charAt(0);

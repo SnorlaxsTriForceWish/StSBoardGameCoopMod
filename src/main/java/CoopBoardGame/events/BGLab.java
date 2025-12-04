@@ -24,7 +24,6 @@ public class BGLab extends Lab {
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
 
-    private static final String DIALOG_1 = DESCRIPTIONS[0];
     private CUR_SCREEN screen = CUR_SCREEN.INTRO;
 
     private enum CUR_SCREEN {

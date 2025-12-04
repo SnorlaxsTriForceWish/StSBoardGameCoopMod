@@ -35,26 +35,16 @@ public class BGLooter extends AbstractBGMonster implements BGDamageIcons {
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final int HP_MIN = 44;
-    private static final int HP_MAX = 48;
-    private static final int A_2_HP_MIN = 46;
-    private static final int A_2_HP_MAX = 50;
     private int swipeDmg;
     private int lungeDmg;
     private int escapeDef = 1;
     private int goldAmt;
     private int fakeGoldAmt = 15;
-    private static final byte MUG = 1;
     private static final String SLASH_MSG1 = DIALOG[0];
-    private static final byte SMOKE_BOMB = 2;
-    private static final byte ESCAPE = 3;
-    private static final byte LUNGE = 4;
     private static final String DEATH_MSG1 = DIALOG[1];
     private static final String SMOKE_BOMB_MSG = DIALOG[2];
     private static final String RUN_MSG = DIALOG[3];
-    private int slashCount = 0;
     private int stolenGold = 0;
-    private boolean hardmode = false;
 
     public BGLooter(float x, float y, boolean hardmode) {
         super(NAME, "BGLooter", 48, 0.0F, 0.0F, 200.0F, 220.0F, null, x, y);
@@ -129,7 +119,6 @@ public class BGLooter extends AbstractBGMonster implements BGDamageIcons {
                 break;
             case 2:
                 playSfx();
-                this.slashCount++;
                 AbstractDungeon.actionManager.addToBottom(
                     (AbstractGameAction) new AnimateSlowAttackAction((AbstractCreature) this)
                 );

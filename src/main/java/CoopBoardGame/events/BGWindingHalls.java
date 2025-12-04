@@ -23,16 +23,9 @@ public class BGWindingHalls extends AbstractImageEvent {
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
 
-    private static final float HP_LOSS_PERCENT = 0.125F;
-
-    private static final float HP_MAX_LOSS_PERCENT = 0.05F;
-    private static final float A_2_HP_LOSS_PERCENT = 0.18F;
-    private static final float HEAL_AMT = 0.25F;
     private static final String INTRO_BODY1 = DESCRIPTIONS[0];
-    private static final float A_2_HEAL_AMT = 0.2F;
     private int hpAmt;
     private int healAmt;
-    private int maxHPAmt;
     private static final String INTRO_BODY2 = DESCRIPTIONS[1];
     private static final String CHOICE_1_TEXT = DESCRIPTIONS[2];
     private static final String CHOICE_2_TEXT = DESCRIPTIONS[3];

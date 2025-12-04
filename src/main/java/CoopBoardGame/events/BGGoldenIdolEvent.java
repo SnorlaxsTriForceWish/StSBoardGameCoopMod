@@ -1,7 +1,6 @@
 package CoopBoardGame.events;
 
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.curses.Injury;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -23,19 +22,11 @@ public class BGGoldenIdolEvent extends AbstractImageEvent {
 
     private static final String DIALOG_START = DESCRIPTIONS[0];
     private static final String DIALOG_BOULDER = DESCRIPTIONS[1];
-    private static final String DIALOG_CHOSE_RUN = DESCRIPTIONS[2];
     private static final String DIALOG_CHOSE_FIGHT = DESCRIPTIONS[3];
-    private static final String DIALOG_CHOSE_FLAT = DESCRIPTIONS[4];
     private static final String DIALOG_IGNORE = DESCRIPTIONS[5];
 
     private int screenNum = 0;
-
-    private static final float HP_LOSS_PERCENT = 0.25F;
-    private static final float MAX_HP_LOSS_PERCENT = 0.08F;
-    private static final float A_2_HP_LOSS_PERCENT = 0.35F;
-    private static final float A_2_MAX_HP_LOSS_PERCENT = 0.1F;
     private int damage;
-    private int maxHpLoss;
     private AbstractRelic relicMetric = null;
 
     public BGGoldenIdolEvent() {
@@ -44,7 +35,6 @@ public class BGGoldenIdolEvent extends AbstractImageEvent {
         this.imageEventText.setDialogOption(OPTIONS[1]);
 
         this.damage = 1;
-        this.maxHpLoss = 1;
     }
 
     public void onEnterRoom() {
@@ -54,7 +44,6 @@ public class BGGoldenIdolEvent extends AbstractImageEvent {
     }
 
     protected void buttonEffect(int buttonPressed) {
-        Injury injury;
         switch (this.screenNum) {
             case 0:
                 switch (buttonPressed) {

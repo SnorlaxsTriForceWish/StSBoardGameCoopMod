@@ -9,12 +9,9 @@ import com.megacrit.cardcrawl.events.AbstractEvent;
 import com.megacrit.cardcrawl.events.AbstractImageEvent;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGScrapOoze extends AbstractImageEvent {
 
-    private static final Logger logger = LogManager.getLogger(BGScrapOoze.class.getName());
     public static final String ID = "BGScrap Ooze";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
         "CoopBoardGame:BGScrap Ooze"
@@ -151,7 +148,6 @@ public class BGScrapOoze extends AbstractImageEvent {
             i += 1;
         }
         if (pendingReward > 0) {
-            int pendingRewardTextIndex = (pendingReward + 1) / 2;
             if (AbstractDungeon.player.hasRelic("BGGambling Chip")) {
                 if (!alreadyUsedGamblingChip) {
                     this.imageEventText.setDialogOption("[Gambling Chip] Reroll.");
@@ -192,8 +188,6 @@ public class BGScrapOoze extends AbstractImageEvent {
                 i += 1;
             }
         }
-        int x = 0;
-        x += 1;
     }
 
     protected String getRewardDescription() {

@@ -48,15 +48,10 @@ public class BGSlimeBoss extends AbstractBGMonster {
     public static final int A_2_TACKLE_DAMAGE = 10;
     public static final int A_2_SLAM_DAMAGE = 38;
     private static final String SLAM_NAME = MOVES[0],
-        PREP_NAME = MOVES[1],
         SPLIT_NAME = MOVES[2];
     private int tackleDmg;
     private int slamDmg;
     public static final int STICKY_TURNS = 3;
-    private static final byte SLAM = 1;
-    private static final byte PREP_SLAM = 2;
-    private static final byte SPLIT = 3;
-    private static final byte STICKY = 4;
     private static final String STICKY_NAME = MOVES[3];
     private boolean firstTurn = true;
 

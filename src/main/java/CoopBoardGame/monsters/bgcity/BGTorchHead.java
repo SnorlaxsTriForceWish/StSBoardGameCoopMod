@@ -34,9 +34,7 @@ public class BGTorchHead extends AbstractBGMonster implements BGDamageIcons {
     public static final int A_2_HP_MIN = 40;
     public static final int A_2_HP_MAX = 45;
     public static final int ATTACK_DMG = 1;
-    private static final byte TACKLE = 1;
     private float fireTimer = 0.0F;
-    private static final float FIRE_TIME = 0.04F;
 
     public BGTorchHead(float x, float y) {
         super(

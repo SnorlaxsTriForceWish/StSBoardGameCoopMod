@@ -44,22 +44,9 @@ public class BGTimeEater extends AbstractBGMonster implements BGDamageIcons {
     public static final String[] DIALOG = monsterStrings.DIALOG;
     public static final int HP = 456;
     public static final int A_2_HP = 480;
-    private static final byte REVERBERATE = 2;
-    private static final byte RIPPLE = 3;
-    private static final byte HEAD_SLAM = 4;
-    private static final byte HASTE = 5;
-    private static final int REVERB_DMG = 7;
-    private static final int REVERB_AMT = 3;
-    private static final int A_2_REVERB_DMG = 8;
-    private static final int RIPPLE_BLOCK = 20;
-    private static final int HEAD_SLAM_DMG = 26;
-    private static final int A_2_HEAD_SLAM_DMG = 32;
     private int reverbDmg;
     private int headSlamDmg;
-    private static final int HEAD_SLAM_STICKY = 1;
-    private static final int RIPPLE_DEBUFF_TURNS = 1;
-    private boolean usedHaste = false,
-        firstTurn = true;
+    private boolean firstTurn = true;
     private int turnCount = 0;
     private boolean phase2 = false;
 

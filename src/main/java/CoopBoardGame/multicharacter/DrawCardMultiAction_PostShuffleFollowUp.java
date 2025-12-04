@@ -2,7 +2,6 @@ package CoopBoardGame.multicharacter;
 
 import CoopBoardGame.CoopBoardGame;
 import CoopBoardGame.multicharacter.patches.ContextPatches;
-import basemod.BaseMod;
 import com.badlogic.gdx.Gdx;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -19,12 +18,10 @@ public class DrawCardMultiAction_PostShuffleFollowUp extends AbstractGameAction 
 
     private ArrayList<Integer> amountLeftToDraw;
     private static final Logger logger = LogManager.getLogger(DrawCardAction.class.getName());
-    public static ArrayList<AbstractCard> drawnCards = new ArrayList();
-    private boolean clearDrawHistory;
+    public static ArrayList<AbstractCard> drawnCards = new ArrayList<>();
     private AbstractGameAction followUpAction;
 
     public DrawCardMultiAction_PostShuffleFollowUp(ArrayList<Integer> amountLeftToDraw) {
-        this.clearDrawHistory = true;
         this.followUpAction = null;
 
         this.setValues(AbstractDungeon.player, AbstractDungeon.player, 0);
@@ -45,11 +42,6 @@ public class DrawCardMultiAction_PostShuffleFollowUp extends AbstractGameAction 
                 "WARNING: DrawCardMultiAction_PostShuffleFollowUp was updated while ContextPatches.originalBGMultiCharacter==null, time to panic!"
             );
             this.endActionWithFollowUp();
-        } else if (false && AbstractDungeon.player.hasPower("No Draw")) {
-            AbstractDungeon.player.getPower("No Draw").flash();
-            this.endActionWithFollowUp();
-        } else if (false && this.amount <= 0) {
-            this.endActionWithFollowUp();
         } else {
             this.duration -= Gdx.graphics.getDeltaTime();
             if (this.duration < 0.0F) {
@@ -60,13 +52,9 @@ public class DrawCardMultiAction_PostShuffleFollowUp extends AbstractGameAction 
                     if (!SoulGroup.isActive()) {
                         if (deckSize + discardSize == 0) {
                             endActionCounter += 1;
-                        } else if (false && p.hand.size() == BaseMod.MAX_HAND_SIZE) {
-                            p.createHandIsFullDialog();
-                            endActionCounter += 1;
                         } else if (deckSize == 0) {
                             endActionCounter += 1;
                         } else {
-                            //if (this.amount != 0 && this.duration < 0.0F) {
                             if (this.amountLeftToDraw.get(i) > 0) {
                                 if (!p.drawPile.isEmpty()) {
                                     drawnCards.add(p.drawPile.getTopCard());

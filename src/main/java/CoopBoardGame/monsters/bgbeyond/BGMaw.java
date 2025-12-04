@@ -33,20 +33,9 @@ public class BGMaw extends AbstractBGMonster implements BGDamageIcons {
         CardCrawlGame.languagePack.getMonsterStrings("Maw");
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
-    private static final int HP = 300;
-    private static final float HB_X = 0.0F;
-    private static final float HB_Y = -40.0F;
-    private static final float HB_W = 430.0F;
-    private static final float HB_H = 360.0F;
-    private static final int SLAM_DMG = 25;
-    private static final int NOM_DMG = 5;
-    private static final int A_2_SLAM_DMG = 30;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
-    private boolean roared = false;
     private int turnCount = 1;
-    private int strUp;
-    private int terrifyDur;
     private int multiCount;
 
     public BGMaw(float x, float y) {
@@ -122,7 +111,6 @@ public class BGMaw extends AbstractBGMonster implements BGDamageIcons {
                     )
                 );
 
-                this.roared = true;
                 AbstractDungeon.actionManager.addToBottom(
                     (AbstractGameAction) new SetMoveAction(
                         this,

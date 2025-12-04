@@ -68,17 +68,12 @@ public class BGGremlinWheelGame extends AbstractImageEvent {
     private float imgX = Settings.WIDTH / 2.0F;
     private float imgY = START_Y;
     private float wheelAngle = 0.0F;
-    private static final int WHEEL_W = 1024;
-    private static final int ARROW_W = 512;
     private static final float ARROW_OFFSET_X = 300.0F * Settings.scale;
     private Color color = new Color(1.0F, 1.0F, 1.0F, 0.0F);
 
-    private float hpLossPercent = 0.1F;
-
-    private static final float A_2_HP_LOSS = 0.15F;
 
     private boolean alreadyUsedGamblingChip = false;
-    private int takePrizeIndex, gamblingChipIndex, theAbacusIndex, toolboxIndex, potionIndex;
+    private int gamblingChipIndex, theAbacusIndex, toolboxIndex, potionIndex;
 
     public BGGremlinWheelGame() {
         super(NAME, INTRO_DIALOG, "images/events/spinTheWheel.jpg");
@@ -86,10 +81,6 @@ public class BGGremlinWheelGame extends AbstractImageEvent {
         this.arrowImg = ImageMaster.loadImage("images/events/wheelArrow.png");
         this.buttonImg = ImageMaster.loadImage("images/events/spinButton.png");
         this.noCardsInRewards = true;
-
-        if (AbstractDungeon.ascensionLevel >= 15) {
-            this.hpLossPercent = 0.15F;
-        }
 
         this.imageEventText.setDialogOption(OPTIONS[0]);
         setGold();
@@ -204,7 +195,7 @@ public class BGGremlinWheelGame extends AbstractImageEvent {
 
     private void preApplyResult() {
         potionIndex = theAbacusIndex = toolboxIndex = gamblingChipIndex = -1;
-        takePrizeIndex = 0;
+        
         int i = 0;
         this.imageEventText.clearAllDialogs();
         if (AbstractDungeon.player.hasRelic("BGGambling Chip")) {
@@ -218,7 +209,6 @@ public class BGGremlinWheelGame extends AbstractImageEvent {
         this.imageEventText.updateBodyText(DESCRIPTIONS[this.result + 1]);
         this.imageEventText.setDialogOption(OPTIONS[this.result + 1]);
         if (this.result == 5) this.color = new Color(0.5F, 0.5F, 0.5F, 1.0F);
-        takePrizeIndex = i;
         i += 1;
 
         if (AbstractDungeon.player.hasRelic("BGTheAbacus")) {
@@ -257,7 +247,6 @@ public class BGGremlinWheelGame extends AbstractImageEvent {
                 }
                 return;
             case COMPLETE:
-                boolean tryReroll = false;
                 {
                     AbstractRelic r = AbstractDungeon.player.getRelic("BGGambling Chip");
                     if (r != null) {
@@ -335,6 +324,10 @@ public class BGGremlinWheelGame extends AbstractImageEvent {
                 this.imageEventText.setDialogOption(OPTIONS[8]);
                 this.screen = CUR_SCREEN.LEAVE;
                 return;
+            case SPIN:
+                break;
+            default:
+                break;
         }
         logger.info("UNHANDLED CASE");
     }

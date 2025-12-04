@@ -4,7 +4,6 @@ import CoopBoardGame.dungeons.AbstractBGDungeon;
 import CoopBoardGame.relics.AbstractBGRelic;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.curses.Decay;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -79,7 +78,6 @@ public class BGForgottenAltar extends AbstractImageEvent implements LockRelicsEv
     }
 
     protected void buttonEffect(int buttonPressed) {
-        Decay decay;
         switch (this.screenNum) {
             case 0:
                 switch (buttonPressed) {

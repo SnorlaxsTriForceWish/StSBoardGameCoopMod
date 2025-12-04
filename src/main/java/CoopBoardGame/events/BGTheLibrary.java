@@ -32,22 +32,14 @@ public class BGTheLibrary extends AbstractImageEvent {
 
     private boolean pickCard = false;
     private boolean removeCard = false;
-    private static final float HP_HEAL_PERCENT = 0.33F;
-    private static final float A_2_HP_HEAL_PERCENT = 0.2F;
     private int healAmt;
 
     public BGTheLibrary() {
         super(NAME, DIALOG_1, "images/events/library.jpg");
         this.healAmt = 3;
-        //        if(AbstractDungeon.player.hasRelic("BGRegal Pillow")){
-        //            this.healAmt+=3;
-        //        }
 
         this.imageEventText.setDialogOption(OPTIONS[0]);
         String option2 = OPTIONS[1] + this.healAmt + OPTIONS[2];
-        //        if(AbstractDungeon.player.hasRelic("BGPeace Pipe")){
-        //            option2+=OPTIONS[5];
-        //        }
 
         this.imageEventText.setDialogOption(option2);
     }

@@ -11,10 +11,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractImageEvent;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.EventStrings;
-import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
-import java.util.ArrayList;
 
 public class BGWeMeetAgain extends AbstractImageEvent implements LockRelicsEvent {
 
@@ -28,11 +26,6 @@ public class BGWeMeetAgain extends AbstractImageEvent implements LockRelicsEvent
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
 
     public static final String[] OPTIONS = eventStrings.OPTIONS;
-
-    private static final int MAX_GOLD = 150;
-
-    private AbstractPotion potionOption;
-
     private AbstractCard cardOption;
 
     private int goldAmount;
@@ -87,7 +80,6 @@ public class BGWeMeetAgain extends AbstractImageEvent implements LockRelicsEvent
 
     private CardGroup getRanwiddableCards() {
         CardGroup retVal = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        ArrayList<AbstractCard> list = new ArrayList<>();
         CardGroup purgableCards = CardGroup.getGroupWithoutBottledCards(
             AbstractDungeon.player.masterDeck.getPurgeableCards()
         );

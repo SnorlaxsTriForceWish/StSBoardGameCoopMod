@@ -41,48 +41,22 @@ public class BGTheGuardian extends AbstractBGMonster {
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
-    private static final String DEFENSIVE_MODE = "Defensive Mode";
-
-    private static final String OFFENSIVE_MODE = "Offensive Mode";
-
-    private static final String RESET_THRESH = "Reset Threshold";
     public static final int HP = 240;
     public static final int A_2_HP = 250;
-    private static final int DMG_THRESHOLD = 30;
-    private static final int A_2_DMG_THRESHOLD = 35;
-    private static final int A_19_DMG_THRESHOLD = 40;
-    private int dmgThreshold;
-    private int dmgThresholdIncrease = 10;
-    private int dmgTaken;
-    private static final int FIERCE_BASH_DMG = 32;
-    private static final int A_2_FIERCE_BASH_DMG = 36;
-    private static final int ROLL_DMG = 9;
-    private static final int A_2_ROLL_DMG = 10;
     private int fierceBashDamage;
     private int whirlwindDamage = 5,
         twinSlamDamage = 8,
         rollDamage,
-        whirlwindCount = 4,
-        DEFENSIVE_BLOCK = 20;
+        whirlwindCount = 4;
 
     private int blockAmount = 9;
     private int thornsDamage = 3;
-    private int VENT_DEBUFF = 2;
     private boolean isOpen = true;
     private boolean closeUpTriggered = false;
-    private static final byte CLOSE_UP = 1;
-    private static final byte FIERCE_BASH = 2;
     private static final String CLOSEUP_NAME = MOVES[0],
         FIERCEBASH_NAME = MOVES[1],
         TWINSLAM_NAME = MOVES[3];
-    private static final byte ROLL_ATTACK = 3;
-    private static final byte TWIN_SLAM = 4;
-    private static final byte WHIRLWIND = 5;
-    private static final byte CHARGE_UP = 6;
-    private static final byte VENT_STEAM = 7;
-    private static final String WHIRLWIND_NAME = MOVES[4],
-        CHARGEUP_NAME = MOVES[5],
-        VENTSTEAM_NAME = MOVES[6];
+    private static final String WHIRLWIND_NAME = MOVES[4];
 
     public BGTheGuardian() {
         super(NAME, "BGTheGuardian", 240, 0.0F, 95.0F, 440.0F, 350.0F, null, -50.0F, -100.0F);
@@ -96,7 +70,6 @@ public class BGTheGuardian extends AbstractBGMonster {
         this.fierceBashDamage = (AbstractDungeon.ascensionLevel < 10) ? 6 : 7;
         this.rollDamage = (AbstractDungeon.ascensionLevel < 10) ? 2 : 3;
         this.twinSlamDamage = 4;
-        this.DEFENSIVE_BLOCK = 5;
         this.blockAmount = (AbstractDungeon.ascensionLevel < 10) ? 5 : 6;
         this.thornsDamage = 1;
 
@@ -334,7 +307,6 @@ public class BGTheGuardian extends AbstractBGMonster {
                 this.state.setTimeScale(2.0F);
                 this.state.setAnimation(0, "transition", false);
                 this.state.addAnimation(0, "defensive", true, 0.0F);
-                this.dmgThreshold += this.dmgThresholdIncrease;
                 setMove(CLOSEUP_NAME, (byte) 1, AbstractMonster.Intent.BUFF);
                 createIntent();
                 this.isOpen = false;
@@ -370,33 +342,8 @@ public class BGTheGuardian extends AbstractBGMonster {
                 updateHitbox(0.0F, 95.0F, 440.0F, 350.0F);
                 healthBarUpdatedEvent();
                 break;
-            case "Reset Threshold":
-                this.dmgTaken = 0;
-                break;
         }
     }
-
-    //    public void damage(DamageInfo info) {
-    //        int tmpHealth = this.currentHealth;
-    //        super.damage(info);
-    //
-    //        if (this.isOpen && !this.closeUpTriggered &&
-    //                tmpHealth > this.currentHealth && !this.isDying) {
-    //            this.dmgTaken += tmpHealth - this.currentHealth;
-    //            if (getPower("Mode Shift") != null) {
-    //                (getPower("Mode Shift")).amount -= tmpHealth - this.currentHealth;
-    //                getPower("Mode Shift").updateDescription();
-    //            }
-    //
-    //            if (this.dmgTaken >= this.dmgThreshold) {
-    //                this.dmgTaken = 0;
-    //                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new VFXAction((AbstractCreature)this, (AbstractGameEffect)new IntenseZoomEffect(this.hb.cX, this.hb.cY, false), 0.05F, true));
-    //
-    //                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new ChangeStateAction(this, "Defensive Mode"));
-    //                this.closeUpTriggered = true;
-    //            }
-    //        }
-    //    }
 
     protected int decrementBlock(DamageInfo info, int damageAmount) {
         if (info.type != DamageInfo.DamageType.HP_LOSS && this.currentBlock > 0) {

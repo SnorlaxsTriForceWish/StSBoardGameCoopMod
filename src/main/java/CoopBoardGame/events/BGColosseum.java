@@ -87,6 +87,8 @@ public class BGColosseum extends Colosseum {
             case LEAVE:
                 openMap();
                 return;
+            default:
+                break;
         }
         openMap();
     }

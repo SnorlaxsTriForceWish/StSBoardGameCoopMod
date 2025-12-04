@@ -42,20 +42,6 @@ public class BGShelledParasite
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
-    private static final int HP_MIN = 68;
-    private static final int HP_MAX = 72;
-    private static final int A_2_HP_MIN = 70;
-    private static final int A_2_HP_MAX = 75;
-    private static final float HB_X_F = 20.0F;
-    private static final float HB_Y_F = -6.0F;
-    private static final float HB_W = 350.0F;
-    private static final float HB_H = 260.0F;
-    private static final int PLATED_ARMOR_AMT = 14;
-    private static final int FELL_DMG = 18;
-    private static final int DOUBLE_STRIKE_DMG = 6;
-    private static final int SUCK_DMG = 10;
-    private static final int A_2_FELL_DMG = 21;
-
     public BGShelledParasite(float x, float y) {
         super(NAME, "BGShelled Parasite", 72, 20.0F, -6.0F, 350.0F, 260.0F, null, x, y);
         loadAnimation(
@@ -79,18 +65,6 @@ public class BGShelledParasite
         this.damage.add(new DamageInfo((AbstractCreature) this, 2));
     }
 
-    private static final int A_2_DOUBLE_STRIKE_DMG = 7;
-    private static final int A_2_SUCK_DMG = 12;
-    private int fellDmg;
-    private int doubleStrikeDmg;
-    private int suckDmg;
-    private static final int DOUBLE_STRIKE_COUNT = 2;
-    private static final int FELL_FRAIL_AMT = 2;
-    private static final byte FELL = 1;
-    private static final byte DOUBLE_STRIKE = 2;
-    private static final byte LIFE_SUCK = 3;
-    private static final byte STUNNED = 4;
-    private boolean firstMove = true;
     public static final String ARMOR_BREAK = "ARMOR_BREAK";
 
     public BGShelledParasite() {
@@ -98,7 +72,6 @@ public class BGShelledParasite
     }
 
     public void takeTurn() {
-        int i;
         switch (this.nextMove) {
             case 1:
                 AbstractDungeon.actionManager.addToBottom(

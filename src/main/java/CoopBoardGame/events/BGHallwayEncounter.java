@@ -10,14 +10,11 @@ import com.megacrit.cardcrawl.events.AbstractEvent;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGHallwayEncounter extends AbstractEvent {
 
     public static final String ID = "BGHallwayEncounter";
 
-    private static final Logger logger = LogManager.getLogger(BGHallwayEncounter.class.getName());
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
         "CoopBoardGame:BGPlaceholderEvent"
     );

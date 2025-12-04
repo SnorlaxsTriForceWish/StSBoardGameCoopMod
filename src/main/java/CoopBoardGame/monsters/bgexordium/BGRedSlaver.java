@@ -1,6 +1,5 @@
 package CoopBoardGame.monsters.bgexordium;
 
-import CoopBoardGame.CoopBoardGame;
 import CoopBoardGame.cards.BGStatus.BGDazed;
 import CoopBoardGame.monsters.AbstractBGMonster;
 import CoopBoardGame.monsters.BGDamageIcons;
@@ -22,8 +21,6 @@ import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.vfx.SpeechBubble;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGRedSlaver extends AbstractBGMonster implements BGDamageIcons, DieControlledMoves {
 
@@ -33,24 +30,8 @@ public class BGRedSlaver extends AbstractBGMonster implements BGDamageIcons, Die
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final int HP_MIN = 46;
-    private static final int HP_MAX = 50;
-    private static final int A_2_HP_MIN = 48;
-    private static final int A_2_HP_MAX = 52;
-    private static final int STAB_DMG = 13;
-    private static final int A_2_STAB_DMG = 14;
-    private static final int SCRAPE_DMG = 8;
-    private static final int A_2_SCRAPE_DMG = 9;
-    private int stabDmg;
-    private int scrapeDmg;
-    private int VULN_AMT = 1;
-    private static final byte STAB = 1;
-    private static final byte ENTANGLE = 2;
-    private static final byte SCRAPE = 3;
     private static final String SCRAPE_NAME = MOVES[0];
     private static final String ENTANGLE_NAME = MOVES[1];
-    private boolean usedEntangle = false,
-        firstTurn = true;
 
     public BGRedSlaver(float x, float y) {
         this(x, y, "DV3");
@@ -73,7 +54,6 @@ public class BGRedSlaver extends AbstractBGMonster implements BGDamageIcons, Die
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
-        this.firstTurn = true;
     }
 
     public void takeTurn() {
@@ -99,7 +79,6 @@ public class BGRedSlaver extends AbstractBGMonster implements BGDamageIcons, Die
                     )
                 );
 
-                this.usedEntangle = true;
                 break;
             case 1: // 3dmg
                 playSfx();
@@ -177,8 +156,6 @@ public class BGRedSlaver extends AbstractBGMonster implements BGDamageIcons, Die
     }
 
     public void dieMove(int num) {
-        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
-        //logger.info("Monster: TheDie "+ TheDie.monsterRoll);
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);
         else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4) move = this.behavior.charAt(1);

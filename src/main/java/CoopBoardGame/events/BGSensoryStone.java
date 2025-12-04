@@ -87,6 +87,8 @@ public class BGSensoryStone extends AbstractImageEvent {
             case ACCEPT:
                 reward(this.choice);
                 break;
+            default:
+                break;
         }
         openMap();
     }

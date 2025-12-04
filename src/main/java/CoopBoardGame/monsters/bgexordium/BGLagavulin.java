@@ -30,30 +30,14 @@ public class BGLagavulin extends AbstractBGMonster implements BGDamageIcons {
         CardCrawlGame.languagePack.getMonsterStrings("Lagavulin");
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
-    private static final int HP_MIN = 109;
-    private static final int HP_MAX = 111;
-    private static final int A_2_HP_MIN = 112;
-    private static final int A_2_HP_MAX = 115;
-    private static final byte DEBUFF = 1;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
-    private static final byte STRONG_ATK = 3;
-    private static final byte OPEN = 4;
-    private static final byte IDLE = 5;
-    private static final byte OPEN_NATURAL = 6;
     private static final String DEBUFF_NAME = MOVES[0];
-    private static final int STRONG_ATK_DMG = 18;
-    private static final int DEBUFF_AMT = -1;
-    private static final int A_18_DEBUFF_AMT = -2;
-    private static final int A_2_STRONG_ATK_DMG = 20;
     private int attackDmg;
-    private int debuff;
-    private static final int ARMOR_AMT = 8;
     private boolean isOut = false;
     private boolean asleep;
     private boolean isOutTriggered = false;
-    private int idleCount = 0,
-        debuffTurnCount = 0;
+    private int debuffTurnCount = 0;
 
     public BGLagavulin() {
         super(NAME, "BGLagavulin", 111, 0.0F, -25.0F, 320.0F, 220.0F, null, 0.0F, 20.0F);
@@ -63,12 +47,6 @@ public class BGLagavulin extends AbstractBGMonster implements BGDamageIcons {
         setHp(AbstractDungeon.ascensionLevel < 12 ? 22 : 24);
 
         this.attackDmg = 4;
-
-        if (AbstractDungeon.ascensionLevel >= 18) {
-            this.debuff = -2;
-        } else {
-            this.debuff = -1;
-        }
 
         this.damage.add(new DamageInfo((AbstractCreature) this, this.attackDmg));
         if (AbstractDungeon.ascensionLevel == 0) {
@@ -177,34 +155,19 @@ public class BGLagavulin extends AbstractBGMonster implements BGDamageIcons {
                 );
                 break;
             case 5: //Sleep
-                this.idleCount++;
-                if (true) {
-                    logger.info("idle happened");
-                    this.isOutTriggered = true;
-                    AbstractDungeon.actionManager.addToBottom(
-                        (AbstractGameAction) new ChangeStateAction(this, "OPEN")
-                    );
-                    AbstractDungeon.actionManager.addToBottom(
-                        (AbstractGameAction) new SetMoveAction(
-                            this,
-                            (byte) 3,
-                            AbstractMonster.Intent.ATTACK,
-                            ((DamageInfo) this.damage.get(0)).base
-                        )
-                    );
-                } else {
-                    setMove((byte) 5, AbstractMonster.Intent.SLEEP);
-                }
-                //                switch (this.idleCount) {
-                //                    case 1:
-                //                        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new TalkAction((AbstractCreature)this, DIALOG[1], 0.5F, 2.0F));
-                //                        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new RollMoveAction(this));
-                //                        break;
-                //                    case 2:
-                //                        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new TalkAction((AbstractCreature)this, DIALOG[2], 0.5F, 2.0F));
-                //                        AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new RollMoveAction(this));
-                //                        break;
-                //                }
+                logger.info("idle happened");
+                this.isOutTriggered = true;
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new ChangeStateAction(this, "OPEN")
+                );
+                AbstractDungeon.actionManager.addToBottom(
+                    (AbstractGameAction) new SetMoveAction(
+                        this,
+                        (byte) 3,
+                        AbstractMonster.Intent.ATTACK,
+                        ((DamageInfo) this.damage.get(0)).base
+                    )
+                );
                 break;
             case 4:
                 AbstractDungeon.actionManager.addToBottom(

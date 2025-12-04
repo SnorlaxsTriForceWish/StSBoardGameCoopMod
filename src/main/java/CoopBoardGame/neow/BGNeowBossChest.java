@@ -9,19 +9,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.neow.NeowRoom;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rewards.RewardItem;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 public class BGNeowBossChest {
-
-    private static final Logger logger = LogManager.getLogger(BGNeowBossChest.class.getName());
-
     @SpirePatch(clz = RewardItem.class, method = "claimReward", paramtypez = {})
     public static class PickOnlyOneRelicPatch {
 
         @SpirePrefixPatch
         public static SpireReturn<Boolean> claimReward(RewardItem __instance) {
-            //logger.info("BGNeowBossChest: claimReward Patch");
             if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 if (AbstractDungeon.getCurrRoom() instanceof NeowRoom) {
                     if (__instance.type == RewardItem.RewardType.RELIC) {

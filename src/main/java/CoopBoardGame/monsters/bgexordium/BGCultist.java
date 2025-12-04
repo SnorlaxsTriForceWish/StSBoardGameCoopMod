@@ -37,45 +37,23 @@ public class BGCultist extends AbstractBGMonster implements BGDamageIcons {
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
     public static final String MURDER_ENCOUNTER_KEY = "Murder of Cultists";
-    private static final int HP_MIN = 48;
-    private static final int HP_MAX = 54;
-    private static final int A_2_HP_MIN = 50;
-    private static final int A_2_HP_MAX = 56;
-    private static final float HB_X = -8.0F;
-    private static final float HB_Y = 10.0F;
-    private static final float HB_W = 230.0F;
-    private static final String INCANTATION_NAME = MOVES[2];
 
-    private static final float HB_H = 240.0F;
-
-    private static final int ATTACK_DMG = 1;
-    private static final int strAmt = 1;
+    private final int strAmt = 1;
 
     private boolean firstMove = true;
     private boolean saidPower = false;
-    private static final int RITUAL_AMT = 3;
-    private static final int A_2_RITUAL_AMT = 4;
     private int ritualAmount = 0;
-    private static final byte DARK_STRIKE = 1;
-    private static final byte INCANTATION = 3;
     private boolean talky = true;
 
     public BGCultist(float x, float y, boolean talk) {
         super(NAME, "BGCultist", 54, -8.0F, 10.0F, 230.0F, 240.0F, null, x, y);
-        //        if (AbstractDungeon.ascensionLevel >= 7) {
-        //            setHp(50, 56);
-        //        } else {
+       
         setHp(9, 9);
-        //        }
 
         this.dialogX = -50.0F * Settings.scale;
         this.dialogY = 50.0F * Settings.scale;
 
-        //        if (AbstractDungeon.ascensionLevel >= 2) {
-        //            this.ritualAmount = 4;  //NYI
-        //        } else {
         this.ritualAmount = 1;
-        //        }
 
         this.damage.add(new DamageInfo((AbstractCreature) this, 1));
 

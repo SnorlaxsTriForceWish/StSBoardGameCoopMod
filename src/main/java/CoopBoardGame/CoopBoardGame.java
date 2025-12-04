@@ -498,7 +498,7 @@ public class CoopBoardGame
         logger.info(
             "========================= Initializing <s>Default</s> CoopBoardGame Mod. Hi. ========================="
         );
-        CoopBoardGame defaultmod = new CoopBoardGame();
+        new CoopBoardGame();
         logger.info(
             "========================= /<s>Default</s> CoopBoardGame Mod Initialized. Hello World./ ========================="
         );

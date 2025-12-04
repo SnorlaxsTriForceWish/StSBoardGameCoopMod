@@ -116,39 +116,19 @@ public class BGNeowEvent extends AbstractEvent {
         }
         this.body = "";
 
-        if (false) {
-            //if (Settings.isEndless && AbstractDungeon.floorNum > 1) {
-
-            talk(TEXT[MathUtils.random(12, 14)]);
-            this.screenNum = 999;
-            this.roomEventText.addDialogOption(OPTIONS[0]);
-        } else if (shouldSkipNeowDialog()) {
+        if (shouldSkipNeowDialog()) {
             this.screenNum = 10;
             talk(TEXT[10]); //Time for a CHALLENGE...
             this.roomEventText.addDialogOption(OPTIONS[1]);
         } else if (!isDone) {
             //normally, CoopBoardGame starts HERE
-            //            this.screenNum = 2;       //standard intro
-            //            talk(TEXT[MathUtils.random(1, 3)]);
-            //            this.roomEventText.addDialogOption(OPTIONS[1]);
 
             if (AbstractDungeon.player instanceof MultiCharacter) {
                 BaseMod.openCustomScreen(MultiCharacterSelectScreen.Enum.MULTI_CHARACTER_SELECT);
             }
 
-            /// //// note -- when changing LATEST UPDATES visibility, must also change corresponding line in BGNeowQuickStart
-            ////////            //LATEST UPDATES screen
-            //            this.screenNum = -1;    //disclaimer intro
-            //            this.roomEventText.addDialogOption(EXTRA[68]);
-            //            //character screen is still open, we can't set disclaimer text until the player clicks proceed
-            ////////            //skip LATEST UPDATES screen
             this.roomEventText.addDialogOption(EXTRA[0]);
             blessing(true);
-            //            this.roomEventText.updateBodyText("");
-            //            playSfx();
-            //            talk(TEXT[MathUtils.random(1, 3)]);
-            //            this.screenNum = 2;
-            //            this.roomEventText.addDialogOption(EXTRA[0]);
 
             AbstractDungeon.topLevelEffects.add(
                 new LevelTransitionTextOverlayEffect(
@@ -165,11 +145,6 @@ public class BGNeowEvent extends AbstractEvent {
 
         this.hasDialog = true;
         this.hasFocus = true;
-
-        //        this.roomEventText.updateBodyText("");
-        //        playSfx();
-        //        this.roomEventText.addDialogOption(EXTRA[0]);
-        //        talk(TEXT[MathUtils.random(1, 3)]);
     }
 
     public BGNeowEvent() {
@@ -308,6 +283,10 @@ public class BGNeowEvent extends AbstractEvent {
                                 AbstractDungeon.player.masterDeck.removeCard(c);
                             }
                             break;
+                        case NONE:
+                            break;
+                        default:
+                            break;
                     }
                     cardOperation = NeowCardOperation.NONE;
                     AbstractDungeon.gridSelectScreen.selectedCards.clear();
@@ -368,23 +347,15 @@ public class BGNeowEvent extends AbstractEvent {
                 dismissBubble();
                 talk(TEXT[4]);
 
-                if (true) {
-                    AbstractDungeon.cardRewardScreen.open(getRewardCards(), null, text22);
-                    blessing(false);
-                } else {
-                    miniBlessing();
-                }
+                AbstractDungeon.cardRewardScreen.open(getRewardCards(), null, text22);
+                blessing(false);
                 return;
             case 1: //"Hello... again..."
                 dismissBubble();
                 logger.info(Integer.valueOf(this.bossCount));
 
-                if (false) {
-                    miniBlessing();
-                } else {
-                    AbstractDungeon.cardRewardScreen.open(getRewardCards(), null, text22);
-                    blessing(false);
-                }
+                AbstractDungeon.cardRewardScreen.open(getRewardCards(), null, text22);
+                blessing(false);
                 return;
             case 2:
                 if (buttonPressed == 0) {
@@ -808,7 +779,6 @@ public class BGNeowEvent extends AbstractEvent {
                         }
                         logger.info("numRewards: " + numRewards + " chosen: " + actualRewards);
                         if (actualRewards > 0) {
-                            String title = actualRewards == 2 ? EXTRA[24] : EXTRA[23];
                             cardOperation = NeowCardOperation.REMOVE;
                             AbstractDungeon.gridSelectScreen.open(
                                 AbstractDungeon.player.masterDeck.getPurgeableCards(),
@@ -1034,12 +1004,6 @@ public class BGNeowEvent extends AbstractEvent {
         this.screenNum = 99;
     }
 
-    private void miniBlessing() {
-        logger.info(
-            "ERROR: BGNeowReward tried to call a miniBlessing instead of a Blessing!  Panic!"
-        );
-    }
-
     private void blessing(boolean previewOnly) {
         logger.info("BLESSING");
         NeowEvent.rng = new Random(Settings.seed);
@@ -1102,31 +1066,9 @@ public class BGNeowEvent extends AbstractEvent {
             )
         );
 
-        //OLD REWARD LIST
-        //        ArrayList<String> rewardoptions=new ArrayList<String>(Arrays.asList(
-        //                "-4 -r CU",
-        //                "-u -t D8",
-        //                "-r -4 DC",
-        //                "-r -4 DU",
-        //                "-t -r GU",
-        //                "-? -4 GR",
-        //                "-u -? D%",
-        //                "-u -? DX",
-        //                "-u -P CT",
-        //                "-t -P C!",
-        //                "-u -= DR",
-        //                "-u -r G+",
-        //                "-= -P C%",
-        //                "-= -4 G!",
-        //                "-= -P D%",
-        //                "-= -u G%"
-        //        ));
 
         Collections.shuffle(rewardoptions, new java.util.Random(NeowEvent.rng.randomLong()));
         String card = rewardoptions.get(0);
-        //card="-r -t 3T"; //for debugging only
-        //card="-r -P CW"; //for debugging only
-        //logger.info("Card: "+card);
         String[] rewards = card.split(" ");
         logger.info("Neow card: " + rewards[0] + " " + rewards[1] + " " + rewards[2]);
 
@@ -1134,7 +1076,6 @@ public class BGNeowEvent extends AbstractEvent {
         this.rewards.add(new BGNeowReward(rewards[0]));
         this.rewards.add(new BGNeowReward(rewards[1]));
         this.rewards.add(new BGNeowReward(rewards[2]));
-        //this.rewards.add(new NeowReward(3));
 
         if (previewOnly) {
             this.roomEventText.addDialogOption((this.rewards.get(0)).optionLabel, true);
@@ -1149,7 +1090,6 @@ public class BGNeowEvent extends AbstractEvent {
             );
             this.roomEventText.addDialogOption(((BGNeowReward) this.rewards.get(1)).optionLabel);
             this.roomEventText.addDialogOption(((BGNeowReward) this.rewards.get(2)).optionLabel);
-            //this.roomEventText.addDialogOption(((NeowReward)this.rewards.get(3)).optionLabel);
             this.screenNum = 3;
         }
     }
@@ -1191,30 +1131,4 @@ public class BGNeowEvent extends AbstractEvent {
             this.npc = null;
         }
     }
-
-    //    @SpirePatch2
-    //            (clz=RoomEventDialog.class,method="render",paramtypez={SpriteBatch.class})
-    //    public static class TempPatch{
-    //        @SpirePrefixPatch
-    //        public static void Insert(RoomEventDialog __instance, SpriteBatch sb, ArrayList<DialogWord> ___words,
-    //                                  float ___curLineWidth, boolean ___show){
-    //            if(___words.size()>0){
-    //                //logger.info("Test: "+___words.get(___words.size()-1).word);
-    //            }
-    //            //logger.info("Test: "+___words.size()+" "+___show);
-    //        }
-    //    }
-    //
-    //    @SpirePatch2
-    //            (clz=RoomEventDialog.class,method="clear",paramtypez={})
-    //    public static class TempPatch2{
-    //        @SpirePrefixPatch
-    //        public static void Insert(RoomEventDialog __instance, ArrayList<DialogWord> ___words,
-    //                                  float ___curLineWidth, boolean ___show){
-    ////            if(___words.size()>0){
-    ////                logger.info("Test: "+___curLineWidth);
-    ////            }
-    //            //logger.info("CLEAR:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    //        }
-    //    }
 }

@@ -17,7 +17,6 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -46,15 +45,9 @@ public class BGDeadAdventurer extends DeadAdventurer {
 
     private int numRewards = 0;
 
-    private int encounterChance = 0;
-
-    private ArrayList<String> rewards = new ArrayList<>();
-
     private float x = 800.0F * Settings.xScale;
 
     private float y = AbstractDungeon.floorY;
-
-    private int enemy = 0;
 
     private CUR_SCREEN screen = CUR_SCREEN.INTRO;
 
@@ -67,7 +60,6 @@ public class BGDeadAdventurer extends DeadAdventurer {
     private int leaveIndex, takePrizeIndex, gamblingChipIndex, theAbacusIndex, toolboxIndex, potionIndex;
     public boolean alreadyUsedGamblingChip, alreadyUsedTheAbacus, alreadyUsedToolbox;
     public boolean encounterHasBeenSpawned = false;
-    private AbstractRelic relicRewardMetric = null;
 
     public String encounterID;
     public int pendingReward = 0;
@@ -85,7 +77,6 @@ public class BGDeadAdventurer extends DeadAdventurer {
         pendingReward = 0;
         takePrizeIndex = 0;
         leaveIndex = 1;
-        this.enemy = AbstractDungeon.miscRng.random(0, 2);
         this.adventurerImg = ImageMaster.loadImage("images/npcs/nopants.png");
         this.body = DESCRIPTIONS[2];
         this.roomEventText.clear();
@@ -208,7 +199,6 @@ public class BGDeadAdventurer extends DeadAdventurer {
         leaveIndex = potionIndex = theAbacusIndex = toolboxIndex = gamblingChipIndex = -1;
         int i = 1;
         if (pendingReward > 0) {
-            int pendingRewardTextIndex = (pendingReward + 1) / 2;
             if (AbstractDungeon.player.hasRelic("BGGambling Chip")) {
                 if (!alreadyUsedGamblingChip) {
                     //REMINDER: this uses roomEventText instead of imageEventText
@@ -258,17 +248,8 @@ public class BGDeadAdventurer extends DeadAdventurer {
                 }
             }
         }
-        int x = 0;
         x += 1;
     }
-
-    //    public void logMetric(int numAttempts) {
-    //        if (this.relicRewardMetric != null) {
-    //            AbstractEvent.logMetricGainGoldAndRelic("Dead Adventurer", "Searched '" + numAttempts + "' times", this.relicRewardMetric, this.goldRewardMetric);
-    //        } else {
-    //            AbstractEvent.logMetricGainGold("Dead Adventurer", "Searched '" + numAttempts + "' times", this.goldRewardMetric);
-    //        }
-    //    }
 
     public void render(SpriteBatch sb) {
         super.render(sb);

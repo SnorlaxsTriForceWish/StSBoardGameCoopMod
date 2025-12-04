@@ -20,17 +20,8 @@ public class FakeMonsterRoomEvent extends AbstractEvent {
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     public static final String[] OPTIONS = eventStrings.OPTIONS;
 
-    private static final String INTRO_MSG = DESCRIPTIONS[0];
-    private CurScreen screen = CurScreen.INTRO;
-
     private int phase = 1;
-
-    private enum CurScreen {
-        INTRO,
-        PRE_COMBAT,
-        COMPLETE,
-    }
-
+    
     public FakeMonsterRoomEvent() {
         this.hasDialog = true;
         this.hasFocus = true;
@@ -73,7 +64,6 @@ public class FakeMonsterRoomEvent extends AbstractEvent {
                 }
             }
         } else {
-            this.screen = CurScreen.COMPLETE;
             (AbstractDungeon.getCurrRoom()).phase = AbstractRoom.RoomPhase.COMPLETE;
             AbstractDungeon.overlayMenu.proceedButton.show();
         }

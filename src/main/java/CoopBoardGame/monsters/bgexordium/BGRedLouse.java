@@ -1,6 +1,5 @@
 package CoopBoardGame.monsters.bgexordium;
 
-import CoopBoardGame.CoopBoardGame;
 import CoopBoardGame.monsters.AbstractBGMonster;
 import CoopBoardGame.monsters.BGDamageIcons;
 import CoopBoardGame.monsters.DieControlledMoves;
@@ -23,8 +22,6 @@ import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGRedLouse extends AbstractBGMonster implements BGDamageIcons, DieControlledMoves {
 
@@ -35,18 +32,7 @@ public class BGRedLouse extends AbstractBGMonster implements BGDamageIcons, DieC
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final int HP_MIN = 10;
-    private static final int HP_MAX = 15;
-    private static final int A_2_HP_MIN = 11;
-    private static final int A_2_HP_MAX = 16;
-    private static final byte BITE = 3;
-    private static final byte STRENGTHEN = 4;
     private boolean isOpen = true;
-    private static final String CLOSED_STATE = "CLOSED";
-    private static final String OPEN_STATE = "OPEN";
-    private static final String REAR_IDLE = "REAR_IDLE";
-    private int biteDamage;
-    private static final int STR_AMOUNT = 3;
     private boolean hard;
 
     public BGRedLouse(float x, float y, boolean hard, String behavior) {
@@ -173,9 +159,6 @@ public class BGRedLouse extends AbstractBGMonster implements BGDamageIcons, DieC
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
-        //logger.info("BGRedLouseEasy: TheDie "+ TheDie.monsterRoll);
-
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);
         else if (TheDie.monsterRoll == 3 || TheDie.monsterRoll == 4) move = this.behavior.charAt(1);

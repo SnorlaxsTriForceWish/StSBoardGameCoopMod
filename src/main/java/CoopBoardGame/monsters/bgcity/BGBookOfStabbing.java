@@ -30,22 +30,9 @@ public class BGBookOfStabbing extends AbstractBGMonster implements BGDamageIcons
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
-    private static final int HP_MIN = 160;
 
-    private static final int HP_MAX = 164;
-
-    private static final int A_2_HP_MIN = 168;
-    private static final int A_2_HP_MAX = 172;
-    private static final int STAB_DAMAGE = 6;
-    private static final int BIG_STAB_DAMAGE = 21;
-    private int stabCount = 1;
-    private static final int A_2_STAB_DAMAGE = 7;
-    private static final int A_2_BIG_STAB_DAMAGE = 24;
     private int stabDmg;
     private int bigStabDmg;
-    private static final byte STAB = 1;
-    private static final byte BIG_STAB = 2;
-
     public BGBookOfStabbing() {
         super(NAME, "BGBookOfStabbing", 164, 0.0F, -10.0F, 320.0F, 420.0F, null, 0.0F, 5.0F);
         loadAnimation(
@@ -110,7 +97,6 @@ public class BGBookOfStabbing extends AbstractBGMonster implements BGDamageIcons
     }
 
     public void takeTurn() {
-        int i;
         switch (this.nextMove) {
             case 1:
                 AbstractDungeon.actionManager.addToBottom(

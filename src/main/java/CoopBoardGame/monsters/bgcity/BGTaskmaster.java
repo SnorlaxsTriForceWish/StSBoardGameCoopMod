@@ -29,16 +29,6 @@ public class BGTaskmaster extends AbstractBGMonster implements BGDamageIcons {
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private static final int HP_MIN = 54;
-    private static final int HP_MAX = 60;
-    private static final int A_2_HP_MIN = 57;
-    private static final int A_2_HP_MAX = 64;
-    private static final int WHIP_DMG = 4;
-    private static final int SCOURING_WHIP_DMG = 7;
-    private static final int WOUNDS = 1;
-    private static final int A_2_WOUNDS = 2;
-    private int woundCount;
-    private static final byte SCOURING_WHIP = 2;
 
     public BGTaskmaster(float x, float y) {
         super(

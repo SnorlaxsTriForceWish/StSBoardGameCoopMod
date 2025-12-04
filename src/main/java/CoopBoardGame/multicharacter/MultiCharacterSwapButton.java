@@ -11,8 +11,6 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import com.megacrit.cardcrawl.screens.CharSelectInfo;
-import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 public class MultiCharacterSwapButton {
 
@@ -27,10 +25,6 @@ public class MultiCharacterSwapButton {
         this.hb = new Hitbox(HB_W, HB_W);
         this.buttonImg = texture;
         this.c = c;
-        this.charInfo = null;
-        this.charInfo = c.getLoadout();
-        this.flavorText = this.charInfo.flavorText;
-        this.unlocksRemaining = 5 - UnlockTracker.getUnlockLevel(c.chosenClass);
     }
 
     public MultiCharacterSwapButton(String optionName, AbstractPlayer c, String buttonUrl) {
@@ -115,7 +109,6 @@ public class MultiCharacterSwapButton {
 
     private static final Color BLACK_OUTLINE_COLOR = new Color(0.0F, 0.0F, 0.0F, 0.5F);
 
-    private static final float NAME_OFFSET_Y = 200.0F * Settings.scale;
 
     private Texture buttonImg;
 
@@ -123,30 +116,9 @@ public class MultiCharacterSwapButton {
 
     public Hitbox hb;
 
-    private static final int BUTTON_W = 220;
 
     public static final String ASSETS_DIR = "images/ui/charSelect/";
 
-    private static final int ICON_W = 64;
-
-    private float infoX;
-
-    private float infoY;
 
     public String name;
-
-    private String hp;
-
-    private int gold;
-
-    private String flavorText;
-
-    private CharSelectInfo charInfo;
-
-    private int unlocksRemaining;
 }
-
-/* Location:              C:\Spire dev\CoopBoardGame.jar!\CoopBoardGame\multicharacter\MultiCharacterSwapButton.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       1.1.3
- */

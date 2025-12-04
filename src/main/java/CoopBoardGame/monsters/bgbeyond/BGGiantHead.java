@@ -20,7 +20,6 @@ import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import com.megacrit.cardcrawl.powers.WeakPower;
 import java.util.ArrayList;
 
 //TODO: maybe use STUN intent instead of UNKNOWN?
@@ -33,23 +32,8 @@ public class BGGiantHead extends AbstractBGMonster implements BGDamageIcons {
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
 
-    private static final int HP = 500;
-
-    private static final int A_2_HP = 520;
-    private static final float HB_X_F = 0.0F;
-    private static final float HB_Y_F = -40.0F;
-    private static final float HB_W = 460.0F;
-    private static final float HB_H = 300.0F;
-    private static final int COUNT_DMG = 13;
     private int count = 5;
-    private static final int DEATH_DMG = 30;
-    private static final int GLARE_WEAK = 1;
-    private static final int INCREMENT_DMG = 5;
-    private static final int A_2_DEATH_DMG = 40;
     private int startingDeathDmg;
-    private static final byte GLARE = 1;
-    private static final byte IT_IS_TIME = 2;
-    private static final byte COUNT = 3;
     private int secondaryDmg = 0;
 
     public BGGiantHead() {
@@ -138,20 +122,6 @@ public class BGGiantHead extends AbstractBGMonster implements BGDamageIcons {
                         1.7F
                     )
                 );
-                if (false) {
-                    AbstractDungeon.actionManager.addToBottom(
-                        (AbstractGameAction) new ApplyPowerAction(
-                            (AbstractCreature) AbstractDungeon.player,
-                            (AbstractCreature) this,
-                            (AbstractPower) new WeakPower(
-                                (AbstractCreature) AbstractDungeon.player,
-                                1,
-                                true
-                            ),
-                            1
-                        )
-                    );
-                }
                 break;
             case 3:
                 playSfx();
@@ -163,15 +133,6 @@ public class BGGiantHead extends AbstractBGMonster implements BGDamageIcons {
                         1.7F
                     )
                 );
-                if (false) {
-                    AbstractDungeon.actionManager.addToBottom(
-                        (AbstractGameAction) new DamageAction(
-                            (AbstractCreature) AbstractDungeon.player,
-                            this.damage.get(0),
-                            AbstractGameAction.AttackEffect.FIRE
-                        )
-                    );
-                }
                 break;
             case 2:
                 playSfx();
@@ -183,10 +144,6 @@ public class BGGiantHead extends AbstractBGMonster implements BGDamageIcons {
                         2.0F
                     )
                 );
-                //                index = 1 - this.count;
-                //                if (index > 7) {
-                //                    index = 7;
-                //                }
                 index = 2;
                 AbstractDungeon.actionManager.addToBottom(
                     (AbstractGameAction) new DamageAction(

@@ -22,10 +22,6 @@ public class BGWomanInBlue extends AbstractImageEvent {
     public static final String[] OPTIONS = eventStrings.OPTIONS;
 
     private static final String DIALOG_1 = DESCRIPTIONS[0];
-    private static final int cost1 = 20;
-    private static final int cost2 = 30;
-    private static final int cost3 = 40;
-    private static final float PUNCH_DMG_PERCENT = 0.05F;
     private CurScreen screen = CurScreen.INTRO;
 
     private enum CurScreen {
@@ -101,6 +97,10 @@ public class BGWomanInBlue extends AbstractImageEvent {
                 this.imageEventText.setDialogOption(OPTIONS[4]);
                 this.screen = CurScreen.RESULT;
                 return;
+            case RESULT:
+                break;
+            default:
+                break;
         }
         openMap();
     }

@@ -26,17 +26,6 @@ public class BGSpireSpear extends AbstractBGMonster implements BGDamageIcons {
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
     public static final String[] DIALOG = monsterStrings.DIALOG;
-    private int moveCount = 0;
-
-    private static final byte BURN_STRIKE = 1;
-
-    private static final byte PIERCER = 2;
-
-    private static final byte SKEWER = 3;
-
-    private static final int BURN_STRIKE_COUNT = 2;
-
-    private int skewerCount;
 
     public BGSpireSpear(float offsetx, float offsety) {
         super(
@@ -65,8 +54,7 @@ public class BGSpireSpear extends AbstractBGMonster implements BGDamageIcons {
         MultiCreature.Field.currentRow.set(this, 1);
 
         setHp(42);
-
-        this.skewerCount = 2;
+        
         this.damage.add(new DamageInfo(this, 2));
         this.damage.add(new DamageInfo(this, 9));
     }

@@ -22,8 +22,6 @@ public class BGPurificationShrine extends AbstractImageEvent {
     public static final String[] OPTIONS = eventStrings.OPTIONS;
 
     private static final String DIALOG_1 = DESCRIPTIONS[0];
-    private static final String DIALOG_2 = DESCRIPTIONS[1];
-    private static final String IGNORE = DESCRIPTIONS[2];
     private CUR_SCREEN screen = CUR_SCREEN.INTRO;
 
     private enum CUR_SCREEN {

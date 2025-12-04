@@ -31,27 +31,14 @@ public class BGTheJoust extends AbstractImageEvent implements LockRelicsEvent {
 
     private static final String EXPL_MSG = DESCRIPTIONS[1];
 
-    private static final String BET_AGAINST = DESCRIPTIONS[2];
-
-    private static final String BET_FOR = DESCRIPTIONS[3];
 
     private static final String COMBAT_MSG = DESCRIPTIONS[4];
 
-    private static final String NOODLES_WIN = DESCRIPTIONS[5];
-
-    private static final String NOODLES_LOSE = DESCRIPTIONS[6];
 
     private static final String BET_WON_MSG = DESCRIPTIONS[7];
 
     private static final String BET_LOSE_MSG = DESCRIPTIONS[8];
-    private boolean betFor;
     private boolean playerWins;
-
-    private static final int WIN_OWNER = 250;
-
-    private static final int WIN_MURDERER = 100;
-
-    private static final int BET_AMT = 50;
 
     private CUR_SCREEN screen = CUR_SCREEN.HALT;
 

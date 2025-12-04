@@ -138,13 +138,10 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
                     //do not change key.  game is hard-coded to check for "Exordium"
                     return SpireReturn.Return((AbstractDungeon) new BGExordium(p, saveFile));
                 } else if (key[0].equals("TheCity")) {
-                    ArrayList<String> emptyList = new ArrayList<>();
                     return SpireReturn.Return((AbstractDungeon) new BGTheCity(p, saveFile));
                 } else if (key[0].equals("TheBeyond")) {
-                    ArrayList<String> emptyList = new ArrayList<>();
                     return SpireReturn.Return((AbstractDungeon) new BGTheBeyond(p, saveFile));
                 } else if (key[0].equals("TheEnding")) {
-                    ArrayList<String> emptyList = new ArrayList<>();
                     return SpireReturn.Return((AbstractDungeon) new BGTheEnding(p, saveFile));
                 }
             }
@@ -206,6 +203,8 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
                                 break;
                             case RARE:
                                 if (!(c instanceof BGGoldenTicket)) rares.addToTop(c.makeCopy());
+                                break;
+                            default:
                                 break;
                         }
                     }
@@ -478,6 +477,8 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
                         return SpireReturn.Return(DrawFromRareRewardDeck());
                     case CURSE:
                         return SpireReturn.Return(DrawFromCursesRewardDeck());
+                    default:
+                        break;
                 }
             }
             return SpireReturn.Continue();
@@ -603,13 +604,8 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
         public static SpireReturn<EventHelper.RoomResult> roll(Random eventRng) {
             if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 //TODO: on ascension 3+, check the top event card + AbstractDungeon.floorNum first
-                if (true) {
-                    return SpireReturn.Return(EventHelper.RoomResult.EVENT);
-                } else if (false) {
-                    return SpireReturn.Return(EventHelper.RoomResult.MONSTER);
-                } else if (false) {
-                    return SpireReturn.Return(EventHelper.RoomResult.SHOP);
-                }
+
+                return SpireReturn.Return(EventHelper.RoomResult.EVENT);
             }
             return SpireReturn.Continue();
         }
