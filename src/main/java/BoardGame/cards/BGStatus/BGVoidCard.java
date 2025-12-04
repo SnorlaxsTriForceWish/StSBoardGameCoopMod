@@ -2,11 +2,10 @@
 
 package BoardGame.cards.BGStatus;
 
-import BoardGame.actions.BGAttemptAutoplayCardAction;
+import BoardGame.actions.BGAttemptAutoExhaustCardAction;
 import BoardGame.cards.AbstractBGCard;
 import BoardGame.cards.CardDisappearsOnExhaust;
 import BoardGame.characters.BGColorless;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -20,23 +19,24 @@ public class BGVoidCard extends AbstractBGCard implements CardDisappearsOnExhaus
         "BoardGame:BGVoidCard"
     );
     static final String ID = "BGVoidCard";
+    static final String IMG_PATH = "status/void";
+    static final int ENERGY_COST = 1;
 
     public BGVoidCard() {
         super(
-            "BGVoidCard",
+            ID,
             cardStrings.NAME,
-            "status/void",
-            1,
+            IMG_PATH,
+            ENERGY_COST,
             cardStrings.DESCRIPTION,
             AbstractCard.CardType.STATUS,
             BGColorless.Enums.CARD_COLOR,
             AbstractCard.CardRarity.COMMON,
             AbstractCard.CardTarget.NONE
         );
-        this.isEthereal = true;
+        // this.isEthereal = true;
         this.exhaust = true;
     }
-
 
     public void use(AbstractPlayer p, AbstractMonster m) {}
 
@@ -44,5 +44,9 @@ public class BGVoidCard extends AbstractBGCard implements CardDisappearsOnExhaus
 
     public AbstractCard makeCopy() {
         return new BGVoidCard();
+    }
+
+    public void triggerWhenDrawn() {
+        addToBot(new BGAttemptAutoExhaustCardAction(this));
     }
 }
