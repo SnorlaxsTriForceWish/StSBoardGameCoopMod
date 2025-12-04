@@ -36,7 +36,9 @@ import javassist.expr.MethodCall;
 
 public class Ascension {
 
-    private static String[] A_TEXT = null;
+    static String[] A_TEXT = CardCrawlGame.languagePack.getUIString(
+        "CoopBoardGame:AscensionModeDescriptions"
+    ).TEXT;
 
     public static final int CURRENT_MAX_ASCENSION = 13;
 

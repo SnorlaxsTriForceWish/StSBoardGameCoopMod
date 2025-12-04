@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import java.util.ArrayList;
 
-//TODO: CoopBoardGame library should allow you to skip
+//TODO: coopboardgame library should allow you to skip
 
 public class BGTheLibrary extends AbstractImageEvent {
 

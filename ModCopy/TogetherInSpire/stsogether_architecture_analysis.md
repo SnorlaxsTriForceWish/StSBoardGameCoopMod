@@ -612,7 +612,7 @@ public static class FixedEnergyPatch {
 
         @SpirePostfixPatch
         public static void Postfix(AbstractPlayer __instance) {
-            if (GameSettings.CoopBoardGameMode) {
+            if (GameSettings.coopBoardGameMode) {
                 __instance.energy.energy = 3; // Always reset to 3
             }
         }
@@ -783,9 +783,9 @@ public class CoopBoardGameCombatManager {
 2. Add new message types: `QueuedAction`, `PlayerReady`, `DieRolled`, `PhaseTransition`
 3. Add new callbacks: `OnActionQueued`, `OnPlayerReady`, `OnDieRolled`, `OnPhaseChanged`
 4. Modify combat screen UI to show queued cards and ready indicator
-5. Toggle with `GameSettings.CoopBoardGameMode` boolean
+5. Toggle with `GameSettings.coopBoardGameMode` boolean
 
-**Compatibility**: Can coexist with normal mode by checking `CoopBoardGameMode` flag
+**Compatibility**: Can coexist with normal mode by checking `coopBoardGameMode` flag
 
 ---
 

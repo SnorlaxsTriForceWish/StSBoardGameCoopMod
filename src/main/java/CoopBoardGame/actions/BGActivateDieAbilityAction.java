@@ -14,11 +14,15 @@ public class BGActivateDieAbilityAction extends AbstractGameAction {
     private DieControlledRelic relic = null;
 
     public BGActivateDieAbilityAction(DieControlledRelic relic) {
+        //final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
+        //logger.info("BGActivateDieAbilityAction: constructor");
         this.target = AbstractDungeon.player;
         this.relic = relic;
     }
 
     public void update() {
+        //final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
+        //logger.info("BGActivateDieAbilityAction: update");
         if (shouldCancelAction()) {
             this.isDone = true;
 

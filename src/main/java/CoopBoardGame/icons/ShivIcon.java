@@ -29,8 +29,8 @@ public class ShivIcon extends AbstractCustomIcon {
 
         list.add(
             new TooltipInfo(
-                BaseMod.getKeywordTitle("CoopBoardGame:shiv"),
-                BaseMod.getKeywordDescription("CoopBoardGame:shiv")
+                BaseMod.getKeywordTitle("coopboardgame:shiv"),
+                BaseMod.getKeywordDescription("coopboardgame:shiv")
             )
         );
         return list;
