@@ -1,4 +1,4 @@
-# StSBoardGameMod
+# StSCoopBoardGameMod
 Video game adaptation of the board game adaptation of the video game.
 Based on the StS-Default Mod Base, because we didn't find BasicMod until it was too late.
 

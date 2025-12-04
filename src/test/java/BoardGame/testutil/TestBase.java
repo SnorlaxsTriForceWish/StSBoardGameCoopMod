@@ -1,4 +1,4 @@
-package BoardGame.testutil;
+package CoopBoardGame.testutil;
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;

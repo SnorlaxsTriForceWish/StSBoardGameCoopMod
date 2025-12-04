@@ -1,7 +1,6 @@
-package BoardGame.testutil;
+package CoopBoardGame.testutil;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
