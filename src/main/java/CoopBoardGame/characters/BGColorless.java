@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 
 public class BGColorless {
@@ -25,26 +24,30 @@ public class BGColorless {
     }
 
     public ArrayList<AbstractCard> getCardPool(ArrayList<AbstractCard> tmpPool) {
-        AbstractCard.CardColor color = Enums.CARD_COLOR;
-        Iterator var3 = CardLibrary.cards.entrySet().iterator();
+        AbstractCard.CardColor targetColor = Enums.CARD_COLOR;
 
-        while (true) {
-            Map.Entry c;
-            AbstractCard card;
-            do {
-                do {
-                    do {
-                        if (!var3.hasNext()) {
-                            return tmpPool;
-                        }
+        for (Map.Entry<String, AbstractCard> entry : CardLibrary.cards.entrySet()) {
+            AbstractCard card = entry.getValue();
+            String cardKey = entry.getKey();
 
-                        c = (Map.Entry) var3.next();
-                        card = (AbstractCard) c.getValue();
-                    } while (!card.color.equals(color));
-                } while (card.rarity == AbstractCard.CardRarity.BASIC);
-            } while (UnlockTracker.isCardLocked((String) c.getKey()) && !Settings.isDailyRun);
+            // Skip cards that don't match our color
+            if (!card.color.equals(targetColor)) {
+                continue;
+            }
+
+            // Skip basic rarity cards
+            if (card.rarity == AbstractCard.CardRarity.BASIC) {
+                continue;
+            }
+
+            // Skip locked cards (unless in daily run)
+            if (UnlockTracker.isCardLocked(cardKey) && !Settings.isDailyRun) {
+                continue;
+            }
 
             tmpPool.add(card);
         }
+
+        return tmpPool;
     }
 }
