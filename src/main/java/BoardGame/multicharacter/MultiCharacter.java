@@ -1,14 +1,10 @@
 package BoardGame.multicharacter;
 
-import BoardGame.BoardGame;
-import BoardGame.cards.BGRed.BGStrike_Red;
-import BoardGame.characters.AbstractBGPlayer;
-import BoardGame.characters.BGIronclad;
-import BoardGame.multicharacter.patches.AbstractScenePatches;
-import BoardGame.multicharacter.patches.ContextPatches;
-import BoardGame.multicharacter.patches.HandLayoutHelper;
-import BoardGame.relics.BGBurningBlood;
-import BoardGame.relics.BGTheDieRelic;
+import java.util.ArrayList;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -25,14 +21,27 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.*;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
+import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.helpers.ModHelper;
+import com.megacrit.cardcrawl.helpers.RelicLibrary;
+import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
-import java.util.ArrayList;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import BoardGame.BoardGame;
+import BoardGame.cards.BGRed.BGStrike_Red;
+import BoardGame.characters.AbstractBGPlayer;
+import BoardGame.characters.BGIronclad;
+import BoardGame.multicharacter.patches.AbstractScenePatches;
+import BoardGame.multicharacter.patches.ContextPatches;
+import BoardGame.multicharacter.patches.HandLayoutHelper;
+import BoardGame.relics.BGBurningBlood;
+import BoardGame.relics.BGTheDieRelic;
+
+import static imgui.extension.texteditor.flag.TextEditorPaletteIndex.String;
 
 //TODO: oops we forgot Watcher's add-miracle-to-hand-at-start-of-combat relic
 

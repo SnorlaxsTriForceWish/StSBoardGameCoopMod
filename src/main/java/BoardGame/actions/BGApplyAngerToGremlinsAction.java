@@ -9,10 +9,9 @@ import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.powers.AngryPower;
 
 public class BGApplyAngerToGremlinsAction extends AbstractGameAction {
-    private final int ATTACK_AMOUNT = 1;
-    private final int STACK_AMOUNT = 1;
+    private static final int ATTACK_AMOUNT = 1;
+    private static final int STACK_AMOUNT = 1;
 
-    @Override
     public void update() {
         MonsterGroup dungeonMonsterGroup = AbstractDungeon.getMonsters();
 
