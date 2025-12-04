@@ -13,9 +13,9 @@ public class BGBarrageAction extends AbstractGameAction {
     private AbstractCreature target;
     private int extrahits;
 
-    public BGBarrageAction(AbstractCreature m, DamageInfo info, int extrahits) {
+    public BGBarrageAction(AbstractCreature creature, DamageInfo info, int extrahits) {
         this.info = info;
-        this.target = m;
+        this.target = creature;
         this.extrahits = extrahits;
     }
 

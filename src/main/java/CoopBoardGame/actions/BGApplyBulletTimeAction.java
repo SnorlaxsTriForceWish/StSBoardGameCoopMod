@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import java.util.Iterator;
 
 public class BGApplyBulletTimeAction extends AbstractGameAction {
 
@@ -19,13 +18,10 @@ public class BGApplyBulletTimeAction extends AbstractGameAction {
     }
 
     public void update() {
-        Iterator var1 = AbstractDungeon.player.hand.group.iterator();
-
-        while (var1.hasNext()) {
-            AbstractCard c = (AbstractCard) var1.next();
-            c.setCostForTurn(-9);
-            if (c instanceof AbstractBGCard) {
-                ((AbstractBGCard) c).temporarilyCostsZero = true;
+        for (AbstractCard card : AbstractDungeon.player.drawPile.group) {
+            card.setCostForTurn(0);
+            if (card instanceof AbstractBGCard) {
+                ((AbstractBGCard) card).temporarilyCostsZero = true;
             }
         }
 
