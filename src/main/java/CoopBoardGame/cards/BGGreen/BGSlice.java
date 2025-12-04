@@ -23,8 +23,6 @@ public class BGSlice extends AbstractBGCard {
     );
     public static final String ID = "BGSlice";
 
-    private AbstractMonster target;
-
     static Logger logger = LogManager.getLogger(BGSlice.class.getName());
 
     public BGSlice() {
@@ -57,7 +55,6 @@ public class BGSlice extends AbstractBGCard {
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.target = m;
         addToBot(
             (AbstractGameAction) new DamageAction(
                 (AbstractCreature) m,

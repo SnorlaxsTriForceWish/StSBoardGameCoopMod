@@ -22,8 +22,6 @@ public class BGDistraction extends AbstractBGCard {
     );
     public static final String ID = "BGDistraction";
 
-    private AbstractMonster target;
-
     static Logger logger = LogManager.getLogger(BGDistraction.class.getName());
 
     public BGDistraction() {

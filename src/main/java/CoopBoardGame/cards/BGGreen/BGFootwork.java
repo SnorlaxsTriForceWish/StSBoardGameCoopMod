@@ -22,8 +22,6 @@ public class BGFootwork extends AbstractBGCard {
     );
     public static final String ID = "BGFootwork";
 
-    private AbstractMonster target;
-
     static Logger logger = LogManager.getLogger(BGFootwork.class.getName());
 
     public BGFootwork() {

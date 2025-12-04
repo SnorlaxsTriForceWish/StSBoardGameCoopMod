@@ -22,13 +22,10 @@ public class BGOmniscienceAction extends AbstractGameAction {
 
     private AbstractPlayer player;
 
-    private int playAmt;
-
     public BGOmniscienceAction(int playAmt) {
         this.actionType = AbstractGameAction.ActionType.CARD_MANIPULATION;
         this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
         this.player = AbstractDungeon.player;
-        this.playAmt = playAmt;
     }
 
     public void update() {

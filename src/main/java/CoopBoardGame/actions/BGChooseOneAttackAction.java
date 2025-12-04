@@ -12,31 +12,30 @@ import java.util.ArrayList;
 public class BGChooseOneAttackAction extends AbstractGameAction {
 
     private ArrayList<AbstractCard> choices;
-    private AbstractPlayer p;
-    private AbstractMonster m;
+    boolean cardSelected = false;
 
     public BGChooseOneAttackAction(
         ArrayList<AbstractBGAttackCardChoice> choices,
-        AbstractPlayer p,
-        AbstractMonster m
+        AbstractPlayer player,
+        AbstractMonster monster
     ) {
         this.duration = Settings.ACTION_DUR_FAST;
         this.choices = new ArrayList<>();
         for (AbstractBGAttackCardChoice card : choices) {
-            card.setTargets(p, m);
+            card.setTargets(player, monster);
             this.choices.add(card);
         }
-        this.p = p;
-        this.m = m;
     }
 
     public void update() {
-        if (this.duration == Settings.ACTION_DUR_FAST) {
+        tickDuration();
+        
+        if (!this.cardSelected) {
             AbstractDungeon.cardRewardScreen.chooseOneOpen(this.choices);
-            tickDuration();
+
+            this.cardSelected = true;
 
             return;
         }
-        tickDuration();
     }
 }

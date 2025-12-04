@@ -1,6 +1,5 @@
 package CoopBoardGame.cards.BGRed;
 
-import CoopBoardGame.CoopBoardGame;
 import CoopBoardGame.actions.BGRampageAction;
 import CoopBoardGame.cards.AbstractBGCard;
 import CoopBoardGame.characters.BGIronclad;
@@ -12,8 +11,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGRampage extends AbstractBGCard {
 
@@ -49,8 +46,6 @@ public class BGRampage extends AbstractBGCard {
     public void applyPowers() {
         this.baseDamage = AbstractDungeon.player.exhaustPile.size();
         super.applyPowers();
-        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
-        //logger.info("BGRampage applyPowers:"+this.damage);
         if (!this.upgraded) {
             this.rawDescription = cardStrings.DESCRIPTION + cardStrings.EXTENDED_DESCRIPTION[0];
         } else {

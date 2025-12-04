@@ -19,9 +19,6 @@ public class BGBouncingFlaskAction extends AbstractGameAction {
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
         "CoopBoardGame:BGBouncingFlask"
     );
-    private static final float DURATION = 0.01F;
-
-    private static final float POST_ATTACK_WAIT_DUR = 0.1F;
 
     private int numTimes;
 

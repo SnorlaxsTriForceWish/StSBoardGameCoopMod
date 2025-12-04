@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 
@@ -20,7 +19,6 @@ public class BGSpotWeaknessAction extends AbstractGameAction {
 
     private int damageIncrease;
     private int maxDieNumber;
-    private AbstractMonster targetMonster;
 
     public BGSpotWeaknessAction(int damageIncrease, int maxDieNumber) {
         this.duration = 0.0F;

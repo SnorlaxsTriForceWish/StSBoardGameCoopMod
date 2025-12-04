@@ -1,20 +1,16 @@
 package CoopBoardGame.actions;
 
-import CoopBoardGame.cards.BGRed.BGWhirlwind;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGWorshipAction extends AbstractGameAction {
 
-    private static final Logger logger = LogManager.getLogger(BGWhirlwind.class.getName());
     private boolean dontExpendResources = false;
     private int energyOnUse = -1;
-    private static final int extrahits = 1;
+    private final int EXTRA_HITS = 1;
     private AbstractCard card;
 
     private AbstractPlayer p;
@@ -38,7 +34,7 @@ public class BGWorshipAction extends AbstractGameAction {
         if (this.energyOnUse != -1) {
             effect = this.energyOnUse;
         }
-        effect += this.extrahits;
+        effect += this.EXTRA_HITS;
 
         if (this.p.hasRelic("Chemical X")) {
             effect += 2;

@@ -2,11 +2,9 @@ package CoopBoardGame.actions;
 
 import CoopBoardGame.CoopBoardGame;
 import CoopBoardGame.cards.AbstractBGCard;
-import CoopBoardGame.relics.DieControlledRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.HandCheckAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
@@ -15,8 +13,6 @@ import org.apache.logging.log4j.Logger;
 
 public class CheckAfterUseCardAction extends AbstractGameAction {
 
-    private DamageInfo info;
-    private DieControlledRelic relic = null;
     private AbstractBGCard fakeCard = null;
     private UseCardAction fakeCardAction = null;
 

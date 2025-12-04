@@ -33,15 +33,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 //class for cards which use artwork from the original game but custom colors.
-public abstract class AbstractBGCard
-    extends CustomCard { //implements AlternateCardCostModifier
-
-    private static final Logger logger = LogManager.getLogger(AbstractCard.class.getName());
-    //public CardType type; //AbstractCard already has a type
+public abstract class AbstractBGCard extends CustomCard {
 
     public AbstractPlayer owner;
 

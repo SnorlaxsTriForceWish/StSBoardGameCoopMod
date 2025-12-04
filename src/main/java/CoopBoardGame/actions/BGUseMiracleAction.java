@@ -3,14 +3,10 @@ package CoopBoardGame.actions;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class BGUseMiracleAction extends AbstractGameAction {
-
-    private AbstractPlayer player;
-    private String message;
 
     public BGUseMiracleAction() {
         this.duration = 0.0F;

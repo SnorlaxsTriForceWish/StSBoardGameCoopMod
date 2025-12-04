@@ -1,19 +1,14 @@
 package CoopBoardGame.actions;
 
-import CoopBoardGame.cards.BGRed.BGWhirlwind;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 public class BGWreathOfFlameAction extends AbstractGameAction {
 
-    private static final Logger logger = LogManager.getLogger(BGWhirlwind.class.getName());
     private boolean dontExpendResources = false;
     private int energyOnUse = -1;
-    private static final int extrahits = 0;
+    private final int EXTRA_HITS = 0;
 
     private AbstractPlayer p;
 
@@ -30,7 +25,7 @@ public class BGWreathOfFlameAction extends AbstractGameAction {
         if (this.energyOnUse != -1) {
             effect = this.energyOnUse;
         }
-        effect += this.extrahits;
+        effect += this.EXTRA_HITS;
 
         if (this.p.hasRelic("Chemical X")) {
             effect += 2;
@@ -40,7 +35,6 @@ public class BGWreathOfFlameAction extends AbstractGameAction {
         if (effect > 0) {
             addToTop(new GainTemporaryStrengthIfNotCappedAction(p, effect));
 
-            //logger.info("BGWhirlwindAction: subtract energy "+this.energyOnUse);
             if (!this.dontExpendResources) {
                 this.p.energy.use(this.energyOnUse);
             }

@@ -22,8 +22,6 @@ public class BGInfiniteBlades extends AbstractBGCard {
     );
     public static final String ID = "BGInfinite Blades";
 
-    private AbstractMonster target;
-
     static Logger logger = LogManager.getLogger(BGInfiniteBlades.class.getName());
 
     public BGInfiniteBlades() {

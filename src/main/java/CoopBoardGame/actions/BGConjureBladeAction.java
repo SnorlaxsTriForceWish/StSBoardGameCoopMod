@@ -1,18 +1,14 @@
 package CoopBoardGame.actions;
 
-import CoopBoardGame.cards.BGRed.BGWhirlwind;
 import CoopBoardGame.powers.BGConjureBladePower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGConjureBladeAction extends AbstractGameAction {
 
-    private static final Logger logger = LogManager.getLogger(BGWhirlwind.class.getName());
     private boolean dontExpendResources = false;
     private int energyOnUse = -1;
     private int extrahits;
@@ -47,7 +43,6 @@ public class BGConjureBladeAction extends AbstractGameAction {
 
         if (effect > 0) {
             addToTop(new ApplyPowerAction(p, p, new BGConjureBladePower(p, effect)));
-            //logger.info("BGWhirlwindAction: subtract energy "+this.energyOnUse);
             if (!this.dontExpendResources) {
                 this.p.energy.use(this.energyOnUse);
             }

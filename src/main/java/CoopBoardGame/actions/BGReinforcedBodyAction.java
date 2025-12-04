@@ -1,24 +1,17 @@
 package CoopBoardGame.actions;
 
-import CoopBoardGame.cards.BGRed.BGWhirlwind;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGReinforcedBodyAction extends AbstractGameAction {
 
-    private static final Logger logger = LogManager.getLogger(BGWhirlwind.class.getName());
     public int[] multiDamage;
     private boolean dontExpendResources = false;
     private int energyOnUse = -1;
     private boolean upgraded = false;
-
-    private DamageInfo.DamageType damageType;
 
     private AbstractPlayer p;
 

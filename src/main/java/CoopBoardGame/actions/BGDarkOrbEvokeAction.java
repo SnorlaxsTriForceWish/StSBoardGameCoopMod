@@ -13,10 +13,6 @@ public class BGDarkOrbEvokeAction extends AbstractGameAction {
 
     private DamageInfo info;
 
-    private static final float DURATION = 0.1F;
-
-    private static final float POST_ATTACK_WAIT_DUR = 0.1F;
-
     private boolean muteSfx = false;
 
     public BGDarkOrbEvokeAction(DamageInfo info, AbstractGameAction.AttackEffect effect) {

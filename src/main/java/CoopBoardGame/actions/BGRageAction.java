@@ -28,7 +28,7 @@ public class BGRageAction extends AbstractGameAction {
             }
         }
 
-        for (AbstractCard c : cardsToBlock) {
+        for (int i = 0; i < cardsToBlock.size(); i++) {
             addToTop(
                 (AbstractGameAction) new GainBlockAction(
                     (AbstractCreature) AbstractDungeon.player,

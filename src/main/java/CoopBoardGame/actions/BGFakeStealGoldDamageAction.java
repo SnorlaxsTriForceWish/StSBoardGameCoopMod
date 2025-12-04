@@ -15,8 +15,6 @@ public class BGFakeStealGoldDamageAction extends AbstractGameAction {
 
     private DamageInfo info;
     private int goldAmount = 0;
-    private static final float DURATION = 0.1F;
-    private static final float POST_ATTACK_WAIT_DUR = 0.1F;
     private boolean skipWait = false,
         muteSfx = false;
 

@@ -22,8 +22,6 @@ public class BGFlechettes extends AbstractBGCard {
     );
     public static final String ID = "BGFlechettes";
 
-    private AbstractMonster target;
-
     static Logger logger = LogManager.getLogger(BGFlechettes.class.getName());
 
     public BGFlechettes() {

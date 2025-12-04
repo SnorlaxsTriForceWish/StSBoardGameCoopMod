@@ -1,28 +1,20 @@
 package CoopBoardGame.actions;
 
-import CoopBoardGame.cards.BGRed.BGWhirlwind;
 import CoopBoardGame.powers.BGPoisonPower;
 import CoopBoardGame.powers.BGWeakPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGMalaiseAction extends AbstractGameAction {
-
-    private static final Logger logger = LogManager.getLogger(BGWhirlwind.class.getName());
     public int[] multiDamage;
     private boolean dontExpendResources = false;
     private int energyOnUse = -1;
     private int extrahits = 0;
-
-    private DamageInfo.DamageType damageType;
 
     private AbstractPlayer p;
     private AbstractCreature m;

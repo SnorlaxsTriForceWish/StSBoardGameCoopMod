@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
@@ -17,10 +16,6 @@ public class BGUseShivAction extends AbstractGameAction {
 
     private boolean isARealShiv; //false if we play Cunning Potion or Ninja Scroll
     private int bonusDamage;
-    private int baseDamage;
-    private int damage;
-    private boolean canDiscard; //currently unused.
-    private AbstractPlayer player;
     private String message;
 
     public BGUseShivAction(
@@ -32,7 +27,6 @@ public class BGUseShivAction extends AbstractGameAction {
         this.duration = 0.0F;
         this.actionType = AbstractGameAction.ActionType.WAIT;
         this.isARealShiv = isARealShiv;
-        this.canDiscard = canDiscard;
         this.bonusDamage = bonusDamage;
         this.message = message;
     }

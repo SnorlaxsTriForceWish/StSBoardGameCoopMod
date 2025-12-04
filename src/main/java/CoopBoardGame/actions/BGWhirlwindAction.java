@@ -1,6 +1,5 @@
 package CoopBoardGame.actions;
 
-import CoopBoardGame.cards.BGRed.BGWhirlwind;
 import CoopBoardGame.powers.WeakVulnCancel;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -14,12 +13,9 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.CleaveEffect;
 import com.megacrit.cardcrawl.vfx.combat.WhirlwindEffect;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGWhirlwindAction extends AbstractGameAction {
 
-    private static final Logger logger = LogManager.getLogger(BGWhirlwind.class.getName());
     public int[] multiDamage;
     private boolean dontExpendResources = false;
     private int energyOnUse = -1;

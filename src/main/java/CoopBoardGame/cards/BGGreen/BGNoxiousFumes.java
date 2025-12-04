@@ -25,8 +25,6 @@ public class BGNoxiousFumes extends AbstractBGCard {
     );
     public static final String ID = "BGNoxiousFumes";
 
-    private AbstractMonster target;
-
     static Logger logger = LogManager.getLogger(BGNoxiousFumes.class.getName());
 
     public BGNoxiousFumes() {

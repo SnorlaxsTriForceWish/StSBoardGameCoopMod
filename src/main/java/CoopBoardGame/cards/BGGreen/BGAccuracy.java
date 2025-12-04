@@ -22,8 +22,6 @@ public class BGAccuracy extends AbstractBGCard {
     );
     public static final String ID = "BGAccuracy";
 
-    private AbstractMonster target;
-
     static Logger logger = LogManager.getLogger(BGAccuracy.class.getName());
 
     public BGAccuracy() {

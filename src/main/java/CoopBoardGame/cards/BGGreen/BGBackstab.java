@@ -23,8 +23,6 @@ public class BGBackstab extends AbstractBGCard {
     );
     public static final String ID = "BGBackstab";
 
-    private AbstractMonster target;
-
     static Logger logger = LogManager.getLogger(BGBackstab.class.getName());
 
     public BGBackstab() {
@@ -46,7 +44,6 @@ public class BGBackstab extends AbstractBGCard {
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.target = m;
         addToBot(
             (AbstractGameAction) new DamageAction(
                 (AbstractCreature) m,

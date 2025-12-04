@@ -24,8 +24,6 @@ public class BGChoke extends AbstractBGCard {
     );
     public static final String ID = "BGChoke";
 
-    private AbstractMonster target;
-
     static Logger logger = LogManager.getLogger(BGChoke.class.getName());
 
     public BGChoke() {
@@ -46,27 +44,21 @@ public class BGChoke extends AbstractBGCard {
     }
 
     public static int countTargetDebuffs(AbstractMonster target) {
-        //logger.info("Choke countTargetDebuffs target "+target);
         if (target == null) return 0;
         AbstractPower weak = target.getPower("BGWeakened");
         AbstractPower poison = target.getPower("BGPoison");
         int total = 0;
-        //
         if (weak != null && weak.amount > 0) {
             //strictly speaking >0 check shouldn't be necessary for weak/poison.  in theory.
             total += weak.amount;
-            //logger.info("Weak:"+weak.amount);
         }
         if (poison != null && poison.amount > 0) {
             total += poison.amount;
-            //logger.info("Poison:"+poison.amount);
         }
         return total;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        //logger.info("Choke use");
-        this.target = m;
         addToBot(
             (AbstractGameAction) new DamageAction(
                 (AbstractCreature) m,
@@ -74,15 +66,10 @@ public class BGChoke extends AbstractBGCard {
                 AbstractGameAction.AttackEffect.SLASH_HEAVY
             )
         );
-        //        if(this.target!=null) {
-        //            this.rawDescription = cardStrings.DESCRIPTION;
-        //        }
-        //        initializeDescription();
     }
 
     public void applyPowers() {
         int realBaseDamage = this.baseDamage;
-        //this.baseDamage += this.magicNumber * 0;  //TODO: why did we have to comment this out again?
 
         super.applyPowers();
 

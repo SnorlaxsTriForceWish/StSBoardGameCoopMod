@@ -95,7 +95,6 @@ public class BGIronWave extends AbstractBGCard {
         super.applyPowers();
         int actualBaseDamage = baseDamage;
         int actualDamage = damage;
-        boolean actualIsDamageModified = isDamageModified;
 
         baseDamage = defaultBaseSecondMagicNumber;
 
@@ -105,14 +104,12 @@ public class BGIronWave extends AbstractBGCard {
 
         baseDamage = actualBaseDamage;
         damage = actualDamage;
-        isDamageModified = isDamageModified;
     }
 
     public void calculateCardDamage(AbstractMonster mo) {
         super.calculateCardDamage(mo);
         int actualBaseDamage = baseDamage;
         int actualDamage = damage;
-        boolean actualIsDamageModified = isDamageModified;
 
         baseDamage = defaultBaseSecondMagicNumber;
 
@@ -122,7 +119,6 @@ public class BGIronWave extends AbstractBGCard {
 
         baseDamage = actualBaseDamage;
         damage = actualDamage;
-        isDamageModified = isDamageModified;
     }
 
     protected void applyPowersToBlock() {

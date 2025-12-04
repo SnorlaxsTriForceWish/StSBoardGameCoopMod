@@ -38,7 +38,6 @@ public class BGSpawnTwoGremlinsForGremlinLeaderAction extends AbstractGameAction
     }
 
     public void update() {
-        String[] gremlintypes = this.leader.gremlintypes;
         AbstractMonster gremlin;
         for (int i = 0; i <= 1; i++) {
             String type = getGremlinInSlot(i);

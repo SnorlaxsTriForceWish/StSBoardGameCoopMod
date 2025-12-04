@@ -28,7 +28,6 @@ public class BGChannelAction extends AbstractGameAction {
 
     public static boolean playerIsDarkOrbCapped() {
         int darkCount = 0;
-        boolean anyEmptySlots = false;
         for (AbstractOrb o : AbstractDungeon.player.orbs) {
             if (o instanceof BGDark) {
                 darkCount += 1;

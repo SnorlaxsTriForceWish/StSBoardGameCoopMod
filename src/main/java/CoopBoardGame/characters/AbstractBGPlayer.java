@@ -13,29 +13,13 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.potions.PotionSlot;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbInterface;
-import java.util.Iterator;
 
 public abstract class AbstractBGPlayer extends CustomPlayer {
-
-    //    public static final String[] orbTextures = {
-    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer1.png",
-    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer2.png",
-    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer3.png",
-    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer4.png",
-    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer5.png",
-    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer6.png",
-    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer1d.png",
-    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer2d.png",
-    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer3d.png",
-    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer4d.png",
-    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer5d.png",};
 
     //TODO: maybe move PlayedThisTurn to TheDie relic
     public int shivsPlayedThisTurn = 0;
     public boolean startTurnPhaseIsActive = true;
     public boolean stanceChangedThisTurn = false;
-
-    //public int currentRow=0;
 
     public void applyStartOfTurnRelics() {
         super.applyStartOfTurnRelics();
@@ -102,20 +86,15 @@ public abstract class AbstractBGPlayer extends CustomPlayer {
     }
 
     public void nonInputReleaseCard() {
-        Iterator var1 = this.orbs.iterator();
-
-        while (var1.hasNext()) {
-            AbstractOrb o = (AbstractOrb) var1.next();
-            o.hideEvokeValues();
+        for (AbstractOrb orb : this.orbs) {
+            orb.hideEvokeValues();
         }
 
         ReflectionHacks.setPrivate(this, AbstractPlayer.class, "passedHesitationLine", false);
 
         this.inSingleTargetMode = false;
         this.isInKeyboardMode = false;
-        if (true || !this.isInKeyboardMode) {
-            GameCursor.hidden = false;
-        }
+        GameCursor.hidden = false;
 
         ReflectionHacks.setPrivate(this, AbstractPlayer.class, "isUsingClickDragControl", false);
         this.isHoveringDropZone = false;
@@ -134,33 +113,4 @@ public abstract class AbstractBGPlayer extends CustomPlayer {
         this.hand.refreshHandLayout();
         ReflectionHacks.setPrivate(this, AbstractPlayer.class, "touchscreenInspectCount", 0);
     }
-
-    //
-    //    @Override
-    //    public ArrayList<String> getStartingDeck() {
-    //        ArrayList<String> retVal = new ArrayList<>();
-    //
-    //        retVal.add(BGStrike_Red.ID);
-    //        retVal.add(BGStrike_Red.ID);
-    //        retVal.add(BGStrike_Red.ID);
-    //        retVal.add(BGStrike_Red.ID);
-    //        retVal.add(BGStrike_Red.ID);
-    //        retVal.add(BGDefend_Red.ID);
-    //        retVal.add(BGDefend_Red.ID);
-    //        retVal.add(BGDefend_Red.ID);
-    //        retVal.add(BGDefend_Red.ID);
-    //        retVal.add(BGBash.ID);
-    //
-    //        return retVal;
-    //    }
-    //
-    //
-    //    public ArrayList<String> getStartingRelics() {
-    //        ArrayList<String> retVal = new ArrayList<>();
-    //
-    //        retVal.add(BGTheDieRelic.ID);
-    //        UnlockTracker.markRelicAsSeen(BGTheDieRelic.ID);
-    //
-    //        return retVal;
-    //    }
 }

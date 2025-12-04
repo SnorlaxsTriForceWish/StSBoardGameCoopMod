@@ -1,6 +1,5 @@
 package CoopBoardGame.actions;
 
-import CoopBoardGame.cards.BGRed.BGWhirlwind;
 import CoopBoardGame.orbs.BGLightning;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -9,23 +8,15 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGTempestAction extends AbstractGameAction {
 
-    private static final Logger logger = LogManager.getLogger(BGWhirlwind.class.getName());
     public int[] multiDamage;
     private boolean dontExpendResources = false;
     private int energyOnUse = -1;
     private int extrahits = 0;
 
-    private DamageInfo.DamageType damageType;
-
     private AbstractPlayer p;
-    private AbstractMonster m;
-    private int damage;
-    private DamageInfo.DamageType damageTypeForTurn;
 
     public BGTempestAction(
         AbstractPlayer p,
@@ -36,15 +27,10 @@ public class BGTempestAction extends AbstractGameAction {
         int energyOnUse,
         int extrahits
     ) {
-        this.multiDamage = multiDamage;
-        this.damageType = damageType;
         this.p = p;
-        this.m = m;
-        this.damage = damage;
         this.dontExpendResources = dontExpendResources;
         this.duration = Settings.ACTION_DUR_XFAST;
         this.actionType = ActionType.SPECIAL;
-        this.damageTypeForTurn = damageTypeForTurn;
         this.energyOnUse = energyOnUse;
         this.extrahits = extrahits;
     }

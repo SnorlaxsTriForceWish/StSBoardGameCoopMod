@@ -19,8 +19,6 @@ public class BGSetup extends AbstractBGCard {
     );
     public static final String ID = "BGSetup";
 
-    private AbstractMonster target;
-
     static Logger logger = LogManager.getLogger(BGSetup.class.getName());
 
     public BGSetup() {

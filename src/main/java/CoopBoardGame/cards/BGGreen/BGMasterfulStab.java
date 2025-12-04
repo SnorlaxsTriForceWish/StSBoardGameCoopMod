@@ -21,8 +21,6 @@ public class BGMasterfulStab extends AbstractBGCard {
     );
     public static final String ID = "BGMasterfulStab";
 
-    private AbstractMonster target;
-
     static Logger logger = LogManager.getLogger(BGMasterfulStab.class.getName());
 
     public BGMasterfulStab() {

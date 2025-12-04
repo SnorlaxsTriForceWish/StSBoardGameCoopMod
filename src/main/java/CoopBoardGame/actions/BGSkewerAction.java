@@ -1,6 +1,5 @@
 package CoopBoardGame.actions;
 
-import CoopBoardGame.cards.BGRed.BGWhirlwind;
 import CoopBoardGame.powers.WeakVulnCancel;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -10,18 +9,13 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGSkewerAction extends AbstractGameAction {
 
-    private static final Logger logger = LogManager.getLogger(BGWhirlwind.class.getName());
     public int[] multiDamage;
     private boolean dontExpendResources = false;
     private int energyOnUse = -1;
     private int extrahits = 0;
-
-    private DamageInfo.DamageType damageType;
 
     private AbstractPlayer p;
     private AbstractMonster m;
@@ -37,8 +31,6 @@ public class BGSkewerAction extends AbstractGameAction {
         int energyOnUse,
         int extrahits
     ) {
-        this.multiDamage = multiDamage;
-        this.damageType = damageType;
         this.p = p;
         this.m = m;
         this.damage = damage;

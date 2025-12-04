@@ -6,7 +6,6 @@ import CoopBoardGame.relics.BGMiracles;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
@@ -16,7 +15,6 @@ public class BGGainMiracleAction extends AbstractGameAction {
 
     private int amount;
     private AbstractCard card;
-    private AbstractPlayer player;
 
     //TODO LATER: check for exceptions to the "if card wasn't in autoplay, convert excess miracles to energy" rule
 

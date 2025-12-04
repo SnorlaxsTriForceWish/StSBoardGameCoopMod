@@ -43,11 +43,8 @@ public class BGTrueGrit extends AbstractBGCard {
                 this.block
             )
         );
-        if (true) {
-            addToBot((AbstractGameAction) new ExhaustAction(1, false));
-        } else {
-            addToBot((AbstractGameAction) new ExhaustAction(1, true, false, false));
-        }
+
+        addToBot((AbstractGameAction) new ExhaustAction(1, false));
     }
 
     public void upgrade() {

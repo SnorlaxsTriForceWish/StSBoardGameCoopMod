@@ -1,6 +1,5 @@
 package CoopBoardGame.actions;
 
-import CoopBoardGame.cards.BGRed.BGWhirlwind;
 import CoopBoardGame.orbs.BGFrost;
 import CoopBoardGame.powers.WeakVulnCancel;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -14,12 +13,8 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.Frost;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.BlizzardEffect;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGBlizzardAction extends AbstractGameAction {
-
-    private static final Logger logger = LogManager.getLogger(BGWhirlwind.class.getName());
     private int[] multiDamage;
 
     private AbstractPlayer p;

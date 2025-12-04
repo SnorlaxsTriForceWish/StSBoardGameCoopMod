@@ -51,7 +51,6 @@ public class BGFTL extends AbstractBGCard {
 
     public void applyPowers() {
         super.applyPowers();
-        int count = AbstractDungeon.actionManager.cardsPlayedThisTurn.size();
         this.rawDescription = cardStrings.DESCRIPTION;
         initializeDescription();
     }

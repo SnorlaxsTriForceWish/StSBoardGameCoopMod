@@ -3,16 +3,12 @@
 package CoopBoardGame.actions;
 
 import CoopBoardGame.cards.AbstractBGCard;
-import CoopBoardGame.powers.BGDoubleTapPower_DEPRECATED;
 import CoopBoardGame.screen.TargetSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.NewQueueCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGCopyAndPlayCardAction extends AbstractGameAction {
 
@@ -32,24 +28,22 @@ public class BGCopyAndPlayCardAction extends AbstractGameAction {
     }
 
     public void update() {
-        AbstractMonster m = null;
-        AbstractCard tmp = card.makeSameInstanceOf();
+        AbstractCard tmp = this.card.makeSameInstanceOf();
         AbstractDungeon.player.limbo.addToBottom(tmp);
-        tmp.current_x = card.current_x;
-        tmp.current_y = card.current_y;
+        tmp.current_x = this.card.current_x;
+        tmp.current_y = this.card.current_y;
         tmp.target_x = Settings.WIDTH / 2.0F - 300.0F * Settings.scale;
         tmp.target_y = Settings.HEIGHT / 2.0F;
 
         tmp.purgeOnUse = true;
 
-        Logger logger = LogManager.getLogger(BGDoubleTapPower_DEPRECATED.class.getName());
-        if (card instanceof AbstractBGCard) {
-            ((AbstractBGCard) card).copiedCard = (AbstractBGCard) tmp;
+        if (this.card instanceof AbstractBGCard) {
+            ((AbstractBGCard) this.card).copiedCard = (AbstractBGCard) tmp;
         }
 
         if (
-            card.target == AbstractCard.CardTarget.ENEMY ||
-            card.target == AbstractCard.CardTarget.SELF_AND_ENEMY
+            this.card.target == AbstractCard.CardTarget.ENEMY ||
+            this.card.target == AbstractCard.CardTarget.SELF_AND_ENEMY
         ) {
             TargetSelectScreen.TargetSelectAction tssAction = target -> {
                 if (target != null) {

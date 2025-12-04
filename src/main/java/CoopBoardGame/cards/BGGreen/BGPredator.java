@@ -22,8 +22,6 @@ public class BGPredator extends AbstractBGCard {
     );
     public static final String ID = "BGPredator";
 
-    private AbstractMonster target;
-
     static Logger logger = LogManager.getLogger(BGPredator.class.getName());
 
     public BGPredator() {

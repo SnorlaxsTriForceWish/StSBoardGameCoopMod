@@ -12,8 +12,6 @@ import java.util.ArrayList;
 //TODO: it is suspected that Cunning Potion will close BGEntropicBrew menu
 public class BGTooManyShivsAction extends AbstractGameAction {
 
-    private int amount;
-
     public BGTooManyShivsAction() {
         this.duration = 0.0F;
         this.actionType = ActionType.WAIT;

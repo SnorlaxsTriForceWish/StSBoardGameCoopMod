@@ -24,8 +24,6 @@ public class BGBane extends AbstractBGCard {
     );
     public static final String ID = "BGBane";
 
-    private AbstractMonster target;
-
     static Logger logger = LogManager.getLogger(BGBane.class.getName());
 
     public BGBane() {
@@ -56,7 +54,6 @@ public class BGBane extends AbstractBGCard {
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.target = m;
         addToBot(
             (AbstractGameAction) new DamageAction(
                 (AbstractCreature) m,

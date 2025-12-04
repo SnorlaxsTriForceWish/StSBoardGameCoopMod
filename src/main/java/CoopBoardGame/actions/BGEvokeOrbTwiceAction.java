@@ -2,9 +2,7 @@ package CoopBoardGame.actions;
 
 import CoopBoardGame.screen.OrbSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 public class BGEvokeOrbTwiceAction extends AbstractGameAction {
 
@@ -24,13 +22,12 @@ public class BGEvokeOrbTwiceAction extends AbstractGameAction {
     public void update() {
         if (this.duration == this.startDuration) {
             OrbSelectScreen.OrbSelectAction ossAction = target -> {
-                AbstractPlayer player = AbstractDungeon.player;
                 //addToTop -- reverse order
                 CoopBoardGame.CoopBoardGame.logger.info("BGEvokeOrbTwiceAction: slot " + target);
-                addToTop((AbstractGameAction) new BGEvokeSpecificOrbAction(target));
-                addToTop((AbstractGameAction) new BGEvokeWithoutRemovingSpecificOrbAction(target));
+                addToTop(new BGEvokeSpecificOrbAction(target));
+                addToTop(new BGEvokeWithoutRemovingSpecificOrbAction(target));
             };
-            addToTop((AbstractGameAction) new OrbSelectScreenAction(ossAction, description, false));
+            addToTop(new OrbSelectScreenAction(ossAction, description, false));
         }
         this.tickDuration();
     }

@@ -5,7 +5,6 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
@@ -16,11 +15,6 @@ public class BGMulticastAction extends AbstractGameAction {
     private boolean dontExpendResources = false;
     private int energyOnUse = -1;
     private int extrahits = 0;
-    private AbstractMonster m;
-
-    private DamageInfo.DamageType damageType;
-    private int damage;
-    private DamageInfo.DamageType damageTypeForTurn;
 
     private AbstractPlayer p;
 
@@ -34,12 +28,9 @@ public class BGMulticastAction extends AbstractGameAction {
         int extrahits
     ) {
         this.p = p;
-        this.m = m;
-        this.damage = damage;
         this.dontExpendResources = dontExpendResources;
         this.duration = Settings.ACTION_DUR_XFAST;
         this.actionType = ActionType.SPECIAL;
-        this.damageTypeForTurn = damageTypeForTurn;
         this.energyOnUse = energyOnUse;
         this.extrahits = extrahits;
     }
@@ -59,7 +50,6 @@ public class BGMulticastAction extends AbstractGameAction {
         if (effect > 0) {
             int finalEffect = effect;
             OrbSelectScreen.OrbSelectAction ossAction = target -> {
-                AbstractPlayer player = AbstractDungeon.player;
                 //addToTop -- reverse order
                 CoopBoardGame.CoopBoardGame.logger.info(
                     "BGEvokeOrbMulticastAction: slot " + target

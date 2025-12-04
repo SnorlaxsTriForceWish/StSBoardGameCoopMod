@@ -44,10 +44,6 @@ public class BGGoldenTicket extends AbstractBGCard {
     public static final CardColor COLOR = BGColorless.Enums.CARD_COLOR;
 
     private static final int COST = -2;
-    private static final int UPGRADE_COST = 1;
-
-    private static final int MAGIC = 1;
-
     // /STAT DECLARATION/
 
     public BGGoldenTicket(String ID, CardColor color) {
