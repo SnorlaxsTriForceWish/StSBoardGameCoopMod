@@ -1,9 +1,9 @@
-package BoardGame.cards.BGPurple;
+package CoopBoardGame.cards.BGPurple;
 
-import BoardGame.actions.BGConjureBladeAction;
-import BoardGame.actions.BGXCostCardAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGWatcher;
+import CoopBoardGame.actions.BGConjureBladeAction;
+import CoopBoardGame.actions.BGXCostCardAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGWatcher;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGConjureBlade extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGConjureBlade"
+        "CoopBoardGame:BGConjureBlade"
     );
     public static final String ID = "BGConjureBlade";
 

@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -10,7 +10,7 @@ public class BGConjureBladePower extends AbstractBGPower {
 
     public static final String POWER_ID = "BGConjureBladePower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGConjureBladePower"
+        "CoopBoardGame:BGConjureBladePower"
     );
 
     public BGConjureBladePower(AbstractCreature owner, int amt) {

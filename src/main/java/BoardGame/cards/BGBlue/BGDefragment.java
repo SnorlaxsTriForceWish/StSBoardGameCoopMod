@@ -1,8 +1,8 @@
-package BoardGame.cards.BGBlue;
+package CoopBoardGame.cards.BGBlue;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGDefect;
-import BoardGame.powers.BGOrbEndOfTurnPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGDefect;
+import CoopBoardGame.powers.BGOrbEndOfTurnPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -18,7 +18,7 @@ public class BGDefragment extends AbstractBGCard {
     public static final String ID = "BGDefragment";
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGDefragment"
+        "CoopBoardGame:BGDefragment"
     );
 
     public BGDefragment() {

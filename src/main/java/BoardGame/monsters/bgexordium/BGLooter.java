@@ -1,9 +1,9 @@
-package BoardGame.monsters.bgexordium;
+package CoopBoardGame.monsters.bgexordium;
 
-import BoardGame.actions.BGFakeStealGoldDamageAction;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
-import BoardGame.powers.BGThieveryPower;
+import CoopBoardGame.actions.BGFakeStealGoldDamageAction;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.powers.BGThieveryPower;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;

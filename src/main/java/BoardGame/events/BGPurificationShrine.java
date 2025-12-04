@@ -1,4 +1,4 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -15,7 +15,7 @@ public class BGPurificationShrine extends AbstractImageEvent {
 
     public static final String ID = "BGPurificationShrine";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGPurificationShrine"
+        "CoopBoardGame:BGPurificationShrine"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

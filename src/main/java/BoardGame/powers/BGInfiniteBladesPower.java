@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.BGGainShivAction;
+import CoopBoardGame.actions.BGGainShivAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -12,7 +12,7 @@ public class BGInfiniteBladesPower extends AbstractBGPower {
     public static final String POWER_ID = "BGInfinite Blades";
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGInfinite Blades"
+        "CoopBoardGame:BGInfinite Blades"
     );
 
     public BGInfiniteBladesPower(AbstractCreature owner, int bladeAmt) {

@@ -1,11 +1,11 @@
 //TODO: technically we're not supposed to be able to use this before relicroll is locked in
 //TODO: don't flash relic if draw pile is empty
 
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.cards.BGColorless.BGTheCourierPotion;
-import BoardGame.cards.BGColorless.BGTheCourierRelic;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.cards.BGColorless.BGTheCourierPotion;
+import CoopBoardGame.cards.BGColorless.BGTheCourierRelic;
+import CoopBoardGame.thedie.TheDie;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;

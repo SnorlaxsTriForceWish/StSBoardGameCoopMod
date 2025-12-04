@@ -1,6 +1,6 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
-import BoardGame.actions.GainTemporaryStrengthIfNotCappedAction;
+import CoopBoardGame.actions.GainTemporaryStrengthIfNotCappedAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 public class BGSteroidPotion extends AbstractPotion {
 
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGFlexPotion"
+        "CoopBoardGame:BGFlexPotion"
     );
 
     public static final String POTION_ID = "BGSteroidPotion";

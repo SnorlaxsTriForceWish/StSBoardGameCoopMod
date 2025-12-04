@@ -1,8 +1,8 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.multicharacter.ALLEnemiesMonster;
-import BoardGame.multicharacter.patches.ActionPatches;
-import BoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.multicharacter.ALLEnemiesMonster;
+import CoopBoardGame.multicharacter.patches.ActionPatches;
+import CoopBoardGame.relics.BGTheDieRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;

@@ -1,8 +1,8 @@
-package BoardGame.multicharacter.patches;
+package CoopBoardGame.multicharacter.patches;
 
-import BoardGame.dungeons.BGExordium;
-import BoardGame.multicharacter.MultiCharacter;
-import BoardGame.multicharacter.MultiCreature;
+import CoopBoardGame.dungeons.BGExordium;
+import CoopBoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.multicharacter.MultiCreature;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.core.CardCrawlGame;

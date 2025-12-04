@@ -1,7 +1,7 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.cards.BGColorless.BGShieldSpear_Shield;
-import BoardGame.cards.BGColorless.BGShieldSpear_Spear;
+import CoopBoardGame.cards.BGColorless.BGShieldSpear_Shield;
+import CoopBoardGame.cards.BGColorless.BGShieldSpear_Spear;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -16,10 +16,10 @@ import java.util.ArrayList;
 public class BGSurroundedAction extends AbstractGameAction {
 
     private static final CardStrings SPEAR = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGShieldSpear_Spear"
+        "CoopBoardGame:BGShieldSpear_Spear"
     );
     private static final CardStrings SHIELD = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGShieldSpear_Shield"
+        "CoopBoardGame:BGShieldSpear_Shield"
     );
 
     @Override

@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;

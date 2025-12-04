@@ -1,6 +1,6 @@
-package BoardGame.multicharacter.patches;
+package CoopBoardGame.multicharacter.patches;
 
-import BoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.multicharacter.MultiCharacter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInstrumentPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;

@@ -1,6 +1,6 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import static BoardGame.powers.StrengthCap.MAX_STRENGTH;
+import static CoopBoardGame.powers.StrengthCap.MAX_STRENGTH;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;

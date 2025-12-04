@@ -1,7 +1,7 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.BGChannelAction;
-import BoardGame.orbs.BGLightning;
+import CoopBoardGame.actions.BGChannelAction;
+import CoopBoardGame.orbs.BGLightning;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -13,7 +13,7 @@ public class BGStormPower extends AbstractBGPower {
     public static final String POWER_ID = "BGStormPower";
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGStormPower"
+        "CoopBoardGame:BGStormPower"
     );
 
     public static final String NAME = powerStrings.NAME;

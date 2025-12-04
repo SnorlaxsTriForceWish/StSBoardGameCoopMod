@@ -1,7 +1,7 @@
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGSilent;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGSilent;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -23,7 +23,7 @@ public class BGDieDieDie extends AbstractBGCard {
     public static final String ID = "BGDieDieDie";
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGDieDieDie"
+        "CoopBoardGame:BGDieDieDie"
     );
 
     public BGDieDieDie() {

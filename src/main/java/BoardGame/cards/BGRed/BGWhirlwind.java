@@ -1,11 +1,11 @@
 //copying Whirlwind is currently treated as spending 0 energy on it? ...false alarm, we played DoubleTap instead of BGDoubleTap
 
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.actions.BGWhirlwindAction;
-import BoardGame.actions.BGXCostCardAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
+import CoopBoardGame.actions.BGWhirlwindAction;
+import CoopBoardGame.actions.BGXCostCardAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -17,7 +17,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGWhirlwind extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGWhirlwind"
+        "CoopBoardGame:BGWhirlwind"
     );
     public static final String ID = "BGWhirlwind";
 

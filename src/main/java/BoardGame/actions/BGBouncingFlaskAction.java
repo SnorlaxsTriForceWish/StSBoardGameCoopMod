@@ -1,7 +1,7 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.powers.BGPoisonPower;
-import BoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.powers.BGPoisonPower;
+import CoopBoardGame.screen.TargetSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -17,7 +17,7 @@ import com.megacrit.cardcrawl.vfx.combat.PotionBounceEffect;
 public class BGBouncingFlaskAction extends AbstractGameAction {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGBouncingFlask"
+        "CoopBoardGame:BGBouncingFlask"
     );
     private static final float DURATION = 0.01F;
 

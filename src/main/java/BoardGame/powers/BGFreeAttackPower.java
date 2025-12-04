@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
@@ -16,7 +16,7 @@ public class BGFreeAttackPower extends AbstractBGPower {
 
     public static final String POWER_ID = "BGFreeAttackPower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGFreeAttackPower"
+        "CoopBoardGame:BGFreeAttackPower"
     );
 
     public BGFreeAttackPower(AbstractCreature owner, int amount) {

@@ -1,9 +1,9 @@
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.actions.BGMalaiseAction;
-import BoardGame.actions.BGXCostCardAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGSilent;
+import CoopBoardGame.actions.BGMalaiseAction;
+import CoopBoardGame.actions.BGXCostCardAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGSilent;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -16,7 +16,7 @@ public class BGMalaise extends AbstractBGCard {
     public static final String ID = "BGMalaise";
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGMalaise"
+        "CoopBoardGame:BGMalaise"
     );
 
     public BGMalaise() {

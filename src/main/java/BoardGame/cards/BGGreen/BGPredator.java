@@ -1,7 +1,7 @@
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGSilent;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGSilent;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Logger;
 public class BGPredator extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGPredator"
+        "CoopBoardGame:BGPredator"
     );
     public static final String ID = "BGPredator";
 

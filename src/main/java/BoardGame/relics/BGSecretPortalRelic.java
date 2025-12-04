@@ -1,4 +1,4 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import org.apache.logging.log4j.LogManager;

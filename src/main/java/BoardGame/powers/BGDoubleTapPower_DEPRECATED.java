@@ -1,8 +1,8 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.TargetSelectScreenAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.actions.TargetSelectScreenAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.screen.TargetSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.utility.NewQueueCardAction;

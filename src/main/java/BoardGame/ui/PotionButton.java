@@ -1,8 +1,8 @@
-package BoardGame.ui;
+package CoopBoardGame.ui;
 
-import BoardGame.potions.BGGamblersBrew;
-import BoardGame.thedie.TheDie;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.potions.BGGamblersBrew;
+import CoopBoardGame.thedie.TheDie;
+import CoopBoardGame.util.TextureLoader;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -23,7 +23,7 @@ public class PotionButton extends Button {
         super(
             (Settings.WIDTH / 2) - 350 * Settings.scale,
             (Settings.HEIGHT / 2) + 200 * Settings.scale,
-            TextureLoader.getTexture("BoardGameResources/images/ui/dice/Potion.png")
+            TextureLoader.getTexture("CoopBoardGameResources/images/ui/dice/Potion.png")
         );
     }
 
@@ -54,7 +54,7 @@ public class PotionButton extends Button {
                     }
                 }
                 if (this.pressed && !this.isDisabled) {
-                    if (AbstractDungeon.player.hasRelic("BoardGame:BGTheDieRelic")) {
+                    if (AbstractDungeon.player.hasRelic("CoopBoardGame:BGTheDieRelic")) {
                         TheDie.monsterRoll += 1;
                         if (TheDie.monsterRoll > 6) TheDie.monsterRoll = 1;
                         TheDie.tentativeRoll(TheDie.monsterRoll);

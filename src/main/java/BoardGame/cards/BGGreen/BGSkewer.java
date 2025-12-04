@@ -1,9 +1,9 @@
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.actions.BGSkewerAction;
-import BoardGame.actions.BGXCostCardAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGSilent;
+import CoopBoardGame.actions.BGSkewerAction;
+import CoopBoardGame.actions.BGXCostCardAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGSilent;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGSkewer extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGSkewer"
+        "CoopBoardGame:BGSkewer"
     );
     public static final String ID = "BGSkewer";
 

@@ -1,8 +1,8 @@
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGSilent;
-import BoardGame.powers.BGAThousandCutsPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGSilent;
+import CoopBoardGame.powers.BGAThousandCutsPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGAThousandCuts extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGAThousandCuts"
+        "CoopBoardGame:BGAThousandCuts"
     );
     public static final String ID = "BGAThousandCuts";
 

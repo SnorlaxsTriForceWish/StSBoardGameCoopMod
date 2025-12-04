@@ -1,4 +1,4 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -22,7 +22,7 @@ public class BGGainBlockIfShivAction extends AbstractGameAction {
     }
 
     public void update() {
-        AbstractRelic shivs = AbstractDungeon.player.getRelic("BoardGame:BGShivs");
+        AbstractRelic shivs = AbstractDungeon.player.getRelic("CoopBoardGame:BGShivs");
         if (shivs != null) {
             if (shivs.counter > 0) {
                 AbstractDungeon.actionManager.addToTop(

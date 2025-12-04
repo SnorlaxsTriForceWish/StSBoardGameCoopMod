@@ -1,7 +1,7 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.cards.BGRed.BGWhirlwind;
-import BoardGame.orbs.BGLightning;
+import CoopBoardGame.cards.BGRed.BGWhirlwind;
+import CoopBoardGame.orbs.BGLightning;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;

@@ -1,10 +1,10 @@
 //TODO: currently, copied cards are played after the original card (VG) instead of before the original card (BG)
 //TODO: if Doppelganger is forced to copy Burst via e.g. Havoc, is Doppelganger Unplayable or does it merely have no effect?
 
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGSilent;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGSilent;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;

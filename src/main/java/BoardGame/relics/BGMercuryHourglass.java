@@ -1,8 +1,8 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.actions.BGActivateDieAbilityAction;
-import BoardGame.powers.NilrysCodexCompatible;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.actions.BGActivateDieAbilityAction;
+import CoopBoardGame.powers.NilrysCodexCompatible;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;

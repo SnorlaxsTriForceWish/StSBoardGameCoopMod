@@ -1,11 +1,11 @@
-package BoardGame.monsters.bgbeyond;
+package CoopBoardGame.monsters.bgbeyond;
 
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.ascensionLevel;
 
-import BoardGame.cards.BGStatus.BGBurn;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
-import BoardGame.powers.BGIntangiblePower;
+import CoopBoardGame.cards.BGStatus.BGBurn;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.powers.BGIntangiblePower;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;

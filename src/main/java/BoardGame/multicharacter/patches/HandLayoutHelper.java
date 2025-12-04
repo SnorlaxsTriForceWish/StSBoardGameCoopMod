@@ -1,8 +1,8 @@
-package BoardGame.multicharacter.patches;
+package CoopBoardGame.multicharacter.patches;
 
-import BoardGame.multicharacter.MultiCharacter;
-import BoardGame.multicharacter.MultiCreature;
-import BoardGame.multicharacter.grid.GridBackground;
+import CoopBoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.multicharacter.MultiCreature;
+import CoopBoardGame.multicharacter.grid.GridBackground;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;

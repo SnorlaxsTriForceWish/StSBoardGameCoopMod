@@ -1,17 +1,17 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import static BoardGame.BoardGame.makeRelicOutlinePath;
-import static BoardGame.BoardGame.makeRelicPath;
+import static CoopBoardGame.CoopBoardGame.makeRelicOutlinePath;
+import static CoopBoardGame.CoopBoardGame.makeRelicPath;
 
-import BoardGame.BoardGame;
-import BoardGame.actions.BGActivateDieAbilityAction;
-import BoardGame.actions.BGCheckEndPlayerStartTurnPhaseAction;
-import BoardGame.cards.BGColorless.BGShivSurrogate;
-import BoardGame.potions.BGGamblersBrew;
-import BoardGame.powers.BGTriggerAnyDieAbilityPower;
-import BoardGame.thedie.TheDie;
-import BoardGame.ui.EntropicBrewPotionButton;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.actions.BGActivateDieAbilityAction;
+import CoopBoardGame.actions.BGCheckEndPlayerStartTurnPhaseAction;
+import CoopBoardGame.cards.BGColorless.BGShivSurrogate;
+import CoopBoardGame.potions.BGGamblersBrew;
+import CoopBoardGame.powers.BGTriggerAnyDieAbilityPower;
+import CoopBoardGame.thedie.TheDie;
+import CoopBoardGame.ui.EntropicBrewPotionButton;
+import CoopBoardGame.util.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -32,7 +32,7 @@ import org.apache.logging.log4j.Logger;
 //TODO: if we roll a 6, don't allow Incense Burner to be triggered a second time
 public class BGTheDieRelic extends AbstractBGRelic implements DieControlledRelic {
 
-    public static final String ID = BoardGame.makeID("BGTheDieRelic");
+    public static final String ID = CoopBoardGame.makeID("BGTheDieRelic");
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("BGloadedDie.png"));
     private static final Texture OUTLINE = TextureLoader.getTexture(
         makeRelicOutlinePath("BGloadedDie.png")
@@ -234,7 +234,7 @@ public class BGTheDieRelic extends AbstractBGRelic implements DieControlledRelic
             // If it has been used this turn, or the player doesn't actually have the relic (i.e. it's on display in the shop room), or it's the enemy's turn
             return; // Don't do anything.
         }
-        //final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        //final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("BGTheDieRelic.onRightClick");
         addToBot((AbstractGameAction) new BGActivateDieAbilityAction(this));
     }

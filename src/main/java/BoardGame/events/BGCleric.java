@@ -1,4 +1,4 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -16,7 +16,7 @@ public class BGCleric extends AbstractImageEvent {
 
     public static final String ID = "BGThe Cleric";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGThe Cleric"
+        "CoopBoardGame:BGThe Cleric"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

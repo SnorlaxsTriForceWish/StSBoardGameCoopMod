@@ -1,6 +1,6 @@
-package BoardGame.damagemodifiers;
+package CoopBoardGame.damagemodifiers;
 
-import BoardGame.BoardGame;
+import CoopBoardGame.CoopBoardGame;
 import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.damagemods.AbstractDamageModifier;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 public class DamageModBGWeak extends AbstractDamageModifier {
 
-    public static final String ID = BoardGame.makeID("BGWeakDamage");
+    public static final String ID = CoopBoardGame.makeID("BGWeakDamage");
     public final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
     TooltipInfo leechTooltip = null;
@@ -20,7 +20,7 @@ public class DamageModBGWeak extends AbstractDamageModifier {
     public DamageModBGWeak() {}
 
     public int onAttackToChangeDamage(DamageInfo info, int damageAmount, AbstractCreature target) {
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         logger.info("DamageModBGWeak: onAttackToChangeDamage");
         if (target.hasPower("BGVulnerable")) {
             logger.info("get " + damageAmount + ", return same (vuln)");

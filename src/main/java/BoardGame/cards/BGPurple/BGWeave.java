@@ -1,8 +1,8 @@
-package BoardGame.cards.BGPurple;
+package CoopBoardGame.cards.BGPurple;
 
-import BoardGame.actions.BGPlayCardFromDiscardPileAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGWatcher;
+import CoopBoardGame.actions.BGPlayCardFromDiscardPileAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGWatcher;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -25,7 +25,7 @@ import javassist.CtBehavior;
 public class BGWeave extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGWeave"
+        "CoopBoardGame:BGWeave"
     );
     public static final String ID = "BGWeave";
 
@@ -112,7 +112,7 @@ public class BGWeave extends AbstractBGCard {
         public static SpireReturn<Void> Insert(@ByRef AbstractCard[] ___c) {
             if (___c[0] instanceof BGWeave) {
                 ((BGWeave) ___c[0]).triggerOnScryDiscard();
-                BoardGame.BoardGame.logger.info(
+                CoopBoardGame.CoopBoardGame.logger.info(
                     "Discarded BGWeave during Scry, setting card reference to null"
                 );
                 ___c[0] = null; //stop card from going to discard -- it messes with the limbo/autoplay stuff we just set up
@@ -154,11 +154,11 @@ public class BGWeave extends AbstractBGCard {
                             .getClassName()
                             .equals("com.megacrit.cardcrawl.actions.utility.ScryAction")
                     ) {
-                        //BoardGame.BoardGame.logger.info("Just called moveToDiscardPile(null), but ScryAction was in the stack trace as expected, so we're failing silently");
+                        //CoopBoardGame.CoopBoardGame.logger.info("Just called moveToDiscardPile(null), but ScryAction was in the stack trace as expected, so we're failing silently");
                         return SpireReturn.Return();
                     }
                 }
-                BoardGame.BoardGame.logger.warn(
+                CoopBoardGame.CoopBoardGame.logger.warn(
                     "Just called moveToDiscardPile(null), and ScryAction was NOT in the stack trace. NullPointerException incoming!"
                 );
             }

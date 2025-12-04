@@ -1,6 +1,6 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.curses.Doubt;
@@ -20,12 +20,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class BGMindBloom
-    extends MindBloom { //game is hardcoded to check for MindBloom when completing event
+public class BGMindBloom extends MindBloom {
+
+    //game is hardcoded to check for MindBloom when completing event
 
     public static final String ID = "BGMindBloom";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGMindBloom"
+        "CoopBoardGame:BGMindBloom"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

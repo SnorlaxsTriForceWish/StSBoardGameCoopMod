@@ -1,6 +1,6 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;

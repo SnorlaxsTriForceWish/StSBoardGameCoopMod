@@ -1,11 +1,11 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.actions.BGActivateDieAbilityAction;
-import BoardGame.actions.BGChooseOneAttackAction;
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.cards.BGColorless.BGGremlinHornDrawACard;
-import BoardGame.cards.BGColorless.BGGremlinHornGainEnergy;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.actions.BGActivateDieAbilityAction;
+import CoopBoardGame.actions.BGChooseOneAttackAction;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.cards.BGColorless.BGGremlinHornDrawACard;
+import CoopBoardGame.cards.BGColorless.BGGremlinHornGainEnergy;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;

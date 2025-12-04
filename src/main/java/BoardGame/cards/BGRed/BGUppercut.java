@@ -1,9 +1,9 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
-import BoardGame.powers.BGVulnerablePower;
-import BoardGame.powers.BGWeakPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
+import CoopBoardGame.powers.BGVulnerablePower;
+import CoopBoardGame.powers.BGWeakPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -19,7 +19,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGUppercut extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGUppercut"
+        "CoopBoardGame:BGUppercut"
     );
     public static final String ID = "BGUppercut";
 

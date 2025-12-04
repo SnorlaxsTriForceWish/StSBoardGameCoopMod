@@ -1,7 +1,7 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.BoardGame;
-import BoardGame.multicharacter.patches.AbstractDungeonMonsterPatches;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.multicharacter.patches.AbstractDungeonMonsterPatches;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;
@@ -32,7 +32,7 @@ public class BGPoisonPower extends AbstractBGPower {
 
     private static final int MAX_POISON_TOKENS = 30;
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGPoison"
+        "CoopBoardGame:BGPoison"
     );
 
     public static final String NAME = powerStrings.NAME;
@@ -102,20 +102,20 @@ public class BGPoisonPower extends AbstractBGPower {
                 }
             }
         }
-        //BoardGame.BoardGame.logger.info("Current total: "+total);
+        //CoopBoardGame.CoopBoardGame.logger.info("Current total: "+total);
         //        if(total>30){
-        //            BoardGame.BoardGame.logger.info("Total is >30; something's wrong!");
+        //            CoopBoardGame.CoopBoardGame.logger.info("Total is >30; something's wrong!");
         //        }
         //TODO: if max<0, logger debug message
         int maximumAllowedPoisonOnCurrentEnemy = Math.max(0, MAX_POISON_TOKENS - total);
-        //        BoardGame.BoardGame.logger.info("Target poison stacks: "+this.amount);
-        //        BoardGame.BoardGame.logger.info("Remaining tokens: "+maximumAllowedPoisonOnCurrentEnemy);
+        //        CoopBoardGame.CoopBoardGame.logger.info("Target poison stacks: "+this.amount);
+        //        CoopBoardGame.CoopBoardGame.logger.info("Remaining tokens: "+maximumAllowedPoisonOnCurrentEnemy);
 
         if (this.amount > maximumAllowedPoisonOnCurrentEnemy) {
-            //BoardGame.BoardGame.logger.info("Out of poison tokens, cap to " + maximumAllowedPoisonOnCurrentEnemy);
+            //CoopBoardGame.CoopBoardGame.logger.info("Out of poison tokens, cap to " + maximumAllowedPoisonOnCurrentEnemy);
             this.amount = maximumAllowedPoisonOnCurrentEnemy;
-            if (!BoardGame.alreadyShowedMaxPoisonWarning) {
-                BoardGame.alreadyShowedMaxPoisonWarning = true;
+            if (!CoopBoardGame.alreadyShowedMaxPoisonWarning) {
+                CoopBoardGame.alreadyShowedMaxPoisonWarning = true;
                 //TODO: localization
                 AbstractDungeon.effectList.add(
                     new ThoughtBubble(
@@ -130,12 +130,12 @@ public class BGPoisonPower extends AbstractBGPower {
         }
         if (this.amount <= 0) {
             //TODO: for reasons we don't yet understand, both addToBot and addToTop fail to remove a 0-stack poison here unless the poison stack already existed (has it not been registered with the powers list?)
-            //BoardGame.BoardGame.logger.info("Amount is <0, attempt to remove poison");
+            //CoopBoardGame.CoopBoardGame.logger.info("Amount is <0, attempt to remove poison");
             addToBot(
                 (AbstractGameAction) new RemoveSpecificPowerAction(this.owner, this.source, this)
             );
         }
-        //BoardGame.BoardGame.logger.info("Final amount: "+this.amount);
+        //CoopBoardGame.CoopBoardGame.logger.info("Final amount: "+this.amount);
     }
 
     public void proc() {

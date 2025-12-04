@@ -1,7 +1,7 @@
-package BoardGame.cards.BGCurse;
+package CoopBoardGame.cards.BGCurse;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGCurse;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGCurse;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -19,7 +19,7 @@ public class BGParasite extends AbstractBGCard {
 
     public static final String ID = "BGParasite";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGParasite"
+        "CoopBoardGame:BGParasite"
     );
 
     public BGParasite() {

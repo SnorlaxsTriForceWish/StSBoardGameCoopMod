@@ -1,4 +1,4 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,7 +14,7 @@ public class FakeMonsterRoomEvent extends AbstractEvent {
 
     public static final String ID = "FakeMonsterRoomEvent";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:FakeMonsterRoomEvent"
+        "CoopBoardGame:FakeMonsterRoomEvent"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

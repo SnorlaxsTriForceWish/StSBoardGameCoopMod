@@ -1,9 +1,9 @@
-package BoardGame.cards.BGBlue;
+package CoopBoardGame.cards.BGBlue;
 
-import BoardGame.actions.BGChannelAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGDefect;
-import BoardGame.orbs.BGLightning;
+import CoopBoardGame.actions.BGChannelAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGDefect;
+import CoopBoardGame.orbs.BGLightning;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -18,7 +18,7 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 public class BGBallLightning extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGBallLightning"
+        "CoopBoardGame:BGBallLightning"
     );
     public static final String ID = "BGBallLightning";
 

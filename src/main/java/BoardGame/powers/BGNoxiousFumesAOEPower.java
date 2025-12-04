@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -13,7 +13,7 @@ public class BGNoxiousFumesAOEPower extends AbstractBGPower {
     public static final String POWER_ID = "BGNoxiousFumesAOE";
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGNoxiousFumes"
+        "CoopBoardGame:BGNoxiousFumes"
     );
 
     public static final String NAME = powerStrings.NAME;

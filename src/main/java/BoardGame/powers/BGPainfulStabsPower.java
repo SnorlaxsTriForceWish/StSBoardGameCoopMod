@@ -1,8 +1,8 @@
 //TODO: it should be possible to use the Amount field to disable Painful Stabs, rather than removing it and adding it again (which is visually noisy)
 
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.cards.BGStatus.BGDazed;
+import CoopBoardGame.cards.BGStatus.BGDazed;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 public class BGPainfulStabsPower extends AbstractBGPower {
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGPainful Stabs"
+        "CoopBoardGame:BGPainful Stabs"
     );
     public static final String POWER_ID = "BGPainful Stabs";
     public static final String NAME = powerStrings.NAME;

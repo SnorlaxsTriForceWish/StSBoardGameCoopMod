@@ -1,6 +1,6 @@
-//package BoardGame.multicharacter;
+//package CoopBoardGame.multicharacter;
 //
-//import BoardGame.characters.AbstractBGCharacter;
+//import CoopBoardGame.characters.AbstractBGCharacter;
 //import com.evacipated.cardcrawl.modthespire.lib.LineFinder;
 //import com.evacipated.cardcrawl.modthespire.lib.Matcher;
 //import com.evacipated.cardcrawl.modthespire.lib.SpireInsertLocator;
@@ -40,7 +40,7 @@
 //}
 //
 //
-///* Location:              C:\Spire dev\BoardGame.jar!\BoardGame\multicharacter\StartOfTurnPatches.class
+///* Location:              C:\Spire dev\CoopBoardGame.jar!\CoopBoardGame\multicharacter\StartOfTurnPatches.class
 // * Java compiler version: 8 (52.0)
 // * JD-Core Version:       1.1.3
 // */

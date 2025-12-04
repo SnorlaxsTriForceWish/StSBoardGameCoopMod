@@ -1,6 +1,6 @@
-package BoardGame.icons;
+package CoopBoardGame.icons;
 
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.util.TextureLoader;
 import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.icons.AbstractCustomIcon;
 import java.util.ArrayList;
@@ -8,11 +8,11 @@ import java.util.List;
 
 public class WeakIcon extends AbstractCustomIcon {
 
-    public static final String ID = "BoardGame:Weak"; //reminder: "Icon" is automatically added
+    public static final String ID = "CoopBoardGame:Weak"; //reminder: "Icon" is automatically added
     private static WeakIcon singleton;
 
     public WeakIcon() {
-        super(ID, TextureLoader.getTexture("BoardGameResources/images/icons/weak.png"));
+        super(ID, TextureLoader.getTexture("CoopBoardGameResources/images/icons/weak.png"));
     }
 
     public static WeakIcon get() {
@@ -26,8 +26,8 @@ public class WeakIcon extends AbstractCustomIcon {
         List<TooltipInfo> list = new ArrayList<>();
         list.add(
             new TooltipInfo(
-                "[BoardGame:WeakIcon] Weak",
-                "Deal -1 damage on each [BoardGame:HitIcon] in the next Attack, then remove a [BoardGame:WeakIcon] token."
+                "[CoopBoardGame:WeakIcon] Weak",
+                "Deal -1 damage on each [CoopBoardGame:HitIcon] in the next Attack, then remove a [CoopBoardGame:WeakIcon] token."
             )
         );
         return list;

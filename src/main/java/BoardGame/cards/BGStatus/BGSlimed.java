@@ -1,8 +1,8 @@
-package BoardGame.cards.BGStatus;
+package CoopBoardGame.cards.BGStatus;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.cards.CardDisappearsOnExhaust;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.cards.CardDisappearsOnExhaust;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;

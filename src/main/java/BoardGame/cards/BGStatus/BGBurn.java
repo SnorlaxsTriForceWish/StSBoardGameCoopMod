@@ -1,8 +1,8 @@
-package BoardGame.cards.BGStatus;
+package CoopBoardGame.cards.BGStatus;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.cards.CardDisappearsOnExhaust;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.cards.CardDisappearsOnExhaust;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -19,7 +19,7 @@ public class BGBurn extends AbstractBGCard implements CardDisappearsOnExhaust {
 
     public static final String ID = "BGBurn";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGBurn"
+        "CoopBoardGame:BGBurn"
     );
 
     public BGBurn() {

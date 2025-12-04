@@ -1,18 +1,18 @@
-package BoardGame.characters;
+package CoopBoardGame.characters;
 
-import static BoardGame.BoardGame.*;
+import static CoopBoardGame.CoopBoardGame.*;
 import static com.megacrit.cardcrawl.helpers.ImageMaster.PURPLE_ORB_FLASH_VFX;
 
-import BoardGame.BoardGame;
-import BoardGame.cards.BGBlue.BGStrike_Blue;
-import BoardGame.cards.BGPurple.BGDefend_W;
-import BoardGame.cards.BGPurple.BGEruption;
-import BoardGame.cards.BGPurple.BGStrike_W;
-import BoardGame.cards.BGPurple.BGVigilance;
-import BoardGame.multicharacter.UnselectablePlayer;
-import BoardGame.relics.BGCrackedCore;
-import BoardGame.relics.BGMiracles;
-import BoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.cards.BGBlue.BGStrike_Blue;
+import CoopBoardGame.cards.BGPurple.BGDefend_W;
+import CoopBoardGame.cards.BGPurple.BGEruption;
+import CoopBoardGame.cards.BGPurple.BGStrike_W;
+import CoopBoardGame.cards.BGPurple.BGVigilance;
+import CoopBoardGame.multicharacter.UnselectablePlayer;
+import CoopBoardGame.relics.BGCrackedCore;
+import CoopBoardGame.relics.BGMiracles;
+import CoopBoardGame.relics.BGTheDieRelic;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -50,7 +50,7 @@ import org.apache.logging.log4j.Logger;
 
 public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
 
-    public static final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+    public static final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
 
     // =============== CHARACTER ENUMERATORS =================
 
@@ -68,7 +68,7 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
 
     // =============== CHARACTER ENUMERATORS  =================
     public String getMultiSwapButtonUrl() {
-        return "BoardGameResources/images/icons/watcher.png";
+        return "CoopBoardGameResources/images/icons/watcher.png";
     }
 
     // =============== BASE STATS =================
@@ -95,11 +95,11 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
     // =============== TEXTURES OF BIG ENERGY ORB ===============
 
     public static final String[] orbTextures = {
-        "BoardGameResources/images/char/theWatcher/orb/layer1.png",
-        "BoardGameResources/images/char/theWatcher/orb/layer2.png",
-        "BoardGameResources/images/char/theWatcher/orb/layer3.png",
-        "BoardGameResources/images/char/theWatcher/orb/layer4.png",
-        "BoardGameResources/images/char/theWatcher/orb/layer5.png",
+        "CoopBoardGameResources/images/char/theWatcher/orb/layer1.png",
+        "CoopBoardGameResources/images/char/theWatcher/orb/layer2.png",
+        "CoopBoardGameResources/images/char/theWatcher/orb/layer3.png",
+        "CoopBoardGameResources/images/char/theWatcher/orb/layer4.png",
+        "CoopBoardGameResources/images/char/theWatcher/orb/layer5.png",
     };
 
     // =============== /TEXTURES OF BIG ENERGY ORB/ ===============
@@ -344,7 +344,7 @@ public class BGWatcher extends AbstractBGPlayer implements UnselectablePlayer {
         this.stanceChangedThisTurn = false;
     }
 
-    //TODO: move addBlock to CustomBoardGameCreature class (which itself will require various sweeping changes to implement)
+    //TODO: move addBlock to CustomCoopBoardGameCreature class (which itself will require various sweeping changes to implement)
     public void addBlock(int blockAmount) {
         float tmp = blockAmount;
 

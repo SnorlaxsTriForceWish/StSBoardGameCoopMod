@@ -1,6 +1,6 @@
-package BoardGame.patches.dailyclimb;
+package CoopBoardGame.patches.dailyclimb;
 
-import BoardGame.characters.AbstractBGPlayer;
+import CoopBoardGame.characters.AbstractBGPlayer;
 import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;

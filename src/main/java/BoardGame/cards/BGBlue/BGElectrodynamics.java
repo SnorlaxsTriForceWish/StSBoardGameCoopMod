@@ -1,10 +1,10 @@
-package BoardGame.cards.BGBlue;
+package CoopBoardGame.cards.BGBlue;
 
-import BoardGame.actions.BGChannelAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGDefect;
-import BoardGame.orbs.BGLightning;
-import BoardGame.powers.BGElectroPower;
+import CoopBoardGame.actions.BGChannelAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGDefect;
+import CoopBoardGame.orbs.BGLightning;
+import CoopBoardGame.powers.BGElectroPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -21,7 +21,7 @@ public class BGElectrodynamics extends AbstractBGCard {
     public static final String ID = "BGElectrodynamics";
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGElectrodynamics"
+        "CoopBoardGame:BGElectrodynamics"
     );
 
     public BGElectrodynamics() {

@@ -1,7 +1,7 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.CheckAkabekoStrengthCapAction;
-import BoardGame.cards.BGRed.BGLimitBreak;
+import CoopBoardGame.actions.CheckAkabekoStrengthCapAction;
+import CoopBoardGame.cards.BGRed.BGLimitBreak;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
@@ -19,7 +19,7 @@ public class BGAkabekoPower extends AbstractBGPower {
 
     public static final String POWER_ID = "BGAkabeko";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:Akabeko"
+        "CoopBoardGame:Akabeko"
     );
 
     public boolean gainedStrengthSuccessfully = true;

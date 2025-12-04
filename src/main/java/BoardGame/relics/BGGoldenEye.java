@@ -1,7 +1,7 @@
 //TODO: technically we're not supposed to be able to use this before relicroll is locked in
 //TODO: don't flash relic if draw pile is empty
 
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;

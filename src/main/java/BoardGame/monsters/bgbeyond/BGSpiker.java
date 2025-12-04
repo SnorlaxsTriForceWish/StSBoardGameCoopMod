@@ -1,11 +1,11 @@
-package BoardGame.monsters.bgbeyond;
+package CoopBoardGame.monsters.bgbeyond;
 
-import BoardGame.dungeons.BGTheBeyond;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
-import BoardGame.monsters.DieControlledMoves;
-import BoardGame.powers.BGSpikerPower;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.dungeons.BGTheBeyond;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.monsters.DieControlledMoves;
+import CoopBoardGame.powers.BGSpikerPower;
+import CoopBoardGame.thedie.TheDie;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -165,7 +165,7 @@ public class BGSpiker extends AbstractBGMonster implements DieControlledMoves, B
     //as of latest discussion, spiker DOES reflect damage IF combat isn't over
     public void die() {
         //BGSpikerPowerProcced won't activate if the player's attack also ends combat, so check here
-        AbstractPower p = this.getPower("BoardGame:BGSpikerProcced");
+        AbstractPower p = this.getPower("CoopBoardGame:BGSpikerProcced");
         if (p != null) {
             addToBot(
                 (AbstractGameAction) new DamageAction(

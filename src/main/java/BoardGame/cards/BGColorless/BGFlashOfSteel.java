@@ -1,7 +1,7 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGFlashOfSteel extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGFlash of Steel"
+        "CoopBoardGame:BGFlash of Steel"
     );
     public static final String ID = "BGFlash of Steel";
 

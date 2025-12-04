@@ -1,15 +1,15 @@
-package BoardGame.neow;
+package CoopBoardGame.neow;
 
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.player;
 
-import BoardGame.characters.BGDefect;
-import BoardGame.characters.BGIronclad;
-import BoardGame.characters.BGSilent;
-import BoardGame.characters.BGWatcher;
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.multicharacter.MultiCharacter;
-import BoardGame.multicharacter.MultiCharacterSelectScreen;
-import BoardGame.patches.Ascension259Patch;
+import CoopBoardGame.characters.BGDefect;
+import CoopBoardGame.characters.BGIronclad;
+import CoopBoardGame.characters.BGSilent;
+import CoopBoardGame.characters.BGWatcher;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.multicharacter.MultiCharacterSelectScreen;
+import CoopBoardGame.patches.Ascension259Patch;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.*;
@@ -62,7 +62,7 @@ public class BGNeowQuickStart {
     };
 
     private static final CharacterStrings extraStrings =
-        CardCrawlGame.languagePack.getCharacterString("BoardGame:BGNeow Reward");
+        CardCrawlGame.languagePack.getCharacterString("CoopBoardGame:BGNeow Reward");
     public static final String[] EXTRA = extraStrings.TEXT;
 
     public static void setRollTheDieButtons(BGNeowEvent event) {

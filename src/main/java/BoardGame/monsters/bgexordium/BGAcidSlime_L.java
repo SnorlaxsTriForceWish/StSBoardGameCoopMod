@@ -1,14 +1,14 @@
-package BoardGame.monsters.bgexordium;
+package CoopBoardGame.monsters.bgexordium;
 
-import BoardGame.BoardGame;
-import BoardGame.cards.BGStatus.BGDazed;
-import BoardGame.cards.BGStatus.BGSlimed;
-import BoardGame.dungeons.BGExordium;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
-import BoardGame.monsters.DieControlledMoves;
-import BoardGame.powers.BGWeakPower;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.cards.BGStatus.BGDazed;
+import CoopBoardGame.cards.BGStatus.BGSlimed;
+import CoopBoardGame.dungeons.BGExordium;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.monsters.DieControlledMoves;
+import CoopBoardGame.powers.BGWeakPower;
+import CoopBoardGame.thedie.TheDie;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -159,7 +159,8 @@ public class BGAcidSlime_L extends AbstractBGMonster implements BGDamageIcons, D
                     (AbstractGameAction) new RollMoveAction(this)
                 );
                 break;
-            case 3: { //summon
+            case 3: {
+                //summon
                 AbstractDungeon.actionManager.addToBottom(
                     (AbstractGameAction) new AnimateShakeAction((AbstractCreature) this, 1.0F, 0.1F)
                 );
@@ -301,7 +302,8 @@ public class BGAcidSlime_L extends AbstractBGMonster implements BGDamageIcons, D
                     (AbstractGameAction) new SetMoveAction(this, "Summon", (byte) 8, Intent.UNKNOWN)
                 );
                 break;
-            case 8: { //summon
+            case 8: {
+                //summon
                 AbstractDungeon.actionManager.addToBottom(
                     (AbstractGameAction) new AnimateShakeAction((AbstractCreature) this, 1.0F, 0.1F)
                 );
@@ -365,7 +367,7 @@ public class BGAcidSlime_L extends AbstractBGMonster implements BGDamageIcons, D
             return;
         }
 
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("BGAcidSlime_M: TheDie "+ TheDie.monsterRoll);
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);

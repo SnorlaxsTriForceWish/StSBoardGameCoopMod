@@ -1,7 +1,7 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -20,7 +20,7 @@ import com.megacrit.cardcrawl.vfx.combat.MindblastEffect;
 public class BGMindBlast extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGMind Blast"
+        "CoopBoardGame:BGMind Blast"
     );
     public static final String ID = "BGMind Blast";
 

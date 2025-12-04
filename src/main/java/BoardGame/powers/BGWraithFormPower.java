@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.relics.BGTheDieRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGWraithFormPower extends AbstractBGPower {
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGWraithFormPower"
+        "CoopBoardGame:BGWraithFormPower"
     );
     public static final String POWER_ID = "BGWraithFormPower";
     public static final String NAME = powerStrings.NAME;

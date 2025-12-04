@@ -1,4 +1,4 @@
-package BoardGame.cards;
+package CoopBoardGame.cards;
 
 import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.*;

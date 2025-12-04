@@ -1,10 +1,16 @@
-package BoardGame.multicharacter;
+package CoopBoardGame.multicharacter;
 
-import java.util.ArrayList;
+import static imgui.extension.texteditor.flag.TextEditorPaletteIndex.String;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.cards.BGRed.BGStrike_Red;
+import CoopBoardGame.characters.AbstractBGPlayer;
+import CoopBoardGame.characters.BGIronclad;
+import CoopBoardGame.multicharacter.patches.AbstractScenePatches;
+import CoopBoardGame.multicharacter.patches.ContextPatches;
+import CoopBoardGame.multicharacter.patches.HandLayoutHelper;
+import CoopBoardGame.relics.BGBurningBlood;
+import CoopBoardGame.relics.BGTheDieRelic;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -30,18 +36,9 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
-
-import BoardGame.BoardGame;
-import BoardGame.cards.BGRed.BGStrike_Red;
-import BoardGame.characters.AbstractBGPlayer;
-import BoardGame.characters.BGIronclad;
-import BoardGame.multicharacter.patches.AbstractScenePatches;
-import BoardGame.multicharacter.patches.ContextPatches;
-import BoardGame.multicharacter.patches.HandLayoutHelper;
-import BoardGame.relics.BGBurningBlood;
-import BoardGame.relics.BGTheDieRelic;
-
-import static imgui.extension.texteditor.flag.TextEditorPaletteIndex.String;
+import java.util.ArrayList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 //TODO: oops we forgot Watcher's add-miracle-to-hand-at-start-of-combat relic
 
@@ -59,10 +56,10 @@ public class MultiCharacter extends AbstractBGPlayer {
         @SpireEnum
         public static AbstractPlayer.PlayerClass BG_MULTICHARACTER;
 
-        @SpireEnum(name = "BG_BoardGame_COLOR")
+        @SpireEnum(name = "BG_CoopBoardGame_COLOR")
         public static AbstractCard.CardColor CARD_COLOR;
 
-        @SpireEnum(name = "BG_BoardGame_COLOR")
+        @SpireEnum(name = "BG_CoopBoardGame_COLOR")
         public static CardLibrary.LibraryType LIBRARY_COLOR;
     }
 
@@ -98,7 +95,7 @@ public class MultiCharacter extends AbstractBGPlayer {
 
     public static final int ORB_SLOTS = 0;
 
-    private static final String ID = BoardGame.makeID("BGMultiCharacter");
+    private static final String ID = CoopBoardGame.makeID("BGMultiCharacter");
 
     private static final CharacterStrings characterStrings =
         CardCrawlGame.languagePack.getCharacterString(ID);
@@ -108,17 +105,17 @@ public class MultiCharacter extends AbstractBGPlayer {
     private static final String[] TEXT = characterStrings.TEXT;
 
     public static final String[] orbTextures = new String[] {
-        "BoardGameResources/images/char/defaultCharacter/orb/layer1.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer2.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer3.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer4.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer5.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer6.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer1d.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer2d.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer3d.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer4d.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer5d.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer1.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer2.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer3.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer4.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer5.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer6.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer1d.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer2d.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer3d.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer4d.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer5d.png",
     };
 
     protected Color blockTextColor;
@@ -130,11 +127,11 @@ public class MultiCharacter extends AbstractBGPlayer {
             name,
             setClass,
             orbTextures,
-            "BoardGameResources/images/char/defaultCharacter/orb/vfx.png",
+            "CoopBoardGameResources/images/char/defaultCharacter/orb/vfx.png",
             null,
             ""
         );
-        if (BoardGame.ENABLE_TEST_FEATURES) TEXT[0] = TEXT[3];
+        if (CoopBoardGame.ENABLE_TEST_FEATURES) TEXT[0] = TEXT[3];
         this.blockTextColor = new Color(0.9F, 0.9F, 0.9F, 0.0F);
         this.blockScale = 1.0F;
         initializeClass(
@@ -208,15 +205,15 @@ public class MultiCharacter extends AbstractBGPlayer {
         retVal.add(BGTheDieRelic.ID);
         retVal.add(BGBurningBlood.ID);
         retVal.add("BGRing of the Snake");
-        retVal.add("BoardGame:BGShivs");
+        retVal.add("CoopBoardGame:BGShivs");
         retVal.add("BGCrackedCore");
-        retVal.add("BoardGame:BGMiracles");
+        retVal.add("CoopBoardGame:BGMiracles");
         UnlockTracker.markRelicAsSeen(BGTheDieRelic.ID);
         UnlockTracker.markRelicAsSeen(BGBurningBlood.ID);
         UnlockTracker.markRelicAsSeen("BGRing of the Snake");
-        UnlockTracker.markRelicAsSeen("BoardGame:BGShivs");
+        UnlockTracker.markRelicAsSeen("CoopBoardGame:BGShivs");
         UnlockTracker.markRelicAsSeen("BGCrackedCore");
-        UnlockTracker.markRelicAsSeen("BoardGame:BGMiracles");
+        UnlockTracker.markRelicAsSeen("CoopBoardGame:BGMiracles");
         return retVal;
     }
 
@@ -231,7 +228,7 @@ public class MultiCharacter extends AbstractBGPlayer {
         if (ModHelper.isModEnabled("ControlledChaos")) relics.add("Frozen Eye");
         int index = 0;
 
-        //TODO: "if(BoardGame.USE_BoardGame_RULES)" or inverse
+        //TODO: "if(CoopBoardGame.USE_CoopBoardGame_RULES)" or inverse
         for (String s : relics) {
             if (s.equals(BGTheDieRelic.ID)) {
                 RelicLibrary.getRelic(s)
@@ -265,7 +262,7 @@ public class MultiCharacter extends AbstractBGPlayer {
     }
 
     public Color getCardTrailColor() {
-        return BoardGame.BG_IRONCLAD_RED;
+        return CoopBoardGame.BG_IRONCLAD_RED;
     }
 
     public BitmapFont getEnergyNumFont() {
@@ -289,11 +286,11 @@ public class MultiCharacter extends AbstractBGPlayer {
     }
 
     public Color getCardRenderColor() {
-        return BoardGame.BG_IRONCLAD_RED;
+        return CoopBoardGame.BG_IRONCLAD_RED;
     }
 
     public Color getSlashAttackColor() {
-        return BoardGame.BG_IRONCLAD_RED;
+        return CoopBoardGame.BG_IRONCLAD_RED;
     }
 
     public AbstractGameAction.AttackEffect[] getSpireHeartSlashEffect() {
@@ -444,7 +441,7 @@ public class MultiCharacter extends AbstractBGPlayer {
                 i >= handLayoutHelper.currentHand;
                 i -= 1
             ) {
-                //BoardGame.logger.info("???   " + i + "   " + i % subcharacters.size());
+                //CoopBoardGame.logger.info("???   " + i + "   " + i % subcharacters.size());
                 AbstractPlayer c = subcharacters.get(i % subcharacters.size());
                 ContextPatches.pushPlayerContext(c);
                 c.renderHand(sb);

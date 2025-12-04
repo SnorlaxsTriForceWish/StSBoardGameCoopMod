@@ -1,7 +1,7 @@
-package BoardGame.multicharacter.patches.screens;
+package CoopBoardGame.multicharacter.patches.screens;
 
-import BoardGame.multicharacter.MultiCharacter;
-import BoardGame.multicharacter.patches.ContextPatches;
+import CoopBoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.multicharacter.patches.ContextPatches;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;

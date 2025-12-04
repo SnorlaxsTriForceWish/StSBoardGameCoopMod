@@ -1,9 +1,9 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import static BoardGame.BoardGame.makePowerPath;
+import static CoopBoardGame.CoopBoardGame.makePowerPath;
 
-import BoardGame.BoardGame;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.util.TextureLoader;
 import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -24,7 +24,7 @@ public class CommonPower extends AbstractBGPower implements CloneablePowerInterf
 
     public AbstractCreature source;
 
-    public static final String POWER_ID = BoardGame.makeID("CommonPower");
+    public static final String POWER_ID = CoopBoardGame.makeID("CommonPower");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
         POWER_ID
     );

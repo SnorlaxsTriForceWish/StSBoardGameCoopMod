@@ -1,8 +1,8 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
-import BoardGame.powers.BGVulnerablePower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
+import CoopBoardGame.powers.BGVulnerablePower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -22,7 +22,7 @@ public class BGBash extends AbstractBGCard {
 
     public static final String ID = "BGBash";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:Bash"
+        "CoopBoardGame:Bash"
     );
 
     public BGBash() {
@@ -43,7 +43,7 @@ public class BGBash extends AbstractBGCard {
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        BoardGame.BoardGame.logger.info(
+        CoopBoardGame.CoopBoardGame.logger.info(
             "Current act number is " + AbstractDungeon.actNum + "    !!!!!!!!!!!!!!!"
         );
         if (Settings.isDebug) {

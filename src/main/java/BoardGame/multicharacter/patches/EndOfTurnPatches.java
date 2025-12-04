@@ -1,6 +1,6 @@
-package BoardGame.multicharacter.patches;
+package CoopBoardGame.multicharacter.patches;
 
-import BoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.multicharacter.MultiCharacter;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.actions.GameActionManager;

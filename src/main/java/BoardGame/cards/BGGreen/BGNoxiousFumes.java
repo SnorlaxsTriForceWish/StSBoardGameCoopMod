@@ -1,9 +1,9 @@
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGSilent;
-import BoardGame.powers.BGNoxiousFumesAOEPower;
-import BoardGame.powers.BGNoxiousFumesPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGSilent;
+import CoopBoardGame.powers.BGNoxiousFumesAOEPower;
+import CoopBoardGame.powers.BGNoxiousFumesPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -21,7 +21,7 @@ import org.apache.logging.log4j.Logger;
 public class BGNoxiousFumes extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGNoxiousFumes"
+        "CoopBoardGame:BGNoxiousFumes"
     );
     public static final String ID = "BGNoxiousFumes";
 
@@ -56,7 +56,7 @@ public class BGNoxiousFumes extends AbstractBGCard {
         );
         else if (
             !(AbstractDungeon.getCurrRoom() instanceof MonsterRoom &&
-                AbstractDungeon.lastCombatMetricKey.equals("BoardGame:Shield and Spear"))
+                AbstractDungeon.lastCombatMetricKey.equals("CoopBoardGame:Shield and Spear"))
         ) addToBot(
             (AbstractGameAction) new ApplyPowerAction(
                 (AbstractCreature) p,

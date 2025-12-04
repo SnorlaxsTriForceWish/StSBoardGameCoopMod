@@ -1,10 +1,10 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
 import static com.megacrit.cardcrawl.cards.AbstractCard.CardType.ATTACK;
 import static com.megacrit.cardcrawl.cards.AbstractCard.CardType.SKILL;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.screen.TargetSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.NewQueueCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;

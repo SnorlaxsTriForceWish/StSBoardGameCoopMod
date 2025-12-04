@@ -1,7 +1,7 @@
-package BoardGame.cards.BGCurse;
+package CoopBoardGame.cards.BGCurse;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGCurse;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGCurse;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;

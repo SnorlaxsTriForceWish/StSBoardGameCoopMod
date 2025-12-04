@@ -1,8 +1,8 @@
-package BoardGame.monsters.bgexordium;
+package CoopBoardGame.monsters.bgexordium;
 
-import BoardGame.cards.BGStatus.BGBurn;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.cards.BGStatus.BGBurn;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;

@@ -1,6 +1,6 @@
-package BoardGame.multicharacter;
+package CoopBoardGame.multicharacter;
 
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.util.TextureLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -146,7 +146,7 @@ public class MultiCharacterSwapButton {
     private int unlocksRemaining;
 }
 
-/* Location:              C:\Spire dev\BoardGame.jar!\BoardGame\multicharacter\MultiCharacterSwapButton.class
+/* Location:              C:\Spire dev\CoopBoardGame.jar!\CoopBoardGame\multicharacter\MultiCharacterSwapButton.class
  * Java compiler version: 8 (52.0)
  * JD-Core Version:       1.1.3
  */

@@ -1,7 +1,7 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.BGForcedWaitAction;
-import BoardGame.actions.BGSurroundedAction;
+import CoopBoardGame.actions.BGForcedWaitAction;
+import CoopBoardGame.actions.BGSurroundedAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -12,7 +12,7 @@ public class BGSurroundedPower extends AbstractBGPower {
     public static final String POWER_ID = "BGSurroundedPower";
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGSurroundedPower"
+        "CoopBoardGame:BGSurroundedPower"
     );
 
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;

@@ -1,8 +1,8 @@
-package BoardGame.cards.BGBlue;
+package CoopBoardGame.cards.BGBlue;
 
-import BoardGame.actions.BGScrapeAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGDefect;
+import CoopBoardGame.actions.BGScrapeAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGDefect;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -20,7 +20,7 @@ import com.megacrit.cardcrawl.vfx.combat.ScrapeEffect;
 public class BGScrape extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGScrape"
+        "CoopBoardGame:BGScrape"
     );
     public static final String ID = "BGScrape";
 

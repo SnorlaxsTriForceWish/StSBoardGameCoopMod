@@ -1,6 +1,6 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -15,7 +15,7 @@ public class BGGoldShrine extends AbstractImageEvent {
 
     public static final String ID = "BGGolden Shrine";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGGolden Shrine"
+        "CoopBoardGame:BGGolden Shrine"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

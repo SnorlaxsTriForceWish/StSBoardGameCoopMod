@@ -1,4 +1,4 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -18,7 +18,7 @@ public class BGUpgradeShrine extends AbstractImageEvent {
 
     public static final String ID = "BGUpgrade Shrine";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGUpgrade Shrine"
+        "CoopBoardGame:BGUpgrade Shrine"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

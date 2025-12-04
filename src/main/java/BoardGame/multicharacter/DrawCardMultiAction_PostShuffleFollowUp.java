@@ -1,7 +1,7 @@
-package BoardGame.multicharacter;
+package CoopBoardGame.multicharacter;
 
-import BoardGame.BoardGame;
-import BoardGame.multicharacter.patches.ContextPatches;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.multicharacter.patches.ContextPatches;
 import basemod.BaseMod;
 import com.badlogic.gdx.Gdx;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -41,7 +41,7 @@ public class DrawCardMultiAction_PostShuffleFollowUp extends AbstractGameAction 
     public void update() {
         int endActionCounter = 0;
         if (ContextPatches.originalBGMultiCharacter == null) {
-            BoardGame.logger.info(
+            CoopBoardGame.logger.info(
                 "WARNING: DrawCardMultiAction_PostShuffleFollowUp was updated while ContextPatches.originalBGMultiCharacter==null, time to panic!"
             );
             this.endActionWithFollowUp();

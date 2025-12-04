@@ -1,12 +1,12 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.BGCheckEndPlayerStartTurnPhaseAction;
-import BoardGame.actions.BGUpdateDieRelicPulseAction;
-import BoardGame.relics.BGDollysMirror;
-import BoardGame.relics.BGTheDieRelic;
-import BoardGame.relics.DieControlledRelic;
-import BoardGame.thedie.TheDie;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.actions.BGCheckEndPlayerStartTurnPhaseAction;
+import CoopBoardGame.actions.BGUpdateDieRelicPulseAction;
+import CoopBoardGame.relics.BGDollysMirror;
+import CoopBoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.relics.DieControlledRelic;
+import CoopBoardGame.thedie.TheDie;
+import CoopBoardGame.util.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -38,10 +38,10 @@ public class BGTriggerAnyDieAbilityPower
     public boolean doNotActivateOnRemove = false;
 
     private static final Texture tex84 = TextureLoader.getTexture(
-        "BoardGameResources/images/powers/wildcard_power84.png"
+        "CoopBoardGameResources/images/powers/wildcard_power84.png"
     );
     private static final Texture tex32 = TextureLoader.getTexture(
-        "BoardGameResources/images/powers/wildcard_power32.png"
+        "CoopBoardGameResources/images/powers/wildcard_power32.png"
     );
 
     public BGTriggerAnyDieAbilityPower(AbstractCreature owner) {

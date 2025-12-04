@@ -1,8 +1,8 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -23,7 +23,7 @@ import javassist.CtBehavior;
 public class BGSeverSoul extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGSever Soul"
+        "CoopBoardGame:BGSever Soul"
     );
     public static final String ID = "BGSever Soul";
 

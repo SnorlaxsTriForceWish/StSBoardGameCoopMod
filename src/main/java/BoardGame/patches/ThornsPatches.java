@@ -1,6 +1,6 @@
-package BoardGame.patches;
+package CoopBoardGame.patches;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -16,7 +16,7 @@ public class ThornsPatches {
 
         @SpirePostfixPatch
         public static void Bar(GameActionManager __instance) {
-            //we've already cleared most actions.  if this is BoardGame, clear damage actions too
+            //we've already cleared most actions.  if this is CoopBoardGame, clear damage actions too
             if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 for (
                     Iterator<AbstractGameAction> i = __instance.actions.iterator();

@@ -1,7 +1,7 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.cards.BGRed.BGWhirlwind;
-import BoardGame.powers.BGConjureBladePower;
+import CoopBoardGame.cards.BGRed.BGWhirlwind;
+import CoopBoardGame.powers.BGConjureBladePower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;

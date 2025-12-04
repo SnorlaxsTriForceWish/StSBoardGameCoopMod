@@ -1,6 +1,6 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.screen.OrbSelectScreen;
+import CoopBoardGame.screen.OrbSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;

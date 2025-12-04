@@ -1,6 +1,6 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.orbs.BGLightning;
+import CoopBoardGame.orbs.BGLightning;
 import basemod.BaseMod;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;

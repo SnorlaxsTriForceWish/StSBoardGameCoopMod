@@ -1,6 +1,6 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.screen.OrbSelectScreen;
+import CoopBoardGame.screen.OrbSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -61,7 +61,9 @@ public class BGMulticastAction extends AbstractGameAction {
             OrbSelectScreen.OrbSelectAction ossAction = target -> {
                 AbstractPlayer player = AbstractDungeon.player;
                 //addToTop -- reverse order
-                BoardGame.BoardGame.logger.info("BGEvokeOrbMulticastAction: slot " + target);
+                CoopBoardGame.CoopBoardGame.logger.info(
+                    "BGEvokeOrbMulticastAction: slot " + target
+                );
                 addToTop((AbstractGameAction) new BGEvokeSpecificOrbAction(target));
                 for (int i = 0; i < finalEffect - 1; i += 1) {
                     addToTop(

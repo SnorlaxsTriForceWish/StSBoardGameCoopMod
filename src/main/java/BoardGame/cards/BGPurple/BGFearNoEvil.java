@@ -1,8 +1,8 @@
-package BoardGame.cards.BGPurple;
+package CoopBoardGame.cards.BGPurple;
 
-import BoardGame.actions.BGFearNoEvilAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGWatcher;
+import CoopBoardGame.actions.BGFearNoEvilAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGWatcher;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGFearNoEvil extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGFearNoEvil"
+        "CoopBoardGame:BGFearNoEvil"
     );
     public static final String ID = "BGFearNoEvil";
 

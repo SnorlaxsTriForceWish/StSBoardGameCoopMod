@@ -1,6 +1,6 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.screen.TargetSelectScreen;
 import basemod.BaseMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import org.apache.logging.log4j.LogManager;

@@ -1,9 +1,9 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.actions.TargetSelectScreenAction;
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.characters.BGColorless;
-import BoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.actions.TargetSelectScreenAction;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.characters.BGColorless;
+import CoopBoardGame.screen.TargetSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -18,7 +18,7 @@ public class BGDuality2Damage extends AbstractBGAttackCardChoice {
 
     public static final String ID = "BGDuality2Damage";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGDuality2Damage"
+        "CoopBoardGame:BGDuality2Damage"
     );
 
     public BGDuality2Damage() {

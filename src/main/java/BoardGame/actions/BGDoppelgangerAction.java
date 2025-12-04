@@ -2,11 +2,11 @@
 
 //TODO: BGDoppelgangerAction does not yet support Miracles
 
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.cards.BGColorless.BGXCostChoice;
-import BoardGame.cards.BGGreen.BGDoppelganger;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.cards.BGColorless.BGXCostChoice;
+import CoopBoardGame.cards.BGGreen.BGDoppelganger;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -34,7 +34,7 @@ public class BGDoppelgangerAction extends BGXCostCardAction {
 
             int effectiveMaxEnergy = info.maxEnergy;
             if (info.exactEnergyCost < 0) {
-                AbstractRelic relic = AbstractDungeon.player.getRelic("BoardGame:BGMiracles");
+                AbstractRelic relic = AbstractDungeon.player.getRelic("CoopBoardGame:BGMiracles");
                 if (relic != null) {
                     effectiveMaxEnergy += relic.counter;
                 }

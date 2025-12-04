@@ -1,8 +1,8 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.BGCheckEndPlayerStartTurnPhaseAction;
-import BoardGame.relics.BGCharonsAshes;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.actions.BGCheckEndPlayerStartTurnPhaseAction;
+import CoopBoardGame.relics.BGCharonsAshes;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;

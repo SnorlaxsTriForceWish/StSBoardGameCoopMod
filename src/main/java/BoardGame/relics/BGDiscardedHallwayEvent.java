@@ -1,7 +1,7 @@
 //probably easiest to add a check to AbstractBGRelic functions
 //...preferably with some way to notify the player that BGOldCoin was drawn+discarded
 
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 

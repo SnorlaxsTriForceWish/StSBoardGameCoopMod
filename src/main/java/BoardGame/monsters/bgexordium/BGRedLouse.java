@@ -1,11 +1,11 @@
-package BoardGame.monsters.bgexordium;
+package CoopBoardGame.monsters.bgexordium;
 
-import BoardGame.BoardGame;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
-import BoardGame.monsters.DieControlledMoves;
-import BoardGame.powers.BGCurlUpPower;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.monsters.DieControlledMoves;
+import CoopBoardGame.powers.BGCurlUpPower;
+import CoopBoardGame.thedie.TheDie;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -173,7 +173,7 @@ public class BGRedLouse extends AbstractBGMonster implements BGDamageIcons, DieC
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("BGRedLouseEasy: TheDie "+ TheDie.monsterRoll);
 
         char move = '-';

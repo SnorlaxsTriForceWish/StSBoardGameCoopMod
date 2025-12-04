@@ -1,7 +1,7 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.characters.BGColorless;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -23,7 +23,7 @@ public class BGBecomeAlmighty extends AbstractBGAttackCardChoice {
 
     public static final String ID = "BGBecomeAlmighty";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGBecomeAlmighty"
+        "CoopBoardGame:BGBecomeAlmighty"
     );
 
     public BGBecomeAlmighty() {

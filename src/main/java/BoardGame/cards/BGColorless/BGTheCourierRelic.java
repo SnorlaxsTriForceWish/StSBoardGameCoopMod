@@ -1,10 +1,10 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.characters.BGColorless;
-import BoardGame.relics.BGDiscardedOldCoin;
-import BoardGame.relics.BGOldCoin;
-import BoardGame.ui.EntropicBrewCourierRelicButton;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.characters.BGColorless;
+import CoopBoardGame.relics.BGDiscardedOldCoin;
+import CoopBoardGame.relics.BGOldCoin;
+import CoopBoardGame.ui.EntropicBrewCourierRelicButton;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -20,7 +20,7 @@ public class BGTheCourierRelic extends AbstractBGAttackCardChoice {
 
     public static final String ID = "BGTheCourierRelic";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGTheCourierRelic"
+        "CoopBoardGame:BGTheCourierRelic"
     );
 
     public BGTheCourierRelic() {

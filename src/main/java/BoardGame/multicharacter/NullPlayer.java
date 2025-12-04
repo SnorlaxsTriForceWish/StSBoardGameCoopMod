@@ -1,6 +1,6 @@
-package BoardGame.multicharacter;
+package CoopBoardGame.multicharacter;
 
-import BoardGame.characters.AbstractBGPlayer;
+import CoopBoardGame.characters.AbstractBGPlayer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;

@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.cards.AbstractBGCard;
+import CoopBoardGame.cards.AbstractBGCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -17,16 +17,16 @@ import org.apache.logging.log4j.Logger;
 
 public class BGBurstPower extends AbstractBGPower {
 
-    public static final String POWER_ID = "BoardGame:BGBurstPower";
+    public static final String POWER_ID = "CoopBoardGame:BGBurstPower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGBurstPower"
+        "CoopBoardGame:BGBurstPower"
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
     public BGBurstPower(AbstractCreature owner, int amount) {
         this.name = NAME;
-        this.ID = "BoardGame:BGBurstPower";
+        this.ID = "CoopBoardGame:BGBurstPower";
         this.owner = owner;
         this.amount = amount;
         updateDescription();
@@ -112,7 +112,7 @@ public class BGBurstPower extends AbstractBGPower {
                     (AbstractGameAction) new RemoveSpecificPowerAction(
                         this.owner,
                         this.owner,
-                        "BoardGame:BGBurstPower"
+                        "CoopBoardGame:BGBurstPower"
                     )
                 );
             }
@@ -124,7 +124,7 @@ public class BGBurstPower extends AbstractBGPower {
             (AbstractGameAction) new RemoveSpecificPowerAction(
                 this.owner,
                 this.owner,
-                "BoardGame:BGBurstPower"
+                "CoopBoardGame:BGBurstPower"
             )
         );
     }

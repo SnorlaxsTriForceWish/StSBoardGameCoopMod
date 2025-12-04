@@ -1,4 +1,4 @@
-package BoardGame.multicharacter.patches;
+package CoopBoardGame.multicharacter.patches;
 
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.Soul;

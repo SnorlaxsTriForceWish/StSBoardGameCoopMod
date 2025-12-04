@@ -1,8 +1,8 @@
-package BoardGame.cards.BGPurple;
+package CoopBoardGame.cards.BGPurple;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGWatcher;
-import BoardGame.powers.BGForesightPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGWatcher;
+import CoopBoardGame.powers.BGForesightPower;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -22,7 +22,7 @@ import com.megacrit.cardcrawl.vfx.combat.GiantEyeEffect;
 public class BGForesight extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGForesight"
+        "CoopBoardGame:BGForesight"
     );
     public static final String ID = "BGForesight";
 

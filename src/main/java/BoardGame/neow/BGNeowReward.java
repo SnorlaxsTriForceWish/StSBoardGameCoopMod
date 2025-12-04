@@ -1,7 +1,7 @@
-package BoardGame.neow;
+package CoopBoardGame.neow;
 
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.patches.TransformPatch;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.patches.TransformPatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -578,7 +578,7 @@ public class BGNeowReward {
 
     private static final Logger logger = LogManager.getLogger(BGNeowReward.class.getName());
     private static final CharacterStrings characterStrings =
-        CardCrawlGame.languagePack.getCharacterString("BoardGame:BGNeow Reward");
+        CardCrawlGame.languagePack.getCharacterString("CoopBoardGame:BGNeow Reward");
     public static final String[] NAMES = characterStrings.NAMES;
     public static final String[] TEXT = characterStrings.TEXT;
     public String optionLabel;

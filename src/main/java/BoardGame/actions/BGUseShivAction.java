@@ -1,8 +1,8 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.cards.BGColorless.BGShivSurrogate;
-import BoardGame.characters.AbstractBGPlayer;
-import BoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.cards.BGColorless.BGShivSurrogate;
+import CoopBoardGame.characters.AbstractBGPlayer;
+import CoopBoardGame.screen.TargetSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -38,7 +38,7 @@ public class BGUseShivAction extends AbstractGameAction {
     }
 
     public void update() {
-        AbstractRelic relic = AbstractDungeon.player.getRelic("BoardGame:BGShivs");
+        AbstractRelic relic = AbstractDungeon.player.getRelic("CoopBoardGame:BGShivs");
         int reliccounter = 0;
 
         if (relic != null) reliccounter = relic.counter;

@@ -1,6 +1,6 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.AbstractBGMonster;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;

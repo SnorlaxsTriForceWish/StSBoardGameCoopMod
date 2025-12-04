@@ -1,6 +1,6 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -13,7 +13,7 @@ public class BGTombRedMask extends AbstractImageEvent {
 
     public static final String ID = "BGTombRedMask";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGTombRedMask"
+        "CoopBoardGame:BGTombRedMask"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

@@ -1,4 +1,4 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -12,7 +12,7 @@ public class BGBeggar extends AbstractImageEvent {
 
     public static final String ID = "BGBeggar";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGBeggar"
+        "CoopBoardGame:BGBeggar"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

@@ -1,4 +1,4 @@
-package BoardGame.stances;
+package CoopBoardGame.stances;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -73,7 +73,7 @@ public class BGWrathStance extends AbstractStance {
     public void updateDescription() {
         //TODO: localization
         this.description =
-            "+1 to your [BoardGame:HitIcon] . NL #yEnd #yof #yturn: NL Take 1 damage.";
+            "+1 to your [CoopBoardGame:HitIcon] . NL #yEnd #yof #yturn: NL Take 1 damage.";
     }
 
     public void onEnterStance() {

@@ -1,6 +1,6 @@
-package BoardGame.patches;
+package CoopBoardGame.patches;
 
-import BoardGame.characters.AbstractBGPlayer;
+import CoopBoardGame.characters.AbstractBGPlayer;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;

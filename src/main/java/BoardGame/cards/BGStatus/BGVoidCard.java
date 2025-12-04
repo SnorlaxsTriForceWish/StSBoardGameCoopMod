@@ -1,11 +1,11 @@
 //this card is not supposed to be on sale at the merchant... keep an eye out in case the fix didn't work
 
-package BoardGame.cards.BGStatus;
+package CoopBoardGame.cards.BGStatus;
 
-import BoardGame.actions.BGAttemptAutoExhaustCardAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.cards.CardDisappearsOnExhaust;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.actions.BGAttemptAutoExhaustCardAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.cards.CardDisappearsOnExhaust;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGVoidCard extends AbstractBGCard implements CardDisappearsOnExhaust {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGVoidCard"
+        "CoopBoardGame:BGVoidCard"
     );
     static final String ID = "BGVoidCard";
     static final String IMG_PATH = "status/void";

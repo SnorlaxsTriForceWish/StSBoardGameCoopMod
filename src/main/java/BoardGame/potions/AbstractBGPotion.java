@@ -1,7 +1,7 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
-import BoardGame.events.BGNloth;
-import BoardGame.events.BGTheJoust;
+import CoopBoardGame.events.BGNloth;
+import CoopBoardGame.events.BGTheJoust;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;

@@ -1,4 +1,4 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 

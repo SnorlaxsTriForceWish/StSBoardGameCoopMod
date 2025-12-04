@@ -1,4 +1,4 @@
-package BoardGame.patches.bestiary;
+package CoopBoardGame.patches.bestiary;
 
 import Bestiary.database.MonsterDatabase;
 import Bestiary.database.MonsterInfo;
@@ -29,7 +29,9 @@ public class MonsterDatabasePatches {
             InputStream in = __instance
                 .getClass()
                 .getClassLoader()
-                .getResourceAsStream("BoardGameResources/localization/eng/Bestiary-Monsters.json");
+                .getResourceAsStream(
+                    "CoopBoardGameResources/localization/eng/Bestiary-Monsters.json"
+                );
             if (in == null) {
                 System.out.println("ERROR: failed to load monsters.json (not found?)");
                 return;

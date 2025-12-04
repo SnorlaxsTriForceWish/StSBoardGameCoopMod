@@ -1,28 +1,28 @@
-package BoardGame.dungeons;
+package CoopBoardGame.dungeons;
 
-import BoardGame.cards.*;
-import BoardGame.cards.BGBlue.BGClaw;
-import BoardGame.cards.BGBlue.BGClaw2;
-import BoardGame.cards.BGCurse.*;
-import BoardGame.characters.*;
-import BoardGame.events.BGColosseum;
-import BoardGame.events.BGDeadAdventurer;
-import BoardGame.events.BGHallwayEncounter;
-import BoardGame.monsters.MonsterGroupRewardsList;
-import BoardGame.monsters.bgbeyond.BGAwakenedOne;
-import BoardGame.monsters.bgbeyond.BGDeca;
-import BoardGame.monsters.bgbeyond.BGDonu;
-import BoardGame.monsters.bgbeyond.BGTimeEater;
-import BoardGame.monsters.bgcity.BGBronzeAutomaton;
-import BoardGame.monsters.bgcity.BGChamp;
-import BoardGame.monsters.bgcity.BGTheCollector;
-import BoardGame.monsters.bgending.BGCorruptHeart;
-import BoardGame.monsters.bgexordium.BGCultist;
-import BoardGame.monsters.bgexordium.BGHexaghost;
-import BoardGame.monsters.bgexordium.BGSlimeBoss;
-import BoardGame.monsters.bgexordium.BGTheGuardian;
-import BoardGame.multicharacter.MultiCharacter;
-import BoardGame.ui.EntropicBrewPotionButton;
+import CoopBoardGame.cards.*;
+import CoopBoardGame.cards.BGBlue.BGClaw;
+import CoopBoardGame.cards.BGBlue.BGClaw2;
+import CoopBoardGame.cards.BGCurse.*;
+import CoopBoardGame.characters.*;
+import CoopBoardGame.events.BGColosseum;
+import CoopBoardGame.events.BGDeadAdventurer;
+import CoopBoardGame.events.BGHallwayEncounter;
+import CoopBoardGame.monsters.MonsterGroupRewardsList;
+import CoopBoardGame.monsters.bgbeyond.BGAwakenedOne;
+import CoopBoardGame.monsters.bgbeyond.BGDeca;
+import CoopBoardGame.monsters.bgbeyond.BGDonu;
+import CoopBoardGame.monsters.bgbeyond.BGTimeEater;
+import CoopBoardGame.monsters.bgcity.BGBronzeAutomaton;
+import CoopBoardGame.monsters.bgcity.BGChamp;
+import CoopBoardGame.monsters.bgcity.BGTheCollector;
+import CoopBoardGame.monsters.bgending.BGCorruptHeart;
+import CoopBoardGame.monsters.bgexordium.BGCultist;
+import CoopBoardGame.monsters.bgexordium.BGHexaghost;
+import CoopBoardGame.monsters.bgexordium.BGSlimeBoss;
+import CoopBoardGame.monsters.bgexordium.BGTheGuardian;
+import CoopBoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.ui.EntropicBrewPotionButton;
 import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
@@ -92,12 +92,12 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
         @SpirePrefixPatch
         public static SpireReturn<AbstractDungeon> Prefix(@ByRef String[] key, AbstractPlayer p) {
             if (p instanceof AbstractBGPlayer) {
-                if (key[0].equals("BoardGameSetupDungeon")) {
-                    //                    //logger.info("BoardGame SETUPDUNGEON DETECTED");
+                if (key[0].equals("CoopBoardGameSetupDungeon")) {
+                    //                    //logger.info("CoopBoardGame SETUPDUNGEON DETECTED");
                     //                    ArrayList<String>emptyList = new ArrayList<>();
                     //                    return SpireReturn.Return((AbstractDungeon)new BGSetupDungeon(p, emptyList));
                 } else if (key[0].equals("Exordium")) {
-                    //logger.info("BoardGame EXORDIUM DETECTED");
+                    //logger.info("CoopBoardGame EXORDIUM DETECTED");
                     //do not change the key itself.  game is hard-coded in several places to check for "Exordium"
                     ArrayList<String> emptyList = new ArrayList<>();
                     return SpireReturn.Return((AbstractDungeon) new BGExordium(p, emptyList));
@@ -131,10 +131,10 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
         ) {
             //logger.info("SAVEFILE CHECK GOES HERE "+key[0]+" "+p);
             if (p instanceof AbstractBGPlayer) {
-                if (key[0].equals("BoardGameSetupDungeon")) {
+                if (key[0].equals("CoopBoardGameSetupDungeon")) {
                     //                    return SpireReturn.Return((AbstractDungeon)new BGSetupDungeon(p, saveFile));
                 } else if (key[0].equals("Exordium")) {
-                    //logger.info("BoardGame EXORDIUM DETECTED (savefile)");
+                    //logger.info("CoopBoardGame EXORDIUM DETECTED (savefile)");
                     //do not change key.  game is hard-coded to check for "Exordium"
                     return SpireReturn.Return((AbstractDungeon) new BGExordium(p, saveFile));
                 } else if (key[0].equals("TheCity")) {
@@ -160,7 +160,7 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
             if (!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) return;
             //TODO: the correct solution here is to load the card pools when loading a savefile, which unfortunately involves saving the card pools first
             if (!initializedCardPools) {
-                logger.info("----------BoardGame mod is resetting ALL reward decks----------");
+                logger.info("----------CoopBoardGame mod is resetting ALL reward decks----------");
                 //TODO: there is an extraordinary amount of Logger spam between here and Results.  should we be concerned about things loading out of order?
                 initializedCardPools = true;
                 physicalRewardDecks.clear();
@@ -717,9 +717,9 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
             if (AbstractDungeon.player instanceof MultiCharacter) return SpireReturn.Continue();
             boolean potion = false;
             String encounter = "";
-            //BoardGame.logger.info("addPotionToRewardsPatch...");
+            //CoopBoardGame.logger.info("addPotionToRewardsPatch...");
             if (__instance instanceof MonsterRoomBoss) {
-                //BoardGame.logger.info("...MonsterRoomBoss...");
+                //CoopBoardGame.logger.info("...MonsterRoomBoss...");
                 encounter = "NO POTION";
             } else if (__instance instanceof MonsterRoomElite) {
                 encounter = AbstractDungeon.eliteMonsterList.get(0);
@@ -746,7 +746,7 @@ public abstract class AbstractBGDungeon extends AbstractDungeon {
                 __instance.rewards.add(new RewardItem(AbstractDungeon.returnRandomPotion()));
             }
             if (AbstractDungeon.player.hasRelic("BGWhite Beast Statue")) {
-                //BoardGame.logger.info("...BGWhite Beast Statue...");
+                //CoopBoardGame.logger.info("...BGWhite Beast Statue...");
 
                 CardCrawlGame.metricData.potions_floor_spawned.add(
                     Integer.valueOf(AbstractDungeon.floorNum)

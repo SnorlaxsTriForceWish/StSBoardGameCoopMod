@@ -1,7 +1,7 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.potions.BGGamblersBrew;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.potions.BGGamblersBrew;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -37,7 +37,7 @@ public class BGGremlinWheelGame extends AbstractImageEvent {
     private static final Logger logger = LogManager.getLogger(BGGremlinWheelGame.class.getName());
     public static final String ID = "BGWheel of Change";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGWheel of Change"
+        "CoopBoardGame:BGWheel of Change"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

@@ -1,6 +1,6 @@
-package BoardGame.icons;
+package CoopBoardGame.icons;
 
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.util.TextureLoader;
 import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.icons.AbstractCustomIcon;
 import java.util.ArrayList;
@@ -8,11 +8,11 @@ import java.util.List;
 
 public class PotionIcon extends AbstractCustomIcon {
 
-    public static final String ID = "BoardGame:Potion"; //reminder: "Icon" is automatically added
+    public static final String ID = "CoopBoardGame:Potion"; //reminder: "Icon" is automatically added
     private static PotionIcon singleton;
 
     public PotionIcon() {
-        super(ID, TextureLoader.getTexture("BoardGameResources/images/icons/pot.png"));
+        super(ID, TextureLoader.getTexture("CoopBoardGameResources/images/icons/pot.png"));
     }
 
     public static PotionIcon get() {
@@ -26,7 +26,7 @@ public class PotionIcon extends AbstractCustomIcon {
         List<TooltipInfo> list = new ArrayList<>();
         list.add(
             new TooltipInfo(
-                "[BoardGame:PotionIcon] Potion",
+                "[CoopBoardGame:PotionIcon] Potion",
                 "Draw a card from the potion deck. You may gain that potion or skip it."
             )
         );

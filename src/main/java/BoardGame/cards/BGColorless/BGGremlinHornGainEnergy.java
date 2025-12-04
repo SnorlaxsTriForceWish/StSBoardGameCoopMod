@@ -1,7 +1,7 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -14,7 +14,7 @@ public class BGGremlinHornGainEnergy extends AbstractBGAttackCardChoice {
 
     public static final String ID = "BGGremlinHornGainEnergy";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGGremlinHornGainEnergy"
+        "CoopBoardGame:BGGremlinHornGainEnergy"
     );
 
     public BGGremlinHornGainEnergy() {

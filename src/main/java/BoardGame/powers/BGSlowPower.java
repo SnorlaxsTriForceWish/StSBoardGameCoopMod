@@ -1,6 +1,6 @@
 //TODO: VG says if your 5th card is an autoplayed copy of the 4th, Vulnerable takes effect before 5th is played.  Is that intended behavior for BG?
 
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGSlowPower extends AbstractBGPower {
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGSlowPower"
+        "CoopBoardGame:BGSlowPower"
     );
     public static final String POWER_ID = "BGSlowPower";
     public static final String NAME = powerStrings.NAME;

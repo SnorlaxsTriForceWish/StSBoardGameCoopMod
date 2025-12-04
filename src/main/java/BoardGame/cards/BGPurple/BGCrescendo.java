@@ -1,7 +1,7 @@
-package BoardGame.cards.BGPurple;
+package CoopBoardGame.cards.BGPurple;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGWatcher;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGWatcher;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGCrescendo extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGCrescendo"
+        "CoopBoardGame:BGCrescendo"
     );
     public static final String ID = "BGCrescendo";
 

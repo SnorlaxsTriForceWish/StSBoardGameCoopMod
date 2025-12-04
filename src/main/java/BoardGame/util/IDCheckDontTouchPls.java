@@ -1,4 +1,4 @@
-package BoardGame.util;
+package CoopBoardGame.util;
 
 public class IDCheckDontTouchPls {
 

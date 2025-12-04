@@ -1,6 +1,6 @@
-package BoardGame.ui;
+package CoopBoardGame.ui;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -12,7 +12,7 @@ import java.util.Collections;
 public class BGGameTips extends GameTips {
 
     public static final CharacterStrings bgtutorialStrings =
-        CardCrawlGame.languagePack.getCharacterString("BoardGame:Random Tips");
+        CardCrawlGame.languagePack.getCharacterString("CoopBoardGame:Random Tips");
 
     @SpirePatch(clz = GameTips.class, method = SpirePatch.CLASS)
     public static class ExtraGameTipsPatch {

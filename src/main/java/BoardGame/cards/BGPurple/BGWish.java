@@ -1,10 +1,10 @@
-package BoardGame.cards.BGPurple;
+package CoopBoardGame.cards.BGPurple;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.cards.BGColorless.BGBecomeAlmighty;
-import BoardGame.cards.BGColorless.BGFameAndFortune;
-import BoardGame.cards.BGColorless.BGLiveForever;
-import BoardGame.characters.BGWatcher;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.cards.BGColorless.BGBecomeAlmighty;
+import CoopBoardGame.cards.BGColorless.BGFameAndFortune;
+import CoopBoardGame.cards.BGColorless.BGLiveForever;
+import CoopBoardGame.characters.BGWatcher;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class BGWish extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGWish"
+        "CoopBoardGame:BGWish"
     );
     public static final String ID = "BGWish";
 

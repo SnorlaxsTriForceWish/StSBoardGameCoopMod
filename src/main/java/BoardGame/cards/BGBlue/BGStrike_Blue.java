@@ -1,7 +1,7 @@
-package BoardGame.cards.BGBlue;
+package CoopBoardGame.cards.BGBlue;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGDefect;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGDefect;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
@@ -18,7 +18,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGStrike_Blue extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGStrike_B"
+        "CoopBoardGame:BGStrike_B"
     );
     public static final String ID = "BGStrike_B";
 

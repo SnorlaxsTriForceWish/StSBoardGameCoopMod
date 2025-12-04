@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.cards.BGBlue.BGStrike_Blue;
+import CoopBoardGame.cards.BGBlue.BGStrike_Blue;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -12,7 +12,7 @@ public class BGApotheosisPower extends AbstractBGPower {
 
     public static final String POWER_ID = "BGApotheosisPower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGApotheosisPower"
+        "CoopBoardGame:BGApotheosisPower"
     );
 
     public BGApotheosisPower(AbstractCreature owner, int amt) {

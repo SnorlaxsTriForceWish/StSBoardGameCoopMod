@@ -1,9 +1,9 @@
-package BoardGame.monsters.bgbeyond;
+package CoopBoardGame.monsters.bgbeyond;
 
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.DieControlledMoves;
-import BoardGame.monsters.MixedAttacks;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.DieControlledMoves;
+import CoopBoardGame.monsters.MixedAttacks;
+import CoopBoardGame.thedie.TheDie;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;

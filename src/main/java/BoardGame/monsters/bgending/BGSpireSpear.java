@@ -1,11 +1,11 @@
-package BoardGame.monsters.bgending;
+package CoopBoardGame.monsters.bgending;
 
-import BoardGame.cards.BGStatus.BGBurn;
-import BoardGame.cards.BGStatus.BGDazed;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
-import BoardGame.multicharacter.MultiCreature;
-import BoardGame.powers.BGDifferentRowsPower;
+import CoopBoardGame.cards.BGStatus.BGBurn;
+import CoopBoardGame.cards.BGStatus.BGDazed;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.multicharacter.MultiCreature;
+import CoopBoardGame.powers.BGDifferentRowsPower;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;

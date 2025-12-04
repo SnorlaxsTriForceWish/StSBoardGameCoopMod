@@ -1,7 +1,7 @@
-package BoardGame.multicharacter.patches;
+package CoopBoardGame.multicharacter.patches;
 
-import BoardGame.multicharacter.DrawCardMultiAction;
-import BoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.multicharacter.DrawCardMultiAction;
+import CoopBoardGame.multicharacter.MultiCharacter;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
@@ -17,7 +17,7 @@ public class DrawCardPatch {
         public static SpireReturn<Void> Prefix(DrawCardAction __instance) {
             if (AbstractDungeon.player instanceof MultiCharacter) {
                 if (ActionPatches.Field.owner.get(__instance) == null) {
-                    BoardGame.BoardGame.logger.warn(
+                    CoopBoardGame.CoopBoardGame.logger.warn(
                         "called DrawCardAction with BGMultiCharacter and no owner -- subbing in DrawCardMultiAction whether we want it or not"
                     );
                     AbstractDungeon.actionManager.addToTop(new DrawCardMultiAction());

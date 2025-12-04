@@ -1,9 +1,9 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.actions.BGSpotWeaknessAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.actions.BGSpotWeaknessAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGSpotWeakness extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGSpot Weakness"
+        "CoopBoardGame:BGSpot Weakness"
     );
     public static final String ID = "BGSpot Weakness";
 

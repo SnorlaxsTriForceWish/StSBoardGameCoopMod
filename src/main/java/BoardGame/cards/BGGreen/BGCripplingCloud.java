@@ -1,9 +1,9 @@
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGSilent;
-import BoardGame.powers.BGPoisonPower;
-import BoardGame.powers.BGWeakPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGSilent;
+import CoopBoardGame.powers.BGPoisonPower;
+import CoopBoardGame.powers.BGWeakPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -20,7 +20,7 @@ public class BGCripplingCloud extends AbstractBGCard {
     public static final String ID = "BGCripplingCloud";
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGCripplingCloud"
+        "CoopBoardGame:BGCripplingCloud"
     );
 
     public BGCripplingCloud() {

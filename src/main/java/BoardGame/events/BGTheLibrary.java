@@ -1,6 +1,6 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -14,13 +14,13 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import java.util.ArrayList;
 
-//TODO: boardgame library should allow you to skip
+//TODO: coopboardgame library should allow you to skip
 
 public class BGTheLibrary extends AbstractImageEvent {
 
     public static final String ID = "BGThe Library";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGThe Library"
+        "CoopBoardGame:BGThe Library"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

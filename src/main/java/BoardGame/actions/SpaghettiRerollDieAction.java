@@ -1,10 +1,10 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.monsterRng;
 
-import BoardGame.BoardGame;
-import BoardGame.powers.BGTheDiePower;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.powers.BGTheDiePower;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -22,7 +22,7 @@ public class SpaghettiRerollDieAction extends AbstractGameAction {
 
     public void update() {
         int r = monsterRng.random(1, 6);
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         logger.info("ROLL THE DIE (WRITHING MASS): " + r);
         TheDie.monsterRoll = r;
         AbstractDungeon.actionManager.addToTop(

@@ -1,7 +1,7 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.relics.AbstractBGRelic;
-import BoardGame.relics.BGShivs;
+import CoopBoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.relics.BGShivs;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -20,7 +20,7 @@ public class BGGainShivAction extends AbstractGameAction {
     }
 
     public void update() {
-        if (!AbstractDungeon.player.hasRelic("BoardGame:BGShivs")) {
+        if (!AbstractDungeon.player.hasRelic("CoopBoardGame:BGShivs")) {
             AbstractRelic shivs = new BGShivs();
             AbstractDungeon.getCurrRoom().spawnRelicAndObtain(
                 (Settings.WIDTH / 2),
@@ -29,7 +29,7 @@ public class BGGainShivAction extends AbstractGameAction {
             );
             ((AbstractBGRelic) shivs).setupObtainedDuringCombat();
         }
-        AbstractRelic relic = AbstractDungeon.player.getRelic("BoardGame:BGShivs");
+        AbstractRelic relic = AbstractDungeon.player.getRelic("CoopBoardGame:BGShivs");
         for (int i = 0; i < this.amount; i += 1) {
             relic.counter = relic.counter + 1;
         }

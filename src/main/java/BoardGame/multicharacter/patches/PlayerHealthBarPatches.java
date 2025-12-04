@@ -1,7 +1,7 @@
-package BoardGame.multicharacter.patches;
+package CoopBoardGame.multicharacter.patches;
 
-import BoardGame.dungeons.BGExordium;
-import BoardGame.multicharacter.grid.GridBackground;
+import CoopBoardGame.dungeons.BGExordium;
+import CoopBoardGame.multicharacter.grid.GridBackground;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;

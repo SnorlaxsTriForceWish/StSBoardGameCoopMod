@@ -1,8 +1,8 @@
-package BoardGame.patches;
+package CoopBoardGame.patches;
 
-import BoardGame.characters.*;
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.characters.*;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.multicharacter.MultiCharacter;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;
@@ -37,7 +37,7 @@ import javassist.expr.MethodCall;
 public class Ascension {
 
     static String[] A_TEXT = CardCrawlGame.languagePack.getUIString(
-        "BoardGame:AscensionModeDescriptions"
+        "CoopBoardGame:AscensionModeDescriptions"
     ).TEXT;
 
     public static final int CURRENT_MAX_ASCENSION = 13;

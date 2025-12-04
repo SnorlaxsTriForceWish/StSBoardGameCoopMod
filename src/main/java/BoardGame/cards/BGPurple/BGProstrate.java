@@ -1,8 +1,8 @@
-package BoardGame.cards.BGPurple;
+package CoopBoardGame.cards.BGPurple;
 
-import BoardGame.actions.BGGainMiracleAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGWatcher;
+import CoopBoardGame.actions.BGGainMiracleAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGWatcher;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGProstrate extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGProstrate"
+        "CoopBoardGame:BGProstrate"
     );
     public static final String ID = "BGProstrate";
 

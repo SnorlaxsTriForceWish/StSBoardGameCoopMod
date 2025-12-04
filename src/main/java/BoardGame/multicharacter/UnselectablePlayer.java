@@ -1,4 +1,4 @@
-package BoardGame.multicharacter;
+package CoopBoardGame.multicharacter;
 
 import basemod.BaseMod;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInstrumentPatch;

@@ -1,4 +1,4 @@
-package BoardGame.stances;
+package CoopBoardGame.stances;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

@@ -1,11 +1,11 @@
 //TODO: currently, copied cards are played after the original card (VG) instead of before the original card (BG)
 //TODO: if Doppelganger is forced to copy Burst via e.g. Havoc, is Doppelganger Unplayable or does it merely have no effect?
 
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGSilent;
-import BoardGame.powers.BGBurstPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGSilent;
+import CoopBoardGame.powers.BGBurstPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -19,7 +19,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGBurst extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGBurst"
+        "CoopBoardGame:BGBurst"
     );
     public static final String ID = "BGBurst";
 
@@ -46,7 +46,7 @@ public class BGBurst extends AbstractBGCard {
         if (!canUse) {
             return false;
         }
-        if (p.hasPower("BoardGame:BGBurstPower")) {
+        if (p.hasPower("CoopBoardGame:BGBurstPower")) {
             this.cantUseMessage = cardStrings.UPGRADE_DESCRIPTION;
             return false;
         }

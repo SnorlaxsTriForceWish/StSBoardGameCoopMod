@@ -1,17 +1,17 @@
-package BoardGame.characters;
+package CoopBoardGame.characters;
 
-import static BoardGame.BoardGame.*;
+import static CoopBoardGame.CoopBoardGame.*;
 
-import BoardGame.BoardGame;
-import BoardGame.cards.BGGreen.BGDefend_Green;
-import BoardGame.cards.BGGreen.BGNeutralize;
-import BoardGame.cards.BGGreen.BGStrike_Green;
-import BoardGame.cards.BGGreen.BGSurvivor;
-import BoardGame.multicharacter.UnselectablePlayer;
-import BoardGame.relics.BGBurningBlood;
-import BoardGame.relics.BGShivs;
-import BoardGame.relics.BGSnakeRing;
-import BoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.cards.BGGreen.BGDefend_Green;
+import CoopBoardGame.cards.BGGreen.BGNeutralize;
+import CoopBoardGame.cards.BGGreen.BGStrike_Green;
+import CoopBoardGame.cards.BGGreen.BGSurvivor;
+import CoopBoardGame.multicharacter.UnselectablePlayer;
+import CoopBoardGame.relics.BGBurningBlood;
+import CoopBoardGame.relics.BGShivs;
+import CoopBoardGame.relics.BGSnakeRing;
+import CoopBoardGame.relics.BGTheDieRelic;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -49,7 +49,7 @@ import org.apache.logging.log4j.Logger;
 
 public class BGSilent extends AbstractBGPlayer implements UnselectablePlayer {
 
-    public static final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+    public static final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
 
     // =============== CHARACTER ENUMERATORS =================
 
@@ -67,7 +67,7 @@ public class BGSilent extends AbstractBGPlayer implements UnselectablePlayer {
 
     // =============== CHARACTER ENUMERATORS  =================
     public String getMultiSwapButtonUrl() {
-        return "BoardGameResources/images/icons/silent.png";
+        return "CoopBoardGameResources/images/icons/silent.png";
     }
 
     // =============== BASE STATS =================
@@ -94,17 +94,17 @@ public class BGSilent extends AbstractBGPlayer implements UnselectablePlayer {
     // =============== TEXTURES OF BIG ENERGY ORB ===============
 
     public static final String[] orbTextures = {
-        "BoardGameResources/images/char/theSilent/orb/layer1.png",
-        "BoardGameResources/images/char/theSilent/orb/layer2.png",
-        "BoardGameResources/images/char/theSilent/orb/layer3.png",
-        "BoardGameResources/images/char/theSilent/orb/layer4.png",
-        "BoardGameResources/images/char/theSilent/orb/layer5.png",
-        "BoardGameResources/images/char/theSilent/orb/layer6.png",
-        "BoardGameResources/images/char/theSilent/orb/layer1d.png",
-        "BoardGameResources/images/char/theSilent/orb/layer2d.png",
-        "BoardGameResources/images/char/theSilent/orb/layer3d.png",
-        "BoardGameResources/images/char/theSilent/orb/layer4d.png",
-        "BoardGameResources/images/char/theSilent/orb/layer5d.png",
+        "CoopBoardGameResources/images/char/theSilent/orb/layer1.png",
+        "CoopBoardGameResources/images/char/theSilent/orb/layer2.png",
+        "CoopBoardGameResources/images/char/theSilent/orb/layer3.png",
+        "CoopBoardGameResources/images/char/theSilent/orb/layer4.png",
+        "CoopBoardGameResources/images/char/theSilent/orb/layer5.png",
+        "CoopBoardGameResources/images/char/theSilent/orb/layer6.png",
+        "CoopBoardGameResources/images/char/theSilent/orb/layer1d.png",
+        "CoopBoardGameResources/images/char/theSilent/orb/layer2d.png",
+        "CoopBoardGameResources/images/char/theSilent/orb/layer3d.png",
+        "CoopBoardGameResources/images/char/theSilent/orb/layer4d.png",
+        "CoopBoardGameResources/images/char/theSilent/orb/layer5d.png",
     };
 
     // =============== /TEXTURES OF BIG ENERGY ORB/ ===============
@@ -116,12 +116,12 @@ public class BGSilent extends AbstractBGPlayer implements UnselectablePlayer {
             name,
             setClass,
             orbTextures,
-            "BoardGameResources/images/char/theSilent/orb/vfx.png",
+            "CoopBoardGameResources/images/char/theSilent/orb/vfx.png",
             null,
             ""
         );
         //                new SpriterAnimation(
-        //                        "BoardGameResources/images/char/defaultCharacter/Spriter/theDefaultAnimation.scml"));
+        //                        "CoopBoardGameResources/images/char/defaultCharacter/Spriter/theDefaultAnimation.scml"));
 
         // =============== TEXTURES, ENERGY, LOADOUT =================
 
@@ -273,7 +273,7 @@ public class BGSilent extends AbstractBGPlayer implements UnselectablePlayer {
     // Should return a color object to be used to color the trail of moving cards
     @Override
     public Color getCardTrailColor() {
-        return BoardGame.BG_SILENT_GREEN;
+        return CoopBoardGame.BG_SILENT_GREEN;
     }
 
     // Should return a BitmapFont object that you can use to customize how your
@@ -310,14 +310,14 @@ public class BGSilent extends AbstractBGPlayer implements UnselectablePlayer {
     // Should return a Color object to be used to color the miniature card images in run history.
     @Override
     public Color getCardRenderColor() {
-        return BoardGame.BG_SILENT_GREEN;
+        return CoopBoardGame.BG_SILENT_GREEN;
     }
 
     // Should return a Color object to be used as screen tint effect when your
     // character attacks the heart.
     @Override
     public Color getSlashAttackColor() {
-        return BoardGame.BG_SILENT_GREEN;
+        return CoopBoardGame.BG_SILENT_GREEN;
     }
 
     // Should return an AttackEffect array of any size greater than 0. These effects
@@ -372,7 +372,7 @@ public class BGSilent extends AbstractBGPlayer implements UnselectablePlayer {
         this.stanceChangedThisTurn = false;
     }
 
-    //TODO: move addBlock to CustomBoardGameCreature class (which itself will require various sweeping changes to implement)
+    //TODO: move addBlock to CustomCoopBoardGameCreature class (which itself will require various sweeping changes to implement)
     public void addBlock(int blockAmount) {
         float tmp = blockAmount;
 

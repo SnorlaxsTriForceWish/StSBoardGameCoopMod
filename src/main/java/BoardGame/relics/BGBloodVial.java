@@ -1,4 +1,4 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;

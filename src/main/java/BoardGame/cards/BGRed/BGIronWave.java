@@ -1,9 +1,9 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.actions.BGChooseOneAttackAction;
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
+import CoopBoardGame.actions.BGChooseOneAttackAction;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class BGIronWave extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGIron Wave"
+        "CoopBoardGame:BGIron Wave"
     );
     public static final String ID = "BGIron Wave";
 

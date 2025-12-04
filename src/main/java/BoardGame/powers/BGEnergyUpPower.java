@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -10,7 +10,7 @@ public class BGEnergyUpPower extends AbstractBGPower {
     public static final String POWER_ID = "BGEnergyUpPower";
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGEnergyUpPower"
+        "CoopBoardGame:BGEnergyUpPower"
     );
 
     public static final String NAME = powerStrings.NAME;

@@ -1,10 +1,10 @@
 //TODO: on A1+, should Taskmaster's 2nd action be ATTACK_DEBUFF or ATTACK_BUFF?
 
-package BoardGame.monsters.bgcity;
+package CoopBoardGame.monsters.bgcity;
 
-import BoardGame.cards.BGStatus.BGDazed;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.cards.BGStatus.BGDazed;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;

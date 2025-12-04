@@ -1,7 +1,7 @@
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGSilent;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGSilent;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -22,7 +22,7 @@ public class BGDaggerThrow extends AbstractBGCard {
     public static final String ID = "BGDaggerThrow";
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGDaggerThrow"
+        "CoopBoardGame:BGDaggerThrow"
     );
 
     public BGDaggerThrow() {

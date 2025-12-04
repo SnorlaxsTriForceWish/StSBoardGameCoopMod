@@ -1,6 +1,6 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -21,7 +21,7 @@ public class BGWorldOfGoop extends AbstractImageEvent {
     public static final String ID = "BGWorldOfGoop";
 
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGWorldOfGoop"
+        "CoopBoardGame:BGWorldOfGoop"
     );
 
     public static final String NAME = eventStrings.NAME;

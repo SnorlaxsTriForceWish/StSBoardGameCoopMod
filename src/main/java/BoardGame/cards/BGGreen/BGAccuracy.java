@@ -1,8 +1,8 @@
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGSilent;
-import BoardGame.powers.BGAccuracyPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGSilent;
+import CoopBoardGame.powers.BGAccuracyPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Logger;
 public class BGAccuracy extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGAccuracy"
+        "CoopBoardGame:BGAccuracy"
     );
     public static final String ID = "BGAccuracy";
 

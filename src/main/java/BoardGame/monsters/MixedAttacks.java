@@ -1,4 +1,4 @@
-package BoardGame.monsters;
+package CoopBoardGame.monsters;
 
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.Color;

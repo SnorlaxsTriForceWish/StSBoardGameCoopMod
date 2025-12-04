@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
@@ -12,7 +12,7 @@ public class BGOrbEndOfTurnPower extends AbstractBGPower {
     public static final String POWER_ID = "BGOrbEndOfTurnPower";
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGOrbEndOfTurnPower"
+        "CoopBoardGame:BGOrbEndOfTurnPower"
     );
 
     public static final String NAME = powerStrings.NAME;

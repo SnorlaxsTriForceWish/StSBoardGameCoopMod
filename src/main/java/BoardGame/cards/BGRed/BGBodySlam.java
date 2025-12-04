@@ -1,7 +1,7 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -17,7 +17,7 @@ public class BGBodySlam extends AbstractBGCard {
 
     public static final String ID = "BGBody Slam";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGBodySlam"
+        "CoopBoardGame:BGBodySlam"
     );
 
     public BGBodySlam() {

@@ -1,12 +1,12 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import static BoardGame.BoardGame.makeRelicOutlinePath;
-import static BoardGame.BoardGame.makeRelicPath;
+import static CoopBoardGame.CoopBoardGame.makeRelicOutlinePath;
+import static CoopBoardGame.CoopBoardGame.makeRelicPath;
 
-import BoardGame.actions.BGUseMiracleAction;
-import BoardGame.characters.BGWatcher;
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.actions.BGUseMiracleAction;
+import CoopBoardGame.characters.BGWatcher;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.util.TextureLoader;
 import basemod.BaseMod;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
@@ -23,7 +23,7 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 public class BGMiracles extends AbstractBGRelic implements ClickableRelic {
 
-    public static final String ID = "BoardGame:BGMiracles";
+    public static final String ID = "CoopBoardGame:BGMiracles";
     private static final String IMGPATH = "BGMiracles.png";
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath(IMGPATH));
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath(IMGPATH));
@@ -50,7 +50,7 @@ public class BGMiracles extends AbstractBGRelic implements ClickableRelic {
 
     public void updateDescription(int accuracy) {
         this.description = getUpdatedDescription();
-        //BoardGame.logger.info("updateDescription: "+this.description);
+        //CoopBoardGame.logger.info("updateDescription: "+this.description);
         this.tips.clear();
         this.tips.add(new PowerTip(this.name, this.description));
         initializeTips();
@@ -81,7 +81,7 @@ public class BGMiracles extends AbstractBGRelic implements ClickableRelic {
             // If it has been used this turn, or the player doesn't actually have the relic (i.e. it's on display in the shop room), or it's the enemy's turn
             return; // Don't do anything.
         }
-        //final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        //final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("BGTheDieRelic.onRightClick");
         if (this.counter > 0) {
             addToBot((AbstractGameAction) new BGUseMiracleAction());
@@ -119,7 +119,7 @@ public class BGMiracles extends AbstractBGRelic implements ClickableRelic {
                 actualEnergy = EnergyPanel.totalCount;
                 miracleEnergy = ___e - actualEnergy;
             }
-            AbstractRelic relic = AbstractDungeon.player.getRelic("BoardGame:BGMiracles");
+            AbstractRelic relic = AbstractDungeon.player.getRelic("CoopBoardGame:BGMiracles");
             if (relic != null) {
                 relic.counter -= miracleEnergy;
                 if (relic.counter < 0) relic.counter = 0; //this shouldn't happen...

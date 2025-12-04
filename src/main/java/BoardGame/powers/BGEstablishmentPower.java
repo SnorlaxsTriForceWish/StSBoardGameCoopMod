@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -9,7 +9,7 @@ public class BGEstablishmentPower extends AbstractBGPower {
     public static final String POWER_ID = "BGEstablishmentPower";
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGEstablishmentPower"
+        "CoopBoardGame:BGEstablishmentPower"
     );
 
     private int applyNextTurn;

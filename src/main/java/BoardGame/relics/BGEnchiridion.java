@@ -1,9 +1,9 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
 //TODO: if you Save and Exit while Enchiridion card select screen is up, then immediately reload, the relic stays in "obtained" state on the reward screen so you can only examine it instead of actually obtain it again
 //TODO: sometimes card fails to be added to deck during Quick Start process :(
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.Settings;

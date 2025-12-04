@@ -1,8 +1,8 @@
-package BoardGame.cards.BGBlue;
+package CoopBoardGame.cards.BGBlue;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGDefect;
-import BoardGame.powers.BGBufferPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGDefect;
+import CoopBoardGame.powers.BGBufferPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -18,7 +18,7 @@ public class BGBuffer extends AbstractBGCard {
     public static final String ID = "BGBuffer";
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGBuffer"
+        "CoopBoardGame:BGBuffer"
     );
 
     public BGBuffer() {

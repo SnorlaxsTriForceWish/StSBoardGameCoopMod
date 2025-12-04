@@ -1,8 +1,8 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.actions.BGFlameBarrierAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
+import CoopBoardGame.actions.BGFlameBarrierAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -19,7 +19,7 @@ import com.megacrit.cardcrawl.vfx.combat.FlameBarrierEffect;
 public class BGFlameBarrier extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGFlame Barrier"
+        "CoopBoardGame:BGFlame Barrier"
     );
     public static final String ID = "BGFlame Barrier";
 

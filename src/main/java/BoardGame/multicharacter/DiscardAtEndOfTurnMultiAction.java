@@ -1,6 +1,6 @@
-package BoardGame.multicharacter;
+package CoopBoardGame.multicharacter;
 
-import BoardGame.multicharacter.patches.ContextPatches;
+import CoopBoardGame.multicharacter.patches.ContextPatches;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;

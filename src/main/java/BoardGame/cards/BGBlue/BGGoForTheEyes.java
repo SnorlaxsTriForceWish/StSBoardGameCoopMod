@@ -1,10 +1,10 @@
-package BoardGame.cards.BGBlue;
+package CoopBoardGame.cards.BGBlue;
 
-import BoardGame.actions.BGGoForTheEyesConditionalWeakAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGDefect;
-import BoardGame.powers.BGWeakPower;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.actions.BGGoForTheEyesConditionalWeakAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGDefect;
+import CoopBoardGame.powers.BGWeakPower;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -20,7 +20,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGGoForTheEyes extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGGoForTheEyes"
+        "CoopBoardGame:BGGoForTheEyes"
     );
     public static final String ID = "BGGoForTheEyes";
 

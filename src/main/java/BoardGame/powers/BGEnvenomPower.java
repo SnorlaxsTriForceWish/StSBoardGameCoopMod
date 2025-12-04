@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -9,16 +9,16 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class BGEnvenomPower extends AbstractBGPower {
 
-    public static final String POWER_ID = "BoardGame:BGEnvenomPower";
+    public static final String POWER_ID = "CoopBoardGame:BGEnvenomPower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGEnvenomPower"
+        "CoopBoardGame:BGEnvenomPower"
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
     public BGEnvenomPower(AbstractCreature owner, int amount) {
         this.name = NAME;
-        this.ID = "BoardGame:BGEnvenomPower";
+        this.ID = "CoopBoardGame:BGEnvenomPower";
         this.owner = owner;
         this.amount = amount;
         updateDescription();

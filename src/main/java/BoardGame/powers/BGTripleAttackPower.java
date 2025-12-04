@@ -1,7 +1,7 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-//import BoardGame.actions.BGCopyCardAction;
-import BoardGame.cards.AbstractBGCard;
+//import CoopBoardGame.actions.BGCopyCardAction;
+import CoopBoardGame.cards.AbstractBGCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -19,7 +19,7 @@ public class BGTripleAttackPower extends AbstractBGPower {
 
     public static final String POWER_ID = "BGTripleAttackPower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGTripleAttackPower"
+        "CoopBoardGame:BGTripleAttackPower"
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;

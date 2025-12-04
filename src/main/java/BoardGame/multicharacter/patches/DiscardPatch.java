@@ -1,7 +1,7 @@
-package BoardGame.multicharacter.patches;
+package CoopBoardGame.multicharacter.patches;
 
-import BoardGame.multicharacter.DiscardAtEndOfTurnMultiAction;
-import BoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.multicharacter.DiscardAtEndOfTurnMultiAction;
+import CoopBoardGame.multicharacter.MultiCharacter;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;

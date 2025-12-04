@@ -1,6 +1,6 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
-import BoardGame.powers.BGDoubleAttackPower;
+import CoopBoardGame.powers.BGDoubleAttackPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -17,7 +17,7 @@ public class BGAttackPotion extends AbstractPotion {
 
     public static final String POTION_ID = "BGAttackPotion";
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGAttackPotion"
+        "CoopBoardGame:BGAttackPotion"
     );
 
     public BGAttackPotion() {

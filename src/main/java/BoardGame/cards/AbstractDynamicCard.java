@@ -1,4 +1,4 @@
-package BoardGame.cards;
+package CoopBoardGame.cards;
 
 import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
 

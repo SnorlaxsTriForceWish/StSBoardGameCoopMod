@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.relics.BGTheDieRelic;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -17,7 +17,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 public class BGInvinciblePlayerPower extends AbstractBGPower {
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGIntangible"
+        "CoopBoardGame:BGIntangible"
     );
     public static final String POWER_ID = "BGIntangible";
     public static final String NAME = powerStrings.NAME;
@@ -30,7 +30,7 @@ public class BGInvinciblePlayerPower extends AbstractBGPower {
         this.owner = owner;
         this.amount = 1;
         if (owner instanceof AbstractPlayer) {
-            AbstractRelic r = ((AbstractPlayer) owner).getRelic("BoardGame:BGTheDieRelic");
+            AbstractRelic r = ((AbstractPlayer) owner).getRelic("CoopBoardGame:BGTheDieRelic");
             if (r != null) {
                 if (((BGTheDieRelic) r).tookDamageThisTurn) {
                     //TODO: move flag to AbstractBGPlayer, if possible (but requires turn start event)
@@ -99,7 +99,9 @@ public class BGInvinciblePlayerPower extends AbstractBGPower {
                 p.updateDescription();
             }
             if (__result > 0 && __instance == AbstractDungeon.player) {
-                AbstractRelic r = ((AbstractPlayer) __instance).getRelic("BoardGame:BGTheDieRelic");
+                AbstractRelic r = ((AbstractPlayer) __instance).getRelic(
+                    "CoopBoardGame:BGTheDieRelic"
+                );
                 if (r != null) {
                     ((BGTheDieRelic) r).tookDamageThisTurn = true;
                 }

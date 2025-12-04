@@ -1,4 +1,4 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -15,7 +15,7 @@ public class BGWomanInBlue extends AbstractImageEvent {
 
     public static final String ID = "BGThe Woman in Blue";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGThe Woman in Blue"
+        "CoopBoardGame:BGThe Woman in Blue"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

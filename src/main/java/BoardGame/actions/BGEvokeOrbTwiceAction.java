@@ -1,6 +1,6 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.screen.OrbSelectScreen;
+import CoopBoardGame.screen.OrbSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
@@ -26,7 +26,7 @@ public class BGEvokeOrbTwiceAction extends AbstractGameAction {
             OrbSelectScreen.OrbSelectAction ossAction = target -> {
                 AbstractPlayer player = AbstractDungeon.player;
                 //addToTop -- reverse order
-                BoardGame.BoardGame.logger.info("BGEvokeOrbTwiceAction: slot " + target);
+                CoopBoardGame.CoopBoardGame.logger.info("BGEvokeOrbTwiceAction: slot " + target);
                 addToTop((AbstractGameAction) new BGEvokeSpecificOrbAction(target));
                 addToTop((AbstractGameAction) new BGEvokeWithoutRemovingSpecificOrbAction(target));
             };

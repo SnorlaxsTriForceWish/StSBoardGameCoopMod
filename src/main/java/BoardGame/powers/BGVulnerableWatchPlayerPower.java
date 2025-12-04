@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.BoardGame;
+import CoopBoardGame.CoopBoardGame;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.InvisiblePower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGVulnerableWatchPlayerPower extends AbstractBGPower implements InvisiblePower {
 
-    public static final String POWER_ID = BoardGame.makeID("VulnerableWatchPlayer");
+    public static final String POWER_ID = CoopBoardGame.makeID("VulnerableWatchPlayer");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
         POWER_ID
     );

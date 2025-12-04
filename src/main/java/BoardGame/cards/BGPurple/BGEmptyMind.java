@@ -1,7 +1,7 @@
-package BoardGame.cards.BGPurple;
+package CoopBoardGame.cards.BGPurple;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGWatcher;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGWatcher;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -18,7 +18,7 @@ import com.megacrit.cardcrawl.vfx.combat.EmptyStanceEffect;
 public class BGEmptyMind extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGEmptyMind"
+        "CoopBoardGame:BGEmptyMind"
     );
     public static final String ID = "BGEmptyMind";
 

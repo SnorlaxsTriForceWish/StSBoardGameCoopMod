@@ -3,9 +3,9 @@
 // (powered by FernFlower decompiler)
 //
 
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.cards.AbstractBGCard;
+import CoopBoardGame.cards.AbstractBGCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;

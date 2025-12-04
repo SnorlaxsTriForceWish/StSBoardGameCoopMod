@@ -1,8 +1,8 @@
-package BoardGame.multicharacter.patches;
+package CoopBoardGame.multicharacter.patches;
 
-import BoardGame.multicharacter.ALLEnemiesMonster;
-import BoardGame.multicharacter.MultiCreature;
-import BoardGame.multicharacter.NullMonster;
+import CoopBoardGame.multicharacter.ALLEnemiesMonster;
+import CoopBoardGame.multicharacter.MultiCreature;
+import CoopBoardGame.multicharacter.NullMonster;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.core.AbstractCreature;

@@ -3,9 +3,9 @@
 // (powered by FernFlower decompiler)
 //
 
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.BGToggleDiscardingAtEndOfTurnFlagAction;
+import CoopBoardGame.actions.BGToggleDiscardingAtEndOfTurnFlagAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;

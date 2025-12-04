@@ -1,7 +1,7 @@
-package BoardGame.orbs;
+package CoopBoardGame.orbs;
 
-import BoardGame.actions.BGLightningOrbEvokeAction;
-import BoardGame.actions.BGLightningOrbPassiveAction;
+import CoopBoardGame.actions.BGLightningOrbEvokeAction;
+import CoopBoardGame.actions.BGLightningOrbPassiveAction;
 import basemod.abstracts.CustomOrb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -27,10 +27,10 @@ import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
 
 public class BGLightning extends CustomOrb {
 
-    public static final String ORB_ID = "BoardGame:BGLightning";
+    public static final String ORB_ID = "CoopBoardGame:BGLightning";
 
     private static final OrbStrings orbString = CardCrawlGame.languagePack.getOrbString(
-        "BoardGame:BGLightning"
+        "CoopBoardGame:BGLightning"
     );
     public static final String[] DESCRIPTIONS = orbString.DESCRIPTION;
 

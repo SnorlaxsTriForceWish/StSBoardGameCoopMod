@@ -1,8 +1,8 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.actions.BGActivateDieAbilityAction;
-import BoardGame.powers.BGInvinciblePlayerPower;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.actions.BGActivateDieAbilityAction;
+import CoopBoardGame.powers.BGInvinciblePlayerPower;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;

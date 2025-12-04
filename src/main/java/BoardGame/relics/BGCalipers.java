@@ -1,7 +1,7 @@
 //Calipers is handled in line 460 of GameActionManager
 // we don't need to patch it exactly there, but it's probably a good place to check for leftover block
 
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.evacipated.cardcrawl.modthespire.lib.*;

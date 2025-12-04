@@ -1,8 +1,8 @@
-package BoardGame.variables;
+package CoopBoardGame.variables;
 
-import static BoardGame.BoardGame.makeID;
+import static CoopBoardGame.CoopBoardGame.makeID;
 
-import BoardGame.cards.AbstractBGCard;
+import CoopBoardGame.cards.AbstractBGCard;
 import basemod.abstracts.DynamicVariable;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 

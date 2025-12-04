@@ -8,7 +8,7 @@
 
 //WARNING: X-cost cards, and/or the actions they use, are hardcoded to remove all energy.  must adjust that in each file
 
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
@@ -36,7 +36,7 @@ public class BGConfusionPower extends AbstractBGPower {
 
     private static final Logger logger = LogManager.getLogger(BGConfusionPower.class.getName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGConfusion"
+        "CoopBoardGame:BGConfusion"
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;

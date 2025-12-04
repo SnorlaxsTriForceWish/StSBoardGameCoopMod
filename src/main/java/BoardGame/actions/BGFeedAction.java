@@ -1,7 +1,7 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.monsters.bgbeyond.BGAwakenedOne;
-import BoardGame.monsters.bgbeyond.BGDarkling;
+import CoopBoardGame.monsters.bgbeyond.BGAwakenedOne;
+import CoopBoardGame.monsters.bgbeyond.BGDarkling;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -52,11 +52,7 @@ public class BGFeedAction extends AbstractGameAction {
 
     private void showAttackEffect() {
         AbstractDungeon.effectList.add(
-            new FlashAtkImgEffect(
-                this.target.hb.cX,
-                this.target.hb.cY,
-                AttackEffect.NONE
-            )
+            new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, AttackEffect.NONE)
         );
     }
 
@@ -69,8 +65,8 @@ public class BGFeedAction extends AbstractGameAction {
         boolean isDead = monster.isDying || monster.currentHealth <= 0;
 
         // TODO: SlimeBoss should use halfdead state instead of disappearing until the next turn
-        boolean canBypassHalfDead = this.target instanceof BGDarkling ||
-                                     this.target instanceof BGAwakenedOne;
+        boolean canBypassHalfDead =
+            this.target instanceof BGDarkling || this.target instanceof BGAwakenedOne;
         boolean isActuallyDead = !this.target.halfDead || canBypassHalfDead;
 
         return isDead && isActuallyDead;

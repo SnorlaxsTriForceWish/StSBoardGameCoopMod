@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.BGGainMiracleAction;
+import CoopBoardGame.actions.BGGainMiracleAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 public class BGDevaFormPower extends AbstractBGPower {
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGDevaFormPower"
+        "CoopBoardGame:BGDevaFormPower"
     );
     public static final String POWER_ID = "BGDevaFormPower";
     public static final String NAME = powerStrings.NAME;

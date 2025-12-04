@@ -1,35 +1,35 @@
-package BoardGame;
+package CoopBoardGame;
 
 import static basemod.BaseMod.addMonster;
 
-import BoardGame.cards.AbstractDefaultCard;
-import BoardGame.cards.BGBlue.BGClaw2;
-import BoardGame.characters.*;
-import BoardGame.dungeons.*;
-import BoardGame.events.*;
-import BoardGame.icons.*;
-import BoardGame.monsters.bgbeyond.*;
-import BoardGame.monsters.bgcity.*;
-import BoardGame.monsters.bgending.BGCorruptHeart;
-import BoardGame.monsters.bgending.BGSpireShield;
-import BoardGame.monsters.bgending.BGSpireSpear;
-import BoardGame.monsters.bgexordium.*;
-import BoardGame.multicharacter.MultiCharacter;
-import BoardGame.multicharacter.MultiCharacterSelectScreen;
-import BoardGame.patches.Ascension;
-import BoardGame.potions.*;
-import BoardGame.relics.AbstractBGRelic;
-import BoardGame.relics.BottledPlaceholderRelic;
-import BoardGame.rewards.TinyHouseUpgrade1Card;
-import BoardGame.rewards.TinyHouseUpgrade1CardTypePatch;
-import BoardGame.savables.DeckSaveInfo;
-import BoardGame.screen.OrbSelectScreen;
-import BoardGame.screen.RelicTradingScreen;
-import BoardGame.screen.TargetSelectScreen;
-import BoardGame.util.IDCheckDontTouchPls;
-import BoardGame.util.TextureLoader;
-import BoardGame.variables.DefaultCustomVariable;
-import BoardGame.variables.DefaultSecondMagicNumber;
+import CoopBoardGame.cards.AbstractDefaultCard;
+import CoopBoardGame.cards.BGBlue.BGClaw2;
+import CoopBoardGame.characters.*;
+import CoopBoardGame.dungeons.*;
+import CoopBoardGame.events.*;
+import CoopBoardGame.icons.*;
+import CoopBoardGame.monsters.bgbeyond.*;
+import CoopBoardGame.monsters.bgcity.*;
+import CoopBoardGame.monsters.bgending.BGCorruptHeart;
+import CoopBoardGame.monsters.bgending.BGSpireShield;
+import CoopBoardGame.monsters.bgending.BGSpireSpear;
+import CoopBoardGame.monsters.bgexordium.*;
+import CoopBoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.multicharacter.MultiCharacterSelectScreen;
+import CoopBoardGame.patches.Ascension;
+import CoopBoardGame.potions.*;
+import CoopBoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.relics.BottledPlaceholderRelic;
+import CoopBoardGame.rewards.TinyHouseUpgrade1Card;
+import CoopBoardGame.rewards.TinyHouseUpgrade1CardTypePatch;
+import CoopBoardGame.savables.DeckSaveInfo;
+import CoopBoardGame.screen.OrbSelectScreen;
+import CoopBoardGame.screen.RelicTradingScreen;
+import CoopBoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.util.IDCheckDontTouchPls;
+import CoopBoardGame.util.TextureLoader;
+import CoopBoardGame.variables.DefaultCustomVariable;
+import CoopBoardGame.variables.DefaultSecondMagicNumber;
 import basemod.*;
 import basemod.eventUtil.AddEventParams;
 import basemod.eventUtil.util.Condition;
@@ -63,11 +63,11 @@ import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-//TODO: Game softlocks if BoardGame character is started on a completely new profile (tries to skip Neow screen)
+//TODO: Game softlocks if CoopBoardGame character is started on a completely new profile (tries to skip Neow screen)
 //TODO: implement PostCreditsNeow easter egg -- need to put these back in the box -- does anyone have opposable thumbs
 
 @SpireInitializer
-public class BoardGame
+public class CoopBoardGame
     implements
         EditCardsSubscriber,
         EditRelicsSubscriber,
@@ -86,11 +86,11 @@ public class BoardGame
 
     // Make sure to implement the subscribers *you* are using (read basemod wiki). Editing cards? EditCardsSubscriber.
     // Making relics? EditRelicsSubscriber. etc., etc., for a full list and how to make your own, visit the basemod wiki.
-    public static final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+    public static final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
     private static String modID;
 
     // Mod-settings settings. This is if you want an on/off savable button
-    public static Properties BoardGameSettings = new Properties();
+    public static Properties CoopBoardGameSettings = new Properties();
     public static final String CLAW_PACK_COUNT = "enablePlaceholder";
     public static final String ENABLE_MULTICHAR_SAVE_FLAG = "enableMultichar";
     public static float clawPackCount = 0;
@@ -123,32 +123,32 @@ public class BoardGame
 
     // Card backgrounds - The actual rectangular card.
     private static final String BGATTACK_IRONCLAD =
-        "BoardGameResources/images/512/bg_attack_default_gray.png";
+        "CoopBoardGameResources/images/512/bg_attack_default_gray.png";
     private static final String BGSKILL_IRONCLAD =
-        "BoardGameResources/images/512/bg_skill_default_gray.png";
+        "CoopBoardGameResources/images/512/bg_skill_default_gray.png";
     private static final String BGPOWER_IRONCLAD =
-        "BoardGameResources/images/512/bg_power_default_gray.png";
+        "CoopBoardGameResources/images/512/bg_power_default_gray.png";
 
     private static final String ENERGY_ORB_IRONCLAD =
-        "BoardGameResources/images/512/card_default_gray_orb.png";
+        "CoopBoardGameResources/images/512/card_default_gray_orb.png";
     private static final String SMALL_ORB_IRONCLAD =
-        "BoardGameResources/images/512/card_small_orb.png";
+        "CoopBoardGameResources/images/512/card_small_orb.png";
 
     private static final String BGATTACK_P_IRONCLAD =
-        "BoardGameResources/images/1024/bg_attack_default_gray.png";
+        "CoopBoardGameResources/images/1024/bg_attack_default_gray.png";
     private static final String BGSKILL_P_IRONCLAD =
-        "BoardGameResources/images/1024/bg_skill_default_gray.png";
+        "CoopBoardGameResources/images/1024/bg_skill_default_gray.png";
     private static final String BGPOWER_P_IRONCLAD =
-        "BoardGameResources/images/1024/bg_power_default_gray.png";
+        "CoopBoardGameResources/images/1024/bg_power_default_gray.png";
     private static final String ENERGY_ORB_P_IRONCLAD =
-        "BoardGameResources/images/1024/card_default_gray_orb.png";
+        "CoopBoardGameResources/images/1024/card_default_gray_orb.png";
 
     // Character assets
 
     public static final String CHAR_SELECT_BUTTON_MULTICHARACTER =
-        "BoardGameResources/images/charSelect/BGMultiCharacterButton.png";
+        "CoopBoardGameResources/images/charSelect/BGMultiCharacterButton.png";
     private static final String CHAR_SELECT_PORTRAIT_MULTICHARACTER =
-        "BoardGameResources/images/charSelect/MultiCharacterPortrait.png";
+        "CoopBoardGameResources/images/charSelect/MultiCharacterPortrait.png";
 
     public static final String CHAR_SELECT_BUTTON_IRONCLAD =
         "images/ui/charSelect/ironcladButton.png";
@@ -156,82 +156,82 @@ public class BoardGame
         "images/ui/charSelect/ironcladPortrait.jpg";
 
     private static final String BGATTACK_SILENT =
-        "BoardGameResources/images/512/bg_attack_theSilent.png";
+        "CoopBoardGameResources/images/512/bg_attack_theSilent.png";
     private static final String BGSKILL_SILENT =
-        "BoardGameResources/images/512/bg_skill_theSilent.png";
+        "CoopBoardGameResources/images/512/bg_skill_theSilent.png";
     private static final String BGPOWER_SILENT =
-        "BoardGameResources/images/512/bg_power_theSilent.png";
+        "CoopBoardGameResources/images/512/bg_power_theSilent.png";
     private static final String ENERGY_ORB_SILENT =
-        "BoardGameResources/images/512/card_orb_theSilent.png";
+        "CoopBoardGameResources/images/512/card_orb_theSilent.png";
     private static final String SMALL_ORB_SILENT =
-        "BoardGameResources/images/512/card_small_orb.png";
+        "CoopBoardGameResources/images/512/card_small_orb.png";
     private static final String BGATTACK_P_SILENT =
-        "BoardGameResources/images/1024/bg_attack_theSilent.png";
+        "CoopBoardGameResources/images/1024/bg_attack_theSilent.png";
     private static final String BGSKILL_P_SILENT =
-        "BoardGameResources/images/1024/bg_skill_theSilent.png";
+        "CoopBoardGameResources/images/1024/bg_skill_theSilent.png";
     private static final String BGPOWER_P_SILENT =
-        "BoardGameResources/images/1024/bg_power_theSilent.png";
+        "CoopBoardGameResources/images/1024/bg_power_theSilent.png";
     private static final String ENERGY_ORB_P_SILENT =
-        "BoardGameResources/images/1024/card_orb_theSilent.png";
+        "CoopBoardGameResources/images/1024/card_orb_theSilent.png";
     public static final String CHAR_SELECT_BUTTON_SILENT = "images/ui/charSelect/silentButton.png";
     private static final String CHAR_SELECT_PORTRAIT_SILENT =
         "images/ui/charSelect/silentPortrait.jpg";
 
     private static final String BGATTACK_DEFECT =
-        "BoardGameResources/images/512/bg_attack_theDefect.png";
+        "CoopBoardGameResources/images/512/bg_attack_theDefect.png";
     private static final String BGSKILL_DEFECT =
-        "BoardGameResources/images/512/bg_skill_theDefect.png";
+        "CoopBoardGameResources/images/512/bg_skill_theDefect.png";
     private static final String BGPOWER_DEFECT =
-        "BoardGameResources/images/512/bg_power_theDefect.png";
+        "CoopBoardGameResources/images/512/bg_power_theDefect.png";
     private static final String ENERGY_ORB_DEFECT =
-        "BoardGameResources/images/512/card_orb_theDefect.png";
+        "CoopBoardGameResources/images/512/card_orb_theDefect.png";
     private static final String SMALL_ORB_DEFECT =
-        "BoardGameResources/images/512/card_small_orb.png";
+        "CoopBoardGameResources/images/512/card_small_orb.png";
     private static final String BGATTACK_P_DEFECT =
-        "BoardGameResources/images/1024/bg_attack_theDefect.png";
+        "CoopBoardGameResources/images/1024/bg_attack_theDefect.png";
     private static final String BGSKILL_P_DEFECT =
-        "BoardGameResources/images/1024/bg_skill_theDefect.png";
+        "CoopBoardGameResources/images/1024/bg_skill_theDefect.png";
     private static final String BGPOWER_P_DEFECT =
-        "BoardGameResources/images/1024/bg_power_theDefect.png";
+        "CoopBoardGameResources/images/1024/bg_power_theDefect.png";
     private static final String ENERGY_ORB_P_DEFECT =
-        "BoardGameResources/images/1024/card_orb_theDefect.png";
+        "CoopBoardGameResources/images/1024/card_orb_theDefect.png";
     public static final String CHAR_SELECT_BUTTON_DEFECT = "images/ui/charSelect/defectButton.png";
     private static final String CHAR_SELECT_PORTRAIT_DEFECT =
         "images/ui/charSelect/defectPortrait.jpg";
 
     private static final String BGATTACK_WATCHER =
-        "BoardGameResources/images/512/bg_attack_theWatcher.png";
+        "CoopBoardGameResources/images/512/bg_attack_theWatcher.png";
     private static final String BGSKILL_WATCHER =
-        "BoardGameResources/images/512/bg_skill_theWatcher.png";
+        "CoopBoardGameResources/images/512/bg_skill_theWatcher.png";
     private static final String BGPOWER_WATCHER =
-        "BoardGameResources/images/512/bg_power_theWatcher.png";
+        "CoopBoardGameResources/images/512/bg_power_theWatcher.png";
     private static final String ENERGY_ORB_WATCHER =
-        "BoardGameResources/images/512/card_orb_theWatcher.png";
+        "CoopBoardGameResources/images/512/card_orb_theWatcher.png";
     private static final String SMALL_ORB_WATCHER =
-        "BoardGameResources/images/512/card_small_orb.png";
+        "CoopBoardGameResources/images/512/card_small_orb.png";
     private static final String BGATTACK_P_WATCHER =
-        "BoardGameResources/images/1024/bg_attack_theWatcher.png";
+        "CoopBoardGameResources/images/1024/bg_attack_theWatcher.png";
     private static final String BGSKILL_P_WATCHER =
-        "BoardGameResources/images/1024/bg_skill_theWatcher.png";
+        "CoopBoardGameResources/images/1024/bg_skill_theWatcher.png";
     private static final String BGPOWER_P_WATCHER =
-        "BoardGameResources/images/1024/bg_power_theWatcher.png";
+        "CoopBoardGameResources/images/1024/bg_power_theWatcher.png";
     private static final String ENERGY_ORB_P_WATCHER =
-        "BoardGameResources/images/1024/card_orb_theWatcher.png";
+        "CoopBoardGameResources/images/1024/card_orb_theWatcher.png";
     public static final String CHAR_SELECT_BUTTON_WATCHER =
         "images/ui/charSelect/watcherButton.png";
     private static final String CHAR_SELECT_PORTRAIT_WATCHER =
         "images/ui/charSelect/watcherPortrait.jpg";
 
     private static final String ENERGY_ORB_COLORLESS =
-        "BoardGameResources/images/512/card_orb_Colorless.png";
+        "CoopBoardGameResources/images/512/card_orb_Colorless.png";
 
-    //    public static final String SHOULDER_1 = "BoardGameResources/images/char/defaultCharacter/shoulder.png";
-    //    public static final String SHOULDER_2 = "BoardGameResources/images/char/defaultCharacter/shoulder2.png";
-    //    public static final String CORPSE = "BoardGameResources/images/char/defaultCharacter/corpse.png";
+    //    public static final String SHOULDER_1 = "CoopBoardGameResources/images/char/defaultCharacter/shoulder.png";
+    //    public static final String SHOULDER_2 = "CoopBoardGameResources/images/char/defaultCharacter/shoulder2.png";
+    //    public static final String CORPSE = "CoopBoardGameResources/images/char/defaultCharacter/corpse.png";
 
     //Mod Badge - A small icon that appears in the mod settings menu next to your mod.
     //TODO: still using placeholder TheDefaultMod badge
-    public static final String BADGE_IMAGE = "BoardGameResources/images/Badge.png";
+    public static final String BADGE_IMAGE = "CoopBoardGameResources/images/Badge.png";
 
     // Atlas and JSON files for the Animations
     public static final String BGIRONCLAD_SKELETON_ATLAS =
@@ -255,19 +255,20 @@ public class BoardGame
         "images/characters/watcher/idle/skeleton.json";
 
     private static final String ATTACK_COLORLESS =
-        "BoardGameResources/images/512/colorless_bg_attack.png";
+        "CoopBoardGameResources/images/512/colorless_bg_attack.png";
     private static final String SKILL_COLORLESS =
-        "BoardGameResources/images/512/colorless_bg_skill.png";
+        "CoopBoardGameResources/images/512/colorless_bg_skill.png";
     private static final String POWER_COLORLESS =
-        "BoardGameResources/images/512/colorless_bg_power.png";
+        "CoopBoardGameResources/images/512/colorless_bg_power.png";
     private static final String ATTACK_P_COLORLESS =
-        "BoardGameResources/images/1024/colorless_bg_attack.png";
+        "CoopBoardGameResources/images/1024/colorless_bg_attack.png";
     private static final String SKILL_P_COLORLESS =
-        "BoardGameResources/images/1024/colorless_bg_skill.png";
+        "CoopBoardGameResources/images/1024/colorless_bg_skill.png";
     private static final String POWER_P_COLORLESS =
-        "BoardGameResources/images/1024/colorless_bg_power.png";
+        "CoopBoardGameResources/images/1024/colorless_bg_power.png";
 
-    private static final String SKILL_P_CURSE = "BoardGameResources/images/1024/curse_bg_skill.png";
+    private static final String SKILL_P_CURSE =
+        "CoopBoardGameResources/images/1024/curse_bg_skill.png";
 
     // =============== MAKE IMAGE PATHS =================
 
@@ -303,14 +304,14 @@ public class BoardGame
 
     public static DeckSaveInfo deckSaveInfo = new DeckSaveInfo();
 
-    public BoardGame() {
+    public CoopBoardGame() {
         logger.info("Subscribe to BaseMod hooks");
 
         BaseMod.subscribe(this);
 
         BaseMod.addSaveField("Deck Info", deckSaveInfo);
 
-        setModID("BoardGame");
+        setModID("CoopBoardGame");
 
         logger.info("Done subscribing");
 
@@ -410,10 +411,14 @@ public class BoardGame
         logger.info("Adding mod settings");
         // This loads the mod settings.
         // The actual mod Button is added below in receivePostInitialize()
-        BoardGameSettings.setProperty(CLAW_PACK_COUNT, "0"); // This is the default setting. It's actually set...
-        BoardGameSettings.setProperty(ENABLE_MULTICHAR_SAVE_FLAG, "false");
+        CoopBoardGameSettings.setProperty(CLAW_PACK_COUNT, "0"); // This is the default setting. It's actually set...
+        CoopBoardGameSettings.setProperty(ENABLE_MULTICHAR_SAVE_FLAG, "false");
         try {
-            SpireConfig config = new SpireConfig("BoardGame", "BoardGameConfig", BoardGameSettings); // ...right here
+            SpireConfig config = new SpireConfig(
+                "CoopBoardGame",
+                "CoopBoardGameConfig",
+                CoopBoardGameSettings
+            ); // ...right here
             // the "fileName" parameter is the name of the file MTS will create where it will save our setting.
             config.load(); // Load the setting and set the boolean to equal it
             clawPackCount = config.getFloat(CLAW_PACK_COUNT);
@@ -432,7 +437,7 @@ public class BoardGame
         // DON'T EDIT
         Gson coolG = new Gson(); // EY DON'T EDIT THIS
         //   String IDjson = Gdx.files.internal("IDCheckStringsDONT-EDIT-AT-ALL.json").readString(String.valueOf(StandardCharsets.UTF_8)); // i hate u Gdx.files
-        InputStream in = BoardGame.class.getResourceAsStream(
+        InputStream in = CoopBoardGame.class.getResourceAsStream(
             "/IDCheckStringsDONT-EDIT-AT-ALL.json"
         ); // DON'T EDIT THIS ETHER
         IDCheckDontTouchPls EXCEPTION_STRINGS = coolG.fromJson(
@@ -462,14 +467,14 @@ public class BoardGame
         // ALSO NO
         Gson coolG = new Gson(); // NOPE DON'T EDIT THIS
         //   String IDjson = Gdx.files.internal("IDCheckStringsDONT-EDIT-AT-ALL.json").readString(String.valueOf(StandardCharsets.UTF_8)); // i still hate u btw Gdx.files
-        InputStream in = BoardGame.class.getResourceAsStream(
+        InputStream in = CoopBoardGame.class.getResourceAsStream(
             "/IDCheckStringsDONT-EDIT-AT-ALL.json"
         ); // DON'T EDIT THISSSSS
         IDCheckDontTouchPls EXCEPTION_STRINGS = coolG.fromJson(
             new InputStreamReader(in, StandardCharsets.UTF_8),
             IDCheckDontTouchPls.class
         ); // NAH, NO EDIT
-        String packageName = BoardGame.class.getPackage().getName(); // STILL NO EDIT ZONE
+        String packageName = CoopBoardGame.class.getPackage().getName(); // STILL NO EDIT ZONE
         FileHandle resourcePathExists = Gdx.files.internal(getModID() + "Resources"); // PLEASE DON'T EDIT THINGS HERE, THANKS
         if (!modID.equals(EXCEPTION_STRINGS.DEVID)) {
             // LEAVE THIS EDIT-LESS
@@ -490,11 +495,11 @@ public class BoardGame
 
     public static void initialize() {
         logger.info(
-            "========================= Initializing <s>Default</s> BoardGame Mod. Hi. ========================="
+            "========================= Initializing <s>Default</s> CoopBoardGame Mod. Hi. ========================="
         );
-        BoardGame defaultmod = new BoardGame();
+        CoopBoardGame defaultmod = new CoopBoardGame();
         logger.info(
-            "========================= /<s>Default</s> BoardGame Mod Initialized. Hello World./ ========================="
+            "========================= /<s>Default</s> CoopBoardGame Mod Initialized. Hello World./ ========================="
         );
     }
 
@@ -580,9 +585,9 @@ public class BoardGame
                 setClawLabel(clawLabel);
                 try {
                     SpireConfig config = new SpireConfig(
-                        "BoardGame",
-                        "BoardGameConfig",
-                        BoardGameSettings
+                        "CoopBoardGame",
+                        "CoopBoardGameConfig",
+                        CoopBoardGameSettings
                     );
                     config.setFloat(CLAW_PACK_COUNT, clawPackCount);
                     config.save();
@@ -671,9 +676,9 @@ public class BoardGame
                 ENABLE_TEST_FEATURES = button.enabled;
                 try {
                     SpireConfig config = new SpireConfig(
-                        "BoardGame",
-                        "BoardGameConfig",
-                        BoardGameSettings
+                        "CoopBoardGame",
+                        "CoopBoardGameConfig",
+                        CoopBoardGameSettings
                     );
                     config.setBool(ENABLE_MULTICHAR_SAVE_FLAG, ENABLE_TEST_FEATURES);
                     config.save();
@@ -693,7 +698,7 @@ public class BoardGame
         BaseMod.addCustomScreen(new RelicTradingScreen());
 
         BaseMod.registerCustomReward(
-            TinyHouseUpgrade1CardTypePatch.BoardGame_UPGRADEREWARD,
+            TinyHouseUpgrade1CardTypePatch.CoopBoardGame_UPGRADEREWARD,
             rewardSave -> {
                 // this handles what to do when this quest type is loaded.
                 return new TinyHouseUpgrade1Card(1);
@@ -707,8 +712,8 @@ public class BoardGame
         //TODO: non-repeating "monster deck" -- it's still possible to get the same encounter twice, especially with elites
 
         addMonster(BGCultist.ID, () -> new BGCultist(0, 0));
-        addMonster("BoardGame:Jaw Worm (Easy)", () -> new BGJawWorm(0, 0, 0, ""));
-        addMonster("BoardGame:Easy Small Slimes", () ->
+        addMonster("CoopBoardGame:Jaw Worm (Easy)", () -> new BGJawWorm(0, 0, 0, ""));
+        addMonster("CoopBoardGame:Easy Small Slimes", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGSpikeSlime_S(-200.0F, 0.0F),
@@ -716,7 +721,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:2 Louse", () ->
+        addMonster("CoopBoardGame:2 Louse", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGRedLouse(-200.0F, 10.0F, false, "S21"),
@@ -724,7 +729,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Cultist and SpikeSlime", () ->
+        addMonster("CoopBoardGame:Cultist and SpikeSlime", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGCultist(-200.0F, 10.0F),
@@ -732,7 +737,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Cultist and Louse", () ->
+        addMonster("CoopBoardGame:Cultist and Louse", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGCultist(-200.0F, 10.0F),
@@ -740,7 +745,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Fungi Beasts", () ->
+        addMonster("CoopBoardGame:Fungi Beasts", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGFungiBeast(-200.0F, 10.0F, "21S", false),
@@ -748,7 +753,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Slime Trio", () ->
+        addMonster("CoopBoardGame:Slime Trio", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGSpikeSlime_S(-350.0F, 0.0F),
@@ -757,7 +762,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:3 Louse (Hard)", () ->
+        addMonster("CoopBoardGame:3 Louse (Hard)", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGRedLouse(-350.0F, 10.0F, true, "S22"),
@@ -766,14 +771,18 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Large Slime", () -> new BGAcidSlime_L(-480.0F, 0.0F, false));
-        addMonster("BoardGame:Sneaky Gremlin Team", () -> new BGGremlinSneaky(-220.0F, 0.0F, true));
-        addMonster("BoardGame:Angry Gremlin Team", () -> new BGGremlinAngry(-220.0F, 0.0F, true));
-        addMonster("BoardGame:Blue Slaver", () -> new BGBlueSlaver(0.0F, 0.0F, "W3D"));
-        addMonster("BoardGame:Red Slaver", () -> new BGRedSlaver(0.0F, 0.0F, "DV3"));
-        addMonster("BoardGame:Looter", () -> new BGLooter(0.0F, 0.0F, false));
-        addMonster("BoardGame:Jaw Worm (Medium)", () -> new BGJawWorm(0, 0, 1, ""));
-        addMonster("BoardGame:A7 Jaw Worm and Spike Slime", () ->
+        addMonster("CoopBoardGame:Large Slime", () -> new BGAcidSlime_L(-480.0F, 0.0F, false));
+        addMonster("CoopBoardGame:Sneaky Gremlin Team", () ->
+            new BGGremlinSneaky(-220.0F, 0.0F, true)
+        );
+        addMonster("CoopBoardGame:Angry Gremlin Team", () ->
+            new BGGremlinAngry(-220.0F, 0.0F, true)
+        );
+        addMonster("CoopBoardGame:Blue Slaver", () -> new BGBlueSlaver(0.0F, 0.0F, "W3D"));
+        addMonster("CoopBoardGame:Red Slaver", () -> new BGRedSlaver(0.0F, 0.0F, "DV3"));
+        addMonster("CoopBoardGame:Looter", () -> new BGLooter(0.0F, 0.0F, false));
+        addMonster("CoopBoardGame:Jaw Worm (Medium)", () -> new BGJawWorm(0, 0, 1, ""));
+        addMonster("CoopBoardGame:A7 Jaw Worm and Spike Slime", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGJawWorm(-200, 0, 3, ""),
@@ -781,7 +790,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:A7 Looter and Acid Slime", () ->
+        addMonster("CoopBoardGame:A7 Looter and Acid Slime", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGLooter(-200, 0, false),
@@ -789,9 +798,9 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Lagavulin", () -> new BGLagavulin());
-        addMonster("BoardGame:Gremlin Nob", () -> new BGGremlinNob(0, 0));
-        addMonster("BoardGame:3 Sentries", () ->
+        addMonster("CoopBoardGame:Lagavulin", () -> new BGLagavulin());
+        addMonster("CoopBoardGame:Gremlin Nob", () -> new BGGremlinNob(0, 0));
+        addMonster("CoopBoardGame:3 Sentries", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGSentry(-330.0F, 25.0F, "3D"),
@@ -801,11 +810,11 @@ public class BoardGame
             )
         );
         //note that we create boss encounters on-demand in AbstractBGDungeon; these are just here to register to console
-        addMonster("BoardGame:Hexaghost", () -> new BGHexaghost());
-        addMonster("BoardGame:SlimeBoss", () -> new BGSlimeBoss());
-        addMonster("BoardGame:TheGuardian", () -> new BGTheGuardian());
+        addMonster("CoopBoardGame:Hexaghost", () -> new BGHexaghost());
+        addMonster("CoopBoardGame:SlimeBoss", () -> new BGSlimeBoss());
+        addMonster("CoopBoardGame:TheGuardian", () -> new BGTheGuardian());
 
-        addMonster("BoardGame:Centurion A", () ->
+        addMonster("CoopBoardGame:Centurion A", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGCenturion(-200.0F, -15.0F, "B3"),
@@ -813,7 +822,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Centurion B", () ->
+        addMonster("CoopBoardGame:Centurion B", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGCenturion(-240.0F, 0.0F, "3B"),
@@ -821,7 +830,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Looter (Hard)", () ->
+        addMonster("CoopBoardGame:Looter (Hard)", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGLooter(-200.0F, -15.0F, true),
@@ -829,7 +838,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Another Looter (Hard)", () ->
+        addMonster("CoopBoardGame:Another Looter (Hard)", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGLooter(-240, -0.0F, true),
@@ -837,7 +846,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Chosen and Cultist", () ->
+        addMonster("CoopBoardGame:Chosen and Cultist", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGChosen(-230.0F, 15.0F, 14),
@@ -845,15 +854,15 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Chosen and Byrd", () ->
+        addMonster("CoopBoardGame:Chosen and Byrd", () ->
             new MonsterGroup(
                 new AbstractMonster[] { new BGChosen(-170.0F, 0.0F, 16), new BGByrd(80.0F, 70.0F) }
             )
         );
-        addMonster("BoardGame:Shelled Parasite", () ->
+        addMonster("CoopBoardGame:Shelled Parasite", () ->
             new MonsterGroup(new AbstractMonster[] { new BGShelledParasite() })
         );
-        addMonster("BoardGame:A7 Shelled Parasite and Fungi Beast", () ->
+        addMonster("CoopBoardGame:A7 Shelled Parasite and Fungi Beast", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGShelledParasite(-260.0F, 15.0F),
@@ -862,7 +871,7 @@ public class BoardGame
             )
         );
 
-        addMonster("BoardGame:3 Cultists", () ->
+        addMonster("CoopBoardGame:3 Cultists", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGCultist(-465.0F, -20.0F, false),
@@ -871,7 +880,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:3 Byrds", () ->
+        addMonster("CoopBoardGame:3 Byrds", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGByrd(-360.0F, MathUtils.random(25.0F, 70.0F), "1S3", 5),
@@ -880,10 +889,10 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:SphericGuardian", () ->
+        addMonster("CoopBoardGame:SphericGuardian", () ->
             new MonsterGroup(new AbstractMonster[] { new BGSphericGuardian() })
         );
-        addMonster("BoardGame:A7 Spheric Guardian and Sentry A", () ->
+        addMonster("CoopBoardGame:A7 Spheric Guardian and Sentry A", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGSphericGuardian(-305.0F, 30.0F),
@@ -891,16 +900,16 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:SnakePlant", () ->
+        addMonster("CoopBoardGame:SnakePlant", () ->
             new MonsterGroup(new AbstractMonster[] { new BGSnakePlant(-30.0F, -30.0F) })
         );
-        addMonster("BoardGame:Snecko", () ->
+        addMonster("CoopBoardGame:Snecko", () ->
             new MonsterGroup(new AbstractMonster[] { new BGSnecko() })
         );
-        addMonster("BoardGame:Book of Stabbing", () ->
+        addMonster("CoopBoardGame:Book of Stabbing", () ->
             new MonsterGroup((AbstractMonster) new BGBookOfStabbing())
         );
-        addMonster("BoardGame:Gremlin Leader", () ->
+        addMonster("CoopBoardGame:Gremlin Leader", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGGremlinPlaceholder(),
@@ -909,7 +918,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Taskmaster", () ->
+        addMonster("CoopBoardGame:Taskmaster", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     new BGBlueSlaver(-385.0F, -15.0F),
@@ -919,13 +928,13 @@ public class BoardGame
             )
         );
 
-        addMonster("BoardGame:Automaton", () -> new BGBronzeAutomaton());
-        addMonster("BoardGame:Collector", () ->
+        addMonster("CoopBoardGame:Automaton", () -> new BGBronzeAutomaton());
+        addMonster("CoopBoardGame:Collector", () ->
             new MonsterGroup(new AbstractMonster[] { new BGTheCollector() })
         );
-        addMonster("BoardGame:Champ", () -> new BGChamp());
+        addMonster("CoopBoardGame:Champ", () -> new BGChamp());
 
-        addMonster("BoardGame:Jaw Worms (Hard)", () ->
+        addMonster("CoopBoardGame:Jaw Worms (Hard)", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     (AbstractMonster) new BGJawWorm(-490.0F, -5.0F, 2, "SDA"),
@@ -934,10 +943,10 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Spire Growth", () ->
+        addMonster("CoopBoardGame:Spire Growth", () ->
             new MonsterGroup(new AbstractMonster[] { (AbstractMonster) new BGSpireGrowth() })
         );
-        addMonster("BoardGame:Exploder and Friends", () ->
+        addMonster("CoopBoardGame:Exploder and Friends", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     (AbstractMonster) new BGExploder(-480.0F, 6.0F),
@@ -946,7 +955,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Repulsor and Friends", () ->
+        addMonster("CoopBoardGame:Repulsor and Friends", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     (AbstractMonster) new BGRepulsor(-480.0F, 6.0F, "D3"),
@@ -955,7 +964,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:A7 Exploder and Friends", () ->
+        addMonster("CoopBoardGame:A7 Exploder and Friends", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     (AbstractMonster) new BGExploder(-480.0F, 6.0F),
@@ -965,7 +974,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:A7 Repulsor and Friends", () ->
+        addMonster("CoopBoardGame:A7 Repulsor and Friends", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     (AbstractMonster) new BGRepulsor(-435.0F, 10.0F, "D3"),
@@ -974,26 +983,26 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Orb Walker v2.3", () ->
+        addMonster("CoopBoardGame:Orb Walker v2.3", () ->
             new MonsterGroup(
                 new AbstractMonster[] { (AbstractMonster) new BGOrbWalker(-30.0F, 20.0F, "23") }
             )
         );
-        addMonster("BoardGame:Orb Walker v3.2", () ->
+        addMonster("CoopBoardGame:Orb Walker v3.2", () ->
             new MonsterGroup(
                 new AbstractMonster[] { (AbstractMonster) new BGOrbWalker(0.0F, 26.0F, "32") }
             )
         );
-        addMonster("BoardGame:Transient", () ->
+        addMonster("CoopBoardGame:Transient", () ->
             new MonsterGroup(new AbstractMonster[] { (AbstractMonster) new BGTransient() })
         );
-        addMonster("BoardGame:Maw", () ->
+        addMonster("CoopBoardGame:Maw", () ->
             new MonsterGroup(new AbstractMonster[] { (AbstractMonster) new BGMaw(-70.0F, 20.0F) })
         );
-        addMonster("BoardGame:Writhing Mass", () ->
+        addMonster("CoopBoardGame:Writhing Mass", () ->
             new MonsterGroup(new AbstractMonster[] { (AbstractMonster) new BGWrithingMass() })
         );
-        addMonster("BoardGame:3 Darklings", () ->
+        addMonster("CoopBoardGame:3 Darklings", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     //(AbstractMonster)new BGDarkling(-440.0F, 10.0F,"----"),
@@ -1003,19 +1012,19 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Giant Head", () ->
+        addMonster("CoopBoardGame:Giant Head", () ->
             new MonsterGroup(new AbstractMonster[] { (AbstractMonster) new BGGiantHead() })
         );
-        addMonster("BoardGame:Nemesis", () ->
+        addMonster("CoopBoardGame:Nemesis", () ->
             new MonsterGroup(new AbstractMonster[] { (AbstractMonster) new BGNemesis() })
         );
-        addMonster("BoardGame:Reptomancer", () ->
+        addMonster("CoopBoardGame:Reptomancer", () ->
             new MonsterGroup(new AbstractMonster[] { (AbstractMonster) new BGReptomancer() })
         );
-        addMonster("BoardGame:Time Eater", () ->
+        addMonster("CoopBoardGame:Time Eater", () ->
             new MonsterGroup(new AbstractMonster[] { (AbstractMonster) new BGTimeEater() })
         );
-        addMonster("BoardGame:Awakened One", () ->
+        addMonster("CoopBoardGame:Awakened One", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     (AbstractMonster) new BGCultist(-590.0F, 10.0F, false),
@@ -1024,7 +1033,7 @@ public class BoardGame
                 }
             )
         );
-        addMonster("BoardGame:Donu and Deca", () ->
+        addMonster("CoopBoardGame:Donu and Deca", () ->
             new MonsterGroup(
                 new AbstractMonster[] {
                     (AbstractMonster) new BGDeca(),
@@ -1033,12 +1042,12 @@ public class BoardGame
             )
         );
 
-        addMonster("BoardGame:Shield and Spear", () ->
+        addMonster("CoopBoardGame:Shield and Spear", () ->
             new MonsterGroup(
                 new AbstractMonster[] { new BGSpireSpear(-200, 25), new BGSpireShield(0, -100) }
             )
         );
-        addMonster("BoardGame:The Heart", () ->
+        addMonster("CoopBoardGame:The Heart", () ->
             new MonsterGroup(new AbstractMonster[] { (AbstractMonster) new BGCorruptHeart() })
         );
 
@@ -1702,7 +1711,7 @@ public class BoardGame
     public void receiveEditRelics() {
         logger.info("Adding relics");
 
-        new AutoAdd("BoardGame")
+        new AutoAdd("CoopBoardGame")
             .packageFilter(AbstractBGRelic.class)
             .any(AbstractBGRelic.class, (info, relic) -> {
                 BaseMod.addRelicToCustomPool(relic, BGIronclad.Enums.BG_RED);
@@ -1778,7 +1787,7 @@ public class BoardGame
 
         //DONE: Rename the "DefaultMod" with the modid in your ModTheSpire.json file
         //DONE: The artifact mentioned in ModTheSpire.json is the artifactId in pom.xml you should've edited earlier
-        new AutoAdd("BoardGame") // ${project.artifactId}
+        new AutoAdd("CoopBoardGame") // ${project.artifactId}
             .packageFilter(AbstractDefaultCard.class) // filters to any class in the same package as AbstractDefaultCard, nested packages included
             .setDefaultSeen(true)
             .cards();

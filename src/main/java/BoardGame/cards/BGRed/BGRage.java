@@ -1,8 +1,8 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.actions.BGRageAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
+import CoopBoardGame.actions.BGRageAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -19,7 +19,7 @@ import com.megacrit.cardcrawl.vfx.combat.ShockWaveEffect;
 public class BGRage extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGRage"
+        "CoopBoardGame:BGRage"
     );
     public static final String ID = "BGRage";
 

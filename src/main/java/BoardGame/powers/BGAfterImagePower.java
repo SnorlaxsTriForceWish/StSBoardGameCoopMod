@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -28,15 +28,15 @@ import javassist.CtBehavior;
 
 public class BGAfterImagePower extends AbstractBGPower {
 
-    public static final String POWER_ID = "BoardGame:BGAfterImagePower";
+    public static final String POWER_ID = "CoopBoardGame:BGAfterImagePower";
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGAfterImagePower"
+        "CoopBoardGame:BGAfterImagePower"
     );
 
     public BGAfterImagePower(AbstractCreature owner, int amount) {
         this.name = powerStrings.NAME;
-        this.ID = "BoardGame:BGAfterImagePower";
+        this.ID = "CoopBoardGame:BGAfterImagePower";
         this.owner = owner;
         this.amount = amount;
         updateDescription();
@@ -126,15 +126,15 @@ public class BGAfterImagePower extends AbstractBGPower {
                 return;
             }
             if (__instance.isDone) {
-                //BoardGame.BoardGame.logger.info("BGAfterImagePower.update.postfix.isDone...");
-                //BoardGame.BoardGame.logger.info("...compare "+GameActionManager.totalDiscardedThisTurn+" , "+DiscardTotalField.discardTotal.get(__instance)+" ...");
+                //CoopBoardGame.CoopBoardGame.logger.info("BGAfterImagePower.update.postfix.isDone...");
+                //CoopBoardGame.CoopBoardGame.logger.info("...compare "+GameActionManager.totalDiscardedThisTurn+" , "+DiscardTotalField.discardTotal.get(__instance)+" ...");
                 if (
                     GameActionManager.totalDiscardedThisTurn >
                     DiscardTotalField.discardTotal.get(__instance)
                 ) {
-                    //BoardGame.BoardGame.logger.info("...success!  gain 1 block if we have afterimage");
+                    //CoopBoardGame.CoopBoardGame.logger.info("...success!  gain 1 block if we have afterimage");
                     AbstractPower pw = AbstractDungeon.player.getPower(
-                        "BoardGame:BGAfterImagePower"
+                        "CoopBoardGame:BGAfterImagePower"
                     );
                     if (pw != null) {
                         ((BGAfterImagePower) pw).onDiscardAction();

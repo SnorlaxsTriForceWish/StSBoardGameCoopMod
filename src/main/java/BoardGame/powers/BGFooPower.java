@@ -1,4 +1,4 @@
-//package BoardGame.powers;
+//package CoopBoardGame.powers;
 //
 //import com.megacrit.cardcrawl.actions.AbstractGameAction;
 //import com.megacrit.cardcrawl.actions.common.ChangeStateAction;
@@ -9,12 +9,12 @@
 //import com.megacrit.cardcrawl.core.CardCrawlGame;
 //import com.megacrit.cardcrawl.localization.PowerStrings;
 //import com.megacrit.cardcrawl.monsters.AbstractMonster;
-//import BoardGame.monsters.AbstractBGMonster;
+//import CoopBoardGame.monsters.AbstractBGMonster;
 //import com.megacrit.cardcrawl.powers.AbstractPower;
 //
 //public class BGFooPower extends AbstractBGPower {
 //    public static final String POWER_ID = "BGFooPower";
-//    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("BoardGame:Curl Up");
+//    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings("CoopBoardGame:Curl Up");
 //    public static final String NAME = powerStrings.NAME;
 //    public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 //

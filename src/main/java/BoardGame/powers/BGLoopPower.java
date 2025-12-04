@@ -1,8 +1,8 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.OrbSelectScreenAction;
-import BoardGame.orbs.BGDark;
-import BoardGame.screen.OrbSelectScreen;
+import CoopBoardGame.actions.OrbSelectScreenAction;
+import CoopBoardGame.orbs.BGDark;
+import CoopBoardGame.screen.OrbSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -15,9 +15,9 @@ import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 public class BGLoopPower extends AbstractBGPower {
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGLoopPower"
+        "CoopBoardGame:BGLoopPower"
     );
-    public static final String POWER_ID = "BoardGame:BGLoopPower";
+    public static final String POWER_ID = "CoopBoardGame:BGLoopPower";
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
@@ -25,7 +25,7 @@ public class BGLoopPower extends AbstractBGPower {
 
     public BGLoopPower(AbstractCreature owner, int amount) {
         this.name = NAME;
-        this.ID = "BoardGame:BGLoopPower" + loopIdOffset;
+        this.ID = "CoopBoardGame:BGLoopPower" + loopIdOffset;
         loopIdOffset++;
         this.owner = owner;
         this.amount = amount;
@@ -55,7 +55,7 @@ public class BGLoopPower extends AbstractBGPower {
         }
         if (!isEmpty) {
             flash();
-            BoardGame.BoardGame.logger.info("BGLoopPower.atEndOfTurn");
+            CoopBoardGame.CoopBoardGame.logger.info("BGLoopPower.atEndOfTurn");
             OrbSelectScreen.OrbSelectAction ossAction = target -> {
                 //TODO LATER: this code currently runs even if we pick EmptyOrbSlot or BGDark, so don't add any side effects
                 //TODO LATER: onEndOfTurn currently uses addToBot, so some events will be out of order

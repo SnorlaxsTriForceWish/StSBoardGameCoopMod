@@ -1,10 +1,10 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import static BoardGame.BoardGame.makeRelicOutlinePath;
-import static BoardGame.BoardGame.makeRelicPath;
+import static CoopBoardGame.CoopBoardGame.makeRelicOutlinePath;
+import static CoopBoardGame.CoopBoardGame.makeRelicPath;
 
-import BoardGame.BoardGame;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.util.TextureLoader;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
@@ -28,7 +28,7 @@ public class DefaultClickableRelic extends CustomRelic implements ClickableRelic
      */
 
     // ID, images, text.
-    public static final String ID = BoardGame.makeID("DefaultClickableRelic");
+    public static final String ID = CoopBoardGame.makeID("DefaultClickableRelic");
 
     private static final Texture IMG = TextureLoader.getTexture(
         makeRelicPath("default_clickable_relic.png")

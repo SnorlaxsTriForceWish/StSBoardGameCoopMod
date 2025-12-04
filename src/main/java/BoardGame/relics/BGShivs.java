@@ -1,10 +1,10 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import static BoardGame.BoardGame.makeRelicOutlinePath;
-import static BoardGame.BoardGame.makeRelicPath;
+import static CoopBoardGame.CoopBoardGame.makeRelicOutlinePath;
+import static CoopBoardGame.CoopBoardGame.makeRelicPath;
 
-import BoardGame.actions.BGUseShivAction;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.actions.BGUseShivAction;
+import CoopBoardGame.util.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class BGShivs extends AbstractBGRelic implements ClickableRelic {
 
-    public static final String ID = "BoardGame:BGShivs";
+    public static final String ID = "CoopBoardGame:BGShivs";
     private static final String IMGPATH = "BGshivs.png";
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath(IMGPATH));
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath(IMGPATH));
@@ -40,7 +40,7 @@ public class BGShivs extends AbstractBGRelic implements ClickableRelic {
     public void updateDescription(int accuracy) {
         this.accuracy = accuracy;
         this.description = getUpdatedDescription();
-        //BoardGame.logger.info("updateDescription: "+this.description);
+        //CoopBoardGame.logger.info("updateDescription: "+this.description);
         this.tips.clear();
         this.tips.add(new PowerTip(this.name, this.description));
         initializeTips();
@@ -70,7 +70,7 @@ public class BGShivs extends AbstractBGRelic implements ClickableRelic {
             // If it has been used this turn, or the player doesn't actually have the relic (i.e. it's on display in the shop room), or it's the enemy's turn
             return; // Don't do anything.
         }
-        //final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        //final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("BGTheDieRelic.onRightClick");
         if (this.counter > 0) {
             addToBot(

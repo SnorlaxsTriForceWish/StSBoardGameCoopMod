@@ -1,4 +1,4 @@
-package BoardGame.patches.bestiary;
+package CoopBoardGame.patches.bestiary;
 
 import Bestiary.BestiaryMod;
 import Bestiary.database.*;
@@ -8,12 +8,12 @@ import Bestiary.ui.MonsterOverlay;
 import Bestiary.ui.SmartLabel;
 import Bestiary.utils.ExtraColors;
 import Bestiary.utils.ExtraFonts;
-import BoardGame.events.BGColosseum;
-import BoardGame.events.BGDeadAdventurer;
-import BoardGame.events.BGHallwayEncounter;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.MonsterGroupRewardsList;
-import BoardGame.monsters.bgbeyond.BGAwakenedOne;
+import CoopBoardGame.events.BGColosseum;
+import CoopBoardGame.events.BGDeadAdventurer;
+import CoopBoardGame.events.BGHallwayEncounter;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.MonsterGroupRewardsList;
+import CoopBoardGame.monsters.bgbeyond.BGAwakenedOne;
 import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
@@ -206,15 +206,15 @@ public class OverlayPatches {
                 ArrayList<String> dice = new ArrayList<>();
                 if (len == 2) {
                     dice.add(
-                        "[BoardGame:Die1Icon] [BoardGame:Die2Icon] [BoardGame:Die3Icon] [] [] []"
+                        "[CoopBoardGame:Die1Icon] [CoopBoardGame:Die2Icon] [CoopBoardGame:Die3Icon] [] [] []"
                     );
                     dice.add(
-                        "[BoardGame:Die4Icon] [BoardGame:Die5Icon] [BoardGame:Die6Icon] [] [] []"
+                        "[CoopBoardGame:Die4Icon] [CoopBoardGame:Die5Icon] [CoopBoardGame:Die6Icon] [] [] []"
                     );
                 } else if (len == 3) {
-                    dice.add("[BoardGame:Die1Icon] [BoardGame:Die2Icon] [] [] []");
-                    dice.add("[BoardGame:Die3Icon] [BoardGame:Die4Icon] [] [] []");
-                    dice.add("[BoardGame:Die5Icon] [BoardGame:Die6Icon] [] [] []");
+                    dice.add("[CoopBoardGame:Die1Icon] [CoopBoardGame:Die2Icon] [] [] []");
+                    dice.add("[CoopBoardGame:Die3Icon] [CoopBoardGame:Die4Icon] [] [] []");
+                    dice.add("[CoopBoardGame:Die5Icon] [CoopBoardGame:Die6Icon] [] [] []");
                 }
                 for (int i = 0; i < len; i += 1) {
                     String move = String.valueOf(

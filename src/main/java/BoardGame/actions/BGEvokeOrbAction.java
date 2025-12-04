@@ -1,8 +1,8 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.orbs.BGDark;
-import BoardGame.screen.OrbSelectScreen;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.orbs.BGDark;
+import CoopBoardGame.screen.OrbSelectScreen;
 import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
@@ -85,7 +85,7 @@ public class BGEvokeOrbAction extends AbstractGameAction {
 
             if (___duration == ___startDuration) {
                 for (int i = 0; i < ___orbCount; i += 1) {
-                    BoardGame.BoardGame.logger.info("NEW BGEVOKEORBACTION");
+                    CoopBoardGame.CoopBoardGame.logger.info("NEW BGEVOKEORBACTION");
                     //first check if we got here by channeling a dark orb
                     // -- if we did, remember that in case we're at the dark orb limit
                     AbstractOrb nextOrb = null;

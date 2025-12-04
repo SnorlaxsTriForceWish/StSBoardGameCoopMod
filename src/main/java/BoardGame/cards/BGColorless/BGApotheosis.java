@@ -1,8 +1,8 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGColorless;
-import BoardGame.powers.BGApotheosisPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGColorless;
+import CoopBoardGame.powers.BGApotheosisPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -17,7 +17,7 @@ public class BGApotheosis extends AbstractBGCard {
 
     public static final String ID = "BGApotheosis";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGApotheosis"
+        "CoopBoardGame:BGApotheosis"
     );
 
     public BGApotheosis() {

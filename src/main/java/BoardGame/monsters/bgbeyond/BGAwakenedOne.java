@@ -1,9 +1,9 @@
-package BoardGame.monsters.bgbeyond;
+package CoopBoardGame.monsters.bgbeyond;
 
-import BoardGame.cards.BGStatus.BGVoidCard;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.powers.BGCuriosityPower;
-import BoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.cards.BGStatus.BGVoidCard;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.powers.BGCuriosityPower;
+import CoopBoardGame.relics.BGTheDieRelic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

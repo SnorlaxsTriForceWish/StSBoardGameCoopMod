@@ -1,8 +1,8 @@
-package BoardGame.cards.BGBlue;
+package CoopBoardGame.cards.BGBlue;
 
-import BoardGame.actions.BGCoreSurgeAttackAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGDefect;
+import CoopBoardGame.actions.BGCoreSurgeAttackAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGDefect;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGCoreSurge extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGCoreSurge"
+        "CoopBoardGame:BGCoreSurge"
     );
     public static final String ID = "BGCoreSurge";
 

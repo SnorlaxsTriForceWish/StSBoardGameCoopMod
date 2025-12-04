@@ -1,7 +1,7 @@
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGSilent;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGSilent;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 public class BGSlice extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGSlice"
+        "CoopBoardGame:BGSlice"
     );
     public static final String ID = "BGSlice";
 
@@ -46,7 +46,7 @@ public class BGSlice extends AbstractBGCard {
 
     public static int checkShivs() {
         int total = 0;
-        AbstractRelic shivs = AbstractDungeon.player.getRelic("BoardGame:BGShivs");
+        AbstractRelic shivs = AbstractDungeon.player.getRelic("CoopBoardGame:BGShivs");
         if (shivs != null) {
             if (shivs.counter > 0) {
                 total = 1;

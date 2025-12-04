@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.BGForcedWaitAction;
+import CoopBoardGame.actions.BGForcedWaitAction;
 import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
@@ -23,7 +23,7 @@ public class BGAngerPower extends AbstractBGPower implements AfterCompletelyReso
 
     public static final String POWER_ID = "BGAnger";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:Anger"
+        "CoopBoardGame:Anger"
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;

@@ -1,6 +1,6 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.rewards.TinyHouseUpgrade1Card;
+import CoopBoardGame.rewards.TinyHouseUpgrade1Card;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PotionHelper;
 import com.megacrit.cardcrawl.relics.AbstractRelic;

@@ -1,4 +1,4 @@
-package BoardGame.patches;
+package CoopBoardGame.patches;
 
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;

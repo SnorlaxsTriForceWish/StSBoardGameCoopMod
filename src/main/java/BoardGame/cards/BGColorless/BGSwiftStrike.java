@@ -1,7 +1,7 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGSwiftStrike extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGSwiftStrike"
+        "CoopBoardGame:BGSwiftStrike"
     );
     public static final String ID = "BGSwift Strike";
 

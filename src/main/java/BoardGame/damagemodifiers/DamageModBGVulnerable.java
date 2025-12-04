@@ -1,6 +1,6 @@
-package BoardGame.damagemodifiers;
+package CoopBoardGame.damagemodifiers;
 
-import BoardGame.BoardGame;
+import CoopBoardGame.CoopBoardGame;
 import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.damagemods.AbstractDamageModifier;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 
 public class DamageModBGVulnerable extends AbstractDamageModifier {
 
-    public static final String ID = BoardGame.makeID("BGVulnerableDamage");
+    public static final String ID = CoopBoardGame.makeID("BGVulnerableDamage");
     public final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
     TooltipInfo leechTooltip = null;

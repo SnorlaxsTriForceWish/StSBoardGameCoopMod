@@ -1,6 +1,6 @@
-package BoardGame.shop;
+package CoopBoardGame.shop;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 public class BGMerchant {
 
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGMerchant"
+        "CoopBoardGame:BGMerchant"
     );
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
 
@@ -50,7 +50,7 @@ public class BGMerchant {
         ) {
             if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 //if(false){
-                BoardGame.BoardGame.logger.info("Rolling BG MERCHANT CARDS");
+                CoopBoardGame.CoopBoardGame.logger.info("Rolling BG MERCHANT CARDS");
                 merchant.anim = new AnimatedNpc(
                     Merchant.DRAW_X + 256.0F * Settings.scale,
                     AbstractDungeon.floorY + 30.0F * Settings.scale,

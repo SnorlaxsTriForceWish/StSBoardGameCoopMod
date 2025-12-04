@@ -1,4 +1,4 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;

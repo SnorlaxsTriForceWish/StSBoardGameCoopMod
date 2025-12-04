@@ -1,11 +1,11 @@
-package BoardGame.monsters.bgending;
+package CoopBoardGame.monsters.bgending;
 
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
-import BoardGame.powers.BGDifferentRowsPower;
-import BoardGame.powers.BGSurroundedPower;
-import BoardGame.powers.BGZeroDamagePower;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.powers.BGDifferentRowsPower;
+import CoopBoardGame.powers.BGSurroundedPower;
+import CoopBoardGame.powers.BGZeroDamagePower;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;

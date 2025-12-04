@@ -1,8 +1,8 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.actions.BGDarkShacklesAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.actions.BGDarkShacklesAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGDarkShackles extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGDarkShackles"
+        "CoopBoardGame:BGDarkShackles"
     );
     public static final String ID = "BGDarkShackles";
 

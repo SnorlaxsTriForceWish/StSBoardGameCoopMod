@@ -1,8 +1,8 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.dungeons.BGExordium;
-import BoardGame.relics.BGDiscardedHallwayEvent;
-import BoardGame.relics.BGSsserpentHead;
+import CoopBoardGame.dungeons.BGExordium;
+import CoopBoardGame.relics.BGDiscardedHallwayEvent;
+import CoopBoardGame.relics.BGSsserpentHead;
 import basemod.ReflectionHacks;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -19,7 +19,7 @@ public class BGHallwayEncounter extends AbstractEvent {
 
     private static final Logger logger = LogManager.getLogger(BGHallwayEncounter.class.getName());
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGPlaceholderEvent"
+        "CoopBoardGame:BGPlaceholderEvent"
     );
     public static final String NAME = eventStrings.NAME;
 

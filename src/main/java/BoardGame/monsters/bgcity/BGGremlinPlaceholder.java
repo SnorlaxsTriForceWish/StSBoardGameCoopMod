@@ -1,7 +1,7 @@
-package BoardGame.monsters.bgcity;
+package CoopBoardGame.monsters.bgcity;
 
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class BGGremlinPlaceholder extends AbstractBGMonster implements BGDamageIcons {

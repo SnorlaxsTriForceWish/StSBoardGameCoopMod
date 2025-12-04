@@ -1,4 +1,4 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
@@ -18,7 +18,7 @@ public class BGUseMiracleAction extends AbstractGameAction {
     }
 
     public void update() {
-        AbstractRelic relic = AbstractDungeon.player.getRelic("BoardGame:BGMiracles");
+        AbstractRelic relic = AbstractDungeon.player.getRelic("CoopBoardGame:BGMiracles");
 
         if (relic != null) {
             if (relic.counter > 0) {

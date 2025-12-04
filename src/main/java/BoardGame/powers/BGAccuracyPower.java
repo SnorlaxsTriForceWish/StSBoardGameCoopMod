@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.relics.BGShivs;
+import CoopBoardGame.relics.BGShivs;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -12,7 +12,7 @@ public class BGAccuracyPower extends AbstractBGPower {
     public static final String POWER_ID = "BGAccuracy";
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGAccuracyPower"
+        "CoopBoardGame:BGAccuracyPower"
     );
 
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
@@ -39,7 +39,7 @@ public class BGAccuracyPower extends AbstractBGPower {
 
     private void updateExistingShivs() {
         if (AbstractDungeon.player != null) {
-            AbstractRelic shivs = AbstractDungeon.player.getRelic("BoardGame:BGShivs");
+            AbstractRelic shivs = AbstractDungeon.player.getRelic("CoopBoardGame:BGShivs");
             if (shivs != null) {
                 ((BGShivs) shivs).updateDescription(this.amount);
             }
@@ -48,7 +48,7 @@ public class BGAccuracyPower extends AbstractBGPower {
 
     public void onVictory() {
         if (AbstractDungeon.player != null) {
-            AbstractRelic shivs = AbstractDungeon.player.getRelic("BoardGame:BGShivs");
+            AbstractRelic shivs = AbstractDungeon.player.getRelic("CoopBoardGame:BGShivs");
             if (shivs != null) {
                 ((BGShivs) shivs).updateDescription(0);
             }

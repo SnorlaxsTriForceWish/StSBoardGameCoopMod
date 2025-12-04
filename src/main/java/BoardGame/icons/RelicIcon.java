@@ -1,6 +1,6 @@
-package BoardGame.icons;
+package CoopBoardGame.icons;
 
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.util.TextureLoader;
 import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.icons.AbstractCustomIcon;
 import java.util.ArrayList;
@@ -8,11 +8,11 @@ import java.util.List;
 
 public class RelicIcon extends AbstractCustomIcon {
 
-    public static final String ID = "BoardGame:Relic"; //reminder: "Icon" is automatically added
+    public static final String ID = "CoopBoardGame:Relic"; //reminder: "Icon" is automatically added
     private static RelicIcon singleton;
 
     public RelicIcon() {
-        super(ID, TextureLoader.getTexture("BoardGameResources/images/icons/relic.png"));
+        super(ID, TextureLoader.getTexture("CoopBoardGameResources/images/icons/relic.png"));
     }
 
     public static RelicIcon get() {
@@ -26,7 +26,7 @@ public class RelicIcon extends AbstractCustomIcon {
         List<TooltipInfo> list = new ArrayList<>();
         list.add(
             new TooltipInfo(
-                "[BoardGame:RelicIcon] Relic",
+                "[CoopBoardGame:RelicIcon] Relic",
                 "Draw a card from the relic deck. You may gain that relic or skip it."
             )
         );

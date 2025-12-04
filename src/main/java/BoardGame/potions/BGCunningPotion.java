@@ -1,6 +1,6 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
-import BoardGame.actions.BGUseShivAction;
+import CoopBoardGame.actions.BGUseShivAction;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -17,7 +17,7 @@ public class BGCunningPotion extends AbstractPotion {
 
     public static final String POTION_ID = "BGCunningPotion";
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGCunningPotion"
+        "CoopBoardGame:BGCunningPotion"
     );
 
     //TODO: decide whether we want this to proc Curl Up between attacks (currently waiting for all attacks to resolve)

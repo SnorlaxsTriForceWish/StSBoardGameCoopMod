@@ -1,8 +1,8 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.actions.BGFeedAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
+import CoopBoardGame.actions.BGFeedAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -17,7 +17,7 @@ import com.megacrit.cardcrawl.vfx.combat.BiteEffect;
 public class BGFeed extends AbstractBGCard {
 
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGFeed"
+        "CoopBoardGame:BGFeed"
     );
     public static final String ID = "BGFeed";
 

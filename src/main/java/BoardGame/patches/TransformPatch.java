@@ -1,8 +1,8 @@
-package BoardGame.patches;
+package CoopBoardGame.patches;
 
-import static BoardGame.characters.BGCurse.Enums.BG_CURSE;
+import static CoopBoardGame.characters.BGCurse.Enums.BG_CURSE;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;

@@ -1,4 +1,4 @@
-package BoardGame.cards;
+package CoopBoardGame.cards;
 
 import basemod.abstracts.CustomCard;
 

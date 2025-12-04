@@ -1,6 +1,6 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.powers.BGAkabekoPower;
+import CoopBoardGame.powers.BGAkabekoPower;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;

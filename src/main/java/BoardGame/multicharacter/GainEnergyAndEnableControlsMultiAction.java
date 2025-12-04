@@ -1,6 +1,6 @@
-package BoardGame.multicharacter;
+package CoopBoardGame.multicharacter;
 
-import BoardGame.multicharacter.patches.ContextPatches;
+import CoopBoardGame.multicharacter.patches.ContextPatches;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;

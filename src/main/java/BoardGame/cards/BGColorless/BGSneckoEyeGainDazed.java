@@ -1,8 +1,8 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.cards.BGStatus.BGDazed;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.cards.BGStatus.BGDazed;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -15,7 +15,7 @@ public class BGSneckoEyeGainDazed extends AbstractBGAttackCardChoice {
 
     public static final String ID = "BGSneckoEyeGainDazed";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGSneckoEyeGainDazed"
+        "CoopBoardGame:BGSneckoEyeGainDazed"
     );
 
     public BGSneckoEyeGainDazed() {

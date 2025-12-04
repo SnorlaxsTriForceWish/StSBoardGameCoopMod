@@ -1,6 +1,6 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
-import BoardGame.powers.BGVulnerablePower;
+import CoopBoardGame.powers.BGVulnerablePower;
 import basemod.BaseMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGFearPotion extends AbstractPotion {
 
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGFearPotion"
+        "CoopBoardGame:BGFearPotion"
     );
 
     public static final String POTION_ID = "BGFearPotion";
@@ -45,8 +45,8 @@ public class BGFearPotion extends AbstractPotion {
         //        //TODO: fix missing icon on keyword title
         this.tips.add(
             new PowerTip(
-                BaseMod.getKeywordTitle("boardgame:vulnerable"),
-                BaseMod.getKeywordDescription("boardgame:vulnerable")
+                BaseMod.getKeywordTitle("coopboardgame:vulnerable"),
+                BaseMod.getKeywordDescription("coopboardgame:vulnerable")
             )
         );
     }

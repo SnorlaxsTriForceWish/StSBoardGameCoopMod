@@ -1,7 +1,7 @@
-package BoardGame.cards.BGPurple;
+package CoopBoardGame.cards.BGPurple;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGWatcher;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGWatcher;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -17,7 +17,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 public class BGReachHeaven extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGReachHeaven"
+        "CoopBoardGame:BGReachHeaven"
     );
     public static final String ID = "BGReachHeaven";
 
@@ -39,7 +39,7 @@ public class BGReachHeaven extends AbstractBGCard {
     }
 
     public static int countMiracles(AbstractCard self) {
-        AbstractRelic r = AbstractDungeon.player.getRelic("BoardGame:BGMiracles");
+        AbstractRelic r = AbstractDungeon.player.getRelic("CoopBoardGame:BGMiracles");
         int count = 0;
         if (r != null) count += r.counter;
         return count;

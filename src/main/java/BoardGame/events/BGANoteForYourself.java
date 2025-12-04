@@ -1,11 +1,11 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.characters.BGDefect;
-import BoardGame.characters.BGIronclad;
-import BoardGame.characters.BGSilent;
-import BoardGame.characters.BGWatcher;
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.relics.BGPrismaticShard;
+import CoopBoardGame.characters.BGDefect;
+import CoopBoardGame.characters.BGIronclad;
+import CoopBoardGame.characters.BGSilent;
+import CoopBoardGame.characters.BGWatcher;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.relics.BGPrismaticShard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -19,7 +19,7 @@ public class BGANoteForYourself extends AbstractImageEvent {
 
     public static final String ID = "BGANoteForYourself";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGANoteForYourself"
+        "CoopBoardGame:BGANoteForYourself"
     );
     public static final String NAME = eventStrings.NAME;
 

@@ -1,8 +1,8 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.potions.BGGamblersBrew;
-import BoardGame.relics.AbstractBGRelic;
-import BoardGame.screen.RelicTradingScreen;
+import CoopBoardGame.potions.BGGamblersBrew;
+import CoopBoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.screen.RelicTradingScreen;
 import basemod.BaseMod;
 import com.badlogic.gdx.Gdx;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -18,7 +18,7 @@ public class BGTheJoust extends AbstractImageEvent implements LockRelicsEvent {
 
     public static final String ID = "BGTheJoust";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGTheJoust"
+        "CoopBoardGame:BGTheJoust"
     );
 
     public static final String NAME = eventStrings.NAME;

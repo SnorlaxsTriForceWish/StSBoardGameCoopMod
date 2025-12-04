@@ -1,6 +1,6 @@
-package BoardGame.icons;
+package CoopBoardGame.icons;
 
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.util.TextureLoader;
 import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.icons.AbstractCustomIcon;
 import java.util.ArrayList;
@@ -8,11 +8,11 @@ import java.util.List;
 
 public class SlimedIcon extends AbstractCustomIcon {
 
-    public static final String ID = "BoardGame:Slimed"; //reminder: "Icon" is automatically added
+    public static final String ID = "CoopBoardGame:Slimed"; //reminder: "Icon" is automatically added
     private static SlimedIcon singleton;
 
     public SlimedIcon() {
-        super(ID, TextureLoader.getTexture("BoardGameResources/images/icons/slime.png"));
+        super(ID, TextureLoader.getTexture("CoopBoardGameResources/images/icons/slime.png"));
     }
 
     public static SlimedIcon get() {
@@ -26,7 +26,7 @@ public class SlimedIcon extends AbstractCustomIcon {
         List<TooltipInfo> list = new ArrayList<>();
         list.add(
             new TooltipInfo(
-                "[BoardGame:SlimedIcon] Slimed",
+                "[CoopBoardGame:SlimedIcon] Slimed",
                 "Put in your discard pile. NL Play for [E] to Exhaust."
             )
         );

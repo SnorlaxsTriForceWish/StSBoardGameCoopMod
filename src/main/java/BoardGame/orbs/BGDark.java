@@ -1,7 +1,7 @@
-package BoardGame.orbs;
+package CoopBoardGame.orbs;
 
-import BoardGame.actions.BGDarkOrbEvokeAction;
-import BoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.actions.BGDarkOrbEvokeAction;
+import CoopBoardGame.relics.BGTheDieRelic;
 import basemod.abstracts.CustomOrb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -25,7 +25,7 @@ public class BGDark extends CustomOrb {
     public static final String ORB_ID = "BGDark";
 
     private static final OrbStrings orbString = CardCrawlGame.languagePack.getOrbString(
-        "BoardGame:BGDark"
+        "CoopBoardGame:BGDark"
     );
     public static final String[] DESCRIPTIONS = orbString.DESCRIPTION;
     private static final int PASSIVE_AMOUNT = 3;

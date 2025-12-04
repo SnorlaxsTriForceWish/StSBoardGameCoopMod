@@ -1,3 +1,3 @@
-package BoardGame.multicharacter;
+package CoopBoardGame.multicharacter;
 
 public class RelicPatches {}

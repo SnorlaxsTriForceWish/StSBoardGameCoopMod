@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.BGDiscardCorpseExplosionAction;
+import CoopBoardGame.actions.BGDiscardCorpseExplosionAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -13,10 +13,10 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGCorpseExplosionPower extends AbstractBGPower {
 
-    public static final String POWER_ID = "BoardGame:BGCorpseExplosionPower";
+    public static final String POWER_ID = "CoopBoardGame:BGCorpseExplosionPower";
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGCorpseExplosionPower"
+        "CoopBoardGame:BGCorpseExplosionPower"
     );
 
     public static final String NAME = powerStrings.NAME;
@@ -32,7 +32,7 @@ public class BGCorpseExplosionPower extends AbstractBGPower {
         AbstractCard originalcard
     ) {
         this.name = NAME;
-        this.ID = "BoardGame:BGCorpseExplosionPower";
+        this.ID = "CoopBoardGame:BGCorpseExplosionPower";
         this.owner = owner;
         this.amount = amount;
         this.type = AbstractPower.PowerType.DEBUFF;

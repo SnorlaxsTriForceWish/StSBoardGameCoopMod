@@ -1,7 +1,7 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.BGGainMiracleAction;
-import BoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.actions.BGGainMiracleAction;
+import CoopBoardGame.relics.BGTheDieRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
@@ -20,7 +20,7 @@ public class BGDevotionPower extends AbstractBGPower {
     public static final String POWER_ID = "BGDevotionPower";
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGDevotionPower"
+        "CoopBoardGame:BGDevotionPower"
     );
 
     public static final String NAME = powerStrings.NAME;

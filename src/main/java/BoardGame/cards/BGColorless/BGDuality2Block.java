@@ -1,7 +1,7 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -15,7 +15,7 @@ public class BGDuality2Block extends AbstractBGAttackCardChoice {
 
     public static final String ID = "BGDuality2Block";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGDuality2Block"
+        "CoopBoardGame:BGDuality2Block"
     );
 
     public BGDuality2Block() {

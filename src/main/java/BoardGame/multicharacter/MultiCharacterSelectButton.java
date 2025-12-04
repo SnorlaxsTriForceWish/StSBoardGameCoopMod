@@ -1,7 +1,7 @@
-package BoardGame.multicharacter;
+package CoopBoardGame.multicharacter;
 
-import BoardGame.BoardGame;
-import BoardGame.ui.OverlayMenuPatches;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.ui.OverlayMenuPatches;
 import basemod.BaseMod;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -62,7 +62,7 @@ public class MultiCharacterSelectButton {
         if (this.hb.clicked) {
             this.hb.clicked = false;
             if (!this.selected) {
-                boolean SOLO_MODE_ONLY = !BoardGame.ENABLE_TEST_FEATURES;
+                boolean SOLO_MODE_ONLY = !CoopBoardGame.ENABLE_TEST_FEATURES;
                 if (SOLO_MODE_ONLY) {
                     MultiCharacterSelectScreen screen =
                         (MultiCharacterSelectScreen) BaseMod.getCustomScreen(
@@ -201,7 +201,7 @@ public class MultiCharacterSelectButton {
     private int unlocksRemaining;
 }
 
-/* Location:              C:\Spire dev\BoardGame.jar!\BoardGame\multicharacter\MultiCharacterSelectButton.class
+/* Location:              C:\Spire dev\CoopBoardGame.jar!\CoopBoardGame\multicharacter\MultiCharacterSelectButton.class
  * Java compiler version: 8 (52.0)
  * JD-Core Version:       1.1.3
  */

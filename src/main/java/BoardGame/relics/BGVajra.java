@@ -1,9 +1,9 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.actions.BGActivateDieAbilityAction;
-import BoardGame.actions.GainTemporaryStrengthIfNotCappedAction;
-import BoardGame.powers.NilrysCodexCompatible;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.actions.BGActivateDieAbilityAction;
+import CoopBoardGame.actions.GainTemporaryStrengthIfNotCappedAction;
+import CoopBoardGame.powers.NilrysCodexCompatible;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;

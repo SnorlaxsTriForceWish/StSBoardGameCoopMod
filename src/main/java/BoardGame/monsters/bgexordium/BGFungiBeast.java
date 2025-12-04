@@ -1,11 +1,11 @@
-package BoardGame.monsters.bgexordium;
+package CoopBoardGame.monsters.bgexordium;
 
-import BoardGame.BoardGame;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
-import BoardGame.monsters.DieControlledMoves;
-import BoardGame.powers.BGSporeCloudPower;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.monsters.DieControlledMoves;
+import CoopBoardGame.powers.BGSporeCloudPower;
+import CoopBoardGame.thedie.TheDie;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -147,7 +147,7 @@ public class BGFungiBeast extends AbstractBGMonster implements BGDamageIcons, Di
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("Monster: TheDie "+ TheDie.monsterRoll);
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);

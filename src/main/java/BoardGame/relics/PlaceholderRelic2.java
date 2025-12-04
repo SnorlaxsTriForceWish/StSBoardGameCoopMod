@@ -1,10 +1,10 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import static BoardGame.BoardGame.makeRelicOutlinePath;
-import static BoardGame.BoardGame.makeRelicPath;
+import static CoopBoardGame.CoopBoardGame.makeRelicOutlinePath;
+import static CoopBoardGame.CoopBoardGame.makeRelicPath;
 
-import BoardGame.BoardGame;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.util.TextureLoader;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -21,7 +21,7 @@ public class PlaceholderRelic2 extends CustomRelic {
      */
 
     // ID, images, text.
-    public static final String ID = BoardGame.makeID("PlaceholderRelic2");
+    public static final String ID = CoopBoardGame.makeID("PlaceholderRelic2");
 
     private static final Texture IMG = TextureLoader.getTexture(
         makeRelicPath("placeholder_relic2.png")

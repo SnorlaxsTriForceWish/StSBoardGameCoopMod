@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.cards.BGColorless.BGShivSurrogate;
+import CoopBoardGame.cards.BGColorless.BGShivSurrogate;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 public class BGConclusionPower extends AbstractBGPower {
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGConclusionPower"
+        "CoopBoardGame:BGConclusionPower"
     );
     public static final String POWER_ID = "BGConclusionPower";
     public static final String NAME = powerStrings.NAME;
@@ -83,7 +83,7 @@ public class BGConclusionPower extends AbstractBGPower {
     //    public void renderAmount(SpriteBatch sb, float x, float y, Color c) {
     //        FontHelper.renderFontRightTopAligned(sb, FontHelper.powerAmountFont,
     //                Integer.toString(this.amount), x, y, this.fontScale, c);
-    ////        Logger logger = LogManager.getLogger(BoardGame.class.getName());
+    ////        Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
     ////        logger.info("TimeWarp render: "+x+" "+y+" "+c+" "+fontScale+" "+this.amount);
     //        super.renderAmount(sb,x,y,c);
     //    }

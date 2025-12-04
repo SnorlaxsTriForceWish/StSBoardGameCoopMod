@@ -1,7 +1,7 @@
-package BoardGame.cards;
+package CoopBoardGame.cards;
 
-import BoardGame.BoardGame;
-import BoardGame.characters.BGDefect;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.characters.BGDefect;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
 //TODO: exact wording of Golden Ticket card seems to have changed just before printing -- check physical copies when available
@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 
 public class BGGoldenTicket_B extends BGGoldenTicket {
 
-    public static final String ID = BoardGame.makeID("GoldenTicket_B");
+    public static final String ID = CoopBoardGame.makeID("GoldenTicket_B");
     public static final CardColor COLOR = BGDefect.Enums.BG_BLUE;
 
     public BGGoldenTicket_B() {

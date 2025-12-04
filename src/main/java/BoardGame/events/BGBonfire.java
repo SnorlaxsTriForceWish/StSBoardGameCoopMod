@@ -1,4 +1,4 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
 import static com.megacrit.cardcrawl.cards.AbstractCard.CardRarity.CURSE;
 
@@ -17,7 +17,7 @@ public class BGBonfire extends AbstractImageEvent {
 
     public static final String ID = "BGBonfire Elementals";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGBonfire Elementals"
+        "CoopBoardGame:BGBonfire Elementals"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

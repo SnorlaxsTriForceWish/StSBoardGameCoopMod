@@ -1,4 +1,4 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.getRewardCards;
 
@@ -22,7 +22,7 @@ public class BGKnowingSkull extends AbstractImageEvent {
     private static final Logger logger = LogManager.getLogger(BGKnowingSkull.class.getName());
     public static final String ID = "BGKnowing Skull";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGKnowing Skull"
+        "CoopBoardGame:BGKnowing Skull"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

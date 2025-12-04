@@ -1,4 +1,4 @@
-//package BoardGame.shop;
+//package CoopBoardGame.shop;
 //
 //import com.badlogic.gdx.graphics.Color;
 //import com.badlogic.gdx.graphics.Texture;

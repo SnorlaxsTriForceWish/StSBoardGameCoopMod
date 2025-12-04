@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.BGPlayDrawnCardAction;
+import CoopBoardGame.actions.BGPlayDrawnCardAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -11,7 +11,7 @@ public class BGMayhemPower extends AbstractBGPower {
 
     public static final String POWER_ID = "BGMayhemPower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGMayhemPower"
+        "CoopBoardGame:BGMayhemPower"
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;

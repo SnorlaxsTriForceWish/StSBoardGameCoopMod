@@ -1,8 +1,8 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.cards.BGRed.BGWhirlwind;
-import BoardGame.powers.BGPoisonPower;
-import BoardGame.powers.BGWeakPower;
+import CoopBoardGame.cards.BGRed.BGWhirlwind;
+import CoopBoardGame.powers.BGPoisonPower;
+import CoopBoardGame.powers.BGWeakPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;

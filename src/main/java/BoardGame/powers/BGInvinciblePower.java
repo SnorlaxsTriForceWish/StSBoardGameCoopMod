@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGInvinciblePower extends AbstractBGPower {
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGInvinciblePower"
+        "CoopBoardGame:BGInvinciblePower"
     );
     public static final String POWER_ID = "BGInvinciblePower";
     public static final String NAME = powerStrings.NAME;

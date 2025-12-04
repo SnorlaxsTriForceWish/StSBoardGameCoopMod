@@ -1,10 +1,10 @@
-package BoardGame.monsters.bgcity;
+package CoopBoardGame.monsters.bgcity;
 
-import BoardGame.cards.BGStatus.BGBurn;
-import BoardGame.cards.BGStatus.BGDazed;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
-import BoardGame.powers.BGWeakPower;
+import CoopBoardGame.cards.BGStatus.BGBurn;
+import CoopBoardGame.cards.BGStatus.BGDazed;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.powers.BGWeakPower;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;

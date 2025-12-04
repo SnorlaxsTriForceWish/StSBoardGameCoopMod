@@ -1,15 +1,15 @@
-package BoardGame.characters;
+package CoopBoardGame.characters;
 
-import static BoardGame.BoardGame.*;
-import static BoardGame.characters.BGIronclad.Enums.BG_RED;
+import static CoopBoardGame.CoopBoardGame.*;
+import static CoopBoardGame.characters.BGIronclad.Enums.BG_RED;
 
-import BoardGame.BoardGame;
-import BoardGame.cards.BGRed.BGBash;
-import BoardGame.cards.BGRed.BGDefend_Red;
-import BoardGame.cards.BGRed.BGStrike_Red;
-import BoardGame.multicharacter.UnselectablePlayer;
-import BoardGame.relics.BGBurningBlood;
-import BoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.cards.BGRed.BGBash;
+import CoopBoardGame.cards.BGRed.BGDefend_Red;
+import CoopBoardGame.cards.BGRed.BGStrike_Red;
+import CoopBoardGame.multicharacter.UnselectablePlayer;
+import CoopBoardGame.relics.BGBurningBlood;
+import CoopBoardGame.relics.BGTheDieRelic;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -45,7 +45,7 @@ import org.apache.logging.log4j.Logger;
 
 public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
 
-    public static final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+    public static final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
 
     // =============== CHARACTER ENUMERATORS =================
 
@@ -64,7 +64,7 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
     // =============== CHARACTER ENUMERATORS  =================
 
     public String getMultiSwapButtonUrl() {
-        return "BoardGameResources/images/icons/ironclad.png";
+        return "CoopBoardGameResources/images/icons/ironclad.png";
     }
 
     // =============== BASE STATS =================
@@ -91,17 +91,17 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
     // =============== TEXTURES OF BIG ENERGY ORB ===============
 
     public static final String[] orbTextures = {
-        "BoardGameResources/images/char/defaultCharacter/orb/layer1.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer2.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer3.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer4.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer5.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer6.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer1d.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer2d.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer3d.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer4d.png",
-        "BoardGameResources/images/char/defaultCharacter/orb/layer5d.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer1.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer2.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer3.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer4.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer5.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer6.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer1d.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer2d.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer3d.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer4d.png",
+        "CoopBoardGameResources/images/char/defaultCharacter/orb/layer5d.png",
     };
 
     // =============== /TEXTURES OF BIG ENERGY ORB/ ===============
@@ -113,12 +113,12 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
             name,
             setClass,
             orbTextures,
-            "BoardGameResources/images/char/defaultCharacter/orb/vfx.png",
+            "CoopBoardGameResources/images/char/defaultCharacter/orb/vfx.png",
             null,
             ""
         );
         //                new SpriterAnimation(
-        //                        "BoardGameResources/images/char/defaultCharacter/Spriter/theDefaultAnimation.scml"));
+        //                        "CoopBoardGameResources/images/char/defaultCharacter/Spriter/theDefaultAnimation.scml"));
 
         // =============== TEXTURES, ENERGY, LOADOUT =================
 
@@ -267,7 +267,7 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
     // Should return a color object to be used to color the trail of moving cards
     @Override
     public Color getCardTrailColor() {
-        return BoardGame.BG_IRONCLAD_RED;
+        return CoopBoardGame.BG_IRONCLAD_RED;
     }
 
     // Should return a BitmapFont object that you can use to customize how your
@@ -304,14 +304,14 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
     // Should return a Color object to be used to color the miniature card images in run history.
     @Override
     public Color getCardRenderColor() {
-        return BoardGame.BG_IRONCLAD_RED;
+        return CoopBoardGame.BG_IRONCLAD_RED;
     }
 
     // Should return a Color object to be used as screen tint effect when your
     // character attacks the heart.
     @Override
     public Color getSlashAttackColor() {
-        return BoardGame.BG_IRONCLAD_RED;
+        return CoopBoardGame.BG_IRONCLAD_RED;
     }
 
     // Should return an AttackEffect array of any size greater than 0. These effects
@@ -351,7 +351,7 @@ public class BGIronclad extends AbstractBGPlayer implements UnselectablePlayer {
         this.stanceChangedThisTurn = false;
     }
 
-    //TODO: move addBlock to CustomBoardGameCreature class (which itself will require various sweeping changes to implement)
+    //TODO: move addBlock to CustomCoopBoardGameCreature class (which itself will require various sweeping changes to implement)
     public void addBlock(int blockAmount) {
         float tmp = blockAmount;
 

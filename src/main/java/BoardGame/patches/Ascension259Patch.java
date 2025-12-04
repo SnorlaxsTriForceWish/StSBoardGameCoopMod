@@ -1,11 +1,11 @@
-package BoardGame.patches;
+package CoopBoardGame.patches;
 
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.player;
 
-import BoardGame.cards.BGCurse.BGAscendersBane;
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.dungeons.BGExordium;
-import BoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.cards.BGCurse.BGAscendersBane;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.BGExordium;
+import CoopBoardGame.multicharacter.MultiCharacter;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInstrumentPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;

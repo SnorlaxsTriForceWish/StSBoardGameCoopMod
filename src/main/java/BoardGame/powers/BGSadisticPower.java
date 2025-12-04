@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -44,7 +44,7 @@ public class BGSadisticPower extends AbstractBGPower {
                 power.ID.equals("BGPoison")
             ) {
                 flash();
-                //Logger logger = LogManager.getLogger(BoardGame.class.getName());
+                //Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
                 //logger.info("power.amount: "+power.amount);
                 //power.amount is the number of stacks being applied, not the total number of stacks after application
                 //TODO: if it's ruled that this doesn't count if we're at the stack limit, must check weak/vuln <= 3, poison <= 30

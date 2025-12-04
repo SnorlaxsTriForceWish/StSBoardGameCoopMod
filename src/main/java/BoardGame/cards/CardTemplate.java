@@ -1,9 +1,9 @@
-package BoardGame.cards;
+package CoopBoardGame.cards;
 
-import static BoardGame.BoardGame.makeCardPath;
+import static CoopBoardGame.CoopBoardGame.makeCardPath;
 
-import BoardGame.BoardGame;
-import BoardGame.characters.BGIronclad;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.characters.BGIronclad;
 import basemod.AutoAdd;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -37,7 +37,7 @@ public class CardTemplate extends AbstractDynamicCard {
     // TEXT DECLARATION
 
     // public static final String ID = DefaultMod.makeID(${NAME}.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
-    public static final String ID = BoardGame.makeID("DefaultCommonAttack"); // DELETE THIS ONE.
+    public static final String ID = CoopBoardGame.makeID("DefaultCommonAttack"); // DELETE THIS ONE.
     public static final String IMG = makeCardPath("Attack.png"); // "public static final String IMG = makeCardPath("${NAME}.png");
     // This does mean that you will need to have an image with the same NAME as the card in your image folder for it to run correctly.
 

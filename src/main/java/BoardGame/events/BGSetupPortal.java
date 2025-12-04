@@ -1,7 +1,7 @@
-//package BoardGame.events;
+//package CoopBoardGame.events;
 //
-//import BoardGame.neow.BGNeowEvent;
-//import BoardGame.neow.BGNeowRoom;
+//import CoopBoardGame.neow.BGNeowEvent;
+//import CoopBoardGame.neow.BGNeowRoom;
 //import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 //import com.megacrit.cardcrawl.characters.AnimatedNpc;
 //import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -22,7 +22,7 @@
 //        //extends AbstractImageEvent {
 //        extends AbstractEvent {
 //    public static final String ID = "BGSetupPortal";
-//    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("BoardGame:BGSetupPortal");
+//    private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString("CoopBoardGame:BGSetupPortal");
 //    public static final String NAME = eventStrings.NAME;
 //    public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
 //    public static final String[] OPTIONS = eventStrings.OPTIONS;

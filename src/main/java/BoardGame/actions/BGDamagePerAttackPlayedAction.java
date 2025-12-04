@@ -1,7 +1,7 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.characters.AbstractBGPlayer;
-import BoardGame.powers.WeakVulnCancel;
+import CoopBoardGame.characters.AbstractBGPlayer;
+import CoopBoardGame.powers.WeakVulnCancel;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;

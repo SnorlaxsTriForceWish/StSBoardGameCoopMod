@@ -1,4 +1,4 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.potions.AbstractPotion;
 public class BGBlockPotion extends AbstractPotion {
 
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGBlock Potion"
+        "CoopBoardGame:BGBlock Potion"
     );
 
     public static final String POTION_ID = "BGBlock Potion";

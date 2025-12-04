@@ -1,4 +1,4 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -19,7 +19,7 @@ public class BGExplosivePotion extends AbstractPotion {
 
     public static final String POTION_ID = "BGExplosive Potion";
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGExplosive Potion"
+        "CoopBoardGame:BGExplosive Potion"
     );
 
     public BGExplosivePotion() {

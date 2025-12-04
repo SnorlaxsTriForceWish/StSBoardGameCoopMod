@@ -1,9 +1,9 @@
-package BoardGame.patches;
+package CoopBoardGame.patches;
 
-import BoardGame.characters.BGDefect;
-import BoardGame.characters.BGIronclad;
-import BoardGame.characters.BGSilent;
-import BoardGame.characters.BGWatcher;
+import CoopBoardGame.characters.BGDefect;
+import CoopBoardGame.characters.BGIronclad;
+import CoopBoardGame.characters.BGSilent;
+import CoopBoardGame.characters.BGWatcher;
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.modthespire.lib.ByRef;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;

@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
@@ -9,11 +9,11 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BGDexterityPower extends AbstractPower {
 
-    //TODO: BoardGame dexterity affects outgoing block, not incoming block!
+    //TODO: CoopBoardGame dexterity affects outgoing block, not incoming block!
 
     public static final String POWER_ID = "BGDexterity";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGDexterity"
+        "CoopBoardGame:BGDexterity"
     );
 
     public static final String NAME = powerStrings.NAME;

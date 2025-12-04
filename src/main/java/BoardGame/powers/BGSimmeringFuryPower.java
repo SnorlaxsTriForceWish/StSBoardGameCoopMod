@@ -1,15 +1,15 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.BoardGame;
+import CoopBoardGame.CoopBoardGame;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class BGSimmeringFuryPower extends AbstractBGPower {
 
-    public static final String POWER_ID = BoardGame.makeID("BGSimmeringFuryPower");
+    public static final String POWER_ID = CoopBoardGame.makeID("BGSimmeringFuryPower");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGSimmeringFuryPower"
+        "CoopBoardGame:BGSimmeringFuryPower"
     );
 
     public static final String NAME = powerStrings.NAME;

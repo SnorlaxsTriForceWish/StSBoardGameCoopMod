@@ -1,8 +1,8 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRng;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
@@ -33,37 +33,37 @@ public abstract class PotionHelperPatch {
                 if (potionDeck.isEmpty()) {
                     potionDeck = new ArrayList<>();
                     //...these are listed in the order they appear in Tabletop Simulator's deck search
-                    potionDeck.add("BoardGame:BGBlock Potion");
-                    potionDeck.add("BoardGame:BGEnergy Potion");
-                    potionDeck.add("BoardGame:BGExplosive Potion");
-                    potionDeck.add("BoardGame:BGFire Potion");
-                    potionDeck.add("BoardGame:BGSwift Potion");
-                    potionDeck.add("BoardGame:BGWeak Potion");
-                    potionDeck.add("BoardGame:BGFearPotion");
-                    potionDeck.add("BoardGame:BGSteroidPotion");
-                    potionDeck.add("BoardGame:BGGamblersBrew");
-                    potionDeck.add("BoardGame:BGBloodPotion");
-                    potionDeck.add("BoardGame:BGGhostInAJar");
-                    potionDeck.add("BoardGame:BGDistilledChaos");
-                    potionDeck.add("BoardGame:BGEntropicBrew");
-                    potionDeck.add("BoardGame:BGFairyPotion");
-                    potionDeck.add("BoardGame:BGAttackPotion");
-                    potionDeck.add("BoardGame:BGSkillPotion");
-                    potionDeck.add("BoardGame:BGAncientPotion");
-                    potionDeck.add("BoardGame:BGBlock Potion");
-                    potionDeck.add("BoardGame:BGEnergy Potion");
-                    potionDeck.add("BoardGame:BGExplosive Potion");
-                    potionDeck.add("BoardGame:BGFire Potion");
-                    potionDeck.add("BoardGame:BGSwift Potion");
-                    potionDeck.add("BoardGame:BGWeak Potion");
-                    potionDeck.add("BoardGame:BGFearPotion");
-                    potionDeck.add("BoardGame:BGSteroidPotion");
-                    potionDeck.add("BoardGame:BGLiquidMemories");
-                    potionDeck.add("BoardGame:BGSneckoOil");
-                    potionDeck.add("BoardGame:BGElixirPotion");
-                    potionDeck.add("BoardGame:BGCunningPotion");
+                    potionDeck.add("CoopBoardGame:BGBlock Potion");
+                    potionDeck.add("CoopBoardGame:BGEnergy Potion");
+                    potionDeck.add("CoopBoardGame:BGExplosive Potion");
+                    potionDeck.add("CoopBoardGame:BGFire Potion");
+                    potionDeck.add("CoopBoardGame:BGSwift Potion");
+                    potionDeck.add("CoopBoardGame:BGWeak Potion");
+                    potionDeck.add("CoopBoardGame:BGFearPotion");
+                    potionDeck.add("CoopBoardGame:BGSteroidPotion");
+                    potionDeck.add("CoopBoardGame:BGGamblersBrew");
+                    potionDeck.add("CoopBoardGame:BGBloodPotion");
+                    potionDeck.add("CoopBoardGame:BGGhostInAJar");
+                    potionDeck.add("CoopBoardGame:BGDistilledChaos");
+                    potionDeck.add("CoopBoardGame:BGEntropicBrew");
+                    potionDeck.add("CoopBoardGame:BGFairyPotion");
+                    potionDeck.add("CoopBoardGame:BGAttackPotion");
+                    potionDeck.add("CoopBoardGame:BGSkillPotion");
+                    potionDeck.add("CoopBoardGame:BGAncientPotion");
+                    potionDeck.add("CoopBoardGame:BGBlock Potion");
+                    potionDeck.add("CoopBoardGame:BGEnergy Potion");
+                    potionDeck.add("CoopBoardGame:BGExplosive Potion");
+                    potionDeck.add("CoopBoardGame:BGFire Potion");
+                    potionDeck.add("CoopBoardGame:BGSwift Potion");
+                    potionDeck.add("CoopBoardGame:BGWeak Potion");
+                    potionDeck.add("CoopBoardGame:BGFearPotion");
+                    potionDeck.add("CoopBoardGame:BGSteroidPotion");
+                    potionDeck.add("CoopBoardGame:BGLiquidMemories");
+                    potionDeck.add("CoopBoardGame:BGSneckoOil");
+                    potionDeck.add("CoopBoardGame:BGElixirPotion");
+                    potionDeck.add("CoopBoardGame:BGCunningPotion");
                     Collections.shuffle(potionDeck, new java.util.Random(cardRng.randomLong()));
-                    BoardGame.BoardGame.logger.info("Shuffled potion deck successfully");
+                    CoopBoardGame.CoopBoardGame.logger.info("Shuffled potion deck successfully");
                     return SpireReturn.Continue();
                 }
             }
@@ -122,47 +122,47 @@ public abstract class PotionHelperPatch {
         public static SpireReturn<AbstractPotion> getPotion(String name) {
             if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 switch (name) {
-                    case "BoardGame:BGBlock Potion":
+                    case "CoopBoardGame:BGBlock Potion":
                         return SpireReturn.Return((AbstractPotion) new BGBlockPotion());
-                    case "BoardGame:BGEnergy Potion":
+                    case "CoopBoardGame:BGEnergy Potion":
                         return SpireReturn.Return((AbstractPotion) new BGEnergyPotion());
-                    case "BoardGame:BGSwift Potion":
+                    case "CoopBoardGame:BGSwift Potion":
                         return SpireReturn.Return((AbstractPotion) new BGSwiftPotion());
-                    case "BoardGame:BGExplosive Potion":
+                    case "CoopBoardGame:BGExplosive Potion":
                         return SpireReturn.Return((AbstractPotion) new BGExplosivePotion());
-                    case "BoardGame:BGFire Potion":
+                    case "CoopBoardGame:BGFire Potion":
                         return SpireReturn.Return((AbstractPotion) new BGFirePotion());
-                    case "BoardGame:BGWeak Potion":
+                    case "CoopBoardGame:BGWeak Potion":
                         return SpireReturn.Return((AbstractPotion) new BGWeakenPotion());
-                    case "BoardGame:BGFearPotion":
+                    case "CoopBoardGame:BGFearPotion":
                         return SpireReturn.Return((AbstractPotion) new BGFearPotion());
-                    case "BoardGame:BGSteroidPotion":
+                    case "CoopBoardGame:BGSteroidPotion":
                         return SpireReturn.Return((AbstractPotion) new BGSteroidPotion());
-                    case "BoardGame:BGGamblersBrew":
+                    case "CoopBoardGame:BGGamblersBrew":
                         return SpireReturn.Return((AbstractPotion) new BGGamblersBrew());
-                    case "BoardGame:BGBloodPotion":
+                    case "CoopBoardGame:BGBloodPotion":
                         return SpireReturn.Return((AbstractPotion) new BGBloodPotion());
-                    case "BoardGame:BGGhostInAJar":
+                    case "CoopBoardGame:BGGhostInAJar":
                         return SpireReturn.Return((AbstractPotion) new BGGhostInAJar());
-                    case "BoardGame:BGDistilledChaos":
+                    case "CoopBoardGame:BGDistilledChaos":
                         return SpireReturn.Return((AbstractPotion) new BGDistilledChaos());
-                    case "BoardGame:BGEntropicBrew":
+                    case "CoopBoardGame:BGEntropicBrew":
                         return SpireReturn.Return((AbstractPotion) new BGEntropicBrew());
-                    case "BoardGame:BGAttackPotion":
+                    case "CoopBoardGame:BGAttackPotion":
                         return SpireReturn.Return((AbstractPotion) new BGAttackPotion());
-                    case "BoardGame:BGSkillPotion":
+                    case "CoopBoardGame:BGSkillPotion":
                         return SpireReturn.Return((AbstractPotion) new BGSkillPotion());
-                    case "BoardGame:BGAncientPotion":
+                    case "CoopBoardGame:BGAncientPotion":
                         return SpireReturn.Return((AbstractPotion) new BGAncientPotion());
-                    case "BoardGame:BGFairyPotion":
+                    case "CoopBoardGame:BGFairyPotion":
                         return SpireReturn.Return((AbstractPotion) new BGFairyPotion());
-                    case "BoardGame:BGLiquidMemories":
+                    case "CoopBoardGame:BGLiquidMemories":
                         return SpireReturn.Return((AbstractPotion) new BGLiquidMemories());
-                    case "BoardGame:BGSneckoOil":
+                    case "CoopBoardGame:BGSneckoOil":
                         return SpireReturn.Return((AbstractPotion) new BGSneckoOil());
-                    case "BoardGame:BGElixirPotion":
+                    case "CoopBoardGame:BGElixirPotion":
                         return SpireReturn.Return((AbstractPotion) new BGElixir());
-                    case "BoardGame:BGCunningPotion":
+                    case "CoopBoardGame:BGCunningPotion":
                         return SpireReturn.Return((AbstractPotion) new BGCunningPotion());
                 }
             }

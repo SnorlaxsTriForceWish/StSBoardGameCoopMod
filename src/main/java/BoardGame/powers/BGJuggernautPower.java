@@ -1,7 +1,7 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.TargetSelectScreenAction;
-import BoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.actions.TargetSelectScreenAction;
+import CoopBoardGame.screen.TargetSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -14,7 +14,7 @@ public class BGJuggernautPower extends AbstractBGPower {
 
     public static final String POWER_ID = "BGJuggernaut";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:Juggernaut"
+        "CoopBoardGame:Juggernaut"
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;

@@ -1,11 +1,11 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import static BoardGame.BoardGame.makeRelicOutlinePath;
-import static BoardGame.BoardGame.makeRelicPath;
+import static CoopBoardGame.CoopBoardGame.makeRelicOutlinePath;
+import static CoopBoardGame.CoopBoardGame.makeRelicPath;
 
-import BoardGame.BoardGame;
-import BoardGame.patches.relics.BottledPlaceholderField;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.patches.relics.BottledPlaceholderField;
+import CoopBoardGame.util.TextureLoader;
 import basemod.BaseMod;
 import basemod.abstracts.CustomBottleRelic;
 import basemod.abstracts.CustomRelic;
@@ -44,7 +44,7 @@ public class BottledPlaceholderRelic
     // (It's set to false on Equip)
 
     // ID, images, text.
-    public static final String ID = BoardGame.makeID("BottledPlaceholderRelic");
+    public static final String ID = CoopBoardGame.makeID("BottledPlaceholderRelic");
     private static final Texture IMG = TextureLoader.getTexture(
         makeRelicPath("BottledPlaceholder.png")
     );

@@ -1,4 +1,4 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;

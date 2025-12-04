@@ -1,8 +1,8 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.BoardGame;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 public class BGBloodForBlood extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGBlood for Blood"
+        "CoopBoardGame:BGBlood for Blood"
     );
     public static final String ID = "BGBlood for Blood";
 
@@ -41,7 +41,7 @@ public class BGBloodForBlood extends AbstractBGCard {
     }
 
     public void tookDamage() {
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         logger.info("BGBloodForBlood tookDamage: " + this.magicNumber);
         updateCost(-this.cost + this.magicNumber);
         nonvolatileBaseCost = this.magicNumber;

@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 public class BGIntangiblePower extends AbstractBGPower {
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGIntangiblePower"
+        "CoopBoardGame:BGIntangiblePower"
     );
     public static final String POWER_ID = "BGIntangiblePower";
     public static final String NAME = powerStrings.NAME;

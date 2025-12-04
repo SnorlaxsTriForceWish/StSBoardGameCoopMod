@@ -1,7 +1,7 @@
-package BoardGame.monsters.bgexordium;
+package CoopBoardGame.monsters.bgexordium;
 
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.powers.BGModeShiftPower;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.powers.BGModeShiftPower;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.AnimateSlowAttackAction;

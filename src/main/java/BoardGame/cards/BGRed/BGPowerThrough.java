@@ -1,8 +1,8 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.cards.BGStatus.BGDazed;
-import BoardGame.characters.BGIronclad;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.cards.BGStatus.BGDazed;
+import CoopBoardGame.characters.BGIronclad;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
@@ -17,7 +17,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGPowerThrough extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGPower Through"
+        "CoopBoardGame:BGPower Through"
     );
     public static final String ID = "BGPower Through";
 

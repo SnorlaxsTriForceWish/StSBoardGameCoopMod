@@ -1,4 +1,4 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;

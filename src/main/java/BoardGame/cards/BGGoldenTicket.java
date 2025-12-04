@@ -1,10 +1,10 @@
-package BoardGame.cards;
+package CoopBoardGame.cards;
 
-import static BoardGame.BoardGame.makeCardPath;
+import static CoopBoardGame.CoopBoardGame.makeCardPath;
 import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
 
-import BoardGame.BoardGame;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.characters.BGColorless;
 import basemod.AutoAdd;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.*;
@@ -30,8 +30,8 @@ public class BGGoldenTicket extends AbstractBGCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = BoardGame.makeID(BGGoldenTicket.class.getSimpleName());
-    public static final String BASE_ID = BoardGame.makeID(BGGoldenTicket.class.getSimpleName());
+    public static final String ID = CoopBoardGame.makeID(BGGoldenTicket.class.getSimpleName());
+    public static final String BASE_ID = CoopBoardGame.makeID(BGGoldenTicket.class.getSimpleName());
     public static final String IMG = makeCardPath("GoldenTicket.png");
 
     // /TEXT DECLARATION/

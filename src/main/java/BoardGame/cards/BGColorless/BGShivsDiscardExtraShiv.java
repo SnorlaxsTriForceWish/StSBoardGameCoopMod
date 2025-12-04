@@ -1,7 +1,7 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -14,7 +14,7 @@ public class BGShivsDiscardExtraShiv extends AbstractBGAttackCardChoice {
 
     public static final String ID = "BGShivsDiscardExtraShiv";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGShivsDiscardExtraShiv"
+        "CoopBoardGame:BGShivsDiscardExtraShiv"
     );
 
     public BGShivsDiscardExtraShiv() {
@@ -35,7 +35,7 @@ public class BGShivsDiscardExtraShiv extends AbstractBGAttackCardChoice {
     public void use(AbstractPlayer p, AbstractMonster m) {}
 
     public void onChoseThisOption() {
-        AbstractRelic relic = AbstractDungeon.player.getRelic("BoardGame:BGShivs");
+        AbstractRelic relic = AbstractDungeon.player.getRelic("CoopBoardGame:BGShivs");
         if (relic != null) {
             relic.counter = relic.counter - 1;
         }

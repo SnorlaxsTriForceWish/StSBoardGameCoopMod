@@ -1,9 +1,9 @@
-package BoardGame.cards.BGPurple;
+package CoopBoardGame.cards.BGPurple;
 
-import BoardGame.actions.TargetSelectScreenAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGWatcher;
-import BoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.actions.TargetSelectScreenAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGWatcher;
+import CoopBoardGame.screen.TargetSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -23,7 +23,7 @@ import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 public class BGRagnarok extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGRagnarok"
+        "CoopBoardGame:BGRagnarok"
     );
     public static final String ID = "BGRagnarok";
 

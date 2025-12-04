@@ -1,10 +1,10 @@
 //TODO: there is an unhandled edge case where right dagger kills itself via Thorns after Reptomancer has already checked if daggers are dead
 
-package BoardGame.monsters.bgbeyond;
+package CoopBoardGame.monsters.bgbeyond;
 
-import BoardGame.cards.BGStatus.BGDazed;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.cards.BGStatus.BGDazed;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;

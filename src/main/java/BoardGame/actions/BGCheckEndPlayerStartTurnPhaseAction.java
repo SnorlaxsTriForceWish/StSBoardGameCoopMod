@@ -1,6 +1,6 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.characters.AbstractBGPlayer;
+import CoopBoardGame.characters.AbstractBGPlayer;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 
 public class BGCheckEndPlayerStartTurnPhaseAction extends AbstractGameAction {

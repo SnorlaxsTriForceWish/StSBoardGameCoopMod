@@ -1,3 +1,3 @@
-package BoardGame.cards;
+package CoopBoardGame.cards;
 
 public interface NotARealCard {}

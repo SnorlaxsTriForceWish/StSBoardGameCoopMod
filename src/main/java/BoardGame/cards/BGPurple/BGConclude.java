@@ -1,8 +1,8 @@
-package BoardGame.cards.BGPurple;
+package CoopBoardGame.cards.BGPurple;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGWatcher;
-import BoardGame.powers.BGConclusionPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGWatcher;
+import CoopBoardGame.powers.BGConclusionPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -20,7 +20,7 @@ import com.megacrit.cardcrawl.vfx.combat.CleaveEffect;
 public class BGConclude extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGConclude"
+        "CoopBoardGame:BGConclude"
     );
     public static final String ID = "BGConclude";
 

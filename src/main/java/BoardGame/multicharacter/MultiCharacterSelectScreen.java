@@ -1,11 +1,11 @@
-package BoardGame.multicharacter;
+package CoopBoardGame.multicharacter;
 
-import BoardGame.BoardGame;
-import BoardGame.characters.BGDefect;
-import BoardGame.characters.BGIronclad;
-import BoardGame.characters.BGSilent;
-import BoardGame.characters.BGWatcher;
-import BoardGame.ui.OverlayMenuPatches;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.characters.BGDefect;
+import CoopBoardGame.characters.BGIronclad;
+import CoopBoardGame.characters.BGSilent;
+import CoopBoardGame.characters.BGWatcher;
+import CoopBoardGame.ui.OverlayMenuPatches;
 import basemod.BaseMod;
 import basemod.ReflectionHacks;
 import basemod.abstracts.CustomScreen;
@@ -168,7 +168,7 @@ public class MultiCharacterSelectScreen extends CustomScreen {
     }
 
     public void render(SpriteBatch sb) {
-        description = BoardGame.ENABLE_TEST_FEATURES
+        description = CoopBoardGame.ENABLE_TEST_FEATURES
             ? "Choose up to 4 characters."
             : "Choose 1 character.";
         FontHelper.renderFontCentered(
@@ -246,7 +246,7 @@ public class MultiCharacterSelectScreen extends CustomScreen {
             "charInfo"
         );
         if (charInfo.player instanceof MultiCharacter) {
-            if (BoardGame.ENABLE_TEST_FEATURES) {
+            if (CoopBoardGame.ENABLE_TEST_FEATURES) {
                 return charInfo.flavorText + " NL Play up to four characters at once!";
             }
         }

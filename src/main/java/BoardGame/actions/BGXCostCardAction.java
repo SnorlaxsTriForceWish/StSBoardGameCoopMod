@@ -1,12 +1,12 @@
 //TODO: make sure this still interacts correctly with Weak/Vuln
 
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.cards.BGColorless.BGXCostChoice;
-import BoardGame.powers.BGCorruptionPower;
-import BoardGame.powers.BGFreeAttackPower;
-import BoardGame.powers.BGFreeCardPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.cards.BGColorless.BGXCostChoice;
+import CoopBoardGame.powers.BGCorruptionPower;
+import CoopBoardGame.powers.BGFreeAttackPower;
+import CoopBoardGame.powers.BGFreeCardPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
@@ -115,7 +115,7 @@ public class BGXCostCardAction extends AbstractGameAction {
 
             int effectiveMaxEnergy = info.maxEnergy;
             if (info.exactEnergyCost < 0) {
-                AbstractRelic relic = AbstractDungeon.player.getRelic("BoardGame:BGMiracles");
+                AbstractRelic relic = AbstractDungeon.player.getRelic("CoopBoardGame:BGMiracles");
                 if (relic != null) {
                     effectiveMaxEnergy += relic.counter;
                 }

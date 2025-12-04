@@ -1,7 +1,7 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.BoardGame;
-import BoardGame.actions.BGForcedWaitAction;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.actions.BGForcedWaitAction;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.InvisiblePower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -19,7 +19,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 //  in order to fix an inconsistency with the end-of-combat referee whistle.
 public class BGSpikerProccedPower extends AbstractBGPower implements InvisiblePower {
 
-    public static final String POWER_ID = BoardGame.makeID("BGSpikerProcced");
+    public static final String POWER_ID = CoopBoardGame.makeID("BGSpikerProcced");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
         POWER_ID
     );

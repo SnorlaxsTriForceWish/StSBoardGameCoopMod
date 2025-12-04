@@ -1,6 +1,6 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.cards.BGCurse.BGAscendersBane;
+import CoopBoardGame.cards.BGCurse.BGAscendersBane;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -15,7 +15,7 @@ public class BGFalling extends AbstractImageEvent {
 
     public static final String ID = "BGFalling";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGFalling"
+        "CoopBoardGame:BGFalling"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

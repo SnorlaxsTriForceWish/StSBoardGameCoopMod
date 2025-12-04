@@ -1,8 +1,8 @@
-package BoardGame.multicharacter;
+package CoopBoardGame.multicharacter;
 
-import BoardGame.characters.BGWatcher;
-import BoardGame.multicharacter.grid.GridBackground;
-import BoardGame.multicharacter.grid.GridTile;
+import CoopBoardGame.characters.BGWatcher;
+import CoopBoardGame.multicharacter.grid.GridBackground;
+import CoopBoardGame.multicharacter.grid.GridTile;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.esotericsoftware.spine.Bone;

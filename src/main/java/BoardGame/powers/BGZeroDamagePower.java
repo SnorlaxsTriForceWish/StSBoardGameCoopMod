@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.BoardGame;
+import CoopBoardGame.CoopBoardGame;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class BGZeroDamagePower extends AbstractBGPower {
 
-    public static final String POWER_ID = BoardGame.makeID("BGZeroDamagePower");
+    public static final String POWER_ID = CoopBoardGame.makeID("BGZeroDamagePower");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
         POWER_ID
     );

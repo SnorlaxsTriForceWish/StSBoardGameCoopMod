@@ -1,7 +1,7 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.relics.AbstractBGRelic;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.curses.Decay;
@@ -28,7 +28,7 @@ public class BGForgottenAltar extends AbstractImageEvent implements LockRelicsEv
     }
 
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGForgottenAltar"
+        "CoopBoardGame:BGForgottenAltar"
     );
 
     public static final String NAME = eventStrings.NAME;

@@ -1,18 +1,18 @@
-package BoardGame.characters;
+package CoopBoardGame.characters;
 
-import static BoardGame.BoardGame.*;
+import static CoopBoardGame.CoopBoardGame.*;
 
 //TODO: updateOrb incorrectly sets orb's angle1 spin rate very high (appears to be based on Ironclad animation; vanilla Defect orb angle1 does not change)
 //TODO: does Recycle interact correctly with card cost changes?
 
-import BoardGame.BoardGame;
-import BoardGame.cards.BGBlue.BGDefend_Blue;
-import BoardGame.cards.BGBlue.BGDualcast;
-import BoardGame.cards.BGBlue.BGStrike_Blue;
-import BoardGame.cards.BGBlue.BGZap;
-import BoardGame.multicharacter.UnselectablePlayer;
-import BoardGame.relics.BGCrackedCore;
-import BoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.cards.BGBlue.BGDefend_Blue;
+import CoopBoardGame.cards.BGBlue.BGDualcast;
+import CoopBoardGame.cards.BGBlue.BGStrike_Blue;
+import CoopBoardGame.cards.BGBlue.BGZap;
+import CoopBoardGame.multicharacter.UnselectablePlayer;
+import CoopBoardGame.relics.BGCrackedCore;
+import CoopBoardGame.relics.BGTheDieRelic;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -50,7 +50,7 @@ import org.apache.logging.log4j.Logger;
 
 public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
 
-    public static final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+    public static final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
 
     // =============== CHARACTER ENUMERATORS =================
 
@@ -69,7 +69,7 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
     // =============== CHARACTER ENUMERATORS  =================
 
     public String getMultiSwapButtonUrl() {
-        return "BoardGameResources/images/icons/defect.png";
+        return "CoopBoardGameResources/images/icons/defect.png";
     }
 
     // =============== BASE STATS =================
@@ -96,17 +96,17 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
     // =============== TEXTURES OF BIG ENERGY ORB ===============
 
     public static final String[] orbTextures = {
-        "BoardGameResources/images/char/theDefect/orb/layer1.png",
-        "BoardGameResources/images/char/theDefect/orb/layer2.png",
-        "BoardGameResources/images/char/theDefect/orb/layer3.png",
-        "BoardGameResources/images/char/theDefect/orb/layer4.png",
-        "BoardGameResources/images/char/theDefect/orb/layer5.png",
-        "BoardGameResources/images/char/theDefect/orb/layer6.png",
-        "BoardGameResources/images/char/theDefect/orb/layer1d.png",
-        "BoardGameResources/images/char/theDefect/orb/layer2d.png",
-        "BoardGameResources/images/char/theDefect/orb/layer3d.png",
-        "BoardGameResources/images/char/theDefect/orb/layer4d.png",
-        "BoardGameResources/images/char/theDefect/orb/layer5d.png",
+        "CoopBoardGameResources/images/char/theDefect/orb/layer1.png",
+        "CoopBoardGameResources/images/char/theDefect/orb/layer2.png",
+        "CoopBoardGameResources/images/char/theDefect/orb/layer3.png",
+        "CoopBoardGameResources/images/char/theDefect/orb/layer4.png",
+        "CoopBoardGameResources/images/char/theDefect/orb/layer5.png",
+        "CoopBoardGameResources/images/char/theDefect/orb/layer6.png",
+        "CoopBoardGameResources/images/char/theDefect/orb/layer1d.png",
+        "CoopBoardGameResources/images/char/theDefect/orb/layer2d.png",
+        "CoopBoardGameResources/images/char/theDefect/orb/layer3d.png",
+        "CoopBoardGameResources/images/char/theDefect/orb/layer4d.png",
+        "CoopBoardGameResources/images/char/theDefect/orb/layer5d.png",
     };
 
     // =============== /TEXTURES OF BIG ENERGY ORB/ ===============
@@ -118,7 +118,7 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
             name,
             setClass,
             orbTextures,
-            "BoardGameResources/images/char/theDefect/orb/vfx.png",
+            "CoopBoardGameResources/images/char/theDefect/orb/vfx.png",
             null,
             ""
         );
@@ -358,7 +358,7 @@ public class BGDefect extends AbstractBGPlayer implements UnselectablePlayer {
         this.stanceChangedThisTurn = false;
     }
 
-    //TODO: move addBlock to CustomBoardGameCreature class (which itself will require various sweeping changes to implement)
+    //TODO: move addBlock to CustomCoopBoardGameCreature class (which itself will require various sweeping changes to implement)
     public void addBlock(int blockAmount) {
         float tmp = blockAmount;
 

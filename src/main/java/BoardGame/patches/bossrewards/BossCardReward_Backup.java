@@ -1,6 +1,6 @@
-//package BoardGame.patches.bossrewards;
+//package CoopBoardGame.patches.bossrewards;
 //
-//import BoardGame.dungeons.AbstractBGDungeon;
+//import CoopBoardGame.dungeons.AbstractBGDungeon;
 //import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 //import com.evacipated.cardcrawl.modthespire.lib.*;
 //import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;

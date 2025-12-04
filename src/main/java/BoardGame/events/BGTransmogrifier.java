@@ -1,8 +1,8 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.neow.BGNeowReward;
-import BoardGame.patches.TransformPatch;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.neow.BGNeowReward;
+import CoopBoardGame.patches.TransformPatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -18,7 +18,7 @@ public class BGTransmogrifier extends AbstractImageEvent {
 
     public static final String ID = "BGTransmorgrifier";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGTransmorgrifier"
+        "CoopBoardGame:BGTransmorgrifier"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

@@ -1,8 +1,8 @@
-package BoardGame.neow;
+package CoopBoardGame.neow;
 
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.multicharacter.MultiCharacter;
-import BoardGame.patches.DefaultInsertPatch;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.patches.DefaultInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;

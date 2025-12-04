@@ -1,7 +1,7 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.relics.AbstractBGRelic;
-import BoardGame.screen.RelicTradingScreen;
+import CoopBoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.screen.RelicTradingScreen;
 import basemod.BaseMod;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -23,7 +23,7 @@ public class BGFaceTrader extends AbstractImageEvent implements LockRelicsEvent 
 
     public static final String ID = "BGFaceTrader";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGFaceTrader"
+        "CoopBoardGame:BGFaceTrader"
     );
     public static final String NAME = eventStrings.NAME;
 

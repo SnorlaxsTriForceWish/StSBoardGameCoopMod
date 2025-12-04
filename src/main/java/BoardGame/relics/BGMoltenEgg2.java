@@ -1,7 +1,7 @@
 //eggs are surprisingly not hardcoded!
 // don't deduct charges unless (1) the card wasn't already upgraded AND (2) the player actually obtains the card
 
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;

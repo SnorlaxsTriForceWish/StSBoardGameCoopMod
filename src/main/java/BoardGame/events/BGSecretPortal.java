@@ -1,6 +1,6 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.relics.BGSecretPortalRelic;
+import CoopBoardGame.relics.BGSecretPortalRelic;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -13,7 +13,7 @@ public class BGSecretPortal extends AbstractImageEvent {
 
     public static final String ID = "BGSecretPortal";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGSecretPortal"
+        "CoopBoardGame:BGSecretPortal"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

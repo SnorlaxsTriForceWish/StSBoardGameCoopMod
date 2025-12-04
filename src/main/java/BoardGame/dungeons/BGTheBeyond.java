@@ -1,6 +1,6 @@
-package BoardGame.dungeons;
+package CoopBoardGame.dungeons;
 
-import BoardGame.monsters.bgexordium.BGCultist;
+import CoopBoardGame.monsters.bgexordium.BGCultist;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
@@ -155,10 +155,10 @@ public class BGTheBeyond extends AbstractBGDungeon {
     /*     */ protected void generateWeakEnemies(int count) {
         ArrayList<MonsterInfo> monsters = new ArrayList<>();
 
-        monsters.add(new MonsterInfo("BoardGame:Easy Small Slimes", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Jaw Worm (Easy)", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Easy Small Slimes", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Jaw Worm (Easy)", 2.0F));
         monsters.add(new MonsterInfo(BGCultist.ID, 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:2 Louse", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:2 Louse", 2.0F));
 
         /* 159 */ MonsterInfo.normalizeWeights(monsters);
         /* 160 */ populateMonsterList(monsters, count, false);
@@ -167,20 +167,20 @@ public class BGTheBeyond extends AbstractBGDungeon {
 
     protected void generateStrongEnemies(int count) {
         ArrayList<MonsterInfo> monsters = new ArrayList<>();
-        monsters.add(new MonsterInfo("BoardGame:Jaw Worms (Hard)", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Spire Growth", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Orb Walker v2.3", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Orb Walker v3.2", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Transient", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Maw", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Writhing Mass", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:3 Darklings", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Jaw Worms (Hard)", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Spire Growth", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Orb Walker v2.3", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Orb Walker v3.2", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Transient", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Maw", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Writhing Mass", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:3 Darklings", 2.0F));
         if (AbstractDungeon.ascensionLevel < 7) {
-            monsters.add(new MonsterInfo("BoardGame:Exploder and Friends", 2.0F));
-            monsters.add(new MonsterInfo("BoardGame:Repulsor and Friends", 2.0F));
+            monsters.add(new MonsterInfo("CoopBoardGame:Exploder and Friends", 2.0F));
+            monsters.add(new MonsterInfo("CoopBoardGame:Repulsor and Friends", 2.0F));
         } else {
-            monsters.add(new MonsterInfo("BoardGame:A7 Exploder and Friends", 2.0F));
-            monsters.add(new MonsterInfo("BoardGame:A7 Repulsor and Friends", 2.0F));
+            monsters.add(new MonsterInfo("CoopBoardGame:A7 Exploder and Friends", 2.0F));
+            monsters.add(new MonsterInfo("CoopBoardGame:A7 Repulsor and Friends", 2.0F));
         }
 
         MonsterInfo.normalizeWeights(monsters);
@@ -190,9 +190,9 @@ public class BGTheBeyond extends AbstractBGDungeon {
 
     protected void generateElites(int count) {
         ArrayList<MonsterInfo> monsters = new ArrayList<>();
-        monsters.add(new MonsterInfo("BoardGame:Giant Head", 1.0F));
-        monsters.add(new MonsterInfo("BoardGame:Nemesis", 1.0F));
-        monsters.add(new MonsterInfo("BoardGame:Reptomancer", 1.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Giant Head", 1.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Nemesis", 1.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Reptomancer", 1.0F));
         MonsterInfo.normalizeWeights(monsters);
         populateMonsterList(monsters, count, true);
     }

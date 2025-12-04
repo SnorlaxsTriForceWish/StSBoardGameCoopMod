@@ -1,4 +1,4 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -11,7 +11,7 @@ public class BGGamblersBrew extends AbstractPotion {
 
     public static final String POTION_ID = "BGGamblersBrew";
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGGamblersBrew"
+        "CoopBoardGame:BGGamblersBrew"
     );
 
     public BGGamblersBrew() {

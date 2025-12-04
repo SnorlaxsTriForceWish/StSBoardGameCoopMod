@@ -1,4 +1,4 @@
-package BoardGame.cards;
+package CoopBoardGame.cards;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;

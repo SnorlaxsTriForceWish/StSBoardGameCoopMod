@@ -1,10 +1,10 @@
-package BoardGame.cards.BGBlue;
+package CoopBoardGame.cards.BGBlue;
 
-import BoardGame.actions.BGBeamCellConditionalVulnAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGDefect;
-import BoardGame.powers.BGVulnerablePower;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.actions.BGBeamCellConditionalVulnAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGDefect;
+import CoopBoardGame.powers.BGVulnerablePower;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -22,7 +22,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGBeamCell extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGBeamCell"
+        "CoopBoardGame:BGBeamCell"
     );
     public static final String ID = "BGBeamCell";
 

@@ -1,7 +1,7 @@
-package BoardGame.shop;
+package CoopBoardGame.shop;
 
-import BoardGame.cards.BGGoldenTicket;
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.cards.BGGoldenTicket;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
@@ -24,7 +24,7 @@ import javassist.CtBehavior;
 public class BGShopScreen {
 
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGMerchant"
+        "CoopBoardGame:BGMerchant"
     );
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
 

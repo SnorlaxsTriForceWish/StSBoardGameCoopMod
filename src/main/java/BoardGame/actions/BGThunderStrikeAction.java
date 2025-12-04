@@ -1,8 +1,8 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.cards.BGRed.BGWhirlwind;
-import BoardGame.orbs.BGLightning;
-import BoardGame.powers.WeakVulnCancel;
+import CoopBoardGame.cards.BGRed.BGWhirlwind;
+import CoopBoardGame.orbs.BGLightning;
+import CoopBoardGame.powers.WeakVulnCancel;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;

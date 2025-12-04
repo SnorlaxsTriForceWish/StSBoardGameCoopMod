@@ -1,6 +1,6 @@
 //TODO: blood potion has different appearance in the BG
 
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -19,7 +19,7 @@ public class BGBloodPotion extends AbstractPotion {
 
     public static final String POTION_ID = "BGBloodPotion";
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGBloodPotion"
+        "CoopBoardGame:BGBloodPotion"
     );
 
     public BGBloodPotion() {

@@ -1,6 +1,6 @@
-package BoardGame.icons;
+package CoopBoardGame.icons;
 
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.util.TextureLoader;
 import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.icons.AbstractCustomIcon;
 import java.util.ArrayList;
@@ -8,11 +8,11 @@ import java.util.List;
 
 public class DazedIcon extends AbstractCustomIcon {
 
-    public static final String ID = "BoardGame:Dazed"; //reminder: "Icon" is automatically added
+    public static final String ID = "CoopBoardGame:Dazed"; //reminder: "Icon" is automatically added
     private static DazedIcon singleton;
 
     public DazedIcon() {
-        super(ID, TextureLoader.getTexture("BoardGameResources/images/icons/daze.png"));
+        super(ID, TextureLoader.getTexture("CoopBoardGameResources/images/icons/daze.png"));
     }
 
     public static DazedIcon get() {
@@ -25,7 +25,10 @@ public class DazedIcon extends AbstractCustomIcon {
     public List<TooltipInfo> getCustomTooltips() {
         List<TooltipInfo> list = new ArrayList<>();
         list.add(
-            new TooltipInfo("[BoardGame:DazedIcon] Daze", "Put a Daze on top of your draw pile.")
+            new TooltipInfo(
+                "[CoopBoardGame:DazedIcon] Daze",
+                "Put a Daze on top of your draw pile."
+            )
         );
         return list;
     }

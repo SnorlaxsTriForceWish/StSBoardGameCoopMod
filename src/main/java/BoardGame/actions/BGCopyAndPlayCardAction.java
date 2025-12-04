@@ -1,10 +1,10 @@
 //TODO: see if we can reuse BGXCostCardAction without cloning it outright
 
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.powers.BGDoubleTapPower_DEPRECATED;
-import BoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.powers.BGDoubleTapPower_DEPRECATED;
+import CoopBoardGame.screen.TargetSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.NewQueueCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;

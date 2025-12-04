@@ -1,8 +1,8 @@
-package BoardGame.monsters.bgexordium;
+package CoopBoardGame.monsters.bgexordium;
 
-import BoardGame.BoardGame;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -110,7 +110,7 @@ public class BGCultist extends AbstractBGMonster implements BGDamageIcons {
 
     public void takeTurn() {
         int temp;
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         logger.info("Monster: nextMove " + this.nextMove);
         switch (this.nextMove) {
             case 3:

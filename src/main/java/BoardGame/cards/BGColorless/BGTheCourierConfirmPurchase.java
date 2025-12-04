@@ -1,11 +1,11 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.characters.BGColorless;
-import BoardGame.potions.BGEntropicBrew;
-import BoardGame.relics.AbstractBGRelic;
-import BoardGame.ui.EntropicBrewCourierRelicButton;
-import BoardGame.ui.EntropicBrewPotionButton;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.characters.BGColorless;
+import CoopBoardGame.potions.BGEntropicBrew;
+import CoopBoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.ui.EntropicBrewCourierRelicButton;
+import CoopBoardGame.ui.EntropicBrewPotionButton;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ObtainPotionAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -20,7 +20,7 @@ public class BGTheCourierConfirmPurchase extends AbstractBGAttackCardChoice {
 
     public static final String ID = "BGTheCourierConfirmPurchase";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGTheCourierConfirmPurchase"
+        "CoopBoardGame:BGTheCourierConfirmPurchase"
     );
 
     EntropicBrewPotionButton potionButton;

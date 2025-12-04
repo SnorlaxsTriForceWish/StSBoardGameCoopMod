@@ -1,9 +1,9 @@
-package BoardGame.ui;
+package CoopBoardGame.ui;
 
-import BoardGame.relics.AbstractBGRelic;
-import BoardGame.relics.BGToolbox;
-import BoardGame.thedie.TheDie;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.relics.BGToolbox;
+import CoopBoardGame.thedie.TheDie;
+import CoopBoardGame.util.TextureLoader;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -27,7 +27,7 @@ public class ToolboxButton extends Button {
         super(
             (Settings.WIDTH / 2) - 150 * Settings.scale,
             (Settings.HEIGHT / 2) - 200 * Settings.scale,
-            TextureLoader.getTexture("BoardGameResources/images/ui/dice/Toolbox.png")
+            TextureLoader.getTexture("CoopBoardGameResources/images/ui/dice/Toolbox.png")
         );
     }
 
@@ -63,7 +63,7 @@ public class ToolboxButton extends Button {
                         }
                     }
                     if (this.pressed && !this.isDisabled) {
-                        if (AbstractDungeon.player.hasRelic("BoardGame:BGTheDieRelic")) {
+                        if (AbstractDungeon.player.hasRelic("CoopBoardGame:BGTheDieRelic")) {
                             if (AbstractDungeon.player.hasRelic("BGToolbox")) {
                                 ((BGToolbox) r).activate();
                             }

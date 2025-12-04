@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.vfx.combat.CleaveEffect;
 public class BGBerserkPower extends AbstractBGPower {
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:Berserk"
+        "CoopBoardGame:Berserk"
     );
     public static final String POWER_ID = "BGBerserk";
     public static final String NAME = powerStrings.NAME;

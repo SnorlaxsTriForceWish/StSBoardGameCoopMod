@@ -1,7 +1,7 @@
-package BoardGame.cards.BGBlue;
+package CoopBoardGame.cards.BGBlue;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGDefect;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGDefect;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -19,7 +19,7 @@ import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
 public class BGMeteorStrike extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGMeteorStrike"
+        "CoopBoardGame:BGMeteorStrike"
     );
     public static final String ID = "BGMeteorStrike";
 

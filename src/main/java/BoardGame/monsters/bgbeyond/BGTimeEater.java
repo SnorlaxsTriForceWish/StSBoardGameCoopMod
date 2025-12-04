@@ -1,14 +1,14 @@
 //use NoSkillsPower+VelvetChoker as a base for BGTimeWarpPower
 
-package BoardGame.monsters.bgbeyond;
+package CoopBoardGame.monsters.bgbeyond;
 
-import BoardGame.cards.BGStatus.BGDazed;
-import BoardGame.cards.BGStatus.BGSlimed;
-import BoardGame.characters.BGWatcher;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
-import BoardGame.powers.BGTimeEaterPhase2WarningPower;
-import BoardGame.powers.BGTimeWarpPower;
+import CoopBoardGame.cards.BGStatus.BGDazed;
+import CoopBoardGame.cards.BGStatus.BGSlimed;
+import CoopBoardGame.characters.BGWatcher;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.powers.BGTimeEaterPhase2WarningPower;
+import CoopBoardGame.powers.BGTimeWarpPower;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;

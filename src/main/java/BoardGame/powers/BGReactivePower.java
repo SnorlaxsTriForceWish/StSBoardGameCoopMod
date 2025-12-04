@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.actions.SpaghettiRerollDieAction;
+import CoopBoardGame.actions.SpaghettiRerollDieAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -11,7 +11,7 @@ public class BGReactivePower extends AbstractBGPower {
 
     public static final String POWER_ID = "BGReactivePower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGReactivePower"
+        "CoopBoardGame:BGReactivePower"
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;

@@ -1,8 +1,8 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.BoardGame;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.relics.DieControlledRelic;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.relics.DieControlledRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.HandCheckAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -26,7 +26,7 @@ public class CheckAfterUseCardAction extends AbstractGameAction {
     }
 
     public void update() {
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         logger.info("CheckAfterUseCardAction activates");
 
         for (AbstractPower p : AbstractDungeon.player.powers) {

@@ -1,8 +1,8 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import static BoardGame.powers.StrengthCap.MAX_STRENGTH;
+import static CoopBoardGame.powers.StrengthCap.MAX_STRENGTH;
 
-import BoardGame.powers.BGAkabekoPower;
+import CoopBoardGame.powers.BGAkabekoPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;

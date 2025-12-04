@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -8,7 +8,7 @@ public class BGChampPhase2WarningPower extends AbstractBGPower {
 
     public static final String POWER_ID = "BGChampPhase2WarningPower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGChampPhase2WarningPower"
+        "CoopBoardGame:BGChampPhase2WarningPower"
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;

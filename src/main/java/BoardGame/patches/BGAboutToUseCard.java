@@ -1,8 +1,8 @@
-package BoardGame.patches;
+package CoopBoardGame.patches;
 
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.powers.AbstractBGPower;
-import BoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.powers.AbstractBGPower;
+import CoopBoardGame.relics.AbstractBGRelic;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;

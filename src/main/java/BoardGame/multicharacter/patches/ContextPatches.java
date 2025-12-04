@@ -1,7 +1,7 @@
-package BoardGame.multicharacter.patches;
+package CoopBoardGame.multicharacter.patches;
 
-import BoardGame.multicharacter.MultiCreature;
-import BoardGame.multicharacter.NullMonster;
+import CoopBoardGame.multicharacter.MultiCreature;
+import CoopBoardGame.multicharacter.NullMonster;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -39,7 +39,7 @@ public class ContextPatches {
     }
 
     public static void pushTargetContext(AbstractCreature newContext) {
-        //BoardGame.BoardGame.logger.info("push "+newContext);
+        //CoopBoardGame.CoopBoardGame.logger.info("push "+newContext);
         if (currentTargetContext != null) {
             targetContextHistory.push(currentTargetContext);
         } else {
@@ -52,7 +52,7 @@ public class ContextPatches {
     }
 
     public static void popTargetContext() {
-        //BoardGame.BoardGame.logger.info("pop");
+        //CoopBoardGame.CoopBoardGame.logger.info("pop");
         AbstractCreature oldContext = targetContextHistory.pop();
         AbstractDungeon.getCurrRoom().monsters = AbstractDungeonMonsterPatches.getMonstersInSameRow(
             oldContext

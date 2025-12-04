@@ -1,7 +1,7 @@
-package BoardGame.cards.BGCurse;
+package CoopBoardGame.cards.BGCurse;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGCurse;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGCurse;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.SetDontTriggerAction;
 import com.megacrit.cardcrawl.actions.utility.LoseBlockAction;
@@ -18,7 +18,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGShame extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGShame"
+        "CoopBoardGame:BGShame"
     );
     public static final String ID = "BGShame";
 

@@ -1,15 +1,15 @@
-package BoardGame.icons;
+package CoopBoardGame.icons;
 
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.util.TextureLoader;
 import com.evacipated.cardcrawl.mod.stslib.icons.AbstractCustomIcon;
 
 public class Die3Icon extends AbstractCustomIcon {
 
-    public static final String ID = "BoardGame:Die3"; //reminder: "Icon" is automatically added
+    public static final String ID = "CoopBoardGame:Die3"; //reminder: "Icon" is automatically added
     private static Die3Icon singleton;
 
     public Die3Icon() {
-        super(ID, TextureLoader.getTexture("BoardGameResources/images/icons/die3.png"));
+        super(ID, TextureLoader.getTexture("CoopBoardGameResources/images/icons/die3.png"));
     }
 
     public static Die3Icon get() {

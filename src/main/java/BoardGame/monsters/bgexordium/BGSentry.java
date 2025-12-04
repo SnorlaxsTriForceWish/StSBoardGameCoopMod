@@ -1,11 +1,11 @@
-package BoardGame.monsters.bgexordium;
+package CoopBoardGame.monsters.bgexordium;
 
-import BoardGame.BoardGame;
-import BoardGame.cards.BGStatus.BGDazed;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
-import BoardGame.monsters.DieControlledMoves;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.cards.BGStatus.BGDazed;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.monsters.DieControlledMoves;
+import CoopBoardGame.thedie.TheDie;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
@@ -443,7 +443,7 @@ public class BGSentry extends AbstractBGMonster implements BGDamageIcons, DieCon
 
     public void dieMove(int roll) {
         if (behavior.equals("2D") && AbstractDungeon.ascensionLevel >= 1) return;
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("BGJawWorm: TheDie "+TheDie.monsterRoll);
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2 || TheDie.monsterRoll == 3) move =

@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.util.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -11,17 +11,17 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGTheDiePower extends AbstractBGPower {
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:TheDiePower"
+        "CoopBoardGame:TheDiePower"
     );
     public static final String POWER_ID = "BGTheDiePower";
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
     private static final Texture tex84 = TextureLoader.getTexture(
-        "BoardGameResources/images/powers/loadeddie_power84.png"
+        "CoopBoardGameResources/images/powers/loadeddie_power84.png"
     );
     private static final Texture tex32 = TextureLoader.getTexture(
-        "BoardGameResources/images/powers/loadeddie_power32.png"
+        "CoopBoardGameResources/images/powers/loadeddie_power32.png"
     );
 
     public BGTheDiePower(AbstractCreature owner, int amount) {
@@ -54,7 +54,7 @@ public class BGTheDiePower extends AbstractBGPower {
 
     //    @Override
     //    public void renderAmount(SpriteBatch sb, float x, float y, Color c) {
-    //        //Logger logger = LogManager.getLogger(BoardGame.class.getName());
+    //        //Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
     //        //logger.info("TheDie render: "+x+" "+y+" "+c+" "+fontScale+" "+this.amount);
     //        super.renderAmount(sb,x,y,c);
     //    }

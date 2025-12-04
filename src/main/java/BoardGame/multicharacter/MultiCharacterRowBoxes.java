@@ -1,7 +1,7 @@
-package BoardGame.multicharacter;
+package CoopBoardGame.multicharacter;
 
-import BoardGame.characters.AbstractBGPlayer;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.characters.AbstractBGPlayer;
+import CoopBoardGame.util.TextureLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class MultiCharacterRowBoxes {
 
     private final Texture img = TextureLoader.getTexture(
-        "BoardGameResources/images/charSelect/MultiCharacterSelectGrid.png"
+        "CoopBoardGameResources/images/charSelect/MultiCharacterSelectGrid.png"
     );
 
     private final float START_X = -800.0F * Settings.xScale;
@@ -108,7 +108,7 @@ public class MultiCharacterRowBoxes {
     }
 }
 
-/* Location:              C:\Spire dev\BoardGame.jar!\BoardGame\multicharacter\MultiCharacterRowBoxes.class
+/* Location:              C:\Spire dev\CoopBoardGame.jar!\CoopBoardGame\multicharacter\MultiCharacterRowBoxes.class
  * Java compiler version: 8 (52.0)
  * JD-Core Version:       1.1.3
  */

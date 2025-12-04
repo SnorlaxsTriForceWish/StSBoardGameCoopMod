@@ -1,6 +1,6 @@
-package BoardGame.monsters;
+package CoopBoardGame.monsters;
 
-import BoardGame.multicharacter.MultiCreature;
+import CoopBoardGame.multicharacter.MultiCreature;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;

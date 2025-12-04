@@ -1,7 +1,7 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.patches.DiscardInOrderOfEnergyCostPatch;
-import BoardGame.powers.BGAfterImagePower;
+import CoopBoardGame.patches.DiscardInOrderOfEnergyCostPatch;
+import CoopBoardGame.powers.BGAfterImagePower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
@@ -54,7 +54,9 @@ public class BGStormOfSteelAction extends AbstractGameAction {
             }
             if (!AbstractDungeon.handCardSelectScreen.selectedCards.group.isEmpty()) {
                 //That did NOT trigger DiscardAction's AfterImage call, so do that now
-                AbstractPower pw = AbstractDungeon.player.getPower("BoardGame:BGAfterImagePower");
+                AbstractPower pw = AbstractDungeon.player.getPower(
+                    "CoopBoardGame:BGAfterImagePower"
+                );
                 if (pw != null) {
                     ((BGAfterImagePower) pw).onDiscardAction();
                 }

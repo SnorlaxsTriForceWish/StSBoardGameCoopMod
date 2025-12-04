@@ -1,8 +1,8 @@
-package BoardGame.cards.BGPurple;
+package CoopBoardGame.cards.BGPurple;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGWatcher;
-import BoardGame.powers.WeakVulnCancel;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGWatcher;
+import CoopBoardGame.powers.WeakVulnCancel;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
@@ -20,7 +20,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 public class BGBrilliance extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGBrilliance"
+        "CoopBoardGame:BGBrilliance"
     );
     public static final String ID = "BGBrilliance";
 
@@ -42,7 +42,7 @@ public class BGBrilliance extends AbstractBGCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         //TODO: do we need to move this to an action since a relic is involved??
         int count = 0;
-        AbstractRelic r = p.getRelic("BoardGame:BGMiracles");
+        AbstractRelic r = p.getRelic("CoopBoardGame:BGMiracles");
         if (r != null) {
             count = r.counter;
         }

@@ -1,4 +1,4 @@
-package BoardGame.screen;
+package CoopBoardGame.screen;
 
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;

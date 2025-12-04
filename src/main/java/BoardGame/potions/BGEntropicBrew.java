@@ -1,6 +1,6 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
-import BoardGame.ui.EntropicBrewPotionButton;
+import CoopBoardGame.ui.EntropicBrewPotionButton;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ObtainPotionAction;
@@ -17,7 +17,7 @@ import com.megacrit.cardcrawl.vfx.ObtainPotionEffect;
 public class BGEntropicBrew extends AbstractPotion {
 
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGEntropicBrew"
+        "CoopBoardGame:BGEntropicBrew"
     );
 
     public static final String POTION_ID = "BGEntropicBrew";

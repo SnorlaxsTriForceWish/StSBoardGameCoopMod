@@ -1,7 +1,7 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.potions.BGGamblersBrew;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.potions.BGGamblersBrew;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -24,7 +24,7 @@ public class BGAccursedBlacksmith extends AbstractImageEvent {
 
     private static final Logger logger = LogManager.getLogger(BGAccursedBlacksmith.class.getName());
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGAccursed Blacksmith"
+        "CoopBoardGame:BGAccursed Blacksmith"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

@@ -1,4 +1,4 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.curses.Injury;
@@ -15,7 +15,7 @@ public class BGGoldenIdolEvent extends AbstractImageEvent {
 
     public static final String ID = "BGGolden Idol";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGGolden Idol"
+        "CoopBoardGame:BGGolden Idol"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

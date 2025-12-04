@@ -1,15 +1,15 @@
-package BoardGame.savables;
+package CoopBoardGame.savables;
 
-import static BoardGame.savables.DeckSaveInfo.DeckType.*;
+import static CoopBoardGame.savables.DeckSaveInfo.DeckType.*;
 
-import BoardGame.BoardGame;
-import BoardGame.characters.BGDefect;
-import BoardGame.characters.BGIronclad;
-import BoardGame.characters.BGSilent;
-import BoardGame.characters.BGWatcher;
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.potions.PotionHelperPatch;
-import BoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.characters.BGDefect;
+import CoopBoardGame.characters.BGIronclad;
+import CoopBoardGame.characters.BGSilent;
+import CoopBoardGame.characters.BGWatcher;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.potions.PotionHelperPatch;
+import CoopBoardGame.relics.AbstractBGRelic;
 import basemod.abstracts.CustomSavable;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
@@ -91,29 +91,31 @@ public class DeckSaveInfo
         if (!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) {
             return null;
         }
-        BoardGame.logger.info("Saving BG REWARD DECKS");
+        CoopBoardGame.logger.info("Saving BG REWARD DECKS");
         HashMap<DeckType, ArrayList<String>> decks;
         if (deckInfoBeforeCardReward == null) {
             decks = getCurrentDeckInfo();
-            BoardGame.logger.info("Save deck info as it is currently.");
+            CoopBoardGame.logger.info("Save deck info as it is currently.");
         } else {
             decks = deckInfoBeforeCardReward;
             deckInfoBeforeCardReward = null;
-            BoardGame.logger.info("Save previously stored deck info before drawing card reward.");
+            CoopBoardGame.logger.info(
+                "Save previously stored deck info before drawing card reward."
+            );
         }
         ArrayList<String> red = decks.get(RED_REWARDS);
-        //        BoardGame.logger.info("Top cards: "+red.get(red.size()-1)+" "+red.get(red.size()-2)+" "+red.get(red.size()-3));
-        //        BoardGame.logger.info("Bottom cards: "+red.get(0)+" "+red.get(1)+" "+red.get(2)
+        //        CoopBoardGame.logger.info("Top cards: "+red.get(red.size()-1)+" "+red.get(red.size()-2)+" "+red.get(red.size()-3));
+        //        CoopBoardGame.logger.info("Bottom cards: "+red.get(0)+" "+red.get(1)+" "+red.get(2)
         //                +" "+red.get(3)+" "+red.get(4)+" "+red.get(5)
         //                +" "+red.get(6)+" "+red.get(7)+" "+red.get(8)
-        BoardGame.logger.info("ALL cards: ");
+        CoopBoardGame.logger.info("ALL cards: ");
         StringBuilder s = new StringBuilder();
         int i = 0;
         for (String c : red) {
             i += 1;
             s.append(i).append("-").append(c).append(" ");
         }
-        BoardGame.logger.info(s.toString());
+        CoopBoardGame.logger.info(s.toString());
 
         return decks;
     }
@@ -139,9 +141,9 @@ public class DeckSaveInfo
 
     @Override
     public void onLoad(HashMap<DeckType, ArrayList<String>> decks) {
-        BoardGame.logger.info("LOADING BG REWARD DECKS");
+        CoopBoardGame.logger.info("LOADING BG REWARD DECKS");
         if (decks == null) {
-            BoardGame.logger.info("Saved decks is null (not a BG save?)");
+            CoopBoardGame.logger.info("Saved decks is null (not a BG save?)");
             return;
         }
         AbstractBGDungeon.physicalRewardDecks = new ArrayList<>();
@@ -204,7 +206,7 @@ public class DeckSaveInfo
 
         AbstractBGDungeon.initializedCardPools = true;
 
-        BoardGame.logger.info("ALL cards: ");
+        CoopBoardGame.logger.info("ALL cards: ");
         StringBuilder s = new StringBuilder();
         ArrayList<String> red = decks.get(RED_REWARDS);
         int i = 0;
@@ -212,7 +214,7 @@ public class DeckSaveInfo
             i += 1;
             s.append(i).append("-").append(c).append(" ");
         }
-        BoardGame.logger.info(s.toString());
+        CoopBoardGame.logger.info(s.toString());
     }
 
     @SpirePatch2(clz = AbstractRoom.class, method = "update")

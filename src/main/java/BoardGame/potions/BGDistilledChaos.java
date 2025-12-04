@@ -1,9 +1,9 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
-import BoardGame.actions.BGPlayThreeDrawnCardsAction;
-import BoardGame.actions.TargetSelectScreenAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.actions.BGPlayThreeDrawnCardsAction;
+import CoopBoardGame.actions.TargetSelectScreenAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.screen.TargetSelectScreen;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
@@ -28,7 +28,7 @@ import javassist.CtBehavior;
 public class BGDistilledChaos extends AbstractPotion {
 
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGDistilledChaos"
+        "CoopBoardGame:BGDistilledChaos"
     );
 
     public static final String POTION_ID = "BGDistilledChaos";

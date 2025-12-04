@@ -1,13 +1,13 @@
-package BoardGame.monsters.bgexordium;
+package CoopBoardGame.monsters.bgexordium;
 
-import BoardGame.BoardGame;
-import BoardGame.cards.BGStatus.BGDazed;
-import BoardGame.dungeons.BGExordium;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
-import BoardGame.monsters.DieControlledMoves;
-import BoardGame.powers.BGVulnerablePower;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.cards.BGStatus.BGDazed;
+import CoopBoardGame.dungeons.BGExordium;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.monsters.DieControlledMoves;
+import CoopBoardGame.powers.BGVulnerablePower;
+import CoopBoardGame.thedie.TheDie;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -131,7 +131,7 @@ public class BGSpikeSlime_M extends AbstractBGMonster implements BGDamageIcons, 
     }
 
     public void dieMove(int roll) {
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("BGAcidSlime_M: TheDie "+ TheDie.monsterRoll);
         char move = '-';
         if (TheDie.monsterRoll == 1 || TheDie.monsterRoll == 2) move = this.behavior.charAt(0);

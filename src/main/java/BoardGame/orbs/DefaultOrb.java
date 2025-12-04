@@ -1,8 +1,8 @@
-package BoardGame.orbs;
+package CoopBoardGame.orbs;
 
-import static BoardGame.BoardGame.makeOrbPath;
+import static CoopBoardGame.CoopBoardGame.makeOrbPath;
 
-import BoardGame.BoardGame;
+import CoopBoardGame.CoopBoardGame;
 import basemod.abstracts.CustomOrb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,7 +24,7 @@ import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
 public class DefaultOrb extends CustomOrb {
 
     // Standard ID/Description
-    public static final String ORB_ID = BoardGame.makeID("DefaultOrb");
+    public static final String ORB_ID = CoopBoardGame.makeID("DefaultOrb");
     private static final OrbStrings orbString = CardCrawlGame.languagePack.getOrbString(ORB_ID);
     public static final String[] DESCRIPTIONS = orbString.DESCRIPTION;
 

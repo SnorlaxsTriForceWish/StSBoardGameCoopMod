@@ -1,11 +1,11 @@
 //TODO: currently, copied cards are played after the original card (VG) instead of before the original card (BG)
 //TODO: NYI: Double Tap CAN be copied, but CANNOT be PlayedTwice
 
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
-import BoardGame.powers.BGDoubleAttackPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
+import CoopBoardGame.powers.BGDoubleAttackPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -19,7 +19,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGDoubleTap extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGDouble Tap"
+        "CoopBoardGame:BGDouble Tap"
     );
     public static final String ID = "BGDouble Tap";
 

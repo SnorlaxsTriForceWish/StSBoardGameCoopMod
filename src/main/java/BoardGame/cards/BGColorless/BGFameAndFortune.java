@@ -1,8 +1,8 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.actions.BGGainMiracleAction;
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.actions.BGGainMiracleAction;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -17,7 +17,7 @@ public class BGFameAndFortune extends AbstractBGAttackCardChoice {
 
     public static final String ID = "BGFameAndFortune";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGFameAndFortune"
+        "CoopBoardGame:BGFameAndFortune"
     );
     private AbstractCard wishCard;
 

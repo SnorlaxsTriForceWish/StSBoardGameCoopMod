@@ -1,8 +1,8 @@
-package BoardGame.cards.BGCurse;
+package CoopBoardGame.cards.BGCurse;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGCurse;
-import BoardGame.powers.BGWeakPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGCurse;
+import CoopBoardGame.powers.BGWeakPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.SetDontTriggerAction;
@@ -19,7 +19,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGDoubt extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGDoubt"
+        "CoopBoardGame:BGDoubt"
     );
     public static final String ID = "BGDoubt";
 

@@ -1,9 +1,9 @@
 // copy RetainCardPower (99 stacks)
 //but don't actually use RetainCardPower itself, since it doesn't wear off at end of turn
 
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.powers.BGOneTurnRetainCardPower;
+import CoopBoardGame.powers.BGOneTurnRetainCardPower;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;

@@ -1,8 +1,8 @@
-//package BoardGame.actions;
+//package CoopBoardGame.actions;
 //
-//import BoardGame.cards.AbstractBGCard;
-//import BoardGame.powers.BGTripleAttackPower;
-//import BoardGame.screen.TargetSelectScreen;
+//import CoopBoardGame.cards.AbstractBGCard;
+//import CoopBoardGame.powers.BGTripleAttackPower;
+//import CoopBoardGame.screen.TargetSelectScreen;
 //import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 //import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 //import com.megacrit.cardcrawl.actions.AbstractGameAction;

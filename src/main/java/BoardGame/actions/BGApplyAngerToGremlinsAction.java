@@ -1,6 +1,6 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.monsters.bgexordium.BGGremlinAngry;
+import CoopBoardGame.monsters.bgexordium.BGGremlinAngry;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.powers.AngryPower;
 
 public class BGApplyAngerToGremlinsAction extends AbstractGameAction {
+
     private static final int ATTACK_AMOUNT = 1;
     private static final int STACK_AMOUNT = 1;
 

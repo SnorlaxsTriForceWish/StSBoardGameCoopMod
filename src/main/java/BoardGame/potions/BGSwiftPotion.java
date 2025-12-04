@@ -1,4 +1,4 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;

@@ -1,12 +1,12 @@
-package BoardGame.monsters.bgcity;
+package CoopBoardGame.monsters.bgcity;
 
-import BoardGame.actions.BGForcedWaitAction;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
-import BoardGame.monsters.DieControlledMoves;
-import BoardGame.monsters.bgexordium.BGFungiBeast;
-import BoardGame.powers.BGVulnerablePower;
-import BoardGame.powers.BGVulnerableWatchPlayerPower;
+import CoopBoardGame.actions.BGForcedWaitAction;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.monsters.DieControlledMoves;
+import CoopBoardGame.monsters.bgexordium.BGFungiBeast;
+import CoopBoardGame.powers.BGVulnerablePower;
+import CoopBoardGame.powers.BGVulnerableWatchPlayerPower;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;

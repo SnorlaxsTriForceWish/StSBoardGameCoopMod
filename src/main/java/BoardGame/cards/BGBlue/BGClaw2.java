@@ -1,8 +1,8 @@
-package BoardGame.cards.BGBlue;
+package CoopBoardGame.cards.BGBlue;
 
-import BoardGame.actions.BGClawAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGDefect;
+import CoopBoardGame.actions.BGClawAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGDefect;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -22,7 +22,7 @@ import com.megacrit.cardcrawl.vfx.combat.ClawEffect;
 public class BGClaw2 extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGClaw2"
+        "CoopBoardGame:BGClaw2"
     );
     public static final String ID = "BGClaw2";
 
@@ -44,7 +44,7 @@ public class BGClaw2 extends AbstractBGCard {
     }
 
     public static int getClawPackCount() {
-        int c = Math.round(BoardGame.BoardGame.clawPackCount);
+        int c = Math.round(CoopBoardGame.CoopBoardGame.clawPackCount);
         if (c < 2) c = 0;
         if (c > 8) c = 8;
         return c;

@@ -1,7 +1,7 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -21,7 +21,7 @@ public class BGIronWaveShield extends AbstractBGAttackCardChoice {
 
     public static final String ID = "BGIronWaveShield";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGIronWaveShield"
+        "CoopBoardGame:BGIronWaveShield"
     );
 
     public BGIronWaveShield() {

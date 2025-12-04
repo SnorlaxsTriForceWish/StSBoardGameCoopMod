@@ -1,6 +1,6 @@
-package BoardGame.ui;
+package CoopBoardGame.ui;
 
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.util.TextureLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -41,7 +41,7 @@ public class EntropicBrewCourierRelicButton extends Button {
         super(
             (Settings.WIDTH / 2) + xoffset * Settings.scale,
             Settings.HEIGHT / 2 + yoffset * Settings.scale,
-            TextureLoader.getTexture("BoardGameResources/images/icons/pot.png")
+            TextureLoader.getTexture("CoopBoardGameResources/images/icons/pot.png")
         );
         this.realRelic = realRelic;
         this.hb = new Hitbox(96, 96);

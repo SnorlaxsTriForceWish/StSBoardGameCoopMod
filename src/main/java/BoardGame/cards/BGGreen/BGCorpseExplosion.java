@@ -1,10 +1,10 @@
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.cards.CardDoesNotDiscardWhenPlayed;
-import BoardGame.characters.BGSilent;
-import BoardGame.powers.BGCorpseExplosionPower;
-import BoardGame.powers.BGPoisonPower;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.cards.CardDoesNotDiscardWhenPlayed;
+import CoopBoardGame.characters.BGSilent;
+import CoopBoardGame.powers.BGCorpseExplosionPower;
+import CoopBoardGame.powers.BGPoisonPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -19,7 +19,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGCorpseExplosion extends AbstractBGCard implements CardDoesNotDiscardWhenPlayed {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGCorpseExplosion"
+        "CoopBoardGame:BGCorpseExplosion"
     );
     public static final String ID = "BGCorpseExplosion";
 
@@ -59,7 +59,7 @@ public class BGCorpseExplosion extends AbstractBGCard implements CardDoesNotDisc
         //not only because we might be running more than one physical copy of CE,
         //but there are some shenanigans which allow a Copy Of CE (or the original, whichever comes 2nd) to be played while no enemy has the debuff
         for (AbstractMonster m2 : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
-            AbstractPower pw = m2.getPower("BoardGame:BGCorpseExplosionPower");
+            AbstractPower pw = m2.getPower("CoopBoardGame:BGCorpseExplosionPower");
             if (pw != null) {
                 return;
             }

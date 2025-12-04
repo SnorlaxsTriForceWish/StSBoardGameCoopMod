@@ -1,10 +1,10 @@
-package BoardGame.monsters.bgcity;
+package CoopBoardGame.monsters.bgcity;
 
-import BoardGame.actions.BGBuffAllEnemiesAction;
-import BoardGame.actions.BGSpawnTwoGremlinsForGremlinLeaderAction;
-import BoardGame.dungeons.BGExordium;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.BGDamageIcons;
+import CoopBoardGame.actions.BGBuffAllEnemiesAction;
+import CoopBoardGame.actions.BGSpawnTwoGremlinsForGremlinLeaderAction;
+import CoopBoardGame.dungeons.BGExordium;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.BGDamageIcons;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;

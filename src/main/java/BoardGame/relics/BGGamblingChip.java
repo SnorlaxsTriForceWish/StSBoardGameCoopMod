@@ -1,7 +1,7 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.events.BGDeadAdventurer;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.events.BGDeadAdventurer;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;

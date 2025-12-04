@@ -1,8 +1,8 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.BoardGame;
-import BoardGame.relics.AbstractBGRelic;
-import BoardGame.relics.BGMiracles;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.relics.BGMiracles;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -32,7 +32,7 @@ public class BGGainMiracleAction extends AbstractGameAction {
     }
 
     public void update() {
-        if (!AbstractDungeon.player.hasRelic("BoardGame:BGMiracles")) {
+        if (!AbstractDungeon.player.hasRelic("CoopBoardGame:BGMiracles")) {
             AbstractRelic miracles = new BGMiracles();
             AbstractDungeon.getCurrRoom().spawnRelicAndObtain(
                 (Settings.WIDTH / 2),
@@ -42,7 +42,7 @@ public class BGGainMiracleAction extends AbstractGameAction {
             ((AbstractBGRelic) miracles).setupObtainedDuringCombat();
         }
 
-        AbstractRelic relic = AbstractDungeon.player.getRelic("BoardGame:BGMiracles");
+        AbstractRelic relic = AbstractDungeon.player.getRelic("CoopBoardGame:BGMiracles");
         for (int i = 0; i < this.amount; i += 1) {
             relic.counter = relic.counter + 1;
         }
@@ -53,8 +53,8 @@ public class BGGainMiracleAction extends AbstractGameAction {
             if (card != null && !card.isInAutoplay) {
                 addToTop(new GainEnergyAction(surplus));
             }
-            if (!BoardGame.alreadyShowedMaxMiraclesWarning) {
-                BoardGame.alreadyShowedMaxMiraclesWarning = true;
+            if (!CoopBoardGame.alreadyShowedMaxMiraclesWarning) {
+                CoopBoardGame.alreadyShowedMaxMiraclesWarning = true;
                 //TODO: localization
                 AbstractDungeon.effectList.add(
                     new ThoughtBubble(

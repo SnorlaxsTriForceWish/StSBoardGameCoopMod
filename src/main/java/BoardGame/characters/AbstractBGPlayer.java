@@ -1,8 +1,8 @@
-package BoardGame.characters;
+package CoopBoardGame.characters;
 
-import BoardGame.cards.BGGreen.BGDoppelganger;
-import BoardGame.powers.BGSurroundedPower;
-import BoardGame.powers.ManualStartTurnPhasePower;
+import CoopBoardGame.cards.BGGreen.BGDoppelganger;
+import CoopBoardGame.powers.BGSurroundedPower;
+import CoopBoardGame.powers.ManualStartTurnPhasePower;
 import basemod.ReflectionHacks;
 import basemod.abstracts.CustomPlayer;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -18,17 +18,17 @@ import java.util.Iterator;
 public abstract class AbstractBGPlayer extends CustomPlayer {
 
     //    public static final String[] orbTextures = {
-    //            "BoardGameResources/images/char/defaultCharacter/orb/layer1.png",
-    //            "BoardGameResources/images/char/defaultCharacter/orb/layer2.png",
-    //            "BoardGameResources/images/char/defaultCharacter/orb/layer3.png",
-    //            "BoardGameResources/images/char/defaultCharacter/orb/layer4.png",
-    //            "BoardGameResources/images/char/defaultCharacter/orb/layer5.png",
-    //            "BoardGameResources/images/char/defaultCharacter/orb/layer6.png",
-    //            "BoardGameResources/images/char/defaultCharacter/orb/layer1d.png",
-    //            "BoardGameResources/images/char/defaultCharacter/orb/layer2d.png",
-    //            "BoardGameResources/images/char/defaultCharacter/orb/layer3d.png",
-    //            "BoardGameResources/images/char/defaultCharacter/orb/layer4d.png",
-    //            "BoardGameResources/images/char/defaultCharacter/orb/layer5d.png",};
+    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer1.png",
+    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer2.png",
+    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer3.png",
+    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer4.png",
+    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer5.png",
+    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer6.png",
+    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer1d.png",
+    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer2d.png",
+    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer3d.png",
+    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer4d.png",
+    //            "CoopBoardGameResources/images/char/defaultCharacter/orb/layer5d.png",};
 
     //TODO: maybe move PlayedThisTurn to TheDie relic
     public int shivsPlayedThisTurn = 0;

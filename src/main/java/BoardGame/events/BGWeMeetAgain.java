@@ -1,7 +1,7 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.relics.AbstractBGRelic;
-import BoardGame.screen.RelicTradingScreen;
+import CoopBoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.screen.RelicTradingScreen;
 import basemod.BaseMod;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -20,7 +20,7 @@ public class BGWeMeetAgain extends AbstractImageEvent implements LockRelicsEvent
 
     public static final String ID = "BGWeMeetAgain";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGWeMeetAgain"
+        "CoopBoardGame:BGWeMeetAgain"
     );
 
     public static final String NAME = eventStrings.NAME;

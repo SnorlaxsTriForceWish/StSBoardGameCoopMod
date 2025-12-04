@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.InvisiblePower;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -14,7 +14,7 @@ public class BGPoisonProccerPower extends AbstractBGPower implements InvisiblePo
 
     private static final int MAX_POISON_TOKENS = 30;
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGPoison"
+        "CoopBoardGame:BGPoison"
     );
 
     public static final String NAME = powerStrings.NAME;

@@ -5,13 +5,13 @@
 
 //TODO: ascension 7+ attacks with 3 + AOE2 instead of 3 + 2.  no other changes though
 
-package BoardGame.monsters.bgcity;
+package CoopBoardGame.monsters.bgcity;
 
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.monsters.DieControlledMoves;
-import BoardGame.monsters.MixedAttacks;
-import BoardGame.powers.BGWeakPower;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.DieControlledMoves;
+import CoopBoardGame.monsters.MixedAttacks;
+import CoopBoardGame.powers.BGWeakPower;
+import CoopBoardGame.thedie.TheDie;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;

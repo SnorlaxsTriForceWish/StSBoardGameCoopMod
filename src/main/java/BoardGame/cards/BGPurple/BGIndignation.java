@@ -1,9 +1,9 @@
-package BoardGame.cards.BGPurple;
+package CoopBoardGame.cards.BGPurple;
 
-import BoardGame.actions.BGIndignationAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.AbstractBGPlayer;
-import BoardGame.characters.BGWatcher;
+import CoopBoardGame.actions.BGIndignationAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.AbstractBGPlayer;
+import CoopBoardGame.characters.BGWatcher;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -23,7 +23,7 @@ import javassist.CtBehavior;
 public class BGIndignation extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGIndignation"
+        "CoopBoardGame:BGIndignation"
     );
     public static final String ID = "BGIndignation";
 

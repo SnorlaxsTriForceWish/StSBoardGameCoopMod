@@ -1,7 +1,7 @@
 //TODO: make sure ALL monsters are using BG damage icons correctly, we forgot to Implements them
-package BoardGame.dungeons;
+package CoopBoardGame.dungeons;
 
-import BoardGame.cards.BGStatus.BGBurn;
+import CoopBoardGame.cards.BGStatus.BGBurn;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
@@ -228,14 +228,14 @@ public class BGTheEnding extends AbstractBGDungeon {
         //TODO: when it comes time to add shield+spear, remember that "one row" AOE doesn't work against them (will probably require significant changes)
 
         monsterList = new ArrayList<>();
-        monsterList.add("BoardGame:Shield and Spear");
-        monsterList.add("BoardGame:Shield and Spear");
-        monsterList.add("BoardGame:Shield and Spear");
+        monsterList.add("CoopBoardGame:Shield and Spear");
+        monsterList.add("CoopBoardGame:Shield and Spear");
+        monsterList.add("CoopBoardGame:Shield and Spear");
 
         eliteMonsterList = new ArrayList<>();
-        eliteMonsterList.add("BoardGame:Shield and Spear");
-        eliteMonsterList.add("BoardGame:Shield and Spear");
-        eliteMonsterList.add("BoardGame:Shield and Spear");
+        eliteMonsterList.add("CoopBoardGame:Shield and Spear");
+        eliteMonsterList.add("CoopBoardGame:Shield and Spear");
+        eliteMonsterList.add("CoopBoardGame:Shield and Spear");
     }
 
     protected void generateWeakEnemies(int count) {}

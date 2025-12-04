@@ -1,7 +1,7 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.powers.BGTriggerAnyDieAbilityPower;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.powers.BGTriggerAnyDieAbilityPower;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
@@ -69,7 +69,7 @@ public class BGDollysMirror extends AbstractBGRelic implements DieControlledReli
     public void onRightClick() {
         // On right click
         //Don't actually do anything when right-clicked, since we'd be spending a die ability to activate a die ability
-        //        //final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        //        //final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //        //logger.info("Relic.onRightClick");
         //        addToBot((AbstractGameAction)new BGActivateDieAbilityAction(this));
     }

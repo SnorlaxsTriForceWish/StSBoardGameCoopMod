@@ -2,7 +2,7 @@
 //TODO: close screen if combat ends (otherwise cursor becomes invisible until map)
 //TODO: extra safeguard for Juggernaut: once screen fades out, start autoclicking (otherwise screen stays black until player clicks several more times)
 
-package BoardGame.screen;
+package CoopBoardGame.screen;
 
 import basemod.BaseMod;
 import basemod.ReflectionHacks;

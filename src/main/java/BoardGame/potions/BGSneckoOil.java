@@ -1,6 +1,6 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
-import BoardGame.cards.BGStatus.BGDazed;
+import CoopBoardGame.cards.BGStatus.BGDazed;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 public class BGSneckoOil extends AbstractPotion {
 
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGSneckoOil"
+        "CoopBoardGame:BGSneckoOil"
     );
 
     public static final String POTION_ID = "BGSneckoOil";

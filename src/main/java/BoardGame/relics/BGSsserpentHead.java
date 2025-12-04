@@ -1,6 +1,6 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.dungeons.BGTheEnding;
+import CoopBoardGame.dungeons.BGTheEnding;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;

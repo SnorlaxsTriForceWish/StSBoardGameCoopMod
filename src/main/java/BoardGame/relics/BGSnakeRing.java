@@ -1,4 +1,4 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
 import basemod.BaseMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;

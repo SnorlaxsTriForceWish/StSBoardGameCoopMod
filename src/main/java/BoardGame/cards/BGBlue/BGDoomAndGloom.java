@@ -1,9 +1,9 @@
-package BoardGame.cards.BGBlue;
+package CoopBoardGame.cards.BGBlue;
 
-import BoardGame.actions.BGChannelAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGDefect;
-import BoardGame.orbs.BGDark;
+import CoopBoardGame.actions.BGChannelAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGDefect;
+import CoopBoardGame.orbs.BGDark;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
@@ -23,7 +23,7 @@ public class BGDoomAndGloom extends AbstractBGCard {
     public static final String ID = "BGDoomAndGloom";
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGDoomAndGloom"
+        "CoopBoardGame:BGDoomAndGloom"
     );
 
     public BGDoomAndGloom() {

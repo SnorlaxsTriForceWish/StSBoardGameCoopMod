@@ -1,9 +1,9 @@
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.actions.BGDoppelgangerAction;
-import BoardGame.actions.BGXCostCardAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGSilent;
+import CoopBoardGame.actions.BGDoppelgangerAction;
+import CoopBoardGame.actions.BGXCostCardAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGSilent;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class BGDoppelganger extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGDoppelganger"
+        "CoopBoardGame:BGDoppelganger"
     );
     public static final String ID = "BGDoppelganger";
 
@@ -50,7 +50,7 @@ public class BGDoppelganger extends AbstractBGCard {
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         BGXCostCardAction.XCostInfo info = BGXCostCardAction.preProcessCard(this);
-        //BoardGame.logger.info("Doppelganger energyOnUse: "+this.energyOnUse);
+        //CoopBoardGame.logger.info("Doppelganger energyOnUse: "+this.energyOnUse);
         //addToTop((AbstractGameAction)new BGDoppelgangerAction(this, info, (e,d)-> {}));
         addToBot((AbstractGameAction) new BGDoppelgangerAction(this, info, (e, d) -> {}));
     }
@@ -112,7 +112,7 @@ public class BGDoppelganger extends AbstractBGCard {
             //TODO: most uncopyable cards haven't been flagged cannotBeCopied yet (only BGShivSurrogate atm)
             if (card instanceof AbstractBGCard) if (((AbstractBGCard) card).cannotBeCopied) return;
             //TODO: copies cannot be copied
-            //BoardGame.logger.info("Adding "+card.name+" to the Doppelganger stack...");
+            //CoopBoardGame.logger.info("Adding "+card.name+" to the Doppelganger stack...");
             cardsPlayedThisTurn.add(card);
         }
     }

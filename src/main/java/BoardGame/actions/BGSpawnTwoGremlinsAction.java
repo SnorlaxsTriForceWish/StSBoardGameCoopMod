@@ -1,10 +1,10 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.dungeons.BGExordium;
-import BoardGame.monsters.bgexordium.BGGremlinAngry;
-import BoardGame.monsters.bgexordium.BGGremlinFat;
-import BoardGame.monsters.bgexordium.BGGremlinSneaky;
-import BoardGame.monsters.bgexordium.BGGremlinWizard;
+import CoopBoardGame.dungeons.BGExordium;
+import CoopBoardGame.monsters.bgexordium.BGGremlinAngry;
+import CoopBoardGame.monsters.bgexordium.BGGremlinFat;
+import CoopBoardGame.monsters.bgexordium.BGGremlinSneaky;
+import CoopBoardGame.monsters.bgexordium.BGGremlinWizard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.SpawnMonsterAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;

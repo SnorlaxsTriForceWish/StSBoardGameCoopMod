@@ -1,8 +1,8 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.dungeons.BGExordium;
-import BoardGame.relics.BGDiscardedMerchantEvent;
-import BoardGame.relics.BGSsserpentHead;
+import CoopBoardGame.dungeons.BGExordium;
+import CoopBoardGame.relics.BGDiscardedMerchantEvent;
+import CoopBoardGame.relics.BGSsserpentHead;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -26,7 +26,7 @@ public class BGMerchantEncounter extends AbstractEvent {
 
     private static final Logger logger = LogManager.getLogger(BGHallwayEncounter.class.getName());
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGMerchant"
+        "CoopBoardGame:BGMerchant"
     );
     public static final String NAME = eventStrings.NAME;
 

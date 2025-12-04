@@ -1,6 +1,6 @@
-package BoardGame.dungeons;
+package CoopBoardGame.dungeons;
 
-import BoardGame.monsters.bgexordium.BGCultist;
+import CoopBoardGame.monsters.bgexordium.BGCultist;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
@@ -213,10 +213,10 @@ public class BGTheCity extends AbstractBGDungeon {
     /*     */ protected void generateWeakEnemies(int count) {
         ArrayList<MonsterInfo> monsters = new ArrayList<>();
 
-        monsters.add(new MonsterInfo("BoardGame:Easy Small Slimes", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Jaw Worm (Easy)", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Easy Small Slimes", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Jaw Worm (Easy)", 2.0F));
         monsters.add(new MonsterInfo(BGCultist.ID, 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:2 Louse", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:2 Louse", 2.0F));
 
         /* 159 */ MonsterInfo.normalizeWeights(monsters);
         /* 160 */ populateMonsterList(monsters, count, false);
@@ -225,22 +225,24 @@ public class BGTheCity extends AbstractBGDungeon {
 
     protected void generateStrongEnemies(int count) {
         ArrayList<MonsterInfo> monsters = new ArrayList<>();
-        monsters.add(new MonsterInfo("BoardGame:Snecko", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:SnakePlant", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:3 Byrds", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:3 Cultists", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Chosen and Cultist", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Chosen and Byrd", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Looter (Hard)", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Another Looter (Hard)", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Centurion A", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Centurion B", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Snecko", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:SnakePlant", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:3 Byrds", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:3 Cultists", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Chosen and Cultist", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Chosen and Byrd", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Looter (Hard)", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Another Looter (Hard)", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Centurion A", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Centurion B", 2.0F));
         if (AbstractDungeon.ascensionLevel < 7) {
-            monsters.add(new MonsterInfo("BoardGame:Shelled Parasite", 2.0F));
-            monsters.add(new MonsterInfo("BoardGame:SphericGuardian", 2.0F));
+            monsters.add(new MonsterInfo("CoopBoardGame:Shelled Parasite", 2.0F));
+            monsters.add(new MonsterInfo("CoopBoardGame:SphericGuardian", 2.0F));
         } else {
-            monsters.add(new MonsterInfo("BoardGame:A7 Shelled Parasite and Fungi Beast", 2.0F));
-            monsters.add(new MonsterInfo("BoardGame:A7 Spheric Guardian and Sentry A", 2.0F));
+            monsters.add(
+                new MonsterInfo("CoopBoardGame:A7 Shelled Parasite and Fungi Beast", 2.0F)
+            );
+            monsters.add(new MonsterInfo("CoopBoardGame:A7 Spheric Guardian and Sentry A", 2.0F));
         }
         MonsterInfo.normalizeWeights(monsters);
         //populateFirstStrongEnemy(monsters, generateExclusions());
@@ -249,9 +251,9 @@ public class BGTheCity extends AbstractBGDungeon {
 
     protected void generateElites(int count) {
         ArrayList<MonsterInfo> monsters = new ArrayList<>();
-        monsters.add(new MonsterInfo("BoardGame:Book of Stabbing", 1.0F));
-        monsters.add(new MonsterInfo("BoardGame:Gremlin Leader", 1.0F));
-        monsters.add(new MonsterInfo("BoardGame:Taskmaster", 1.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Book of Stabbing", 1.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Gremlin Leader", 1.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Taskmaster", 1.0F));
         MonsterInfo.normalizeWeights(monsters);
         populateMonsterList(monsters, count, true);
     }

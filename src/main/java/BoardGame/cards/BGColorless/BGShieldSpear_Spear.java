@@ -1,8 +1,8 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGColorless;
-import BoardGame.monsters.bgending.BGSpireSpear;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGColorless;
+import CoopBoardGame.monsters.bgending.BGSpireSpear;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -14,7 +14,7 @@ public class BGShieldSpear_Spear extends AbstractBGCard {
 
     public static final String ID = "BGShieldSpear_Spear";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGShieldSpear_Spear"
+        "CoopBoardGame:BGShieldSpear_Spear"
     );
 
     public BGShieldSpear_Spear() {

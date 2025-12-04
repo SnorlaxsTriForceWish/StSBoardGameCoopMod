@@ -1,9 +1,9 @@
 //TODO: in VG, Headbutt can draw itself if a copy is played.  not allowed in BG (copy is played first).
 
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.unique.DiscardPileToTopOfDeckAction;
@@ -18,7 +18,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGHeadbutt extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGHeadbutt"
+        "CoopBoardGame:BGHeadbutt"
     );
     public static final String ID = "BGHeadbutt";
 

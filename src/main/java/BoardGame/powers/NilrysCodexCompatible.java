@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 public interface NilrysCodexCompatible {
     public void Trigger2Ability();

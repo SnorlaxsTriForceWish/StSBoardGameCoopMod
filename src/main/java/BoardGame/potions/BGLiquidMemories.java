@@ -1,6 +1,6 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
-import BoardGame.cards.AbstractBGCard;
+import CoopBoardGame.cards.AbstractBGCard;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
@@ -76,7 +76,7 @@ public class BGLiquidMemories extends AbstractPotion {
         public static void Insert(@ByRef AbstractCard[] ___c, boolean ___setCost, int ___newCost) {
             if (___c[0] instanceof AbstractBGCard) {
                 if (___setCost && ___newCost == 0) {
-                    BoardGame.BoardGame.logger.info(
+                    CoopBoardGame.CoopBoardGame.logger.info(
                         "Assigned Liquid Memories effect to " + ___c[0]
                     );
                     ((AbstractBGCard) ___c[0]).temporarilyCostsZero = true;

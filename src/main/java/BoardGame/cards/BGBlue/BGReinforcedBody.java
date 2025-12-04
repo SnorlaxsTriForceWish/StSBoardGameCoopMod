@@ -1,9 +1,9 @@
-package BoardGame.cards.BGBlue;
+package CoopBoardGame.cards.BGBlue;
 
-import BoardGame.actions.BGReinforcedBodyEnergyCheckAction;
-import BoardGame.actions.BGXCostCardAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGDefect;
+import CoopBoardGame.actions.BGReinforcedBodyEnergyCheckAction;
+import CoopBoardGame.actions.BGXCostCardAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGDefect;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -18,7 +18,7 @@ public class BGReinforcedBody extends AbstractBGCard {
     //TODO: "I can't play *that* card for 0 Energy", played it anyway
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGReinforcedBody"
+        "CoopBoardGame:BGReinforcedBody"
     );
     public static final String ID = "BGReinforcedBody";
 

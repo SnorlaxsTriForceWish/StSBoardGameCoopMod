@@ -1,8 +1,8 @@
-package BoardGame.multicharacter.patches;
+package CoopBoardGame.multicharacter.patches;
 
-import BoardGame.BoardGame;
-import BoardGame.multicharacter.NullMonster;
-import BoardGame.patches.Ascension;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.multicharacter.NullMonster;
+import CoopBoardGame.patches.Ascension;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -23,8 +23,8 @@ public class OnGameResetPatch {
             ContextPatches.playerContextHistory = new ArrayDeque<>();
             ContextPatches.targetContextHistory = new ArrayDeque<>();
             ContextPatches.currentTargetContext = new NullMonster();
-            BoardGame.alreadyShowedMaxPoisonWarning = false;
-            BoardGame.alreadyShowedMaxMiraclesWarning = false;
+            CoopBoardGame.alreadyShowedMaxPoisonWarning = false;
+            CoopBoardGame.alreadyShowedMaxMiraclesWarning = false;
             Ascension.combineUnlockedAscensions();
         }
 

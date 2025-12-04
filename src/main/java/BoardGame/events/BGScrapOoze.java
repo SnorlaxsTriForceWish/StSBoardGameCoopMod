@@ -1,6 +1,6 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.potions.BGGamblersBrew;
+import CoopBoardGame.potions.BGGamblersBrew;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -17,7 +17,7 @@ public class BGScrapOoze extends AbstractImageEvent {
     private static final Logger logger = LogManager.getLogger(BGScrapOoze.class.getName());
     public static final String ID = "BGScrap Ooze";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGScrap Ooze"
+        "CoopBoardGame:BGScrap Ooze"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

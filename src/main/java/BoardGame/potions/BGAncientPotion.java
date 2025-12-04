@@ -1,4 +1,4 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
@@ -15,7 +15,7 @@ public class BGAncientPotion extends AbstractPotion {
 
     public static final String POTION_ID = "BGAncientPotion";
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGAncientPotion"
+        "CoopBoardGame:BGAncientPotion"
     );
 
     public BGAncientPotion() {

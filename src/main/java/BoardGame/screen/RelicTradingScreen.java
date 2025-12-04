@@ -1,7 +1,7 @@
-package BoardGame.screen;
+package CoopBoardGame.screen;
 
-import BoardGame.relics.AbstractBGRelic;
-import BoardGame.ui.FakeTradingRelic;
+import CoopBoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.ui.FakeTradingRelic;
 import basemod.abstracts.CustomScreen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;

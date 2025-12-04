@@ -1,11 +1,11 @@
-package BoardGame.cards.BGBlue;
+package CoopBoardGame.cards.BGBlue;
 
-import BoardGame.actions.BGChannelAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGDefect;
-import BoardGame.orbs.BGDark;
-import BoardGame.orbs.BGFrost;
-import BoardGame.orbs.BGLightning;
+import CoopBoardGame.actions.BGChannelAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGDefect;
+import CoopBoardGame.orbs.BGDark;
+import CoopBoardGame.orbs.BGFrost;
+import CoopBoardGame.orbs.BGLightning;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -22,7 +22,7 @@ public class BGRainbow extends AbstractBGCard {
     public static final String ID = "BGRainbow";
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGRainbow"
+        "CoopBoardGame:BGRainbow"
     );
 
     public BGRainbow() {

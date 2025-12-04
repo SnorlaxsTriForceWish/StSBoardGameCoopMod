@@ -1,9 +1,9 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.relicRng;
 import static com.megacrit.cardcrawl.relics.AbstractRelic.RelicTier.*;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;

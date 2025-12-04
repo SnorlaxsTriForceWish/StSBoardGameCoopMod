@@ -1,4 +1,4 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
 

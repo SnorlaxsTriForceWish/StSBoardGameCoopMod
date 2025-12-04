@@ -1,7 +1,7 @@
-package BoardGame.multicharacter.patches;
+package CoopBoardGame.multicharacter.patches;
 
-import BoardGame.multicharacter.GainEnergyAndEnableControlsMultiAction;
-import BoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.multicharacter.GainEnergyAndEnableControlsMultiAction;
+import CoopBoardGame.multicharacter.MultiCharacter;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
@@ -18,7 +18,7 @@ public class GainEnergyAndEnableControlsActionPatch {
         public static SpireReturn<Void> Prefix(GainEnergyAndEnableControlsAction __instance) {
             if (AbstractDungeon.player instanceof MultiCharacter) {
                 if (ActionPatches.Field.owner.get(__instance) == null) {
-                    BoardGame.BoardGame.logger.info(
+                    CoopBoardGame.CoopBoardGame.logger.info(
                         "called GainEnergyAndEnableControlsAction, subbing in GainEnergyAndEnableControlsMultiAction"
                     );
                     AbstractDungeon.actionManager.addToTop(
@@ -27,7 +27,7 @@ public class GainEnergyAndEnableControlsActionPatch {
                     __instance.isDone = true;
                     return SpireReturn.Return();
                 } else {
-                    BoardGame.BoardGame.logger.warn(
+                    CoopBoardGame.CoopBoardGame.logger.warn(
                         "called GainEnergyAndEnableControlsAction with owner " +
                             ActionPatches.Field.owner.get(__instance) +
                             " when null owner was expected!"

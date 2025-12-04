@@ -1,3 +1,3 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 public interface ManualStartTurnPhasePower {}

@@ -1,4 +1,4 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ChangeStateAction;
@@ -17,7 +17,7 @@ public class BGCurlUpPower extends AbstractBGPower {
 
     public static final String POWER_ID = "BGCurl Up";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:Curl Up"
+        "CoopBoardGame:Curl Up"
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;

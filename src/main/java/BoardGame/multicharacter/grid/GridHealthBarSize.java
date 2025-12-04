@@ -1,4 +1,4 @@
-package BoardGame.multicharacter.grid;
+package CoopBoardGame.multicharacter.grid;
 
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

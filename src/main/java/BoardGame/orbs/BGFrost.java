@@ -1,4 +1,4 @@
-package BoardGame.orbs;
+package CoopBoardGame.orbs;
 
 import basemod.abstracts.CustomOrb;
 import com.badlogic.gdx.Gdx;
@@ -21,10 +21,10 @@ import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
 
 public class BGFrost extends CustomOrb {
 
-    public static final String ORB_ID = "BoardGame:BGFrost";
+    public static final String ORB_ID = "CoopBoardGame:BGFrost";
 
     private static final OrbStrings orbString = CardCrawlGame.languagePack.getOrbString(
-        "BoardGame:BGFrost"
+        "CoopBoardGame:BGFrost"
     );
     public static final String[] DESCRIPTIONS = orbString.DESCRIPTION;
 

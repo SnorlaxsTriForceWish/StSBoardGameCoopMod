@@ -1,8 +1,8 @@
 //Omamori is hardcoded ShowCardAndObtainEffect (24-26) + FastCardObtainEffect (25-27)
 
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.characters.BGCurse;
+import CoopBoardGame.characters.BGCurse;
 import com.evacipated.cardcrawl.modthespire.lib.ByRef;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;

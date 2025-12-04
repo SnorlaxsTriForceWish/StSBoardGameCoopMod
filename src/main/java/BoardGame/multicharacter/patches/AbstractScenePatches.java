@@ -1,7 +1,7 @@
-package BoardGame.multicharacter.patches;
+package CoopBoardGame.multicharacter.patches;
 
-import BoardGame.multicharacter.grid.GridBackground;
-import BoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.multicharacter.grid.GridBackground;
+import CoopBoardGame.relics.AbstractBGRelic;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;

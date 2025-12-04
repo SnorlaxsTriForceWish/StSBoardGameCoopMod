@@ -1,9 +1,9 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.orbs.BGDark;
-import BoardGame.orbs.BGFrost;
-import BoardGame.orbs.BGLightning;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.orbs.BGDark;
+import CoopBoardGame.orbs.BGFrost;
+import CoopBoardGame.orbs.BGLightning;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 

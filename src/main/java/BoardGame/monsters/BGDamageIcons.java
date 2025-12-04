@@ -1,6 +1,6 @@
-package BoardGame.monsters;
+package CoopBoardGame.monsters;
 
-import BoardGame.patches.DefaultInsertPatch;
+import CoopBoardGame.patches.DefaultInsertPatch;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;

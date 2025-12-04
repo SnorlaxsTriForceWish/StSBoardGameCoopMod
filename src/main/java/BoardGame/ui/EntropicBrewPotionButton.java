@@ -1,7 +1,7 @@
-package BoardGame.ui;
+package CoopBoardGame.ui;
 
-import BoardGame.potions.BGEntropicBrew;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.potions.BGEntropicBrew;
+import CoopBoardGame.util.TextureLoader;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -75,7 +75,7 @@ public class EntropicBrewPotionButton extends Button {
         super(
             (Settings.WIDTH / 2) + xoffset * Settings.scale,
             Settings.HEIGHT / 2 + yoffset * Settings.scale,
-            TextureLoader.getTexture("BoardGameResources/images/icons/pot.png")
+            TextureLoader.getTexture("CoopBoardGameResources/images/icons/pot.png")
         );
         this.realPotion = realPotion;
         this.hb = new Hitbox(64, 64);
@@ -110,7 +110,7 @@ public class EntropicBrewPotionButton extends Button {
                     }
                     this.die();
                 } else {
-                    BoardGame.BoardGame.logger.info(
+                    CoopBoardGame.CoopBoardGame.logger.info(
                         "EntropicBrewPotionButton: NOT ENOUGH POTION SLOTS"
                     );
                     AbstractDungeon.topPanel.flashRed();

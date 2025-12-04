@@ -1,8 +1,8 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.BoardGame;
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.relics.AbstractBGRelic;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -30,7 +30,7 @@ public class BGNloth extends AbstractImageEvent implements LockRelicsEvent {
 
     public static final String ID = "BGNloth";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGNloth"
+        "CoopBoardGame:BGNloth"
     );
     public static final String NAME = eventStrings.NAME;
 
@@ -68,7 +68,7 @@ public class BGNloth extends AbstractImageEvent implements LockRelicsEvent {
             }
         }
         if (randomRelic != null) {
-            BoardGame.logger.info(
+            CoopBoardGame.logger.info(
                 "N'loth: SECRETLY picked " +
                     randomRelic.name +
                     ". Hey! You are not allowed to read this message! Stop this at once!"

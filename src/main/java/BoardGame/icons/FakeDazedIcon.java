@@ -1,17 +1,17 @@
-package BoardGame.icons;
+package CoopBoardGame.icons;
 
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.util.TextureLoader;
 import com.evacipated.cardcrawl.mod.stslib.icons.AbstractCustomIcon;
 
 public class FakeDazedIcon extends AbstractCustomIcon {
 
     //Exactly the same as normal Dazed but without the "put on top of your draw pile" tooltip.
 
-    public static final String ID = "BoardGame:FakeDazed"; //reminder: "Icon" is automatically added
+    public static final String ID = "CoopBoardGame:FakeDazed"; //reminder: "Icon" is automatically added
     private static FakeDazedIcon singleton;
 
     public FakeDazedIcon() {
-        super(ID, TextureLoader.getTexture("BoardGameResources/images/icons/daze.png"));
+        super(ID, TextureLoader.getTexture("CoopBoardGameResources/images/icons/daze.png"));
     }
 
     public static FakeDazedIcon get() {

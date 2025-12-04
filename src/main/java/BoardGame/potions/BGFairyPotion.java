@@ -1,6 +1,6 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -20,7 +20,7 @@ public class BGFairyPotion extends AbstractPotion {
 
     public static final String POTION_ID = "BGFairyPotion";
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGFairyPotion"
+        "CoopBoardGame:BGFairyPotion"
     );
 
     public BGFairyPotion() {
@@ -88,7 +88,7 @@ public class BGFairyPotion extends AbstractPotion {
                 //                if (__instance.hasPotion("BGFairyPotion")) {
                 //                    //TODO: if it's ruled that Fairy Potion doesn't protect from multihits, just copy the vanilla fairy potion code block over to here
                 //                    AbstractDungeon.actionManager.addToBottom(new BGDestroyFairyPotionAction());
-                //                    BoardGame.BoardGame.logger.info("hasPotion(BGFairyPotion)==true");
+                //                    CoopBoardGame.CoopBoardGame.logger.info("hasPotion(BGFairyPotion)==true");
                 //                    return SpireReturn.Return();
                 //                }
 

@@ -1,7 +1,7 @@
-package BoardGame.multicharacter.patches;
+package CoopBoardGame.multicharacter.patches;
 
-import BoardGame.multicharacter.NullMonster;
-import BoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.multicharacter.NullMonster;
+import CoopBoardGame.screen.TargetSelectScreen;
 import basemod.BaseMod;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
@@ -15,7 +15,7 @@ public class DamageAllEnemiesActionPatch {
 
         @SpirePrefixPatch
         public static SpireReturn<Void> Foo(DamageAllEnemiesAction __instance) {
-            BoardGame.BoardGame.logger.info("MAX_HAND_SIZE: " + BaseMod.MAX_HAND_SIZE);
+            CoopBoardGame.CoopBoardGame.logger.info("MAX_HAND_SIZE: " + BaseMod.MAX_HAND_SIZE);
             if (CardTargetingPatches.moreThanOneRowExists()) {
                 if (
                     ActionPatches.Field.rowTarget.get(__instance) == null ||

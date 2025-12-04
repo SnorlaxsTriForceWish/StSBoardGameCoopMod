@@ -1,6 +1,6 @@
 //Regal Pillow is hardcoded in RestOption constructor and CampfireSleepEffect constructor
 
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;

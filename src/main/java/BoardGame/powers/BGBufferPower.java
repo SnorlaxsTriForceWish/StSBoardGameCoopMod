@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.relics.BGTheDieRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
@@ -32,7 +32,7 @@ public class BGBufferPower extends AbstractBGPower {
 
     public BGBufferPower(AbstractCreature owner, int amount, AbstractCard originalcard) {
         this.name = NAME;
-        this.ID = "BoardGame:BGBufferPower" + bufferIdOffset;
+        this.ID = "CoopBoardGame:BGBufferPower" + bufferIdOffset;
         bufferIdOffset++;
         this.owner = owner;
         this.amount = amount;

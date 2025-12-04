@@ -1,6 +1,6 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.relics.BGShivs;
+import CoopBoardGame.relics.BGShivs;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
@@ -15,7 +15,7 @@ public class BGUnloadAction extends AbstractGameAction {
     }
 
     public void update() {
-        BGShivs relic = (BGShivs) AbstractDungeon.player.getRelic("BoardGame:BGShivs");
+        BGShivs relic = (BGShivs) AbstractDungeon.player.getRelic("CoopBoardGame:BGShivs");
         if (relic != null) {
             for (int i = 0; i < relic.counter; i += 1) {
                 addToTop(

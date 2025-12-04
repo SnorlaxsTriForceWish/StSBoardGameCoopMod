@@ -1,6 +1,6 @@
-package BoardGame.icons;
+package CoopBoardGame.icons;
 
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.util.TextureLoader;
 import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.icons.AbstractCustomIcon;
 import java.util.ArrayList;
@@ -8,11 +8,11 @@ import java.util.List;
 
 public class PoisonIcon extends AbstractCustomIcon {
 
-    public static final String ID = "BoardGame:Poison"; //reminder: "Icon" is automatically added
+    public static final String ID = "CoopBoardGame:Poison"; //reminder: "Icon" is automatically added
     private static PoisonIcon singleton;
 
     public PoisonIcon() {
-        super(ID, TextureLoader.getTexture("BoardGameResources/images/icons/poison.png"));
+        super(ID, TextureLoader.getTexture("CoopBoardGameResources/images/icons/poison.png"));
     }
 
     public static PoisonIcon get() {
@@ -26,8 +26,8 @@ public class PoisonIcon extends AbstractCustomIcon {
         List<TooltipInfo> list = new ArrayList<>();
         list.add(
             new TooltipInfo(
-                "[BoardGame:PoisonIcon] Poison",
-                "At the end of the player's turn, enemies with [BoardGame:PoisonIcon] lose 1 HP per [BoardGame:PoisonIcon] token they have."
+                "[CoopBoardGame:PoisonIcon] Poison",
+                "At the end of the player's turn, enemies with [CoopBoardGame:PoisonIcon] lose 1 HP per [CoopBoardGame:PoisonIcon] token they have."
             )
         );
         return list;

@@ -1,6 +1,6 @@
-package BoardGame.patches;
+package CoopBoardGame.patches;
 
-import BoardGame.characters.*;
+import CoopBoardGame.characters.*;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.cards.AbstractCard;

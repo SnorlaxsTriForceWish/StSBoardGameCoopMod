@@ -1,4 +1,4 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -15,7 +15,7 @@ public class BGColosseum extends Colosseum {
     public static final String ID = "BGColosseum";
 
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGColosseum"
+        "CoopBoardGame:BGColosseum"
     );
 
     public static final String NAME = eventStrings.NAME;

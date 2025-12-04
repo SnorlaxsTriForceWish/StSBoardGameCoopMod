@@ -1,10 +1,10 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.actions.BGXCostCardAction;
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.cards.BGRed.BGWhirlwind;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.actions.BGXCostCardAction;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.cards.BGRed.BGWhirlwind;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -15,7 +15,7 @@ public class BGXCostChoice extends AbstractBGAttackCardChoice {
 
     public static final String ID = "BGXCostChoice";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGXCostChoice"
+        "CoopBoardGame:BGXCostChoice"
     );
 
     //TODO LATER: action could be private if our DoppelgangerAction was better structured.  Alternately, public card.executeAction()

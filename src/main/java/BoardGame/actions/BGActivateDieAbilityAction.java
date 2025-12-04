@@ -1,9 +1,9 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.powers.BGTrigger2DieAbilityPower;
-import BoardGame.powers.BGTriggerAnyDieAbilityPower;
-import BoardGame.powers.NilrysCodexCompatible;
-import BoardGame.relics.DieControlledRelic;
+import CoopBoardGame.powers.BGTrigger2DieAbilityPower;
+import CoopBoardGame.powers.BGTriggerAnyDieAbilityPower;
+import CoopBoardGame.powers.NilrysCodexCompatible;
+import CoopBoardGame.relics.DieControlledRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -16,14 +16,14 @@ public class BGActivateDieAbilityAction extends AbstractGameAction {
     private DieControlledRelic relic = null;
 
     public BGActivateDieAbilityAction(DieControlledRelic relic) {
-        //final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        //final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("BGActivateDieAbilityAction: constructor");
         this.target = AbstractDungeon.player;
         this.relic = relic;
     }
 
     public void update() {
-        //final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        //final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("BGActivateDieAbilityAction: update");
         if (shouldCancelAction()) {
             this.isDone = true;

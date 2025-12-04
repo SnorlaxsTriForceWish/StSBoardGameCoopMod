@@ -1,19 +1,19 @@
-package BoardGame.icons;
+package CoopBoardGame.icons;
 
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.util.TextureLoader;
 import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.icons.AbstractCustomIcon;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: consider adding a BoardGame:SummonIcon for bestiary/multicharintent graphics
+//TODO: consider adding a CoopBoardGame:SummonIcon for bestiary/multicharintent graphics
 public class AOEIcon extends AbstractCustomIcon {
 
-    public static final String ID = "BoardGame:AOE"; //reminder: "Icon" is automatically added
+    public static final String ID = "CoopBoardGame:AOE"; //reminder: "Icon" is automatically added
     private static AOEIcon singleton;
 
     public AOEIcon() {
-        super(ID, TextureLoader.getTexture("BoardGameResources/images/icons/aoe.png"));
+        super(ID, TextureLoader.getTexture("CoopBoardGameResources/images/icons/aoe.png"));
     }
 
     public static AOEIcon get() {
@@ -27,7 +27,7 @@ public class AOEIcon extends AbstractCustomIcon {
         List<TooltipInfo> list = new ArrayList<>();
         list.add(
             new TooltipInfo(
-                "[BoardGame:AOEIcon] Area of Effect",
+                "[CoopBoardGame:AOEIcon] Area of Effect",
                 "Affects all enemies in a row and the boss."
             )
         );

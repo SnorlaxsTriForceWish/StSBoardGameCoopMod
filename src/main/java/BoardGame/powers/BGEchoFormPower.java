@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.cards.AbstractBGCard;
+import CoopBoardGame.cards.AbstractBGCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -19,9 +19,9 @@ import org.apache.logging.log4j.Logger;
 
 public class BGEchoFormPower extends AbstractBGPower {
 
-    public static final String POWER_ID = "BoardGame:BGEchoFormPower";
+    public static final String POWER_ID = "CoopBoardGame:BGEchoFormPower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGEchoFormPower"
+        "CoopBoardGame:BGEchoFormPower"
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
@@ -31,7 +31,7 @@ public class BGEchoFormPower extends AbstractBGPower {
 
     public BGEchoFormPower(AbstractCreature owner, int amount) {
         this.name = NAME;
-        this.ID = "BoardGame:BGEchoFormPower";
+        this.ID = "CoopBoardGame:BGEchoFormPower";
         this.owner = owner;
         this.amount = amount;
         updateDescription();
@@ -56,7 +56,7 @@ public class BGEchoFormPower extends AbstractBGPower {
     }
 
     public static boolean isEchoFormAvailable() {
-        AbstractPower p = AbstractDungeon.player.getPower("BoardGame:BGEchoFormPower");
+        AbstractPower p = AbstractDungeon.player.getPower("CoopBoardGame:BGEchoFormPower");
         if (p != null) {
             if (((BGEchoFormPower) p).cardsDoubledThisTurn < p.amount) {
                 return true;
@@ -87,7 +87,7 @@ public class BGEchoFormPower extends AbstractBGPower {
         }
         if (
             originalCard.type == AbstractCard.CardType.SKILL &&
-            this.owner.getPower("BoardGame:BGBurstPower") != null
+            this.owner.getPower("CoopBoardGame:BGBurstPower") != null
         ) {
             return;
         }

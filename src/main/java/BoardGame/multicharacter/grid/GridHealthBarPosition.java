@@ -1,4 +1,4 @@
-package BoardGame.multicharacter.grid;
+package CoopBoardGame.multicharacter.grid;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;

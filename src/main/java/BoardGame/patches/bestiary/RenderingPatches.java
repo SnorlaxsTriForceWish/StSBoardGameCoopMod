@@ -1,4 +1,4 @@
-package BoardGame.patches.bestiary;
+package CoopBoardGame.patches.bestiary;
 
 import Bestiary.ui.Label;
 import Bestiary.utils.RenderingUtils;

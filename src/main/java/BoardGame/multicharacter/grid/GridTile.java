@@ -1,6 +1,6 @@
-package BoardGame.multicharacter.grid;
+package CoopBoardGame.multicharacter.grid;
 
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.util.TextureLoader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -18,7 +18,7 @@ public class GridTile {
     public static int TILE_WIDTH = SOURCE_TILE_WIDTH;
     public static int TILE_HEIGHT = SOURCE_TILE_HEIGHT;
     public static Texture tileImg = TextureLoader.getTexture(
-        "BoardGameResources/images/ui/gridtile.png"
+        "CoopBoardGameResources/images/ui/gridtile.png"
     );
     public int width = 1;
     public int height = 1;

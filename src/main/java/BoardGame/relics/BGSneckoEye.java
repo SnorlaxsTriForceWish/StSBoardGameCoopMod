@@ -1,14 +1,14 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.actions.BGActivateDieAbilityAction;
-import BoardGame.actions.BGChooseOneAttackAction;
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.cards.BGColorless.BGGremlinHornGainEnergy;
-import BoardGame.cards.BGColorless.BGSneckoEyeDrawTwoCards;
-import BoardGame.cards.BGColorless.BGSneckoEyeGainDazed;
-import BoardGame.cards.BGStatus.BGDazed;
-import BoardGame.powers.NilrysCodexCompatible;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.actions.BGActivateDieAbilityAction;
+import CoopBoardGame.actions.BGChooseOneAttackAction;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.cards.BGColorless.BGGremlinHornGainEnergy;
+import CoopBoardGame.cards.BGColorless.BGSneckoEyeDrawTwoCards;
+import CoopBoardGame.cards.BGColorless.BGSneckoEyeGainDazed;
+import CoopBoardGame.cards.BGStatus.BGDazed;
+import CoopBoardGame.powers.NilrysCodexCompatible;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;

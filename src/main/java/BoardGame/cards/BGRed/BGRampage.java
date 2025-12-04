@@ -1,9 +1,9 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.BoardGame;
-import BoardGame.actions.BGRampageAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.actions.BGRampageAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Logger;
 public class BGRampage extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGRampage"
+        "CoopBoardGame:BGRampage"
     );
     public static final String ID = "BGRampage";
 
@@ -49,7 +49,7 @@ public class BGRampage extends AbstractBGCard {
     public void applyPowers() {
         this.baseDamage = AbstractDungeon.player.exhaustPile.size();
         super.applyPowers();
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("BGRampage applyPowers:"+this.damage);
         if (!this.upgraded) {
             this.rawDescription = cardStrings.DESCRIPTION + cardStrings.EXTENDED_DESCRIPTION[0];

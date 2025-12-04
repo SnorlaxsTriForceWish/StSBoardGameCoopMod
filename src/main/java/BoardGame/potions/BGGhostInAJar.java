@@ -1,6 +1,6 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
-import BoardGame.powers.BGInvinciblePlayerPower;
+import CoopBoardGame.powers.BGInvinciblePlayerPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -18,7 +18,7 @@ public class BGGhostInAJar extends AbstractPotion {
 
     public static final String POTION_ID = "BGGhostInAJar";
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGGhostInAJar"
+        "CoopBoardGame:BGGhostInAJar"
     );
 
     public BGGhostInAJar() {

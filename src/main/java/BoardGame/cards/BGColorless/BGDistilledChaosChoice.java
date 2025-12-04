@@ -1,10 +1,10 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.actions.TargetSelectScreenAction;
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGColorless;
-import BoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.actions.TargetSelectScreenAction;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGColorless;
+import CoopBoardGame.screen.TargetSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.NewQueueCardAction;
 import com.megacrit.cardcrawl.actions.utility.UnlimboAction;
@@ -21,7 +21,7 @@ public class BGDistilledChaosChoice extends AbstractBGAttackCardChoice {
 
     public static final String ID = "BGDistilledChaosChoice";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGDistilledChaosChoice"
+        "CoopBoardGame:BGDistilledChaosChoice"
     );
 
     private ArrayList<AbstractCard> cards = new ArrayList<>();

@@ -1,14 +1,14 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.actions.BGActivateDieAbilityAction;
-import BoardGame.actions.BGChooseOneAttackAction;
-import BoardGame.actions.TargetSelectScreenAction;
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.cards.BGColorless.BGDuality2Block;
-import BoardGame.cards.BGColorless.BGDuality2Damage;
-import BoardGame.powers.NilrysCodexCompatible;
-import BoardGame.screen.TargetSelectScreen;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.actions.BGActivateDieAbilityAction;
+import CoopBoardGame.actions.BGChooseOneAttackAction;
+import CoopBoardGame.actions.TargetSelectScreenAction;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.cards.BGColorless.BGDuality2Block;
+import CoopBoardGame.cards.BGColorless.BGDuality2Damage;
+import CoopBoardGame.powers.NilrysCodexCompatible;
+import CoopBoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -112,7 +112,7 @@ public class BGDuality
             // If it has been used this turn, or the player doesn't actually have the relic (i.e. it's on display in the shop room), or it's the enemy's turn
             return; // Don't do anything.
         }
-        //final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        //final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("BGTheDieRelic.onRightClick");
         addToBot((AbstractGameAction) new BGActivateDieAbilityAction(this));
     }

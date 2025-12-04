@@ -1,7 +1,7 @@
-package BoardGame.rewards;
+package CoopBoardGame.rewards;
 
-import BoardGame.screen.GridCardSelectScreenCallback;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.screen.GridCardSelectScreenCallback;
+import CoopBoardGame.util.TextureLoader;
 import basemod.abstracts.CustomReward;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -13,13 +13,13 @@ import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 public class TinyHouseUpgrade1Card extends CustomReward {
 
     private static final Texture ICON = TextureLoader.getTexture(
-        "BoardGameResources/images/rewards/upgradeTongs.png"
+        "CoopBoardGameResources/images/rewards/upgradeTongs.png"
     );
 
     public int amount;
 
     public TinyHouseUpgrade1Card(int amount) {
-        super(ICON, "Upgrade a card", TinyHouseUpgrade1CardTypePatch.BoardGame_UPGRADEREWARD);
+        super(ICON, "Upgrade a card", TinyHouseUpgrade1CardTypePatch.CoopBoardGame_UPGRADEREWARD);
     }
 
     @Override

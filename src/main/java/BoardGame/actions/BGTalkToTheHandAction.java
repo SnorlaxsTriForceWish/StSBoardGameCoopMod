@@ -1,4 +1,4 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -17,7 +17,7 @@ public class BGTalkToTheHandAction extends AbstractGameAction {
     }
 
     public void update() {
-        AbstractRelic r = p.getRelic("BoardGame:BGMiracles");
+        AbstractRelic r = p.getRelic("CoopBoardGame:BGMiracles");
         if (r != null) {
             for (int i = 0; i < r.counter; i += 1) {
                 addToTop((AbstractGameAction) new GainBlockAction(p, block));

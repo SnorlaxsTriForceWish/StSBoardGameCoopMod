@@ -1,7 +1,7 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -21,7 +21,7 @@ public class BGIronWaveSpear extends AbstractBGAttackCardChoice {
 
     public static final String ID = "BGIronWaveSpear";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGIronWaveSpear"
+        "CoopBoardGame:BGIronWaveSpear"
     );
 
     public BGIronWaveSpear() {
@@ -52,7 +52,7 @@ public class BGIronWaveSpear extends AbstractBGAttackCardChoice {
     }
 
     public void onChoseThisOption() {
-        //final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        //final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("BGIronWaveSpear: "+this.damage+" "+this.block);
         applyPowers();
         calculateCardDamage(this.m);

@@ -1,10 +1,10 @@
-package BoardGame.cards;
+package CoopBoardGame.cards;
 
-import BoardGame.actions.TargetSelectScreenAction;
-import BoardGame.characters.BGColorless;
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.relics.BGTheDieRelic;
-import BoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.actions.TargetSelectScreenAction;
+import CoopBoardGame.characters.BGColorless;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.screen.TargetSelectScreen;
 import basemod.BaseMod;
 import basemod.abstracts.CustomCard;
 import basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.RenderFixSwitches;
@@ -37,8 +37,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 //class for cards which use artwork from the original game but custom colors.
-public abstract class AbstractBGCard extends CustomCard //implements AlternateCardCostModifier
-{
+public abstract class AbstractBGCard
+    extends CustomCard { //implements AlternateCardCostModifier
 
     private static final Logger logger = LogManager.getLogger(AbstractCard.class.getName());
     //public CardType type; //AbstractCard already has a type
@@ -386,13 +386,13 @@ public abstract class AbstractBGCard extends CustomCard //implements AlternateCa
     }
 
     //
-    //    //private static final String FILENAME="BoardGameResources/images/512/colorless_bg_skill.png";
+    //    //private static final String FILENAME="CoopBoardGameResources/images/512/colorless_bg_skill.png";
     //    private static final Texture SKILL_COLORLESS = ((ReflectionHacks.RMethod)ReflectionHacks.privateStaticMethod(CustomCard.class,"getTextureFromString",String.class))
-    //            .invoke(null, "BoardGameResources/images/512/colorless_bg_skill.png");
+    //            .invoke(null, "CoopBoardGameResources/images/512/colorless_bg_skill.png");
     //
     //    @Override
     //    public Texture getCardBg() {
-    //        BoardGame.BoardGame.logger.info("getCardBg"+(String)((this.type==CardType.STATUS) ? " !!!!!!" : ""));
+    //        CoopBoardGame.CoopBoardGame.logger.info("getCardBg"+(String)((this.type==CardType.STATUS) ? " !!!!!!" : ""));
     //        return(this.type==CardType.STATUS) ? SKILL_COLORLESS : super.getCardBg();
     //    }
     //

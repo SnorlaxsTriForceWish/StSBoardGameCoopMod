@@ -1,9 +1,9 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import static BoardGame.powers.BGVulnerablePower.getEffectiveIndex;
-import static BoardGame.powers.BGVulnerablePower.whichMonsterIsCalculatingDamage;
+import static CoopBoardGame.powers.BGVulnerablePower.getEffectiveIndex;
+import static CoopBoardGame.powers.BGVulnerablePower.whichMonsterIsCalculatingDamage;
 
-import BoardGame.BoardGame;
+import CoopBoardGame.CoopBoardGame;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
@@ -21,7 +21,7 @@ import org.apache.logging.log4j.Logger;
 
 public class BGWeakPower extends AbstractBGPower {
 
-    public static final String POWER_ID = BoardGame.makeID("Weakened (BG)");
+    public static final String POWER_ID = CoopBoardGame.makeID("Weakened (BG)");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
         POWER_ID
     );
@@ -51,7 +51,7 @@ public class BGWeakPower extends AbstractBGPower {
 
     //    @Override
     //    public boolean shouldPushMods(DamageInfo damageInfo, Object o, List<AbstractDamageModifier> list) {
-    ////        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+    ////        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
     ////        logger.info("BGWeakPower: shouldPushMods: true");
     //        return true;
     //        //return o instanceof AbstractCard && ((AbstractCard) o).type == AbstractCard.CardType.ATTACK && list.stream().noneMatch(mod -> mod instanceof FireDamage);
@@ -59,7 +59,7 @@ public class BGWeakPower extends AbstractBGPower {
     //
     //    @Override
     //    public List<AbstractDamageModifier> modsToPush(DamageInfo damageInfo, Object o, List<AbstractDamageModifier> list) {
-    ////        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+    ////        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
     ////        logger.info("BGWeakPower: modsToPush");
     //        return Collections.singletonList(new DamageModBGWeak());
     //    }
@@ -137,7 +137,7 @@ public class BGWeakPower extends AbstractBGPower {
     }
 
     //    public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
-    //        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+    //        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
     ////        logger.info("BGWeakPower: onAttack");
     ////        logger.info("BGWeakPower: target: "+target);
     ////        logger.info("BGWeakPower: owner: "+this.owner);
@@ -158,7 +158,7 @@ public class BGWeakPower extends AbstractBGPower {
 
     //public void atEndOfRound() {
     public void duringTurn() {
-        //final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        //final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("BGWeakPower: duringTurn");
 
         //if monster, wears off at end of turn
@@ -181,7 +181,7 @@ public class BGWeakPower extends AbstractBGPower {
     public void onAfterUseCard(AbstractCard card, UseCardAction action) {
         //if player, wears off after playing an ATTACK card
         if (this.owner == AbstractDungeon.player) {
-            final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+            final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
             //logger.info("BGWeakPower: player onAfterUseCard");
             if (card.type == AbstractCard.CardType.ATTACK) {
                 //logger.info("BGWeakPower: played an ATTACK");
@@ -195,7 +195,7 @@ public class BGWeakPower extends AbstractBGPower {
                 );
             }
         }
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         logger.info("BGWeakPower: onAfterUseCard ");
         //onUseCard -> onAttack -> onAfterUseCard
     }

@@ -1,9 +1,9 @@
-package BoardGame.multicharacter.grid;
+package CoopBoardGame.multicharacter.grid;
 
-import BoardGame.BoardGame;
-import BoardGame.multicharacter.MultiCharacter;
-import BoardGame.multicharacter.patches.AbstractScenePatches;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.multicharacter.patches.AbstractScenePatches;
+import CoopBoardGame.util.TextureLoader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -30,7 +30,7 @@ public class GridBackground {
     public float offsetX = 0;
     public float offsetY = 0;
     public static Texture tileImg = TextureLoader.getTexture(
-        "BoardGameResources/images/ui/gridtile.png"
+        "CoopBoardGameResources/images/ui/gridtile.png"
     );
 
     //TODO: during spireshield fight, there are always 4 rows (instead of # players)
@@ -39,7 +39,7 @@ public class GridBackground {
     }
 
     public void resetGridAtStartOfCombat() {
-        if (!BoardGame.ENABLE_TEST_FEATURES) return;
+        if (!CoopBoardGame.ENABLE_TEST_FEATURES) return;
         if (MultiCharacter.getSubcharacters().size() < 2) return;
         tileSpawnTimer = INITIAL_TILE_SPAWN_TIMER;
         gridViewIsReady = false;
@@ -58,7 +58,7 @@ public class GridBackground {
     }
 
     public void update() {
-        if (!BoardGame.ENABLE_TEST_FEATURES) return;
+        if (!CoopBoardGame.ENABLE_TEST_FEATURES) return;
         ArrayList<GridTile> tilesSpawningIn = new ArrayList<>();
         ArrayList<GridTile> tilesDespawning = new ArrayList<>();
         for (GridSubgrid sub : subGrids) {
@@ -91,7 +91,7 @@ public class GridBackground {
     }
 
     public void render(SpriteBatch sb) {
-        if (!BoardGame.ENABLE_TEST_FEATURES) return;
+        if (!CoopBoardGame.ENABLE_TEST_FEATURES) return;
         if (!visible) return;
         for (GridSubgrid sub : subGrids) {
             sub.render(sb);

@@ -1,8 +1,8 @@
-package BoardGame.cards.BGColorless;
+package CoopBoardGame.cards.BGColorless;
 
-import BoardGame.actions.BGUseShivAction;
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.characters.BGColorless;
+import CoopBoardGame.actions.BGUseShivAction;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.characters.BGColorless;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -15,7 +15,7 @@ public class BGShivsUseExtraShiv extends AbstractBGAttackCardChoice {
 
     public static final String ID = "BGShivsUseExtraShiv";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGShivsUseExtraShiv"
+        "CoopBoardGame:BGShivsUseExtraShiv"
     );
 
     public BGShivsUseExtraShiv() {

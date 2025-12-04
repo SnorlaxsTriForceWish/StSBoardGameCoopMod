@@ -1,11 +1,11 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.actions.BGActivateDieAbilityAction;
-import BoardGame.actions.TargetSelectScreenAction;
-import BoardGame.powers.BGTriggerCharonsAshesPower;
-import BoardGame.powers.NilrysCodexCompatible;
-import BoardGame.screen.TargetSelectScreen;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.actions.BGActivateDieAbilityAction;
+import CoopBoardGame.actions.TargetSelectScreenAction;
+import CoopBoardGame.powers.BGTriggerCharonsAshesPower;
+import CoopBoardGame.powers.NilrysCodexCompatible;
+import CoopBoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.thedie.TheDie;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -38,7 +38,7 @@ public class BGCharonsAshes
     }
 
     public String getUpdatedDescription() {
-        BoardGame.BoardGame.logger.info("BGCalipers.getUpdatedDescription...");
+        CoopBoardGame.CoopBoardGame.logger.info("BGCalipers.getUpdatedDescription...");
         String desc = this.DESCRIPTIONS[0];
         desc += DieControlledRelic.RIGHT_CLICK_TO_ACTIVATE; //TODO LATER: "on cooldown" message, if possible
         return desc;

@@ -1,6 +1,6 @@
-package BoardGame.icons;
+package CoopBoardGame.icons;
 
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.util.TextureLoader;
 import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.icons.AbstractCustomIcon;
 import java.util.ArrayList;
@@ -8,11 +8,11 @@ import java.util.List;
 
 public class HitIcon extends AbstractCustomIcon {
 
-    public static final String ID = "BoardGame:Hit"; //reminder: "Icon" is automatically added
+    public static final String ID = "CoopBoardGame:Hit"; //reminder: "Icon" is automatically added
     private static HitIcon singleton;
 
     public HitIcon() {
-        super(ID, TextureLoader.getTexture("BoardGameResources/images/icons/hit.png"));
+        super(ID, TextureLoader.getTexture("CoopBoardGameResources/images/icons/hit.png"));
     }
 
     public static HitIcon get() {
@@ -24,7 +24,7 @@ public class HitIcon extends AbstractCustomIcon {
 
     public List<TooltipInfo> getCustomTooltips() {
         List<TooltipInfo> list = new ArrayList<>();
-        list.add(new TooltipInfo("[BoardGame:HitIcon] Hit", "Hits deal damage."));
+        list.add(new TooltipInfo("[CoopBoardGame:HitIcon] Hit", "Hits deal damage."));
         return list;
     }
 }

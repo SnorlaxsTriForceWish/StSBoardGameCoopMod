@@ -1,6 +1,6 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.patches.TransformPatch;
+import CoopBoardGame.patches.TransformPatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.colorless.JAX;
@@ -24,7 +24,7 @@ public class BGDrugDealer extends AbstractImageEvent {
     private static final Logger logger = LogManager.getLogger(BGDrugDealer.class.getName());
     public static final String ID = "BGDrug Dealer";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGDrug Dealer"
+        "CoopBoardGame:BGDrug Dealer"
     );
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

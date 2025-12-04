@@ -3,7 +3,7 @@
 // (powered by FernFlower decompiler)
 //
 
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;

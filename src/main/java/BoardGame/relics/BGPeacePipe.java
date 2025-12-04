@@ -2,7 +2,7 @@
 //but BGPeacePipe will probably need overrides to RestOption constructor and CampfireSleepEffect constructor
 //and very likely add a skip button to remove-a-card
 
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;

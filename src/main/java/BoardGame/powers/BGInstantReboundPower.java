@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.BoardGame;
+import CoopBoardGame.CoopBoardGame;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.InvisiblePower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 
 public class BGInstantReboundPower extends AbstractBGPower implements InvisiblePower {
 
-    public static final String POWER_ID = BoardGame.makeID("Instant Rebound");
+    public static final String POWER_ID = CoopBoardGame.makeID("Instant Rebound");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
         POWER_ID
     );
@@ -33,7 +33,7 @@ public class BGInstantReboundPower extends AbstractBGPower implements InvisibleP
         loadRegion("rebound");
         this.isTurnBased = true;
         this.type = AbstractPower.PowerType.BUFF;
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         logger.info("BGInstantReboundPower constructor");
     }
 
@@ -46,7 +46,7 @@ public class BGInstantReboundPower extends AbstractBGPower implements InvisibleP
     }
 
     public void onAfterUseCard(AbstractCard card, UseCardAction action) {
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         logger.info("BGInstantReboundPower.onAfterUseCard");
         if (card.type != AbstractCard.CardType.POWER) {
             flash();

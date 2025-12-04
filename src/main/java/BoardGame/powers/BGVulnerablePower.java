@@ -1,10 +1,10 @@
 //TODO: Bash an enemy with 3 vuln stacks -> should still have 3 vuln stacks, not 2
 
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import static BoardGame.powers.WeakVulnCancel.WEAKVULN_ZEROHITS;
+import static CoopBoardGame.powers.WeakVulnCancel.WEAKVULN_ZEROHITS;
 
-import BoardGame.BoardGame;
+import CoopBoardGame.CoopBoardGame;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -25,7 +25,7 @@ import org.apache.logging.log4j.Logger;
 
 public class BGVulnerablePower extends AbstractBGPower {
 
-    public static final String POWER_ID = BoardGame.makeID("Vulnerable (BG)");
+    public static final String POWER_ID = CoopBoardGame.makeID("Vulnerable (BG)");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
         POWER_ID
     );
@@ -123,12 +123,12 @@ public class BGVulnerablePower extends AbstractBGPower {
     }
 
     //    public void duringTurn() {
-    //        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+    //        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
     //        logger.info("BGVulnerablePower: duringTurn");
     //    }
 
     public int onAttacked(DamageInfo info, int damageAmount) {
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         logger.info("BGVulnerablePower: onAttacked " + info.type + " " + this.owner);
         if (info.type == DamageInfo.DamageType.NORMAL || info.type == WEAKVULN_ZEROHITS) {
             if (this.owner != AbstractDungeon.player) {
@@ -199,7 +199,7 @@ public class BGVulnerablePower extends AbstractBGPower {
     public static int getEffectiveIndex(AbstractMonster monster) {
         if (
             AbstractDungeon.lastCombatMetricKey.equals(
-                "BoardGame:A7 Shelled Parasite and Fungi Beast"
+                "CoopBoardGame:A7 Shelled Parasite and Fungi Beast"
             )
         ) return 0;
         if (monster == null) return 0;

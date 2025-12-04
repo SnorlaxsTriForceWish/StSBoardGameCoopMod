@@ -1,6 +1,6 @@
-package BoardGame.multicharacter;
+package CoopBoardGame.multicharacter;
 
-import BoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.monsters.AbstractBGMonster;
 
 public class NullMonster extends AbstractBGMonster implements MultiCreature {
 

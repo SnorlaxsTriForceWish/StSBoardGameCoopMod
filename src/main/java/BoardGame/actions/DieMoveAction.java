@@ -1,7 +1,7 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.monsters.DieControlledMoves;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.monsters.DieControlledMoves;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 

@@ -1,19 +1,19 @@
-package BoardGame.thedie;
+package CoopBoardGame.thedie;
 
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.monsterRng;
 
-import BoardGame.BoardGame;
-import BoardGame.actions.BGLockInRollAction;
-import BoardGame.actions.DieMoveAction;
-import BoardGame.monsters.DieControlledMoves;
-import BoardGame.potions.BGGamblersBrew;
-import BoardGame.powers.BGTheDiePower;
-import BoardGame.relics.BGGamblingChip;
-import BoardGame.relics.BGTheAbacus;
-import BoardGame.relics.BGToolbox;
-import BoardGame.relics.DieControlledRelic;
-import BoardGame.ui.LockInRollButton;
-import BoardGame.ui.OverlayMenuPatches;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.actions.BGLockInRollAction;
+import CoopBoardGame.actions.DieMoveAction;
+import CoopBoardGame.monsters.DieControlledMoves;
+import CoopBoardGame.potions.BGGamblersBrew;
+import CoopBoardGame.powers.BGTheDiePower;
+import CoopBoardGame.relics.BGGamblingChip;
+import CoopBoardGame.relics.BGTheAbacus;
+import CoopBoardGame.relics.BGToolbox;
+import CoopBoardGame.relics.DieControlledRelic;
+import CoopBoardGame.ui.LockInRollButton;
+import CoopBoardGame.ui.OverlayMenuPatches;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -37,7 +37,7 @@ public class TheDie {
     public static void roll() {
         //TODO: can we get TheDie's displayed number to update BEFORE applying Block (and triggering a 20-hit Transient combo)?
         int r = monsterRng.random(1, 6);
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         logger.info("ROLL THE DIE: " + r);
         TheDie.initialRoll = r;
         TheDie.finalRelicRoll = -1;
@@ -133,8 +133,8 @@ public class TheDie {
             OverlayMenuPatches.OverlayMenuExtraInterface.lockinrollbutton.get(
                 AbstractDungeon.overlayMenu
             ).visible = false;
-            //            if(AbstractDungeon.player.hasRelic("BoardGame:BGTheDieRelic")) {
-            //                AbstractRelic relic = AbstractDungeon.player.getRelic("BoardGame:BGTheDieRelic");
+            //            if(AbstractDungeon.player.hasRelic("CoopBoardGame:BGTheDieRelic")) {
+            //                AbstractRelic relic = AbstractDungeon.player.getRelic("CoopBoardGame:BGTheDieRelic");
             //                ((BGTheDieRelic) relic).lockRollAndActivateDieRelics();
             //            }
             AbstractDungeon.actionManager.addToBottom(new BGLockInRollAction());

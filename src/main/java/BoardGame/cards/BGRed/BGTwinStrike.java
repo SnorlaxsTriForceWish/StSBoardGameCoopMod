@@ -1,7 +1,7 @@
-package BoardGame.cards.BGRed;
+package CoopBoardGame.cards.BGRed;
 
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGIronclad;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGIronclad;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BGTwinStrike extends AbstractBGCard {
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGTwin Strike"
+        "CoopBoardGame:BGTwin Strike"
     );
     public static final String ID = "BGTwin Strike";
     private boolean isFirstAttack;
@@ -50,7 +50,7 @@ public class BGTwinStrike extends AbstractBGCard {
 
     public void calculateCardDamage(AbstractMonster mo) {
         int realBaseDamage = this.baseDamage;
-        //        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        //        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //        logger.info("BGTwinStrike Damage:"+this.damage);
         //        logger.info("BGTwinStrike Magic Number:"+this.magicNumber);
         //        logger.info("BGTwinStrike First Attack:"+this.isFirstAttack);

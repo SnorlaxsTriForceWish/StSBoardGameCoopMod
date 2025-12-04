@@ -1,8 +1,8 @@
-package BoardGame.actions;
+package CoopBoardGame.actions;
 
-import BoardGame.cards.AbstractBGAttackCardChoice;
-import BoardGame.cards.BGColorless.BGShivsDiscardExtraShiv;
-import BoardGame.cards.BGColorless.BGShivsUseExtraShiv;
+import CoopBoardGame.cards.AbstractBGAttackCardChoice;
+import CoopBoardGame.cards.BGColorless.BGShivsDiscardExtraShiv;
+import CoopBoardGame.cards.BGColorless.BGShivsUseExtraShiv;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
@@ -29,7 +29,7 @@ public class BGTooManyShivsAction extends AbstractGameAction {
         } else {
             //if monsters ARE dead, then we're in the middle of a boss phase change
             // and the targetselectscreen will fail silently (and if useextrashiv was chosen, it won't decrement the shiv count)
-            AbstractRelic relic = AbstractDungeon.player.getRelic("BoardGame:BGShivs");
+            AbstractRelic relic = AbstractDungeon.player.getRelic("CoopBoardGame:BGShivs");
             if (relic != null) {
                 relic.counter = relic.counter - 1;
             }

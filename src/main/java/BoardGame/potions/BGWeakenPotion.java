@@ -1,6 +1,6 @@
-package BoardGame.potions;
+package CoopBoardGame.potions;
 
-import BoardGame.powers.BGWeakPower;
+import CoopBoardGame.powers.BGWeakPower;
 import basemod.BaseMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class BGWeakenPotion extends AbstractPotion {
 
     private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(
-        "BoardGame:BGWeak Potion"
+        "CoopBoardGame:BGWeak Potion"
     );
 
     public static final String POTION_ID = "BGWeak_Potion";
@@ -43,8 +43,8 @@ public class BGWeakenPotion extends AbstractPotion {
         this.tips.add(new PowerTip(this.name, this.description));
         this.tips.add(
             new PowerTip(
-                BaseMod.getKeywordTitle("boardgame:weak"),
-                BaseMod.getKeywordDescription("boardgame:weak")
+                BaseMod.getKeywordTitle("coopboardgame:weak"),
+                BaseMod.getKeywordDescription("coopboardgame:weak")
             )
         );
     }

@@ -1,8 +1,8 @@
-package BoardGame.monsters.bgexordium;
+package CoopBoardGame.monsters.bgexordium;
 
-import BoardGame.cards.BGStatus.BGSlimed;
-import BoardGame.monsters.AbstractBGMonster;
-import BoardGame.powers.BGSplitPower;
+import CoopBoardGame.cards.BGStatus.BGSlimed;
+import CoopBoardGame.monsters.AbstractBGMonster;
+import CoopBoardGame.powers.BGSplitPower;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;

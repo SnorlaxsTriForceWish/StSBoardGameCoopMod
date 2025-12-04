@@ -1,8 +1,8 @@
-package BoardGame.multicharacter.patches.screens;
+package CoopBoardGame.multicharacter.patches.screens;
 
-import BoardGame.multicharacter.MultiCharacter;
-import BoardGame.multicharacter.patches.ContextPatches;
-import BoardGame.screen.OrbSelectScreen;
+import CoopBoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.multicharacter.patches.ContextPatches;
+import CoopBoardGame.screen.OrbSelectScreen;
 import basemod.abstracts.CustomScreen;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;

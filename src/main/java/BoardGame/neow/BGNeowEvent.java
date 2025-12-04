@@ -1,14 +1,14 @@
-package BoardGame.neow;
+package CoopBoardGame.neow;
 
-import static BoardGame.neow.BGNeowQuickStart.clearAllRewards;
+import static CoopBoardGame.neow.BGNeowQuickStart.clearAllRewards;
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.*;
 
 //TODO: if possible, move quickstart handlers to BGNeowQuickStart
 //TODO: several rewards can softlock if player doesn't have enough cards (not just limited to Quick Start)
 
-import BoardGame.dungeons.AbstractBGDungeon;
-import BoardGame.multicharacter.MultiCharacter;
-import BoardGame.multicharacter.MultiCharacterSelectScreen;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.multicharacter.MultiCharacter;
+import CoopBoardGame.multicharacter.MultiCharacterSelectScreen;
 import basemod.BaseMod;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -56,7 +56,7 @@ public class BGNeowEvent extends AbstractEvent {
     public static final String[] OPTIONS = characterStrings.OPTIONS;
 
     private static final CharacterStrings extraStrings =
-        CardCrawlGame.languagePack.getCharacterString("BoardGame:BGNeow Reward");
+        CardCrawlGame.languagePack.getCharacterString("CoopBoardGame:BGNeow Reward");
     public static final String[] EXTRA = extraStrings.TEXT;
     public static final String choose_a_card = CardCrawlGame.languagePack.getCharacterString(
         "Neow Reward"
@@ -127,7 +127,7 @@ public class BGNeowEvent extends AbstractEvent {
             talk(TEXT[10]); //Time for a CHALLENGE...
             this.roomEventText.addDialogOption(OPTIONS[1]);
         } else if (!isDone) {
-            //normally, BoardGame starts HERE
+            //normally, CoopBoardGame starts HERE
             //            this.screenNum = 2;       //standard intro
             //            talk(TEXT[MathUtils.random(1, 3)]);
             //            this.roomEventText.addDialogOption(OPTIONS[1]);

@@ -1,7 +1,7 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.relics.BGTheDieRelic;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.thedie.TheDie;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;
@@ -76,23 +76,23 @@ public class AbstractBGPower extends AbstractPower {
 
         @SpireInsertPatch(locator = AbstractBGPower.EndTurnPatch.Locator.class, localvars = {})
         public static SpireReturn<Void> updateInput(AbstractPlayer __instance) {
-            //BoardGame.logger.info("EndTurn is queued, run a BG power check...");
+            //CoopBoardGame.logger.info("EndTurn is queued, run a BG power check...");
             for (AbstractPower power : __instance.powers) {
                 if (power instanceof AbstractBGPower) {
                     ((AbstractBGPower) power).atEndTurnQueued();
                 }
             }
-            //BoardGame.logger.info("BG power check is done, call actionManager.update...");
+            //CoopBoardGame.logger.info("BG power check is done, call actionManager.update...");
             AbstractDungeon.actionManager.update();
-            //BoardGame.logger.info("Now look at the action list again...");
+            //CoopBoardGame.logger.info("Now look at the action list again...");
             if (
                 AbstractDungeon.actionManager.cardQueue.isEmpty() &&
                 !AbstractDungeon.actionManager.hasControl
             ) {
-                //BoardGame.logger.info("Actions are empty, proceed");
+                //CoopBoardGame.logger.info("Actions are empty, proceed");
                 return SpireReturn.Continue();
             } else {
-                //BoardGame.logger.info("Queue is not empty, abort");
+                //CoopBoardGame.logger.info("Queue is not empty, abort");
                 return SpireReturn.Return();
             }
         }

@@ -1,9 +1,9 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import static BoardGame.powers.WeakVulnCancel.WEAKVULN_ZEROHITS;
+import static CoopBoardGame.powers.WeakVulnCancel.WEAKVULN_ZEROHITS;
 
-import BoardGame.BoardGame;
-import BoardGame.actions.SpikerReflectAction;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.actions.SpikerReflectAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 
 public class BGSpikerPower extends AbstractBGPower {
 
-    public static final String POWER_ID = BoardGame.makeID("BGSpiker");
+    public static final String POWER_ID = CoopBoardGame.makeID("BGSpiker");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
         POWER_ID
     );
@@ -55,7 +55,7 @@ public class BGSpikerPower extends AbstractBGPower {
     }
 
     public int onAttacked(DamageInfo info, int damageAmount) {
-        final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         logger.info("BGSpikerPower: onAttacked " + info.type + " " + this.owner);
         if (info.type == DamageInfo.DamageType.NORMAL || info.type == WEAKVULN_ZEROHITS) {
             if (this.owner != AbstractDungeon.player) {

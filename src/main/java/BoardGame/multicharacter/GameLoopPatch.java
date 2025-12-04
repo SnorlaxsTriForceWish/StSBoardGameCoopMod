@@ -1,4 +1,4 @@
-//package BoardGame.multicharacter;
+//package CoopBoardGame.multicharacter;
 //
 //import com.evacipated.cardcrawl.modthespire.lib.LineFinder;
 //import com.evacipated.cardcrawl.modthespire.lib.Matcher;
@@ -38,7 +38,7 @@
 //}
 //
 //
-///* Location:              C:\Spire dev\BoardGame.jar!\BoardGame\multicharacter\GameLoopPatch.class
+///* Location:              C:\Spire dev\CoopBoardGame.jar!\CoopBoardGame\multicharacter\GameLoopPatch.class
 // * Java compiler version: 8 (52.0)
 // * JD-Core Version:       1.1.3
 // */

@@ -1,7 +1,7 @@
-package BoardGame.ui;
+package CoopBoardGame.ui;
 
-import BoardGame.multicharacter.MultiCharacterRowBoxes;
-import BoardGame.relics.AbstractBGRelic;
+import CoopBoardGame.multicharacter.MultiCharacterRowBoxes;
+import CoopBoardGame.relics.AbstractBGRelic;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;

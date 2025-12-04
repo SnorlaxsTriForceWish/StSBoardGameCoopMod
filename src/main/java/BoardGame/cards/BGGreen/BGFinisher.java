@@ -1,9 +1,9 @@
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.actions.BGDamagePerAttackPlayedAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.AbstractBGPlayer;
-import BoardGame.characters.BGSilent;
+import CoopBoardGame.actions.BGDamagePerAttackPlayedAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.AbstractBGPlayer;
+import CoopBoardGame.characters.BGSilent;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -19,7 +19,7 @@ public class BGFinisher extends AbstractBGCard {
     public static final String ID = "BGFinisher";
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGFinisher"
+        "CoopBoardGame:BGFinisher"
     );
 
     public BGFinisher() {

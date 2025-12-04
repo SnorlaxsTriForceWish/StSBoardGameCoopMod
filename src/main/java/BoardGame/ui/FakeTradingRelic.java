@@ -1,6 +1,6 @@
-package BoardGame.ui;
+package CoopBoardGame.ui;
 
-import BoardGame.screen.RelicTradingScreen;
+import CoopBoardGame.screen.RelicTradingScreen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.core.CardCrawlGame;

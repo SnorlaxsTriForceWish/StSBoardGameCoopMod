@@ -1,8 +1,8 @@
-package BoardGame.events;
+package CoopBoardGame.events;
 
-import BoardGame.dungeons.BGExordium;
-import BoardGame.potions.BGGamblersBrew;
-import BoardGame.relics.BGSsserpentHead;
+import CoopBoardGame.dungeons.BGExordium;
+import CoopBoardGame.potions.BGGamblersBrew;
+import CoopBoardGame.relics.BGSsserpentHead;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -31,7 +31,7 @@ public class BGDeadAdventurer extends DeadAdventurer {
     public static final String ID = "BGDeadAdventurer";
 
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(
-        "BoardGame:BGDeadAdventurer"
+        "CoopBoardGame:BGDeadAdventurer"
     );
 
     public static final String NAME = eventStrings.NAME;

@@ -1,9 +1,9 @@
-package BoardGame.ui;
+package CoopBoardGame.ui;
 
-import BoardGame.potions.BGGamblersBrew;
-import BoardGame.relics.BGTheDieRelic;
-import BoardGame.thedie.TheDie;
-import BoardGame.util.TextureLoader;
+import CoopBoardGame.potions.BGGamblersBrew;
+import CoopBoardGame.relics.BGTheDieRelic;
+import CoopBoardGame.thedie.TheDie;
+import CoopBoardGame.util.TextureLoader;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -25,7 +25,7 @@ public class LockInRollButton extends Button {
         super(
             (Settings.WIDTH / 2) - 350 * Settings.scale,
             (Settings.HEIGHT / 2),
-            TextureLoader.getTexture("BoardGameResources/images/ui/dice/LockIn.png")
+            TextureLoader.getTexture("CoopBoardGameResources/images/ui/dice/LockIn.png")
         );
     }
 
@@ -56,9 +56,9 @@ public class LockInRollButton extends Button {
                     }
                 }
                 if (this.pressed && !this.isDisabled) {
-                    if (AbstractDungeon.player.hasRelic("BoardGame:BGTheDieRelic")) {
+                    if (AbstractDungeon.player.hasRelic("CoopBoardGame:BGTheDieRelic")) {
                         AbstractRelic thedie = AbstractDungeon.player.getRelic(
-                            "BoardGame:BGTheDieRelic"
+                            "CoopBoardGame:BGTheDieRelic"
                         );
                         ((BGTheDieRelic) thedie).lockRollAndActivateDieRelics();
                     }

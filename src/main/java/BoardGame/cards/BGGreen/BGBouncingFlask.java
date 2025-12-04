@@ -1,10 +1,10 @@
-package BoardGame.cards.BGGreen;
+package CoopBoardGame.cards.BGGreen;
 
-import BoardGame.actions.BGBouncingFlaskAction;
-import BoardGame.actions.TargetSelectScreenAction;
-import BoardGame.cards.AbstractBGCard;
-import BoardGame.characters.BGSilent;
-import BoardGame.screen.TargetSelectScreen;
+import CoopBoardGame.actions.BGBouncingFlaskAction;
+import CoopBoardGame.actions.TargetSelectScreenAction;
+import CoopBoardGame.cards.AbstractBGCard;
+import CoopBoardGame.characters.BGSilent;
+import CoopBoardGame.screen.TargetSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -21,7 +21,7 @@ public class BGBouncingFlask extends AbstractBGCard {
     public static final String ID = "BGBouncingFlask";
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(
-        "BoardGame:BGBouncingFlask"
+        "CoopBoardGame:BGBouncingFlask"
     );
 
     public BGBouncingFlask() {

@@ -1,7 +1,7 @@
-package BoardGame.dungeons;
+package CoopBoardGame.dungeons;
 
-import BoardGame.BoardGame;
-import BoardGame.monsters.bgexordium.BGCultist;
+import CoopBoardGame.CoopBoardGame;
+import CoopBoardGame.monsters.bgexordium.BGCultist;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
@@ -256,15 +256,15 @@ public class BGExordium extends AbstractBGDungeon {
     /*     */ protected void generateWeakEnemies(int count) {
         ArrayList<MonsterInfo> monsters = new ArrayList<>();
 
-        //TODO: add BoardGame: tag in front of all monster IDs -- probably search-and-replace "BG -> "BoardGame:BG
+        //TODO: add CoopBoardGame: tag in front of all monster IDs -- probably search-and-replace "BG -> "CoopBoardGame:BG
 
-        if (BoardGame.ENABLE_TEST_FEATURES) {
+        if (CoopBoardGame.ENABLE_TEST_FEATURES) {
             count = 4;
         }
-        monsters.add(new MonsterInfo("BoardGame:Easy Small Slimes", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Jaw Worm (Easy)", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Easy Small Slimes", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Jaw Worm (Easy)", 2.0F));
         monsters.add(new MonsterInfo(BGCultist.ID, 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:2 Louse", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:2 Louse", 2.0F));
 
         ////vanilla test
         //            count=4;
@@ -279,22 +279,22 @@ public class BGExordium extends AbstractBGDungeon {
 
     protected void generateStrongEnemies(int count) {
         ArrayList<MonsterInfo> monsters = new ArrayList<>();
-        monsters.add(new MonsterInfo("BoardGame:Cultist and SpikeSlime", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Cultist and Louse", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Fungi Beasts", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Slime Trio", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:3 Louse (Hard)", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Large Slime", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Sneaky Gremlin Team", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Angry Gremlin Team", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Blue Slaver", 2.0F));
-        monsters.add(new MonsterInfo("BoardGame:Red Slaver", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Cultist and SpikeSlime", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Cultist and Louse", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Fungi Beasts", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Slime Trio", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:3 Louse (Hard)", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Large Slime", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Sneaky Gremlin Team", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Angry Gremlin Team", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Blue Slaver", 2.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Red Slaver", 2.0F));
         if (ascensionLevel < 7) {
-            monsters.add(new MonsterInfo("BoardGame:Jaw Worm (Medium)", 2.0F));
-            monsters.add(new MonsterInfo("BoardGame:Looter", 2.0F));
+            monsters.add(new MonsterInfo("CoopBoardGame:Jaw Worm (Medium)", 2.0F));
+            monsters.add(new MonsterInfo("CoopBoardGame:Looter", 2.0F));
         } else {
-            monsters.add(new MonsterInfo("BoardGame:A7 Jaw Worm and Spike Slime", 2.0F));
-            monsters.add(new MonsterInfo("BoardGame:A7 Looter and Acid Slime", 2.0F));
+            monsters.add(new MonsterInfo("CoopBoardGame:A7 Jaw Worm and Spike Slime", 2.0F));
+            monsters.add(new MonsterInfo("CoopBoardGame:A7 Looter and Acid Slime", 2.0F));
         }
         MonsterInfo.normalizeWeights(monsters);
         //populateFirstStrongEnemy(monsters, generateExclusions());
@@ -304,9 +304,9 @@ public class BGExordium extends AbstractBGDungeon {
     protected void generateElites(int count) {
         //TODO: same elite can incorrectly be encountered twice (not in a row) -- update to use deck system
         ArrayList<MonsterInfo> monsters = new ArrayList<>();
-        monsters.add(new MonsterInfo("BoardGame:Gremlin Nob", 1.0F));
-        monsters.add(new MonsterInfo("BoardGame:Lagavulin", 1.0F));
-        monsters.add(new MonsterInfo("BoardGame:3 Sentries", 1.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Gremlin Nob", 1.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:Lagavulin", 1.0F));
+        monsters.add(new MonsterInfo("CoopBoardGame:3 Sentries", 1.0F));
         MonsterInfo.normalizeWeights(monsters);
         populateMonsterList(monsters, count, true);
     }

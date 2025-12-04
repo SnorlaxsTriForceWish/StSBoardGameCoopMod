@@ -1,9 +1,9 @@
-package BoardGame.relics;
+package CoopBoardGame.relics;
 
-import BoardGame.actions.BGActivateDieAbilityAction;
-import BoardGame.powers.BGTrigger2DieAbilityPower;
-import BoardGame.powers.NilrysCodexCompatible;
-import BoardGame.thedie.TheDie;
+import CoopBoardGame.actions.BGActivateDieAbilityAction;
+import CoopBoardGame.powers.BGTrigger2DieAbilityPower;
+import CoopBoardGame.powers.NilrysCodexCompatible;
+import CoopBoardGame.thedie.TheDie;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -89,7 +89,7 @@ public class BGNilrysCodex
             // If it has been used this turn, or the player doesn't actually have the relic (i.e. it's on display in the shop room), or it's the enemy's turn
             return; // Don't do anything.
         }
-        //final Logger logger = LogManager.getLogger(BoardGame.class.getName());
+        //final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         //logger.info("BGTheDieRelic.onRightClick");
         addToBot((AbstractGameAction) new BGActivateDieAbilityAction(this));
     }

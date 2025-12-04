@@ -1,6 +1,6 @@
-package BoardGame.powers;
+package CoopBoardGame.powers;
 
-import BoardGame.dungeons.AbstractBGDungeon;
+import CoopBoardGame.dungeons.AbstractBGDungeon;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
@@ -23,16 +23,16 @@ import com.megacrit.cardcrawl.vfx.combat.CleaveEffect;
 
 public class BGAThousandCutsPower extends AbstractBGPower {
 
-    public static final String POWER_ID = "BoardGame:BGAThousandCutsPower";
+    public static final String POWER_ID = "CoopBoardGame:BGAThousandCutsPower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
-        "BoardGame:BGAThousandCutsPower"
+        "CoopBoardGame:BGAThousandCutsPower"
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
     public BGAThousandCutsPower(AbstractCreature owner, int amount) {
         this.name = NAME;
-        this.ID = "BoardGame:BGAThousandCutsPower";
+        this.ID = "CoopBoardGame:BGAThousandCutsPower";
         this.owner = owner;
         this.amount = amount;
         updateDescription();
