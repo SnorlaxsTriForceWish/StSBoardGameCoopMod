@@ -18,7 +18,6 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 public class BGAboutToUseCard {
 
     public static CardQueueItem cardQueueItemInstance = null;
-    private AbstractCard targetCard;
 
     public AbstractCreature target = null;
 

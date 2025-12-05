@@ -4,7 +4,6 @@ import Bestiary.BestiaryMod;
 import Bestiary.database.*;
 import Bestiary.ui.Label;
 import Bestiary.ui.MonsterInfoRenderHelper;
-import Bestiary.ui.MonsterOverlay;
 import Bestiary.ui.SmartLabel;
 import Bestiary.utils.ExtraColors;
 import Bestiary.utils.ExtraFonts;
@@ -96,11 +95,6 @@ public class OverlayPatches {
                         BestiaryMod bestiaryMod = (ReflectionHacks.getPrivateStatic(
                                 BestiaryMod.class,
                                 "instance"
-                            ));
-                        MonsterOverlay overlay = (ReflectionHacks.getPrivate(
-                                bestiaryMod,
-                                BestiaryMod.class,
-                                "overlay"
                             ));
                         MonsterDatabase db = (ReflectionHacks.getPrivate(
                                 bestiaryMod,

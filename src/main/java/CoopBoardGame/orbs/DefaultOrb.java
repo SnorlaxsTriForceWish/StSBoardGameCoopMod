@@ -35,8 +35,6 @@ public class DefaultOrb extends CustomOrb {
     private float vfxTimer = 1.0f;
     private float vfxIntervalMin = 0.1f;
     private float vfxIntervalMax = 0.4f;
-    private static final float ORB_WAVY_DIST = 0.04f;
-    private static final float PI_4 = 12.566371f;
 
     public DefaultOrb() {
         // The passive/evoke description we pass in here, specifically, don't matter

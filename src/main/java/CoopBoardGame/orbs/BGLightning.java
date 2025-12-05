@@ -8,19 +8,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
-import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 import com.megacrit.cardcrawl.vfx.combat.LightningOrbActivateEffect;
 import com.megacrit.cardcrawl.vfx.combat.LightningOrbPassiveEffect;
 import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
@@ -38,14 +33,6 @@ public class BGLightning extends CustomOrb {
     private static final int EVOKE_AMOUNT = 2;
 
     private float vfxTimer = 1.0F;
-
-    private static final float PI_DIV_16 = 0.19634955F;
-
-    private static final float ORB_WAVY_DIST = 0.05F;
-
-    private static final float PI_4 = 12.566371F;
-
-    private static final float ORB_BORDER_SCALE = 1.2F;
 
     public BGLightning() {
         super(
@@ -156,78 +143,6 @@ public class BGLightning extends CustomOrb {
                     this,
                     false
                 )
-            );
-        }
-    }
-
-    private void triggerPassiveEffect(DamageInfo info, boolean hitAll) {
-        if (!hitAll) {
-            AbstractMonster abstractMonster = AbstractDungeon.getRandomMonster();
-            if (abstractMonster != null) {
-                float speedTime = 0.2F / AbstractDungeon.player.orbs.size();
-                if (Settings.FAST_MODE) speedTime = 0.0F;
-                AbstractDungeon.actionManager.addToBottom(
-                    (AbstractGameAction) new DamageAction(
-                        (AbstractCreature) abstractMonster,
-                        info,
-                        AbstractGameAction.AttackEffect.NONE,
-                        true
-                    )
-                );
-                AbstractDungeon.actionManager.addToBottom(
-                    (AbstractGameAction) new VFXAction(
-                        (AbstractGameEffect) new OrbFlareEffect(
-                            this,
-                            OrbFlareEffect.OrbFlareColor.LIGHTNING
-                        ),
-                        speedTime
-                    )
-                );
-                AbstractDungeon.actionManager.addToBottom(
-                    (AbstractGameAction) new VFXAction(
-                        (AbstractGameEffect) new LightningEffect(
-                            ((AbstractCreature) abstractMonster).drawX,
-                            ((AbstractCreature) abstractMonster).drawY
-                        ),
-                        speedTime
-                    )
-                );
-                AbstractDungeon.actionManager.addToBottom(
-                    (AbstractGameAction) new SFXAction("ORB_LIGHTNING_EVOKE")
-                );
-            }
-        } else {
-            float speedTime = 0.2F / AbstractDungeon.player.orbs.size();
-            if (Settings.FAST_MODE) speedTime = 0.0F;
-            AbstractDungeon.actionManager.addToBottom(
-                (AbstractGameAction) new VFXAction(
-                    (AbstractGameEffect) new OrbFlareEffect(
-                        this,
-                        OrbFlareEffect.OrbFlareColor.LIGHTNING
-                    ),
-                    speedTime
-                )
-            );
-            AbstractDungeon.actionManager.addToBottom(
-                (AbstractGameAction) new DamageAllEnemiesAction(
-                    (AbstractCreature) AbstractDungeon.player,
-                    DamageInfo.createDamageMatrix(info.base, true),
-                    DamageInfo.DamageType.THORNS,
-                    AbstractGameAction.AttackEffect.NONE
-                )
-            );
-            for (AbstractMonster m3 : (AbstractDungeon.getMonsters()).monsters) {
-                if (
-                    !m3.isDeadOrEscaped() && !m3.halfDead
-                ) AbstractDungeon.actionManager.addToBottom(
-                    (AbstractGameAction) new VFXAction(
-                        (AbstractGameEffect) new LightningEffect(m3.drawX, m3.drawY),
-                        speedTime
-                    )
-                );
-            }
-            AbstractDungeon.actionManager.addToBottom(
-                (AbstractGameAction) new SFXAction("ORB_LIGHTNING_EVOKE")
             );
         }
     }

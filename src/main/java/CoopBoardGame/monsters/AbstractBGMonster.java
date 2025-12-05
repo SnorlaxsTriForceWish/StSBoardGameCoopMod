@@ -113,11 +113,6 @@ public abstract class AbstractBGMonster extends AbstractMonster implements Multi
         AbstractPlayer target = AbstractDungeon.player;
         float tmp = dmg;
 
-        //        if (Settings.isEndless && AbstractDungeon.player.hasBlight("DeadlyEnemies")) {
-        //            float mod = AbstractDungeon.player.getBlight("DeadlyEnemies").effectFloat();
-        //            tmp *= mod;
-        //        }
-
         for (AbstractPower p : this.powers) {
             tmp = p.atDamageGive(tmp, DamageInfo.DamageType.NORMAL);
         }

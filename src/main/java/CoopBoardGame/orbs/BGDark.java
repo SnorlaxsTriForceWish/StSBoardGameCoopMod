@@ -171,13 +171,7 @@ public class BGDark extends CustomOrb {
             this.cY + this.bobEffect.y / 2.0F + NUM_Y_OFFSET,
             new Color(0.2F, 1.0F, 1.0F, this.c.a),
             this.fontScale
-        );
-
-        //        FontHelper.renderFontCentered(sb, FontHelper.cardEnergyFont_L,
-        //                Integer.toString(this.evokeAmount), this.cX + NUM_X_OFFSET, this.cY + this.bobEffect.y / 2.0F + NUM_Y_OFFSET - 4.0F * Settings.scale, new Color(0.2F, 1.0F, 1.0F, this.c.a), this.fontScale);
-        //        FontHelper.renderFontCentered(sb, FontHelper.cardEnergyFont_L,
-        //                Integer.toString(this.evokeAmount), this.cX + NUM_X_OFFSET, this.cY + this.bobEffect.y / 2.0F + NUM_Y_OFFSET + 20.0F * Settings.scale, this.c, this.fontScale);
-    }
+        );    }
 
     public void playChannelSFX() {
         CardCrawlGame.sound.play("ORB_DARK_CHANNEL", 0.1F);
