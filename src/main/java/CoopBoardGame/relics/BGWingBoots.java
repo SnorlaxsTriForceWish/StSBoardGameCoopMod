@@ -11,14 +11,10 @@ import com.megacrit.cardcrawl.screens.DungeonMapScreen;
 import java.util.ArrayList;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGWingBoots extends AbstractBGRelic {
 
     public static final String ID = "BGWingedGreaves";
-
-    private static final Logger logger = LogManager.getLogger(BGWingBoots.class.getName());
 
     public BGWingBoots() {
         super(

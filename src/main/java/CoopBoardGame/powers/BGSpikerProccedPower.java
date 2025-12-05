@@ -25,8 +25,6 @@ public class BGSpikerProccedPower extends AbstractBGPower implements InvisiblePo
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
-    private boolean justApplied = false;
-    private static final int EFFECTIVENESS_STRING = 1;
 
     public BGSpikerProccedPower(AbstractCreature owner, int amount, boolean isSourceMonster) {
         this.name = NAME;
@@ -35,10 +33,6 @@ public class BGSpikerProccedPower extends AbstractBGPower implements InvisiblePo
         this.amount = amount;
         updateDescription();
         loadRegion("thorns");
-
-        //        if (isSourceMonster) {
-        //            this.justApplied = true;
-        //        }
 
         this.type = AbstractPower.PowerType.BUFF;
         this.isTurnBased = false;

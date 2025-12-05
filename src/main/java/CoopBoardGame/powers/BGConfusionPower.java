@@ -27,14 +27,11 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import java.util.ArrayList;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGConfusionPower extends AbstractBGPower {
 
     public static final String POWER_ID = "BGConfusion";
 
-    private static final Logger logger = LogManager.getLogger(BGConfusionPower.class.getName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
         "CoopBoardGame:BGConfusion"
     );

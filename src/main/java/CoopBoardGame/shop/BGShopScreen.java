@@ -157,8 +157,7 @@ public class BGShopScreen {
                     "idleMessages"
                 );
                 idleMessages.add(DESCRIPTIONS[0]);
-                if (AbstractBGDungeon.ascensionLevel < 8) __instance.actualPurgeCost = 3;
-                else __instance.actualPurgeCost = 4;
+                if (AbstractBGDungeon.ascensionLevel < 8) ShopScreen.actualPurgeCost = 3;
             }
         }
     }

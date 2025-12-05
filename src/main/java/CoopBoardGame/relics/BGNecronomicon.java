@@ -18,8 +18,6 @@ public class BGNecronomicon extends AbstractBGRelic implements DieControlledReli
 
     //TODOLATER: don't let Dolly's Mirror copy Necronomicon (exact wording is "FIRST attack THIS turn", which is incompatible with double copy rules)
 
-    private boolean activated = true;
-
     public BGNecronomicon() {
         super(
             "BGNecronomicon",

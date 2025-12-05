@@ -25,8 +25,6 @@ import com.megacrit.cardcrawl.ui.buttons.Button;
 import com.megacrit.cardcrawl.ui.panels.TopPanel;
 import com.megacrit.cardcrawl.vfx.ObtainPotionEffect;
 import java.util.ArrayList;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class EntropicBrewPotionButton extends Button {
 
@@ -268,8 +266,6 @@ public class EntropicBrewPotionButton extends Button {
             );
         }
     }
-
-    private static Logger logger = LogManager.getLogger(EntropicBrewPotionButton.class.getName());
 
     @SpirePatch(clz = TopPanel.class, method = SpirePatch.CLASS)
     public static class TopPanelEntropicInterface {

@@ -12,7 +12,6 @@ public class BGPoisonProccerPower extends AbstractBGPower implements InvisiblePo
 
     public static final String POWER_ID = "BGPoisonProccerPower";
 
-    private static final int MAX_POISON_TOKENS = 30;
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(
         "CoopBoardGame:BGPoison"
     );
@@ -20,8 +19,6 @@ public class BGPoisonProccerPower extends AbstractBGPower implements InvisiblePo
     public static final String NAME = powerStrings.NAME;
 
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
-
-    private AbstractCreature source;
 
     public BGPoisonProccerPower(AbstractCreature owner) {
         this.name = NAME;

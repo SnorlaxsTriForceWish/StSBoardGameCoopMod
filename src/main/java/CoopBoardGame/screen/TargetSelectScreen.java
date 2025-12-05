@@ -60,17 +60,6 @@ public class TargetSelectScreen extends CustomScreen {
     public TargetSelectAction cancelAction = null; //dummied out
     public AbstractMonster finaltarget = null;
 
-    private void open(TargetSelectAction action, String description, boolean allowCancel) {
-        this.description = description;
-        this.action = action;
-        this.allowCancel = allowCancel;
-        this.isDone = false;
-        if (
-            AbstractDungeon.screen != AbstractDungeon.CurrentScreen.NONE
-        ) AbstractDungeon.previousScreen = AbstractDungeon.screen;
-        reopen();
-    }
-
     @Override
     public void reopen() {
         AbstractDungeon.screen = curScreen();
@@ -151,14 +140,12 @@ public class TargetSelectScreen extends CustomScreen {
 
         @SpireInsertPatch(locator = Locator.class, localvars = {})
         public static void Insert(AbstractDungeon __instance) {
-            Logger logger = LogManager.getLogger(TargetSelectScreen.class.getName());
-            //logger.info("Dungeon Update: " + AbstractDungeon.isScreenUp);
-            if (__instance.screen.equals(Enum.TARGET_SELECT)) {
+            if (AbstractDungeon.screen.equals(Enum.TARGET_SELECT)) {
                 //TODO: maybe move some of these to update?
-                __instance.overlayMenu.hideBlackScreen();
+                AbstractDungeon.overlayMenu.hideBlackScreen();
                 AbstractDungeon.player.inSingleTargetMode = true;
                 //GameCursor.hidden = true;     //TODO: hide cursor once we're sure we can unhide it consistently
-                __instance.currMapNode.room.update();
+                AbstractDungeon.currMapNode.room.update();
             }
         }
 
@@ -184,8 +171,6 @@ public class TargetSelectScreen extends CustomScreen {
 
         @SpireInsertPatch(locator = Locator.class, localvars = {})
         public static void Insert(AbstractRoom __instance) {
-            Logger logger = LogManager.getLogger(TargetSelectScreen.class.getName());
-            //logger.info("Insert: "+AbstractDungeon.isScreenUp);
             if (AbstractDungeon.isScreenUp) {
                 if (AbstractDungeon.screen.equals(Enum.TARGET_SELECT)) {
                     if (
@@ -243,8 +228,6 @@ public class TargetSelectScreen extends CustomScreen {
                 ___arrowY[0] = MathHelper.mouseLerpSnap(___arrowY[0], InputHelper.mY);
                 ___controlPoint.x = __instance.hb.cX - (___arrowX[0] - __instance.hb.cX) / 4.0F;
                 ___controlPoint.y = ___arrowY[0] + (___arrowY[0] - __instance.hb.cY) / 2.0F;
-                Logger logger = LogManager.getLogger(TargetSelectScreen.class.getName());
-                //logger.info("hoveredMonster: "+___hoveredMonster);
                 if (___hoveredMonster == null) {
                     ___arrowScale[0] = Settings.scale;
                     ___arrowScaleTimer[0] = 0.0F;
@@ -334,42 +317,18 @@ public class TargetSelectScreen extends CustomScreen {
         ) {
             if (AbstractDungeon.screen.equals(Enum.TARGET_SELECT)) {
                 __instance.isInKeyboardMode = false;
-                if (false && __instance.isInKeyboardMode) {
-                    //THIS BLOCK INEVITABLY CRASHES OR SOFTLOCKS. DON'T USE IT
-                    //if (InputActionSet.releaseCard.isJustPressed() || CInputActionSet.cancel.isJustPressed()) {
-                    if (false) {
-                        //TODO: check getCustomScreen(TargetSelectScreen).allowCancel
-                        __instance.inSingleTargetMode = false;
-                        ___hoveredMonster[0] = null;
-                        AbstractDungeon.closeCurrentScreen();
-                    } else {
-                        ReflectionHacks.RMethod updateTargetArrowWithKeyboard =
-                            ReflectionHacks.privateMethod(
-                                AbstractPlayer.class,
-                                "updateTargetArrowWithKeyboard",
-                                boolean.class
-                            );
-                        updateTargetArrowWithKeyboard.invoke(__instance, true);
-                    }
-                } else {
                     ___hoveredMonster[0] = null;
                     for (AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
                         m.hb.update();
                         //currently, the only card that allowsCancel is Carve Reality, which targets "one or two" enemies
                         //so we're allowing the cancel by clicking the same monster twice -- even if the first hit kills it
                         //TODO: maybe pass a 4th arg along with AllowCancel being the originally-targeted enemy?
-                        TargetSelectScreen screen = (TargetSelectScreen) BaseMod.getCustomScreen(
-                            Enum.TARGET_SELECT
-                        );
                         if (m.hb.hovered && !m.isDying && !m.isEscaping && m.currentHealth > 0) {
                             ___hoveredMonster[0] = m;
                             break;
                         }
-                    }
                 }
 
-                //if ((AbstractDungeon.getCurrRoom()).monsters.areMonstersBasicallyDead() || InputHelper.justClickedRight || InputHelper.mY < 50.0F * Settings.scale || InputHelper.mY < ___hoverStartLine - 400.0F * Settings.scale) {
-                //if ((AbstractDungeon.getCurrRoom()).monsters.areMonstersBasicallyDead()) {
                 if ((AbstractDungeon.getCurrRoom()).monsters.areMonstersBasicallyDead()) {
                     if (Settings.isTouchScreen) {
                         InputHelper.moveCursorToNeutralPosition();
@@ -435,24 +394,6 @@ public class TargetSelectScreen extends CustomScreen {
 
                     return SpireReturn.Return();
                 }
-
-                //                TargetSelectScreen screen=(TargetSelectScreen)BaseMod.getCustomScreen(Enum.TARGET_SELECT);
-                //                if(screen.allowCancel) {
-                //                    if (InputHelper.justClickedRight || InputActionSet.cancel.isJustPressed()) {
-                //                        CardCrawlGame.sound.play("UI_CLICK_1");
-                //                        if (!screen.isDone) {
-                //                            screen.isDone = true;
-                ////                            if (screen.cancelAction != null) {
-                ////                                screen.cancelAction.execute(___hoveredMonster[0]);
-                ////                            }
-                //                        }
-                //                        ___isUsingClickDragControl[0] = false;
-                //                        __instance.inSingleTargetMode = false;
-                //                        GameCursor.hidden = false;
-                //                        ___hoveredMonster[0] = null;
-                //                        AbstractDungeon.closeCurrentScreen();
-                //                    }
-                //                }
 
                 return SpireReturn.Return();
             }

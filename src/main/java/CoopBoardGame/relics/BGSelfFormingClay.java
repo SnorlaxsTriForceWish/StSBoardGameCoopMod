@@ -27,8 +27,6 @@ public class BGSelfFormingClay extends AbstractBGRelic implements ClickableRelic
         return 8;
     }
 
-    private static final int BLOCK_AMT = 3;
-
     public AbstractRelic makeCopy() {
         return new BGSelfFormingClay();
     }

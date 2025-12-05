@@ -12,7 +12,6 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import java.util.ArrayList;
-import java.util.Iterator;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 
@@ -26,7 +25,7 @@ public class BGFairyPotion extends AbstractPotion {
     public BGFairyPotion() {
         super(
             potionStrings.NAME,
-            "BGFairyPotion",
+            POTION_ID,
             AbstractPotion.PotionRarity.RARE,
             AbstractPotion.PotionSize.FAIRY,
             AbstractPotion.PotionColor.FAIRY
@@ -46,7 +45,6 @@ public class BGFairyPotion extends AbstractPotion {
     }
 
     public void use(AbstractCreature target) {
-        float percent = this.potency / 100.0F;
         int healAmt = 2;
 
         if (healAmt < 1) {
@@ -83,32 +81,18 @@ public class BGFairyPotion extends AbstractPotion {
             //we're not 100% sure this patch doesn't break anything, so only do it if we're playing the board game
             if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
                 ////
-                // Behavior for Fairy Potion protecting from multihits
-                ////
-                //                if (__instance.hasPotion("BGFairyPotion")) {
-                //                    //TODO: if it's ruled that Fairy Potion doesn't protect from multihits, just copy the vanilla fairy potion code block over to here
-                //                    AbstractDungeon.actionManager.addToBottom(new BGDestroyFairyPotionAction());
-                //                    CoopBoardGame.CoopBoardGame.logger.info("hasPotion(BGFairyPotion)==true");
-                //                    return SpireReturn.Return();
-                //                }
-
-                ////
                 // Behavior for Fairy Potion NOT protecting from multihits
                 ////
-                Iterator var4;
-                if (__instance.hasPotion("BGFairyPotion")) {
-                    var4 = __instance.potions.iterator();
-
-                    while (var4.hasNext()) {
-                        AbstractPotion p = (AbstractPotion) var4.next();
-                        if (p.ID.equals("BGFairyPotion")) {
-                            p.flash();
-                            __instance.currentHealth = 0;
-                            p.use(__instance);
-                            AbstractDungeon.topPanel.destroyPotion(p.slot);
-                            return SpireReturn.Return();
-                        }
+                for (AbstractPotion potion : __instance.potions) {
+                    if (!potion.ID.equals(POTION_ID)) {
+                        continue;
                     }
+
+                    potion.flash();
+                    __instance.currentHealth = 0;
+                    potion.use(__instance);
+                    AbstractDungeon.topPanel.destroyPotion(potion.slot);
+                    return SpireReturn.Return();
                 }
             }
             return SpireReturn.Continue();

@@ -75,13 +75,9 @@ public class BGEnchiridion extends AbstractBGRelic {
 
     public void giveCards(ArrayList<AbstractCard> group) {
         this.cardsSelected = true;
-        float displayCount = 0.0F;
 
-        //if (!AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
         if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
-            //AbstractCard c = ((AbstractCard) AbstractDungeon.gridSelectScreen.selectedCards.get(0)).makeCopy();
             AbstractCard c = ((AbstractCard) AbstractDungeon.gridSelectScreen.selectedCards.get(0));
-            //logMetricObtainCard("The Library", "Read", c);
             AbstractDungeon.effectList.add(
                 new ShowCardAndObtainEffect(c, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F)
             );

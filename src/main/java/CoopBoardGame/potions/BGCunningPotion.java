@@ -3,7 +3,6 @@ package CoopBoardGame.potions;
 import CoopBoardGame.actions.BGUseShivAction;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -53,7 +52,6 @@ public class BGCunningPotion extends AbstractPotion {
     }
 
     public void use(AbstractCreature target) {
-        AbstractPlayer abstractPlayer = AbstractDungeon.player;
         if ((AbstractDungeon.getCurrRoom()).phase == AbstractRoom.RoomPhase.COMBAT) {
             for (int i = 0; i < potency; i += 1) {
                 addToBot(

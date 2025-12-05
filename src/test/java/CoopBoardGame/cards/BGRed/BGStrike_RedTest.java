@@ -21,7 +21,6 @@ import org.mockito.MockedStatic;
  */
 class BGStrike_RedTest {
 
-    private BGStrike_Red card;
     private static MockedStatic<CardCrawlGame> mockedGame;
     private static MockedStatic<Settings> mockedSettings;
     private static MockedStatic<Gdx> mockedGdx;
@@ -70,7 +69,6 @@ class BGStrike_RedTest {
 
     @BeforeEach
     void setUp() {
-        card = new BGStrike_Red();
     }
 
     // @Test

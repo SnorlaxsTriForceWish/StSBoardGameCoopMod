@@ -6,7 +6,6 @@ import CoopBoardGame.powers.BGTriggerCharonsAshesPower;
 import CoopBoardGame.powers.NilrysCodexCompatible;
 import CoopBoardGame.screen.TargetSelectScreen;
 import CoopBoardGame.thedie.TheDie;
-import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -22,7 +21,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 //TODO: don't stop flashing if we click Ashes while another wildcard power is active
 public class BGCharonsAshes
     extends AbstractBGRelic
-    implements DieControlledRelic, ClickableRelic, NilrysCodexCompatible {
+    implements DieControlledRelic, NilrysCodexCompatible {
 
     public BGCharonsAshes() {
         super("BGCharonsAshes", "ashes.png", RelicTier.RARE, LandingSound.MAGICAL);

@@ -15,7 +15,6 @@ import java.util.Iterator;
 public class BGWarPaint extends AbstractBGRelic implements ClickableRelic {
 
     public static final String ID = "BGWar Paint";
-    private static final int CARD_AMT = 1;
     private boolean cardsSelected = false;
     private boolean activated = false;
 
@@ -207,14 +206,12 @@ public class BGWarPaint extends AbstractBGRelic implements ClickableRelic {
 
     public void giveCards(ArrayList<AbstractCard> group) {
         this.cardsSelected = true;
-        float displayCount = 0.0F;
         for (Iterator<AbstractCard> i = group.iterator(); i.hasNext(); ) {
             AbstractCard c = i.next();
             c.untip();
             c.unhover();
             c.upgrade();
-            //logMetricCardUpgrade("Accursed Blacksmith", "Forge", c);
-            //AbstractDungeon.player.bottledCardUpgradeCheck(AbstractDungeon.gridSelectScreen.selectedCards.get(0));
+
             AbstractDungeon.effectsQueue.add(new ShowCardBrieflyEffect(c.makeStatEquivalentCopy()));
             AbstractDungeon.topLevelEffects.add(
                 new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F)

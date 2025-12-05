@@ -29,15 +29,11 @@ public class BGRedSkull extends AbstractBGRelic implements ClickableRelic {
         return 8;
     }
 
-    private static final int STR_AMT = 1;
-    private boolean isActive = false;
-
     public AbstractRelic makeCopy() {
         return new BGRedSkull();
     }
 
     private boolean usedThisTurn = false; // You can also have a relic be only usable once per combat. Check out Hubris for more examples, including other StSlib things.
-    private boolean isPlayerTurn = false; // We should make sure the relic is only activateable during our turn, not the enemies'.
 
     private boolean shuffledThisCombat = false;
 
@@ -47,8 +43,6 @@ public class BGRedSkull extends AbstractBGRelic implements ClickableRelic {
         //else desc += DieControlledRelic.RIGHT_CLICK_TO_ACTIVATE;
         return desc;
     }
-
-    private static final String thoughtbubble = "(UNUSED) I can trigger #rRed #rSkull!"; //TODO: move to localization
 
     public void onShuffle() {
         //        if(!usedThisTurn && !shuffledThisCombat){
@@ -109,13 +103,13 @@ public class BGRedSkull extends AbstractBGRelic implements ClickableRelic {
     }
 
     public void atTurnStart() {
-        isPlayerTurn = true; // It's our turn!
-        if (!usedThisTurn && shuffledThisCombat) beginLongPulse(); // Pulse while the player can click on it.
+        if (!usedThisTurn && shuffledThisCombat) {
+            beginLongPulse(); // Pulse while the player can click on it.
+        }
     }
 
     @Override
     public void onPlayerEndTurn() {
-        isPlayerTurn = false; // Not our turn now.
         stopPulse();
     }
 

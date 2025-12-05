@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 public class BGOldCoin extends AbstractBGRelic {
 
     public static final String ID = "BGOld Coin";
-    private static final int GOLD_AMT = 10;
 
     public boolean usableAsPayment() {
         return false;

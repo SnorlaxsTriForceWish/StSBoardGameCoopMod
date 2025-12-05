@@ -4,7 +4,6 @@ import CoopBoardGame.actions.OrbSelectScreenAction;
 import CoopBoardGame.orbs.BGDark;
 import CoopBoardGame.screen.OrbSelectScreen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -59,8 +58,6 @@ public class BGLoopPower extends AbstractBGPower {
             OrbSelectScreen.OrbSelectAction ossAction = target -> {
                 //TODO LATER: this code currently runs even if we pick EmptyOrbSlot or BGDark, so don't add any side effects
                 //TODO LATER: onEndOfTurn currently uses addToBot, so some events will be out of order
-                AbstractPlayer player = AbstractDungeon.player;
-                AbstractOrb orb = player.orbs.get(target);
                 for (int i = 0; i < this.amount; i++) {
                     ((AbstractOrb) AbstractDungeon.player.orbs.get(target)).onEndOfTurn();
                 }

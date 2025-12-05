@@ -1,6 +1,5 @@
 package CoopBoardGame.ui;
 
-import CoopBoardGame.relics.AbstractBGRelic;
 import CoopBoardGame.relics.BGTheAbacus;
 import CoopBoardGame.thedie.TheDie;
 import CoopBoardGame.util.TextureLoader;
@@ -11,12 +10,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.ui.buttons.Button;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class TheAbacusButton extends Button {
-
-    //public boolean visible=false;
 
     public static String relicList = "";
 
@@ -30,8 +25,6 @@ public class TheAbacusButton extends Button {
             TextureLoader.getTexture("CoopBoardGameResources/images/ui/dice/TheAbacus.png")
         );
     }
-
-    private static Logger logger = LogManager.getLogger(AbstractBGRelic.class.getName());
 
     public void update() {
         super.update();

@@ -21,8 +21,6 @@ public class BGSnakeRing extends AbstractBGRelic {
         );
     }
 
-    private static final int NUM_CARDS = 2;
-
     public void onEquip() {
         BaseMod.MAX_HAND_SIZE = 999;
     }

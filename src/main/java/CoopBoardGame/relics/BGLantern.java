@@ -28,7 +28,6 @@ public class BGLantern extends AbstractBGRelic {
         return 6;
     }
 
-    private static final int ENERGY_AMT = 1;
     private boolean firstTurn = true;
 
     public String getUpdatedDescription() {

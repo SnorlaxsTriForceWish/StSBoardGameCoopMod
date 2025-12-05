@@ -1,14 +1,10 @@
 package CoopBoardGame.relics;
 
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGSecretPortalRelic extends AbstractBGRelic {
 
     public static final String ID = "BGSecretPortalRelic";
-
-    private static final Logger logger = LogManager.getLogger(BGSecretPortalRelic.class.getName());
 
     public BGSecretPortalRelic() {
         super(

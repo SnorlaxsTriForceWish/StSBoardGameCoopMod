@@ -21,8 +21,6 @@ public class BGBattleHymnPower extends AbstractBGPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    private int hpLoss;
-
     public BGBattleHymnPower(AbstractCreature owner, int damageAmount) {
         super();
         this.name = NAME;
@@ -73,7 +71,6 @@ public class BGBattleHymnPower extends AbstractBGPower {
     public void stackPower(int stackAmount) {
         this.fontScale = 8.0F;
         this.amount += stackAmount;
-        //this.hpLoss++;
     }
 
     public void updateDescription() {

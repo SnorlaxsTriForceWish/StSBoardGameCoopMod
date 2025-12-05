@@ -13,8 +13,6 @@ import java.util.Iterator;
 public class BGPandorasBox extends AbstractBGRelic {
 
     public static final String ID = "BGPandora's Box";
-    private int count = 0;
-    private boolean calledTransform = true;
     private boolean cardsSelected = false;
 
     public BGPandorasBox() {

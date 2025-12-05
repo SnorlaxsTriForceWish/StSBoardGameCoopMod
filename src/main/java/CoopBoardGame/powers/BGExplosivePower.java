@@ -14,7 +14,6 @@ public class BGExplosivePower extends AbstractBGPower {
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
-    private static final int DAMAGE_AMOUNT = 30;
 
     public BGExplosivePower(AbstractCreature owner, int damage) {
         this.name = NAME;

@@ -24,8 +24,6 @@ public class BGBloodVial extends AbstractBGRelic {
         return 6;
     }
 
-    private static final int HEAL_AMOUNT = 1;
-
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0];
     }

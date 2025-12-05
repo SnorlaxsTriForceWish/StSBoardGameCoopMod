@@ -20,8 +20,6 @@ public class BGVulnerableProccedPower extends AbstractBGPower implements Invisib
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
-    private boolean justApplied = false;
-    private static final int EFFECTIVENESS_STRING = 1;
 
     public BGVulnerableProccedPower(AbstractCreature owner, int amount, boolean isSourceMonster) {
         this.name = NAME;
@@ -31,23 +29,11 @@ public class BGVulnerableProccedPower extends AbstractBGPower implements Invisib
         updateDescription();
         loadRegion("shackle");
 
-        //        if (isSourceMonster) {
-        //            this.justApplied = true;
-        //        }
-
         this.type = AbstractPower.PowerType.BUFF;
         this.isTurnBased = false;
 
         this.priority = 99;
     }
-
-    //    public void atEndOfTurn(boolean isPlayer) {
-    //        //if player, wears off at end of monster action
-    //        if(this.owner==AbstractDungeon.player) {
-    //            addToBot((AbstractGameAction) new ReducePowerAction(this.owner, this.owner, "BGVulnerable", 1));
-    //            addToBot((AbstractGameAction) new RemoveSpecificPowerAction(this.owner, this.owner, "VulnerableProcced"));
-    //        }
-    //    }
 
     public void onAfterUseCard(AbstractCard card, UseCardAction action) {
         //if monster, wears off after card resolves

@@ -10,12 +10,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGDoubleAttackPower extends AbstractBGPower {
 
@@ -74,7 +71,6 @@ public class BGDoubleAttackPower extends AbstractBGPower {
             copyOK
         ) {
             flash();
-            AbstractMonster m = null;
 
             AbstractCard copiedCard = originalCard.makeSameInstanceOf();
             //note that if the copied card is not a BG card, stacks of doubleattack will be improperly consumed on the new copy
@@ -92,35 +88,13 @@ public class BGDoubleAttackPower extends AbstractBGPower {
 
             copiedCard.purgeOnUse = true;
 
-            Logger logger = LogManager.getLogger(BGDoubleTapPower_DEPRECATED.class.getName());
-            //logger.info("DoubleAttackPower instanceof check");
             if (originalCard instanceof AbstractBGCard) {
-                //logger.info("set old card's copy reference: "+copiedCard);
                 ((AbstractBGCard) originalCard).copiedCard = (AbstractBGCard) copiedCard;
             }
 
-            //((AbstractBGCard)copiedCard).followUpCardChain=new ArrayList<>(Arrays.asList(originalCard));
             ((AbstractBGCard) copiedCard).followUpCardChain = new ArrayList<>(
                 Collections.singletonList(originalCard)
             );
-
-            //AbstractDungeon.actionManager.addCardQueueItem(new CardQueueItem(tmp, m, card.energyOnUse, true, true), true);
-
-            //logger.info("DoubleTap card target type: "+card.target);
-            //            if(originalCard.target == AbstractCard.CardTarget.ENEMY || originalCard.target== AbstractCard.CardTarget.SELF_AND_ENEMY) {
-            //                TargetSelectScreen.TargetSelectAction tssAction = (target) -> {
-            //                    //logger.info("DoubleTap tssAction.execute");
-            //                    if (target != null) {
-            //                        originalCard.calculateCardDamage(target);
-            //                    }
-            //                    //logger.info("DoubleTap final target: "+target);
-            //                    addToBot((AbstractGameAction) new NewQueueCardAction(originalCard, target, true, true));
-            //                };
-            //                //logger.info("DoubleTap addToTop");
-            //                addToBot((AbstractGameAction)new TargetSelectScreenAction(tssAction,"Choose a target for "+originalCard.name+"."));
-            //            }else{
-            //                addToBot((AbstractGameAction) new NewQueueCardAction(originalCard, null, true, true));
-            //            }
 
             this.amount--;
             if (this.amount == 0) {

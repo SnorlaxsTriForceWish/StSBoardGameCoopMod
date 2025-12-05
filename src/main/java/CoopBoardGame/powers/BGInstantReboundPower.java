@@ -22,7 +22,6 @@ public class BGInstantReboundPower extends AbstractBGPower implements InvisibleP
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
-    private boolean justEvoked = false;
 
     public BGInstantReboundPower(AbstractCreature owner) {
         this.name = NAME;

@@ -16,8 +16,6 @@ public class BGTinyHouse extends AbstractBGRelic {
 
     private static final int GOLD_AMT = 3;
 
-    private static final int HP_AMT = 5;
-
     public BGTinyHouse() {
         super(
             "BGTiny House",

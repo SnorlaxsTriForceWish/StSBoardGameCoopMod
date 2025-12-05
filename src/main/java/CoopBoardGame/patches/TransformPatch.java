@@ -13,40 +13,61 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.random.Random;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Objects;
 
-// cards in animation appear to be chosen by AbstractDungeon.returnTrulyRandomCardFromAvailable(this.upgradePreviewCard).makeCopy();
+/**
+ * Patches to modify card transformation behavior in Board Game mode.
+ *
+ * In Board Game mode, transformations use the reward deck instead of all available cards,
+ * and certain cards (BGAscendersBane, BG_CURSE cards) are excluded from transformation options.
+ */
 public class TransformPatch {
 
+    /**
+     * Gets all cards that can be transformed, excluding bottled cards and BG_CURSE cards.
+     *
+     * @return CardGroup containing all transformable cards from the player's deck
+     */
     public static CardGroup getTransformableCards() {
-        CardGroup purgeable = CardGroup.getGroupWithoutBottledCards(
+        CardGroup purgeableCards = CardGroup.getGroupWithoutBottledCards(
             AbstractDungeon.player.masterDeck.getPurgeableCards()
         );
-        CardGroup retVal = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        CardGroup transformableCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
-        for (AbstractCard c : purgeable.group) {
-            if (c.color != BG_CURSE) retVal.group.add(c);
+        for (AbstractCard card : purgeableCards.group) {
+            if (card.color != BG_CURSE) {
+                transformableCards.group.add(card);
+            }
         }
-        return retVal;
+        return transformableCards;
     }
 
+    /**
+     * Prevents BGAscendersBane from being purged (removed from deck).
+     * This card acts like the base game's AscendersBane curse.
+     */
     @SpirePatch2(clz = CardGroup.class, method = "getPurgeableCards")
     public static class BGAscendersBanePurgePatch {
 
         @SpirePostfixPatch
-        public static CardGroup Postfix(CardGroup __result) {
-            CardGroup retVal = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-            for (AbstractCard c : __result.group) {
-                //other nonpurgeable cards have already been filtered
-                if (!c.cardID.equals("BGAscendersBane")) retVal.group.add(c);
+        public static CardGroup Postfix(CardGroup result) {
+            CardGroup filteredCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+
+            for (AbstractCard card : result.group) {
+                // Other non-purgeable cards have already been filtered by vanilla logic
+                if (!card.cardID.equals("BGAscendersBane")) {
+                    filteredCards.group.add(card);
+                }
             }
-            return retVal;
+            return filteredCards;
         }
     }
 
-    //note that returnTrulyRandomCardFromAvailable is also used to determine the actual result of a vanilla transform,
-    // but our patched transform (in AbstractBGDungeon) uses DrawFromRewardDeck instead.
+    /**
+     * Modifies the transform animation to use Board Game reward decks.
+     *
+     * Note: returnTrulyRandomCardFromAvailable is used for the visual animation.
+     * The actual transform result is determined by AbstractBGDungeon.DrawFromRewardDeck.
+     */
     @SpirePatch2(
         clz = AbstractDungeon.class,
         method = "returnTrulyRandomCardFromAvailable",
@@ -55,28 +76,33 @@ public class TransformPatch {
     public static class TransformAnimationPatch {
 
         @SpirePrefixPatch
-        private static SpireReturn<AbstractCard> Foo(AbstractCard prohibited, Random rng) {
-            if (CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
-                ArrayList<AbstractCard> list = new ArrayList();
-                Iterator var3;
-                AbstractCard c;
-                var3 = AbstractBGDungeon.rewardDeck.group.iterator();
-                while (var3.hasNext()) {
-                    c = (AbstractCard) var3.next();
-                    if (!Objects.equals(c.cardID, prohibited.cardID)) {
-                        list.add(c);
-                    }
-                }
-                var3 = AbstractBGDungeon.rareRewardDeck.group.iterator();
-                while (var3.hasNext()) {
-                    c = (AbstractCard) var3.next();
-                    if (!Objects.equals(c.cardID, prohibited.cardID)) {
-                        list.add(c);
-                    }
-                }
-                return SpireReturn.Return((list.get(rng.random(list.size() - 1))).makeCopy());
+        private static SpireReturn<AbstractCard> Prefix(AbstractCard prohibitedCard, Random random) {
+            // Only modify behavior in Board Game dungeons
+            if (!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) {
+                return SpireReturn.Continue();
             }
-            return SpireReturn.Continue();
+
+            ArrayList<AbstractCard> availableCards = new ArrayList<>();
+
+            // Add all cards from the normal reward deck, excluding the prohibited card
+            for (AbstractCard card : AbstractBGDungeon.rewardDeck.group) {
+                if (!card.cardID.equals(prohibitedCard.cardID)) {
+                    availableCards.add(card);
+                }
+            }
+
+            // Add all cards from the rare reward deck, excluding the prohibited card
+            for (AbstractCard card : AbstractBGDungeon.rareRewardDeck.group) {
+                if (!card.cardID.equals(prohibitedCard.cardID)) {
+                    availableCards.add(card);
+                }
+            }
+
+            // Select a random card from the combined pool
+            int randomIndex = random.random(availableCards.size() - 1);
+            AbstractCard selectedCard = availableCards.get(randomIndex);
+
+            return SpireReturn.Return(selectedCard.makeCopy());
         }
     }
 }

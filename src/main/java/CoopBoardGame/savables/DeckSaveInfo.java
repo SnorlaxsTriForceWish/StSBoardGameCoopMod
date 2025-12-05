@@ -252,9 +252,7 @@ public class DeckSaveInfo
 
         @SpirePostfixPatch
         public static void update() {
-            if (true || CardCrawlGame.dungeon instanceof AbstractBGDungeon) {
-                deckInfoBeforeCardReward = null;
-            }
+            deckInfoBeforeCardReward = null;
         }
     }
 }

@@ -14,8 +14,6 @@ public class BGFlightPower extends AbstractBGPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    private int storedAmount;
-
     public BGFlightPower(AbstractCreature owner) {
         this.name = NAME;
         this.ID = "BGFlight";

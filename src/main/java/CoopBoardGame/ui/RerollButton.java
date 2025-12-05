@@ -1,6 +1,5 @@
 package CoopBoardGame.ui;
 
-import CoopBoardGame.relics.AbstractBGRelic;
 import CoopBoardGame.relics.BGGamblingChip;
 import CoopBoardGame.util.TextureLoader;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,8 +9,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.ui.buttons.Button;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class RerollButton extends Button {
 
@@ -29,8 +26,6 @@ public class RerollButton extends Button {
             TextureLoader.getTexture("CoopBoardGameResources/images/ui/dice/Reroll.png")
         );
     }
-
-    private static Logger logger = LogManager.getLogger(AbstractBGRelic.class.getName());
 
     public void update() {
         super.update();

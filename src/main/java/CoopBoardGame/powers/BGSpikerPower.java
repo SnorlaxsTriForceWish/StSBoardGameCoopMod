@@ -24,10 +24,6 @@ public class BGSpikerPower extends AbstractBGPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    private boolean justApplied = false;
-    private static final float EFFECTIVENESS = 2.0F;
-    private static final int EFFECTIVENESS_STRING = 100;
-
     public BGSpikerPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = "BGSpiker";

@@ -1,12 +1,7 @@
 package CoopBoardGame.relics;
 
-import static CoopBoardGame.CoopBoardGame.makeRelicOutlinePath;
-import static CoopBoardGame.CoopBoardGame.makeRelicPath;
-
 import CoopBoardGame.CoopBoardGame;
-import CoopBoardGame.util.TextureLoader;
 import basemod.BaseMod;
-import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -18,15 +13,6 @@ public class BGBurningBlood extends AbstractBGRelic {
 
     // ID, images, text.
     public static final String ID = CoopBoardGame.makeID("BurningBlood");
-
-    //private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic.png"));
-    private static final Texture IMG = TextureLoader.getTexture(
-        makeRelicPath("BGburningBlood.png")
-    );
-    //private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic.png"));
-    private static final Texture OUTLINE = TextureLoader.getTexture(
-        makeRelicOutlinePath("BGburningBlood.png")
-    );
 
     public BGBurningBlood() {
         super(ID, "burningBlood.png", RelicTier.STARTER, LandingSound.MAGICAL);

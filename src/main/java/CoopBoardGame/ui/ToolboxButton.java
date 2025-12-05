@@ -1,6 +1,5 @@
 package CoopBoardGame.ui;
 
-import CoopBoardGame.relics.AbstractBGRelic;
 import CoopBoardGame.relics.BGToolbox;
 import CoopBoardGame.thedie.TheDie;
 import CoopBoardGame.util.TextureLoader;
@@ -11,8 +10,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.ui.buttons.Button;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class ToolboxButton extends Button {
 
@@ -30,8 +27,6 @@ public class ToolboxButton extends Button {
             TextureLoader.getTexture("CoopBoardGameResources/images/ui/dice/Toolbox.png")
         );
     }
-
-    private static Logger logger = LogManager.getLogger(AbstractBGRelic.class.getName());
 
     public void update() {
         super.update();

@@ -17,15 +17,12 @@ public class BGCombustPower extends AbstractBGPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    private int hpLoss;
-
     public BGCombustPower(AbstractCreature owner, int hpLoss, int damageAmount) {
         super();
         this.name = NAME;
         this.ID = "BGCombust";
         this.owner = owner;
         this.amount = damageAmount;
-        this.hpLoss = hpLoss;
         this.clickable = true;
         this.autoActivate = true;
         updateDescription();

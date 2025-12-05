@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 public class BGDollysMirror extends AbstractBGRelic implements DieControlledRelic {
 
     public static final String ID = "BGDollysMirror";
-    private boolean cardSelected = true;
 
     public BGDollysMirror() {
         super(
@@ -51,7 +50,6 @@ public class BGDollysMirror extends AbstractBGRelic implements DieControlledReli
                 this
             )
         );
-        //addToTop((AbstractGameAction) new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, (AbstractPower)new BGTriggerAnyDieAbilityPower((AbstractCreature)AbstractDungeon.player)));
         addToBot(
             (AbstractGameAction) new ApplyPowerAction(
                 (AbstractCreature) AbstractDungeon.player,
@@ -63,26 +61,6 @@ public class BGDollysMirror extends AbstractBGRelic implements DieControlledReli
         );
     }
 
-    private boolean isPlayerTurn = false; // We should make sure the relic is only activateable during our turn, not the enemies'.
-
-    @Override
-    public void onRightClick() {
-        // On right click
-        //Don't actually do anything when right-clicked, since we'd be spending a die ability to activate a die ability
-        //        //final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
-        //        //logger.info("Relic.onRightClick");
-        //        addToBot((AbstractGameAction)new BGActivateDieAbilityAction(this));
-    }
-
-    public void atTurnStart() {
-        isPlayerTurn = true; // It's our turn!
-    }
-
-    @Override
-    public void onPlayerEndTurn() {
-        isPlayerTurn = false; // Not our turn now.
-        stopPulse();
-    }
 
     @Override
     public void onVictory() {
@@ -91,5 +69,9 @@ public class BGDollysMirror extends AbstractBGRelic implements DieControlledReli
 
     public AbstractRelic makeCopy() {
         return new BGDollysMirror();
+    }
+
+    @Override
+    public void onRightClick() {
     }
 }

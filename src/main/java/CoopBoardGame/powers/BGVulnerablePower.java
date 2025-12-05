@@ -33,10 +33,6 @@ public class BGVulnerablePower extends AbstractBGPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    private boolean justApplied = false;
-    private static final float EFFECTIVENESS = 2.0F;
-    private static final int EFFECTIVENESS_STRING = 100;
-
     public BGVulnerablePower(AbstractCreature owner, int amount, boolean isSourceMonster) {
         this.name = NAME;
         this.ID = "BGVulnerable";
@@ -49,29 +45,6 @@ public class BGVulnerablePower extends AbstractBGPower {
         this.isTurnBased = false;
     }
 
-    //    @Override
-    //    public boolean shouldPushMods(DamageInfo damageInfo, Object o, List<AbstractDamageModifier> list) {
-    //        return true;
-    //        //return o instanceof AbstractCard && ((AbstractCard) o).type == AbstractCard.CardType.ATTACK && list.stream().noneMatch(mod -> mod instanceof FireDamage);
-    //    }
-    //
-    //    @Override
-    //    public List<AbstractDamageModifier> modsToPush(DamageInfo damageInfo, Object o, List<AbstractDamageModifier> list) {
-    //        return Collections.singletonList(new DamageModBGVulnerable());
-    //    }
-
-    //    public void atEndOfRound() {
-    //        if (this.justApplied) {
-    //            this.justApplied = false;
-    //
-    //            return;
-    //        }
-    //        if (this.amount == 0) {
-    //            addToBot((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, "Vulnerable"));
-    //        } else {
-    //            addToBot((AbstractGameAction)new ReducePowerAction(this.owner, this.owner, "Vulnerable", 1));
-    //        }
-    //    }
 
     public void updateDescription() {
         //TODO: note about canceling out Weak, if there's room for it
@@ -85,16 +58,13 @@ public class BGVulnerablePower extends AbstractBGPower {
 
     public void stackPower(int stackAmount) {
         if (this.amount == -1) {
-            //logger.info(this.name + " does not stack");
             return;
         }
         this.fontScale = 8.0F;
         this.amount += stackAmount;
         if (!this.owner.hasPower("VulnerableProcced")) {
-            //ordinarily cap at 3
             if (this.amount > 3) this.amount = 3;
         } else {
-            //if target has procced vulnerable, then they're about to drop to 2, so we can add one more than usual
             if (this.amount > 4) this.amount = 4;
         }
     }
@@ -122,18 +92,11 @@ public class BGVulnerablePower extends AbstractBGPower {
         return damage;
     }
 
-    //    public void duringTurn() {
-    //        final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
-    //        logger.info("BGVulnerablePower: duringTurn");
-    //    }
-
     public int onAttacked(DamageInfo info, int damageAmount) {
         final Logger logger = LogManager.getLogger(CoopBoardGame.class.getName());
         logger.info("BGVulnerablePower: onAttacked " + info.type + " " + this.owner);
         if (info.type == DamageInfo.DamageType.NORMAL || info.type == WEAKVULN_ZEROHITS) {
             if (this.owner != AbstractDungeon.player) {
-                //monster was attacked
-                //this must be addToTop.  addToBot doesn't work -- the proc remains on the monster until next card
                 addToTop(
                     (AbstractGameAction) new ApplyPowerAction(
                         (AbstractCreature) this.owner,
@@ -146,17 +109,8 @@ public class BGVulnerablePower extends AbstractBGPower {
                         1
                     )
                 );
-            } else {
-                //player was attacked
-                //addToBot((AbstractGameAction) new ApplyPowerAction((AbstractCreature) info.owner, (AbstractCreature) info.owner, (AbstractPower) new BGVulnerableProccedPlayerPower((AbstractCreature) info.owner, 1, false), 1));
-                //addToTop doesn't work either  :(
-                //addToTop((AbstractGameAction) new ApplyPowerAction((AbstractCreature) info.owner, (AbstractCreature) info.owner, (AbstractPower) new BGVulnerableProccedPlayerPower((AbstractCreature) info.owner, 1, false), 1));
             }
         }
-        //    if(info.owner.hasPower("BGWeakened")) {
-        //        return damageAmount;
-        //    }
-        //    return damageAmount*2;
         return damageAmount;
     }
 

@@ -28,8 +28,6 @@ public class BGAkabeko extends AbstractBGRelic implements ClickableRelic {
         return 6;
     }
 
-    private static final int VIGOR = 1;
-
     public String getUpdatedDescription() {
         String desc = this.DESCRIPTIONS[0];
         if (this.usedUp) desc += DieControlledRelic.USED_THIS_COMBAT;

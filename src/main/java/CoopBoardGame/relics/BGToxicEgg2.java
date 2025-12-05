@@ -5,8 +5,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class BGToxicEgg2 extends AbstractBGRelic {
 
@@ -55,8 +53,6 @@ public class BGToxicEgg2 extends AbstractBGRelic {
     }
 
     public void onPreviewObtainCard(AbstractCard c) {
-        Logger logger = LogManager.getLogger(BGToxicEgg2.class.getName());
-        //logger.info("BGToxicEgg: onPreviewObtainCard");
         if (this.counter > 0) {
             if (c.type == AbstractCard.CardType.SKILL && c.canUpgrade() && !c.upgraded) {
                 c.upgrade();

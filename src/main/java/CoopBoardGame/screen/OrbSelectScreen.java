@@ -60,22 +60,6 @@ public class OrbSelectScreen extends CustomScreen {
     public OrbSelectAction cancelAction = null; //dummied out
     public AbstractMonster finaltarget = null;
 
-    private void open(OrbSelectAction action, String description, boolean prohibitDarkOrbs) {
-        this.description = description;
-        this.action = action;
-        this.prohibitDarkOrbs = prohibitDarkOrbs;
-        //this.allowCancel=allowCancel;
-        //this.cancelAction=cancelAction;
-        this.isDone = false;
-
-        //OrbSelectScreen.PAUSE_ACTION_QUEUE=true;
-
-        if (
-            AbstractDungeon.screen != AbstractDungeon.CurrentScreen.NONE
-        ) AbstractDungeon.previousScreen = AbstractDungeon.screen;
-        reopen();
-    }
-
     @Override
     public void reopen() {
         AbstractDungeon.screen = curScreen();
@@ -165,14 +149,10 @@ public class OrbSelectScreen extends CustomScreen {
 
         @SpireInsertPatch(locator = Locator.class, localvars = {})
         public static void Insert(AbstractDungeon __instance) {
-            Logger logger = LogManager.getLogger(OrbSelectScreen.class.getName());
-            //logger.info("Dungeon Update: " + AbstractDungeon.isScreenUp);
-            if (__instance.screen.equals(Enum.ORB_SELECT)) {
+            if (AbstractDungeon.screen.equals(Enum.ORB_SELECT)) {
                 //TODO: maybe move some of these to update?
-                __instance.overlayMenu.hideBlackScreen();
-                //AbstractDungeon.player.inSingleTargetMode=true;
-                //GameCursor.hidden = true;     //TODO: hide cursor once we're sure we can unhide it consistently
-                __instance.currMapNode.room.update();
+                AbstractDungeon.overlayMenu.hideBlackScreen();
+                AbstractDungeon.currMapNode.room.update();
             }
         }
 
@@ -198,8 +178,6 @@ public class OrbSelectScreen extends CustomScreen {
 
         @SpireInsertPatch(locator = Locator.class, localvars = {})
         public static void Insert(AbstractRoom __instance) {
-            Logger logger = LogManager.getLogger(OrbSelectScreen.class.getName());
-            //logger.info("Insert: "+AbstractDungeon.isScreenUp);
             if (AbstractDungeon.isScreenUp) {
                 if (AbstractDungeon.screen.equals(Enum.ORB_SELECT)) {
                     if (
@@ -229,15 +207,6 @@ public class OrbSelectScreen extends CustomScreen {
         }
     }
 
-    //    @SpirePatch2(clz= AbstractPlayer.class,method="updateSingleTargetInput",paramtypez={})
-    //    public static class temp{
-    //        @SpirePostfixPatch public static SpireReturn<Void> Prefix(AbstractMonster ___hoveredMonster){
-    //            Logger logger = LogManager.getLogger(OrbSelectScreen.class.getName());
-    //            //logger.info("updateinput: "+___hoveredMonster);
-    //            return SpireReturn.Continue();
-    //        }
-    //    }
-
     @SpirePatch2(clz = AbstractPlayer.class, method = "updateInput", paramtypez = {})
     public static class UpdateInputPatch {
 
@@ -251,7 +220,6 @@ public class OrbSelectScreen extends CustomScreen {
                 InputActionSet.confirm.isJustPressed() ||
                 CInputActionSet.select.isJustPressed()
             ) {
-                //for(AbstractOrb o : __instance.orbs){
                 for (int i = 0; i < __instance.orbs.size(); i += 1) {
                     AbstractOrb o = __instance.orbs.get(i);
                     if (o.hb.hovered && !(o instanceof EmptyOrbSlot)) {

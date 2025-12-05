@@ -19,8 +19,6 @@ public class BGZeroDamagePower extends AbstractBGPower {
     );
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
-    private boolean justApplied = false;
-    private static final int EFFECTIVENESS_STRING = 1;
 
     public BGZeroDamagePower(AbstractCreature owner) {
         this.name = NAME;

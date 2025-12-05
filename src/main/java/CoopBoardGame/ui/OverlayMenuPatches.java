@@ -1,20 +1,14 @@
 package CoopBoardGame.ui;
 
 import CoopBoardGame.multicharacter.MultiCharacterRowBoxes;
-import CoopBoardGame.relics.AbstractBGRelic;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.core.OverlayMenu;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class OverlayMenuPatches {
-
-    private static Logger logger = LogManager.getLogger(AbstractBGRelic.class.getName());
-
     @SpirePatch(clz = OverlayMenu.class, method = SpirePatch.CLASS)
     public static class OverlayMenuExtraInterface {
 

@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 public class BGRingOfTheSerpent extends AbstractBGRelic {
 
     public static final String ID = "BGRing of the Serpent";
-    private static final int NUM_CARDS = 1;
 
     public BGRingOfTheSerpent() {
         super(
