@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.screens.VictoryScreen;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.scene.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class VictoryVFXPatches {
 
@@ -56,11 +55,9 @@ public class VictoryVFXPatches {
                 }
             } else if (AbstractDungeon.player.chosenClass == BGDefect.Enums.BG_DEFECT) {
                 boolean foundEyeVfx = false;
-                Iterator var5 = ___effect[0].iterator();
 
-                while (var5.hasNext()) {
-                    AbstractGameEffect e = (AbstractGameEffect) var5.next();
-                    if (e instanceof DefectVictoryEyesEffect) {
+                for (AbstractGameEffect effect : ___effect[0]) {
+                    if (effect instanceof DefectVictoryEyesEffect) {
                         foundEyeVfx = true;
                         break;
                     }
@@ -75,11 +72,9 @@ public class VictoryVFXPatches {
                 }
             } else if (AbstractDungeon.player.chosenClass == BGWatcher.Enums.BG_WATCHER) {
                 boolean createdEffect = false;
-                Iterator var3 = ___effect[0].iterator();
 
-                while (var3.hasNext()) {
-                    AbstractGameEffect e = (AbstractGameEffect) var3.next();
-                    if (e instanceof WatcherVictoryEffect) {
+                for (AbstractGameEffect effect : ___effect[0]) {
+                    if (effect instanceof WatcherVictoryEffect) {
                         createdEffect = true;
                         break;
                     }
