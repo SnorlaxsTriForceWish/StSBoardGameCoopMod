@@ -29,7 +29,6 @@ public class BGDazed extends AbstractBGCard implements CardDisappearsOnExhaust {
             AbstractCard.CardTarget.NONE
         );
         this.isEthereal = true;
-        //this.purgeOnUse=true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {}
