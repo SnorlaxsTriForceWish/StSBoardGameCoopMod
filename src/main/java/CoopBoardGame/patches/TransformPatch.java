@@ -49,10 +49,10 @@ public class TransformPatch {
     public static class BGAscendersBanePurgePatch {
 
         @SpirePostfixPatch
-        public static CardGroup Postfix(CardGroup result) {
+        public static CardGroup Postfix(CardGroup __result) {
             CardGroup filteredCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
-            for (AbstractCard card : result.group) {
+            for (AbstractCard card : __result.group) {
                 // Other non-purgeable cards have already been filtered by vanilla logic
                 if (!card.cardID.equals("BGAscendersBane")) {
                     filteredCards.group.add(card);
@@ -76,7 +76,7 @@ public class TransformPatch {
     public static class TransformAnimationPatch {
 
         @SpirePrefixPatch
-        private static SpireReturn<AbstractCard> Prefix(AbstractCard prohibitedCard, Random random) {
+        private static SpireReturn<AbstractCard> Foo(AbstractCard prohibited, Random rng) {
             // Only modify behavior in Board Game dungeons
             if (!(CardCrawlGame.dungeon instanceof AbstractBGDungeon)) {
                 return SpireReturn.Continue();
@@ -86,20 +86,20 @@ public class TransformPatch {
 
             // Add all cards from the normal reward deck, excluding the prohibited card
             for (AbstractCard card : AbstractBGDungeon.rewardDeck.group) {
-                if (!card.cardID.equals(prohibitedCard.cardID)) {
+                if (!card.cardID.equals(prohibited.cardID)) {
                     availableCards.add(card);
                 }
             }
 
             // Add all cards from the rare reward deck, excluding the prohibited card
             for (AbstractCard card : AbstractBGDungeon.rareRewardDeck.group) {
-                if (!card.cardID.equals(prohibitedCard.cardID)) {
+                if (!card.cardID.equals(prohibited.cardID)) {
                     availableCards.add(card);
                 }
             }
 
             // Select a random card from the combined pool
-            int randomIndex = random.random(availableCards.size() - 1);
+            int randomIndex = rng.random(availableCards.size() - 1);
             AbstractCard selectedCard = availableCards.get(randomIndex);
 
             return SpireReturn.Return(selectedCard.makeCopy());

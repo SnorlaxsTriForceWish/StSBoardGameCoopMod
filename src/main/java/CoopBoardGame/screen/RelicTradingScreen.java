@@ -45,6 +45,12 @@ public class RelicTradingScreen extends CustomScreen {
 
     public ArrayList<FakeTradingRelic> relics;
 
+    public void open() {
+        AbstractDungeon.screen = curScreen();
+        AbstractDungeon.isScreenUp = true;
+        AbstractDungeon.overlayMenu.showBlackScreen();
+    }
+
     @Override
     public void reopen() {
         AbstractDungeon.screen = curScreen();

@@ -60,6 +60,11 @@ public class OrbSelectScreen extends CustomScreen {
     public OrbSelectAction cancelAction = null; //dummied out
     public AbstractMonster finaltarget = null;
 
+    public void open() {
+        AbstractDungeon.screen = curScreen();
+        AbstractDungeon.isScreenUp = true;
+    }
+
     @Override
     public void reopen() {
         AbstractDungeon.screen = curScreen();

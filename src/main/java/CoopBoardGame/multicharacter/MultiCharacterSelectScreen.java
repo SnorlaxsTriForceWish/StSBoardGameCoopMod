@@ -85,6 +85,18 @@ public class MultiCharacterSelectScreen extends CustomScreen {
         }
     }
 
+    public void open() {
+        AbstractDungeon.screen = curScreen();
+        AbstractDungeon.isScreenUp = true;
+        AbstractDungeon.overlayMenu.hideBlackScreen();
+        ((MultiCharacterRowBoxes) OverlayMenuPatches.OverlayMenuExtraInterface.multiCharacterRowBoxes.get(
+                AbstractDungeon.overlayMenu
+            )).show();
+        for (MultiCharacterSelectButton b : this.buttons) {
+            b.selected = false;
+        }
+    }
+
     public void reopen() {
         AbstractDungeon.screen = curScreen();
         AbstractDungeon.isScreenUp = true;
