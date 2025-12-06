@@ -64,6 +64,7 @@ public class OrbSelectScreen extends CustomScreen {
         this.action = action;
         this.description = description;
         this.prohibitDarkOrbs = prohibitDarkOrbs;
+        this.isDone = false;
         AbstractDungeon.screen = curScreen();
         AbstractDungeon.isScreenUp = true;
     }

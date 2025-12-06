@@ -64,6 +64,7 @@ public class TargetSelectScreen extends CustomScreen {
         this.action = action;
         this.description = description;
         this.allowCancel = allowCancel;
+        this.isDone = false;
         AbstractDungeon.screen = curScreen();
         AbstractDungeon.isScreenUp = true;
     }
