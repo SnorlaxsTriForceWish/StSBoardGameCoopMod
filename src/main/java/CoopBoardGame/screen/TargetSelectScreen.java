@@ -60,7 +60,10 @@ public class TargetSelectScreen extends CustomScreen {
     public TargetSelectAction cancelAction = null; //dummied out
     public AbstractMonster finaltarget = null;
 
-    public void open() {
+    public void open(TargetSelectAction action, String description, boolean allowCancel) {
+        this.action = action;
+        this.description = description;
+        this.allowCancel = allowCancel;
         AbstractDungeon.screen = curScreen();
         AbstractDungeon.isScreenUp = true;
     }

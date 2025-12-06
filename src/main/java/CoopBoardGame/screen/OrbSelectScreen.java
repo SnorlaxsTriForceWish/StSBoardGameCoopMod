@@ -60,7 +60,10 @@ public class OrbSelectScreen extends CustomScreen {
     public OrbSelectAction cancelAction = null; //dummied out
     public AbstractMonster finaltarget = null;
 
-    public void open() {
+    public void open(OrbSelectAction action, String description, boolean prohibitDarkOrbs) {
+        this.action = action;
+        this.description = description;
+        this.prohibitDarkOrbs = prohibitDarkOrbs;
         AbstractDungeon.screen = curScreen();
         AbstractDungeon.isScreenUp = true;
     }
