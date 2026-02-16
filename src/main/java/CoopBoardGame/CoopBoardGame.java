@@ -21,7 +21,9 @@ import CoopBoardGame.relics.BottledPlaceholderRelic;
 import CoopBoardGame.rewards.TinyHouseUpgrade1Card;
 import CoopBoardGame.rewards.TinyHouseUpgrade1CardTypePatch;
 import CoopBoardGame.savables.DeckSaveInfo;
+import CoopBoardGame.actions.player.GainBlockOnPlayerAction;
 import CoopBoardGame.screen.OrbSelectScreen;
+import CoopBoardGame.screen.PlayerTargetScreen;
 import CoopBoardGame.screen.RelicTradingScreen;
 import CoopBoardGame.screen.TargetSelectScreen;
 import CoopBoardGame.util.IDCheckDontTouchPls;
@@ -657,6 +659,10 @@ public class CoopBoardGame
         BaseMod.addCustomScreen(new TargetSelectScreen());
         BaseMod.addCustomScreen(new OrbSelectScreen());
         BaseMod.addCustomScreen(new RelicTradingScreen());
+        BaseMod.addCustomScreen(new PlayerTargetScreen());
+
+        // Register player effect executors
+        GainBlockOnPlayerAction.registerExecutor();
 
         BaseMod.registerCustomReward(
             TinyHouseUpgrade1CardTypePatch.CoopBoardGame_UPGRADEREWARD,
