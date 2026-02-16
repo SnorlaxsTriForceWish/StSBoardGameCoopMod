@@ -1,6 +1,7 @@
 package CoopBoardGame.actions.player;
 
 import CoopBoardGame.targeting.PlayerEffectCommand;
+import CoopBoardGame.targeting.PlayerEffectNetworkHelper;
 import CoopBoardGame.targeting.PlayerEffectRegistry;
 import CoopBoardGame.targeting.PlayerEffectType;
 import CoopBoardGame.targeting.PlayerTargetRef;
@@ -11,7 +12,6 @@ import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -53,17 +53,27 @@ public class GainBlockOnPlayerAction extends AbstractGameAction {
             return;
         }
 
-        // Phase 2: Local-only execution path
-        // In Phase 3, this will be replaced with network routing for remote targets
-        if (targetRef.isLocal() || targetPlayerId == localPlayerId) {
+        // Check if target is local player
+        boolean isLocalTarget = targetRef.isLocal() || targetPlayerId == localPlayerId;
+
+        if (isLocalTarget) {
             // Target is local player - apply block directly
             executeLocalBlockGain();
+        } else if (TogetherInSpireHelper.isMultiplayerBoardGameMode() && PlayerEffectNetworkHelper.initialize()) {
+            // Target is remote player in multiplayer - send over network
+            PlayerEffectCommand command = PlayerEffectCommand.createWithIntArgs(
+                PlayerEffectType.GAIN_BLOCK,
+                localPlayerId,
+                targetPlayerId,
+                blockAmount
+            );
+            PlayerEffectNetworkHelper.sendPlayerEffect(command);
+            logger.info("Sent GAIN_BLOCK command to remote player " + targetPlayerId + " for " + blockAmount + " block");
         } else {
-            // Target is remote player
-            // Phase 2: Execute locally as fallback (for single-player testing)
-            // Phase 3: Will send network intent instead
+            // Single-player or no network available - execute locally as fallback
+            // This shouldn't normally happen but provides a safe fallback
             executeLocalBlockGain();
-            logger.info("Phase 2: Local execution for remote target (will be networked in Phase 3)");
+            logger.debug("Local execution fallback for target " + targetPlayerId);
         }
 
         isDone = true;

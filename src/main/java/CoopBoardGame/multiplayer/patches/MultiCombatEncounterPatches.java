@@ -4,6 +4,8 @@ import CoopBoardGame.dungeons.BGExordium;
 import CoopBoardGame.multiplayer.rows.MultiCreature;
 import CoopBoardGame.multiplayer.rows.PlayerRowManager;
 import CoopBoardGame.multiplayer.rows.RowNetworkHelper;
+import CoopBoardGame.targeting.PlayerEffectNetworkHelper;
+import CoopBoardGame.targeting.PlayerEffectRegistry;
 import CoopBoardGame.util.TogetherInSpireHelper;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -28,6 +30,10 @@ public class MultiCombatEncounterPatches {
 
         @SpirePostfixPatch
         public static void Foo() {
+            // Reset player effect caches at combat start to prevent stale command deduplication
+            PlayerEffectRegistry.clearProcessedCache();
+            PlayerEffectNetworkHelper.reset();
+
             // Determine number of player rows for enemy spawning
             int numRows = getNumberOfPlayerRows();
 
