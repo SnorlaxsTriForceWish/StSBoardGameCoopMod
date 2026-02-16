@@ -1,3 +1,16 @@
+<img width="3840" height="1080" alt="image" src="https://github.com/user-attachments/assets/5526c601-41cd-44a3-9d67-e8cbc450460c" />
+2/16/2025: Can now play the full board game in co op mode (kinda)
+
+TODO:
+  - Effects that target players
+  - Redo enemy effects and abilities now that row system exists
+  - AOE cards target a row of enemies, not all enemies across each row
+
+Already done:
+   - All events
+   - Can technically use every card and fight every enemy in the co op board game
+   - Row system that places players and enemies into different rows
+
 # StSCoopBoardGameMod
 Video game adaptation of the board game adaptation of the video game.
 Based on the StS-Default Mod Base, because we didn't find BasicMod until it was too late.
