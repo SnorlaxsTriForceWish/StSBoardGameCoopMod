@@ -1,10 +1,10 @@
 package CoopBoardGame.cards.BGRed;
 
+import CoopBoardGame.actions.TargetPlayerAction;
 import CoopBoardGame.actions.player.GainBlockOnPlayerAction;
 import CoopBoardGame.cards.AbstractBGCard;
 import CoopBoardGame.characters.BGIronclad;
-import CoopBoardGame.patches.CardTargetPatch;
-import CoopBoardGame.targeting.PlayerTargetContext;
+import CoopBoardGame.targeting.PlayerTargetResolver.TargetFilter;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -42,10 +42,13 @@ public class BGDefend_Red extends AbstractBGCard {
         int blockAmount = Settings.isDebug ? 50 : this.block;
 
         if (this.upgraded) {
-            // Upgraded: target any player via arrow targeting (CardTargetPatch.PLAYER)
-            // The target is set in PlayerTargetContext by the targeting patches
-            int targetPlayerId = PlayerTargetContext.requireCurrentTargetOrThrow();
-            addToBot((AbstractGameAction) new GainBlockOnPlayerAction(targetPlayerId, blockAmount));
+            // Upgraded: target any player via screen selection
+            addToBot(new TargetPlayerAction(
+                "Choose a player to gain Block.",
+                TargetFilter.selfAndAllies(),
+                targetId -> addToTop(new GainBlockOnPlayerAction(targetId, blockAmount)),
+                null
+            ));
         } else {
             // Unupgraded: self-target only
             addToBot(
@@ -64,8 +67,6 @@ public class BGDefend_Red extends AbstractBGCard {
             upgradeBlock(1);
             this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
-            // Switch to player arrow targeting for upgraded version
-            this.target = CardTargetPatch.PLAYER;
         }
     }
 

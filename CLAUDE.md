@@ -4,417 +4,276 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**The Board Game** is a Slay the Spire mod that adapts the physical board game (which itself was based on the video game) back into the video game. The project implements board game rules for single-player mode and is being extended to support cooperative multiplayer using the TogetherInSpire mod architecture.
+**The Co-op Board Game** is a Slay the Spire mod that adapts the physical board game into StS.
 
-**Current Status:** Single-player board game mechanics are implemented. The goal is to add cooperative multiplayer support while maintaining board game rules (dice rolls, row-based combat, token limits, simultaneous turns, potion trading, etc.).
+Current state in this repo:
+
+- Single-player board game mechanics are broadly implemented.
+- TogetherInSpire multiplayer integration is partially implemented.
+- Multiplayer row combat, row targeting, map voting, and player-targeted card plumbing exist.
+- Shared die synchronization and true simultaneous-turn resolution are not yet implemented.
 
 ## Build & Development Commands
 
 ### Building and Running
 
-**Windows Command Line** (from `D:\STS_BG_Mod\StSCoopBoardGameCoopMod`):
+**Windows Command Line** (from `D:\STS_BG_Mod\StSBoardGameCoopMod`):
 
 ```cmd
-# Package the mod (creates JAR in target/ and copies to SteamLibrary/mods/)
+# Package mod JAR and copy to Steam mods folder
 mvnw.cmd package
 
-# Run tests (part of development iteration process)
+# Run tests (currently no Java tests in src/test/java)
 mvnw.cmd test
 
 # Clean build artifacts
 mvnw.cmd clean
 
-# Clean and rebuild (recommended after major changes)
+# Clean + package (recommended after larger changes)
 mvnw.cmd clean package
 ```
 
-**Unix/Mac/Linux** (or if you have Maven installed globally):
+**Unix/Mac/Linux**:
 
 ```bash
-# Use ./mvnw (Unix) or mvn (if installed) instead of mvnw.cmd
-mvn package
-mvn test
-mvn clean
-mvn clean package
+./mvnw package
+./mvnw test
+./mvnw clean
+./mvnw clean package
 ```
 
-**Typical Development Iteration:**
+### Notes
 
-1. Make code changes in IntelliJ
-2. Run `mvnw.cmd test` to verify tests pass
-3. Run `mvnw.cmd package` to compile and deploy to Steam mods folder
-4. Launch Slay the Spire to test changes in-game
-5. Repeat as needed
+- `package` builds `target/CoopBoardGame.jar` and copies it to `${steam.path}/common/SlayTheSpire/mods/CoopBoardGame.jar`.
+- Maven packaging does **not** launch Slay the Spire automatically.
+- Steam paths are configured in `pom.xml` (`steam.windows`, `steam.mac`, `steam.linux`).
 
-### Development in IntelliJ
+## Current Codebase Snapshot
 
-- **Steam Installation Path:** Configure in `pom.xml` under `<steam.windows>` property (default: `D:\SteamLibrary\steamapps`)
-- **Platform Selection:** In Maven tab → Profiles, enable only the profile for your OS (Windows is default)
-- **JAR Auto-Copy:** Maven build automatically copies compiled JAR to `SlayTheSpire/mods/` folder
+Snapshot from this checkout:
 
-### Testing Single Changes
+- `src/main/java/CoopBoardGame`: **888** Java files total
+- `CoopBoardGame.java`: **1732** lines
+- Major package sizes:
+  - `cards/`: 322
+  - `actions/`: 107
+  - `powers/`: 101
+  - `relics/`: 96
+  - `monsters/`: 65
+  - `events/`: 44
+  - `potions/`: 24
+  - `patches/`: 23
+  - `multiplayer/`: 16
+  - `targeting/`: 9
 
-After making changes, run `mvn package` which will:
+Card set counts:
 
-1. Compile Java sources
-2. Package resources
-3. Create `CoopBoardGame.jar` in `target/`
-4. Copy JAR to Steam mods folder
-5. Launch Slay the Spire via Steam with ModTheSpire to test
+- `BGRed`: 63
+- `BGBlue`: 62
+- `BGGreen`: 64
+- `BGPurple`: 64
+- `BGColorless`: 42
+- `BGCurse`: 10
+- `BGStatus`: 4
 
 ## Architecture Overview
 
-### Core Design Pattern
+### Core Pattern
 
-The mod uses a **framework-based extension architecture** built on ModTheSpire/BaseMod:
+- Entry point: `src/main/java/CoopBoardGame/CoopBoardGame.java`
+- Main extension model: BaseMod/ModTheSpire subscribers + Spire patches
+- Domain base classes:
+  - `cards/AbstractBGCard.java`
+  - `relics/AbstractBGRelic.java`
+  - `monsters/AbstractBGMonster.java`
+  - `powers/AbstractBGPower.java`
+  - `characters/AbstractBGPlayer.java`
+- IDs are string-based (`makeID(...)` usage throughout).
 
-- **Entry Point:** `CoopBoardGame.java` - All mod initialization happens here via subscriber interfaces
-- **Base Classes:** Every game element (cards, relics, monsters, etc.) extends a `AbstractBG*` base class
-- **Actions:** Complex card/relic effects are implemented as custom `AbstractGameAction` subclasses
-- **Patches:** Vanilla game behavior modifications use SpirePatch annotations (reflection-based)
+### Multiplayer Integration (current)
 
-### Key Architectural Decisions
+TogetherInSpire integration is reflection-based through:
 
-1. **No Direct Game File Modification:** All changes via ModTheSpire patching system
-2. **Separation of Concerns:** Each package handles one domain (cards/, relics/, monsters/, etc.)
-3. **Interface-Based Features:** Board game mechanics use interfaces (`DieControlledRelic`, `MultiCreature`)
-4. **ID-Based Registration:** All content uses unique string IDs via `makeID()` helper
-5. **Localization-First:** All user-facing text in JSON files, not hardcoded
+- `src/main/java/CoopBoardGame/util/TogetherInSpireHelper.java`
 
-### Package Structure
+Implemented multiplayer systems in this repo:
 
-```
-CoopBoardGame/
-├── CoopBoardGame.java           # Main mod initialization (1117 lines)
-├── characters/              # 7 character classes (BGIronclad, BGSilent, etc.)
-├── cards/                   # 323 cards across 7 colors (Red, Blue, Green, Purple, Colorless, Curse, Status)
-├── relics/                  # 96 relics with trading/payment mechanics
-├── monsters/                # 65 enemies across 4 acts (bgexordium, bgcity, bgbeyond, bgending)
-├── thedie/                  # Core dice roll mechanic for board game
-├── multicharacter/          # Cooperative multiplayer grid system (51 files)
-│   ├── grid/                # Grid rendering (GridTile, GridSubgrid, GridBackground)
-│   └── patches/             # Coop-specific UI/rendering patches
-├── actions/                 # 150+ custom action classes for complex effects
-├── powers/                  # 101 temporary effects/statuses
-├── potions/                 # 24 consumable items
-├── events/                  # 44 non-combat encounters
-├── ui/                      # Custom UI elements (dice buttons, relic buttons)
-├── screen/                  # Custom screens (target selection, orb selection)
-├── patches/                 # Vanilla game patches (ascension, card usage, etc.)
-└── util/                    # Helpers (TextureLoader, ID validation)
-```
+- Row assignment and row sync:
+  - `multiplayer/rows/PlayerRowManager.java`
+  - `multiplayer/rows/RowNetworkHelper.java`
+  - `multiplayer/patches/RowMessagePatch.java`
+- Multi-row enemy setup and row rendering/positioning:
+  - `multiplayer/patches/MultiCombatEncounterPatches.java`
+  - `multiplayer/patches/CreatureRowPositionPatch.java`
+  - `multiplayer/patches/MultiplayerRowRenderPatch.java`
+  - `multiplayer/rows/CombatRowManager.java`
+- Row-based target filtering:
+  - `multiplayer/patches/RowBasedTargetingPatch.java`
+- Map voting:
+  - `multiplayer/voting/RoomVotingManager.java`
+  - `multiplayer/voting/VotingNetworkHelper.java`
+  - `multiplayer/patches/MapVotingPatch.java`
+  - `multiplayer/patches/VotingMessagePatch.java`
+- Player-targeted effect messaging (framework + one production executor):
+  - `targeting/PlayerEffectNetworkHelper.java`
+  - `targeting/PlayerEffectRegistry.java`
+  - `multiplayer/patches/PlayerEffectMessagePatch.java`
+  - `actions/player/GainBlockOnPlayerAction.java` (registered executor)
 
-## Board Game Mechanics (vs Vanilla Slay the Spire)
+## Board Game Mechanics (vs Vanilla StS)
 
-The key differences that define "board game mode":
+### 1. Dice Roll System
 
-### 1. Dice Roll System (thedie/TheDie.java)
+- Core logic: `src/main/java/CoopBoardGame/thedie/TheDie.java`
+- Dice UI buttons in `src/main/java/CoopBoardGame/ui/`:
+  - `LockInRollButton.java`
+  - `RerollButton.java`
+  - `TheAbacusButton.java`
+  - `ToolboxButton.java`
+  - `PotionButton.java`
+- Monster behavior hooks use `DieControlledMoves`.
 
-- **Turn Start:** Roll 1d6, display result to player
-- **Monster Moves:** Dice determines which move monsters use (via `DieControlledMoves` interface)
-- **Relic Activation:** Some relics trigger on specific dice values (`DieControlledRelic` interface)
-- **Modification Phase:** Player can use relics/potions to modify roll before "locking in"
-    - `BGGamblingChip` - Reroll the die
-    - `BGTheAbacus` - Adjust die value ±1
-    - `BGToolbox` - Adjust die value ±1
-    - `BGGamblersBrew` potion - Reroll
-- **UI:** `LockInRollButton`, `RerollButton`, `TheAbacusButton`, `ToolboxButton` in overlay menu
+### 2. Row-Based Multiplayer Combat
 
-### 2. Grid-Based Positioning (multicharacter/)
+- Row state is stored via `MultiCreature.Field.currentRow`.
+- Host spawns additional enemy groups per row in multiplayer.
+- Damage/debuff/reduction from monsters is filtered by row in multiplayer mode.
 
-- **MultiCharacter:** Cooperative character (0 energy, 9 HP) containing multiple subcharacters
-- **Row System:** Creatures positioned in grid rows (tracked via `MultiCreature.currentRow` field)
-- **Combat Order:** Players act bottom-to-top, monsters act top-to-bottom
-- **Grid Rendering:** `BGMultiCreatureGrid` → `GridSubgrid` → `GridTile` (216x163px each)
+### 3. Token Caps (partial)
 
-### 3. Token Caps (Not Yet Implemented - Future Work)
+Implemented:
 
-- Strength: Max 8 (Ironclad)
-- Block: Max 20 (all characters)
-- Poison: Max 30 (global, Silent)
-- Vulnerable/Weak: Max 3 (per entity)
+- Strength cap = 8 (`src/main/java/CoopBoardGame/powers/StrengthCap.java`)
+- Poison cap = 30 across enemies (`src/main/java/CoopBoardGame/powers/BGPoisonPower.java`)
 
-### 4. Relic Trading System (relics/AbstractBGRelic.java)
+Still not fully enforced globally:
 
-- **Payment Mechanic:** Relics can be used as payment (`usableAsPayment()`)
-- **Trading Screen:** Custom UI for trading relics between players
-- **Restrictions:** BOSS, STARTER, SPECIAL tier relics cannot be traded
+- Block cap
+- Weak/Vulnerable cap behavior matching physical token limits
 
-### 5. Energy System
+### 4. Trading and Payment Mechanics
 
-- **Single Player:** 3 energy/turn (standard)
-- **MultiCharacter:** 0 energy (each subcharacter has independent energy)
+- Relic payment support in `src/main/java/CoopBoardGame/relics/AbstractBGRelic.java` (`usableAsPayment()`).
+- Relic trading UI exists: `src/main/java/CoopBoardGame/screen/RelicTradingScreen.java`.
 
-## Multiplayer Architecture (Based on TogetherInSpire)
+### 5. Player-Targeted Cards
 
-Reference: `ModCopy/TogetherInSpire/stsogether_architecture_analysis.md`
-
-### Network Layer
-
-- **P2P Mode:** Steam Networking API (peer-to-peer mesh)
-- **PF Mode:** Socket-based TCP (client-server, port forwarding required)
-- **Message Protocol:** Serialized `NetworkMessage` objects with request type + payload
-- **State Replication:** Full player state synchronized via `P2PPlayer` objects
-
-### Key Extension Points for Board Game Features
-
-#### Simultaneous Turn System (Needs Implementation)
-
-Current TogetherInSpire is **sequential** (one player acts, others watch). Board game needs:
-
-- **Turn Phase State Machine:**
-    - `PLANNING` - Players queue cards without executing
-    - `READY_CHECK` - Wait for all players to mark ready
-    - `RESOLUTION` - Execute all queued actions simultaneously
-    - `ENEMY_TURN` - Monsters act
-    - `CLEANUP` - End of turn effects
-- **New Message Types:** `QueuedAction`, `PlayerReady`, `DieRolled`, `PhaseTransition`
-- **New Callbacks:** `OnActionQueued()`, `OnPlayerReady()`, `OnDieRolled()`, `OnPhaseChanged()`
-
-#### Shared Die Roll (Needs Implementation)
-
-- **Host Authority:** Only host rolls die, broadcasts result to all players
-- **Message:** `Send_DieRolled(int result)`
-- **Storage:** Add `currentDieResult` to `P2PClientData`
-- **Synchronization:** All players must see same die result before resolution phase
-
-#### Row-Based Combat (Needs Implementation)
-
-- **Data Model:** Add `combatRow` field to `P2PPlayer`
-- **Enemy Assignment:** Map enemies to rows (`Map<Integer, EnemyRowAssignment>`)
-- **Targeting Rules:** Enemies only target player in their row (Boss targets all)
-- **UI:** Row selection screen between combats
-
-#### Potion Trading (Partially Implemented)
-
-- TogetherInSpire already supports modifying other players' potions
-- **Enhancement:** Add trade UI with `Send_TradePotion(potion, fromPlayerID, toPlayerID)` message
+- Custom targets added by patch enums in `src/main/java/CoopBoardGame/patches/CardTargetPatch.java`:
+  - `PLAYER`
+  - `ALL_PLAYERS`
+- Drag/arrow targeting behavior in `src/main/java/CoopBoardGame/patches/PlayerCardTargetingPatch.java`
+  and `src/main/java/CoopBoardGame/targeting/PlayerTargetingArrow.java`.
+- Current in-use example: upgraded `BGDefend_Red` uses `GainBlockOnPlayerAction`.
 
 ## Common Development Tasks
 
-### Adding a New Card
+### Add a New Card
 
-1. Create class extending `AbstractBGCard` in appropriate package (`cards/BGRed/`, etc.)
-2. Implement constructor with card properties (cost, damage, block, description)
-3. Override `use(AbstractPlayer p, AbstractMonster m)` to define card effect
-4. Use existing actions from `actions/` package or create new `AbstractGameAction` subclass
-5. Register card in `CoopBoardGame.receiveEditCards()`
-6. Add localization strings to `resources/CoopBoardGameModResources/localization/eng/[Card/Power/Relic]-Strings.json`
+1. Create class extending `AbstractBGCard` under the correct card set package.
+2. Implement `use(AbstractPlayer p, AbstractMonster m)`.
+3. Register the card in `CoopBoardGame.receiveEditCards()`.
+4. Add localization entries in:
+   - `src/main/resources/CoopBoardGameResources/localization/eng/DefaultMod-Card-Strings.json`
 
-**Example Pattern:**
+### Add a Patch
 
-```java
-public class MyNewCard extends AbstractBGCard {
+1. Create patch class under `src/main/java/CoopBoardGame/patches/` or `multiplayer/patches/`.
+2. Use `@SpirePatch2` with Prefix/Insert/Postfix as needed.
+3. Prefer `SpireField` for additional state instead of modifying base game classes.
 
-    public static final String ID = makeID("MyNewCard");
+### Add a Multiplayer Message Type
 
-    public MyNewCard() {
-        super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY);
-        baseDamage = 6;
-    }
+1. Add send/receive helper logic in an existing helper (`RowNetworkHelper`, `VotingNetworkHelper`, or `PlayerEffectNetworkHelper`) or a new helper.
+2. Intercept message handling in a message patch class under `multiplayer/patches/`.
+3. Keep host authority explicit for state that must be deterministic.
 
-    @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn)));
-    }
+## Critical Files
 
-    @Override
-    public void upgrade() {
-        if (!upgraded) {
-            upgradeName();
-            upgradeDamage(3);
-        }
-    }
-}
-```
-
-### Adding a Dice-Controlled Relic
-
-1. Create class extending `AbstractBGRelic` implementing `DieControlledRelic`
-2. Implement `getQuickSummary()` to explain what relic does on current die roll
-3. Set `available = true/false` based on die value in `atStartOfTurn()`
-4. Implement relic effect logic
-5. Register in `CoopBoardGame.receiveEditRelics()`
-
-### Adding a Monster with Dice Moves
-
-1. Create class extending `AbstractBGMonster` implementing `DieControlledMoves`
-2. Define move sets for each die result (1-6)
-3. Implement `takeTurn()` to execute selected move
-4. Use `TheDie.monsterRoll` to determine which move set to use
-5. Register in appropriate dungeon file (`dungeons/BGExordium.java`, etc.)
-
-### Adding a Cooperative Grid Character
-
-1. Extend `AbstractBGPlayer`
-2. Attach `MultiCreature` field via `SpireField`
-3. Set `currentRow` for positioning
-4. Use `BGMultiCreatureGrid` for rendering
-5. Handle energy management (0 for parent, individual for subcharacters)
-
-### Patching Vanilla Game Behavior
-
-1. Create patch class in `patches/` directory
-2. Use `@SpirePatch` annotation to target vanilla class/method
-3. Use `@SpireInsertPatch`, `@SpirePrefixPatch`, or `@SpirePostfixPatch`
-4. Use `SpireField` to add fields to vanilla classes without modifying source
-5. See `patches/Ascension.java` or `patches/TransformPatch.java` for examples
-
-## Critical Files to Understand
-
-### Core Initialization
-
-- **CoopBoardGame.java** - All mod registration and initialization (characters, cards, relics, events)
-
-### Base Classes (Extend These)
-
-- **characters/AbstractBGPlayer.java** - Base for all playable characters
-- **cards/AbstractBGCard.java** - Base for all cards (adds `defaultSecondMagicNumber` support)
-- **relics/AbstractBGRelic.java** - Base for all relics (adds payment/trading mechanics)
-- **monsters/AbstractBGMonster.java** - Base for all enemies (adds row positioning)
-- **powers/AbstractBGPower.java** - Base for all temporary effects
-
-### Board Game Mechanics
-
-- **thedie/TheDie.java** - Dice rolling, modification, and monster move selection
-- **multicharacter/MultiCharacter.java** - Cooperative grid character
-- **multicharacter/grid/BGMultiCreatureGrid.java** - Grid rendering system
-- **ui/LockInRollButton.java** - Dice confirmation UI
-
-### Multiplayer Integration Points
-
-- **ModCopy/TogetherInSpire/** - Reference implementation for networking
-- See `stsogether_architecture_analysis.md` for detailed network architecture
+- Mod bootstrap:
+  - `src/main/java/CoopBoardGame/CoopBoardGame.java`
+- Multiplayer core:
+  - `src/main/java/CoopBoardGame/util/TogetherInSpireHelper.java`
+  - `src/main/java/CoopBoardGame/multiplayer/patches/MultiCombatEncounterPatches.java`
+  - `src/main/java/CoopBoardGame/multiplayer/rows/RowNetworkHelper.java`
+  - `src/main/java/CoopBoardGame/multiplayer/voting/RoomVotingManager.java`
+- Player targeting:
+  - `src/main/java/CoopBoardGame/patches/PlayerCardTargetingPatch.java`
+  - `src/main/java/CoopBoardGame/targeting/PlayerEffectNetworkHelper.java`
+- Dice and board-game turn flavor:
+  - `src/main/java/CoopBoardGame/thedie/TheDie.java`
 
 ## Known Issues & Limitations
 
-### Technical Faults (from README.md)
+### Technical faults (from README)
 
-- Quick Start interface can softlock (use map screen to escape)
-- Some events can softlock without enough cards
-- Cards use wrong UI graphics in some situations
-- Score bonuses calculated incorrectly
+- Quick Start interface can softlock; map open/close can recover in many cases.
+- Some events can softlock if the player lacks enough cards.
+- Some events do not validate affordability.
+- Card UI art can be wrong in some situations.
+- Score bonuses can be calculated incorrectly.
+- Egg relic interactions on shop screen can behave oddly.
 
-### Board Game Inaccuracies
+### Board game accuracy gaps
 
-- Physical token limits not yet implemented (Strength/Block/Poison/Vulnerable/Weak caps)
-- Non-card-reward decks can produce duplicates of unique cards
-- Ironclad + Gremlin Nob + Feel No Pain interaction ordering issue
+- Token limits are only partially implemented (Strength/Poison present; others incomplete).
+- Non-card-reward decks can still duplicate unique cards.
+- Ironclad + Gremlin Nob + Feel No Pain ordering mismatch remains documented.
 
-### Multiplayer Not Yet Implemented
+### Multiplayer gaps still pending
 
-- Simultaneous turn system (currently sequential in TogetherInSpire)
-- Shared die roll synchronization
-- Row-based combat with multiple players
-- Potion trading UI (partial support exists)
-- Boss relic multi-choice system (reveal N+1, each player picks one)
+- Shared die roll authority/synchronization across players.
+- True simultaneous-turn planning/resolution state machine.
+- Potion trading UX in this repo (beyond existing TiS ecosystem capabilities).
+- Boss relic reveal/pick flow matching board-game N+1 rule.
 
 ## Dependencies
 
-### Required Mods
+Declared in `pom.xml`:
 
-- **ModTheSpire** 3.30.0 - Mod loader framework (loads JAR files, enables patching)
-- **BaseMod** 5.44.0 - Modding API (CustomCard, CustomPlayer, event registration, etc.)
-- **StSLib** 2.4.0 - Utility library (custom keywords, icons, targeting)
+- `ModTheSpire` 3.30.0
+- `BaseMod` 5.44.0
+- `StSLib` 2.4.0
+- Optional: `Bestiary` 0.1.1
+- Slay the Spire reference version string: `12-18-2022`
 
-### Optional Mods
+Test dependencies declared:
 
-- **Bestiary** 0.1.1 - Enemy glossary support (patches in `patches/bestiary/`)
+- JUnit 5.9.3
+- Mockito 4.11.0
+- AssertJ 3.24.2
 
-### Future Multiplayer Dependency
+## Resources
 
-- **TogetherInSpire** - Cooperative multiplayer networking (reference implementation in `ModCopy/`)
+Localization:
 
-## Resource Files
+- `src/main/resources/CoopBoardGameResources/localization/eng/`
+  - `DefaultMod-Card-Strings.json`
+  - `DefaultMod-Relic-Strings.json`
+  - `DefaultMod-Power-Strings.json`
+  - `DefaultMod-Event-Strings.json`
+  - `DefaultMod-Character-Strings.json`
+  - `DefaultMod-Potion-Strings.json`
+  - `DefaultMod-Orb-Strings.json`
+  - `DefaultMod-Keyword-Strings.json`
+  - `DefaultMod-UI-Strings.json`
+  - `Bestiary-Monsters.json`
 
-### Localization
+Assets:
 
-- `src/main/resources/CoopBoardGameModResources/localization/eng/`
-    - `Card-Strings.json` - Card names, descriptions, upgrades
-    - `Relic-Strings.json` - Relic names, descriptions, flavor text
-    - `Power-Strings.json` - Power names, descriptions
-    - `Event-Strings.json` - Event dialog text, options
-    - `Monster-Strings.json` - Monster names, move descriptions
-    - `UI-Strings.json` - UI element text
+- `src/main/resources/CoopBoardGameResources/images/`
 
-### Assets
+## Reference Docs
 
-- `src/main/resources/CoopBoardGameModResources/images/`
-    - `characters/` - Character sprites and portraits
-    - `cards/` - Card art (512x512 for power/skill/attack)
-    - `relics/` - Relic icons
-    - `monsters/` - Enemy sprites
-    - `ui/` - UI element graphics
+- Board game rules reference: `docs/BoardGameRules.txt`
+- TogetherInSpire architecture notes: `ModCopy/TogetherInSpire/stsogether_architecture_analysis.md`
+- Additional local guides: `docs/guides/`
 
-## Board Game Rules Reference
-
-See `.llm/CoopBoardGameRules.txt` for complete physical board game rulebook. Key mechanics:
-
-- **Cooperative:** All players win or lose together
-- **Dice Roll:** 1d6 at start of each combat round determines monster moves
-- **Row-Based Combat:** Each player occupies a row, enemies in that row target that player
-- **Token Limits:** Strength (8), Block (20), Poison (30), Vulnerable/Weak (3)
-- **Energy:** Always 3 per turn (no energy relic scaling)
-- **Simultaneous Turns:** All players plan actions, then resolve together
-- **Potion Trading:** Only potions can be traded between players (max 3 per player)
-- **Boss Relics:** Reveal (# players + 1) relics, each player picks one
-
-## Future Development Roadmap
-
-### Phase 1: Core Multiplayer Mechanics
-
-- [ ] Implement turn phase state machine (PLANNING → READY_CHECK → RESOLUTION)
-- [ ] Add action queueing system (cards selected but not executed)
-- [ ] Implement "Ready" button and all-players-ready check
-- [ ] Add shared die roll broadcast system
-- [ ] Display die result to all players
-
-### Phase 2: Combat Rules
-
-- [ ] Implement row assignment system for players and enemies
-- [ ] Add row-based enemy targeting (enemies only target player in their row)
-- [ ] Implement token caps (Strength 8, Block 20, Poison 30, Vulnerable/Weak 3)
-- [ ] Fix energy reset to always be 3 (ignore energy relics in board game mode)
-- [ ] Modify block to reset at start of turn (not end)
-
-### Phase 3: Progression & Items
-
-- [ ] Implement shared map progression (party moves together)
-- [ ] Add boss relic multi-choice system (reveal N+1, each picks one)
-- [ ] Complete potion trading UI (already partially supported)
-- [ ] Implement gold pooling at merchants
-
-### Phase 4: Polish
-
-- [ ] Add row switching UI between combats
-- [ ] Implement enemy action preview based on die result
-- [ ] Add visual indicators for simultaneous action resolution
-- [ ] Create board game mode tutorial/onboarding
-
-## Debugging Tips
-
-### Common Issues
-
-- **JAR Not Loading:** Check `ModTheSpire.json` is valid JSON, verify Steam path in `pom.xml`
-- **Cards Not Appearing:** Verify registration in `CoopBoardGame.receiveEditCards()`, check ID uniqueness
-- **Relics Not Working:** Check `onEquip()`, `atTurnStart()`, other hooks are implemented
-- **Patches Not Applying:** Verify target class/method names match vanilla game, check ModTheSpire logs
-- **Multiplayer Desyncs:** Ensure deterministic RNG, use host-authoritative die rolls
-
-### Logging
-
-- Use `logger.info()` from `CoopBoardGame` class for debugging
-- ModTheSpire logs appear in Steam console and `ModTheSpire-*/run.log`
-- Enable verbose logging via ModTheSpire launcher settings
-
-## Contributing
+## Contributing Notes
 
 When modifying code:
 
-1. Follow existing naming conventions (`BG` prefix for all mod classes)
-2. Use `makeID()` helper for all IDs
-3. Add localization strings, don't hardcode text
-4. Test with all 4 characters (Ironclad, Silent, Defect, Watcher)
-5. Verify compatibility with existing relics/powers
-6. Document complex interactions in code comments
-7. Update this CLAUDE.md if architecture changes significantly
+1. Follow established naming conventions (`BG` prefix for mod-specific content).
+2. Register new content in `CoopBoardGame.java`.
+3. Add localization entries instead of hardcoding player-facing text.
+4. Validate single-player behavior first, then multiplayer behavior if affected.
+5. Update this `CLAUDE.md` when architecture or implementation status changes.
